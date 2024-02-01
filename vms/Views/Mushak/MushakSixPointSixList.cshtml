@@ -1,0 +1,45 @@
+﻿@model IEnumerable<vms.entity.models.Purchase>
+@{
+	Layout = "_LayoutMushak";
+	ViewData["Title"] = "Mushak- 6.6 (VDS Purchase List)";
+}
+
+@section contentheader
+{
+	<div class="p-3 page-header">
+		Mushak-6.6 (Purchase VDS Invoice List)
+	</div>
+}
+<scrollable-grid-container>
+	@(Html.Grid(Model).Build(columns =>
+	{
+		columns.Add(model => model.OrgBranch.Name).Titled("Branch");
+		columns.Add(model => model.InvoiceNo).Titled("Invoice");
+		columns.Add(model => model.PurchaseDate.Date)
+			.Titled("Date").Formatted("{0:dd/MM/yyyy}").AppendCss("text-center");
+		columns.Add(model => model.Vendor.Name).Titled("Vendor Name");
+		columns.Add(model => model.VatChallanNo).Titled("VAT Challan No");
+		columns.Add(model => model.VatChallanIssueDate)
+			.Titled("Challan Time").Formatted("{0:dd/MM/yyyy hh:mm:ss tt}").AppendCss("text-center");
+		columns.Add(model => model.VendorInvoiceNo)
+			.Titled("Vendor Inv. No").AppendCss("text-center");
+		columns.Add(model => model.TotalPriceWithoutVat)
+			.Titled(Html.Raw("<div style='min-width: 60px;' data-bs-toggle='tooltip' title='Price Excluding VAT'>Price<sup><i class='bi bi-question-circle'></i></sup><div>"))
+			.AppendCss("text-right").RenderedAs(model => StringGenerator.DecimalToCommaSeparated(model.TotalPriceWithoutVat));
+		columns.Add(model => model.TotalVat)
+			.Titled("VAT").AppendCss("text-right").RenderedAs(model => StringGenerator.DecimalToCommaSeparated(model.TotalVat));
+		columns.Add(model => model.Vdsamount)
+			.Titled("VDS Amount").AppendCss("text-right").RenderedAs(model => model.Vdsamount.DecimalToCommaSeparated());
+		columns.Add(model => model.VdscertificateNo).Titled("VDS Certificate No");
+		columns.Add(model => model.VdscertificateDate)
+			.Titled("VDS Certificate Time").Formatted("{0:dd/MM/yyyy hh:mm:ss tt}").AppendCss("text-center");
+
+			columns.Add().Encoded(false).RenderedAs(data => Html.PartialAsync("LinkPartial/_MushakSixPointSixListActionMenu", data).Result)
+			.Titled(Html.Raw("<i class='bi bi-activity'></i>")).AppendCss("action-col-freez");
+	})
+		.AppendCss("large-index-grid")
+		.Empty("No data found")
+		.Filterable(GridFilterType.Double)
+		.Sortable()
+		.Pageable())
+</scrollable-grid-container>

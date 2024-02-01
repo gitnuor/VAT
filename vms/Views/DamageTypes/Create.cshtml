@@ -1,0 +1,36 @@
+﻿@model vms.entity.models.DamageType
+@{
+    ViewData["Title"] = "Create";
+    
+    
+}
+@section contentheader
+    {
+    <div class="p-3 page-header">
+        Add Damage Type
+    </div>
+}
+
+<div class="row">
+    <div class="col-md-4 offset-4">
+
+        <form asp-action="Create" class="form-horizontal" id="frmDamageCreate">
+            <div class="form-body">
+                <div class="form-group required">
+                    <label class="form-label">Name</label>
+                    <div>
+                        <input asp-for="Name" class="form-control form-control-sm" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+
+                    </div>
+                </div>
+            </div>
+            <div class="float-end mt-3">
+                <button type="submit" data-requiredconfirmation="true" class="btn btn-primary btn-sm"><i class="bi bi-check-lg"></i> Submit</button>
+                <button type="button" value="Reset" onclick="location.reload();" class="btn  btn-warning btn-sm"><i class="bi bi-arrow-repeat"></i> Reset</button>
+                <a asp-controller="DamageTypes" asp-action="Index" class="btn btn-secondary btn-sm"><i class="bi bi-slash-circle"></i> Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+

@@ -1,0 +1,36 @@
+﻿@model vms.entity.viewModels.vmPurchaseIndex
+@{
+	ViewData["Title"] = "Purchase";
+
+	var session = Context.Session.GetComplexData<VmUserSession>(ControllerStaticData.SESSION);
+}
+
+
+@section contentheader
+{
+	<div class="p-2 page-header d-flex">
+		<div class="flex-grow-1">
+			@ViewData["Title"]
+		</div>
+		<div class="d-flex justify-content-start">
+
+			@if (UserAuthorization.Check(FeatureList.PURCHASE_PURCHASE_LIST_CAN_ADD, session.Rights))
+			{
+				<div class="me-1">
+					<a href="@Url.Action("PurchaseLocal", "Purchase")" class="btn btn-primary btn-sm"><i class="bi bi-plus"></i> Local Purchase</a>
+				</div>
+				<div class="me-1">
+					<a href="@Url.Action("PurchaseImport", "Purchase")" class="btn btn-primary btn-sm"><i class="bi bi-plus"></i> Foreign Purchase (Import)</a>
+				</div>
+			}
+		</div>
+	</div>
+	<partial name="_PurchaseSubLink"/>
+}
+
+
+<div class="gray-slim-scroll-container">
+	<div class="table-scroll-container">
+		<partial name="_IndexNew" model="Model.PurchaseList"/>
+	</div>
+</div>

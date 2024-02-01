@@ -1,0 +1,34 @@
+﻿@model vms.entity.models.RoleRight
+
+@{
+    ViewData["Title"] = "Delete";
+    
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>RoleRight</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.RightId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RightId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Role)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Role.RoleName)
+        </dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="RoleRightId" />
+        <input type="submit" value="Delete" class="btn btn-light" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

@@ -1,0 +1,239 @@
+﻿@model vms.entity.viewModels.VmPurchaseImportSubscription
+
+<div class="font-weight-bold mb-3">
+	Product Information
+</div>
+<div>
+	<form class="row g-3 detail-form" id="frmProductInformation">
+		<div class="col-md-10 complex-form-col">
+			<label asp-for="ProductId" ></label>
+			<input type="hidden" asp-for="PurchaseDetailId" >
+			<select asp-for="ProductId" >
+				<option value="@null"
+						data-mu-id="0"
+						data-mu-name=""
+						data-hs-code=""
+						data-vat-percent="15.00"
+						data-sd-percent="0"
+						data-id-percent="0"
+						data-cd-percent="0"
+						data-rd-percent="0"
+						data-at-percent="0"
+						data-ait-percent="0"
+						data-vat-type-id="5">Select Product</option>
+				@if (Model.ProductList.Any())
+				{
+					foreach (var prod in Model.ProductList)
+					{
+						<option value="@prod.ProductId"
+								data-mu-id="@prod.MeasurementUnitId"
+								data-mu-name="@prod.MeasurementUnitName"
+								data-hs-code="@prod.HsCode"
+								data-vat-percent="@prod.DefaultVatPercent"
+								data-sd-percent="@prod.DefaultSupplementaryDutyPercent"
+								data-id-percent="@prod.DefaultImportDutyPercent"
+								data-cd-percent="@prod.DefaultCustomDutyPercent"
+								data-rd-percent="@prod.DefaultRegulatoryDutyPercent"
+								data-at-percent="@prod.DefaultAdvanceTaxPercent"
+								data-ait-percent="@prod.DefaultAdvanceIncomeTaxPercent"
+								data-vat-type-id="@prod.ProductVatTypeId">
+							@prod.ProductName
+						</option>
+					}
+				}
+			</select>
+			<span asp-validation-for="ProductId" ></span>
+		</div>
+		@* <div class="col-md-2 complex-form-col">
+			<label  asp-for="HSCode"></label>
+			<input type="text"  asp-for="HSCode">
+			<span asp-validation-for="HSCode" ></span>
+		</div> *@
+		<div class="col-md-10 complex-form-col">
+			<label  asp-for="ProductDescription"></label>
+			<input type="text"  asp-for="ProductDescription">
+			<span asp-validation-for="ProductDescription" ></span>
+		</div>
+
+		@* <div class="col-md-3 complex-form-col @(Model.IsRequireSkuNo ? "" : "d-none")">
+			<label asp-for="SKUNo" ></label>
+			<input type="text" asp-for="SKUNo" >
+			<span asp-validation-for="SKUNo" ></span>
+		</div> *@
+
+		@* <div class="col-md-3 complex-form-col @(Model.IsRequireSkuId ? "" : "d-none")">
+			<label asp-for="SKUId" ></label>
+			<input type="text" asp-for="SKUId" >
+			<span asp-validation-for="SKUId" ></span>
+		</div>
+ *@
+		@* <div class="col-md-3 complex-form-col @(Model.IsRequireGoodsId ? "" : "d-none")">
+			<label asp-for="GoodsId" ></label>
+			<input type="text" asp-for="GoodsId" >
+			<span asp-validation-for="GoodsId" ></span>
+		</div> *@
+
+		@* <div class="col-md-3 complex-form-col @(Model.IsRequirePartNo ? "" : "d-none")">
+			<label asp-for="PartNo" ></label>
+			<input type="text" asp-for="PartNo" >
+			<span asp-validation-for="PartNo" ></span>
+		</div> *@
+
+		<div class="col-md-3 complex-form-col d-none">
+			<label asp-for="MeasurementUnitName" ></label>
+			<input type="hidden" asp-for="MeasurementUnitName" >
+			<input type="text" asp-for="MeasurementUnitName" readonly="readonly" >
+			<span asp-validation-for="MeasurementUnitName" ></span>
+		</div>
+		<div class="col-md-10 complex-form-col">
+			<label asp-for="MeasurementUnitId" ></label>
+			<select asp-for="MeasurementUnitId" >
+				<option value="@null">Select Unit</option>
+			</select>
+			<span asp-validation-for="MeasurementUnitId" ></span>
+		</div>
+		<div class="col-12">
+			<hr />
+		</div>
+		<div class="col-md-3 complex-form-col">
+			<label asp-for="UnitPrice" ></label>
+			<input type="number" asp-for="UnitPrice" class="text-right">
+			<span asp-validation-for="UnitPrice" ></span>
+		</div>
+
+		<div class="col-md-3 complex-form-col">
+			<label asp-for="Quantity" ></label>
+			<input type="number" asp-for="Quantity" class="text-right">
+			<span asp-validation-for="Quantity" ></span>
+		</div>
+
+		<div class="col-md-3 complex-form-col">
+			<label asp-for="TotalPrice" ></label>
+			<input type="number" asp-for="TotalPrice" class="text-right">
+			<span asp-validation-for="TotalPrice" ></span>
+		</div>
+
+
+		@* <div class="col-md-3 complex-form-col">
+			<label asp-for="CustomDutyPercent" ></label>
+			<input type="number" asp-for="CustomDutyPercent" class="text-right">
+			<span asp-validation-for="CustomDutyPercent" ></span>
+		</div>
+
+		<div class="col-md-3 complex-form-col">
+			<label asp-for="CustomDuty" ></label>
+			<input type="number" asp-for="CustomDuty" readonly class="text-right">
+			<span asp-validation-for="CustomDuty" ></span>
+		</div>
+
+
+		<div class="col-md-3 complex-form-col d-none">
+			<label asp-for="ImportDutyPercent" ></label>
+			<input type="number" asp-for="ImportDutyPercent" class="text-right">
+			<span asp-validation-for="ImportDutyPercent" ></span>
+		</div>
+
+		<div class="col-md-3 complex-form-col d-none">
+			<label asp-for="ImportDuty" ></label>
+			<input type="number" asp-for="ImportDuty" readonly class="text-right">
+			<span asp-validation-for="ImportDuty" ></span>
+		</div>
+
+		<div class="col-md-3 complex-form-col">
+			<label asp-for="RegulatoryDutyPercent" ></label>
+			<input type="number" asp-for="RegulatoryDutyPercent" class="text-right">
+			<span asp-validation-for="RegulatoryDutyPercent" ></span>
+		</div>
+
+		<div class="col-md-3 complex-form-col">
+			<label asp-for="RegulatoryDuty" ></label>
+			<input type="number" asp-for="RegulatoryDuty" readonly class="text-right">
+			<span asp-validation-for="RegulatoryDuty" ></span>
+		</div>
+
+		<div class="col-md-3 complex-form-col">
+			<label asp-for="AdvanceIncomeTaxPercent" ></label>
+			<input type="number" asp-for="AdvanceIncomeTaxPercent" class="text-right">
+			<span asp-validation-for="AdvanceIncomeTaxPercent" ></span>
+		</div>
+
+		<div class="col-md-3 complex-form-col">
+			<label asp-for="AdvanceIncomeTax" ></label>
+			<input type="number" asp-for="AdvanceIncomeTax" readonly class="text-right">
+			<span asp-validation-for="AdvanceIncomeTax" ></span>
+		</div>
+
+		<div class="col-md-3 complex-form-col">
+			<label asp-for="SupplementaryDutyPercent" ></label>
+			<input type="number" asp-for="SupplementaryDutyPercent" class="text-right">
+			<span asp-validation-for="SupplementaryDutyPercent" ></span>
+		</div>
+
+		<div class="col-md-3 complex-form-col">
+			<label asp-for="ProductSupplementaryDuty" ></label>
+			<input type="number" asp-for="ProductSupplementaryDuty" readonly class="text-right">
+			<span asp-validation-for="ProductSupplementaryDuty" ></span>
+		</div> *@
+
+		@* <div class="col-md-3 complex-form-col">
+			<label asp-for="VatAblePrice" ></label>
+			<input type="number" asp-for="VatAblePrice" readonly class="text-right">
+			<span asp-validation-for="VatAblePrice" ></span>
+		</div> *@
+
+
+		@* <div class="col-md-6 complex-form-col">
+			<label asp-for="ProductVatTypeId" ></label>
+			<select asp-for="ProductVatTypeId" >
+				<option value="@null">Select VAT Type</option>
+				@if (Model.ProductVatTypes.Any())
+				{
+					foreach (var productVattype in Model.ProductVatTypes)
+					{
+						<option value="@productVattype.ProductVattypeId"
+								data-vat-percent="@productVattype.DefaultVatPercent"
+								data-is-vat-updatable="@productVattype.IsVatUpdatable">
+							@productVattype.Name (@productVattype.ImportNote)
+						</option>
+					}
+				}
+			</select>
+			<span asp-validation-for="ProductVatTypeId" ></span>
+		</div>
+
+		<div class="col-md-3 complex-form-col">
+			<label asp-for="ProductVatPercent" ></label>
+			<input type="text" asp-for="ProductVatPercent" class="text-right">
+			<span asp-validation-for="ProductVatPercent" ></span>
+		</div>
+
+		<div class="col-md-3 complex-form-col">
+			<label asp-for="ProductVat" ></label>
+			<input type="text" asp-for="ProductVat" readonly class="text-right">
+			<span asp-validation-for="ProductVat" ></span>
+		</div> *@
+
+		@* <div class="col-md-3 complex-form-col">
+			<label asp-for="AdvanceTaxPercent" ></label>
+			<input type="number" asp-for="AdvanceTaxPercent" class="text-right">
+			<span asp-validation-for="AdvanceTaxPercent" ></span>
+		</div>
+		<div class="col-md-3 complex-form-col">
+			<label asp-for="AdvanceTax" ></label>
+			<input type="number" asp-for="AdvanceTax" readonly class="text-right">
+			<span asp-validation-for="AdvanceTax" ></span>
+		</div>
+		<div class="col-md-3 complex-form-col">
+			<label asp-for="TotalPriceIncludingAllTax" ></label>
+			<input type="number" asp-for="TotalPriceIncludingAllTax" readonly="readonly" class="text-right">
+			<span asp-validation-for="TotalPriceIncludingAllTax" ></span>
+		</div> *@
+
+		<div class="col-md-3 mt-2">
+			<div class="float-end">
+				<button type="button" class="btn  btn-primary btn-sm inline-sm-button-complex-form" id="btnAddProduct"><i class="bi bi-plus-lg"></i> Add</button>
+				<button type="button" class="btn  btn-warning btn-sm inline-sm-button-complex-form" id="btnResetProduct"><i class="bi bi-arrow-repeat"></i> Reset</button>
+			</div>
+		</div>
+	</form>
+</div>

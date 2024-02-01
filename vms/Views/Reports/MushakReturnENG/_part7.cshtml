@@ -1,0 +1,185 @@
+﻿@model vms.entity.StoredProcedureModel.MushakReturn.MushakReturnPartSeven
+
+<table class="table table-bordered">
+    @*<thead>*@
+
+        <tr>
+
+            <th class="MreturnHeader" colspan="3" style="background-color: #FBD4B4!important">
+
+                <div class="parthead">Part-7: NET TAX CALCULATION</div>
+            </th>
+        </tr>
+    @*</thead>
+    <tbody class="Returntd">*@
+
+        <tr class="Returntdhead text-center font-weight-bold" style="background-color: #BFBFBF !important">
+            <th class="Returntdhead"><b> Items</b></th>
+            <th style="text-align:center"><b>Note</b></th>
+            <th ><b>Amount (Tax)</b></th>
+        </tr>
+
+        <tr>
+            <td> Net Payable VAT for the Tax Period (Section- 45) (9C-23B+28-33)  </td>
+            <td class="text-center" style="text-align: center">34</td>
+
+            <td class="text-right" style="text-align: right">@StringGenerator.DecimalToCommaSeparated(Model.NetTaxTotalPayableVatAmountInCurrentTaxTerm)</td>
+        </tr>
+        <tr>
+            <td>Net Payable VAT for the Tax Period after Adjusted with Closing Balance and Balance of from 18.6 [34+(52+56)]</td>
+            <td class="text-center" style="text-align: center">35</td>
+
+            <td class="text-right" style="text-align: right">@StringGenerator.DecimalToCommaSeparated(Model.NetTaxTotalPayableVatAmountAfterAdjustmentWithEndingBalance)</td>
+        </tr>
+
+        <tr>
+            <td>Net Payable Supplementary Duty for the Tax Period (Before adjustment with Closing Balance) [9B+38-(39+40)] </td>
+            <td class="text-center" style="text-align: center">36</td>
+
+            <td class="text-right" style="text-align: right">@StringGenerator.DecimalToCommaSeparated(Model.NetTaxTotalPayableSdAmountInCurrentTaxTerm)</td>
+        </tr>
+
+        <tr>
+            <td>
+                Net Payable Supplementary Duty for the Tax Period after Adjusted with Closing Balance and Balance of from 18.6  [36-(53+57)]
+            </td>
+            <td class="text-center" style="text-align: center">37</td>
+
+            <td class="text-right" style="text-align: right">@StringGenerator.DecimalToCommaSeparated(Model.NetTaxTotalPayableSdAmountAfterAdjustmentWithEndingBalance)</td>
+        </tr>
+
+        <tr>
+            <td>
+                Supplementary Duty Against Issuance of Debit Note
+            </td>
+            <td class="text-center" style="text-align: center">38</td>
+
+            <td class="text-right" style="text-align: right">@StringGenerator.DecimalToCommaSeparated(Model.NetTaxSdAmountForDebitNote)</td>
+        </tr>
+
+        <tr>
+            <td>
+                Supplementary Duty Against Issuance of Credit Note
+            </td>
+            <td class="text-center" style="text-align: center">39</td>
+
+            <td class="text-right" style="text-align: right">@StringGenerator.DecimalToCommaSeparated(Model.NetTaxSdAmountForCreditNote)</td>
+        </tr>
+        <tr>
+            <td>
+                Supplementary Duty Paid on Inputs Against Exports
+            </td>
+            <td class="text-center" style="text-align: center">40</td>
+
+            <td class="manual text-right" style="text-align: right">@StringGenerator.DecimalToCommaSeparated(Model.NetTaxPaidSdAmountForRawMaterialPurchaseToProduceExportProd)</td>
+        </tr>
+        <tr>
+            <td>
+                Interest on Overdue VAT (Based on note-35)
+            </td>
+            <td class="text-center" style="text-align: center">41</td>
+
+            <td class="manual text-right" style="text-align: right">@StringGenerator.DecimalToCommaSeparated(Model.NetTaxInterstAmountForDeuVat)</td>
+        </tr>
+        <tr>
+            <td>
+                Interest on Overdue SD  (Based on note-37)
+            </td>
+            <td class="text-center" style="text-align: center">42</td>
+
+            <td class="manual text-right" style="text-align: right">@StringGenerator.DecimalToCommaSeparated(Model.NetTaxInterstAmountForDeuSuppDuty)</td>
+        </tr>
+        <tr>
+            <td>
+                Fine/Penalty for Non-submission of Return
+            </td>
+            <td class="text-center" style="text-align: center">43</td>
+
+            <td class="manual text-right" style="text-align: right">@StringGenerator.DecimalToCommaSeparated(Model.NetTaxFineAndPenaltyForDelaySubmission)</td>
+        </tr>
+
+        <tr>
+            <td>
+                Other Fine/Penalty/Interest
+            </td>
+            <td class="text-center" style="text-align: center">44</td>
+
+            <td class="manual text-right" style="text-align: right">@StringGenerator.DecimalToCommaSeparated(Model.NetTaxFineAndPenaltyOthers)</td>
+        </tr>
+        <tr>
+            <td>
+                Payable Excise Duty
+            </td>
+            <td class="text-center" style="text-align: center">45</td>
+
+            <td class="manual text-right" style="text-align: right">@StringGenerator.DecimalToCommaSeparated(Model.NetTaxExciseDuty)</td>
+        </tr>
+        <tr>
+            <td>
+                Payable Development Surcharge
+            </td>
+            <td class="text-center" style="text-align: center">46</td>
+
+            <td class="manual text-right" style="text-align: right">@StringGenerator.DecimalToCommaSeparated(Model.NetTaxDevelopmentSurcharge)</td>
+        </tr>
+        <tr>
+            <td>
+                Payable ICT Development Surcharge
+            </td>
+            <td class="text-center" style="text-align: center">47</td>
+
+            <td class="manual text-right" style="text-align: right">@StringGenerator.DecimalToCommaSeparated(Model.NetTaxInformationTechnologyDevelopmentSurcharge)</td>
+        </tr>
+        <tr>
+            <td>
+                Payable Health Care Surcharge
+            </td>
+            <td class="text-center" style="text-align: center">48</td>
+
+            <td class="manual text-right" style="text-align: right">@StringGenerator.DecimalToCommaSeparated(Model.NetTaxHealthCareSurcharge)</td>
+        </tr>
+        <tr>
+            <td>
+                Payable Environmental Protection Surcharge
+            </td>
+            <td class="text-center" style="text-align: center">49</td>
+
+            <td class="manual text-right" style="text-align: right">@StringGenerator.DecimalToCommaSeparated(Model.NetTaxEnvironmentProtectionSurcharge)</td>
+        </tr>
+
+        <tr>
+            <td>
+                Net Payable VAT for treasury Deposit (35+41+43+44)
+            </td>
+            <td class="text-center" style="text-align: center">50</td>
+
+            <td class="text-right" style="text-align: right">@StringGenerator.DecimalToCommaSeparated(Model.NetPayableVATForTreasurySubmission)</td>
+        </tr>
+
+        <tr>
+            <td>
+                Net Payable SD for treasury Deposit (37+42)
+            </td>
+            <td class="text-center" style="text-align: center">51</td>
+
+            <td class="text-right" style="text-align: right">@StringGenerator.DecimalToCommaSeparated(Model.NetPayableSDForTreasurySubmission)</td>
+        </tr>
+
+        <tr>
+            <td>
+                Closing Balance of Last Tax Period (VAT)
+            </td>
+            <td class="text-center" style="text-align: center">52</td>
+
+            <td class="text-right" style="text-align:right">@StringGenerator.DecimalToCommaSeparated(Model.NetTaxVatEndingBalanceOfLastTerm)</td>
+        </tr>
+        <tr>
+            <td>
+                Closing Balance of Last Tax Period (SD)
+            </td>
+            <td class="text-center" style="text-align:center">53</td>
+
+            <td class="text-right" style="text-align:right">@StringGenerator.DecimalToCommaSeparated(Model.NetTaxSdEndingBalanceOfLastTerm)</td>
+        </tr>
+    @*</tbody>*@
+</table>

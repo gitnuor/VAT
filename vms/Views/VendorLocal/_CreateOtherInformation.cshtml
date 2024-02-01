@@ -1,0 +1,319 @@
+﻿@model vms.entity.viewModels.VendorViewModel.vmVendor
+<div class="accordion mt-3" id="accordionForm">
+    <div class="accordion-item">
+        <div class="accordion-header" id="headingOtherInformation">
+            <button class="accordion-button collapsed vms-accordion-button"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#otherInformation"
+                    aria-expanded="false"
+                    aria-controls="otherInformation">
+                Others Information
+            </button>
+        </div>
+        <div id="otherInformation"
+             class="accordion-collapse collapse"
+             aria-labelledby="headingOtherInformation"
+             data-bs-parent="#accordionForm">
+            <div class="accordion-body">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group mt-3">
+                            <label asp-for="ReferenceKey"></label>
+                            <div>
+                                <input asp-for="ReferenceKey" />
+                                <span asp-validation-for="ReferenceKey"></span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-6">
+                        <div class="form-group mt-3">
+                            <label asp-for="PostCode"></label>
+                            <div>
+                                <input asp-for="PostCode" />
+                                <span asp-validation-for="PostCode"></span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-6">
+                        <div class="form-group mt-3">
+                            <label asp-for="ServiceVatCode"></label>
+                            <div>
+                                <input asp-for="ServiceVatCode" />
+                                <span asp-validation-for="ServiceVatCode"></span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group mt-3">
+                            <label asp-for="BusinessCategoryDescription"></label>
+                            <div>
+                                <input asp-for="BusinessCategoryDescription" class="form-control  form-control-sm" />
+                                <span asp-validation-for="BusinessCategoryDescription"></span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-6">
+                        <div class="form-group mt-3">
+                            <label asp-for="BusinessCategoryId"></label>
+                            <select asp-for="BusinessCategoryId" asp-items="Model.BusinessCategoryList.CustomSelectListToSelectList()" class="searchable-dropdown" data-live-search="true" data-style="bootstrap-select-option">
+                                <option value="@null">Select Business Category</option>
+                            </select>
+                            <span asp-validation-for="BusinessCategoryId"></span>
+                        </div>
+
+                    </div>
+
+                    <div class="col-6">
+                        <div class="form-group mt-3">
+                            <label asp-for="BusinessNatureId"></label>
+                            <select asp-for="BusinessNatureId" asp-items="Model.BusinessNatureList.CustomSelectListToSelectList()" class="searchable-dropdown" data-live-search="true" data-style="bootstrap-select-option">
+                                <option value="@null">Select Business Nature</option>
+                            </select>
+                            <span asp-validation-for="BusinessNatureId"></span>
+                        </div>
+
+                    </div>
+
+                    <div class="col-6">
+                        <div class="form-group mt-3">
+                            <label asp-for="CountryId"></label>
+                            <select asp-for="CountryId" asp-items="Model.Countries.CustomSelectListToSelectList()" class="searchable-dropdown" data-live-search="true" data-style="bootstrap-select-option">
+                                <option value="@null">Select Country</option>
+                            </select>
+                            <span asp-validation-for="CountryId"></span>
+                        </div>
+
+                    </div>
+
+                    <div class="col-6">
+                        <div class="form-group mt-3">
+                            <label asp-for="DivisionOrStateId"></label>
+                            <select asp-for="DivisionOrStateId" asp-items="Model.DivisionList.CustomSelectListToSelectList()" class="searchable-dropdown" data-live-search="true" data-style="bootstrap-select-option">
+                                <option value="@null">Select Division Or State</option>
+                            </select>
+                            <span asp-validation-for="DivisionOrStateId"></span>
+                        </div>
+
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group mt-3">
+
+                            <label asp-for="CustomsAndVatcommissionarateId"></label>
+                            <select asp-for="CustomsAndVatcommissionarateId" asp-items="Model.CustomsAndVatCommissionarates.CustomSelectListToSelectList()" class="searchable-dropdown" data-live-search="true" data-style="bootstrap-select-option">
+                                <option value="@null">Select Commission</option>
+                            </select>
+                            <span asp-validation-for="CustomsAndVatcommissionarateId"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="form-group mt-3">
+                            <label asp-for="DistrictOrCityId"></label>
+                            <select asp-for="DistrictOrCityId" asp-items="Model.DistrictList.CustomSelectListToSelectList()" class="searchable-dropdown" data-live-search="true" data-style="bootstrap-select-option">
+                                <option value="@null">Select District Or City</option>
+                            </select>
+                            <span asp-validation-for="DistrictOrCityId"></span>
+                        </div>
+
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group mt-3">
+                            <label asp-for="CreditLimit"></label>
+                            <input asp-for="CreditLimit" />
+                            <span asp-validation-for="CreditLimit"></span>
+                        </div>
+
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group mt-3">
+
+                            <label asp-for="CreditPeriodInDay"></label>
+                            <input asp-for="CreditPeriodInDay" />
+                            <span asp-validation-for="CreditPeriodInDay"></span>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-check form-switch complex-form-checkbox">
+                            <input type="checkbox" asp-for="IsForeignVendor" class="form-check-input">
+                            <label asp-for="IsForeignVendor" class="form-check-label"></label>
+                            <span asp-validation-for="IsForeignVendor"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                    </div>
+
+                    <div class="col-6">
+                        <div class="form-check form-switch complex-form-checkbox">
+                            <input type="checkbox" asp-for="IsRegistered" class="form-check-input">
+                            <label asp-for="IsRegistered" class="form-check-label"></label>
+                            <span asp-validation-for="IsRegistered"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                    </div>
+
+                    <div class="col-6">
+                        <div class="form-check form-switch complex-form-checkbox">
+                            <input type="checkbox" asp-for="IsRegisteredAsTurnOverOrg" class="form-check-input">
+                            <label asp-for="IsRegisteredAsTurnOverOrg" class="form-check-label"></label>
+                            <span asp-validation-for="IsRegisteredAsTurnOverOrg"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                    </div>
+
+                    @* <div class="col-6">
+                    <div class="form-group mt-3">
+                    </div>
+                    <div class="form-group mt-3">
+                    <div class="custom-control custom-checkbox custom-control-inline">
+                    <input asp-for="IsForeignVendor" class="custom-control-input" />
+                    <label asp-for="IsForeignVendor" class="custom-control-label">Is Foreign Vendor?</label>
+                    </div>
+                    </div> *@
+                    @* <div class="form-group non-foreign">
+                    <div class="custom-control custom-checkbox custom-control-inline">
+                    <input asp-for="IsRegistered" class="custom-control-input" />
+                    <label asp-for="IsRegistered" class="custom-control-label">Is Registered?</label>
+                    </div>
+                    </div> *@
+                    @* <div class="form-group non-foreign">
+                    <div class="custom-control custom-checkbox custom-control-inline">
+                    <input asp-for="IsRegisteredAsTurnOverOrg" class="custom-control-input" />
+                    <label asp-for="IsRegisteredAsTurnOverOrg" class="custom-control-label">Is Registered As Turn Over?</label>
+                    </div>
+                    </div>
+                    </div>
+                    <div class="col-6">
+                    </div>
+                    </div>*@
+
+                    <div class="col-6">
+                        <div class="form-check form-switch complex-form-checkbox">
+                            <input type="checkbox" asp-for="IsVds" class="form-check-input">
+                            <label asp-for="IsVds" class="form-check-label"></label>
+                            <span asp-validation-for="IsVds"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="form-group mt-3">
+                            <label asp-for="Vdsrate"></label>
+                            <div>
+                                <input asp-for="Vdsrate" class="form-control  form-control-sm" readonly="readonly" />
+                                <span asp-validation-for="Vdsrate"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="form-check form-switch complex-form-checkbox">
+                            <input type="checkbox" asp-for="IsTds" class="form-check-input">
+                            <label asp-for="IsTds" class="form-check-label"></label>
+                            <span asp-validation-for="IsTds"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="form-group mt-3">
+                            <label asp-for="Tdsrate"></label>
+                            <div>
+                                <input asp-for="Tdsrate" class="form-control  form-control-sm" readonly="readonly" />
+                                <span asp-validation-for="Tdsrate"></span>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="col-6">
+                        <div class="form-check form-switch complex-form-checkbox">
+                            <input type="checkbox" asp-for="IsRegisteredUnderActNinetyFour" class="form-check-input">
+                            <label asp-for="IsRegisteredUnderActNinetyFour" class="form-check-label"></label>
+                            <span asp-validation-for="IsRegisteredUnderActNinetyFour"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="form-group mt-3">
+                            <label asp-for="RegistrationNumberUnderActNinetyFour"></label>
+                            <div>
+                                <input asp-for="RegistrationNumberUnderActNinetyFour" class="form-control  form-control-sm" readonly="readonly" />
+                                <span asp-validation-for="RegistrationNumberUnderActNinetyFour"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    @* <div class="row">
+
+
+                    <div class="col-6">
+                    <div class="form-group mt-5">
+                    <div class="custom-control custom-checkbox custom-control-inline">
+                    <input asp-for="IsVds" class="custom-control-input" />
+                    <label asp-for="IsVds" class="custom-control-label"></label>
+                    </div>
+                    </div>
+                    </div> *@
+                    @*  <div class="col-6">
+                    <div class="form-group mt-3">
+                    <label asp-for="Vdsrate"></label>
+                    <div>
+                    <input asp-for="Vdsrate" class="form-control  form-control-sm" readonly="readonly" />
+                    <span asp-validation-for="Vdsrate"></span>
+                    </div>
+                    </div>
+                    </div> *@
+
+                    @* <div class="col-6">
+                    <div class="form-group mt-5">
+                    <div class="custom-control custom-checkbox custom-control-inline">
+                    <input asp-for="IsTds" class="custom-control-input" />
+                    <label asp-for="IsTds" class="custom-control-label"></label>
+                    </div>
+                    </div>
+                    </div> *@
+                    @*  <div class="col-6">
+                    <div class="form-group mt-3">
+                    <label asp-for="Tdsrate"></label>
+                    <div>
+                    <input asp-for="Tdsrate" class="form-control  form-control-sm" readonly="readonly" />
+                    <span asp-validation-for="Tdsrate"></span>
+                    </div>
+                    </div>
+                    </div> *@
+
+                    @* <div class="col-6">
+                    <div class="form-group mt-5">
+                    <div class="custom-control custom-checkbox custom-control-inline">
+                    <input asp-for="IsRegisteredUnderActNinetyFour" class="custom-control-input" />
+                    <label asp-for="IsRegisteredUnderActNinetyFour" class="custom-control-label"></label>
+                    </div>
+                    </div>
+                    </div> *@
+                    @* <div class="col-6">
+                    <div class="form-group mt-3">
+                    <label asp-for="RegistrationNumberUnderActNinetyFour"></label>
+                    <div>
+                    <input asp-for="RegistrationNumberUnderActNinetyFour" class="form-control  form-control-sm" readonly="readonly" />
+                    <span asp-validation-for="RegistrationNumberUnderActNinetyFour"></span>
+                    </div>
+                    </div>
+                    </div>
+
+                    </div>*@
+                </div>
+            </div>
+        </div>
+    </div>

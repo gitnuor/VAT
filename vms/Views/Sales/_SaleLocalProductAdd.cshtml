@@ -1,0 +1,197 @@
+﻿@model vms.entity.viewModels.VmSaleLocal
+
+
+<div class="col-md-7 md-left-border">
+	<div class="font-weight-bold mb-3">
+		Product Information
+	</div>
+	<form class="row g-3 detail-form" id="frmProductInformation">
+		@*<div class="col-md-4 complex-form-col">
+            <label asp-for="ProductId" class="form-label complex-form-label"></label>
+            <select asp-for="ProductId" asp-items="Model.ProductSelectList" class="searchable-dropdown" data-live-search="true" data-style="bootstrap-select-option">
+                <option value="@null">Select Product</option>
+            </select>
+            <span asp-validation-for="ProductId" class="text-danger"></span>
+        </div>*@
+
+		<div class="col-md-6 complex-form-col">
+			<label asp-for="ProductId" class="form-label complex-form-label"></label>
+			<select asp-for="ProductId" class="searchable-dropdown" data-live-search="true" data-style="bootstrap-select-option">
+				<option value="@null">Select Product</option>
+				@*@if (Model.ProductForSaleList.Any())
+				{
+					foreach (var product in Model.ProductForSaleList)
+					{
+						<option value="@product.ProductId"
+						        data-product-hs-code="@product.HSCode"
+						        data-product-model="@product.ModelNo"
+						        data-product-code="@product.ProductCode"
+						        data-product-sales-unit-price="@product.SalesUnitPrice"
+						        data-product-vat-type-id="@product.ProductVatTypeId"
+						        data-product-default-vat-percent="@product.DefaultVatPercent"
+						        data-product-sd-percent="@product.SupplementaryDutyPercent"
+						        data-product-max-sale-quantity="@product.MaxSaleQty"
+						        data-product-measurement-unit-id="@product.MeasurementUnitId"
+						        data-product-measurement-unit-name="@product.MeasurementUnitName"
+						        data-is-inventory="@product.IsInventory">
+							@product.ProductDescription
+						</option>
+					}
+				}*@
+			</select>
+			<span asp-validation-for="ProductId" class="text-danger"></span>
+		</div>
+
+		<div class="col-md-6 complex-form-col">
+			<label asp-for="ProductDescription" class="form-label complex-form-label"></label>
+			<input type="text" asp-for="ProductDescription" class="form-control form-control-sm">
+			<span asp-validation-for="ProductDescription" class="text-danger"></span>
+		</div>
+
+		<div class="col-md-3 complex-form-col">
+			<label asp-for="Hscode" class="form-label complex-form-label"></label>
+			<input type="text" asp-for="Hscode" class="form-control form-control-sm">
+			<span asp-validation-for="Hscode" class="text-danger"></span>
+		</div>
+
+		<div class="col-md-3 complex-form-col">
+			<label asp-for="ProductCode" class="form-label complex-form-label"></label>
+			<input type="text" asp-for="ProductCode" class="form-control form-control-sm">
+			<span asp-validation-for="ProductCode" class="text-danger"></span>
+		</div>
+
+		<div class="col-md-3 complex-form-col d-none">
+			<label asp-for="SKUNo" class="form-label complex-form-label"></label>
+			<input type="text" asp-for="SKUNo" class="form-control form-control-sm">
+			<span asp-validation-for="SKUNo" class="text-danger"></span>
+		</div>
+
+		<div class="col-md-3 complex-form-col d-none">
+			<label asp-for="SKUId" class="form-label complex-form-label"></label>
+			<input type="text" asp-for="SKUId" class="form-control form-control-sm">
+			<span asp-validation-for="SKUId" class="text-danger"></span>
+		</div>
+
+		<div class="col-md-3 complex-form-col d-none">
+			<label asp-for="GoodsId" class="form-label complex-form-label"></label>
+			<input type="text" asp-for="GoodsId" class="form-control form-control-sm">
+			<span asp-validation-for="GoodsId" class="text-danger"></span>
+		</div>
+
+		<div class="col-md-3 complex-form-col">
+			<label asp-for="MeasurementUnitId" class="form-label complex-form-label"></label>
+			<input type="hidden" asp-for="MeasurementUnitId" class="form-control form-control-sm">
+			<input type="text" asp-for="MeasurementUnitName" readonly="readonly" class="form-control form-control-sm">
+			<span asp-validation-for="MeasurementUnitId" class="text-danger"></span>
+		</div>
+
+
+		<div class="col-md-3 complex-form-col">
+			<label asp-for="CurrentStock" class="form-label complex-form-label"></label>
+			<input type="number" asp-for="CurrentStock" class="form-control form-control-sm" readonly>
+			<span asp-validation-for="CurrentStock" class="text-danger"></span>
+		</div>
+
+		<div class="col-md-3 complex-form-col">
+			<label asp-for="UnitPrice" class="form-label complex-form-label"></label>
+			<input type="number" asp-for="UnitPrice" class="form-control form-control-sm">
+			<span asp-validation-for="UnitPrice" class="text-danger"></span>
+		</div>
+
+		<div class="col-md-3 complex-form-col">
+			<label asp-for="Quantity" class="form-label complex-form-label"></label>
+			<input type="number" asp-for="Quantity" class="form-control form-control-sm">
+			<span asp-validation-for="Quantity" class="text-danger"></span>
+			<small id="msgQuantity" class="form-text text-danger"></small>
+		</div>
+
+		<div class="col-md-3 complex-form-col">
+			<label asp-for="TotalPrice" class="form-label complex-form-label"></label>
+			<input type="text" readonly asp-for="TotalPrice" class="form-control form-control-sm">
+			<span asp-validation-for="TotalPrice" class="text-danger"></span>
+		</div>
+
+		<div class="col-md-3 complex-form-col">
+			<label asp-for="DiscountPerItem" class="form-label complex-form-label"></label>
+			<input type="number" asp-for="DiscountPerItem" class="form-control form-control-sm">
+			<span asp-validation-for="DiscountPerItem" class="text-danger"></span>
+		</div>
+		<div class="col-md-3 complex-form-col">
+			<label asp-for="TotalProductDiscount" class="form-label complex-form-label"></label>
+			<input type="number" asp-for="TotalProductDiscount" class="form-control form-control-sm">
+			<span asp-validation-for="TotalProductDiscount" class="text-danger"></span>
+		</div>
+		<div class="col-md-3 complex-form-col">
+			<label asp-for="ProductPriceWithDiscount" class="form-label complex-form-label"></label>
+			<input type="number" readonly="readonly" asp-for="ProductPriceWithDiscount" class="form-control form-control-sm">
+			<span asp-validation-for="ProductPriceWithDiscount" class="text-danger"></span>
+		</div>
+
+		<div class="col-md-3 complex-form-col">
+			<label asp-for="SupplementaryDutyPercent" class="form-label complex-form-label"></label>
+			<input type="number" asp-for="SupplementaryDutyPercent" class="form-control form-control-sm">
+			<span asp-validation-for="SupplementaryDutyPercent" class="text-danger"></span>
+		</div>
+
+
+		<div class="col-md-3 complex-form-col">
+			<label asp-for="ProductSupplementaryDuty" class="form-label complex-form-label"></label>
+			<input type="number" readonly="readonly" asp-for="ProductSupplementaryDuty" class="form-control form-control-sm">
+			<span asp-validation-for="ProductSupplementaryDuty" class="text-danger"></span>
+		</div>
+		<div class="col-md-6 complex-form-col">
+			<label asp-for="VatAblePrice" class="form-label complex-form-label"></label>
+			<input type="number" asp-for="VatAblePrice" readonly="readonly" class="form-control form-control-sm">
+			<span asp-validation-for="VatAblePrice" class="text-danger"></span>
+		</div>
+
+		<div class="col-md-6 complex-form-col">
+			<label asp-for="ProductVatTypeId" class="form-label complex-form-label"></label>
+			<select asp-for="ProductVatTypeId" class="searchable-dropdown" data-live-search="true" data-style="bootstrap-select-option" >
+				<option value="@null">Select Vat Type</option>
+				@if (Model.ProductVatTypes.Any())
+				{
+					foreach (var vattype in Model.ProductVatTypes)
+					{
+						<option value="@vattype.ProductVattypeId"
+						        data-product-default-vat-percent="@vattype.DefaultVatPercent"
+						        data-is-vat-updatable="@vattype.IsVatUpdatable">
+							@vattype.Name @*(@vattype.LocalSaleNote)*@
+						</option>
+					}
+				}
+			</select>
+			<span asp-validation-for="ProductVatTypeId" class="text-danger"></span>
+		</div>
+
+		<div class="col-md-3 complex-form-col">
+			<label asp-for="ProductVatPercent" class="form-label complex-form-label"></label>
+			<input type="number" asp-for="ProductVatPercent" class="form-control form-control-sm">
+			<span asp-validation-for="ProductVatPercent" class="text-danger"></span>
+		</div>
+
+		<div class="col-md-3 complex-form-col">
+			<label asp-for="ProductVat" class="form-label complex-form-label"></label>
+			<input type="number" readonly="readonly" asp-for="ProductVat" class="form-control form-control-sm">
+			<span asp-validation-for="ProductVat" class="text-danger"></span>
+		</div>
+
+		<div class="col-md-4 complex-form-col">
+			<label asp-for="ProductPriceWithVat" class="form-label complex-form-label"></label>
+			<input type="number" asp-for="ProductPriceWithVat" readonly="readonly" class="form-control form-control-sm">
+			<span asp-validation-for="ProductPriceWithVat" class="text-danger"></span>
+		</div>
+		<div class="col-md-4 complex-form-col">
+			<label asp-for="ProductPriceWithVatAfterDiscount" class="form-label complex-form-label"></label>
+			<input type="number" asp-for="ProductPriceWithVatAfterDiscount" readonly="readonly" class="form-control form-control-sm">
+			<span asp-validation-for="ProductPriceWithVatAfterDiscount" class="text-danger"></span>
+		</div>
+
+		<div class="col-md-2 mt-2">
+			<button type="button" class="btn  btn-primary btn-sm inline-sm-button-complex-form w-100" id="btnAddProduct"><i class="bi bi-plus-lg"></i> Add</button>
+		</div>
+		<div class="col-md-2 mt-2">
+			<button onclick="resetProductInformationField();" type="button" class="btn  btn-warning btn-sm inline-sm-button-complex-form w-100" id="btnResetProduct"><i class="bi bi-arrow-repeat"></i> Reset</button>
+		</div>
+	</form>
+</div>

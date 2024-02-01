@@ -1,0 +1,43 @@
+image: microsoft/dotnet:latest
+
+stages:
+  - build
+  - test
+  - deploy
+
+variables:
+  project: "vms"
+  publishdir: "bin//Debug//netcoreapp2.1//"
+  remotedir: "vms"
+  ftphost: "ftp://10.44.34.112"
+  ftpusername: "samnoon.mohebbo"
+  ftppassword: "mB@153519"
+
+before_script:
+  - "dotnet restore"
+
+build:
+    stage: build
+    script:
+        - "cd $project"
+        - "dotnet build"
+    artifacts:
+        paths:
+            - "vms/bin/"
+        expire_in: 1 week
+        
+test:
+    stage: test
+    script: 
+#        - "dotnet test"
+        - echo "testing"
+
+deploy:
+  stage: deploy
+  variables:
+    deploy_path: "$project"
+  script:
+    - "cd $deploy_path"
+    - "dotnet publish -c release"
+    - "apt-get update -qq && apt-get install -y -qq lftp"
+    - "lftp -e \"mirror -R $publishdir $remotedir\" -u $ftpusername,$ftppassword $ftphost"

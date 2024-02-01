@@ -1,0 +1,49 @@
+﻿@{
+	var session = Context.Session.GetComplexData<VmUserSession>(ControllerStaticData.SESSION);
+	Layout = "_LayoutReport";
+	ViewData["Title"] = "Monthly Purchase Report";
+}
+@model vms.entity.viewModels.ReportsViewModel.vmMonthlyPurchaseReport
+
+
+@section contentheader
+	{
+	<div class="p-3 page-header">
+		@ViewData["Title"]
+	</div>
+}
+
+
+
+<div class="row">
+	<div class="col-md-6 offset-3">
+		<form asp-action="PurchaseReportMonth" class="form-horizontal" target="_blank">
+			<div class="form-group">
+				<label  asp-for="From"></label>
+				<div>
+					<input asp-for="From"  type="date" />
+					<span asp-validation-for="From" class="text-danger"></span>
+				</div>
+			</div>
+			<div class="form-group mt-3">
+				<label  asp-for="To"></label>
+				<div>
+					<input asp-for="To"  type="date" />
+					<span asp-validation-for="To" class="text-danger"></span>
+				</div>
+			</div>
+			<div class="form-group mt-3">
+				<label  asp-for="ReportProcessOptionId"></label>
+				<div>
+					<select asp-for="ReportProcessOptionId" asp-items="Model.ReportOptionSelectListItems.CustomSelectListToSelectList()" >
+						<option value="@null">Select Option</option>
+					</select>
+					<span asp-validation-for="ReportProcessOptionId" class="text-danger"></span>
+				</div>
+			</div>
+			<div class="form-group mt-3 float-end">
+				<button type="submit" class="btn btn-sm btn-primary"> <i class="bi bi-file-text"></i> Process Report</button>
+			</div>
+		</form>
+	</div>
+</div>

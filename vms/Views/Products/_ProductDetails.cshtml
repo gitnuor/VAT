@@ -1,0 +1,122 @@
+﻿@model vms.entity.viewModels.VmInputOutputCoEfficient
+
+<div class="form-group col-md-2">
+    <div>
+        <label asp-for="SalesUnitPrice" class="control-label" style="font-weight: bold;">Product Details</label>
+        <div class="col-md-12 ">
+            <div class="form-group" style="font-size:small">
+                <span class="label-text" style="font-size:small">Product Name</span> : @Model.ProductName
+            </div>
+        </div>
+
+        @if (Model.HSCode != null)
+        {
+            <div class="col-md-12 ">
+                <div class="form-group" style="font-size:small">
+                    <span class="label-text" style="font-size:small">HSCode </span>: @Model.HSCode
+                </div>
+            </div>
+        }
+
+        <div class="col-md-12 ">
+            <div class="form-group" style="font-size:small">
+                <span class="label-text">Model</span> : @Model.ModelNo
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="form-group col-md-2">
+    <div>
+        <label asp-for="SalesUnitPrice" class="control-label" style="visibility:hidden">Product Details</label>
+        <div class="col-md-12 ">
+            <div class="form-group" style="font-size:small">
+                <span class="label-text" style="font-size:small">Size</span> : @Model.Size
+            </div>
+        </div>
+
+        @if (Model.HSCode != null)
+        {
+            <div class="col-md-12 ">
+                <div class="form-group" style="font-size:small">
+                    <span class="label-text" style="font-size:small">M. Unit</span>: @Model.MeasurementUnitName
+                </div>
+            </div>
+        }
+
+        <div class="col-md-12 ">
+            <div class="form-group" style="font-size:small">
+                <span class="label-text">Product Group</span> : @Model.ProductGroupName
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="form-group col-md-2">
+    <div>
+        <label asp-for="SalesUnitPrice" class="control-label" style="visibility:hidden">Product Details</label>
+        <div class="col-md-12 ">
+            <div class="form-group" style="font-size:small">
+                <span class="label-text">Product Category</span> : @Model.ProductCategoryName
+            </div>
+        </div>
+
+
+
+        @if (Model.Weight != null)
+        {
+            <div class="col-md-12 ">
+                <div class="form-group" style="font-size:small">
+                    <span class="label-text">Weight </span>: @Model.Weight
+                </div>
+            </div>
+        }
+
+        @if (Model.Variant != null)
+        {
+            <div class="col-md-12 ">
+                <div class="form-group" style="font-size:small">
+                    <span class="label-text">Variant </span>: @Model.Variant
+                </div>
+            </div>
+        }
+
+        @if (Model.Color != null)
+        {
+            <div class="col-md-12 ">
+                <div class="form-group" style="font-size:small">
+                    <span class="label-text">Color </span>: @Model.Color
+                </div>
+            </div>
+        }
+
+        @if (Model.ProductTypeName != null)
+        {
+            <div class="col-md-12">
+                <div class="form-group" style="font-size:small">
+                    <span class="label-text">ProductType </span>: @Model.ProductTypeName
+                </div>
+            </div>
+        }
+        @if (Model.Code != null)
+        {
+            <div class="col-md-12">
+                <div class="form-group" style="font-size:small">
+                    <span class="label-text">Code </span>: @Model.Code
+                </div>
+            </div>
+        }
+        @if (Model.Specification != null)
+        {
+            <div class="col-md-12">
+                <div class="form-group" style="font-size:small">
+                    <span class="label-text">Specification </span>: @Model.Specification
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
+

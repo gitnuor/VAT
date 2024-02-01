@@ -1,0 +1,138 @@
+﻿@model vms.entity.viewModels.vmMushak6P3ById
+
+		<table class="table table-bordered">
+			<tbody>
+			<tr class="text-center">
+				<td>
+					@(Model.Language == 0 ? "ক্রমিক" : "SL")
+				</td>
+				<td>
+					@(Model.Language == 0 ? "পণ্য বা সেবার বর্ণনা (প্রযোজ্য ক্ষেত্রে ব্রান্ড নামসহ)" : "Description of product or service (with brand name if applicable)")
+				</td>
+				@* <td> *@
+				@* 	@(Model.Language == 0 ? "পণ্য বা সেবার কোড" : "Product Code") *@
+				@* </td> *@
+				@*<td>
+							@(Model.Language == 0 ? "এস কে ইউ" : "SKU")
+						</td>
+						<td>
+							@(Model.Language == 0 ? "গুড্স আইডি" : "GOODS ID")
+						</td>*@
+				<td>
+					@(Model.Language == 0 ? "সরবরাহের একক" : "Unit of Supply")
+				</td>
+				<td>
+					@(Model.Language == 0 ? "পরিমাণ" : "Quantity")
+				</td>
+				<td>
+					@Html.Raw(Model.Language == 0 ? "একক মূল্য<sup>১</sup> (টাকায়)" : "Unit Price<sup>1</sup> (Taka)")
+				</td>
+				<td>
+					@Html.Raw(Model.Language == 0 ? "মোট মূল্য<sup>১</sup>/চার্জ<sup>১</sup>  (টাকায়)" : "Total Price<sup>1</sup>/Total Charge<sup>1</sup> (Taka)")
+				</td>
+				<td>
+					@(Model.Language == 0 ? "সম্পূরক শুল্কের হার" : "SD Rate")
+				</td>
+				<td>
+					@(Model.Language == 0 ? "সম্পূরক শুল্কের পরিমাণ (টাকায়)" : "SD Amount (Taka)")
+				</td>
+				<td>
+					@(Model.Language == 0 ? "মূল্য সংযোজন করের হার / সুনির্দিষ্ট কর" : "Value Added Tax Rate / Specific Tax")
+				</td>
+				<td>
+					@(Model.Language == 0 ? "মূল্য সংযোজন কর / সুনির্দিষ্ট কর এর পরিমাণ (টাকায়)" : "Amount of Value Added Tax/Specified Tax")
+				</td>
+				<td>
+					@(Model.Language == 0 ? "সকল প্রকার শুল্ক ও করসহ মূল্য/চার্জ" : "Price/Charge Including All Kinds of Duties and  Taxes")
+				</td>
+			</tr>
+			<tr class="text-center">
+				<td>(@(Model.Language == 0 ? "১" : "1"))</td>
+				<td>(@(Model.Language == 0 ? "২" : "2"))</td>
+				<td>(@(Model.Language == 0 ? "৩" : "3"))</td>
+				<td>(@(Model.Language == 0 ? "৪" : "4"))</td>
+				<td>(@(Model.Language == 0 ? "৫" : "5"))</td>
+				<td>(@(Model.Language == 0 ? "৬" : "6"))</td>
+				<td>(@(Model.Language == 0 ? "৭" : "7"))</td>
+				<td>(@(Model.Language == 0 ? "৮" : "8"))</td>
+				<td>(@(Model.Language == 0 ? "৯" : "9"))</td>
+				<td>(@(Model.Language == 0 ? "১০" : "10"))</td>
+				<td>(@(Model.Language == 0 ? "১১" : "11"))</td>
+				@* <td>(@(Model.Language == 0 ? "১২" : "12"))</td> *@
+				@*<td>(@(Model.Language == 0 ? "১৩" : "13"))</td>*@
+
+
+			</tr>
+
+
+			@if (Model.SalesTaxInvoices.Any())
+			{
+				foreach (var item in Model.SalesTaxInvoices)
+				{
+					<tr>
+						<td class="serial-cell">@item.Sl</td>
+
+						<td class="name-cell">
+							@item.ProductName
+							@*@if (!string.IsNullOrEmpty(item.BrandName))
+							{
+								<div>Brand: @item.BrandName</div>
+							}*@
+							@*@if (!string.IsNullOrEmpty(item.ModelNo))
+							{
+								<div>Model: @item.ModelNo</div>
+							}*@
+							@if (!string.IsNullOrEmpty(item.Size))
+							{
+								<div>Size: @item.Size</div>
+							}
+						</td>
+						@* <td class="name-cell">@item.ProductCode</td> *@
+						@*<td class="name-cell">@item.SKUNo</td>
+								<td class="name-cell">@item.SKUId</td>*@
+						<td class="unit-name-cell">@item.MeasurementUnitName</td>
+						<td class="amount-quantity-cell">
+							@if (item.IsMeasurable)
+							{
+								@StringGenerator.DecimalToCommaSeparated(item.Quantity)
+							}
+						</td>
+						<td class="amount-quantity-cell">
+							@if (item.IsMeasurable)
+							{
+								// TODO: for mothertel
+								@* @StringGenerator.DecimalToCommaSeparatedWithSevenDigit(item.UnitPrice) *@
+								@StringGenerator.DecimalToCommaSeparated(item.UnitPrice)
+							}
+						</td>
+						<td class="amount-quantity-cell">@StringGenerator.DecimalToCommaSeparated(item.TaxablePrice)</td>
+						<td class="amount-quantity-cell">@StringGenerator.DecimalToCommaSeparated(item.SupplementaryDutyPercent)</td>
+						<td class="amount-quantity-cell">@StringGenerator.DecimalToCommaSeparated(item.ProdSupplementaryDutyAmount)</td>
+						<td class="amount-quantity-cell">@StringGenerator.DecimalToCommaSeparated(item.VATPercent)</td>
+						<td class="amount-quantity-cell">@StringGenerator.DecimalToCommaSeparated(item.ProdVATAmount)</td>
+						<td class="amount-quantity-cell">@StringGenerator.DecimalToCommaSeparated(item.ProdPriceInclVATAndDuty)</td>
+
+					</tr>
+					// sumProductPrice += item.TaxablePrice ?? 0;
+					// sumSdAmount += item.ProdSupplementaryDutyAmount ?? 0;
+					// sumProdVatAmount += item.ProdVATAmount ?? 0;
+					// sumPriceInclVatAndDuty += item.ProdPriceInclVATAndDuty ?? 0;
+				}
+				<tr>
+					<td colspan="5" class="total-text-cell text-right">@(Model.Language == 0 ? "সর্বমোট=" : "Total")</td>
+					@* <td class="amount-quantity-cell">@(StringGenerator.DecimalToCommaSeparated(sumProductPrice))</td> *@
+					@* <td class="amount-quantity-cell"></td> *@
+					@* <td class="amount-quantity-cell">@(StringGenerator.DecimalToCommaSeparated(sumSdAmount))</td> *@
+					@* <td class="amount-quantity-cell"></td> *@
+					@* <td class="amount-quantity-cell">@(StringGenerator.DecimalToCommaSeparated(sumProdVatAmount))</td> *@
+					@* <td class="amount-quantity-cell">@(StringGenerator.DecimalToCommaSeparated(sumPriceInclVatAndDuty))</td> *@
+				</tr>
+				<tr>
+					<td colspan="5" class="total-text-cell">@(Model.Language == 0 ? "সকল প্রকার শুল্ক ও কর সহ মূল্য কথায়" : "Price Including All Kinds of Duties and  Taxes in words")</td>
+					@* <td colspan="8" class="name-cell"> @(VmsNumberToWord.ConvertAmountUsingTakaPoishaInEng(sumPriceInclVatAndDuty))</td> *@
+				</tr>
+			}
+
+			</tbody>
+
+		</table>

@@ -1,0 +1,16 @@
+﻿@model IEnumerable<vms.entity.models.AuditLog>
+@(Html.Grid(Model).Build(columns =>
+{
+    columns.Add(model => model.ObjectType.Name).Titled("Table Name");
+    columns.Add(model => model.AuditOperation.Name).Titled("Change Type");
+    columns.Add(model => model.Descriptions.Length > 50? model.Descriptions.Substring(0,50):model.Descriptions).Titled("Description");
+    columns.Add(model => model.User.UserName).Titled("User");
+    columns.Add(model => model.CreatedTime).Titled("Change Time");
+	columns.Add().Encoded(false).RenderedAs(data => Html.PartialAsync("_ActionMenu", data).Result)
+		.Titled(Html.Raw("<i class='bi bi-activity'></i>")).AppendCss("action-col-freez");
+})
+	.AppendCss("large-index-grid")
+	.Empty("No data found")
+	.Filterable(GridFilterType.Double)
+	.Sortable()
+	.Pageable())

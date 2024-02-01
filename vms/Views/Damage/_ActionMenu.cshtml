@@ -1,0 +1,11 @@
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model vms.entity.models.Damage
+@{
+	var session = Context.Session.GetComplexData<VmUserSession>(ControllerStaticData.SESSION);
+}
+
+<grid-freeze-menu>
+	<li>
+		<a class="dropdown-item" asp-action="Details" asp-route-id="@Model.DamageId" target="_blank"><i class="bi bi-info-circle"></i> Details</a>
+	</li>
+</grid-freeze-menu>

@@ -1,0 +1,145 @@
+﻿@model vms.entity.viewModels.VmPurchaseDamage
+
+@{
+    ViewData["Title"] = "Purchase Damage";
+}
+
+@section contentheader
+    {
+    <div class="p-3 page-header">
+        @ViewData["Title"]
+    </div>
+}
+
+
+<div class="row mt-3">
+    <div class="col-md-5 form-1">
+        <div class="font-weight-bold mb-3">
+            Main Information
+        </div>
+        <form class="row g-3" method="post" id="frmMainInformation">
+
+            <div class="col-md-6 complex-form-col">
+                <label asp-for="VoucherNo" ></label>
+                <input type="text" asp-for="VoucherNo" >
+                <span asp-validation-for="VoucherNo" ></span>
+            </div>
+
+            <div class="col-md-6 complex-form-col">
+                <label asp-for="NbrverifierName" ></label>
+                <input type="text" asp-for="NbrverifierName" >
+                <span asp-validation-for="NbrverifierName" ></span>
+            </div>
+
+            <div class="col-md-6 complex-form-col">
+                <label asp-for="NbrverifierDesignation" ></label>
+                <input type="text" asp-for="NbrverifierDesignation" >
+                <span asp-validation-for="NbrverifierDesignation" ></span>
+            </div>
+
+            <div class="col-md-6 complex-form-col">
+                <label asp-for="Description" ></label>
+                <input type="text" asp-for="Description" >
+                <span asp-validation-for="Description" ></span>
+            </div>
+
+        </form>
+    </div>
+    <div class="col-md-7 md-left-border form-2">
+        <div class="font-weight-bold mb-3">
+            Damage Product Information
+        </div>
+        <form class="row g-3 detail-form" id="frmProductInformation">
+
+            <div class="col-md-6 complex-form-col">
+                <label asp-for="ProductId" ></label>
+                <input type="text" asp-for="PurchaseDetailId" hidden >
+                <input type="text" asp-for="MeasurementUnitId" hidden >
+                <input type="text" asp-for="PurchaseId" hidden value="@Model.PurchaseId" >
+                <select asp-for="ProductId" >
+                    <option value="@null">Select Product</option>
+                    @if (Model.DamageDetails.Any())
+                    {
+                        foreach (var product in Model.DamageDetails)
+                        {
+                            <option value="@product.ProductId"
+                                    data-Purchase-Detail-Id="@product.PurchaseDetailId"
+                                    data-Measurement-Unit-Id="@product.MeasurementUnitId">
+                                @product.Product.Name
+                            </option>
+                        }
+                    }
+                </select>
+                <span asp-validation-for="ProductId" ></span>
+            </div>
+
+            <div class="col-md-2 complex-form-col">
+                <label asp-for="DamageQty" ></label>
+                <input type="text" asp-for="DamageQty" class="text-right">
+                <span asp-validation-for="DamageQty" ></span>
+            </div>
+
+            <div class="col-md-2 complex-form-col">
+                <label asp-for="UsableQty" ></label>
+                <input type="text" asp-for="UsableQty" class="text-right">
+                <span asp-validation-for="UsableQty" ></span>
+            </div>
+
+            <div class="col-md-2 complex-form-col">
+                <label asp-for="SuggestedNewUnitPrice" ></label>
+                <input type="text" asp-for="SuggestedNewUnitPrice" class="text-right">
+                <span asp-validation-for="SuggestedNewUnitPrice" ></span>
+            </div>
+
+            <div class="col-md-6 complex-form-col">
+                <label asp-for="DamageDescription" ></label>
+                <input type="text" asp-for="DamageDescription" >
+                <span asp-validation-for="DamageDescription" ></span>
+            </div>
+
+            <div class="col-md-2 mt-2">
+                <button type="button" class="btn  btn-primary btn-sm inline-sm-button-complex-form w-100" id="btnAddProduct"><i class="bi bi-plus-lg"></i> Add</button>
+            </div>
+            <div class="col-md-2 mt-2">
+                <button  type="button" class="btn  btn-warning btn-sm inline-sm-button-complex-form w-100" id="btnResetProduct"><i class="bi bi-arrow-repeat"></i> Reset</button>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-12 form-3">
+        <div class="font-weight-bold mt-3">
+            Damage Product List
+        </div>
+        <table id="productTable" class="table table-bordered form-table mt-3">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Damage Qty</th>
+                    <th>Usable Qty</th>
+                    <th>New Unit Price</th>
+                    <th>Damage Description</th>
+                </tr>
+            </thead>
+            <tbody id="productTableBody">
+            </tbody>
+            <tfoot>
+              
+            </tfoot>
+        </table>
+    </div>
+
+
+</div>
+
+
+<div class="col-md-12">
+    <div class="float-end">
+        <button type="button" class="btn btn-success btn-sm" id="btnSave"><i class="bi bi-check-lg"></i> Submit</button>
+        <button type="button" class="btn btn-primary btn-sm d-none" id="btnSaveDraft"><i class="bi bi-card-list"></i> Draft</button>
+        <button type="button" value="Reset" id="btnResetForm" class="btn btn-warning btn-sm"><i class="bi bi-arrow-repeat"></i> Reset</button>
+        <a asp-action="Index" class="btn btn-secondary btn-sm"><i class="bi bi-slash-circle"></i> Cancel</a>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/CustomJs/PurchaseDamage.js?vguid=@ViewStaticData.StaticFileVersionGuid"></script>
+}

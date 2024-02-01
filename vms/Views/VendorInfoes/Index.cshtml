@@ -1,0 +1,54 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+@section breadcrumb
+    {
+    <ul class="page-breadcrumb">
+        <li>
+            <a href="@Url.Action("GeneralSettings", "Organization")">Settings</a> 
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a href="@Url.Action("Index", "VendorInfoes")">Vendor Infoes</a> 
+        </li>
+    </ul>
+}
+<div class="row">
+    <div class="col-md-6">
+        <h1 class="custom-page-title">Vendor Information</h1>
+    </div>
+    <div class="col-md-5">
+        <div class="input-group" style="margin-top:10px">
+            <input type="text" class="form-control" placeholder="Search...">
+            <span class="input-group-btn">
+                <a href="javascript:;" class="btn submit">
+                    <i class="icon-magnifier"></i>
+                </a>
+            </span>
+        </div>
+    </div>
+    <div class="col-md-1">
+        <a style="margin-top:10px" href="@Url.Action("Create")" class="btn btn-success btn-sm pull-right"><i class="fa fa-plus"></i> Add</a>
+    </div>
+</div>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Code</th>
+            <th>Name</th>
+            <th>Mobile</th>
+            <th>Balance</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>V0001</td>
+            <td>Md. Sohel Rana</td>
+            <td>+8801700000000</td>
+            <td>5000</td>
+            <td>Details</td>
+        </tr>
+    </tbody>
+</table>

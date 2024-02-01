@@ -1,0 +1,11 @@
+﻿@model IEnumerable<vms.entity.models.ExportType>
+@(Html.Grid(Model).Build(columns =>
+{
+    columns.Add(model => model.ExportTypeName).Titled("Name");
+    columns.Add(model => model.ExportTypeNameInBangla).Titled("Name in Bangla").Css("ivat-bangla-font");
+})
+	.AppendCss("large-index-grid")
+	.Empty("No data found")
+	.Filterable(GridFilterType.Double)
+	.Sortable()
+	.Pageable())

@@ -1,0 +1,19 @@
+﻿@model IEnumerable<vms.entity.models.MushakSubmission>
+@(Html.Grid(Model).Build(columns =>
+{
+    columns.Add(model => model.MushakForYear).Titled("Year");
+    columns.Add(model => model.MonthName).Titled("Month");
+    columns.Add(model => model.GenerateDate).Titled("Generate").Formatted("{0:dd/MM/yyyy}");
+    columns.Add(model => model.SubmissionDate).Titled("Submission").Formatted("{0:dd/MM/yyyy}");
+    columns.Add(model => model.Organization.VatResponsiblePersonName).Titled("Responsible Person");
+    columns.Add(model => model.ClosingBalanceStatus).Titled("GetBack Closing Balance?");
+    columns.Add(model => model.MushakSubmissionType.SubmissionTypeName).Titled("Submission Type");
+    columns.Add(model => model.Organization.Name).Titled("Organization");
+    columns.Add().Encoded(false).RenderedAs(data => Html.PartialAsync("_ActionMenu", data).Result)
+		.Titled(Html.Raw("<i class='bi bi-activity'></i>")).AppendCss("action-col-freez");
+})
+	.AppendCss("large-index-grid")
+	.Empty("No data found")
+	.Filterable(GridFilterType.Double)
+	.Sortable()
+	.Pageable())

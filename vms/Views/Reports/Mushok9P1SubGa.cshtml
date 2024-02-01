@@ -1,0 +1,103 @@
+﻿@model vms.entity.viewModels.ReportsViewModel.VmMushakReturnDisplay
+@{
+    Layout = "_LayoutMushak";
+    ViewData["Title"] = "Mushak- 9.1";
+}
+@section contentheader
+    {
+    <div class="p-3 page-header">
+        @ViewData["Title"]
+        <form method="post">
+            <div class="row">
+                <div class="col-3">
+                    <label asp-for="Year" class="form-label"></label>
+                    <input autocomplete="off" asp-for="Year" class="form-control form-control-sm" />
+                    <span asp-validation-for="Year" class="text-danger"></span>
+                </div>
+                <div class="col-3"> 
+                    <label asp-for="Month" class="form-label"></label>
+                    <select asp-for="Month" asp-items="Html.GetEnumSelectList<EnumMonth>()" class="form-select form-select-sm">
+                        <option value="@null">Select</option>
+                    </select>
+                    <span asp-validation-for="Month" class="text-danger"></span>
+                </div>
+                <div class="col-3 d-none">
+                    <label asp-for="Language" class="form-label"></label>
+                    <select asp-for="Language" asp-items="Html.GetEnumSelectList<EnumLanguage>()" class="form-select form-select-sm"> 
+                        <option value="@null">Select</option>
+                    </select>
+                    <span asp-validation-for="Language" class="text-danger"></span>
+                </div>
+                <div class="col-2">
+                    <button type="submit" class="btn btn-sm btn-success inline-sm-button"> <i class="bi bi-file-text"></i> View</button>
+                    <button type="button" class="btn btn-sm btn-primary inline-sm-button" id="btnPrint"><i class="bi bi-printer"></i> Print</button>
+                </div>
+            </div>
+        </form>
+    </div>
+}
+
+
+
+<div class="report-section">
+    <div id="printableArea" class="report-margin">
+
+        @if (Model.VmMushakReturn != null)
+        {
+
+            @*@if (Model.Language == 0)
+            {
+                <partial name="_MushakReturnRowRemoved" model="Model.VmMushakReturn" />
+            }
+            else
+            {
+                <partial name="_MushakReturnRowRemovedEng" model="Model.VmMushakReturn" />
+            }*@
+	        <div class="ivat-bangla-font w-100 mushak-return-bangla">
+		        <div class="w-100 mt-2">
+			        @{
+				        if (Model.VmMushakReturn.MushakReturnSubFormGaList.Any())
+				        {
+					        var sfKas3 = Model.VmMushakReturn.MushakReturnSubFormGaList.Select(sfk => sfk.SubFormName).Distinct();
+
+					        foreach (var sfka3 in sfKas3)
+					        {
+						        <div id=""><div class="parthead">@sfka3</div></div>
+						        <partial name="MushakReturn/_ga" model="Model.VmMushakReturn.MushakReturnSubFormGaList.Where(ga => ga.SubFormName == sfka3)" />
+					        }
+				        }
+				        else
+				        {
+					        <div id=""><div class="parthead">সাবফর্ম- গ (নোট ৬, ১৮ এর জন্য প্রযোজ্য)</div></div>
+					        <partial name="MushakReturn/_ga" model="Model.VmMushakReturn.MushakReturnSubFormGaList" />
+				        }
+			        }
+		        </div>
+	        </div>
+
+        }
+    </div>
+</div>
+@section Scripts{
+    @if (Model.VmMushakReturn != null)
+    {
+<script type="text/javascript">
+//    $("#btnprint").click(function () {
+//        window.print();
+//    });
+$(document).ready(function () {
+    $("#btnPrint").click(function () {
+        //window.printJS({ printable: 'printableArea', type: 'html', css: ['@Url.Content("~/css/vmsprint.css")'] });
+        window.vmsPrint.printA4Portrait('printableArea');
+    });
+});
+</script>
+    }else{
+<script type="text/javascript">
+    $("#btnprint").click(function () {
+        window.generalUtility.message.showErrorMsg("Please generate mushak");
+    });
+</script>
+    }
+
+}

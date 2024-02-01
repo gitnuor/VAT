@@ -1,0 +1,27 @@
+﻿@model IEnumerable<vms.entity.models.Damage>
+@{
+    Layout = "_LayoutMushak";
+    ViewData["Title"] = "Mushak - 4.5 (Accidental Damage List)";
+
+}
+
+@section contentheader
+    {
+    <div class="p-3 page-header">
+        Mushak - 4.5 (Accidental Damage List)
+    </div>
+}
+
+@(Html.Grid(Model).Build(columns =>
+{
+
+    columns.Add(model => model.VoucherNo).Titled("Voucher No");
+    columns.Add(model => model.Description).Titled("Description");
+    columns.Add(model => model.PreparedOn).Titled("Prepared On");
+    columns.Add().Encoded(false).RenderedAs(data =>$"<a class='btn btn-primary btn-sm' href='{Url.Action("Mushak4P5ById")}/{data.DamageId}' role='button' target='_blank'>View</a>" ).Titled("View Report");
+})
+    .Using(GridFilterMode.Excel)
+    .Empty("No data found")
+    .Filterable()
+    .Sortable()
+    .Pageable())

@@ -1,0 +1,24 @@
+﻿@model IEnumerable<vms.entity.models.Sale>
+@{
+	var session = Context.Session.GetComplexData<VmUserSession>(ControllerStaticData.SESSION);
+}
+@(Html.Grid(Model).Build(columns =>
+{
+    columns.Add(model => model.InvoiceNo).Titled(session.InvoiceNameEng);
+    columns.Add(model => model.SalesDate).Titled("Sales Date");
+    columns.Add(model => model.VatChallanNo).Titled("Tax Inv. No.");
+    columns.Add(model => model.TaxInvoicePrintedTime).Titled("Tax Inv. Time");
+    columns.Add(model => model.Customer.Name).Titled("Cust. Name");
+    columns.Add(model => model.TotalPriceWithoutVat).Titled("Price Without VAT");
+    columns.Add(model => model.TotalVat).Titled("VAT");
+    columns.Add(model => model.Vdsamount).Titled("VDS Amount");
+    columns.Add(model => model.IsVdscertificateReceived==true?"Yes":"No").Titled("Is VDS Cert. Received?");
+    columns.Add().Encoded(false).RenderedAs(data => Html.PartialAsync("_ActionMenuSaleVds", data).Result)
+		.Titled(Html.Raw("<i class='bi bi-activity'></i>")).AppendCss("action-col-freez");
+})
+    .Using(GridFilterMode.Excel)
+    .RowAttributed(model => new { @class = model.IsVdscertificateReceived == true ? "bg-color-primary-second" : null })
+    .Empty("No data found")
+    .Filterable()
+    .Sortable()
+    .Pageable())

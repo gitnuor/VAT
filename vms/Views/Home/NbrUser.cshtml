@@ -1,0 +1,153 @@
+﻿@model vms.entity.models.Organization
+@{
+    ViewData["Title"] = "NbrUser";
+
+    Layout = "_LayoutNBR";
+}
+
+<h2>NBR OFFICIAL DASHBOARD </h2>
+
+
+
+<div class="row">
+
+
+    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <a class="dashboard-stat dashboard-stat-v2 blue" href="#">
+            <div class="visual">
+                <i class="bi bi-chat"></i>
+            </div>
+            <div class="details">
+                <div class="number">
+                      <span data-counter="counterup" data-value="105">0</span>
+                </div>
+                <div class="desc">Total NBR Companies</div>
+                <h3>@ViewBag.Name</h3>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <a class="dashboard-stat dashboard-stat-v2 purple" href="#">
+            <div class="visual">
+                <i class="fa fa-globe"></i>
+            </div>
+            <div class="details">
+                <div class="number">
+                    +  <span data-counter="counterup" data-value="45">0</span>
+                </div>
+                <div class="desc">Total 9.1 Submitions</div>
+            </div>
+        </a>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <a class="dashboard-stat dashboard-stat-v2 red" href="#">
+            <div class="visual">
+                <i class="fa fa-bar-chart-o"></i>
+            </div>
+            <div class="details">
+                <div class="number">
+                    +  <span data-counter="counterup" data-value="24">0</span>
+                </div>
+                <div class="desc">Request To Register In NBR</div>
+            </div>
+        </a>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <a class="dashboard-stat dashboard-stat-v2 green" href="#">
+            <div class="visual">
+                <i class="fa fa-shopping-cart"></i>
+            </div>
+            <div class="details">
+                <div class="number">
+                    ৳  <span data-counter="counterup" data-value="3,769000.00">0</span>
+                </div>
+                <div class="desc">Paid TAX (Current Month)</div>
+            </div>
+        </a>
+    </div>
+
+</div>
+
+<div class="row">
+
+
+
+    <div class="col-md-6 col-xs-12 border responsive nbrUser">
+
+        <div id="donutchart">
+
+        </div>
+
+    </div>
+
+    <div class="col-md-6 col-xs-12 border responsive nbrUserDiv">
+
+        <div id="table_div" class="responsive"></div>
+    </div>
+
+
+
+</div>
+
+
+
+@section Scripts{
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'Hours per Day'],
+            ['NBR Registered',     11],
+            ['Requested To Register',  3],
+          ['Not Register',  4],
+          ['Plased For Aprovel', 7],
+         
+        ]);
+
+        var options = {
+          title: '',
+          pieHole: 0.4,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+        chart.draw(data, options);
+        }
+
+
+    </script>
+
+
+    <script type="text/javascript">
+        google.charts.load('current', { 'packages': ['table'] });
+        google.charts.setOnLoadCallback(drawTable);
+
+        function drawTable() {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Company Name');
+            data.addColumn('number', 'Total Submitted VAT');
+            data.addColumn('boolean', 'Generated 9.1');
+            data.addRows([
+                ['OrganizationA', { v: 10000, f: '৳15,00,00,000' }, true],
+                ['OrganizationB', { v: 8000, f: '৳1,90,68,70,000' }, false],
+                ['OrganizationC', { v: 12500, f: '৳25,20,00,050' }, true],
+                ['Aarong', { v: 7000, f: '৳33,90,000' }, true],
+                ['Brac', { v: 7000, f: '৳15,07,50,000' }, true],
+                ['Aysha Abed Foundation', { v: 7000, f: '৳80,90,03,000' }, true],
+                ['Yellow', { v: 7000, f: '৳99,50,02,000' }, true]
+            ]);
+
+            var table = new google.visualization.Table(document.getElementById('table_div'));
+
+            table.draw(data, { showRowNumber: true, width: '100%', height: '100%' });
+        }
+    </script>
+
+
+}
+
+
+

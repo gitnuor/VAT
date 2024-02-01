@@ -1,0 +1,153 @@
+﻿@model vms.entity.viewModels.ReportsViewModel.VmMushakReturn
+
+
+<div class="row ivat-bangla-font">
+    <div class="col-2">
+        @*@if (!string.IsNullOrEmpty(firstElement.InvoiceStatus))
+            {<div class="mushak-name" style="float:left;">@firstElement.InvoiceStatus</div>}*@
+        <img src="/images/logo_bd_govt.svg" height="80px" width="80px" />
+    </div>
+    <div class="col-8 report-header">
+
+        <p class="company-name">গণপ্রজাতন্ত্রী বাংলাদেশ সরকার</p>
+        <p class="company-other-info">জাতীয় রাজস্ব বোর্ড</p>
+        <p class="company-other-info">মূল্য সংযোজন কর দাখিলপত্র</p>
+        <p class="sub-header">[বিধি ৪৭ এর উপ-বিধি (১) দ্রষ্টব্য]</p>
+    </div>
+    <div class="col-2">
+        <div class="mushak-name text-end">মূসক - ৯.১</div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-12">
+            <partial name="MushakReturn/_part1" model="Model.MushakReturnPartOne" />
+        </div>
+    </div>
+
+    <div class="row mt-2">
+        <div class="col-12">
+            <partial name="MushakReturn/_part2" model="Model.MushakReturnPartTwo" />
+        </div>
+    </div>
+
+    <div class="row mt-2">
+        <div class="col-12">
+            <partial name="MushakReturn/_part3" model="Model.MushakReturnPartThree" />
+        </div>
+    </div>
+
+    <div class="row mt-2">
+        <div class="col-12">
+            <partial name="MushakReturn/_part4" model="Model.MushakReturnPartFour" />
+        </div>
+    </div>
+
+    <div class="row mt-2">
+        <div class="col-12">
+            <partial name="MushakReturn/_part5" model="Model.MushakReturnPartFive" />
+        </div>
+    </div>
+
+    <div class="row mt-2">
+        <div class="col-12">
+            <partial name="MushakReturn/_part6" model="Model.MushakReturnPartSix" />
+        </div>
+    </div>
+
+    <div class="row mt-2">
+        <div class="col-12">
+            <partial name="MushakReturn/_part7" model="Model.MushakReturnPartSeven" />
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-12">
+            <partial name="MushakReturn/_part8" model="Model.MushakReturnPartEight" />
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-12">
+            <partial name="MushakReturn/_part9" model="Model.MushakReturnPartNineList" />
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-12">
+            <partial name="MushakReturn/_part10" model="Model.MushakReturnPartTen" />
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-12">
+            <partial name="MushakReturn/_part11" model="Model.MushakReturnPartEleven" />
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-12">
+            <partial name="MushakReturn/_part12" model="Model.MushakReturnPartOne" />
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-12">
+            @{
+                var sfKas = Model.MushakReturnSubFormKaList.Select(sfk => sfk.SubFormName).Distinct();
+
+                foreach (var sfka in sfKas)
+                {
+                    <div id="subFormKa" style="font-weight:bold !important"><div class="parthead">@sfka</div></div>
+                    <partial name="MushakReturn/_ka" model="Model.MushakReturnSubFormKaList.Where(sfk => sfk.SubFormName == sfka)" />
+
+                }
+            }
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-12">
+            <partial name="MushakReturn/_kha" model="Model.MushakReturnSubFormKhaList" />
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-12">
+            @{
+                var sfKas3 = Model.MushakReturnSubFormGaList.Select(sfk => sfk.SubFormName).Distinct();
+
+                foreach (var sfka3 in sfKas3)
+                {
+                    <div id=""><div class="parthead">@sfka3</div></div>
+                    <partial name="MushakReturn/_ga" model="Model.MushakReturnSubFormGaList" />
+                } }
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-12">
+            <partial name="MushakReturn/_gha" model="Model.MushakReturnSubFormGhaList" />
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-12">
+            <partial name="MushakReturn/_ungho" model="Model.MushakReturnSubFormUmaList" />
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-12">
+            <partial name="MushakReturn/_ca" model="Model.MushakReturnSubFormChaList" />
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-12">
+            @{
+                var sfKas7 = Model.MushakReturnSubFormChhaList.Select(sfk => sfk.SubFormName).Distinct();
+
+                foreach (var sfka7 in sfKas7)
+                {
+
+                    <div class="parthead" id="">@sfka7</div>
+                    <partial name="MushakReturn/_cha" model="Model.MushakReturnSubFormChhaList" />
+
+                }
+            }
+        </div>
+    </div>
+    @*<div id="pageFooter" class="footer">
+            <div style="display:inline;text-align:left">
+                Print Date: @StringGenerator.DateTimeToString(DateTime.Now)
+            </div>
+        </div>*@
+</div>

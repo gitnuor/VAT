@@ -1,0 +1,17 @@
+﻿@model IEnumerable<vms.entity.models.AdjustmentType>
+@{
+    ViewData["Title"] = "Adjustment Types";
+
+    var session = Context.Session.GetComplexData<VmUserSession>(ControllerStaticData.SESSION);
+}
+
+@section contentheader
+    {
+    <div class="p-3 page-header">
+        Adjustment Types
+    </div>
+}
+
+<scrollable-grid-container>
+    <partial name="_Index" model="Model" />
+</scrollable-grid-container>

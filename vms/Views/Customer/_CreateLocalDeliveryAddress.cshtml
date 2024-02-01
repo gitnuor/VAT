@@ -1,0 +1,83 @@
+﻿@model vms.entity.viewModels.CustomerViewModel.CustomerLocalCreateViewModel
+<div class="accordion mt-3" id="accordionForm">
+	<div class="accordion-item">
+		<div class="accordion-header" id="headingdeliveryAddressInformation">
+			<button
+				class="accordion-button collapsed vms-accordion-button"
+				type="button"
+				data-bs-toggle="collapse"
+				data-bs-target="#deliveryAddressInformation"
+				aria-expanded="false"
+				aria-controls="deliveryAddressInformation"
+			>
+				Delivery Address
+			</button>
+		</div>
+		<div
+			id="deliveryAddressInformation"
+			class="accordion-collapse collapse"
+			aria-labelledby="headingdeliveryAddressInformation"
+			data-bs-parent="#accordionForm"
+		>
+			<div class="accordion-body">
+				<div class="row">
+					<div class="col-6">
+						<div class="form-group mt-3">
+							<label class="form-label" asp-for="DeliveryAddress"></label>
+							<div>
+								<input asp-for="DeliveryAddress" class="form-control form-control-sm" />
+								<span asp-validation-for="DeliveryAddress" class="text-danger"></span>
+							</div>
+						</div>
+
+					</div>
+
+					<div class="col-6">
+						<div class="form-group mt-3">
+							<label class="form-label" asp-for="DeliveryContactPerson"></label>
+							<div>
+								<input asp-for="DeliveryContactPerson" class="form-control form-control-sm" />
+								<span asp-validation-for="DeliveryContactPerson" class="text-danger"></span>
+							</div>
+						</div>
+
+					</div>
+
+					<div class="col-6">
+						<div class="form-group mt-3">
+							<label class="form-label" asp-for="DeliveryContactPersonDesignation"></label>
+							<div>
+								<input asp-for="DeliveryContactPersonDesignation" class="form-control form-control-sm" />
+								<span asp-validation-for="DeliveryContactPersonDesignation" class="text-danger"></span>
+							</div>
+						</div>
+
+					</div>
+
+					<div class="col-6">
+						<div class="form-group mt-3">
+							<label class="form-label" asp-for="DeliveryContactPersonEmailAddress"></label>
+							<div>
+								<input asp-for="DeliveryContactPersonEmailAddress" class="form-control form-control-sm" />
+								<span asp-validation-for="DeliveryContactPersonEmailAddress" class="text-danger"></span>
+							</div>
+						</div>
+
+					</div>
+
+					<div class="col-6">
+						<div class="form-group mt-3">
+							<label class="form-label" asp-for="DeliveryContactPersonMobile"></label>
+							<div>
+								<input asp-for="DeliveryContactPersonMobile" class="form-control form-control-sm" />
+								<span asp-validation-for="DeliveryContactPersonMobile" class="text-danger"></span>
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

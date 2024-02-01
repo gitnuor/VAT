@@ -1,0 +1,16 @@
+﻿@model IEnumerable<vms.entity.models.SalesPriceAdjustment>
+
+@{
+	ViewData["Title"] = "Sales Price Reduce";
+}
+
+@section contentheader
+{
+	<partial name="Sales/_SalesHeader"/>
+}
+
+<div class="gray-slim-scroll-container">
+	<div class="table-scroll-container">
+		<partial name="_Index" model="Model"/>
+	</div>
+</div>

@@ -1,0 +1,25 @@
+﻿@model vms.entity.models.PurchaseReason
+
+@{
+    ViewData["Title"] = "Details";
+    
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>PurchaseReason</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Reason)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Reason)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.PurchaseReasonId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

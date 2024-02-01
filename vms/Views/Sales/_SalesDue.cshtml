@@ -1,0 +1,43 @@
+﻿@model IEnumerable<vms.entity.models.Sale>
+@{
+	var session = Context.Session.GetComplexData<VmUserSession>(ControllerStaticData.SESSION);
+}
+@(Html.Grid(Model).Build(columns =>
+{
+	columns.Add(model => model.OrgBranch.Name)
+		.Titled("Branch");;
+	columns.Add(model => model.SalesType.SalesTypeName)
+		.Titled("Type").AppendCss("text-center");;
+	columns.Add(model => model.InvoiceNo)
+		.Titled(session.InvoiceNameEng).Sortable(false).AppendCss("text-center");
+	columns.Add(model => model.SalesDate.Date)
+		.Titled("Sales Date").Formatted("{0:dd/MM/yyyy}").AppendCss("text-center");
+	columns.Add(model => model.VatChallanNo)
+		.Titled("Tax Inv. No.").Sortable(false).AppendCss("text-center");
+	columns.Add(model => model.TaxInvoicePrintedTime)
+		.Titled("Tax Inv. Time").Formatted("{0:dd/MM/yyyy hh:mm:ss tt}").AppendCss("text-center");
+	columns.Add(model => model.Customer.Name)
+		.Titled("Customer");
+	columns.Add(model => model.PaymentDueAmount)
+		.Titled("Due Amount").AppendCss("text-right").RenderedAs(model => StringGenerator.DecimalToCommaSeparated(model.PaymentDueAmount));
+	columns.Add(model => model.TotalPriceWithoutVat)
+		.Titled(Html.Raw("<div style='min-width: 60px;' data-bs-toggle='tooltip' title='Price Excluding VAT'>Price<sup><i class='bi bi-question-circle'></i></sup><div>"))
+		.AppendCss("text-right").RenderedAs(model => StringGenerator.DecimalToCommaSeparated(model.TotalPriceWithoutVat));
+	columns.Add(model => model.TotalVat)
+		.Titled("VAT").AppendCss("text-right").RenderedAs(model => StringGenerator.DecimalToCommaSeparated(model.TotalVat));
+	columns.Add(model => model.TotalSupplimentaryDuty)
+		.Titled("SD").AppendCss("text-right").RenderedAs(model => StringGenerator.DecimalToCommaSeparated(model.TotalSupplimentaryDuty));
+	columns.Add(model => model.VDS)
+		.Titled("VDS?").AppendCss("text-center");
+	columns.Add(model => model.Vdsamount)
+		.Titled("VDS Amount").AppendCss("text-right").RenderedAs(model => model.Vdsamount.DecimalToCommaSeparated());
+	columns.Add().Encoded(false).RenderedAs(data => Html.PartialAsync("_ActionMenuSalesDue", data).Result)
+		.Titled(Html.Raw("<i class='bi bi-activity'></i>")).AppendCss("action-col-freez");
+})
+	.AppendCss("large-index-grid")
+	.RowAttributed(model => new { @class = StringGenerator.CssClassForPaymentDue(model.SalesDate, model.Customer.CreditPeriodInDay) })
+	.Empty("No data found")
+	.Filterable(GridFilterType.Double)
+	.Sortable()
+	.Pageable())
+ 

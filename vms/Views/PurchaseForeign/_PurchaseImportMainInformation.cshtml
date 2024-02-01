@@ -1,0 +1,140 @@
+﻿@model vms.entity.viewModels.VmPurchaseImport
+
+<div class="font-weight-bold mb-3">
+	Main Information
+</div>
+<div>
+	<form method="post" class="row g-3" id="frmMainInformation">
+		<div class="col-md-6 complex-form-col">
+			<label asp-for="OrgBranchId" ></label>
+			<select asp-for="OrgBranchId" asp-items="Model.OrgBranchList.CustomSelectListToSelectList()" >
+				<option value="@null">Select Branch</option>
+			</select>
+			<span asp-validation-for="OrgBranchId" ></span>
+		</div>
+		<div class="col-md-6 complex-form-col">
+			<label asp-for="PurchaseReasonId" ></label>
+			<select asp-for="PurchaseReasonId" asp-items="Model.PurchaseReasonSelectList.CustomSelectListToSelectList()">
+				<option value="@null">Select Reason</option>
+			</select>
+			<span asp-validation-for="PurchaseReasonId" ></span>
+		</div>
+
+		<div class="col-md-6 complex-form-col">
+			<label asp-for="VendorId" ></label>
+			<select asp-for="VendorId" asp-items="Model.VendorSelectList.CustomSelectListToSelectList()" >
+				<option value="@null">Select Vendor</option>
+			</select>
+			<span asp-validation-for="VendorId" ></span>
+		</div>
+		<div class="col-md-6 complex-form-col">
+			<label asp-for="VendorInvoiceNo" ></label>
+			<input type="text" asp-for="VendorInvoiceNo" >
+			<span asp-validation-for="VendorInvoiceNo" ></span>
+		</div>
+
+		<div class="col-md-6 complex-form-col">
+			<label asp-for="LcNo" ></label>
+			<input type="text" asp-for="LcNo" >
+			<span asp-validation-for="LcNo" ></span>
+		</div>
+
+		<div class="col-md-6 complex-form-col">
+			<label asp-for="LcDate" ></label>
+			<input type="date" asp-for="LcDate" min='2000-01-01' max='2050-12-12' >
+			<span asp-validation-for="LcDate" ></span>
+		</div>
+
+		<div class="col-md-6 complex-form-col">
+			<label asp-for="BillOfEntry" ></label>
+			<input type="text" asp-for="BillOfEntry" >
+			<span asp-validation-for="BillOfEntry" ></span>
+		</div>
+
+		<div class="col-md-6 complex-form-col">
+			<label asp-for="BillOfEntryDate" ></label>
+			<input type="date" asp-for="BillOfEntryDate" min='2000-01-01' max='2050-12-12' >
+			<span asp-validation-for="BillOfEntryDate" ></span>
+		</div>
+
+		<div class="col-md-6 complex-form-col d-none">
+			<label asp-for="DueDate" ></label>
+			<input type="date" asp-for="DueDate" min='2000-01-01' max='2050-12-12' >
+			<span asp-validation-for="DueDate" ></span>
+		</div>
+
+		<div class="col-md-6 complex-form-col d-none">
+			<label asp-for="TermsOfLc" ></label>
+			<input type="text" asp-for="TermsOfLc" >
+			<span asp-validation-for="TermsOfLc" ></span>
+		</div>
+
+		@*<div class="col-md-6 complex-form-col">
+        <label asp-for="PoNo" ></label>
+        <input type="text" asp-for="PoNo" class="form-control form-control-sm">
+        <span asp-validation-for="PoNo" ></span>
+        </div>*@
+
+		<div class="col-md-6 complex-form-col d-none">
+			<label asp-for="InvoiceNo" ></label>
+			<input type="text" asp-for="InvoiceNo" >
+			<span asp-validation-for="InvoiceNo" ></span>
+		</div>
+		<div class="col-md-6 complex-form-col">
+			<label asp-for="VoucherNo" ></label>
+			<input type="text" asp-for="VoucherNo" >
+			<span asp-validation-for="VoucherNo" ></span>
+		</div>
+		<div class="col-md-6 complex-form-col">
+			<label asp-for="PurchaseDate" ></label>
+			<input type="date" asp-for="PurchaseDate" min='2000-01-01' max='@DateTime.Now.ToString("yyyy-MM-dd")'>
+			<span asp-validation-for="PurchaseDate" ></span>
+		</div>
+
+		@*<div class="col-md-6 complex-form-col">
+        <label asp-for="AtpDate" ></label>
+        <input type="date" asp-for="AtpDate" min='2000-01-01' max='2050-12-12' class="form-control form-control-sm">
+        <span asp-validation-for="AtpDate" ></span>
+        </div>
+
+
+        <div class="col-md-6 complex-form-col">
+        <label asp-for="VatCommissionarate" ></label>
+        <select asp-for="VatCommissionarate" asp-items="Model.VatCommissionarateList" class="searchable-dropdown" data-live-search="true" data-style="bootstrap-select-option">
+        <option value="@null">Vat Commissionarate</option>
+        </select>
+        <span asp-validation-for="VatCommissionarate" ></span>
+        </div>
+
+        <div class="col-md-6 complex-form-col">
+        <label asp-for="AtpbankId" ></label>
+        <select asp-for="AtpbankId" asp-items="Model.AtpBankList" class="searchable-dropdown" data-live-search="true" data-style="bootstrap-select-option">
+        <option value="@null">Select Bank</option>
+        </select>
+        <span asp-validation-for="AtpbankId" ></span>
+        </div>
+
+        <div class="col-md-6 complex-form-col">
+        <label asp-for="AtpbankBranchName" ></label>
+        <input type="text" asp-for="AtpbankBranchName" class="form-control form-control-sm">
+        <span asp-validation-for="AtpbankBranchName" ></span>
+        </div>
+
+        <div class="col-md-6 complex-form-col d-none">
+        <input type="hidden" asp-for="EconomicCodeId" class="form-control form-control-sm">
+        </div>
+
+        <div class="col-md-6 complex-form-col">
+        <label asp-for="AtpchallanNo" ></label>
+        <input type="text" asp-for="AtpchallanNo" class="form-control form-control-sm">
+        <span asp-validation-for="AtpchallanNo" ></span>
+        </div>
+
+        <div class="col-md-6 complex-form-col">
+        <label asp-for="AdvTaxPaidAmount" ></label>
+        <input type="text" asp-for="AdvTaxPaidAmount" class="form-control form-control-sm">
+        <span asp-validation-for="AdvTaxPaidAmount" ></span>
+        </div>*@
+
+	</form>
+</div>

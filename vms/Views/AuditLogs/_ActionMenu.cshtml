@@ -1,0 +1,13 @@
+﻿@model vms.entity.models.AuditLog
+@{
+	var session = Context.Session.GetComplexData<VmUserSession>(ControllerStaticData.SESSION);
+}
+
+<grid-freeze-menu>
+	@if (UserAuthorization.Check(FeatureList.AUDIT_LOGS_CAN_VIEW_DETAILS, session.Rights))
+	{
+		<li>
+			<a class="dropdown-item" asp-action="Details" asp-route-id="@Model.EncryptedId"><i class="bi bi-info-circle"></i> Details</a>
+		</li>
+	}
+</grid-freeze-menu>

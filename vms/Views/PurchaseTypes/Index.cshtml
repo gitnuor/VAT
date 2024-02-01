@@ -1,0 +1,64 @@
+﻿@model IEnumerable<vms.entity.models.PurchaseType>
+
+
+
+
+    <div class="row">
+        <div class="col-md-6">
+            <h1 class="custom-page-title">Purchase Types</h1>
+        </div>
+        <div class="col-md-5">
+            <div class="input-group mt-3">
+                <input type="text" class="form-control" placeholder="Search...">
+                <span class="input-group-btn">
+                    <a href="javascript:;" class="btn submit">
+                        <i class="icon-magnifier"></i>
+                    </a>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-1">
+            <a href="@Url.Action("Create","PurchaseTypes")" class="btn btn-success btn-sm pull-right mt-2"><i class="bi bi-plus-lg"></i> Add</a>
+        </div>
+    </div>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                   
+                    <div class="btn-group">
+                        <div class="dropdown">
+                            <a href="javascript:;" class="dropdown-toggle text-decoration-none" data-bs-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                                <span class=""> Action </span>
+                                <i class="fa fa-angle-down"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-default">
+                                <li>
+                                    <a asp-action="Edit" asp-route-id="@item.PurchaseTypeId"><i class="icon-user"></i> Edit</a>
+
+                                </li>
+                                <li>
+                                    <a asp-action="Details" asp-route-id="@item.PurchaseTypeId"><i class="icon-calendar"></i> Details</a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

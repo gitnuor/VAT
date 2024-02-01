@@ -1,0 +1,4 @@
+>> https://gitlab.bracits.com/appservice/java/vms
+>> user: noor@bracits.com password:Password1.
+>> user: sabbir.osmani@bracits.com password:Password1@
+>> "dev": "Data Source=10.42.65.188; Database=iVat_main; User ID=sa; Password=Password1@;       TrustServerCertificate=True;",

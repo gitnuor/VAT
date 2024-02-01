@@ -1,0 +1,224 @@
+﻿@model IEnumerable<vms.entity.StoredProcedureModel.HTMLMushak.Sp6p5>
+@{
+    ViewData["Title"] = "Mushak 6.5";
+
+    var firstElement = Model.First();
+}
+
+
+
+<style>
+
+    .MreturnHeader {
+        text-align: center;
+        background-color: #ffedbe;
+    }
+
+
+    .Returntd {
+        text-align: left;
+    }
+
+    .Returntdhead {
+        text-align: center;
+        background-color: #cfcfcf;
+    }
+
+    .ReturntdEmpty {
+        background-color: lightgray;
+    }
+
+    .tdp1 {
+        width: 320px;
+    }
+
+    .tdp2 {
+        width: 30px;
+        text-align: center;
+    }
+
+    .report-margin {
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+</style>
+
+
+
+<div class="report-margin">
+    <div class="container-fluid">
+        <div class="col-xs-12">
+
+            <div class="col-xs-3">
+
+                <img src="~/images/logo_bd_govt.svg" style="height :100px;" />
+
+
+            </div>
+
+            
+            <div class="col-xs-6" style="text-align:center">
+
+                <h4>গণপ্রজাতন্ত্রী বাংলাদেশ সরকার</h4>
+                <h4>জাতীয় রাজস্ব বোর্ড</h4>
+                <h4>কেন্দ্রীয় নিবন্ধিত প্রতিষ্ঠানের পণ্য হস্তান্তর চালানপত্র</h4>
+                <h4>[বিধি ৪০ এর উপ-বিধি (১) এর দফা (ঙ)  দ্রষ্টব্য]</h4>
+
+            </div>
+
+            <div class="col-xs-3 pull-right">
+                <h4 style="color:green; border:solid; border-color:cornflowerblue; text-align:center"> মূসক - ৬.৫</h4>
+
+
+
+            </div>
+            <div class="col-xs-12">
+
+
+                <h5>নিবন্ধিত ব্যক্তি নামঃ  @firstElement.PareName </h5>
+                <h5> নিবন্ধিত ব্যক্তির বিআইএনঃ  @firstElement.PareBin </h5>
+                <h5>প্রেরণকারী ইউনিত/শাখা/পণ্যাগারের নাম ও ঠিকানাঃ  @firstElement.SenName ,@firstElement.SenAddre</h5>
+                <h5>গ্রহীতা ইউনিট/শাখা/পণ্যাগারের নাম ও ঠিকানাঃ  @firstElement.ReciName , @firstElement.ReciAddre </h5>
+
+
+
+            </div>
+        
+
+            <div class="col-xs-12">
+
+
+                <div class="col-xs-4" style="text-align:right">
+
+
+                    <h5>চালান নম্বরঃ @firstElement.InvoiceNo </h5>
+                    <h5>ইস্যুর তারিখঃ @firstElement.SalesDate  </h5>
+                    <h5>ইস্যুর সময়ঃ  @firstElement.SalesDate</h5>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-xs-12">
+
+            <table class="table table-bordered">
+
+
+                <tbody style="text-align:center">
+
+
+                    <tr>
+                        <td>
+                            ক্রমিক
+                            সংখ্য
+                        </td>
+                        <td>
+                            পণ্যের
+                            (প্রযোজ্য
+                            ক্ষেত্রে সুনির্দিষ্ট
+                            ব্রান্ড নামসহ)
+                            বিবরণ
+                        </td>
+                        <td>
+                            পরিমাণ
+                        </td>
+                        <td>
+                            কর ব্যতীত মূল্য
+                        </td>
+                        <td>
+                            প্রযোজ্য
+                            করের
+                            পরিমাণ
+                        </td>
+                        <td>
+                            মন্তব্য
+                        </td>
+
+
+
+
+                    </tr>
+
+
+
+
+                    <tr>
+                        <td>১</td>
+                        <td>২</td>
+                        <td>৩</td>
+                        <td>৪</td>
+                        <td>৫</td>
+                        <td>৬</td>
+                    </tr>
+
+
+
+
+
+
+
+
+                    @if (Model.Any())
+                    {
+                        int i = 1;
+                        foreach (var item in Model)
+                        {
+
+
+                            <tr>
+
+                                <td>@i</td>
+                                <td>  @item.ProduName</td>
+                                <td>@item.Qty</td>
+
+                                <td>@item.Price</td>
+                                <td>@item.VtaAmount</td>
+                                <td> </td>
+
+
+
+                            </tr>
+
+                            i++;
+                        }
+                    }
+
+
+
+
+
+                </tbody>
+
+
+
+            </table>
+
+
+
+        </div>
+
+
+        <div class="col-xs-12">
+
+
+
+
+
+            <h5 style="font-weight: bold;">প্রতিষ্ঠান কর্তৃপক্ষদায়িত্ব প্রাপ্ত ব্যক্তির নাম: @firstElement.PareVatPName </h5>
+            <h5 style="font-weight: bold;">পদবী:  @firstElement.PareVatPDes </h5>
+
+            <h5>  স্বাক্ষর : </h5>
+            <h5>  সীল: </h5>
+
+
+
+        </div>
+
+
+    </div>
+</div>
+
+

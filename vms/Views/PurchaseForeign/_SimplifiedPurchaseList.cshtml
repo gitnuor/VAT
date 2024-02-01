@@ -1,0 +1,19 @@
+﻿@model IEnumerable<vms.entity.models.ExcelSimplifiedPurchase>
+
+@(Html.Grid(Model).Build(columns =>
+{
+    columns.Add(model => model.PurchaseType).Titled("Type").Sortable(false).AppendCss("text-align-left list-table-td");
+    columns.Add(model => model.VendorName).Titled("Vendor Name").Sortable(false).AppendCss("text-align-left list-table-td");
+    columns.Add(model => model.VendorAddress).Titled("Vendor Address").Sortable(false).AppendCss("text-align-left list-table-td");
+    columns.Add(model => model.BranchName).Titled("Branch").Sortable(false).AppendCss("text-align-left list-table-td");
+    columns.Add(model => model.ProductGroupName).Titled("Product Group").Sortable(false).AppendCss("text-align-left list-table-td");
+    columns.Add(model => model.ProductName).Titled("Product").Sortable(false).AppendCss("text-align-left list-table-td");
+    columns.Add(model => model.Quantity).Titled("Qty").Sortable(false).AppendCss("text-align-center list-table-td");
+    columns.Add(model => model.MeasurementUnitName).Titled("Unit").Sortable(false).AppendCss("text-align-center list-table-td");
+    columns.Add(model => model.UnitPrice).Titled("Unit Price").Sortable(false).AppendCss("text-align-right list-table-td");
+}).AppendCss("purchase-index-grid")
+    .Using(GridFilterMode.Excel)
+    .Empty("No data found")
+    .Filterable()
+    .Sortable()
+    .Pageable()) 

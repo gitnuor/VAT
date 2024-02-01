@@ -1,0 +1,26 @@
+﻿CREATE TABLE [dbo].[MushakReturnPayment] (
+    [MushakReturnPaymentId]          INT             IDENTITY (1, 1) NOT NULL,
+    [OrganizationId]                 INT             NOT NULL,
+    [CustomsAndVATCommissionarateId] INT             NOT NULL,
+    [MushakYear]                     INT             NOT NULL,
+    [MushakMonth]                    INT             NOT NULL,
+    [MushakReturnPaymentTypeId]      INT             NOT NULL,
+    [PaidAmount]                     DECIMAL (18, 2) NOT NULL,
+    [PaymentDate]                    DATETIME        NOT NULL,
+    [BankBranchId]                   INT             NOT NULL,
+    [IsSubmitted]                    BIT             NOT NULL,
+    [TreasuryChallanNo]              NVARCHAR (50)   NULL,
+    [SubimissionDate]                DATETIME        NULL,
+    [SubmissionEntryBy]              INT             NULL,
+    [SubmissionEntryDate]            DATETIME        NULL,
+    [ReferenceKey]                   NVARCHAR (100)  NULL,
+    [CreatedBy]                      INT             NULL,
+    [CreatedTime]                    DATETIME        NULL,
+    [ApiTransactionId]               BIGINT          NULL,
+    CONSTRAINT [PK_MushakReturnPayment] PRIMARY KEY CLUSTERED ([MushakReturnPaymentId] ASC),
+    CONSTRAINT [FK_MushakReturnPayment_BankBranch] FOREIGN KEY ([BankBranchId]) REFERENCES [dbo].[BankBranch] ([BankBranchId]),
+    CONSTRAINT [FK_MushakReturnPayment_CustomsAndVATCommissionarate] FOREIGN KEY ([MushakReturnPaymentTypeId]) REFERENCES [dbo].[CustomsAndVATCommissionarate] ([CustomsAndVATCommissionarateId]),
+    CONSTRAINT [FK_MushakReturnPayment_MushakReturnPaymentType] FOREIGN KEY ([MushakReturnPaymentTypeId]) REFERENCES [dbo].[MushakReturnPaymentType] ([MushakReturnPaymentTypeId]),
+    CONSTRAINT [FK_MushakReturnPayment_Organizations] FOREIGN KEY ([OrganizationId]) REFERENCES [dbo].[Organizations] ([OrganizationId])
+);
+

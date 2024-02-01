@@ -1,0 +1,205 @@
+﻿@model vms.entity.StoredProcedureModel.MushakReturn.MushakReturnPartFour
+
+<table class="table table-bordered">
+    <thead>
+
+        <tr>
+
+            <th class="MreturnHeader" colspan="5">
+
+                <h4> Part-4:PURCHASE - INPUT TAX</h4>
+            </th>
+        </tr>
+    </thead>
+    <tbody class="Returntd">
+        <tr>
+            <td colspan="3">
+                1) If all the products/services you supply are standard rated,fill up note 10-20.
+                2) All the products/services you supply are not standard rated or input tax credit not taken within
+                stipulated time period under section 46, fill up  note 21-22.
+                3) If all the products/services you supply consist of both standard rated and non-standard rated, then fill
+                up note 10-20 for the raw materials that were used to produce/supply standard rated goods/services
+                and fill  uo note 21-22 for the raw materials that were used to produce/supply non-standard rated
+                goods/services and show the value proportionately in note 10-22 as applicable.
+
+
+            </td>
+
+        </tr>
+
+
+        <tr class="Returntdhead">
+            <td colspan="2"> Nature of Purchase </td>
+            <td>Note</td>
+            <td>Value (a)</td>
+
+            <td>VAT (b)</td>
+        </tr>
+
+        <tr>
+            <td rowspan="2" style="width:300px;">
+                Zero Rated Goods/Service
+            </td>
+            <td>Local Purchase</td>
+            <td style="text-align:center;">10</td>
+            <td style="text-align:right;">@Model.ZeroVatProdLocalPurchaseAmount</td>
+
+            <td class="ReturntdEmpty"></td>
+            <td><a href="#subFormKa" class="ReturntdEmpty">Sub-form</a></td>
+        </tr>
+
+        <tr>
+            <td>
+                Import
+            </td>
+
+            <td style="text-align:center;"> 11</td>
+
+            <td style="text-align:right;">@Model.ZeroVatProdImportAmount       </td>
+            <td class="ReturntdEmpty"></td>
+            <td><a href="#subFormKa" class="ReturntdEmpty">Sub-form</a></td>
+        </tr>
+
+        <tr>
+            <td rowspan="2">
+                Exempted Goods/Service
+            </td>
+            <td>Local Purchase</td>
+            <td style="text-align:center;">12</td>
+            <td style="text-align:right;">@Model.VatExemptedProdLocalPurchaseAmount</td>
+
+            <td class="ReturntdEmpty"></td>
+            <td><a href="#subFormKa" class="ReturntdEmpty">Sub-form</a></td>
+        </tr>
+
+        <tr>
+            <td>
+                Import
+            </td>
+
+            <td style="text-align:center;">13</td>
+            <td style="text-align:right;">@Model.VatExemptedProdImportAmount</td>
+
+            <td class="ReturntdEmpty"></td>
+            <td><a href="#subFormKa" class="ReturntdEmpty">Sub-form</a></td>
+        </tr>
+
+        <tr>
+            <td rowspan="2">
+               Standard Rated Goods/Service
+            </td>
+            <td>Local Purchase</td>
+            <td style="text-align:center;">14</td>
+            <td style="text-align:right;">@Model.OtherThanStandardVatProdLocalPurchaseAmount   </td>
+            <td style="text-align:right;">@Model.OtherThanStandardVatProdLocalPurchaseVatAmount</td>
+
+            <td><a href="#subFormKa">Sub-form</a></td>
+        </tr>
+
+        <tr>
+            <td>
+                Import
+            </td>
+
+            <td style="text-align:center;">15</td>
+            <td style="text-align:right;">@Model.OtherThanStandardVatProdImportAmount   </td>
+            <td style="text-align:right;">@Model.OtherThanStandardVatProdImportVatAmount</td>
+
+            <td><a href="#subFormKa">Sub-form</a></td>
+        </tr>
+
+        <tr>
+            <td rowspan="2">
+                Goods/Service Other than Standard Rate
+            </td>
+            <td>c</td>
+            <td style="text-align:center;">16</td>
+            <td style="text-align:right;">@Model.StandardVatProdLocalPurchaseAmount</td>
+            <td style="text-align:right;">@Model.StandardVatProdLocalPurchaseVatAmount</td>
+
+            <td><a href="#subFormKa"> Sub-form</a></td>
+        </tr>
+
+        <tr>
+            <td>
+                Import
+            </td>
+
+            <td style="text-align:center;">17</td>
+            <td style="text-align:right;">@Model.StandardVatProdImportAmount   </td>
+            <td style="text-align:right;">@Model.StandardVatProdImportVatAmount</td>
+
+            <td><a href="#subFormKa">Sub-form</a></td>
+        </tr>
+
+
+
+        <tr>
+            <td>
+                Goods/Service Based on Specific VAT
+            </td>
+            <td>Goods/Service</td>
+            <td style="text-align:center;">18</td>
+            <td style="text-align:right;">@Model.FixedVatProdLocalPurchaseAmount   </td>
+            <td style="text-align:right;">@Model.FixedVatProdLocalPurchaseVatAmount</td>
+
+            <td>Sub-form</td>
+        </tr>
+
+        <tr>
+            <td rowspan="2">
+                Goods/Service Not Admissible for Credit(Local Purchase)
+            </td>
+            <td> From Turnover Tax Units</td>
+            <td style="text-align:center;">19</td>
+            <td style="text-align:right;">@Model.NonRebatableProdLocalPurchaseFromTurnOverOrgAmount   </td>
+            <td style="text-align:right;">@Model.NonRebatableProdLocalPurchaseFromTurnOverOrgVatAmount</td>
+
+            <td><a href="#subFormKa">Sub-form</a></td>
+        </tr>
+
+        <tr>
+            <td>
+               From Unregistered Entities
+            </td>
+
+            <td style="text-align:center;">20</td>
+            <td style="text-align:right;">@Model.NonRebatableProdLocalPurchaseFromNonRegOrgAmount  </td>
+            <td style="text-align:right;">@Model.NonRebatableProdLocalPurchaseFromNonRegOrgVatAmount</td>
+
+            <td><a href="#subFormKa">Sub-form</a></td>
+        </tr>
+
+        <tr>
+            <td rowspan="2">
+                Goods/Service Not Admissible for Credit (Taxpayers who sell only Exempted/Specific VAT and Goods/Service Other than Standard Rate/Credits not taken within stipulated time)
+            </td>
+            <td>Local Purchase</td>
+            <td style="text-align:center;">21</td>
+            <td style="text-align:right;">@Model.NonRebatableProdLocalPurchaseByOrgWhoSellOtherThanStandardVatProdAmount  </td>
+            <td style="text-align:right;">@Model.NonRebatableProdLocalPurchaseByOrgWhoSellOtherThanStandardVatProdVatAmount</td>
+
+            <td><a href="#subFormKa">Sub-form</a></td>
+        </tr>
+        <tr>
+            
+            <td>Import </td>
+            <td style="text-align:center;">22</td>
+            <td style="text-align:right;">@Model.NonRebatableProdImportByOrgWhoSellOtherThanStandardVatProdAmount </td>
+            <td style="text-align:right;">@Model.NonRebatableProdImportByOrgWhoSellOtherThanStandardVatProdVatAmount</td>
+
+            <td><a href="#subFormKa">Sub-form</a></td>
+        </tr>
+
+        <tr>
+            <td colspan="2">
+               Total Input Tax Credit 
+            </td>
+
+            <td style="text-align:center;">23</td>
+            <td style="text-align:right;" class="ReturntdEmpty">@Model.TotalRawMaterialPurchaseAmount</td>
+            <td style="text-align:right;">@Model.TotalRawMaterialRebateAmount</td>
+            <td> </td>
+        </tr>
+    </tbody>
+</table>

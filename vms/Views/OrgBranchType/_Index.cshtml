@@ -1,0 +1,11 @@
+﻿@model IEnumerable<vms.entity.models.OrgBranchType>
+@(Html.Grid(Model).Build(columns =>
+{
+    columns.Add(model => model.BranchTypeName).Titled("Name");
+    columns.Add(model => model.BranchTypeNameBangla).Titled("Name in Bangla").Css("ivat-bangla-font"); 
+})
+	.AppendCss("large-index-grid")
+	.Empty("No data found")
+	.Filterable(GridFilterType.Double)
+	.Sortable()
+	.Pageable())

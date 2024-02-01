@@ -1,0 +1,47 @@
+﻿@model vms.entity.viewModels.VmPurchaseLocal
+
+<div class="font-weight-bold mt-3">
+    Product List
+</div>
+<div class="table-responsive">
+    <table id="productTable" class="table table-bordered form-table mt-3 align-top">
+        <thead>
+            <tr>
+                <th>Product</th>
+                @*<th>SKU</th>
+                <th>Goods ID</th>*@
+                <th>M. Unit</th>
+                <th>Price/Unit</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Discount</th>
+                <th>Price (-Disc)</th>
+                <th>SD</th>
+                <th>VAT-able Price</th>
+                <th>VAT Type</th>
+                <th>VAT</th>
+                <th>Price (+SD+VAT)</th>
+                <th>Price (+SD+VAT-Disc.)</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody id="productTableBody">
+        </tbody>
+        <tfoot>
+        <tr class="text-end">
+            @*<th colspan="6">Total</th>*@
+            <th colspan="4">Total</th>
+            <th id="productTotalPrice">0</th>
+            <th id="productTotalDiscount">0</th>
+            <th id="productTotalPriceAfterDiscount">0</th>
+            <th id="productTotalSd">0</th>
+            <th id="productTotalVatablePrice">0</th>
+            <th></th>
+            <th id="productTotalVat">0</th>
+            <th id="productTotalPriceWithVat">0</th>
+            <th id="productTotalPriceWithVatAfterDiscount">0</th>
+            <th></th>
+        </tr>
+        </tfoot>
+    </table>
+</div>

@@ -1,0 +1,212 @@
+﻿@model vms.entity.models.OrgBranch
+@{
+	ViewData["Title"] = "Create";
+}
+
+@section contentheader
+{
+	<div class="p-3 page-header">
+		Create Branch
+	</div>
+}
+
+<div class="row">
+	<div class="col-md-4 offset-4">
+		<form asp-action="Create" class="form-horizontal" id="frmusercreate">
+			<div class="form-body">
+				<div class="form-group">
+					<label asp-for="Name">Name</label>
+					<div>
+						<input asp-for="Name"/>
+						<span asp-validation-for="Name"></span>
+					</div>
+				</div>
+
+				<div class="form-group mt-3">
+					<label asp-for="BusinessCategoryDescription">Business Category Description</label>
+					<div>
+						<input asp-for="BusinessCategoryDescription"/>
+						<span asp-validation-for="BusinessCategoryDescription"></span>
+					</div>
+				</div>
+
+				<div class="form-group mt-3">
+					<label asp-for="Code"></label>
+					<div>
+						<input asp-for="Code"/>
+						<span asp-validation-for="Code"></span>
+					</div>
+				</div>
+
+				<div class="form-group required mt-3">
+					<label class="form-label">Address</label>
+					<div>
+						<input asp-for="Address"/>
+						<span asp-validation-for="Address"></span>
+					</div>
+				</div>
+
+				<div class="form-group mt-3">
+					<label asp-for="Mobile"></label>
+					<div>
+						<input asp-for="Mobile"/>
+						<span asp-validation-for="Mobile"></span>
+					</div>
+				</div>
+
+				<div class="form-group mt-3">
+					<label asp-for="EmailAddress">Email Address</label>
+					<div>
+						<input asp-for="EmailAddress"/>
+						<span asp-validation-for="EmailAddress"></span>
+					</div>
+				</div>
+
+				<div class="form-group mt-3">
+					<label asp-for="PostalCode">Post-Code</label>
+					<div>
+						<input asp-for="PostalCode"/>
+						<span asp-validation-for="PostalCode"></span>
+					</div>
+				</div>
+
+				<div class="form-group mt-3">
+					<label asp-for="OrgBranchTypeId">Branch Type</label>
+					<div>
+						<select asp-for="OrgBranchTypeId" asp-items="Model.OrgBranchTypeList.CustomSelectListToSelectList()" >
+							<option value="@null">Select</option>
+						</select>
+						<span asp-validation-for="OrgBranchTypeId"></span>
+					</div>
+				</div>
+
+
+				<div class="form-group  mt-3">
+					<label asp-for="SelectedCountryId">Country</label>
+					<div>
+						@Html.DropDownListFor(model => Model.SelectedCountryId, new SelectList(Model.CountryIds, "Key", "Value", Model.SelectedCountryId), "Select", new { @class = "form-select form-select-sm" })
+						<span asp-validation-for="SelectedCountryId"></span>
+					</div>
+				</div>
+
+
+				<div class="form-group required mt-3">
+					<label class="form-label">District</label>
+					<div>
+
+						@Html.DropDownListFor(x => Model.DistrictId, new SelectList(Model.DistrictList, "Id", "Name"), "Select", htmlAttributes: new { @class = "form-select form-select-sm" })
+						<span asp-validation-for="DistrictId"></span>
+					</div>
+				</div>
+				<div class="form-group required mt-3">
+					<label class="form-label">Business Nature : </label>
+					<div>
+						@Html.DropDownListFor(model => Model.SelectedBusinessNatureId, new SelectList(Model.BusinessNatures, "Key", "Value", Model.SelectedBusinessNatureId), "Select", new { @class = "form-select form-select-sm" })
+						<span asp-validation-for="SelectedBusinessNatureId"></span>
+					</div>
+				</div>
+
+				<div class="form-group required mt-3">
+					<label class="form-label">Business Category</label>
+					<div>
+						@Html.DropDownListFor(model => Model.SelectedBusinessCategoryId, new SelectList(Model.BusinessCategories, "Key", "Value", Model.SelectedBusinessNatureId), "Select", new { @class = "form-select form-select-sm" })
+						<span asp-validation-for="SelectedBusinessCategoryId"></span>
+					</div>
+				</div>
+
+
+				<div class="form-group required mt-3">
+					<label class="form-label">Financial Activity</label>
+					<div>
+						@Html.DropDownListFor(model => Model.SelectedFinancialActivityNatureId, new SelectList(Model.FinancialActivityNatures, "Key", "Value", Model.SelectedFinancialActivityNatureId), "Select", new { @class = "form-select form-select-sm" })
+						<span asp-validation-for="SelectedFinancialActivityNatureId"></span>
+					</div>
+				</div>
+
+				<div class="form-group required mt-3">
+					<label class="form-label">Vat Responsible Person Name</label>
+					<div>
+						<input asp-for="VatResponsiblePersonName"/>
+						<span asp-validation-for="VatResponsiblePersonName"></span>
+					</div>
+				</div>
+
+				<div class="form-group required mt-3">
+					<label class="form-label">VAT Responsible Person Designation</label>
+					<div>
+						<input asp-for="VatResponsiblePersonDesignation"/>
+						<span asp-validation-for="VatResponsiblePersonDesignation"></span>
+					</div>
+				</div>
+
+				<div class="form-group required mt-3">
+					<label class="form-label">VAT Responsible Person User Name (Email Address)</label>
+					<div>
+						<input asp-for="VatResponsiblePersonEmailAddress"/>
+						<span asp-validation-for="VatResponsiblePersonEmailAddress"></span>
+					</div>
+				</div>
+				<div class="form-group required mt-3">
+					<label class="form-label">VAT Responsible Person Mobile</label>
+					<div>
+						<input asp-for="VatResponsiblePersonMobileNo"/>
+						<span asp-validation-for="VatResponsiblePersonMobileNo"></span>
+					</div>
+				</div>
+
+
+				<div class="form-group required hidden">
+					<label class="form-label">User Name</label>
+					<div>
+						<input asp-for="UserName" value="1234"/>
+						<span asp-validation-for="UserName"></span>
+					</div>
+				</div>
+
+
+				<div class="form-group required q_element mt-3">
+					<label class="form-label">Customs &amp; VAT Commissionerate</label>
+					<div>
+
+						@Html.DropDownListFor(x => Model.CustomsAndVatcommissionarateId, new SelectList(Model.CustomsAndVatCommissionarates, "Id", "Name"), "Select", htmlAttributes: new { @class = "form-select form-select-sm" })
+						<span asp-validation-for="CustomsAndVatcommissionarateId"></span>
+					</div>
+				</div>
+
+
+				<div class="form-group">
+					<label class="form-label"> </label>
+					<div class="">
+						<div class="mt-checkbox-list">
+							<label class="mt-checkbox col-md-12 text-left">
+								<input type="checkbox" asp-for="IsActive"/> Is Active
+								<span asp-validation-for="IsActive"></span>
+								<span></span>
+							</label>
+
+						</div>
+					</div>
+				</div>
+				@*<div class="form-group">
+            <label class="form-label"> </label>
+            <div class="">
+                <div class="mt-checkbox-list">
+                    <label class="mt-checkbox col-md-12 text-left">
+                        <input asp-for="IsDeductVatInSource" /> Is Deduct Vat In Source
+                        <span asp-validation-for="IsDeductVatInSource"></span>
+                        <span></span>
+                    </label>
+
+                </div>
+            </div>
+        </div>*@
+
+			</div>
+			<div class="text-right mt-3 float-end">
+				<button type="submit" data-requiredconfirmation="true" class="btn  btn-primary btn-sm"><i class="bi bi-check-lg"></i> Submit</button>
+				<button type="button" value="Reset" onclick="location.reload();" class="btn  btn-warning btn-sm"><i class="bi bi-arrow-repeat"></i> Reset</button>
+				<a asp-controller="OrganizationBranch" asp-action="Index" class="btn btn-secondary btn-sm"><i class="bi bi-slash-circle"></i> Cancel</a>
+			</div>
+		</form>
+	</div>
+</div>

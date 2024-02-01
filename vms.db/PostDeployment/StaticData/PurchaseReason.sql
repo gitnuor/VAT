@@ -1,0 +1,5 @@
+﻿INSERT [dbo].[PurchaseReason] ([PurchaseReasonId], [Reason]) VALUES (0, N'External')
+INSERT [dbo].[PurchaseReason] ([PurchaseReasonId], [Reason]) VALUES (1, N'Sales')
+INSERT [dbo].[PurchaseReason] ([PurchaseReasonId], [Reason]) VALUES (2, N'Internal')
+INSERT [dbo].[PurchaseReason] ([PurchaseReasonId], [Reason]) VALUES (3, N'Export')
+INSERT [dbo].[PurchaseReason] ([PurchaseReasonId], [Reason]) VALUES (4, N'Import')

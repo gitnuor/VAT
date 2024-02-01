@@ -1,0 +1,16 @@
+﻿@model IEnumerable<vms.entity.models.OrgBranchType>
+@{
+	ViewData["Title"] = "Organization Branch Type";
+}
+
+@section contentheader
+{
+	<div class="p-3 page-header">
+		@ViewData["Title"]
+	</div>
+}
+
+
+<scrollable-grid-container>
+	<partial name="_Index" model="Model"/>
+</scrollable-grid-container>

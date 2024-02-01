@@ -1,0 +1,199 @@
+﻿@model vms.entity.viewModels.VmPurchaseDetail
+
+@{
+	ViewData["Title"] = "Purchase Details";
+
+	var i = 1;
+	var j = 1;
+}
+
+<div class="mt-3">
+	<div class="font-weight-bold mb-3">General Information</div>
+	<div class="row">
+		<div class="col-4">
+			<div class="row">
+				<div class="col-12">
+					Vendor Name: @Model.Purchase.Vendor.Name
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-12">
+					Contact: @Model.Purchase.Vendor.ContactNo
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-12">
+					Shipping Address: @Model.Purchase.Vendor.Address
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-12">
+					Purchase Type: @Model.Purchase.PurchaseType.Name
+				</div>
+			</div>
+
+
+			<div class="row">
+				<div class="col-12">
+					Com Date: @StringGenerator.DateTimeToStringWithoutTime(Model.Purchase.PurchaseDate)
+				</div>
+			</div>
+		</div>
+
+		<div class="col-4">
+
+			<div class="row">
+				<div class="col-12">
+					Due Date: @StringGenerator.DateTimeToStringWithoutTime(Model.Purchase
+						          .DueDate)
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-12">
+					Delivery Date: @StringGenerator.DateTimeToStringWithoutTime(Model.Purchase.DeliveryDate)
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-12">
+					LC Number: @Model.Purchase.LcNo
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-12">
+					LC Date: @StringGenerator.DateTimeToStringWithoutTime(Model.Purchase.LcDate)
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-12">
+					Invoice No: @Model.Purchase.InvoiceNo
+				</div>
+			</div>
+		</div>
+
+		<div class="col-4">
+
+			<div class="row">
+				<div class="col-12">
+					PO Number: @Model.Purchase.Vendor.ContactNo
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-12">
+					Purchase Reason: @Model.Purchase.PurchaseReason.Reason
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-12">
+					Payable Amount: @Model.Purchase.PayableAmount.DecimalToCommaSeparated()
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-12">
+					Discount: @StringGenerator.DecimalToCommaSeparated(Model.Purchase.TotalDiscountOnIndividualProduct)
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-12">
+					Paid Amount: @Model.Purchase.PaidAmount.DecimalToCommaSeparated()
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-12">
+					Due Amount: @Model.Purchase.DueAmount.DecimalToCommaSeparated()
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="col-md-12 mt-3">
+	<div class="font-weight-bold mb-3">Product Information</div>
+
+	<table class="table table-bordered" id="gridTable">
+		<thead>
+		<tr class="table-light">
+			<th>Serial</th>
+			<th>Product</th>
+			<th>M. Unit</th>
+			<th>Qty</th>
+			<th>Unit Price</th>
+			<th>Total Price Without VAT</th>
+			<th>VAT Type</th>
+			<th>VAT (%)</th>
+			<th>VAT Amount</th>
+			<th>SD (%)</th>
+			<th>SD Amount</th>
+			<th>Total Price</th>
+
+
+		</tr>
+		</thead>
+
+		<tbody id="tblPurchaseOD">
+		@foreach (var item in Model.PurchaseDetails)
+		{
+			<tr class="table-light">
+				<td class="text-right">@i</td>
+				<td>@item.Product.Name</td>
+				<td>@item.MeasurementUnit.Name</td>
+				<td class="text-right">@item.Quantity</td>
+				<td class="text-right">@item.UnitPrice</td>
+				<td class="text-right"> @(StringGenerator.DecimalToCommaSeparated(item.Purchase.TotalPriceWithoutVat))</td>
+				<td>@(item.ProductVattype.Name)</td>
+				<td class="text-right">@(item.Vatpercent)</td>
+				<td class="text-right">@(StringGenerator.DecimalToCommaSeparated(item.Purchase.TotalVat))</td>
+				<td class="text-right">@item.SupplementaryDutyPercent</td>
+				<td class="text-right">@StringGenerator.DecimalToCommaSeparated(item.Purchase.TotalSupplementaryDuty)</td>
+				<td class="text-right">@StringGenerator.DecimalToCommaSeparated((((item.Purchase.TotalPriceWithoutVat + item.Purchase.TotalVat + item.Purchase.TotalSupplementaryDuty) - item.Purchase.TotalDiscountOnIndividualProduct)))</td>
+			</tr>
+			i++;
+		}
+		</tbody>
+
+	</table>
+</div>
+@if (Model.DebitNotes.Any())
+{
+	<div class="col-12 mt-3">
+		<div class="font-weight-bold mb-3">Debit Note(s) for this sale</div>
+		<table class="table table-bordered" id="gridTable">
+			<thead>
+			<tr class="table-light">
+				<th>Serial</th>
+				<th>Voucher No.</th>
+				<th>Return Date</th>
+				<th>Reason Of Return</th>
+				<th></th>
+			</tr>
+			</thead>
+
+			<tbody>
+			@foreach (var item in Model.DebitNotes)
+			{
+				<tr class="table-light">
+					<td>@j</td>
+					<td>@item.VoucherNo</td>
+					<td>@item.ReturnDate.ToString("dd/MM/yyyy")</td>
+
+					<td>@item.ReasonOfReturn</td>
+					<td>
+						<a class='btn btn-primary btn-sm' href='@Url.Action("DebitNoteViewById", new { id = item.DebitNoteId })' role='button' target='_blank'> View</a>
+					</td>
+				</tr>
+				j++;
+			}
+			</tbody>
+
+		</table>
+	</div>
+}
+
+<div class="col-12 mt-3 text-end">
+	<a href="@Url.Action("Index")" class="btn btn-sm btn-secondary">Back</a>
+</div>

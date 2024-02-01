@@ -1,0 +1,179 @@
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using vms.entity.StoredProcedureModel.HTMLMushak
+@model vms.entity.viewModels.MushakViewModel.VmMushakSixPointSix
+@{
+	ViewData["Title"] = "Mushak- 6.6 (VDS Certificate)";
+	var languageClass = "";
+
+	var firstElement = new SpVdsPurchaseCertificate();
+	if (Model.VdsPurchaseCertificates.Any())
+		firstElement = Model.VdsPurchaseCertificates.First();
+
+	if (Model.Language == EnumLanguage.Bangla)
+		languageClass = "ivat-bangla-font";
+
+	int SlNo = 0;
+	Layout = "_LayoutMushak";
+}
+
+@section contentheader
+{
+	<div class="p-3 page-header">
+		@*<h5></h5>*@
+		<div class="row">
+			<div class="col-8">
+				@ViewData["Title"]
+			</div>
+			<div class="col-4">
+				<form method="post">
+
+					<div class="form-group float-end">
+						<button id="btnPrint" type="button" class="btn btn-sm btn-primary inline-sm-button"><i class="bi bi-printer-fill"></i> Print</button>
+					</div>
+
+				</form>
+			</div>
+		</div>
+
+	</div>
+}
+
+<div class="gray-slim-scroll-container">
+	<div class="long-table-scroll-container">
+		<div class="report-section mt-3">
+			<div class="report-margin @languageClass" id="printableArea">
+				@if (Model.VdsPurchaseCertificates.Any())
+				{
+					<div class="row">
+
+						<div class="col-12 mt-3">
+							<div class="company-other-info">@firstElement.OrgName </div>
+							<div class="company-other-info"> @firstElement.OrgAddress </div>
+							<div class="company-other-info">@(Model.Language == 0 ? "উৎসে কর কর্তনকারী সত্তার বিআইএন (প্রযোজ্য ক্ষেত্রে)" : "BIN of Withholding Entity (If Applicable)"): @firstElement.OrgBin </div>
+							<br/>
+						</div>
+
+						<div class="col-8">
+							<div class="company-other-info">@(Model.Language == 0 ? "উৎসে কর কর্তন সনদপত্র নং" : "VDS Certificate No."): @firstElement.VDSCertificateNo </div>
+						</div>
+
+						<div class="col-4 text-right">
+							<div class="company-other-info">@(Model.Language == 0 ? "ইস্যুর তারিখ" : "Date of Issue"): @StringGenerator.DateTimeToString(firstElement.VDSCertificateDate) </div>
+						</div>
+
+						<div class="col-12 mt-3">
+							@(Model.Language == 0 ? "এই মর্মে প্রত্যয়ন করা যাইতেছে যে, আইনের ধারা ৪৯ অনুযায়ী উৎসে কর কর্তনযোগ্য সরবরাহ হইতে প্রযোজ্য মূল্য সংযোজন কর বাবদ  উৎসে কর কর্তন করা হইল। কর্তনকৃত মূল্য সংযোজন করের অর্থ বুক ট্রান্সফার/ট্রেজারি চালান/দাখিলপত্রে বৃদ্ধিকারী সমন্বয়ের মাধ্যমে সরকারি কোষাগারে জমা প্রদান করা হইয়াছে। কপি এতদসংগে সংযুক্ত করা হইল (প্রযোজ্য ক্ষেত্রে)।" : "This is to certify that VAT has been deducted at Source from the supplier having VAT deductible at Source following section 49 of the Act. The VAT so deducted has been deposited in the government treasury by book transfer/treasury challan/increasing adjustment in the return. A copy has been attached (If Applicable).")
+						</div>
+
+						<div class="col-12 mt-3">
+							<table class="table table-bordered">
+
+								<tbody>
+								<tr class="table-header-row">
+									<td rowspan="2">
+										@(Model.Language == 0 ? "ক্রমিক নং" : "SL")
+
+									</td>
+									<td colspan="2">@(Model.Language == 0 ? "সরবরাহকারীর" : "Supplier")</td>
+									<td colspan="2">@(Model.Language == 0 ? "সংশ্লিষ্ট কর চালানপত্র" : "Corresponding Tax Invoice") </td>
+									<td rowspan="2">
+										@Html.Raw(Model.Language == 0 ? "মোট সরবরাহ মূল্য<sup>১</sup> (টাকা)" : "Total Value of Supply<sup>1</sup> (Taka)")
+									</td>
+									<td rowspan="2">
+										@(Model.Language == 0 ? "মূসকের পরিমাণ (টাকা)" : "Amount of VAT (Taka)")
+									</td>
+									<td rowspan="2">
+										@(Model.Language == 0 ? "উৎসে কর্তনকৃত মুসকের পরিমাণ (টাকা)" : "Amount of VAT Deducted at Source (Taka)")
+									</td>
+
+								</tr>
+
+								<tr class="table-header-row">
+									<td>
+										@(Model.Language == 0 ? "নাম" : "Name")
+									</td>
+									<td>
+										@(Model.Language == 0 ? "বিআইএন" : "BIN")
+
+									</td>
+									<td>
+										@(Model.Language == 0 ? "নম্বর" : "No.")
+
+									</td>
+									<td>
+										@(Model.Language == 0 ? "ইস্যুর তারিখ" : "Issue Date")
+
+									</td>
+
+								</tr>
+
+								@if (Model.VdsPurchaseCertificates.Any())
+								{
+									SlNo = 1;
+									foreach (var item in Model.VdsPurchaseCertificates)
+									{
+										<tr>
+											<td class="text-right">@SlNo</td>
+											<td>@item.VendorName</td>
+											<td>@item.VendorBin</td>
+											<td>@item.VatChallanNo</td>
+											<td>@item.VatChallanIssueDate</td>
+											<td class="text-right">@StringGenerator.DecimalToCommaSeparated(item.TotalPriceWithoutVat)</td>
+											<td class="text-right">@StringGenerator.DecimalToCommaSeparated(item.TotalVAT)</td>
+											<td class="text-right">@item.VDSAmount.DecimalToCommaSeparated()</td>
+										</tr>
+										SlNo++;
+									}
+								}
+
+								</tbody>
+
+							</table>
+						</div>
+
+						<div class="col-12 mt-3">
+							<div class="company-other-info">@(Model.Language == 0 ? "ক্ষমতাপ্রাপ্ত কর্মকর্তার" : "VAT Responsible Person") - </div>
+							<br/>
+							<div class="company-other-info">@(Model.Language == 0 ? "স্বাক্ষর" : "Sign"): </div>
+							<div class="company-other-info mt-3">@(Model.Language == 0 ? "নাম" : "Name"): @firstElement.VatResponsiblePersonName</div>
+
+						</div>
+						<div class="col-12 mt-2">
+							<div class="row">
+								<div class="col-3">
+									<hr class="black-hr">
+									@Html.Raw(Model.Language == 0 ? "<sup>১</sup>সকল প্রকার কর সহ মূল্য" : "<sup>1</sup>Prices including all types of taxes")
+								</div>
+							</div>
+						</div>
+						<div class="col-12 mt-2">
+							<div class="fw-light">
+								@(Model.Language == 0 ? $"অর্থ জমার তথ্য: ব্যাংক- {firstElement.BankName}; শাখা- {firstElement.BankBranchName}; ব্যাংক শাখার জেলা- {firstElement.BankBranchDistrictName}; চালান নাম্বার- {firstElement.TreasuryChallanNo}; চালানের তারিখ- {StringGenerator.DateTimeToStringWithoutTime(firstElement.SubimissionDate)}; অর্থনৈতিক কোড- {firstElement.EconomicCode}" : $"Deposit Information: Bank- {firstElement.BankName}; Branch- {firstElement.BankBranchName}; Bank Branch District- {firstElement.BankBranchDistrictName}; Challan No- {firstElement.TreasuryChallanNo}; Challan Date- {StringGenerator.DateTimeToStringWithoutTime(firstElement.SubimissionDate)}; Economic Code- {firstElement.EconomicCode}")
+							</div>
+						</div>
+					</div>
+				}
+				else
+				{
+					<h1>
+						@(Model.Language == 0 ? "কোন তথ্য পাওয়া যায়নি" : "No Data Found")
+					</h1>
+				}
+				<div class="print-footer">
+					<div class="text-center">@(Model.Language == 0 ? "\"এই ডকুমেন্টটি সিস্টেম জেনারেটেড। স্বাক্ষরের প্রয়োজন নেই।\"" : "\"This document is system-generated. No signature is required.\"")</div>
+					@(Model.Language == 0 ? "তৈরির/মুদ্রণের সময়" : "Generated/Printed on"): @StringGenerator.DateTimeToString(DateTime.Now)
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+@section Scripts{
+	<script>
+		$(document).ready(function() {
+			window.$("#btnPrint").click(function() {
+				window.vmsPrint.printA4Portrait('printableArea');
+			});
+		});
+	</script>
+}

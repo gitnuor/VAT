@@ -1,0 +1,26 @@
+﻿@model IEnumerable<vms.entity.models.BranchTransferSend>
+@{
+	var session = Context.Session.GetComplexData<VmUserSession>(ControllerStaticData.SESSION);
+}
+@(Html.Grid(Model).Build(columns =>
+{
+	columns.Add(model => model.OrgBranchSender.Name)
+		.Titled("Sender Branch");
+	columns.Add(model => model.OrgBranchReceiver.Name)
+		.Titled("Receiver Branch");
+	columns.Add(model => model.InvoiceNo)
+		.Titled(session.InvoiceNameEng).Sortable(false).AppendCss("text-center");
+	columns.Add(model => model.BranchTransferSendDate.Date)
+		.Titled("Transfer Date").Formatted("{0:dd/MM/yyyy}").AppendCss("text-center");
+	columns.Add(model => model.TransferChallanNo)
+		.Titled("Challan No.").Sortable(false).AppendCss("text-center");
+	columns.Add(model => model.TransferChallanPrintedTime)
+		.Titled("Challan Time").Formatted("{0:dd/MM/yyyy hh:mm:ss tt}").AppendCss("text-center");
+	columns.Add().Encoded(false).RenderedAs(data => Html.PartialAsync("_ActionMenu", data).Result)
+		.Titled(Html.Raw("<i class='bi bi-activity'></i>")).AppendCss("action-col-freez");
+})
+	.AppendCss("large-index-grid")
+	.Empty("No data found")
+	.Filterable(GridFilterType.Double)
+	.Sortable()
+	.Pageable())

@@ -1,0 +1,87 @@
+﻿@model vms.entity.viewModels.VmPurchaseLocal
+
+    <div class="font-weight-bold mt-3">
+        Payment
+        <div class="float-end due-amount text-success" id="dueAmount">Due Amount: 0.00</div>
+    </div>
+    <form id="frmPayment">
+        <table class="table table-bordered form-table mt-3 table-7-column-equally-distributed-with-single-action-button align-top" id="paymentTable">
+            <thead>
+                <tr>
+                    <th>Method</th>
+                    <th>Bank Name/Wallet No</th>
+                    <th>Doc. No./Trans ID</th>
+                    <th>Doc./Trans. Date</th> 
+                    <th>Payment Date</th>
+                    <th>Amount</th>
+                    <th>Remarks</th>
+                    <th class="single-button-action-column"></th>
+                </tr>
+                <tr class="control-row">
+                    <td>
+                        <select asp-for="PaymentMethodId" class="searchable-dropdown" data-live-search="true" data-style="bootstrap-select-option">
+                            <option value="@null">Select Method</option>
+                            @if (Model.PaymentMethodList.Any())
+                            {
+                            foreach (var paymentMethod in Model.PaymentMethodList)
+                            {
+                            <option value="@paymentMethod.PaymentMethodId" data-is-banking-channel="@paymentMethod.IsBankingChannel" data-is-mobile-transaction="@paymentMethod.IsMobileTransaction">@paymentMethod.Name</option>
+                            }
+                            }
+                        </select>
+                        <span asp-validation-for="PaymentMethodId" class="text-danger"></span>
+                    </td>
+                    <td>
+                        <div class="payment-bank d-none">
+                            <select asp-for="BankId" asp-items="Model.BankSelectList.CustomSelectListToSelectList()" class="searchable-dropdown" data-live-search="true" data-style="bootstrap-select-option">
+                                <option value="@null">Select Bank</option>
+                            </select>
+                            <span asp-validation-for="BankId" class="text-danger"></span>
+                        </div>
+                        <div class="payment-mobile d-none">
+                            <input type="text" asp-for="MobilePaymentWalletNo" class="form-control form-control-sm">
+                            <span asp-validation-for="MobilePaymentWalletNo" class="text-danger"></span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="payment-bank payment-mobile d-none">
+                            <input type="text" asp-for="DocumentNoOrTransactionId" class="form-control form-control-sm">
+                            <span asp-validation-for="DocumentNoOrTransactionId" class="text-danger"></span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="payment-bank payment-mobile d-none">
+                            <input type="date" asp-for="PaymentDocumentOrTransDate" min='2000-01-01' max='@DateTime.Now.ToString("yyyy-MM-dd")' class="form-control form-control-sm">
+                            <span asp-validation-for="PaymentDocumentOrTransDate" class="text-danger"></span>
+                        </div>
+                    </td>
+                    <td>
+                        <input type="date" asp-for="PaymentDate" min='2000-01-01' max='@DateTime.Now.ToString("yyyy-MM-dd")' class="form-control form-control-sm">
+                        <span asp-validation-for="PaymentDate" class="text-danger"></span>
+                    </td>
+                    <td>
+                        
+                        <input type="text" asp-for="PaidAmount" class="form-control form-control-sm">
+                        <span asp-validation-for="PaidAmount" class="text-danger"></span>
+                    </td>
+                    <td>
+                        <input type="text" asp-for="PaymentRemarks" class="form-control form-control-sm">
+                        <span asp-validation-for="PaymentRemarks" class="text-danger"></span>
+                    </td>
+                    <td class="single-button-action-column">
+                        <button type="button" class="btn  btn-primary btn-sm" id="btnAddPayment"><i class="bi bi-plus-lg"></i></button>
+                    </td>
+                </tr>
+            </thead>
+            <tbody id="paymentTableBody">
+            </tbody>
+            <tfoot>
+            <tr class="text-end">
+                <th colspan="5">Total</th>
+                <th id="paymentTotalPaid"></th>
+                <th></th>
+                <th></th>
+            </tr>
+            </tfoot>
+        </table>
+    </form>

@@ -1,0 +1,179 @@
+﻿@model IEnumerable<vms.entity.models.MushakReturnRefund>
+@{
+    ViewData["Title"] = "Index";
+    
+    var session = Context.Session.GetComplexData<VmUserSession>(ControllerStaticData.SESSION);
+}
+@section contentheader
+    {
+    <div class="p-3 page-header">
+       Mushak Return Refund
+        <div class="d-flex justify-content-start">
+
+            @if (UserAuthorization.Check(FeatureList.MUSHAK_RETURN_MUSHAK_RETURN_REFUND_CAN_ADD, session.Rights))
+            {
+                <div class="pr-1">
+                    <a href="@Url.Action("Create", "MushakReturnRefund")" class="btn btn-primary btn-sm"><i class="bi bi-plus-lg"></i> Add Mushak Return Refund</a>
+                </div>
+            }
+
+        </div>
+    </div>
+    <div class="col-12 d-flex">
+        <ul class="nav nav-pills mt-3 mr-auto align-bottom">
+            
+        </ul>
+        @using (Html.BeginForm("Index", "MushakReturnRefund", FormMethod.Get, new { id = "frmPurchase", @class = "d-flex pr-1 mt-3" }))
+        {
+            <input class="form-control me-2 mr-1 btn-sm" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn-height-fc btn btn-primary btn-sm" type="submit">Search</button>
+        }
+    </div>
+}
+
+<div class="row">
+    <div class="col-12">
+        <table class="table ">
+            <thead>
+                <tr>
+                    <th>
+                        Year
+                    </th>
+                    <th>
+                        Month
+                    </th>
+                    <th class="table-boolean-cell">
+
+                        Interested in Refund?
+                    </th>
+
+                    <th>
+                        Interested VAT Amount
+                    </th>
+
+                    <th>
+
+                        Interested SD Amount
+                    </th>
+
+                    <th>
+                        Approved VAT Amount
+                    </th>
+
+                    <th>
+
+                        Approved SD Amount
+                    </th>
+
+                    <th>
+                        Refunded VAT Amount
+                    </th>
+
+                    <th>
+
+                        Refunded SD Amount
+                    </th>
+
+                    <th class="table-action-cell">
+                        Action
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Any())
+                {
+
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="text-center">
+                                @item.MushakYear
+                            </td>
+                            <td class="text-center">
+                                @{
+                                    System.Globalization.DateTimeFormatInfo mfi = new
+                                        System.Globalization.DateTimeFormatInfo();
+                                    string strMonthName = mfi.GetMonthName(item.MushakMonth).ToString();
+
+                                }
+                                @strMonthName
+                            </td>
+                            <td class="text-center">
+                                @StringGenerator.BooleanToString(item.IsInterestedToGetRefund)
+                            </td>
+                            <td class="text-right">
+                                @StringGenerator.DecimalToCommaSeparated(item.InterestedToRefundVatamount, true)
+                            </td>
+                            <td class="text-right">
+                                @StringGenerator.DecimalToCommaSeparated(item.InterestedToRefundSdamount, true)
+                            </td>
+                            <td class="text-right">
+                                @StringGenerator.DecimalToCommaSeparated(item.ApprovedToRefundVatamount, true)
+                            </td>
+                            <td class="text-right">
+                                @StringGenerator.DecimalToCommaSeparated(item.ApprovedToRefundSdamount, true)
+                            </td>
+                            <td class="text-right">
+                                @StringGenerator.DecimalToCommaSeparated(item.RefundedVatamount, true)
+                            </td>
+                            <td class="text-right">
+                                @StringGenerator.DecimalToCommaSeparated(item.RefundedSdamount, true)
+                            </td>
+
+                            <td>
+                                <div class="btn-group">
+                                    <div class="dropdown">
+                                        <a href="javascript:;" class="dropdown-toggle text-decoration-none" data-bs-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                                            <span class=""> Action</span>
+                                            <i class="fa fa-angle-down"></i>
+                                        </a>
+                                        <ul class="dropdown-menu dropdown-menu-default pull-right">
+
+                                            @if (UserAuthorization.Check(FeatureList.MUSHAK_RETURN_MUSHAK_RETURN_REFUND_CAN_ADD_APPROVED_REFUND, session.Rights))
+                                            {
+                                                <li>
+                                                    <a asp-action="AddRefused" asp-route-id="@item.MushakReturnRefundId"><i class="bi bi-pencil-square"></i> Add Approved Refund</a>
+                                                </li>
+                                            }
+
+                                            @if (UserAuthorization.Check(FeatureList.MUSHAK_RETURN_MUSHAK_RETURN_REFUND_CAN_ADD_REFUND_INFO, session.Rights))
+                                            {
+                                                <li>
+                                                    <a asp-action="AddRefund" asp-route-id="@item.MushakReturnRefundId"><i class="bi bi-pencil-square"></i>Add Refund Info.</a>
+                                                </li>
+                                            }
+                                        </ul>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+
+                }
+
+                else
+                {
+                    <tr>
+                        <td colspan="10">
+                            <p class="text-center">No Records Found</p>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div class="pager">
+            @if ((int)ViewBag.PageCount <= 10)
+            {
+
+            }
+
+            else
+            {
+                //@Html.PagedListPager(
+                //(IPagedList)Model,
+                //page => Url.Action("Index", new { page })
+                //)
+            }
+        </div>
+    </div>
+</div>

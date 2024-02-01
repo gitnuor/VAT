@@ -1,0 +1,97 @@
+﻿@model vms.entity.viewModels.SalesPriceAdjustment.SalesPriceAdjustmentCreditNoteViewModel
+
+<div class="font-weight-bold mb-3 form-1">
+	Main Information
+	<form class="row g-3" method="post" id="frmMainInformation">
+		<input type="hidden" class="form-control" id="SalesId" asp-for="SalesId" value="@Model.SalesId" />
+
+
+
+		@*<div class="col-md-6 complex-form-col">
+		<label asp-for="OrgBranchId" ></label>
+		<select asp-for="OrgBranchId" class="searchable-dropdown searchable-dropdown-with-help-icon" data-live-search="true" data-style="bootstrap-select-option">
+		<option value="@null">Select Branch</option>
+		@if (Model.OrgBranchList.Any())
+		{
+		foreach (var branch in Model.OrgBranchList)
+		{
+		<option value="@branch.OrgBranchId"
+		data-address="@branch.Address">
+		@branch.Name
+		</option>
+		}
+		}
+		</select>
+		<i class="bi bi-question-circle text-warning" data-bs-toggle="tooltip" title="" data-bs-original-title="Changing Branch will reset your products."></i>
+		<span asp-validation-for="OrgBranchId" ></span>
+		</div>*@
+
+		<div class="col-md-6 complex-form-col">
+			<label asp-for="OrgBranchId" ></label>
+			<select asp-for="OrgBranchId" asp-items="Model.OrgBranchList.CustomSelectListToSelectList()" >
+				<option value="@null">Select Branch</option>
+			</select>
+			<span asp-validation-for="OrgBranchId" ></span>
+
+		</div>
+
+		<div class="col-md-6 complex-form-col">
+			<label asp-for="InvoiceNo" ></label>
+			<input type="text" asp-for="InvoiceNo" >
+			<span asp-validation-for="InvoiceNo" ></span>
+		</div>
+
+
+		<div class="col-md-6 complex-form-col">
+			<label asp-for="InvoiceDate" ></label>
+			<input type="date" asp-for="InvoiceDate" >
+			<span asp-validation-for="InvoiceDate" ></span>
+		</div>
+
+		<div class="col-md-6 complex-form-col">
+			<label asp-for="ChangeDate" ></label>
+			<input type="date" asp-for="ChangeDate" min='2000-01-01' max='@((DateTime.Now).ToString("yyyy-MM-dd"))' >
+			<span asp-validation-for="ChangeDate" ></span>
+		</div>
+
+		<div class="col-md-6 complex-form-col">
+			<label asp-for="ClientNoteNo" ></label>
+			<input type="text" asp-for="ClientNoteNo" >
+			<span asp-validation-for="ClientNoteNo" ></span>
+		</div>
+
+
+		<div class="col-md-6 complex-form-col">
+			<label asp-for="ClientNoteTime" ></label>
+			<input type="datetime-local" asp-for="ClientNoteTime" min='2000-01-01' max='@((DateTime.Now).ToString("yyyy-MM-ddTHH:mm"))' >
+			<span asp-validation-for="ClientNoteTime" ></span>
+		</div>
+
+		<div class="col-md-6 complex-form-col d-none">
+			<label asp-for="VehicleTypeId" ></label>
+			<select asp-for="VehicleTypeId" asp-items="Model.VehicleTypeList.CustomSelectListToSelectList()">
+				<option value="@null">Select VehicleType</option>
+			</select>
+			<span asp-validation-for="VehicleTypeId" ></span>
+		</div>
+
+		<div class="col-md-6 complex-form-col d-none">
+			<label asp-for="VehicleRegNo" ></label>
+			<input type="text" asp-for="VehicleRegNo" >
+			<span asp-validation-for="VehicleRegNo" ></span>
+		</div>
+
+		<div class="col-md-6 complex-form-col d-none">
+			<label asp-for="VehicleDriverName" ></label>
+			<input type="text" asp-for="VehicleDriverName" >
+			<span asp-validation-for="VehicleDriverName" ></span>
+		</div>
+
+		<div class="col-md-6 complex-form-col d-none">
+			<label asp-for="VehicleDriverContactNo" ></label>
+			<input type="text" asp-for="VehicleDriverContactNo" >
+			<span asp-validation-for="VehicleDriverContactNo" ></span>
+		</div>
+
+	</form>
+</div>

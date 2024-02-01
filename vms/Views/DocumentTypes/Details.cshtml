@@ -1,0 +1,49 @@
+﻿@model vms.entity.models.DocumentType
+
+@{
+    ViewData["Title"] = "Details";
+    
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>DocumentType</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IsActive)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedBy)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CreatedBy)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedTime)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CreatedTime)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Organization)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Organization.Name)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.DocumentTypeId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

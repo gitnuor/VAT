@@ -1,0 +1,12 @@
+﻿@model IEnumerable<vms.entity.models.ProductVattype>
+@(Html.Grid(Model).Build(columns =>
+{
+    columns.Add(model => model.Name).Titled("Name");
+    columns.Add(model => model.NameInBangla).Titled("Name in Bangla").Css("ivat-bangla-font"); ;
+    columns.Add(model => model.DefaultVatPercent).Titled("Default VAT (%)");
+})
+	.AppendCss("large-index-grid")
+	.Empty("No data found")
+	.Filterable(GridFilterType.Double)
+	.Sortable()
+	.Pageable())

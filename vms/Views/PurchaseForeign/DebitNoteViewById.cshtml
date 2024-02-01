@@ -1,0 +1,358 @@
+﻿@model vms.entity.viewModels.ReportsViewModel.vmDebitMushak
+@using vms.entity.StoredProcedureModel.HTMLMushak
+@{
+    ViewData["Title"] = "Mushak 6.8 Debit Note";
+
+    var firstElement = new SpDebitMushak();
+    if(Model.DebitMushakList.Any())
+    {
+        firstElement = Model.DebitMushakList.First();
+    }
+    decimal TotalSum = 0, vds = 0, vat = 0, sd = 0;
+    Layout = "_LayoutMushak";
+}
+
+
+<style>
+
+    .MreturnHeader {
+        text-align: center;
+        background-color: #ffedbe;
+    }
+
+
+    .Returntd {
+        text-align: left;
+    }
+
+    .Returntdhead {
+        text-align: center;
+        background-color: #cfcfcf;
+    }
+
+    .ReturntdEmpty {
+        background-color: lightgray;
+    }
+
+    .tdp1 {
+        width: 320px;
+    }
+
+    .tdp2 {
+        width: 30px;
+        text-align: center;
+    }
+
+    .report-margin {
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+</style>
+
+@section contentheader
+    {
+    <div class="p-3 page-header">
+        @*<h5></h5>*@
+        <div class="row">
+            <div class="col-8">
+                Mushak-6.8(Debit Note)
+            </div>
+            <div class="col-4">
+                <form method="post">
+
+                    <input type="hidden" asp-for="DebitNoteId" />
+                    <div class="form-group float-end">
+                        <button id="btnPrint" type="button" class="btn btn-sm btn-primary inline-sm-button"><i class="bi bi-printer-fill"></i> Print</button>
+                        <button type="submit" asp-action="Mushok6P8ExportToExcel" class="btn btn-sm btn-warning inline-sm-button"><i class="bi bi-file-excel-fill"></i> Export Excel</button>
+                        @*<button type="button" href="@Url.Action("DebitNoteView")" class="btn btn-info btn-sm inline-sm-button"><i class="bi bi-arrow-90deg-left"></i> Back</button>*@
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+}
+<div class="report-section">
+
+    <div class="report-margin" id="printableArea">
+        @if (Model.DebitMushakList.Any())
+        {
+            <div class="row">
+                <div class="col-12">
+                    <div class="mushak-name">@(Model.Language==0? "মূসক- ৬.৮" : "Mushak- 6.8") </div>
+                </div>
+
+                <div class="col-12 report-header">
+
+                    <div class="sub-header">@(Model.Language==0? "গণপ্রজাতন্ত্রী বাংলাদেশ সরকার": "GOVERNMENT OF THE PEOPLE'S REPUBLIC OF BANGLADESH")</div>
+                    <div class="sub-header">@(Model.Language==0? "জাতীয় রাজস্ব বোর্ড" : "NATIONAL BOARD OF REVENUE")</div>
+                    <div class="sub-header">@(Model.Language==0? "ডেবিট নোট" : "Debit Note")</div>
+                    <div class="sub-header">@(Model.Language==0? "[বিধি ৪০ এর উপ-বিধি (১) এর দফা (ছ) দ্রষ্টব্য]" : "[Note clause (g) of sub-rule (1) of rule 40]")</div>
+
+                </div>
+                <br />
+
+                <div class="col-8" style="text-align:left">
+                    <div class="company-other-info">@(Model.Language == 0? "ফেরত প্রদানকারী ব্যক্তির-": "Returner's-") </div>
+                    <div class="company-other-info">
+                        @(Model.Language == 0? "নাম":"Name") : @firstElement.OrgName
+                    </div>
+                    <div class="company-other-info">@(Model.Language == 0 ? "বিআইএন":"BIN") :  @firstElement.OrgBin </div>
+                    <div class="company-other-info">@(Model.Language == 0 ? "মূল চালান নম্বর": "Original Invoice Number") @firstElement.PSInvoice</div>
+                    <div class="company-other-info">@(Model.Language == 0 ? "মূল চালান ইস্যুর তারিখ" : "Original Invoice Issue Date") : @(firstElement.PSDate == null ? "" : firstElement.PSDate.Value.ToString("dd/MM/yyyy"))</div>
+
+                </div>
+
+                <div class="col-4" style="text-align:left">
+
+                    <div class="company-other-info">@(Model.Language == 0? "ফেরত গ্রহণকারী ব্যক্তির -": "Of the Recipient's : ") </div>
+                    <div class="company-other-info">@(Model.Language == 0? "নাম":"Name"): @firstElement.VENName </div>
+                    <div class="company-other-info">@(Model.Language == 0 ? "বিআইএন":"BIN"): @firstElement.VENBin </div>
+                    <div class="company-other-info">@(Model.Language == 0 ? "ডেবিট নোট নম্বর" :"Debit Note No."): @firstElement.DebitNo </div>
+                    <div class="company-other-info">@(Model.Language == 0 ? "ইস্যুর তারিখ":"Issue Date "): @(firstElement.DrTime==null?"":firstElement.DrTime.Value.ToString("dd/MM/yyyy"))</div>
+                    <div class="company-other-info">@(Model.Language == 0 ? "ইস্যুর সময়":"Issue Time"):  @(firstElement.DrTime==null?"":firstElement.DrTime.Value.ToString("hh:mm tt"))</div>
+
+                </div>
+
+                <div class="col-12 mt-3">
+                    <table class="table table-bordered">
+
+                        <tbody style="text-align:center">
+                            @if (Model.Language == 0)
+                            {
+                                <tr>
+                                    <td>
+                                        ক্রমিক সংখ্যা
+                                    </td>
+                                    <td>ফেরতপ্রাপ্ত সরবরাহের বিবরণ</td>
+                                    <td>
+                                        সরবরাহের একক
+                                    </td>
+                                    <td>
+                                        পরিমাণ
+                                    </td>
+                                    <td>
+                                        একক মূল্য (১) টাকায়
+                                    </td>
+                                    <td>
+                                        মোট মূল্য  (টাকায়)
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td>(১)</td>
+                                    <td>(২)</td>
+                                    <td>(৩)</td>
+                                    <td>(৪)</td>
+                                    <td>(৫)</td>
+                                    <td>(৬)</td>
+                                </tr>
+                            }
+                            else if (Model.Language == 1)
+                            {
+                                <tr>
+                                    <td>
+                                        Serial No.
+                                    </td>
+                                    <td>Details of returned delivery</td>
+                                    <td>
+                                        Unit of supply
+                                    </td>
+                                    <td>
+                                        Quantity
+                                    </td>
+                                    <td>
+                                        Unit Price (1) Taka
+                                    </td>
+                                    <td>
+                                        Total Price (Taka)
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td>(1)</td>
+                                    <td>(2)</td>
+                                    <td>(3)</td>
+                                    <td>(4)</td>
+                                    <td>(5)</td>
+                                    <td>(6)</td>
+                                </tr>
+                            }
+
+
+                            @if (Model.DebitMushakList.Any())
+                            {
+                                int SlNo = 1;
+                                foreach (var item in Model.DebitMushakList)
+                                {
+                                    <tr>
+                                        <td class="serial-cell">@SlNo</td>
+                                        <td class="name-cell">@item.ProductName</td>
+                                        <td>@item.Quantity</td>
+                                        <td class="amount-quantity-cell">@StringGenerator.DecimalToCommaSeparated(item.ReturnQuantity)</td>
+                                        <td class="amount-quantity-cell">@StringGenerator.DecimalToCommaSeparated(item.UnitPrice)</td>
+                                        <td class="amount-quantity-cell">@StringGenerator.DecimalToCommaSeparated(item.TotalAmount)</td>
+                                    </tr>
+                                    TotalSum += item.TotalAmount == null ? 0 : item.TotalAmount.Value;
+                                    vds += item.DeductionAmount == null ? 0 : item.DeductionAmount.Value;
+                                    vat += item.VatAmount == null ? 0 : item.VatAmount.Value;
+                                    sd += item.SupplementaryDutyAmount == null ? 0 : item.SupplementaryDutyAmount.Value;
+                                    SlNo++;
+                                }
+                                <tr>
+                                    <td colspan="5" style="text-align:right">@(Model.Language == 0?"মোট মূল্য : ":"Total Price")</td>
+                                    <td class="amount-quantity-cell">@StringGenerator.DecimalToCommaSeparated(TotalSum) </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="5" style="text-align:right">@(Model.Language==0?"বাদ কর্তন : ":"VAT Deducted")</td>
+                                    <td class="amount-quantity-cell">@StringGenerator.DecimalToCommaSeparated(vds)</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="5" style="text-align:right">@(Model.Language==0? "মূসকসহ মূল্য : " : "Price including VAT")</td>
+                                    <td class="amount-quantity-cell">@(StringGenerator.DecimalToCommaSeparated(TotalSum +vat))</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="5" style="text-align:right">@(Model.Language==0? "মূসকের পরিমাণ : " : "VAT Ammount")</td>
+                                    <td class="amount-quantity-cell">@StringGenerator.DecimalToCommaSeparated(vat)</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="5" style="text-align:right">@(Model.Language==0? "সম্পূরক শুল্কের পরিমাণ : " : "Supplimentary Duty Ammount")</td>
+                                    <td class="amount-quantity-cell">@StringGenerator.DecimalToCommaSeparated(sd)</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="5" style="text-align:right">@(Model.Language==0? "মোট কর : " : "Total VAT")</td>
+                                    <td class="amount-quantity-cell">@(StringGenerator.DecimalToCommaSeparated(sd + vat))</td>
+                                </tr>
+                            }
+
+
+                        </tbody>
+
+                    </table>
+                   
+                </div>
+
+                <div class="col-12 mt-3">
+
+                    <div class="company-other-info"><b>@(Model.Language==0? "ফেরতের কারণ: " : "Reason of Return ")</b></div>
+                    <div class="company-other-info">
+                        @firstElement.ReasonOfReturn
+                    </div>
+                    <div class="company-other-info"><b>@(Model.Language==0? "দায়িত্বপ্রাপ্ত ব্যাক্তির স্বাক্ষর : " : "Signature of Responsible Person : ")</b></div>
+
+                </div>
+                @if (Model.Language == 0)
+                                {
+                    <div class="col-12 mt-3">
+
+                        <div class="company-other-info">
+                            ১) প্রতি একক পণ্য / সেবার মূসক ও সম্পূরক শুল্ক সহ মূল্য।
+                        </div>
+                        <div class="company-other-info">২) ফেরত প্রদানের জন্য কোন ধরনের কটন থাকিলে উহার পরিমাণ।</div>
+                        <div class="company-other-info">৩) মূসক ও সম্পূরক শুল্কের যোগফল।</div>
+                    </div>
+                }
+                else if (Model.Language == 1)
+                {
+                    <div class="col-12 mt-3">
+
+                        <div class="company-other-info">
+                            1) Price per unit of goods / services including VAT and supplementary duty.
+                        </div>
+                        <div class="company-other-info">2) If there is any type of cotton for refund, its quantity.</div>
+                        <div class="company-other-info">3) The sum of VAT and supplementary duty.</div>
+                    </div>
+                }
+
+            </div>
+        }
+        else
+        {
+            <table class="table table-bordered">
+                <tbody style="text-align:center;">
+                    @if (Model.Language == 0)
+                    {
+                        <tr>
+                            <td>
+                                ক্রমিক সংখ্যা
+                            </td>
+                            <td>ফেরতপ্রাপ্ত সরবরাহের বিবরণ</td>
+                            <td>
+                                সরবরাহের একক
+                            </td>
+                            <td>
+                                পরিমাণ
+                            </td>
+                            <td>
+                                একক মূল্য (১) টাকায়
+                            </td>
+                            <td>
+                                মোট মূল্য  (টাকায়)
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td>(১)</td>
+                            <td>(২)</td>
+                            <td>(৩)</td>
+                            <td>(৪)</td>
+                            <td>(৫)</td>
+                            <td>(৬)</td>
+                        </tr>
+                    }
+                    else if (Model.Language == 1)
+                    {
+                        <tr>
+                            <td>
+                                Serial No.
+                            </td>
+                            <td>Details of returned delivery</td>
+                            <td>
+                                Unit of supply
+                            </td>
+                            <td>
+                                Quantity
+                            </td>
+                            <td>
+                                Unit Price (1) Taka
+                            </td>
+                            <td>
+                                Total Price (Taka)
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td>(1)</td>
+                            <td>(2)</td>
+                            <td>(3)</td>
+                            <td>(4)</td>
+                            <td>(5)</td>
+                            <td>(6)</td>
+                        </tr>
+                    }
+                    <tr>
+                        <td colspan="6">No Data Found</td>
+                    </tr>
+                </tbody>
+            </table>
+        }
+    </div>
+</div>
+@section Scripts{
+   
+    <script>
+
+        $(document).ready(function () {
+            $("#btnPrint").click(function () {
+                window.vmsPrint.printA4Portrait('printableArea');
+
+            });
+        });
+
+    </script>
+}
+
+

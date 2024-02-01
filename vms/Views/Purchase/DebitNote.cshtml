@@ -1,0 +1,258 @@
+﻿@model vms.entity.viewModels.VmPurchaseDebitNote
+
+@{
+	ViewData["Title"] = "Debit Note";
+}
+
+@section contentheader
+	{
+	<div class="p-3 page-header">
+		@ViewData["Title"]
+	</div>
+}
+
+
+<div class="row mt-3">
+	<div class="col-md-5 form-1">
+		<div class="font-weight-bold mb-3">
+			Main Information
+		</div>
+		<form class="row g-3" method="post" id="frmMainInformation">
+			<input type="hidden" class="form-control" id="SalesId" asp-for="PurchaseId" value="@Model.Purchase.PurchaseId" />
+
+			<div class="col-md-6 complex-form-col">
+				<label asp-for="VehicleTypeId" ></label>
+				<select asp-for="VehicleTypeId" asp-items="Model.VehicleList.CustomSelectListToSelectList()">
+					<option value="@null">Select VehicleType</option>
+				</select>
+				<span asp-validation-for="VehicleTypeId" ></span>
+			</div>
+
+			<div class="col-md-6 complex-form-col">
+				<label asp-for="VoucherNo" ></label>
+				<input type="text" asp-for="VoucherNo" >
+				<span asp-validation-for="VoucherNo" ></span>
+			</div>
+
+			<div class="col-md-6 complex-form-col">
+				<label asp-for="VehicleRegNo" ></label>
+				<input type="text" asp-for="VehicleRegNo" >
+				<span asp-validation-for="VehicleRegNo" ></span>
+			</div>
+
+			<div class="col-md-6 complex-form-col">
+				<label asp-for="ReturnDate" ></label>
+				<input type="datetime-local" asp-for="ReturnDate" min='2000-01-01' max='@((DateTime.Now).ToString("yyyy-MM-ddTHH:mm"))' >
+				<span asp-validation-for="ReturnDate" ></span>
+			</div>
+
+		</form>
+	</div>
+	<div class="col-md-7 md-left-border form-2">
+		<div class="font-weight-bold mb-3">
+			Product Information
+		</div>
+		<form class="row g-3 detail-form" id="frmProductInformation">
+
+			<div class="col-md-4 complex-form-col">
+				<label asp-for="ProductId" ></label>
+				<input type="text" hidden asp-for="PurchaseDetailId" readonly >
+				<select asp-for="ProductId">
+					<option value="@null">Select Product</option>
+					@if (Model.PurchaseDetails.Any())
+					{
+						foreach (var product in Model.PurchaseDetails)
+						{
+							<option value="@product.ProductId"
+							data-Measurement-Unit-Id="@product.MeasurementUnitId"
+							data-Measurement-Unit-Name="@product.MeasurementUnit.Name"
+							data-Sd="@product.SupplementaryDutyPercent"
+							data-Vat="@product.Vatpercent"
+							data-Quantity="@product.Quantity"
+							data-UnitPrice="@product.UnitPrice"
+							data-PurchaseDetailId="@product.PurchaseDetailId">
+								@product.Product.Name
+							</option>
+						}
+					}
+				</select>
+				<span asp-validation-for="ProductId" ></span>
+			</div>
+
+			<div class="col-md-2 complex-form-col d-none">
+				<label asp-for="MeasurementUnitName" ></label>
+				@* <input type="text" hidden asp-for="MeasurementUnitId" readonly > *@
+				<input type="text" asp-for="MeasurementUnitName" readonly >
+				<span asp-validation-for="MeasurementUnitName" ></span>
+			</div>
+
+			<div class="col-md-2 complex-form-col">
+				<label asp-for="MeasurementUnitId" ></label>
+				<select asp-for="MeasurementUnitId"  disabled>
+					<option value="@null">Select Unit</option>
+				</select>
+				<span asp-validation-for="MeasurementUnitId" ></span>
+			</div>
+
+			<div class="col-md-2 complex-form-col">
+				<label asp-for="Quantity" ></label>
+				<input type="text" asp-for="Quantity" readonly >
+				<span asp-validation-for="Quantity" ></span>
+			</div>
+
+
+			<div class="col-md-2 complex-form-col">
+				<label asp-for="UnitPrice" ></label>
+				<input type="text" asp-for="UnitPrice" readonly >
+				<span asp-validation-for="UnitPrice" ></span>
+			</div>
+
+			<div class="col-md-2 complex-form-col">
+				<label asp-for="Amount" ></label>
+				<input type="text" asp-for="Amount" readonly >
+				<span asp-validation-for="Amount" ></span>
+			</div>
+
+			<div class="col-md-2 complex-form-col">
+				<label asp-for="VatParcent" ></label>
+				<input type="text" asp-for="VatParcent" readonly >
+				<span asp-validation-for="VatParcent" ></span>
+			</div>
+
+			<div class="col-md-2 complex-form-col">
+				<label asp-for="Vat" ></label>
+				<input type="text" asp-for="Vat" readonly >
+				<span asp-validation-for="Vat" ></span>
+			</div>
+
+
+			<div class="col-md-2 complex-form-col">
+				<label asp-for="SdParcent" ></label>
+				<input type="text" asp-for="SdParcent" readonly >
+				<span asp-validation-for="SdParcent" ></span>
+			</div>
+
+			<div class="col-md-2 complex-form-col">
+				<label asp-for="Sd" ></label>
+				<input type="text" asp-for="Sd" readonly >
+				<span asp-validation-for="Sd" ></span>
+			</div>
+
+
+			<div class="col-md-4 complex-form-col">
+				<label asp-for="ReturnQuantity" ></label>
+				<input type="text" asp-for="ReturnQuantity" >
+				<span asp-validation-for="ReturnQuantity" ></span>
+			</div>
+
+
+			<div class="col-md-2 complex-form-col">
+				<label asp-for="ReturnUnitPrice" ></label>
+				<input type="text" asp-for="ReturnUnitPrice" readonly >
+				<span asp-validation-for="ReturnUnitPrice" ></span>
+			</div>
+
+			<div class="col-md-2 complex-form-col">
+				<label asp-for="ReturnAmount" ></label>
+				<input type="text" asp-for="ReturnAmount" readonly >
+				<span asp-validation-for="ReturnAmount" ></span>
+			</div>
+
+			<div class="col-md-2 complex-form-col">
+				<label asp-for="ReturnVatParcent" ></label>
+				<input type="text" asp-for="ReturnVatParcent" readonly >
+				<span asp-validation-for="ReturnVatParcent" ></span>
+			</div>
+
+			<div class="col-md-2 complex-form-col">
+				<label asp-for="ReturnVat" ></label>
+				<input type="text" asp-for="ReturnVat" readonly >
+				<span asp-validation-for="ReturnVat" ></span>
+			</div>
+
+
+			<div class="col-md-2 complex-form-col">
+				<label asp-for="ReturnSdParcent" ></label>
+				<input type="text" asp-for="ReturnSdParcent" readonly >
+				<span asp-validation-for="ReturnSdParcent" ></span>
+			</div>
+
+			<div class="col-md-2 complex-form-col">
+				<label asp-for="ReturnSd" ></label>
+				<input type="text" asp-for="ReturnSd" readonly >
+				<span asp-validation-for="ReturnSd" ></span>
+			</div>
+
+
+			<div class="col-md-8 complex-form-col">
+				<label asp-for="ReasonOfReturn" ></label>
+				<input type="text" asp-for="ReasonOfReturn" >
+				<span asp-validation-for="ReasonOfReturn" ></span>
+			</div>
+
+			<div class="col-md-2 mt-2">
+				<button type="button" class="btn  btn-primary btn-sm inline-sm-button-complex-form w-100" id="btnAddProduct"><i class="bi bi-plus-lg"></i> Add</button>
+			</div>
+			<div class="col-md-2 mt-2">
+				<button type="button" class="btn  btn-warning btn-sm inline-sm-button-complex-form w-100" id="btnResetProduct"><i class="bi bi-arrow-repeat"></i> Reset</button>
+			</div>
+		</form>
+	</div>
+	<div class="col-md-12 form-3">
+		<div class="font-weight-bold mt-3">
+			Product List
+		</div>
+		<table id="productTable" class="table table-bordered form-table mt-3">
+			<thead>
+				<tr>
+					<th>Product</th>
+					<th>M. Unit</th>
+					<th>Quantity</th>
+					<th>U. Price</th>
+					<th>Amount</th>
+					<th>VAT(%)</th>
+					<th>VAT</th>
+					<th>SD(%)</th>
+					<th>SD</th>
+					<th>Return Quantity</th>
+					<th>Return U.Price</th>
+					<th>Return Amount</th>
+					<th>Return VAT (%)</th>
+					<th>Return VAT</th>
+					<th>Return SD (%)</th>
+					<th>Return SD</th>
+					<th>Reason Of Return</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody id="productTableBody">
+			</tbody>
+			<tfoot>
+				<tr class="text-end">
+					<td colspan="9">Total</td>
+					<td id="returnQuantity"></td>
+					<td id="returnUnitPrice"></td>
+					<td id="returnAmount"></td>
+					<td id="returnVatParcent"></td>
+					<td id="returnVat"></td>
+					<td id="returnSdParcent"></td>
+					<td id="returnSd"></td>
+					<td></td>
+				</tr>
+			</tfoot>
+		</table>
+	</div>
+
+	<div class="col-md-12">
+		<div class="float-end">
+			<button type="button" class="btn btn-success btn-sm" id="btnSave"><i class="bi bi-check-lg"></i> Submit</button>
+			<button type="button" class="btn btn-primary btn-sm d-none" id="btnSaveDraft"><i class="bi bi-card-list"></i> Draft</button>
+			<button type="button" value="Reset" id="btnResetForm" class="btn btn-warning btn-sm"><i class="bi bi-arrow-repeat"></i> Reset</button>
+			<a asp-action="Index" class="btn btn-secondary btn-sm"><i class="bi bi-slash-circle"></i> Cancel</a>
+		</div>
+	</div>
+</div>
+
+@section Scripts{
+	<script src="~/CustomJs/DebitNote.js?vguid=@ViewStaticData.StaticFileVersionGuid"></script>
+}

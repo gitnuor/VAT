@@ -1,0 +1,157 @@
+﻿@model vms.entity.viewModels.NewReports.vmSalesReport
+
+
+@{ var session = Context.Session.GetComplexData<VmUserSession>(ControllerStaticData.SESSION);
+                ViewData["Title"] = "Sales Report";
+                Layout = "_LayoutReport"; }
+
+
+
+@section contentheader
+    {
+    <div class="p-3 page-header">
+        Sales Report
+        <form method="post">
+            <div class="row">
+
+                <div class="col-3">
+                    <label asp-for="FromDate" class="form-label"></label>
+                    <input autocomplete="off" asp-for="FromDate" class="form-control form-control-sm" type="date" />
+                    <span asp-validation-for="FromDate" class="text-danger"></span>
+                </div>
+
+                <div class="col-3">
+                    <label asp-for="ToDate" class="form-label"> </label>
+                    <input autocomplete="off" asp-for="ToDate" class="form-control form-control-sm" type="date" />
+                    <span asp-validation-for="ToDate" class="text-danger"></span>
+                </div>
+
+                <div class="col-4">
+                    <button type="submit" class="btn btn-sm btn-success inline-sm-button"> <i class="bi bi-file-text"></i> View</button>
+                    <button type="button" class="btn btn-sm btn-primary inline-sm-button" id="btnPrint"><i class="bi bi-printer"></i> Print</button>
+                    <button type="submit" asp-action="SalesReportExcel" class="btn btn-sm btn-warning inline-sm-button"><i class="bi bi-file-excel-fill"></i> Excel</button>
+                </div>
+            </div>
+        </form>
+    </div>
+}
+
+
+
+
+
+
+<div id="printableArea" class="col-12 mt-3">
+    <div id="" class="report-margin">
+        <div class="report-header">
+            <div class="company-name">@Model.head.CompanyName</div>
+            <div class="report-name">@Model.head.ReportName</div>
+            <div class="report-date-range">From @Model.FromDate.ToString("dd/MM/yyyy") to @Model.ToDate.ToString("dd/MM/yyyy")</div>
+        </div>
+
+
+            <table class="table  table-bordered">
+                <thead>
+                    <tr>
+
+                        <th>
+                            Inv. No.
+                        </th>
+                        <th>
+                            Sales Date
+                        </th>
+
+                        <th>
+                            Tax Inv. No
+                        </th>
+
+                        <th>
+                            Tax Inv. Time
+                        </th>
+                        <th>
+                            Cus. Name
+                        </th>
+                        <th>
+                            Price without VAT
+                        </th>
+                        <th>
+                            VAT
+                        </th>
+                        <th>
+                            SD
+                        </th>
+
+                        <th>
+                            Is VDS?
+                        </th>
+
+                    </tr>
+                </thead>
+
+                @if (Model.salesList.Any())
+                {
+    <tbody>
+        @foreach (var item in Model.salesList)
+        {
+<tr>
+
+    <td>
+        @Html.DisplayFor(modelItem => item.InvoiceNo)
+    </td>
+
+    <td class="text-center">
+        @StringGenerator.DateTimeToString(item.SalesDate, false)
+    </td>
+
+    <td class="text-center">
+        @Html.DisplayFor(modelItem => item.VatChallanNo)
+    </td>
+
+    <td class="text-center">
+        @StringGenerator.DateTimeToString(item.TaxInvoicePrintedTime)
+    </td>
+
+    <td>
+        @Html.DisplayFor(modelItem => item.Customer.Name)
+    </td>
+
+    <td class="text-right">
+        @StringGenerator.DecimalToCommaSeparated(item.TotalPriceWithoutVat)
+    </td>
+
+    <td class="text-right">
+        @StringGenerator.DecimalToCommaSeparated(item.TotalVat)
+    </td>
+
+    <td class="text-right">
+        @StringGenerator.DecimalToCommaSeparated(item.TotalSupplimentaryDuty)
+    </td>
+
+    <td class="text-center">
+        @StringGenerator.BooleanToString(item.IsVatDeductedInSource)
+    </td>
+
+</tr>}
+    </tbody> }
+
+                else
+                {
+    <tr>
+        <td colspan="10">
+            <p style="text-align: center">No Records Found</p>
+        </td>
+    </tr>}
+            </table>
+        </div>
+</div>
+@section Scripts{
+    <script>
+
+        $(document).ready(function () {
+            $("#btnPrint").click(function () {
+                window.vmsPrint.printA4Landscape('printableArea');
+            });
+        });
+    </script>
+
+}

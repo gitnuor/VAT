@@ -1,0 +1,1193 @@
+﻿@{
+    var session = Context.Session.GetComplexData<VmUserSession>(ControllerStaticData.SESSION);
+}
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<input type="hidden" class="form-control" id="ProductId" name="ProductId" />
+
+<div class="custom-page-title">
+    Purchase Foreign
+</div>
+<form method="post" id="purchaseForeign">
+    <div class="row">
+        <div class="col-md-8 purchaseForeignBorder">
+            <div class="row">
+
+                <div class="col-md-2 ">
+                    <div class="form-group form-md-line-input has-info">
+
+                        <select id="VendorId" name="VendorId" class="form-control" asp-items="ViewBag.VendorId"></select>
+                        <label>Vendor  </label>
+                    </div>
+                </div>
+                <div class="col-md-2 ">
+                    <div class="form-group form-md-line-input has-info">
+
+                        <select id="PurchaseReasonId" name="PurchaseReasonId" class="form-control" asp-items="ViewBag.PurchaseReasonId"></select>
+                        <label> Reason  </label>
+                    </div>
+                </div>
+                <div class="col-md-2 ">
+                    <div class="form-group form-md-line-input">
+                        <div>
+                            <input type="text" class="form-control" id="VendorInvoiceNo" name="VendorInvoiceNo" placeholder="#">
+                            <label class="labelColor">V.Inv. No.</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-2 ">
+                    <div class="form-group form-md-line-input">
+                        <div>
+                            <input type="text" class="form-control" id="InvoiceNo" name="InvoiceNo" placeholder="#">
+                            <label class="labelColor">Inv. No.</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 ">
+                    <div class="form-group form-md-line-input has-info">
+
+                        <select id="PurchaseTypeId" name="PurchaseTypeId" class="form-control" asp-items="ViewBag.PurchaseTypeId"></select>
+                        <label>Purch.Type</label>
+                    </div>
+                </div>
+
+                <div class="col-md-2 ">
+                    <div class="form-group form-md-line-input">
+                        <div>
+                            <input type="text" class="form-control" id="Discount" name="Discount" placeholder="00" value="0">
+                            <label class="labelColor">Disc.Total</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 ">
+                    <div class="form-group form-md-line-input">
+                        <div>
+                            <input type="text" class="form-control" id="VatChallanNo" name="VatChallanNo" placeholder="#">
+                            <label class="labelColor">Vat Cha. No.</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 ">
+                    <div class="form-group form-md-line-input">
+                        <div>
+                            <input type="text" class="form-control" id="ExpectedDeliveryDate" name="ExpectedDeliveryDate" placeholder="2018-01-01" value="@DateTime.Now">
+                            <label class="labelColor">Ex. Delv. Date</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 ">
+                    <div class="form-group form-md-line-input">
+                        <div>
+                            <input type="text" class="form-control" id="VatChallanIssueDate" name="VatChallanIssueDate" placeholder="2018-01-01" value="@DateTime.Now">
+                            <label class="labelColor">Challan Date</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 ">
+                    <div class="form-group form-md-line-input">
+                        <div>
+                            <input type="text" class="form-control" id="LcNo" name="LcNo" placeholder="">
+                            <label class="labelColor">Lc No.</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 ">
+                    <div class="form-group form-md-line-input">
+                        <div>
+                            <input type="text" class="form-control" id="LcDate" name="LcDate" placeholder="" value="@DateTime.Now">
+                            <label class="labelColor">Lc Date</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 ">
+                    <div class="form-group form-md-line-input">
+                        <div>
+                            <input type="text" class="form-control" id="BillOfEntry" name="BillOfEntry" placeholder="" >
+                            <label class="labelColor">Bill Of Entry</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 ">
+                    <div class="form-group form-md-line-input">
+                        <div>
+                            <input type="text" class="form-control" id="BillOfEntryDate" name="BillOfEntryDate" placeholder="" value="@DateTime.Now">
+                            <label class="labelColor">BOE Date</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 ">
+                    <div class="form-group form-md-line-input">
+                        <div>
+                            <input type="text" class="form-control" id="DueDate" name="DueDate" placeholder="" value="@DateTime.Now">
+                            <label class="labelColor">Due Date</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 ">
+                    <div class="form-group form-md-line-input">
+                        <div>
+                            <input type="text" class="form-control" id="TermsOfLc" name="TermsOfLc" placeholder="">
+                            <label class="labelColor">Terms Of Lc</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 ">
+                    <div class="form-group form-md-line-input">
+                        <div>
+                            <input type="text" class="form-control" id="PoNumber" name="PoNumber" placeholder="">
+                            <label class="labelColor">P/O No.</label>
+                        </div>
+                    </div>
+                </div>
+                    <div class="col-md-2" hidden>
+                        <div class="mt-repeater-input mt-radio-inline">
+                            <input type="checkbox" name="IsVatDeductedInSource" id="IsVatDeductedInSource" />
+                            <label class="pt-2">VDS?</label>
+                        </div>
+                    </div>
+                </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="row">
+                <div class="col-md-12">
+                    <h4>Document</h4>
+                    <table class="table table-bordered form-table" id="contentTable">
+                        <thead>
+                            <tr>
+                                <th>Sl</th>
+                                <th>Type</th>
+                                <th>File</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                        <tfoot>
+                            <tr>
+                                <td></td>
+                                <td class="form-group form-md-line-input has-info">
+                                    <select id="DocumentTypeId" name="DocumentTypeId" class="form-control" asp-items="ViewBag.DocumentTypeId"></select>
+
+                                </td>
+                                <td class="form-group form-md-line-input has-info">
+                                    <input type="file" name="FileUpload" id="FileUpload" class="form-control" />
+                                </td>
+                                <td class="single-button-action-column">
+                                    <a id="addDocument" class="btn btn-sm btn-success" aria-label="Left Align">
+                                        <i class="bi bi-plus-lg"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+
+                <div class="col-md-12">
+                    <h4>Payment Info</h4>
+                    <table class="table table-bordered form-table" id="payment">
+                        <thead>
+                            <tr>
+                                <th>Sl</th>
+                                <th>Method</th>
+                                <th>Amount</th>
+                                <th>Date</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                        <tfoot>
+                            <tr>
+                                <td></td>
+                                <td class="form-group form-md-line-input has-info">
+
+                                    <select id="PaymentMethodId" name="PaymentMethodId" class="form-control" asp-items="ViewBag.PaymentMethodId"></select>
+
+                                </td>
+                                <td class="form-group form-md-line-input">
+                                    <div>
+                                       <input type="text" name="PaidAmount" id="PaidAmount" class="form-control" autocomplete="off"/>
+                                     </div>
+                                </td>
+                                <td class="form-group form-md-line-input">
+                                    <div>
+                                       <input type="text" name="PaymentDate" id="PaymentDate" class="form-control" value="@DateTime.Now"/>
+                                    </div
+>
+                                </td>
+                                <td class="single-button-action-column">
+                                    <a id="addPayment" class="btn btn-sm btn-success" aria-label="Left Align">
+                                        <i class="bi bi-plus-lg"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 ">
+            <h4>Purchase Details</h4>
+            <table class="table table-bordered form-table" id="gridTable">
+                <thead>
+                    <tr>
+                        <th>Sl</th>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th>Amount</th>
+                        <th>Discount</th>
+                        <th>M. Unit</th>
+                        <th>Price</th>
+                        <th>SD (%)</th>
+                        <th>ID (%)</th>
+                        <th>RD (%)</th>
+                        <th>AT (%)</th>
+                        <th>AIT (%)</th>
+                        <th>VAT(%)</th>
+                        <th>VAT</th>
+                        <th>Total</th>
+                        <th>
+                            
+                        </th>
+                    </tr>
+                    <tr>
+
+                        <td></td>
+                        <td class="form-group form-md-line-input">
+                            <div>
+                                <input type="text" class="form-control" id="Product" name="Product">
+                            </div>
+                        </td>
+                        <td class="form-group form-md-line-input">
+                            <div>
+                                <input type="text" class="form-control" id="item" name="item">
+                            </div>
+                        </td>
+
+                        <td class="form-group form-md-line-input">
+                            <div>
+                                <input type="text" class="form-control" id="amount" name="amount" />
+                            </div>
+                        </td>
+                        <td class="form-group form-md-line-input">
+                            <div>
+                                <input type="text" class="form-control" id="DiscountPerItem" value="0" name="DiscountPerItem" />
+                            </div>
+                        </td>
+                        <td class="form-group form-md-line-input has-info">
+
+                            <select id="unit" name="unit" class="form-control" asp-items="ViewBag.MeasurementUnitId"></select>
+                        </td>
+                        <td>
+                            <label id="Amount" name="Amount" />
+                        </td>
+
+                        <td class="form-group form-md-line-input">
+                            <div>
+                                <input type="text" class="form-control" id="SupplementaryDutyPercent" name="SupplementaryDutyPercent" />
+                            </div>
+                        </td>
+                        <td class="form-group form-md-line-input">
+                            <div>
+                                <input type="text" class="form-control" id="DefaultImportDutyPercent" name="DefaultImportDutyPercent" />
+                            </div>
+                        </td>
+                        <td class="form-group form-md-line-input">
+                            <div>
+                                <input type="text" class="form-control" id="DefaultRegulatoryDutyPercent" name="DefaultRegulatoryDutyPercent" />
+                            </div>
+                        </td>
+                        <td class="form-group form-md-line-input">
+                            <div>
+                                <input type="text" class="form-control" id="DefaultAdvanceTaxPercent" name="DefaultAdvanceTaxPercent" />
+                            </div>
+                        </td>
+                        <td class="form-group form-md-line-input">
+                            <div>
+                                <input type="text" class="form-control" id="DefaultAdvanceIncomeTaxPercent" name="DefaultAdvanceIncomeTaxPercent" />
+                            </div>
+                        </td>
+                        <td>
+                            <label id="VAT" name="VAT" />
+                        </td>
+                        <td>
+                            <label id="vatValue" name="vatValue"></label>
+                        </td>
+                        <td>
+                            <label id="totalValue" name="totalValue"></label>
+                        </td>
+                        <td class="single-button-action-column">
+                            <a id="add" class="btn btn-sm btn-success" aria-label="Left Align">
+                                <i class="bi bi-plus-lg"></i>
+                            </a>
+                        </td>
+                    </tr>
+                </thead>
+
+                <tbody id="tblPurchaseOD"></tbody>
+                <tfoot>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</form>
+<div>
+    {
+        <button type="button" class="btn blue" id="save" ><i class="bi bi-check-lg"></i> Submit</button>}
+    {
+
+    <a href="~/Purchase/Index" class="btn btn-secondary btn-sm"><i class="bi bi-slash-circle"></i> Cancel</a>
+
+     }
+
+</div>
+
+@section Scripts{
+
+    <script src="~/js/typeahead.bundle.js"></script>
+    <script src="~/js/jquery-ui.js"></script>
+    <script>
+
+        var purchasOrder = {
+            init: function() {},
+            count: 1,
+            unitAmount: 0,
+            totalPrice: 0,
+            totalVat: 0,
+            typeId: 0,
+            purchaseOrders:[],
+            PurchaseOrderDetailList: [],
+            ContentInfoJson: [],
+            PurchasePaymenJson:[],
+            item: [],
+            calculateTotal: function () {
+                var vatPercent = $('#VAT').text();
+                var unitAmount = $('#amount').val();
+                var vatValue = parseFloat(unitAmount);
+                var vat = parseFloat(vatPercent) / 100;
+                vatValue = vatValue * (vat);
+                var total = parseFloat(unitAmount) + vatValue;
+                $('#vatValue').text(vatValue);
+                $('#totalValue').text(total);
+            },
+            
+            purchaseForImport: function (purchaseTypeId) {
+                if (purchaseTypeId == 3) {
+
+                    $('#PurchaseTypeId').attr("disabled", true);
+                    $('#gridTable tbody').empty();
+
+                    purchasOrder.gridTableEmpty();
+                    purchasOrder.PurchaseOrderDetailList.length = 0;
+                    purchasOrder.count = 1;
+                    purchasOrder.totalPrice = 0;
+                    purchasOrder.totalVat = 0;
+                    $('#TotalPrice').text('0');
+                    $('#TotalVat').text('0');
+                }
+            },
+            purchaseForVDS: function (purchaseTypeId) {
+                if (purchaseTypeId == 3) {
+
+                    $('#PurchaseTypeId').attr("disabled", true);
+                    $('#gridTable tbody').empty();
+
+                    purchasOrder.gridTableEmpty();
+                    purchasOrder.PurchaseOrderDetailList.length = 0;
+                    purchasOrder.count = 1;
+                    purchasOrder.totalPrice = 0;
+                    purchasOrder.totalVat = 0;
+                    $('#TotalPrice').text('0');
+                    $('#TotalVat').text('0');
+                }
+            },
+
+            gridTableEmpty: function() {
+                $('#ProductId').val('');
+                $('#Product').val('');
+                $('#Amount').text('');
+                $('#item').val('');
+                $('#SupplementaryDutyPercent').val('');
+                $('#DefaultImportDutyPercent').val('');
+                $('#DefaultRegulatoryDutyPercent').val('');
+                $('#DefaultAdvanceTaxPercent').val('');
+                $('#DefaultAdvanceIncomeTaxPercent').val('');
+                $('#amount').val('0');
+                $('#VAT').text('');
+                $('#InitialAmount').val('');
+                $('#vatValue').text('');
+                $('#totalValue').text('');
+            },
+            gridPaymentEmpty: function() {
+                $('#PaidAmount').val('');
+                $('#PaymentDate').val('');
+            },
+            isNumber:function (n) {
+                return !isNaN(parseFloat(n)) && isFinite(n);
+            },
+            CalculateTotalPriceAndVat: function (totalPrice, totalVat) {
+                debugger
+                purchasOrder.totalPrice += totalPrice;
+                purchasOrder.totalVat += totalVat;
+                $('#TotalPrice').text(purchasOrder.totalPrice);
+                $('#TotalVat').text(purchasOrder.totalVat);
+            },
+            add: function () {
+
+                var productName = $('#Product').val();
+                var productId = $('#ProductId').val();
+                var item = $('#item').val();
+                var amount = $('#amount').val();
+                var vatPercent = $('#VAT').text();
+                var unit = $('#unit option:selected').text();
+                var unitId = $('#unit').val();
+                var unitAmount = $('#Amount').text();
+                var DiscountPerItem = $('#DiscountPerItem').val();
+                var SupplementaryDutyPercent = $('#SupplementaryDutyPercent').val();
+                var DefaultImportDutyPercent = $('#DefaultImportDutyPercent').val();
+                var DefaultRegulatoryDutyPercent = $('#DefaultRegulatoryDutyPercent').val();
+                var DefaultAdvanceTaxPercent = $('#DefaultAdvanceTaxPercent').val();
+                var DefaultAdvanceIncomeTaxPercent = $('#DefaultAdvanceIncomeTaxPercent').val();
+                if (productId>0) {
+
+                    var canAdd = true;
+
+                    $.each(purchasOrder.PurchaseOrderDetailList,
+                        function (i, v) {
+                            if (purchasOrder.PurchaseOrderDetailList[i].ProductId == productId) {
+                                alert('Sorry! product Order Exists.');
+                                canAdd = false;
+
+                            }
+
+                        });
+                    if (!parseInt(item)) {
+                        alert('Number of item is inValid!');
+                        canAdd = false;
+                    }
+                    if (!parseInt(amount)) {
+                        alert('Amount of item is inValid!');
+                        canAdd = false;
+                    }
+                    if (canAdd) {
+
+                        if (!purchasOrder.isNumber(vatPercent)) {
+                            return alert("Input VAT %");
+                        }
+                        debugger
+                        var vat = parseFloat(vatPercent)/100;
+                        var data = new Object();
+                        data.ProductId = productId;
+                        data.Quantity = item;
+                        data.UnitPrice = unitAmount;
+                        data.DiscountPerItem = DiscountPerItem;
+                        data.SupplementaryDutyPercent = SupplementaryDutyPercent;
+                        data.DefaultImportDutyPercent = DefaultImportDutyPercent;
+                        data.DefaultRegulatoryDutyPercent = DefaultRegulatoryDutyPercent;
+                        data.DefaultAdvanceTaxPercent = DefaultAdvanceTaxPercent;
+                        data.DefaultAdvanceIncomeTaxPercent = DefaultAdvanceIncomeTaxPercent;
+                        data.VATPercent = vatPercent;
+                        data.MeasurementUnitId = unitId;
+                        var vatValue = parseFloat(amount);
+                        vatValue = vatValue * (vat);
+                        var total = parseFloat(amount) + vatValue;
+
+                        data.totalPrice = total;
+                        data.totalVat = vatValue;
+                        purchasOrder.PurchaseOrderDetailList.push(data);
+
+                        var html = '<tr id="' +
+                            data.ProductId +
+                            '">' +
+                            '<td>' +
+                            purchasOrder.count +
+                            '</td>' +
+                            '<td>' +
+                            productName +
+                            '</td>' +
+                            '<td>' +
+                            item +
+                            '</td>' +
+                            '<td>' +
+                            amount +
+                            '</td>' +
+                            '<td>' +
+                            DiscountPerItem +
+                            '</td>' +
+                            '<td>' +
+                            unit +
+                            '</td>' +
+                            '<td>' +
+                            unitAmount +
+                            '</td>' +
+
+                            '<td>' +
+                            SupplementaryDutyPercent +
+                            '</td>' +
+                            '<td>' +
+                            DefaultImportDutyPercent +
+                            '</td>' +
+                            '<td>' +
+                            DefaultRegulatoryDutyPercent +
+                            '</td>' +
+                            '<td>' +
+                            DefaultAdvanceTaxPercent +
+                            '</td>' +
+                            '<td>' +
+                            DefaultAdvanceIncomeTaxPercent +
+                            '</td>' +
+                            '<td>' +
+                            vatPercent +
+                            '</td>' +
+                            '<td>' +
+                            vatValue +
+                            '</td>' +
+
+                            '<td>' +
+                            total +
+                            '</td>' +
+                            '<td><span onclick="Delete(' +
+                            data.ProductId +
+                            ')"  class="glyphicon glyphicon-minus btn-xs"></a></span></td>';
+
+                        html += '</tr>';
+
+                        $("table#gridTable > tbody").append(html);
+                        purchasOrder.CalculateTotalPriceAndVat(total, vatValue);
+                        purchasOrder.gridTableEmpty();
+                        purchasOrder.count++;
+
+                    }
+                }
+
+            },
+            addDocument: function () {
+
+                var DocumentName = $('#DocumentTypeId option:selected').text();
+                var DocumentTypeId = $('#DocumentTypeId').val();
+                var files = $("#FileUpload").get(0).files;
+                var table = document.getElementById('contentTable');
+                var rowCount = table.rows.length;
+                if (DocumentTypeId > 0) {
+                    var canAdd = true;
+
+                    if (canAdd) {
+                        var data = new Object();
+                        data.rowCount = rowCount;
+                        data.DocumentTypeId = DocumentTypeId;
+                        data.UploadFile = files[0];
+                        purchasOrder.ContentInfoJson.push(data);
+
+                        var html = '<tr id="' +
+                            rowCount +
+                            '">' +
+                            '<td>' +
+                            rowCount +
+                            '</td>' +
+                            '<td>' +
+                            DocumentName +
+                            '</td>' +
+                            '<td>' +
+                            files[0].name +
+                            '</td>' +
+                            '<td><span onclick="DeleteDocument(' +
+                            rowCount +
+                            ')"  class="glyphicon glyphicon-minus btn-xs"></a></span></td>';
+
+                        html += '</tr>';
+
+                        $("table#contentTable > tbody").append(html);
+
+                    }
+                }
+
+            },
+            addPayment: function () {
+
+                var PaymentMethod = $('#PaymentMethodId option:selected').text();
+                var PaymentMethodId = $('#PaymentMethodId').val();
+                var PaidAmount = $("#PaidAmount").val();
+                var PaymentDate = $("#PaymentDate").val();
+                var table = document.getElementById('payment');
+                var rowCount = table.rows.length;
+                if (PaymentMethodId > 0) {
+                    var canAdd = true;
+
+                    if (canAdd) {
+                        var data = new Object();
+                        data.rowCount = rowCount;
+                        data.PaymentMethodId = PaymentMethodId;
+                        data.PaidAmount = PaidAmount;
+                        data.PaymentDate = PaymentDate;
+                        purchasOrder.PurchasePaymenJson.push(data);
+
+                        var html = '<tr id="' +
+                            rowCount +
+                            '">' +
+                            '<td>' +
+                            rowCount +
+                            '</td>' +
+                            '<td>' +
+                            PaymentMethod +
+                            '</td>' +
+                            '<td>' +
+                            PaidAmount +
+                            '</td>' +
+                            '<td>' +
+                            PaymentDate +
+                            '</td>' +
+                            '<td><span onclick="DeletePayment(' +
+                            rowCount +
+                            ')"  class="glyphicon glyphicon-minus btn-xs"></a></span></td>';
+
+                        html += '</tr>';
+
+                        $("table#payment > tbody").append(html);
+                        purchasOrder.gridPaymentEmpty();
+
+                    }
+                }
+
+            },
+            delete: function (id) {
+                debugger
+                for (var key in purchasOrder.PurchaseOrderDetailList) {
+                    var value = purchasOrder.PurchaseOrderDetailList[key].ProductId;
+                    if (purchasOrder.PurchaseOrderDetailList[key].ProductId == id) {
+                        purchasOrder.CalculateTotalPriceAndVat(-purchasOrder.PurchaseOrderDetailList[key].totalPrice, -purchasOrder.PurchaseOrderDetailList[key].totalVat);
+                    }
+                }
+                $.each(purchasOrder.PurchaseOrderDetailList,
+                    function (i, v) {
+                        if (purchasOrder.PurchaseOrderDetailList[i].ProductId == id) {
+
+                            purchasOrder.PurchaseOrderDetailList.splice(i, 1);
+
+                        }
+                        $("tr#" + id).remove().fadeOut();
+
+                    });
+
+            },
+            deletePayment: function (id) {
+
+                $.each(purchasOrder.PurchasePaymenJson,
+                    function (i, v) {
+                        if (purchasOrder.PurchasePaymenJson[i].rowCount == id) {
+
+                            purchasOrder.PurchasePaymenJson.splice(i, 1);
+
+                        }
+                        $("tr#" + id).remove().fadeOut();
+
+                    });
+
+            },
+            deleteDocument: function (id) {
+
+                $.each(purchasOrder.ContentInfoJson,
+                    function (i, v) {
+                        if (purchasOrder.ContentInfoJson[i].rowCount == id) {
+
+                            purchasOrder.ContentInfoJson.splice(i, 1);
+
+                        }
+                        $("tr#" + id).remove().fadeOut();
+
+                    });
+
+            },
+            calculate: function (value) {
+
+                var unitAmount = $('#amount').val();
+
+                if (!purchasOrder.isNumber(unitAmount) || !(purchasOrder.isNumber(value))) {
+                    return; 
+                } else {
+                    $("#Amount").text(unitAmount / value);
+                    purchasOrder.calculateTotal();
+                }
+
+            },
+            calculateUnitPrice: function (value) {
+                var qty = $('#item').val();
+                if (!purchasOrder.isNumber(qty) || !(purchasOrder.isNumber(value))) {
+
+                    return;
+                } else {
+                    $("#Amount").text(value / qty);
+                }
+
+            },
+            Save: function () {
+                var VendorId = $('#VendorId').val();
+                var VatChallanNo = $('#VatChallanNo').val();
+                var VatChallanIssueDate = $('#VatChallanIssueDate').val();
+                var VendorInvoiceNo = $('#VendorInvoiceNo').val();
+                var InvoiceNo = $('#InvoiceNo').val();
+                var PurchaseTypeId = $('#PurchaseTypeId').val();
+                var files = $("#FileUpload").get(0).files;
+                var Amount = $('#PurchaseAmount').val();
+                var ExpectedDeliveryDate = $('#ExpectedDeliveryDate').val();
+                var DeliveryDate = $('#DeliveryDate').val();
+                var Iteams = $('#PurchaseIteams').val();
+                var Vat = $('#PurchaseVat').val();
+                var DiscountOnTotalPrice = $('#DiscountOnTotalPrice').val();
+                var PurchaseReasonId = $('#PurchaseReasonId').val();
+                var IsVatDeductedInSource = $('#IsVatDeductedInSource').is(":checked");
+                var PaidAmount = $('#PaidAmount').val();
+                var LcNo = $('#LcNo').val();
+                var LcDate = $('#LcDate').val();
+                var BillOfEntry = $('#BillOfEntry').val();
+                var BillOfEntryDate = $('#BillOfEntryDate').val();
+                var DueDate = $('#DueDate').val();
+                var TermsOfLc = $('#TermsOfLc').val();
+                var PoNumber = $('#PoNumber').val();
+                var MushakGenerationId = $('#MushakGenerationId').val();
+
+                var data = new FormData();
+
+                for (var i = 0; i < purchasOrder.PurchaseOrderDetailList.length; i++) {
+                    data.append('PurchaseOrderDetailList[' + i + '].ProductId', purchasOrder.PurchaseOrderDetailList[i].ProductId);
+                    data.append('PurchaseOrderDetailList[' + i + '].Quantity', purchasOrder.PurchaseOrderDetailList[i].Quantity);
+                    data.append('PurchaseOrderDetailList[' + i + '].UnitPrice', purchasOrder.PurchaseOrderDetailList[i].UnitPrice);
+                    data.append('PurchaseOrderDetailList[' + i + '].DiscountPerItem', purchasOrder.PurchaseOrderDetailList[i].DiscountPerItem);
+                    data.append('PurchaseOrderDetailList[' + i + '].ImportDutyPercent', purchasOrder.PurchaseOrderDetailList[i].ImportDutyPercent);
+                    data.append('PurchaseOrderDetailList[' + i + '].RegulatoryDutyPercent', purchasOrder.PurchaseOrderDetailList[i].RegulatoryDutyPercent);
+                    data.append('PurchaseOrderDetailList[' + i + '].SupplementaryDutyPercent', purchasOrder.PurchaseOrderDetailList[i].SupplementaryDutyPercent);
+                    data.append('PurchaseOrderDetailList[' + i + '].VATPercent', purchasOrder.PurchaseOrderDetailList[i].VATPercent);
+                    data.append('PurchaseOrderDetailList[' + i + '].AdvanceTaxPercent', purchasOrder.PurchaseOrderDetailList[i].AdvanceTaxPercent);
+                    data.append('PurchaseOrderDetailList[' + i + '].AdvanceIncomeTaxPercent', purchasOrder.PurchaseOrderDetailList[i].AdvanceIncomeTaxPercent);
+                    data.append('PurchaseOrderDetailList[' + i + '].MeasurementUnitId', purchasOrder.PurchaseOrderDetailList[i].MeasurementUnitId);
+                }
+                for (var i = 0; i < purchasOrder.ContentInfoJson.length; i++) {
+                    data.append('ContentInfoJson[' + i + '].DocumentTypeId', purchasOrder.ContentInfoJson[i].DocumentTypeId);
+                    data.append('ContentInfoJson[' + i + '].UploadFile', purchasOrder.ContentInfoJson[i].UploadFile);
+                }
+                for (var i = 0; i < purchasOrder.PurchasePaymenJson.length; i++) {
+                    data.append('PurchasePaymenJson[' + i + '].PaymentMethodId', purchasOrder.PurchasePaymenJson[i].PaymentMethodId);
+                    data.append('PurchasePaymenJson[' + i + '].PaidAmount', purchasOrder.PurchasePaymenJson[i].PaidAmount);
+                    data.append('PurchasePaymenJson[' + i + '].PaymentDate', purchasOrder.PurchasePaymenJson[i].PaymentDate);
+                }
+                data.append("VatChallanNo", VatChallanNo);
+                data.append("VatChallanIssueDate", VatChallanIssueDate);
+                data.append("VendorId", VendorId);
+                data.append("VendorInvoiceNo", VendorInvoiceNo);
+                data.append("InvoiceNo", InvoiceNo);
+                data.append("PurchaseDate", '2019-07-15');
+                data.append("PurchaseTypeId", PurchaseTypeId);
+                data.append("PurchaseReasonId", PurchaseReasonId);
+                data.append("DiscountOnTotalPrice", DiscountOnTotalPrice);
+                data.append("IsVatDeductedInSource", IsVatDeductedInSource);
+                data.append("ExpectedDeliveryDate", ExpectedDeliveryDate);
+                data.append("MushakGenerationId", 1);
+                data.append("LcNo", LcNo);
+                data.append("LcDate", LcDate);
+                data.append("BillOfEntry", BillOfEntry);
+                data.append("BillOfEntryDate", BillOfEntryDate);
+                data.append("DueDate", DueDate);
+                data.append("TermsOfLc", TermsOfLc);
+                data.append("PoNumber", PoNumber);
+                data.append("__RequestVerificationToken", $("input[name=__RequestVerificationToken]").val());
+                if (files.length > 0) {
+                    data.append("UploadFile", files[0]);
+                } else {
+                    alert("Please add  file.");
+                    return false;
+                }
+                $.ajax({
+                    url: '@Url.Action("CreateAsync", "Purchase")',
+                    data: data,
+                    type: "POST",
+                    processData: false,
+                    contentType: false,
+                    dataType: "json",
+                    beforeSend: function () {
+                        $("#loading").show();
+                    },
+                    success: function (result) {
+                        $("#loading").hide();
+
+                        if (result == false) {
+                            alert("Please add atleast on purchase Details");
+                        }
+                        else {
+                            window.location.href = '@Url.Action("Index", "Purchase")';
+                        }
+                    },
+                    error: function (x, e) {
+                        $("#loading").hide();
+                        alert('error');
+                    }
+                });
+            },
+            product : {
+                init: function () { },
+                productAutoComplete: function () {
+                    var materialforrequsition = {
+                        Initialize: function () {
+                            materialforrequsition.Typehead();
+                        },
+
+                        Typehead: function () {
+                            $('#Product').typeahead('destroy');
+                            $('#Product').typeahead({
+                                    hint: true,
+                                    highlight: true,
+                                    minLength: 2,
+                                },
+                                {
+                                    items: 8,
+                                    name: 'Product',
+                                    displayKey: function (s) {
+                                        return s.name;
+                                    },
+                                    property: "ProductId",
+                                    source: function (strmaterial, process) {
+                                        var url = '@Url.Content("~/Products/PurchaseProductAutoComplete")';
+                                        return $.getJSON(url, { filterText: $("#Product").val() }, function (Data) {
+
+                                            return process(Data);
+                                        });
+                                    },
+                                    updater: function (item) {
+                                        return item.name;
+                                    }
+                                }).on('typeahead:selected', function (obj, datum) {
+
+                                    $("#ProductId").val(datum.id);
+                                    $('#Amount').text(datum.unitPrice);
+                                    $('#item').val('1');
+                                    $('#amount').val(datum.unitPrice);
+                                    $('#unit').val(datum.unit);
+                                    $('#SupplementaryDutyPercent').val(datum.supplimentaryDuty);
+                                    $('#DefaultImportDutyPercent').val(datum.defaultImportDutyPercent);
+                                    $('#DefaultRegulatoryDutyPercent').val(datum.defaultRegulatoryDutyPercent);
+                                    $('#DefaultAdvanceTaxPercent').val(datum.defaultAdvanceTaxPercent);
+                                    $('#DefaultAdvanceIncomeTaxPercent').val(datum.defaultAdvanceIncomeTaxPercent);
+                                    $('#VAT').text(datum.vat);
+                                    
+                                   purchasOrder.unitAmount = datum.unitPrice;
+                                   purchasOrder.calculateTotal();
+                            });
+                            $("#Product").focus();
+
+                        }
+                    }
+                    materialforrequsition.Initialize();
+                }
+            }
+        }
+
+        $(document).ready(function () {
+            $('#purchaseForeign').validate({
+                errorClass: 'help-block animation-slideDown',
+                errorElement: 'div',
+                errorPlacement: function (error, e) {
+                    e.parents('.form-group >div').append(error);
+                },
+                highlight: function (e) {
+                   
+                    $(e).closest('.form-group').removeClass('has-success has-error').addClass('has-error');
+                    $(e).closest('.help-block').remove();
+                },
+
+                success: function (e) {
+                    e.closest('.form-group').removeClass('has-success has-error');
+                    e.closest('.help-block').remove();
+                },
+                rules: {
+                    VendorInvoiceNo: "required",
+                    InvoiceNo: "required",
+                    VatChallanNo: {
+                        required: true,
+                        maxlength: 50
+                    },
+                    VatChallanIssueDate: {
+                        date: true
+                    },
+                    ExpectedDeliveryDate: {
+                        date: true
+                    },
+
+                    LcNo: {
+                        maxlength: 50
+                    },
+                    LcDate: {
+                        date: true
+                    },
+                    BillOfEntry: {
+                        maxlength: 50
+                    },
+                    BillOfEntryDate: {
+                        date: true
+                    },
+                    DueDate: {
+                        date: true
+                    },
+                    PoNumber: {
+                        maxlength: 50
+                    },
+                    VDSAmount: {
+                        number: true
+                    },
+                    Discount: {
+                        required: true,
+
+                        number: true
+                    },
+                    item: {
+                        required: true,
+                        number: true
+                    },
+                    amount: {
+                        required: $("#amount").val() < 0,
+
+                        number: true
+                    },
+                    Product: {
+                        required: true
+                    },
+                    DiscountPerItem: {
+                        number: true
+                    },
+                    SupplementaryDutyPercent: {
+                        number: true
+                    },
+                    DefaultImportDutyPercent: {
+                        number: true
+                    },
+                    DefaultRegulatoryDutyPercent: {
+                        number: true
+                    },
+                    DefaultAdvanceTaxPercent: {
+                        number: true
+                    },
+                    DefaultAdvanceIncomeTaxPercent: {
+                        number: true
+                    },
+                    PaidAmount: {
+                       number: true
+                    },
+                    PaymentDate: {
+                        date: true
+                    }
+                },
+                messages: {
+                    VendorInvoiceNo: "Enter Vendor Invoice",
+                    InvoiceNo: "Enter Invoice No",
+                    VatChallanNo: {
+                        maxlength: 'Can not be More Than 50',
+                        required:'Enter VatChallan No'
+                    },
+                    VatChallanIssueDate: {
+                        date: 'Provide a valid Date'
+
+                    },
+                    ExpectedDeliveryDate: {
+                        date: 'Provide a valid Date'
+                    },
+                    LcNo: {
+                        maxlength: 'Can not be More Than 50'
+                    },
+                    LcDate: {
+                        date: 'Provide a valid Date'
+                    },
+                    BillOfEntry: {
+                        maxlength: 'Can not be More Than 50'
+                    },
+                    BillOfEntryDate: {
+                        date: 'Provide a valid Date'
+                    },
+                    DueDate: {
+                        date: 'Provide a valid Date'
+                    },
+                    PoNumber: {
+                        maxlength: 'Can not be More Than 50'
+                    },
+                    VDSAmount: {
+                        number: 'Entrer Number'
+
+                    },
+                    Discount: {
+                        required: 'Please provide Discount',
+                        number: 'Entrer Number'
+                    },
+                    item: {
+                        required: 'Please provide Quantity',
+                        number: 'Entrer Number'
+                    },
+                    amount: {
+                        required: 'Please provide amount',
+                        number: 'Entrer Number'
+                    },
+                    Product: {
+                        required: 'Please Enter Product',
+                    },
+                    DiscountPerItem: {
+                        number: 'Entrer Number'
+                    },
+                    SupplementaryDutyPercent: {
+                        number: 'Entrer Number'
+                    },
+                    DefaultImportDutyPercent: {
+                        number: 'Entrer Number'
+                    },
+                    DefaultRegulatoryDutyPercent: {
+                        number: 'Entrer Number'
+                    },
+                    DefaultAdvanceTaxPercent: {
+                        number: 'Entrer Number'
+                    },
+                    DefaultAdvanceIncomeTaxPercent: {
+                        number: 'Entrer Number'
+                    },
+                    PaidAmount: {
+                        number: 'Entrer Number'
+                    },
+                    PaymentDate: {
+                        date: 'Provide a valid Date',
+                    }
+
+                }
+            });
+            $("#PurchaseTypeId").val('2');
+            $('#add').click(function() {
+                $("#Product").rules('add', 'required');
+                $("#item").rules('add', 'required');
+                $("#amount").rules('add', 'required');
+                $("#PaymentDate").rules('remove', 'required');
+                $("#VatChallanNo").rules('remove', 'required');
+                $("#InvoiceNo").rules('remove', 'required');
+                $("#VendorInvoiceNo").rules('remove', 'required');
+                if ($("#purchaseForeign").valid()) {
+
+                    purchasOrder.add();
+                    return true
+                }
+                else {
+                    return false;
+                }
+                
+            });
+            $('#addDocument').click(function() {
+                purchasOrder.addDocument();
+            });
+            $('#addPayment').click(function () {
+                $("#Product").rules('remove', 'required');
+                $("#item").rules('remove', 'required');
+                $("#amount").rules('remove', 'required');
+                $("#InvoiceNo").rules('remove', 'required');
+                $("#VendorInvoiceNo").rules('remove', 'required');
+                $("#VatChallanNo").rules('remove', 'required');
+                $("#PaymentDate").rules('add', 'required');
+                if ($("#purchaseForeign").valid()) {
+                    purchasOrder.addPayment();
+                    return true
+                }
+                else {
+                    return false;
+                }
+                
+            });
+
+            $('#save').click(function () {
+                $("#Product").rules('remove', 'required');
+                $("#item").rules('remove', 'required');
+                $("#amount").rules('remove', 'required');
+                $("#PaymentDate").rules('remove', 'required');
+                $("#InvoiceNo").rules('add', 'required');
+                $("#VendorInvoiceNo").rules('add', 'required');
+                $("#VatChallanNo").rules('add', 'required');
+                if ($("#purchaseForeign").valid()) {
+                    var rowPurchase = $('#tblPurchaseOD tr').length;
+                    if (rowPurchase > 0) {
+                        if (confirm('Are you sure?')) {
+                            purchasOrder.Save();
+                            return true
+                        }
+                    }
+                    else {
+                        alert('Add Product');
+                    }
+                    
+                }
+                else {
+                    return false;
+                }
+                
+            });
+
+            purchasOrder.product.productAutoComplete();
+            $("#ExpectedDeliveryDate").datepicker();
+            $("#ExpectedDeliveryDate").datepicker('option', 'dateFormat', 'dd M, yy');
+            $("#VatChallanIssueDate").datepicker();
+            $("#VatChallanIssueDate").datepicker('option', 'dateFormat', 'dd M, yy');
+            $("#DeliveryDate").datepicker();
+            $("#DeliveryDate").datepicker('option', 'dateFormat', 'dd M, yy');
+            $("#PaymentDate").datepicker();
+            $("#PaymentDate").datepicker('option', 'dateFormat', 'dd M, yy');
+            $("#BillOfEntryDate").datepicker();
+            $("#BillOfEntryDate").datepicker('option', 'dateFormat', 'dd M, yy');
+            $("#DueDate").datepicker();
+            $("#DueDate").datepicker('option', 'dateFormat', 'dd M, yy');
+            $("#DeliveryDate").datepicker();
+            $("#DeliveryDate").datepicker('option', 'dateFormat', 'dd M, yy');
+            $("#LcDate").datepicker();
+            $("#LcDate").datepicker('option', 'dateFormat', 'dd M, yy');
+
+        });
+
+        function Delete(id) {
+            purchasOrder.delete(id);
+        }
+       function DeleteDocument(id) {
+            purchasOrder.deleteDocument(id);
+        }
+        function DeletePayment(id) {
+            purchasOrder.deletePayment(id);
+        }
+
+        $("#item").keyup(function (evt) {
+            var theEvent = evt || window.event;
+
+            if (theEvent.type === 'paste') {
+                key = event.clipboardData.getData('text/plain');
+            } else {
+                var key = theEvent.keyCode || theEvent.which;
+                key = String.fromCharCode(key);
+            }
+            var regex = /[0-9]|\./;
+            if( !regex.test(key) ) {
+                theEvent.returnValue = false;
+                if (theEvent.preventDefault)
+                    $("#item").val("");
+                return theEvent.preventDefault();
+            }
+            var that = this,
+            numberOfItem = $(this).val();
+            purchasOrder.calculate(numberOfItem);
+
+        });
+
+        $("#amount").keyup(function () {
+            var that = this,
+                amount = $(this).val();
+            purchasOrder.calculateUnitPrice(amount);
+
+        });
+
+        $("#PurchaseTypeId").change(function () {
+            purchasOrder.typeId = $('#PurchaseTypeId').val();
+           var value= $('#PurchaseTypeId').val();
+            purchasOrder.purchaseForVDS(value);
+
+        });
+    </script>
+
+}

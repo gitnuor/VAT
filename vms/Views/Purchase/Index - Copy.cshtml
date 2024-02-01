@@ -1,0 +1,221 @@
+﻿@model IEnumerable<vms.entity.models.Purchase>
+@using X.PagedList.Mvc.Core;
+@using X.PagedList;
+@using vms.Utility
+@using vms.entity.viewModels
+@using vms.utility
+@{
+    var session = Context.Session.GetComplexData<vms.entity.viewModels.vmSession>("session");
+}
+@{
+    ViewData["Title"] = "Index";
+}
+@section breadcrumb
+    {
+    <ul class="page-breadcrumb">
+        <li>
+            <a href="@Url.Action("Dashboard", "Home")">Root</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a href="@Url.Action("Index","Purchase")">Purchase </a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a href="@Url.Action("Index","Purchase")">Purchase List</a>
+        </li>
+    </ul>
+}
+@using (Html.BeginForm("Index", "Purchase", FormMethod.Get, new { id = "frmPurchase" }))
+{
+    <div class="row">
+        <div class="col-md-6">
+            <h1 class="custom-page-title">Purchase List</h1>
+        </div>
+        <div class="col-md-4">
+            <div class="input-group Search" style="margin-top:10px">
+                <input type="text" class="form-control" id="search" name="search" placeholder="Search..." value="@ViewBag.searchText">
+                <span class="input-group-btn">
+                    <button type="submit" class="btn submit ">
+                        <i class="icon-magnifier"></i>
+                    </button>
+                </span>
+            </div>
+        </div>
+        @if (UserRole.Check(FeatureList.PURCHASE_PURCHASE_LIST_CAN_ADD, session.Rights))
+        {
+            <div class="col-md-1">
+                <a style="margin-top:10px" href="@Url.Action("Purchase", "Purchase")" class="btn btn-success btn-sm pull-right"><i class="fa fa-plus"></i> Add</a>
+            </div>
+
+        }
+        @*<div class="col-md-1">
+                <a style="margin-top:10px" href="@Url.Action("PurchaseForeign")" class="btn btn-success btn-sm pull-right"><i class="fa fa-plus"></i> Add(Export)</a>
+            </div>*@
+    </div>
+}
+<table class="table  table-bordered">
+    <thead>
+        <tr>
+
+            <th>
+                Purchase Type
+            </th>
+            <th>
+                Vat Challan No
+            </th>
+            <th class="table-date-cell">
+                Vat Challan Time
+            </th>
+            <th>
+                Inv. No.
+            </th>
+            <th class="table-date-cell">
+                Purchase Date
+            </th>
+            <th>
+                Vendor
+            </th>
+
+            <th>
+                Price Without VAT
+            </th>
+            <th>
+                VAT
+            </th>
+            <th>
+                SD
+            </th>
+            <th class="table-boolean-cell">
+                Is VDS?
+            </th>
+            <th class="table-action-cell"></th>
+        </tr>
+    </thead>
+
+    @if (Model.Any())
+    {
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PurchaseType.Name)
+                    </td>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.VatChallanNo)
+                    </td>
+
+                    <td class="text-center">
+                        @StringGenerator.DateTimeToString(item.VatChallanIssueDate)
+                    </td>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.InvoiceNo)
+                    </td>
+                    <td class="text-center">
+                        @StringGenerator.DateTimeToString(item.PurchaseDate, false)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Vendor.Name)
+                    </td>
+                    <td class="text-right">
+                        @StringGenerator.DecimalToCommaSeparated(item.TotalPriceWithoutVat)
+                    </td>
+                    <td class="text-right">
+                        @StringGenerator.DecimalToCommaSeparated(item.TotalVat)
+                    </td>
+                    <td class="text-right">
+                        @StringGenerator.DecimalToCommaSeparated(item.TotalSupplementaryDuty)
+                    </td>
+                    <td class="text-center">
+                        @StringGenerator.BooleanToString(item.IsVatDeductedInSource)
+                    </td>
+                    <td>
+                        <div class="nav navbar-nav ">
+                            <div class="dropdown dropdown-user">
+                                <a style="text-decoration:none" href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                                    <span class="">
+                                        Action
+                                        <i class="fa fa-angle-down"></i>
+                                    </span>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-default pull-right">
+
+                                    @if (UserRole.Check(FeatureList.PURCHASE_PURCHASE_LIST_CAN_ADD_DEBIT_NOTE, session.Rights))
+                                    {
+                                        <li>
+                                            <a asp-action="DebitNote" asp-route-id="@item.EncryptedId"><i class="fa fa-money"></i> Debit Note</a>
+                                        </li>
+                                    }
+                                    @if (UserRole.Check(FeatureList.PURCHASE_PURCHASE_VDS_LIST_CAN_VIEW, session.Rights))
+                                    {
+                                        <li>
+                                            <a asp-action="Details" asp-route-id="@item.EncryptedId"><i class="fa fa-info"></i> Details</a>
+                                        </li>
+                                    }
+                                    @if (item.DebitNotes.Any())
+                                    {
+                                        if (item.DebitNotes.Count > 1)
+                                        {
+
+                                            <li>
+                                                <a asp-action="DebitNoteView" asp-route-id="@item.PurchaseId"><i class="fa fa-print"></i> Print Mushak 6.8</a>
+                                            </li>
+                                        }
+                                        else
+                                        {
+                                            var DebitNote = item.DebitNotes.FirstOrDefault();
+                                            string URL = ViewData["ReportDebit"].ToString() + DebitNote.DebitNoteId;
+
+                                            <li>
+                                                <a href="@URL" target="_blank"><i class="fa fa-print"></i> Print Mushak 6.7 </a>
+                                            </li>
+
+                                        }
+
+                                    }
+
+                                    @if (item.IsVatDeductedInSource == true)
+                                    {
+
+                                        string URL = ViewData["Report"].ToString() + item.PurchaseId;
+                                        @if (UserRole.Check(FeatureList.PURCHASE_PURCHASE_VDS_LIST_CAN_ADD_VDS_REPORT, session.Rights))
+                                      {
+                                            <li>
+
+                                                <a href="@URL" target="_blank"><i class="icon-user"></i> VDS Report</a>
+                                            </li>
+                                        }
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    }
+
+    else
+    {
+        <tr>
+            <td colspan="15">
+                <p style="text-align: center">No Records Found</p>
+            </td>
+        </tr>
+    }
+</table>
+<div class="pager">
+    @if ((int)ViewBag.PageCount <= 10)
+    {
+
+    }
+
+    else
+    {
+        @Html.PagedListPager(
+        (IPagedList)Model,
+        page => Url.Action("Index", new { page })
+        )
+    }
+</div>

@@ -1,0 +1,18 @@
+﻿@{
+	var session = Context.Session.GetComplexData<VmUserSession>(ControllerStaticData.SESSION);
+}
+<div id="footer" class="page-footer">
+	<div class="page-footer-inner">
+		<a target="_blank" href="#">
+			@* <img src="~/ApplicationDocument/@(session.OrganizationId)/logo.svg" class="footer-bits-logo" alt=""/> *@
+			@session.OrganizationName
+		</a>
+
+	</div>
+	<div class="page-footer-inner">
+		Powered by &nbsp;
+		<a target="_blank" href="https://bracits.com">
+			<img src="~/images/logo_bracits.svg" class="footer-bits-logo" alt="BRAC IT Services Ltd."/>
+		</a> &nbsp;
+	</div>
+</div>

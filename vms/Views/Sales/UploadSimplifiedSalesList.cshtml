@@ -1,0 +1,48 @@
+﻿@model VmViewSimplifiedSales
+@{
+    ViewData["Title"] = "Upload Sales";
+    var session = Context.Session.GetComplexData<VmUserSession>
+    (ControllerStaticData.SESSION);
+    }
+    @section contentheader
+    {
+        <div class="p-3 pb-2 page-header">
+            @ViewData["Title"]
+            <div>
+
+                <form asp-action="UploadSimplifiedSales" enctype="multipart/form-data" class="row">
+                    <div class="col-3">
+                        <input asp-for="UploadedFile" class="form-control form-control-sm">
+                        <span asp-validation-for="UploadedFile" class="text-danger"></span>
+                    </div>
+                    <div class="col-2"><input type="submit" value="Upload" class="btn btn-primary btn-sm" /></div>
+
+                </form>
+            </div>
+        </div>
+       @* <div class="col-12 d-flex">
+            <ul class="nav nav-pills mt-3 mr-auto align-bottom purchaseNavBar">
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Index", "Sales")">Sales List</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("SaleVds", "Sales")">Sale VDS List</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("SalesDue", "Sales")">Sales Due</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("UploadSimplifiedSalesList", "Sales" )">Upload Sales</a>
+                </li>
+
+            </ul>
+
+        </div>*@
+    <partial name="Sales/_SalesSubLink" />
+    }
+    
+<div class="gray-slim-scroll-container">
+	<div class="table-scroll-container">
+		<partial name="_UploadedSimplifiedSales" model="Model.Salses"/>
+	</div>
+</div>

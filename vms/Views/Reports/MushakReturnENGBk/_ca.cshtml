@@ -1,0 +1,55 @@
+﻿@model IEnumerable<vms.entity.StoredProcedureModel.MushakReturn.MushakReturnSubFormCha>
+
+<h4 id="subFormCa"> সাবফর্ম- চ(নোট৩১-"আমদানি পর্যায়ে প্রদেয় অগ্রিম মূল্য সংযােজন কর" এর জন্য প্রযোজ্য)</h4>
+<table class="table table-bordered">
+
+    <thead>
+
+        <tr class="MreturnHeader">
+
+            <th>Serial No.</th>
+            <th>
+             Bill of Entry Number
+            </th>
+            <th>
+               Date
+            </th>
+            <th>Custom House Custom Station</th>
+            <th>
+             Advance Tax Amount
+            </th>
+
+            <th>Notes</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Any())
+        {
+
+            foreach (var item in Model)
+            {
+                <tr>
+
+                    <td>@item.SlNo</td>
+                    <td>@item.BillOfEntryNo</td>
+                    <td>@item.BillOfEntryDate</td>
+                    <td>@item.CustomsAndVATCommissionarateNameInBangla</td>
+                    <td class="text-right">@item.AdvanceTaxPaidAmount</td>
+                    <td></td>
+                </tr>
+
+            }
+        }
+    </tbody>
+    <tfoot>
+        <tr class="MreturnHeader">
+
+            <th></th>
+            <th></th>
+            <th></th>
+            <th class="text-right">Total</th>
+            <th class="text-right">@Model.Sum(c => c.AdvanceTaxPaidAmount)</th>
+            <th></th>
+        </tr>
+    </tfoot>
+</table>

@@ -1,0 +1,116 @@
+﻿@model vms.entity.viewModels.NewReports.vmUsersOldReport
+
+
+@{
+    var session = Context.Session.GetComplexData<VmUserSession>(ControllerStaticData.SESSION);
+    ViewData["Title"] = "Users Report";
+    Layout = "_LayoutReport";
+}
+
+@section contentheader
+    {
+    <div class="p-3 page-header">
+        iVAT Users Report
+        <form method="post">
+            <div class="col-2">
+                <button type="button" class="btn btn-sm btn-primary inline-sm-button" id="btnPrint"><i class="bi bi-printer"></i> Print</button>
+                <button type="submit" asp-action="UserReportExcel" class="btn btn-sm btn-warning inline-sm-button"><i class="bi bi-file-excel-fill"></i> Excel</button>
+            </div>
+        </form>
+    </div>
+}
+
+
+
+@section Scripts{
+
+
+    <script src="~/js/typeahead.bundle.js"></script>
+    <script src="~/js/jquery-ui.js"></script>
+    <script>
+
+        $(document).ready(function () {
+            $("#btnPrint").click(function () {
+                window.vmsPrint.printA4Landscape('printableArea');
+            });
+        });
+    </script>
+
+}
+
+
+<div id="printableArea">
+    <div class="report-margin">
+        <div class="report-header">
+            <div class="company-name">@Model.head.CompanyName</div>
+            <div class="report-name">@Model.head.ReportName</div>
+        </div>
+                
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+
+                        <th class="text-center">
+                            Full Name
+                        </th>
+                        <th class="text-center">
+                            Email Address
+                        </th>
+
+                        <th class="text-center">
+                            Mobile
+                        </th>
+                        <th class="text-center">
+                            Role
+                        </th>
+
+                    </tr>
+                </thead>
+
+                @if (Model.usersList.Any())
+                {
+                    <tbody>
+                        @foreach (var item in Model.usersList)
+                        {
+                            <tr>
+
+                                <td class="text-left">
+                                    @Html.DisplayFor(modelItem => item.FullName)
+                                </td>
+                                <td class="text-left">
+                                    @Html.DisplayFor(modelItem => item.EmailAddress)
+                                </td>
+
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => item.Mobile)
+                                </td>
+                                <td class="text-left">
+                                    @Html.DisplayFor(modelItem => item.Role.RoleName)
+                                </td>
+
+
+                            </tr>
+                        }
+                    </tbody>
+                }
+
+                else
+                {
+                    <tr>
+                        <td colspan="10">
+                            <p style="text-align: center">No Records Found</p>
+                        </td>
+                    </tr>
+                }
+
+            </table>
+
+
+            @*<div class="row">
+                <div class="col-12">
+                    <partial name="_PrintFooter" />
+                </div>
+            </div>*@
+        
+    </div>
+</div>

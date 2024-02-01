@@ -1,0 +1,120 @@
+﻿@model vms.entity.viewModels.vmProduct
+@{
+    ViewData["Title"] = "VAT Edit";
+
+
+}
+@section contentheader
+    {
+    <div class="p-3 page-header">
+        @ViewData["Title"]
+    </div>
+}
+
+<div class="row">
+    <div class="col-md-4 offset-4">
+        <form asp-action="VAtEdit" class="form-horizontal" id="frmusercreate">
+            <div asp-validation-summary="ModelOnly"></div>
+            <input type="hidden" asp-for="ProductId" />
+            <div class="form-body">
+                <div class="form-group">
+                    <label asp-for="Name">Product Name</label>
+                    <div>
+                        <input asp-for="Name" readonly="readonly" value="@Model.Name" />
+                        <span asp-validation-for="Name"></span>
+                    </div>
+                </div>
+
+                <div class="form-group mt-3">
+                    <label asp-for="Code">Product Code</label>
+                    <div>
+                        <input asp-for="Code" readonly="readonly" value="@Model.Code" />
+                        <span asp-validation-for="Code"></span>
+                    </div>
+                </div>
+                <div class="form-group mt-3">
+                    <label asp-for="Hscode">HS Code</label>
+                    <div>
+                        <input asp-for="Hscode" readonly="readonly" value="@Model.Hscode" />
+                        <span asp-validation-for="Hscode"></span>
+                    </div>
+                </div>
+
+                <div class="form-group mt-3">
+                    <label asp-for="ProductVattypeId"></label>
+                    <div>
+                        <select asp-for="ProductVattypeId">
+                            <option value="@null">Select Vat Type</option>
+                            @if (Model.ProductVatTypeList.Any())
+                            {
+                                foreach (var vattype in Model.ProductVatTypeList)
+                                {
+                                    <option value="@vattype.ProductVattypeId"
+                                            data-product-default-vat-percent="@vattype.DefaultVatPercent"
+                                            data-is-vat-updatable="@vattype.IsVatUpdatable">
+                                        @vattype.Name (@vattype.LocalSaleNote)
+                                    </option>
+                                }
+                            }
+                        </select>
+                        <span asp-validation-for="ProductVattypeId"></span>
+                    </div>
+                </div>
+
+                <div class="form-group mt-3 ">
+                    <label asp-for="ProductDefaultVatPercent"></label>
+                    <div>
+                        <input asp-for="ProductDefaultVatPercent" readonly="readonly" />
+                        <span asp-validation-for="ProductDefaultVatPercent"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-right mt-3 float-end">
+                <button type="submit" class="btn  btn-primary btn-sm"><i class="bi bi-check-lg"></i> Update</button>
+                <button type="button" value="Reset" onclick="location.reload();" class="btn  btn-warning btn-sm"><i class="bi bi-arrow-repeat"></i> Reset</button>
+                <a asp-controller="Products" asp-action="Index" class="btn btn-secondary btn-sm"><i class="bi bi-slash-circle"></i> Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+@section Scripts{
+
+    <script>
+        $.get({
+            url: "Products/Edit",
+            dataType: "html",
+            error: function (jqXHR, textStatus, errorThrown) {
+            },
+            success: function (newFormHTML) {
+                var container = document.getElementById("form-container");
+                container.insertAdjacentHTML("beforeend", newFormHTML);
+                var forms = container.getElementsByTagName("form");
+                var newForm = forms[forms.length - 1];
+                $.validator.unobtrusive.parse(newForm);
+            }
+        })
+    </script>
+
+    <script>
+        let vatTypeId = document.getElementById('ProductVattypeId');
+        let productDefaultVatPercent = document.getElementById('ProductDefaultVatPercent');
+        //let isVatUpdateable = document.getElementById('data-is-vat-updatable');
+        vatTypeId.addEventListener('change', (event) => {
+            const drp = event.target;
+            let isVatUpdateable = generalUtility.getDataAttributeValue.dropdownSelected(drp, 'data-is-vat-updatable');
+            let vatPercent = generalUtility.getDataAttributeValue.dropdownSelected(drp, 'data-product-default-vat-percent');
+            console.log(vatPercent);
+
+            if (isVatUpdateable === 'True') {
+                productDefaultVatPercent.value = vatPercent;
+                generalUtility.alterAttr.removeAttr(productDefaultVatPercent, "readonly");
+            }
+            else {
+                productDefaultVatPercent.value = vatPercent;
+                generalUtility.alterAttr.setAttr(productDefaultVatPercent, "readonly", "readonly");
+            }
+
+        });
+    </script>
+}

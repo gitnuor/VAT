@@ -1,0 +1,28 @@
+﻿@model IEnumerable<vms.entity.models.ViewVdsPurchase>
+@(Html.Grid(Model).Build(columns =>
+{
+	columns.Add(model => model.InvoiceNo)
+		.Titled("Invoice").Sortable(false).AppendCss("text-center");
+	columns.Add(model => model.PurchaseDate.Date)
+		.Titled("Date").Formatted("{0:dd/MM/yyyy}").AppendCss("text-center");
+	columns.Add(model => model.VatChallanNo)
+		.Titled("Tax Inv. No").AppendCss("text-center");
+	columns.Add(model => model.VatChallanIssueDate)
+		.Titled("Challan Time").Formatted("{0:dd/MM/yyyy hh:mm:ss tt}").AppendCss("text-center");
+	columns.Add(model => model.VendorName)
+		.Titled("Vendor").AppendCss("text-center");
+	columns.Add(model => model.TotalPriceWithoutVat)
+	.Titled("Price without VAT").AppendCss("text-right").RenderedAs(model => StringGenerator.DecimalToCommaSeparated(model.TotalPriceWithoutVat));
+	columns.Add(model => model.TotalVat)
+	.Titled("VAT").AppendCss("text-right").RenderedAs(model => StringGenerator.DecimalToCommaSeparated(model.TotalVat));
+	columns.Add(model => model.Vdsamount)
+		.Titled("VDS Amount").AppendCss("text-right").RenderedAs(model => model.Vdsamount.DecimalToCommaSeparated());
+	columns.Add(model => model.IsVdscertificatePrinted)
+	.Titled("Is VDS Cert. Received?").AppendCss("text-center");
+
+})
+	.AppendCss("large-index-grid")
+	.Empty("No data found")
+	.Filterable(GridFilterType.Double)
+	.Sortable()
+	.Pageable())

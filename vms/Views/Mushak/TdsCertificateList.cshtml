@@ -1,0 +1,29 @@
+﻿@model IEnumerable<vms.entity.models.Purchase>
+@{
+	Layout = "_LayoutMushak";
+	ViewData["Title"] = "TDS Certificate List";
+}
+
+@section contentheader
+{
+	<div class="p-3 page-header">
+		@ViewData["Title"]
+	</div>
+}
+
+<scrollable-grid-container>
+	@(Html.Grid(Model).Build(columns =>
+	{
+		columns.Add(model => model.PurchaseSlNo).Titled("Serial");
+		columns.Add(model => model.InvoiceNo).Titled("Invoice");
+		columns.Add(model => model.VatChallanNo).Titled("VAT Challan No");
+		columns.Add(model => model.Vendor.Name).Titled("Vendor Name");
+			columns.Add().Encoded(false).RenderedAs(data => Html.PartialAsync("LinkPartial/_TdsCertificateListActionMenu", data).Result)
+			.Titled(Html.Raw("<i class='bi bi-activity'></i>")).AppendCss("action-col-freez");
+	})
+		.AppendCss("large-index-grid")
+		.Empty("No data found")
+		.Filterable(GridFilterType.Double)
+		.Sortable()
+		.Pageable())
+</scrollable-grid-container>

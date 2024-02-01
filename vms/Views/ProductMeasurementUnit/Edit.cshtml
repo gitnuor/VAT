@@ -1,0 +1,57 @@
+﻿@model vms.entity.viewModels.ProductMeasurementUnit.ProductMeasurementUnitCreateViewModel
+@{
+    ViewData["Title"] = "Update";
+
+
+}
+@section contentheader
+    {
+<div class="p-3 page-header">
+    Update Product Measurement Unit
+</div>
+}
+
+<div class="row">
+    <div class="col-md-4 offset-4">
+        <form asp-action="Edit" class="form-horizontal" id="frmusercreate">
+            <input type="hidden" asp-for="ProductMeasurementUnitId" />
+            <div class="form-body">
+                <div class="form-group mt-3">
+                    <label asp-for="ProductId" ></label>
+                    <div>
+                        <select asp-for="ProductId" asp-items="Model.ProductList.CustomSelectListToSelectList()" >
+                            <option value="@null">Select Product</option>
+                        </select>
+                        <span asp-validation-for="ProductId" ></span>
+                    </div>
+                </div>
+
+                <div class="form-group mt-3">
+                    <label asp-for="MeasurementUnitId" ></label>
+                    <div>
+                        <select asp-for="MeasurementUnitId" asp-items="Model.MeasurementUnitList.CustomSelectListToSelectList()" >
+                            <option value="@null">Select Unit</option>
+                        </select>
+                        <span asp-validation-for="MeasurementUnitId" ></span>
+                    </div>
+                </div>
+
+                <div class="form-group mt-3">
+                    <label asp-for="ConversionRatio" ></label>
+                    <div>
+                        <input asp-for="ConversionRatio"  autocomplete="off" />
+                        <span asp-validation-for="ConversionRatio" ></span>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="float-end mt-3">
+                <button type="submit" data-requiredconfirmation="true" class="btn  btn-primary btn-sm"><i class="bi bi-check-lg"></i> Submit</button>
+                <button type="button" value="Reset" onclick="location.reload();" class="btn  btn-warning btn-sm"><i class="bi bi-arrow-repeat"></i> Reset</button>
+                <a asp-controller="ProductMeasurementUnit" asp-action="Index" class="btn btn-secondary btn-sm"><i class="bi bi-slash-circle"></i> Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+

@@ -1,0 +1,264 @@
+﻿@model vms.entity.viewModels.VmSaleTransfer
+@{
+    ViewData["Title"] = "Branch Transfer";
+
+}
+
+@section contentheader
+{
+    <div class="p-3 page-header">
+        @ViewData["Title"]
+        <a class="btn btn-sm btn-secondary float-end" asp-action="SaleLocal">Add Transfer</a>
+    </div>
+}
+
+<div class="row mt-3">
+    <div class="col-md-8">
+        <div class="font-weight-bold mb-3">
+            Main Information
+        </div>
+        <form class="row g-3" id="frmMainInformation" method="post">
+
+            <div class="col-md-4 complex-form-col">
+                <label asp-for="OrgBranchId" class="form-label complex-form-label"></label>
+                <select asp-for="OrgBranchId" asp-items="Model.OrgBranchList.CustomSelectListToSelectList()" class="searchable-dropdown" data-live-search="true" data-style="bootstrap-select-option">
+                    <option value="@null">Select Branch</option>
+                </select>
+                <span asp-validation-for="OrgBranchId" ></span>
+            </div>
+
+            <div class="col-md-4 complex-form-col">
+                <label asp-for="ToOrgBranchId" class="form-label complex-form-label"></label>
+                <select asp-for="ToOrgBranchId" asp-items="Model.OrgBranchList.CustomSelectListToSelectList()" class="searchable-dropdown" data-live-search="true" data-style="bootstrap-select-option">
+                    <option value="@null">Select Branch</option>
+                </select>
+                <span asp-validation-for="ToOrgBranchId" ></span>
+            </div>
+
+
+            <div class="col-md-4 complex-form-col">
+                <label asp-for="SalesDeliveryTypeId" class="form-label complex-form-label"></label>
+                <select asp-for="SalesDeliveryTypeId" asp-items="Model.DeliveryMethodSelectList.CustomSelectListToSelectList()" class="searchable-dropdown" data-live-search="true" data-style="bootstrap-select-option">
+                    <option value="@null">Select Method</option>
+                </select>
+                <span asp-validation-for="SalesDeliveryTypeId" ></span>
+            </div>
+            <div class="col-md-4 complex-form-col">
+                <label asp-for="DeliveryDate" class="form-label complex-form-label"></label>
+                <input type="date" asp-for="DeliveryDate" min='2000-01-01' max='@DateTime.Now.ToString("yyyy-MM-dd")' >
+                <span asp-validation-for="DeliveryDate" ></span>
+            </div>
+
+
+            <div class="col-md-4 complex-form-col">
+                <label asp-for="ShippingAddress" class="form-label complex-form-label"></label>
+                <input type="text" asp-for="ShippingAddress" >
+                <span asp-validation-for="ShippingAddress" ></span>
+            </div>
+
+
+
+            <div class="col-md-4 complex-form-col">
+                <label asp-for="VehicleTypeId" class="form-label complex-form-label"></label>
+                <select asp-for="VehicleTypeId" class="searchable-dropdown" data-live-search="true" data-style="bootstrap-select-option">
+                    <option value="@null">Select VehicleType</option>
+                    @if (Model.VehicleTypesList.Any())
+                    {
+                        foreach (var VehicleType in Model.VehicleTypesList)
+                        {
+                            <option value="@VehicleType.VehicleTypeId"
+                                    data-Is-Require-Registration="@VehicleType.IsRequireRegistration">
+                                @VehicleType.VehicleTypeName
+                            </option>
+                        }
+                    }
+                </select>
+                <span asp-validation-for="VehicleTypeId" ></span>
+            </div>
+
+            <div class="col-md-4 complex-form-col">
+                <label asp-for="DriverName" class="form-label complex-form-label"></label>
+                <input type="text" asp-for="DriverName" >
+                <span asp-validation-for="DriverName" ></span>
+            </div>
+
+            <div class="col-md-4 complex-form-col">
+                <label asp-for="DriverMobile" class="form-label complex-form-label"></label>
+                <input type="text" asp-for="DriverMobile" >
+                <span asp-validation-for="DriverMobile" ></span>
+            </div>
+
+            <div class="col-md-4 complex-form-col vehicle-registration-no d-none">
+                <label asp-for="VehicleRegistrationNo" class="form-label complex-form-label"></label>
+                <input type="text" asp-for="VehicleRegistrationNo" >
+                <span asp-validation-for="VehicleRegistrationNo" ></span>
+            </div>
+
+        </form>
+    </div>
+    <div class="col-md-4 md-left-border">
+        <div class="font-weight-bold mb-3">
+            Product Information
+        </div>
+        <form class="row g-3 detail-form" id="frmProductInformation">
+            <div class="col-md-12 complex-form-col">
+                <label asp-for="ProductId" class="form-label complex-form-label"></label>
+                <select asp-for="ProductId" class="searchable-dropdown" data-live-search="true" data-style="bootstrap-select-option">
+                    <option value="@null">Select Product</option>
+                    @if (Model.ProductForSaleList.Any())
+                    {
+                        foreach (var product in Model.ProductForSaleList)
+                        {
+                            <option value="@product.ProductId"
+                                    data-product-model="@product.ModelNo"
+                                    data-product-code="@product.ProductCode"
+                                    data-product-sales-unit-price="@product.SalesUnitPrice"
+                                    data-product-vat-type-id="@product.ProductVatTypeId"
+                                    data-product-default-vat-percent="@product.DefaultVatPercent"
+                                    data-product-sd-percent="@product.SupplementaryDutyPercent"
+                                    data-product-max-sale-quantity="@product.MaxSaleQty"
+                                    data-product-measurement-unit-id="@product.MeasurementUnitId"
+                                    data-product-measurement-unit-name="@product.MeasurementUnitName">
+                                @product.ProductName
+                            </option>
+                        }
+                    }
+                </select>
+                <span asp-validation-for="ProductId" ></span>
+            </div>
+
+            <div class="col-md-6 complex-form-col">
+                <label asp-for="MeasurementUnitId" class="form-label complex-form-label"></label>
+                <input type="hidden" asp-for="MeasurementUnitId" >
+                <input type="text" asp-for="MeasurementUnitName" readonly="readonly" >
+                <span asp-validation-for="MeasurementUnitId" ></span>
+            </div>
+
+            <div class="col-md-6 complex-form-col">
+                <label asp-for="CurrentStock" class="form-label complex-form-label"></label>
+                <input type="number" asp-for="CurrentStock"  readonly>
+                <span asp-validation-for="CurrentStock" ></span>
+            </div>
+
+            <div class="col-md-6 complex-form-col">
+                <label asp-for="UnitPrice" class="form-label complex-form-label"></label>
+                <input type="number" asp-for="UnitPrice" >
+                <span asp-validation-for="UnitPrice" ></span>
+            </div>
+
+            <div class="col-md-6 complex-form-col">
+                <label asp-for="Quantity" class="form-label complex-form-label"></label>
+                <input type="number" asp-for="Quantity" >
+                <span asp-validation-for="Quantity" ></span>
+            </div>
+
+            <div class="col-md-6 complex-form-col">
+                <label asp-for="TotalPrice" class="form-label complex-form-label"></label>
+                <input type="number" asp-for="TotalPrice" >
+                <span asp-validation-for="TotalPrice" ></span>
+            </div>
+
+
+
+
+            <div class="col-md-6 mt-2">
+                <div class="float-end mt-3">
+                    <button type="button" class="btn  btn-primary btn-sm" id="btnAddProduct"><i class="bi bi-plus-lg"></i> Add</button>
+                    <button type="button" value="Reset" id="btnResetProduct" class="btn  btn-warning btn-sm"><i class="bi bi-arrow-repeat"></i> Reset</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-12">
+        <div class="font-weight-bold mt-3">
+            Product List
+        </div>
+        <table id="productTable" class="table table-bordered form-table mt-3">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>M. Unit</th>
+                    <th>Stock</th>
+                    <th>Unit Price</th>
+                    <th>Qty</th>
+                    <th>Total Price</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="tbdProduct">
+            </tbody>
+            <tfoot>
+                <tr class="text-end">
+                    <th colspan="5">Total</th>
+                    <th id="productTotalPrice"></th>
+                    <th></th>
+                </tr>
+                </tfoot>
+        </table>
+    </div>
+
+    <div class="col-md-12">
+        <h4>Document Info</h4>
+        <form id="frmDocument">
+            <table class="table table-bordered form-table" id="contentTable">
+                <thead>
+                    <tr>
+
+                        <th>Type</th>
+                        <th>File</th>
+                        <th>Document Remarks</th>
+                        <th></th>
+                    </tr>
+
+                    <tr>
+
+                        <td>
+                            <select asp-for="DocumentType" asp-items="Model.DocumentTypeSelectList.CustomSelectListToSelectList()"  id="drpFileType">
+                                <option value="@null">Select Document Type</option>
+                            </select>
+                            <span asp-validation-for="DocumentType" ></span>
+                        </td>
+                        <td>
+                            <input type="file" asp-for="FileUpload" id="fileDocument" multiple="multiple" class="form-control form-control-sm FileUpload" accept=".jpg,.jpeg,.png,.tif,.tiff,.gif,.bmp,.pdf,.doc,.docx,.xlsx,.xlx,.ppt,.pptx" />
+
+                            <small id="msgFileDocument" class="form-text text-danger"></small>
+                            <span asp-validation-for="FileUpload" ></span>
+                        </td>
+                        <td>
+                            <input type="text" asp-for="DocumentRemarks" id="DocumentRemarks"  />
+                            <span asp-validation-for="DocumentRemarks" ></span>
+                        </td>
+                        <td>
+                            <a id="btnAddRelatedFile" class="btn btn-sm btn-success" aria-label="Left Align">
+                                <i class="bi bi-plus-lg"></i>
+                            </a>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody id="tbdAttachedFiles"></tbody>
+                <tfoot>
+
+                </tfoot>
+            </table>
+    </form>
+            </div>
+</div>
+
+<div class="col-md-12">
+    <label asp-for="SalesRemarks" class="form-label complex-form-label"></label>
+    <textarea asp-for="SalesRemarks" rows="2" >
+                 </textarea>
+    <span asp-validation-for="SalesRemarks" ></span>
+</div>
+<div class="col-md-12 mt-2">
+    <div class="float-end">
+        <button type="button" class="btn btn-success btn-sm" id="save"><i class="bi bi-check-lg"></i> Submit</button>
+        <button type="button" class="btn btn-primary btn-sm d-none" id="draft"><i class="bi bi-card-list"></i> Draft</button>
+        <button type="button" value="Reset" onclick="location.reload();" class="btn btn-warning btn-sm"><i class="bi bi-arrow-repeat"></i> Reset</button>
+        <a asp-action="Index" class="btn btn-secondary btn-sm"><i class="bi bi-slash-circle"></i> Cancel</a>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/CustomJs/SaleToTransfer.js?vguid=@ViewStaticData.StaticFileVersionGuid"></script>
+}

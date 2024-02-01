@@ -1,0 +1,70 @@
+﻿@{ var session = Context.Session.GetComplexData<VmUserSession>(ControllerStaticData.SESSION); }
+
+<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+	@if (UserAuthorization.Check(FeatureList.DASHBOARD, session.Rights))
+	{
+		<li class="nav-item">
+			<a asp-action="Dashboard" asp-controller="Home" class="nav-link nav-toggle">
+				<span class="title">Dashboard</span>
+			</a>
+		</li>
+		<li class="nav-item d-sm-none d-lg-block">
+			<a href="#" class="nav-link nav-toggle">
+				<span class="title">|</span>
+			</a>
+		</li>
+	}
+
+	@if (session.UserId != 1)
+	{
+		@if (UserAuthorization.Check(FeatureList.PURCHASE, session.Rights))
+		{
+			<li class="nav-item">
+				<a asp-action="Index" asp-controller="Purchase" class="nav-link nav-toggle">
+					<span class="title">Purchases</span>
+				</a>
+			</li>
+		}
+
+		@if (UserAuthorization.Check(FeatureList.PRODUCTION, session.Rights) && session.IsProductionCompany)
+		{
+			<li class="nav-item">
+				<a asp-action="Index" asp-controller="Production" class="nav-link nav-toggle">
+					<span class="title">Productions</span>
+				</a>
+			</li>
+		}
+
+		@if (UserAuthorization.Check(FeatureList.SALE, session.Rights))
+		{
+			<li class="nav-item">
+				<a asp-action="Index" asp-controller="Sales" class="nav-link nav-toggle">
+					<span class="title">Sales</span>
+				</a>
+			</li>
+		}
+		<li class="nav-item d-sm-none d-lg-block">
+			<a href="#" class="nav-link nav-toggle">
+				<span class="title">|</span>
+			</a>
+		</li>
+	}
+
+	@if (UserAuthorization.Check(FeatureList.MUSHAK, session.Rights))
+	{
+		<li class="nav-item">
+			<a asp-action="Index" asp-controller="Mushak" class="nav-link nav-toggle">
+				<span class="title">Mushak Reports</span>
+			</a>
+		</li>
+	}
+
+	@if (UserAuthorization.Check(FeatureList.REPORTS, session.Rights))
+	{
+		<li class="nav-item">
+			<a asp-action="Index" asp-controller="Reports" class="nav-link nav-toggle">
+				<span class="title">MIS Reports</span>
+			</a>
+		</li>
+	}
+</ul>

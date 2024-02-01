@@ -1,0 +1,176 @@
+﻿@model vms.entity.viewModels.VmSaleLocal
+@{
+	var session = Context.Session.GetComplexData<VmUserSession>(ControllerStaticData.SESSION);
+
+	// var disBranch = (Model.ViewOrganizationConfigurationBooleanData.First(x => x.OrganizationConfigurationBooleanTypeId == (int)EnumSalesLocalBooleanType.DisplayBranch).ConfigurationValue) ? "" : "d-none-custom";
+}
+<div class="col-md-5 form-1">
+	<div class="font-weight-bold mb-3">
+		Main Information
+	</div>
+	<form class="row g-3 pb-2" method="post" id="frmMainInformation">
+		@*<div class="col-md-6 complex-form-col">
+			<label asp-for="OrgBranchId"></label>
+			<select asp-for="OrgBranchId" class="searchable-dropdown searchable-dropdown-with-help-icon" data-live-search="true" data-style="bootstrap-select-option">
+					<option value="@null">Select Branch</option>
+					@if (Model.OrgBranchList.Any())
+					{
+						foreach (var branch in Model.OrgBranchList)
+						{
+							<option value="@branch.OrgBranchId"
+							        data-address="@branch.Address">
+								@branch.Name
+							</option>
+						}
+					}
+				</select>
+			<i class="bi bi-question-circle text-warning" data-bs-toggle="tooltip" title="" data-bs-original-title="Changing Branch will reset your products."></i>
+			<span asp-validation-for="OrgBranchId" ></span>
+		</div>*@
+
+		<div class="col-md-6 complex-form-col">
+			<label asp-for="OrgBranchId"></label>
+			<select asp-for="OrgBranchId" asp-items="Model.OrgBranchList.CustomSelectListToSelectList()" >
+				<option value="@null">Select Branch</option>
+			</select>
+			<span asp-validation-for="OrgBranchId"></span>
+		</div>
+
+		<div class="col-md-6 complex-form-col">
+			<label asp-for="InvoiceNo">@session.InvoiceNameEng No.</label>
+			<input type="text" asp-for="InvoiceNo" >
+			<span asp-validation-for="InvoiceNo" ></span>
+		</div>
+		<div class="col-md-6 complex-form-col">
+			<label asp-for="InvoiceDate">@session.InvoiceNameEng Date</label>
+			<input type="date" asp-for="InvoiceDate" >
+			<span asp-validation-for="InvoiceDate" ></span>
+		</div>
+
+		<div class="col-md-6 complex-form-col">
+			<label asp-for="CustomerId"></label>
+			<select asp-for="CustomerId" >
+				<option value="@null">Select Customer</option>
+				@*@if (Model.CustomerList.Any())
+				{
+					foreach (var customer in Model.CustomerList)
+					{
+						<option value="@customer.CustomerId"
+						data-address="@customer.DeliveryAddress"
+						data-bin="@customer.Bin"
+						data-rec-mobile="@customer.DeliveryContactPersonMobile"
+						data-rec-name="@customer.DeliveryContactPerson"
+						data-cus-mobile="@customer.PhoneNo">
+							@customer.Name
+						</option>
+					}
+				}*@
+			</select>
+			<span asp-validation-for="CustomerId" ></span>
+		</div>
+
+		<div class="col-md-6 complex-form-col">
+			<label asp-for="CustomerPhoneNumber"></label>
+			<input type="text" asp-for="CustomerPhoneNumber" >
+			<span asp-validation-for="CustomerPhoneNumber" ></span>
+		</div>
+		<div class="col-md-6 complex-form-col d-none">
+			<label asp-for="WorkOrderNo"></label>
+			<input type="text" asp-for="WorkOrderNo"  placeholder="##">
+			<span asp-validation-for="WorkOrderNo" ></span>
+		</div>
+		<div class="col-md-6 complex-form-col">
+			<label asp-for="SalesDeliveryTypeId"></label>
+			<select asp-for="SalesDeliveryTypeId" asp-items="Model.DeliveryMethodSelectList.CustomSelectListToSelectList()">
+				<option value="@null">Select Method</option>
+			</select>
+			<span asp-validation-for="SalesDeliveryTypeId" ></span>
+		</div>
+		<div class="col-md-6 complex-form-col">
+			<label asp-for="DeliveryDate"></label>
+			<input type="date" asp-for="DeliveryDate"  min='2000-01-01' max='@DateTime.Now.ToString("yyyy-MM-dd")'>
+			<span asp-validation-for="DeliveryDate" ></span>
+		</div>
+		<div class="col-md-6 complex-form-col">
+			<label asp-for="ReceiverName"></label>
+			<input type="text" asp-for="ReceiverName" >
+			<span asp-validation-for="ReceiverName" ></span>
+		</div>
+
+		<div class="col-md-6 complex-form-col">
+			<label asp-for="ReceiverContactNo"></label>
+			<input type="text" asp-for="ReceiverContactNo"  placeholder="01####">
+			<span asp-validation-for="ReceiverContactNo" ></span>
+		</div>
+
+		<div class="col-md-6 complex-form-col">
+			<label asp-for="ShippingAddress"></label>
+			<input type="text" asp-for="ShippingAddress" >
+			<span asp-validation-for="ShippingAddress" ></span>
+		</div>
+
+		<div class="col-md-6 complex-form-col d-none">
+			<label asp-for="PONo"></label>
+			<input type="text" asp-for="PONo" >
+			<span asp-validation-for="PONo" ></span>
+		</div>
+
+		<div class="col-md-6 complex-form-col">
+			<label asp-for="VehicleTypeId"></label>
+			<select asp-for="VehicleTypeId" >
+				<option value="@null">Select VehicleType</option>
+				@if (Model.VehicleTypesList.Any())
+				{
+					foreach (var vehicleType in Model.VehicleTypesList)
+					{
+						<option value="@vehicleType.VehicleTypeId"
+						        data-Is-Require-Registration="@vehicleType.IsRequireRegistration">
+							@vehicleType.VehicleTypeName
+						</option>
+					}
+				}
+			</select>
+			<span asp-validation-for="VehicleTypeId" ></span>
+		</div>
+
+		<div class="col-md-6 complex-form-col">
+			<label asp-for="DriverName"></label>
+			<input type="text" asp-for="DriverName" >
+			<span asp-validation-for="DriverName" ></span>
+		</div>
+
+		<div class="col-md-6 complex-form-col">
+			<label asp-for="DriverMobile"></label>
+			<input type="text" asp-for="DriverMobile" >
+			<span asp-validation-for="DriverMobile" ></span>
+		</div>
+
+		<div class="col-md-6 complex-form-col vehicle-registration-no d-none">
+			<label asp-for="VehicleRegistrationNo"></label>
+			<input type="text" asp-for="VehicleRegistrationNo" >
+			<span asp-validation-for="VehicleRegistrationNo" ></span>
+		</div>
+
+
+		<div class="col-md-6 complex-form-col d-none">
+			<div class="form-check form-switch complex-form-checkbox">
+				<input type="checkbox" asp-for="IsVatDeductedInSource" class="form-check-input">
+				<label asp-for="IsVatDeductedInSource" class="form-check-label"></label>
+				<i class="bi bi-question-circle text-warning" data-bs-toggle="tooltip" title="" data-bs-original-title="Removing VDS will reset your products."></i>
+				<span asp-validation-for="IsVatDeductedInSource" ></span>
+			</div>
+		</div>
+		<div class="col-md-6 complex-form-col vds-related d-none">
+			<label asp-for="VdsAmount"></label>
+			<input type="number" asp-for="VdsAmount" >
+			<span asp-validation-for="VdsAmount" ></span>
+		</div>
+
+		@*<div class="col-md-6 complex-form-col">
+			<label asp-for="FileSalesBreakDown"></label>
+			<input type="file" asp-for="FileSalesBreakDown"  accept=".xlsx,.xlx">
+			<span asp-validation-for="FileSalesBreakDown" ></span>
+		</div>*@
+
+	</form>
+</div>

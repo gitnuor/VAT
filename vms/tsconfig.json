@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "noImplicitAny": true,
+    "noEmitOnError": true,
+    "removeComments": false,
+    "outDir": "./wwwroot/tsDist",
+    "sourceRoot": "./wwwroot/ts",
+    "sourceMap": true,
+    "target": "es6"
+  },
+  "exclude": [
+    "node_modules"
+  ],
+  "compileOnSave": true
+}

@@ -1,0 +1,26 @@
+﻿CREATE TABLE [dbo].[ProductTransactionBook] (
+    [ProductTransactionBookId] BIGINT          IDENTITY (1, 1) NOT NULL,
+    [OrganizationId]           INT             NOT NULL,
+    [ProductId]                INT             NOT NULL,
+    [InitUnitPrice]            DECIMAL (19, 4) NOT NULL,
+    [InitQty]                  DECIMAL (19, 4) NOT NULL,
+    [PurchaseDetailId]         INT             NULL,
+    [DebitNoteDetailId]        INT             NULL,
+    [UsedInProductionId]       BIGINT          NULL,
+    [ProductionReceiveId]      BIGINT          NULL,
+    [SalesDetailId]            INT             NULL,
+    [CreditNoteDetailId]       INT             NULL,
+    [DamageId]                 INT             NULL,
+    [TransactionTime]          DATETIME        NOT NULL,
+    CONSTRAINT [PK_ProductTransactionBook] PRIMARY KEY CLUSTERED ([ProductTransactionBookId] ASC),
+    CONSTRAINT [FK_ProductTransactionBook_BillOfMaterial] FOREIGN KEY ([UsedInProductionId]) REFERENCES [dbo].[BillOfMaterial] ([BillOfMaterialId]),
+    CONSTRAINT [FK_ProductTransactionBook_CreditNoteDetail] FOREIGN KEY ([CreditNoteDetailId]) REFERENCES [dbo].[CreditNoteDetail] ([CreditNoteDetailId]),
+    CONSTRAINT [FK_ProductTransactionBook_Damage] FOREIGN KEY ([DamageId]) REFERENCES [dbo].[Damage] ([DamageId]),
+    CONSTRAINT [FK_ProductTransactionBook_DebitNoteDetail] FOREIGN KEY ([DebitNoteDetailId]) REFERENCES [dbo].[DebitNoteDetail] ([DebitNoteDetailId]),
+    CONSTRAINT [FK_ProductTransactionBook_Organizations] FOREIGN KEY ([OrganizationId]) REFERENCES [dbo].[Organizations] ([OrganizationId]),
+    CONSTRAINT [FK_ProductTransactionBook_ProductionReceive] FOREIGN KEY ([ProductionReceiveId]) REFERENCES [dbo].[ProductionReceive] ([ProductionReceiveId]),
+    CONSTRAINT [FK_ProductTransactionBook_Products] FOREIGN KEY ([ProductId]) REFERENCES [dbo].[Products] ([ProductId]),
+    CONSTRAINT [FK_ProductTransactionBook_PurchaseDetails] FOREIGN KEY ([PurchaseDetailId]) REFERENCES [dbo].[PurchaseDetails] ([PurchaseDetailId]),
+    CONSTRAINT [FK_ProductTransactionBook_SalesDetails] FOREIGN KEY ([SalesDetailId]) REFERENCES [dbo].[SalesDetails] ([SalesDetailId])
+);
+

@@ -1,0 +1,65 @@
+﻿@model vms.entity.viewModels.VmSaleLocal
+
+<div class="accordion mt-3" id="documentAccordionFomr">
+	<div class="accordion-item">
+		<div class="accordion-header" id="headingDocumentAccordion">
+			<button class="accordion-button collapsed vms-accordion-button"
+			        type="button"
+			        data-bs-toggle="collapse"
+			        data-bs-target="#documentAccordion"
+			        aria-expanded="false"
+			        aria-controls="documentAccordion">
+				Document Information
+			</button>
+		</div>
+		<div id="documentAccordion"
+		     class="accordion-collapse collapse"
+		     aria-labelledby="headingDocumentAccordion"
+		     data-bs-parent="#accordionForm">
+			<div class="accordion-body">
+				<form id="frmDocument">
+					<table class="table table-bordered form-table" id="docTable">
+						<thead>
+						<tr>
+
+							<th>Type</th>
+							<th>File</th>
+							<th>Document Remarks</th>
+							<th class="single-button-action-column"></th>
+						</tr>
+
+						<tr>
+
+							<td>
+								<select asp-for="DocumentType" asp-items="Model.DocumentTypeSelectList.CustomSelectListToSelectList()"  id="DocumentType">
+									<option value="@null">Select Document Type</option>
+								</select>
+								<span asp-validation-for="DocumentType" ></span>
+							</td>
+							<td>
+								<input type="file" asp-for="FileUpload" id="FileUpload" multiple="multiple" class="form-control form-control-sm FileUpload" accept=".jpg,.jpeg,.png,.tif,.tiff,.gif,.bmp,.pdf,.doc,.docx,.xlsx,.xlx,.ppt,.pptx"/>
+
+								<small id="msgFileDocument" class="form-text text-danger"></small>
+								<span asp-validation-for="FileUpload" ></span>
+							</td>
+							<td>
+								<input type="text" asp-for="DocumentRemarks" id="DocumentRemarks" />
+								<span asp-validation-for="DocumentRemarks" ></span>
+							</td>
+							<td>
+								<a id="btnAddDocument" class="btn btn-sm btn-success" aria-label="Left Align">
+									<i class="bi bi-plus-lg"></i>
+								</a>
+							</td>
+						</tr>
+						</thead>
+						<tbody id="docTableBody"></tbody>
+						<tfoot>
+
+						</tfoot>
+					</table>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

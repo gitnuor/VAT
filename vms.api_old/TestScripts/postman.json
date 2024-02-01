@@ -1,0 +1,212 @@
+{
+	"info": {
+		"_postman_id": "74b0ab22-2500-465f-b1a9-b2ff61497152",
+		"name": "VMS_API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "ProductById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:25406/api/PriceDeclare/ProductByProductId/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "25406",
+					"path": [
+						"api",
+						"PriceDeclare",
+						"ProductByProductId",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PriceByProdId",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "InsertPurchase",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"PurchaseId\":,\r\n\"OrganizationId\":,\r\n\"TransferSalesId\":,\r\n\"TransferBranchId\":,\r\n\"VendorId\":,\r\n\"VatChallanNo\":,\r\n\"VatChallanIssueDate\":,\r\n\"VendorInvoiceNo\":,\r\n\"InvoiceNo\":,\r\n\"PurchaseDate\":,\r\n\"PurchaseTypeId\":,\r\n\"PurchaseReasonId\":,\r\n\"DiscountOnTotalPrice\":,\r\n\"AdvanceTaxPaidAmount\":,\r\n\"Atpdate\":,\r\n\"AtpbankBranchId\":,\r\n\"AtpnbrEconomicCodeId\":,\r\n\"AtpchallanNo\":,\r\n\"IsVatDeductedInSource\":,\r\n\"Vdsamount\":,\r\n\"IsVdscertificatePrinted\":,\r\n\"VdscertificateNo\":,\r\n\"VdscertificateDate\":,\r\n\"VdspaymentBookTransferNo\":,\r\n\"Vdsnote\":,\r\n\"ExpectedDeliveryDate\":,\r\n\"DeliveryDate\":,\r\n\"LcNo\":,\r\n\"LcDate\":,\r\n\"BillOfEntry\":,\r\n\"BillOfEntryDate\":,\r\n\"CustomsAndVatcommissionarateId\":,\r\n\"DueDate\":,\r\n\"TermsOfLc\":,\r\n\"PoNumber\":,\r\n\"SecurityToken\":,\r\n\"IsComplete\":,\r\n\"CreatedBy\":,\r\n\"CreatedTime\":,\r\n\"ApiCreatedBy\":,\r\n\"ApiCreatedTime\":,\r\n\"PurchaseDetails\":\r\n[{\r\n\"PurchaseDetailId\":,\r\n\"PurchaseId\":,\r\n\"ProductId\":,\r\n\"ProductVattypeId\":,\r\n\"Quantity\":,\r\n\"UnitPrice\":,\r\n\"DiscountPerItem\":,\r\n\"CustomDutyPercent\":,\r\n\"ImportDutyPercent\":,\r\n\"RegulatoryDutyPercent\":,\r\n\"SupplementaryDutyPercent\":,\r\n\"Vatpercent\":,\r\n\"AdvanceTaxPercent\":,\r\n\"AdvanceIncomeTaxPercent\":,\r\n\"MeasurementUnitId\":\r\n}],\r\n\r\n\"PurchasePayments\":\r\n[{\r\n\"PurchasePaymentId\":,\r\n\"PurchaseId\":,\r\n\"PaymentMethodId\":,\r\n\"PaidAmount\":,\r\n\"PaymentDate\":\r\n\r\n}],\r\n   \r\n}\r\n"
+				},
+				"url": {
+					"raw": "http://localhost:25406/api/Purchase/post",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "25406",
+					"path": [
+						"api",
+						"Purchase",
+						"post"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "InsertSale",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"SalesId\":,\r\n\"InvoiceNo\":,\r\n\"VatChallanNo\":,\r\n\"OrganizationId\":,\r\ndecimalDiscountOnTotalPrice\":,\r\n\"IsVatDeductedInSource\":,\r\n\"Vdsamount\":,\r\n\"IsVdscertificateReceived\":,\r\n\"VdscertificateNo\":,\r\n\"VdscertificateIssueTime\":,\r\n\"VdspaymentBankBranchId\":,\r\n\"VdspaymentDate\":,\r\n\"VdspaymentChallanNo\":,\r\n\"VdspaymentEconomicCode\":,\r\n\"VdspaymentBookTransferNo\":,\r\n\"Vdsnote\":,\r\n\"ReceivableAmount\":,\r\n\"PaymentReceiveAmount\":,\r\n\"PaymentDueAmount\":,\r\n\"CustomerId\":,\r\n\"ReceiverName\":,\r\n\"ReceiverContactNo\":,\r\n\"ShippingAddress\":,\r\n\"ShippingCountryId\":,\r\n\"SalesTypeId\":,\r\n\"SalesDeliveryTypeId\":,\r\n\"WorkOrderNo\":,\r\n\"SalesDate\":,\r\n\"ExpectedDeliveryDate\":,\r\n\"DeliveryDate\":,\r\n\"DeliveryMethodId\":,\r\n\"ExportTypeId\":,\r\n\"LcNo\":,\r\n\"LcDate\":,\r\n\"BillOfEntry\":,\r\n\"BillOfEntryDate\":,\r\n\"DueDate\":,\r\n\"TermsOfLc\":,\r\n\"CustomerPoNumber\":,\r\n\"IsComplete\":,\r\n\"IsTaxInvoicePrined\":,\r\n\"TaxInvoicePr\"edTime\":,\r\n\"OtherBranchOrganizationId\":,\r\n\"TransferChallanNo\":,\r\n\"TransferChallanPr\"edTime\":,\r\n\"ReferenceKey\":,\r\n\"CreatedBy\":,\r\n\"CreatedTime\":,\r\n\"ApiTransactionId\":,\r\n\"ApiCreatedBy\":,\r\n\"ApiCreatedTime\":,\r\n\"SecurityToken\":,\r\n\"SalesDetails\": \r\n[{\r\n\"SalesDetailId\":,\r\n\"SalesId\":,\r\n\"ProductId\":,\r\n\"ProductVattypeId\":,\r\n\"Quantity\":,\r\n\"UnitPrice\":,\r\n\"DiscountPerItem\":,\r\n\"Vatpercent\":,\r\n\"SupplementaryDutyPercent\":,\r\n\"MeasurementUnitId\":\r\n}],\r\n\r\n\"SalesPaymentReceives\": \r\n[{\r\n\"SalesPaymentReceiveId\":,\r\n\"SalesId\":,\r\n\"ReceivedPaymentMethodId\":,\r\n\"ReceiveAmount\":,\r\n\"ReceiveDate\":\r\n}]\r\n}\r\n"
+				},
+				"url": {
+					"raw": "http://localhost:25406/api/Sale/Post",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "25406",
+					"path": [
+						"api",
+						"Sale",
+						"Post"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetOverHeadCostByOrgID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:25406/api/OverHeadCost/GetOverHeadCostByOrgId/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "25406",
+					"path": [
+						"api",
+						"OverHeadCost",
+						"GetOverHeadCostByOrgId",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "OverHeadCostByDate",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:25406/api/OverHeadCost/GetOverHeadCostByModifyDate/2020-03-31",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "25406",
+					"path": [
+						"api",
+						"OverHeadCost",
+						"GetOverHeadCostByModifyDate",
+						"2020-03-31"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreditNote",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\r\n\"CreditNoteId\":,\r\n\"SalesId\":,\r\n\"ReasonOfReturn\":,\r\n\"ReturnDate\":,\r\n\"CreatedBy\":,\r\n\"CreatedTime\":,\r\n\"VoucherNo\":,\r\n\"CreditNoteDetails\":\r\n[{\r\n\"CreditNoteDetailId\":,\r\n\"CreditNoteId\":,\r\n\"SalesDetailId\":,\r\n\"ReturnQuantity\":,\r\n\"MeasurementUnitId\":,\r\n\"ReferenceKey\":,\r\n\"CreatedBy\":,\r\n\"CreatedTime\":\r\n}]\r\n}\r\n"
+				},
+				"url": {
+					"raw": "http://localhost:25406/api/Sale/CreditNote",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "25406",
+					"path": [
+						"api",
+						"Sale",
+						"CreditNote"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DebitNote",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\r\n\"DebitNoteId\":,\r\n\"VoucherNo\":,\r\n\"PurchaseId\":,\r\n\"ReasonOfReturn\":,\r\n\"ReturnDate\":,\r\n\"CreatedBy\":,\r\n\"CreatedTime\":,\r\n\"DebitNoteDetails\":\r\n[{\r\n\"DebitNoteDetailId\":,\r\n\"DebitNoteId\":,\r\n\"PurchaseDetailId\":,\r\n\"ReturnQuantity\":,\r\n\"MeasurementUnitId\":,\r\n\"ReferenceKey\":,\r\n\"CreatedBy\":,\r\n\"CreatedTime\":\r\n}]\r\n\r\n   \r\n}\r\n"
+				},
+				"url": {
+					"raw": "http://localhost:25406/api/Purchase/DebitNote",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "25406",
+					"path": [
+						"api",
+						"Purchase",
+						"DebitNote"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MeasurementUnitPost",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"MeasurementUnitId\":,\r\n\"Name\":,\r\n\"OrganizationId\":,\r\n\"IsActive\":,\r\n\"ReferenceKey\":,\r\n\"CreatedBy\":,\r\n\"CreatedTime\":,\r\n\"ModifiedBy\":,\r\n\"ModifiedTime\":,\r\n\"ApiTransactionId\":\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:25406/api/measurementunit/Post",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "25406",
+					"path": [
+						"api",
+						"measurementunit",
+						"Post"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

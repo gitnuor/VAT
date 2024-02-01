@@ -1,0 +1,77 @@
+﻿@model vms.entity.models.ViewUser
+@{
+	var session = Context.Session.GetComplexData<VmUserSession>(ControllerStaticData.SESSION);
+}
+<grid-freeze-menu>
+	@if (UserAuthorization.Check(FeatureList.ADMINSTRATION_USERS_CAN_EDIT, session.Rights))
+	{
+		<li>
+			<a class="dropdown-item" asp-action="Edit" asp-route-id="@Model.EncryptedId">
+				<i class="bi bi-pencil-square"></i> Edit (Basic Info)
+			</a>
+		</li>
+	}
+	@if (UserAuthorization.Check(FeatureList.ADMINSTRATION_USERS_CAN_UPDATE_ROLE, session.Rights))
+	{
+		<li>
+			<a class="dropdown-item" asp-action="UserUpdateRole" asp-route-id="@Model.EncryptedId">
+				<i class="bi bi-pencil-square"></i> Update Role
+			</a>
+		</li>
+	}
+	@if (UserAuthorization.Check(FeatureList.ADMINSTRATION_USERS_CAN_UPDATE_IMAGE, session.Rights))
+	{
+		<li>
+			<a class="dropdown-item" asp-action="UserUpdateImage" asp-route-id="@Model.EncryptedId">
+				<i class="bi bi-pencil-square"></i> Update Image
+			</a>
+		</li>
+	}
+	@if (UserAuthorization.Check(FeatureList.ADMINSTRATION_USERS_CAN_UPDATE_SIGNATURE, session.Rights))
+	{
+		<li>
+			<a class="dropdown-item" asp-action="UserUpdateSignature" asp-route-id="@Model.EncryptedId">
+				<i class="bi bi-pencil-square"></i> Update Signature
+			</a>
+		</li>
+	}
+	@if (UserAuthorization.Check(FeatureList.ADMINSTRATION_USERS_CAN_UPDATE_PASSWORD, session.Rights))
+	{
+		<li>
+			<a class="dropdown-item" asp-action="UserUpdatePassword" asp-route-id="@Model.EncryptedId">
+				<i class="bi bi-pencil-square"></i> Update Password
+			</a>
+		</li>
+	}
+	@if (UserAuthorization.Check(FeatureList.ADMINSTRATION_USERS_CAN_MANAGE_BRANCH, session.Rights))
+	{
+		<li>
+			<a class="dropdown-item" asp-action="UserManageBranch" asp-route-id="@Model.EncryptedId">
+				<i class="bi bi-pencil-square"></i> Manage Branch
+			</a>
+		</li>
+	}
+	@if (UserAuthorization.Check(FeatureList.ADMINSTRATION_USERS_CAN_VIEW, session.Rights))
+	{
+		<li>
+			<a class="dropdown-item" asp-action="Details" asp-route-id="@Model.EncryptedId"><i class="bi bi-info-circle"></i> Details</a>
+		</li>
+	}
+	@if (UserAuthorization.Check(FeatureList.ADMINSTRATION_USERS_CAN_DELETE, session.Rights))
+	{
+		<li>
+			<a class="dropdown-item" asp-action="ChangeUserStatus" asp-route-id="@Model.EncryptedId" type="button" data-requiredconfirmation="true">
+				@if (Model.IsActive)
+				{
+					<i class="bi bi-exclamation-diamond"></i>
+					<text>Inactive</text>
+				}
+				else
+				{
+					<i class="bi bi-check-circle"></i>
+					<text>Active</text>
+				}
+			</a>
+		</li>
+	}
+</grid-freeze-menu>

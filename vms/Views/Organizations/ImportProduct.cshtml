@@ -1,0 +1,216 @@
+﻿@model IEnumerable<vms.entity.models.Organization>
+@{
+    var session = Context.Session.GetComplexData<VmUserSession>(ControllerStaticData.SESSION);
+}
+
+@{
+    ViewData["Title"] = "Import Product";
+    
+}
+
+
+@section contentheader
+    {
+    <div class="p-3 page-header">
+
+        
+            Import Data
+       
+
+        <div class="d-flex justify-content-start">
+
+
+        </div>
+    </div>
+    <div class="col-12 d-flex">
+        <ul class="nav nav-pills mt-3 mr-auto align-bottom">
+        </ul>
+        @using (Html.BeginForm("Index", "Organizations", FormMethod.Get, new { id = "frmPurchase", @class = "d-flex pr-1" }))
+        {
+
+        }
+    </div>
+}
+
+
+<div class="col-md-12">
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+    }
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+    }
+</div>
+<div class="col-sm-6">
+    @using (Html.BeginForm("ImportProduct", "Organizations", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="row padding-tb-10">
+
+
+            <div class="form-inline">
+                <div class="form-group mx-sm-3 mb-2">
+                    <div class="panel-heading col-md-3">
+                        Import Product
+                    </div>
+                    <input class="form-control col-md-4 ml-1 mr-2" type="file" name="file" id="product" />
+                    <button onclick="return validateProduct()" type="submit" class="btn btn-primary mr-2"><i class="bi bi-cloud-upload"></i> Upload File</button>
+                    <a href="@Url.Action("Download",new { filename = "Products.xlsx" })" class="btn btn-primary"><i class="bi bi-cloud-download"></i> Download File</a>
+
+                </div>
+            </div>
+
+        </div>
+
+    }
+</div>
+<div class="col-sm-6">
+    @using (Html.BeginForm("ImportPurchase", "Organizations", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="row padding-tb-10">
+
+
+            <div class="form-inline">
+                <div class="form-group mx-sm-3 mb-2">
+                    <div class="panel-heading col-md-3">
+                        Import Purchase
+                    </div>
+                    <input class="form-control col-md-4 ml-1 mr-2" type="file" name="file" id="purchase" />
+                    <button onclick="return validatePurchase()" type="submit" class="btn btn-primary mr-2"><i class="bi bi-cloud-upload"></i> Upload File</button>
+                    <a href="@Url.Action("Download",new { filename = "BulkPurchase.xlsx" })" class="btn btn-primary"><i class="bi bi-cloud-download"></i> Download File</a>
+                </div>
+            </div>
+
+        </div>
+
+
+    }
+
+</div>
+<div class="col-sm-6">
+    @using (Html.BeginForm("ImportSale", "Organizations", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="row padding-tb-10">
+
+
+            <div class="form-inline">
+                <div class="form-group mx-sm-3 mb-2">
+                    <div class="panel-heading col-md-3">
+                        Import Sales
+                    </div>
+                    <input class="form-control col-md-4 ml-2 mr-2" type="file" name="file" id="sale" />
+                    <button onclick="return validateSale()" type="submit" class="btn btn-primary mr-2"><i class="bi bi-cloud-upload"></i> Upload File</button>
+                    <a href="@Url.Action("Download",new { filename = "BulkSales.xlsx" })" class="btn btn-primary"><i class="bi bi-cloud-download"></i> Download File</a>
+
+                </div>
+            </div>
+
+        </div>
+
+    }
+</div>
+<div class="col-sm-6">
+
+    @using (Html.BeginForm("ImportProduction", "Organizations", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="row padding-tb-10">
+
+
+
+            <div class="form-inline">
+                <div class="form-group mx-sm-3 mb-2">
+                    <div class="panel-heading col-md-3">
+                        Import Production
+                    </div>
+                    <input class="form-control col-md-4 mr-2" type="file" name="file" id="production" />
+                    <button onclick="return validateProduction()" type="submit" class="btn btn-primary mr-2"><i class="bi bi-cloud-upload"></i> Upload File</button>
+                    <a href="@Url.Action("Download",new { filename = "TestTemplate.xlsx" })" class="btn btn-primary"><i class="bi bi-cloud-download"></i> Download File</a>
+
+                </div>
+            </div>
+
+        </div>
+
+    }
+</div>
+
+
+<div class="col-sm-6">
+
+    @using (Html.BeginForm("ImportStaticData", "Organizations", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="row padding-tb-10">
+
+
+
+            <div class="form-inline">
+                <div class="form-group mx-sm-3 mb-2">
+                    <div class="panel-heading col-md-3 ">
+                        Import Static Data
+                    </div>
+                    <input class="form-control col-md-4 mr-2" type="file" name="file" id="staticData" />
+                    <button onclick="return validateStaticData()" type="submit" class="btn btn-primary mr-2"><i class="bi bi-cloud-upload"></i> Upload File</button>
+                    <a href="@Url.Action("Download",new { filename = "StaticData.xlsx" })" class="btn btn-primary"><i class="bi bi-cloud-download"></i> Download File</a>
+
+                </div>
+            </div>
+
+        </div>
+
+    }
+</div>
+@section Scripts{
+    <script>
+        function validateProduct() {
+            var x = document.getElementById("product").value;
+            if (x == "" || x == null) {
+                alert("File not found! Please select a File!");
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+        function validatePurchase() {
+            var x = document.getElementById("purchase").value;
+            if (x == "" || x == null) {
+                alert("File not found! Please select a File!");
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+        function validateSale() {
+            var x = document.getElementById("sale").value;
+            if (x == "" || x == null) {
+                alert("File not found! Please select a File!");
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+        function validateProduction() {
+            var x = document.getElementById("production").value;
+            if (x == "" || x == null) {
+                alert("File not found! Please select a File!");
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+        function validateStaticData() {
+            var x = document.getElementById("staticData").value;
+            if (x == "" || x == null) {
+                alert("File not found! Please select a File!");
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+    </script>
+}

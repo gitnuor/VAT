@@ -1,0 +1,71 @@
+﻿@model vms.entity.StoredProcedureModel.MushakReturn.MushakReturnPartSix
+
+<table class="table table-bordered">
+    @* <thead> *@
+
+        <tr>
+
+            <th class="MreturnHeader" colspan="4" style="background-color: #FBD4B4!important">
+
+                <div class="parthead ">Part-6: DECREASING ADJUSTMENTS (VAT)</div>
+            </th>
+        </tr>
+    @* </thead> *@
+    @* <tbody class="Returntd"> *@
+
+        <tr class="Returntdhead text-center font-weight-bold" style="background-color: #BFBFBF !important">
+            <th class="Returntdhead text-center"><b> Adjustments Details</b></th>
+            <th style="text-align:center"><b>Note</b></th>
+            <th style=""><b>VAT Amount</b></th>
+            <th><b></b></th>
+        </tr>
+
+        <tr>
+            <td>Due to VAT Deducted at Source from the Suppliers delivered </td>
+            <td class="text-center" style="text-align:center">29</td>
+
+            <td class="text-right" style="text-align:right">
+                @Model.DecrementalAdjustmentAmountForVdsPurchase
+            </td>
+            <td><a href="#note29SubForm">Subform-ṅ</a></td>
+        </tr>
+
+        <tr>
+            <td>Advance Tax Paid at Import Stage</td>
+            <td class="text-center" style="text-align:center">30</td>
+
+            <td class="text-right" style="text-align:right">@StringGenerator.DecimalToCommaSeparated(Model.DecrementalAdjustmentAmountForAdvanceTaxInImport)</td>
+            <td><a href="#subFormCa">Subform-c</a></td>
+        </tr>
+
+
+        <tr>
+            <td>Issuance of Credit Note</td>
+            <td class="text-center" style="text-align:center">31</td>
+
+            <td class="text-right" style="text-align:right">@StringGenerator.DecimalToCommaSeparated(Model.DecrementalAdjustmentVatAmountForCreditNote)</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>
+                Any Other Adjustments (please specify below)
+
+                <div class="border" style="border-color:black;   min-height:25px ; min-width:400px;">
+                    @Model.MiscDecrementalAdjustmentDesc
+                </div>
+            </td>
+            <td class="text-center" style="text-align:center">32</td>
+
+            <td class="manual text-right" style="text-align:right">@StringGenerator.DecimalToCommaSeparated(Model.MiscDecrementalAdjustmentAmount)</td>
+            <td></td>
+        </tr>
+
+    <tr class="font-weight-bold">
+            <th class="text-left"><b>Total Decreasing Adjustment </b></th>
+            <th class="text-center" style="text-align:center"><b>33</b></th>
+
+            <th class="text-right" style="background-color: #BFBFBF !important; text-align: right">@StringGenerator.DecimalToCommaSeparated(Model.TotalDecrementalAdjustmentVatAmount)</th>
+            <th></th>
+        </tr>
+</table>

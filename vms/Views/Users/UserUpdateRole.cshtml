@@ -1,0 +1,49 @@
+﻿@using vms.Utility.Converter
+@model vms.entity.viewModels.User.UserRoleUpdateViewModel
+@{
+    ViewData["Title"] = "Role Update";
+
+
+}
+@section contentheader
+    {
+    <div class="p-3 page-header">
+        Edit User Role
+    </div>
+}
+<div class="row">
+    <div class="col-md-4 offset-4">
+        <form asp-action="UserUpdateRole" class="form-horizontal" id="frmusercreate">
+            <div asp-validation-summary="ModelOnly"></div>
+            <input type="hidden" asp-for="UserId" />
+            <input type="hidden" asp-for="EncryptedId" />
+            <span asp-validation-for="UserId"></span>
+            <div class="form-body">
+
+
+                <div class="form-group mt-3">
+                    <label asp-for="RoleId"></label>
+                    <div>
+                        <select asp-for="RoleId" asp-items="SelectListConverter.CustomSelectListToSelectList(Model.Roles)">
+                            <option value="@null">Select</option>
+                        </select>
+                        <span asp-validation-for="RoleId"></span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="float-end mt-3">
+                <button type="submit" data-requiredconfirmation="true" class="btn  btn-primary btn-sm"><i class="bi bi-check-lg"></i> Update</button>
+                <button type="button" value="Reset" class="btn  btn-warning btn-sm" onclick="location.reload();"><i class="bi bi-arrow-repeat"></i> Reset</button>
+                <a asp-action="Index" class="btn btn-secondary btn-sm"><i class="bi bi-slash-circle"></i> Cancel</a>
+            </div>
+
+        </form>
+    </div>
+</div>
+@section Scripts{
+
+
+
+}

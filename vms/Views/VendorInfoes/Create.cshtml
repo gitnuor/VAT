@@ -1,0 +1,454 @@
+﻿@section breadcrumb
+    {
+<ul class="page-breadcrumb">
+    <li>
+        <a href="@Url.Action("GeneralSettings", "Organization")">Settings</a>
+        <i class="fa fa-circle"></i>
+    </li>
+    <li>
+       
+        <a href="@Url.Action("Index", "VendorInfoes")">Vendor Infoes</a>
+        <i class="fa fa-circle"></i>
+       
+    </li>
+    <li>
+        <a href="@Url.Action("Create")">New Vendor</a> 
+    </li>
+</ul>
+}
+<h1 class="custom-page-title">New Vendor</h1>
+<form role="form">
+    <div class="row">
+        <div class="col-md-6 ">
+            <!-- BEGIN SAMPLE FORM PORTLET-->
+            <div class="portlet light bordered">
+                <div class="portlet-title">
+                    <div class="caption font-green">
+                        <i class="icon-pin font-green"></i>
+                        <span class="caption-subject bold uppercase">  Basic Information</span>
+                    </div>
+                </div>
+                <div class="portlet-body form">
+
+                    <div class="form-body">
+                        <div class="row">
+                            <div class="form-group form-md-line-input form-md-floating-label has-info">
+                                <input type="text" class="form-control input-sm" id="VendorName">
+                                <label for="VendorName">Vendor Name</label>
+                            </div>
+                            <div class="form-group form-md-line-input form-md-floating-label has-info">
+                                <input type="text" class="form-control input-sm" id="PrintAs">
+                                <label for="PrintAs">Print As</label>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group form-md-line-input form-md-floating-label has-info">
+                                        <select class="form-control input-sm" id="SubType">
+                                            <option value=""></option>
+                                            <option value="1">Option 1</option>
+                                            <option value="2">Option 2</option>
+                                            <option value="3">Option 3</option>
+                                            <option value="4">Option 4</option>
+                                        </select>
+                                        <label for="SubType">Subtype</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group form-md-line-input form-md-floating-label has-info">
+                                        <select class="form-control input-sm" id="CategoryId">
+                                            <option value=""></option>
+                                            <option value="1">Option 1</option>
+                                            <option value="2">Option 2</option>
+                                            <option value="3">Option 3</option>
+                                            <option value="4">Option 4</option>
+                                        </select>
+                                        <label for="CategoryId">Category</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group form-md-line-input form-md-floating-label has-info">
+                                        <input type="text" class="form-control input-sm" id="VendorCode">
+                                        <label for="VendorCode">Code</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group form-md-line-input form-md-floating-label has-info">
+                                        <input type="text" class="form-control input-sm" id="VendorPin">
+                                        <label for="VendorPin">PIN</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group form-md-line-input form-md-floating-label has-info">
+                                        <input type="text" class="form-control input-sm" id="OpeningBalance">
+                                        <label for="OpeningBalance">Opening Balance</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group form-md-line-input form-md-floating-label has-info">
+                                        <input type="text" class="form-control input-sm" id="EntryDate">
+                                        <label for="EntryDate">Entry Date</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group form-md-line-input form-md-floating-label has-info">
+                                        <input type="text" class="form-control input-sm" id="Nationality">
+                                        <label for="Nationality">Nationality</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group form-md-line-input form-md-floating-label has-info">
+                                        <input type="text" class="form-control input-sm" id="EmailAddress">
+                                        <label for="EmailAddress">Email Address</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group form-md-line-input form-md-floating-label has-info">
+                                        <input type="text" class="form-control input-sm" id="Mobile">
+                                        <label for="Mobile">Mobile</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group form-md-line-input form-md-floating-label has-info">
+                                        <input type="text" class="form-control input-sm" id="Phone">
+                                        <label for="Phone">Phone</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group form-md-line-input form-md-floating-label has-info">
+                                <textarea class="form-control input-sm" rows="3" id="Description"></textarea>
+                                <label for="Description">Description</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 ">
+            <!-- BEGIN SAMPLE FORM PORTLET-->
+            <div class="portlet light bordered">
+                <div class="portlet-title">
+                    <div class="caption font-green">
+                        <i class="icon-pin font-green"></i>
+                        <span class="caption-subject bold uppercase"> Company Information</span>
+                    </div>
+                </div>
+                <div class="portlet-body form">
+
+                    <div class="form-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group form-md-line-input form-md-floating-label has-info">
+                                    <input type="text" class="form-control input-sm" id="FoundedOn">
+                                    <label for="FoundedOn">Founded On</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group form-md-line-input form-md-floating-label has-info">
+                                    <input type="text" class="form-control input-sm" id="RegNo">
+                                    <label for="RegNo">Reg. No</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group form-md-line-input form-md-floating-label has-info">
+                                    <input type="text" class="form-control input-sm" id="VatRegNo">
+                                    <label for="VatRegNo">Vat Reg. No</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group form-md-line-input form-md-floating-label has-info">
+                                    <input type="text" class="form-control input-sm" id="VatRegDate">
+                                    <label for="VatRegDate">Vat Reg. Date</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group form-md-line-input form-md-floating-label has-info">
+                                    <select class="form-control input-sm" id="ComCategoryId">
+                                        <option value=""></option>
+                                        <option value="1">Option 1</option>
+                                        <option value="2">Option 2</option>
+                                        <option value="3">Option 3</option>
+                                        <option value="4">Option 4</option>
+                                    </select>
+                                    <label for="ComCategoryId">Category</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group form-md-line-input form-md-floating-label has-info">
+                                    <select class="form-control input-sm" id="AssignTo">
+                                        <option value=""></option>
+                                        <option value="1">Option 1</option>
+                                        <option value="2">Option 2</option>
+                                        <option value="3">Option 3</option>
+                                        <option value="4">Option 4</option>
+                                    </select>
+                                    <label for="AssignTo">Assign To</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group form-md-line-input form-md-floating-label has-info">
+                                    <input type="text" class="form-control input-sm" id="FromDate">
+                                    <label for="FromDate">From Date</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group form-md-line-input form-md-floating-label has-info">
+                                    <select class="form-control input-sm" id="Relationship">
+                                        <option value=""></option>
+                                        <option value="1">Option 1</option>
+                                        <option value="2">Option 2</option>
+                                        <option value="3">Option 3</option>
+                                        <option value="4">Option 4</option>
+                                    </select>
+                                    <label for="Relationship">Relationship</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 ">
+            <!-- BEGIN SAMPLE FORM PORTLET-->
+            <div class="portlet light bordered">
+                <div class="portlet-title">
+                    <div class="caption font-green">
+                        <i class="icon-pin font-green"></i>
+                        <span class="caption-subject bold uppercase"> Company Contact Information</span>
+                    </div>
+                </div>
+                <div class="portlet-body form">
+
+                    <div class="form-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group form-md-line-input has-info">
+                                    <input type="text" class="form-control" id="form_control_1" placeholder="Alt. Phone">
+                                    <label for="form_control_1">Alt. Phone</label>
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group form-md-line-input has-info">
+                                    <input type="text" class="form-control" id="form_control_1" placeholder="Facebook">
+                                    <label for="form_control_1">Facebook</label>
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group form-md-line-input has-info">
+                                    <input type="text" class="form-control" id="form_control_1" placeholder="Fax">
+                                    <label for="form_control_1">Fax</label>
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group form-md-line-input has-info">
+                                    <input type="text" class="form-control" id="form_control_1" placeholder="Whats App">
+                                    <label for="form_control_1">Whats App</label>
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group form-md-line-input has-info">
+                                    <input type="text" class="form-control" id="form_control_1" placeholder="Skype">
+                                    <label for="form_control_1">Skype</label>
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group form-md-line-input has-info">
+                                    <input type="text" class="form-control" id="form_control_1" placeholder="Website">
+                                    <label for="form_control_1">Website</label>
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group form-md-line-input has-info">
+                                    <input type="text" class="form-control" id="form_control_1" placeholder="Alt. Email">
+                                    <label for="form_control_1">Alt. Email</label>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 ">
+            <!-- BEGIN SAMPLE FORM PORTLET-->
+            <div class="portlet light bordered">
+                <div class="portlet-title">
+                    <div class="caption font-green">
+                        <i class="icon-pin font-green"></i>
+                        <span class="caption-subject bold uppercase"> Address Information</span>
+                    </div>
+                </div>
+                <div class="portlet-body form">
+
+                    <div class="form-body">
+                        <div class="row">
+                            <div class="col-md-6">
+
+                                <div class="form-group form-md-line-input has-info">
+                                    <select class="form-control" id="form_control_1">
+
+                                        <option value="1">Bangladesh</option>
+                                        <option value="2">Option 2</option>
+                                        <option value="3">Option 3</option>
+                                        <option value="4">Option 4</option>
+                                    </select>
+                                    <label for="form_control_1">Country >></label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group form-md-line-input has-info">
+                                    <select class="form-control" id="form_control_1">
+
+                                        <option value="1">Dhaka</option>
+                                        <option value="2">Option 2</option>
+                                        <option value="3">Option 3</option>
+                                        <option value="4">Option 4</option>
+                                    </select>
+                                    <label for="form_control_1">Division</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group form-md-line-input has-info">
+                                    <select class="form-control" id="form_control_1">
+
+                                        <option value="1">Dhaka</option>
+                                        <option value="2">Option 2</option>
+                                        <option value="3">Option 3</option>
+                                        <option value="4">Option 4</option>
+                                    </select>
+                                    <label for="form_control_1">City</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group form-md-line-input has-info">
+                                    <select class="form-control" id="form_control_1">
+
+                                        <option value="1">Demra</option>
+                                        <option value="2">Option 2</option>
+                                        <option value="3">Option 3</option>
+                                        <option value="4">Option 4</option>
+                                    </select>
+                                    <label for="form_control_1">Thana</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group form-md-line-input has-info">
+                                    <select class="form-control" id="form_control_1">
+
+                                        <option value="1">Mirpur</option>
+                                        <option value="2">Option 2</option>
+                                        <option value="3">Option 3</option>
+                                        <option value="4">Option 4</option>
+                                    </select>
+                                    <label for="form_control_1">Post Office</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group form-md-line-input has-info">
+                                    <input type="text" class="form-control" id="form_control_1" placeholder="Enter your name">
+                                    <label for="form_control_1">Post Code</label>
+                                    <span class="help-block">Enter Post Code</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group form-md-line-input has-info">
+                                    <input type="text" class="form-control" id="form_control_1" placeholder="Enter your name">
+                                    <label for="form_control_1">Section</label>
+                                    <span class="help-block">Enter Section</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group form-md-line-input has-info">
+                                    <input type="text" class="form-control" id="form_control_1" placeholder="Enter your name">
+                                    <label for="form_control_1">Road</label>
+                                    <span class="help-block">Enter Road</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group form-md-line-input has-info">
+                                    <input type="text" class="form-control" id="form_control_1" placeholder="Enter your name">
+                                    <label for="form_control_1">House</label>
+                                    <span class="help-block">Enter House</span>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 ">
+            <!-- BEGIN SAMPLE FORM PORTLET-->
+            <div class="portlet light bordered">
+                <div class="portlet-title">
+                    <div class="caption font-green">
+                        <i class="icon-pin font-green"></i>
+                        <span class="caption-subject bold uppercase"> Account Information</span>
+                    </div>
+                </div>
+                <div class="portlet-body form">
+
+                    <div class="form-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group form-md-line-input has-info">
+                                    <input type="text" class="form-control" id="form_control_1" placeholder="Alt. Phone">
+                                    <label for="form_control_1">Bank</label>
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group form-md-line-input has-info">
+                                    <input type="date" class="form-control" id="form_control_1" placeholder="Fax">
+                                    <label for="form_control_1">Start date</label>
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group form-md-line-input form-md-floating-label has-info">
+                                    <input type="text" class="form-control input-sm" id="VatRegNo">
+                                    <label for="VatRegNo">Vat Reg. No</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group form-md-line-input has-info">
+                                    <input type="text" class="form-control" id="form_control_1" placeholder="Alt. Email">
+                                    <label for="form_control_1">Account Number</label>
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group form-md-line-input has-info">
+                                    <input type="text" class="form-control" id="form_control_1" placeholder="Skype">
+                                    <label for="form_control_1">Account Name</label>
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group form-md-line-input has-success">
+                                    <label for="form_control_1">Description</label>
+                                    <textarea class="form-control" id="form_control_1" placeholder="Description"> </textarea>
+                                    <div class="form-control-focus"> </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="form-actions">
+        <button type="button" class="btn blue"><i class="fa fa-floppy-o"></i> Save</button>
+        <button type="button" class="btn warning"><i class="fa fa-ban"></i> Cancel</button>
+    </div>
+</form>

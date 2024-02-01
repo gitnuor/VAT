@@ -1,0 +1,16 @@
+﻿@model IQueryable<vms.entity.models.ViewTdsPayment>
+@(Html.Grid(Model).Build(columns =>
+{
+    columns.Add(model => model.MushakYear).Titled("Year");
+    columns.Add(model => model.MushakMonthName).Titled("Month");
+    columns.Add(model => model.PaidAmount).Titled("Paid Amount");
+    columns.Add(model => model.PaymentDate).Titled("Payment Date").Formatted("{0:dd/MM/yyyy}");
+    columns.Add(model => model.BankName).Titled("Bank");
+	columns.Add().Encoded(false).RenderedAs(data => Html.PartialAsync("_ActionMenu", data).Result)
+		.Titled(Html.Raw("<i class='bi bi-activity'></i>")).AppendCss("action-col-freez");
+})
+	.AppendCss("large-index-grid")
+	.Empty("No data found")
+	.Filterable(GridFilterType.Double)
+	.Sortable()
+	.Pageable())

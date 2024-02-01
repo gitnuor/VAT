@@ -1,0 +1,113 @@
+﻿@model vms.entity.viewModels.VendorViewModel.vmVendor
+<div class="font-weight-bold mb-3">
+	Basic Information
+</div>
+<div>
+	<div class="row">
+		<div class="col-6">
+			<div class="form-group">
+				<label  asp-for="Name"></label>
+				<div>
+					<input asp-for="Name" />
+					<span asp-validation-for="Name" ></span>
+				</div>
+			</div>
+		</div>
+		<div class="col-6">
+			<div class="form-group non-foreign">
+				<label  asp-for="NationalIdNo"></label>
+				<span class="text-warning">(Either NID or BIN is required.)</span>
+				<div>
+					<input asp-for="NationalIdNo" />
+					<span asp-validation-for="NationalIdNo" ></span>
+				</div>
+			</div>
+
+		</div>
+
+		<div class="col-6">
+			<div class="form-group non-foreign mt-3">
+				<label  asp-for="BinNo"></label>
+				<span class="text-warning">(Either NID or BIN is required.)</span>
+				<div>
+					<input asp-for="BinNo" />
+					<span asp-validation-for="BinNo" ></span>
+				</div>
+			</div>
+		</div>
+		<div class="col-6">
+			<div class="form-group mt-3">
+				<label  asp-for="ContactPerson"></label>
+				<div>
+					<input asp-for="ContactPerson" />
+					<span asp-validation-for="ContactPerson" ></span>
+				</div>
+			</div>
+
+		</div>
+
+		<div class="col-6">
+			<div class="form-group non-foreign mt-3">
+				<label  asp-for="Tinno"></label>
+				<div>
+					<input asp-for="Tinno" />
+					<span asp-validation-for="Tinno" ></span>
+				</div>
+			</div>
+
+		</div>
+		<div class="col-6">
+			<div class="form-group mt-3">
+				<label  asp-for="ContactPersonDesignation"></label>
+				<div>
+					<input asp-for="ContactPersonDesignation" />
+					<span asp-validation-for="ContactPersonDesignation" ></span>
+				</div>
+			</div>
+
+		</div>
+
+		<div class="col-6">
+			<div class="form-group mt-3">
+				<label  asp-for="Address"></label>
+				<div>
+					<input asp-for="Address" />
+					<span asp-validation-for="Address" ></span>
+				</div>
+			</div>
+
+		</div>
+		<div class="col-6">
+			<div class="form-group mt-3">
+				<label  asp-for="ContactPersonMobile"></label>
+				<div>
+					<input asp-for="ContactPersonMobile" />
+					<span asp-validation-for="ContactPersonMobile" ></span>
+				</div>
+			</div>
+
+		</div>
+
+		<div class="col-6">
+			<div class="form-group mt-3">
+				<label  asp-for="ContactNo"></label>
+				<div>
+					<input asp-for="ContactNo" />
+					<span asp-validation-for="ContactNo" ></span>
+				</div>
+			</div>
+
+		</div>
+		<div class="col-6">
+			<div class="form-group mt-3">
+				<label  asp-for="ContactPersonEmailAddress"></label>
+				<div>
+					<input asp-for="ContactPersonEmailAddress" />
+					<span asp-validation-for="ContactPersonEmailAddress" ></span>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+</div>

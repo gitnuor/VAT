@@ -1,0 +1,17 @@
+﻿@model IEnumerable<vms.entity.models.ViewVdsPurchase>
+@{
+    ViewData["Title"] = "VDS List";
+}
+
+
+@section contentheader
+    {
+    <partial name="Purchase/_PurchaseHeader" />
+}
+
+<div class="gray-slim-scroll-container">
+	<div class="table-scroll-container">
+		<partial name="_VdsIndex" model="Model"/>
+	</div>
+</div>
+

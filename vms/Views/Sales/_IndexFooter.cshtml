@@ -1,0 +1,14 @@
+﻿@model IGrid<vms.entity.models.ViewSale>
+<tr>
+	<th class="text-right" colspan="9">
+		<b>Total</b>
+	</th>
+	<th class="text-right">@(Model.Rows.Sum(row => row.Model.TotalPriceWithoutTax).DecimalToCommaSeparated())</th>
+	<th class="text-right">@(Model.Rows.Sum(row => row.Model.TotalVat).DecimalToCommaSeparated())</th>
+	<th class="text-right">@(Model.Rows.Sum(row => row.Model.TotalSupplementaryDuty).DecimalToCommaSeparated())</th>
+	<th class="text-right"></th>
+	<th class="text-right">@(Model.Rows.Sum(row => row.Model.Vdsamount).DecimalToCommaSeparated())</th>
+	<th class="text-right"></th>
+	<th class="text-right">@(Model.Rows.Sum(row => row.Model.TdsAmount).DecimalToCommaSeparated())</th>
+	<th class="action-col-freez"></th>
+</tr>

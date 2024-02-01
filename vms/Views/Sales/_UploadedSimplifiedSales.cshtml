@@ -1,0 +1,14 @@
+﻿@model IEnumerable<vms.entity.models.ExcelDataUpload>
+@(Html.Grid(Model).Build(columns =>
+{
+	columns.Add(model => model.ExcelUploadedDataType.ExcelUploadedDataTypeName).Titled("Type");
+	columns.Add(model => model.UploadTime).Titled("Upload Time").Formatted("{0:dd/MM/yyyy hh:mm:ss tt}");
+	columns.Add(model => model.UploadedFileName).Titled("Uploaded File Name").Sortable(false);
+	columns.Add(model => model.ProcessingMessage).Titled("Processing Message").Sortable(false);
+	columns.Add(model => model.ExcelSimplifiedSalses.Count).Titled("Data Count").Sortable(false).AppendCss("text-align-right");
+})
+	.AppendCss("large-index-grid")
+	.Empty("No data found")
+	.Filterable(GridFilterType.Double)
+	.Sortable()
+	.Pageable())

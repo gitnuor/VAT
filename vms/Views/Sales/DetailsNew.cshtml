@@ -1,0 +1,227 @@
+﻿@model vms.entity.viewModels.VmSalesDetail
+
+@{
+    ViewData["Title"] = "Sales Details";
+
+    var i = 1; var j = 1;
+}
+
+@section contentheader
+    {
+    <div class="p-3 page-header">
+        <h5>Sales Details</h5>
+        <div class="d-flex justify-content-start">
+            <a asp-controller="Reports" asp-action="Mushok6P3ById" asp-route-id="@Model.Sale.SalesId" asp-route-language="0" class="btn btn-primary btn-sm" target="_blank"><span class="icon-Printer"> </span> PRINT MUSHAK 6.3(Bangla)</a>
+            <a asp-controller="Reports" asp-action="Mushok6P3ById" asp-route-id="@Model.Sale.SalesId" asp-route-language="1" class="btn btn-primary btn-sm ms-1" target="_blank"><span class="icon-Printer"> </span> PRINT MUSHAK 6.3(English)</a>
+        </div>
+    </div>
+}
+
+<div class="mt-3">
+    <div class="font-weight-bold mb-3">General Information</div>
+    <div class="row">
+        <div class="col-4">
+            <div class="row">
+                <div class="col-12">
+                    Customer Name: @Model.Sale.Customer.Name
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    Contact: @Model.Sale.Customer.PhoneNo
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    Shipping Address: @Model.Sale.ShippingAddress
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    Sales Type: @Model.Sale.SalesType.SalesTypeName
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    Export Type: @Model.Sale?.ExportType?.ExportTypeName
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    Invoice No: @Model.Sale.InvoiceNo
+                </div>
+            </div>
+        </div>
+
+        <div class="col-4">
+            <div class="row">
+                <div class="col-12">
+                    Work Order No: @Model.Sale.WorkOrderNo
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    Sales Delivery Type: @Model.Sale.SalesDeliveryType.Name
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    Delivery Date: @StringGenerator.DateTimeToStringWithoutTime(Model.Sale.DeliveryDate)
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    LC Number: @Model.Sale.LcNo
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    PO Number: @Model.Sale.CustomerPoNumber
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    LC Date: @StringGenerator.DateTimeToStringWithoutTime(Model.Sale.LcDate)
+                </div>
+            </div>
+        </div>
+
+        <div class="col-4">
+
+
+            <div class="row">
+                <div class="col-12">
+                    Com Date: @StringGenerator.DateTimeToStringWithoutTime(Model.Sale.SalesDate)
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    Due Date: @StringGenerator.DateTimeToStringWithoutTime(Model.Sale.DueDate)
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    Sales Reason: @Model.Sale.SalesRemarks
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    Receivable Amount: @Model.Sale.ReceivableAmount
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    Discount: @Model.Sale.TotalDiscountOnIndividualProduct
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    Payment Receive Amount: @Model.Sale.PaymentReceiveAmount
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    Payment Due Amount: @Model.Sale.PaymentDueAmount
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="col-md-12 mt-3">
+    <div class="font-weight-bold mb-3">Product Information</div>
+
+    <table class="table table-bordered" id="gridTable">
+        <thead>
+            <tr class="table-light">
+                <th>Serial</th>
+                <th>Product</th>
+                <th>M. Unit</th>
+                <th>Qty</th>
+                <th>Unit Price</th>
+                <th>Total Price WithOut Vat</th>
+                <th>VAT Type</th>
+                <th>VAT (%)</th>
+                <th>Vat Amount</th>
+                <th>SD (%)</th>
+                <th>SD Amount</th>
+                <th>Total Price</th>
+
+
+
+            </tr>
+        </thead>
+
+        <tbody id="tblPurchaseOD" style="text-align:center;">
+            @foreach (var item in Model.SalesDetails)
+            {
+                <tr class="table-light">
+                    <td>@i</td>
+                    <td>@item.Product.Name</td>
+                    <td>@item.MeasurementUnit.Name</td>
+                    <td>@item.Quantity</td>
+                    <td>@item.UnitPrice</td>
+                    <td> @(item.Sales.TotalPriceWithoutVat)</td>
+                    <td>@(item.ProductVattype.Name)</td>
+                    <td>@(item.Vatpercent)</td>
+                    <td>@(item.Sales.TotalVat)</td>
+                    <td>@item.SupplementaryDutyPercent</td>
+                    <td>@item.Sales.TotalSupplimentaryDuty</td>
+                    <td>@((item.Sales.TotalPriceWithoutVat+ item.Sales.TotalVat+ item.Sales.TotalSupplimentaryDuty)- item.Sales.TotalDiscountOnIndividualProduct)</td>
+                </tr>
+                i++;
+
+            }
+        </tbody>
+
+    </table>
+</div>
+@if (Model.CreditNotes.Any())
+{
+    <div class="col-12 mt-3">
+        <div class="font-weight-bold mb-3">Credit Note(s) for this sale</div>
+        <table class="table table-bordered" id="gridTable">
+            <thead>
+                <tr class="table-light">
+                    <th>Serial</th>
+                    <th>Voucher No.</th>
+                    <th>Return Date</th>
+                    <th>Reason Of Return</th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model.CreditNotes)
+                {
+                    <tr class="table-light">
+                        <td>@j</td>
+                        <td>@item.VoucherNo</td>
+                        <td>@item.ReturnDate.ToString("dd/MM/yyyy")</td>
+
+                        <td>@item.ReasonOfReturn</td>
+                        <td><a class='btn btn-primary btn-sm' href='@Url.Action("CreditNoteViewById", new {id=item.CreditNoteId})' role='button' target='_blank'> View</a></td>
+                    </tr>
+                    j++;
+
+                }
+            </tbody>
+
+        </table>
+    </div>
+}
+
+<div class="col-12 mt-3 text-end">
+    <a href="@Url.Action("Index")" class="btn btn-sm btn-secondary">Back</a>
+</div>

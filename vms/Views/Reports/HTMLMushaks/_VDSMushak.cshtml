@@ -1,0 +1,173 @@
+﻿@model IEnumerable<vms.entity.StoredProcedureModel.HTMLMushak.Sp6p6>
+
+<style>
+
+    .MreturnHeader {
+        text-align: center;
+        background-color: #ffedbe;
+    }
+
+
+    .Returntd {
+        text-align: left;
+    }
+
+    .Returntdhead {
+        text-align: center;
+        background-color: #cfcfcf;
+    }
+
+    .ReturntdEmpty {
+        background-color: lightgray;
+    }
+
+    .tdp1 {
+        width: 320px;
+    }
+
+    .tdp2 {
+        width: 30px;
+        text-align: center;
+    }
+
+    .report-margin {
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+</style>
+
+
+
+<div class="report-margin">
+    <div class="col-xs-12">
+
+        <div class="col-xs-3">
+
+            <img src="~/images/logo_bd_govt.svg" style="height :100px;" />
+
+
+        </div>
+
+        
+        <div class="col-xs-6" style="text-align:center">
+
+            <h4>গণপ্রজাতন্ত্রী বাংলাদেশ সরকার</h4>
+            <h4>জাতীয় রাজস্ব বোর্ড</h4>
+            <h4>উৎসে কর কর্তন সনদপত্র </h4>
+            <h4>[বিধি ৪০ এর উপবিধি (১) এর দফা (চ) দ্রস্টব্য]</h4>
+
+        </div>
+
+        <div class="col-xs-3 pull-right">
+            <h4 style="color:green; border:solid; border-color:cornflowerblue; text-align:center"> মূসক-৬.৬</h4>
+
+
+
+        </div>
+
+        <div class="col-xs-12">
+
+
+            <div class="col-xs-6" style="text-align:left">
+                <h5>উৎসে কর কর্তনকারী সত্তার নাম : </h5>
+
+                <h5>উৎসে কর কর্তনকারী সত্তার ঠিকানা : </h5>
+                <h5> উৎসে কর কর্তনকারী সত্তার বি আই এন (প্রযোজ্য ক্ষেত্রে) :  </h5>
+                <h5>উৎসে কর কর্তন সনদপত্র নং : </h5>
+                <h5>জারির তারিখ :  </h5>
+
+
+            </div>
+
+        </div>
+        <div class="col-xs-12">
+            এই মর্মে প্রত্যয়ন করা যাইতেসে যে, আইনের ধারা ৪৯ অনুযায়ী উৎসে কর কর্তনযোগ্য  সরবরাহ হইতে প্রযোজ্য মূল্য সংযোজন কর বাবদ উৎসে কর কর্তন করা হইল । কর্তনকৃত মূল্য সংযোজন করের অর্থ বুক ট্রান্সফার/ট্রেজারি চালান/দাখিলপত্রে বৃদ্ধিকারী সমন্বয়ের মাধ্যমে সরকারি কোষাগারে জমা প্রদান করা হইয়াছে । কপি এতদসংগে সংযুক্ত করা হইল (প্রযোজ্য ক্ষেত্রে) ।
+        </div>
+
+        </div>
+
+        <div class="col-xs-12">
+
+            <table class="table table-bordered">
+
+                
+                <tbody style="text-align:center">
+
+
+                    <tr>
+                        <td rowspan="2">
+                            ক্রমিক
+                            সংখ্য
+                        </td>
+                        <td colspan="2">সরবরাহকারী </td>
+                        <td colspan="2">
+                            সংশ্লিষ্ট কর চালানপত্র
+                        </td>
+                        <td rowspan="2">মোট সরবরাহ মূল্য (টাকা) </td>
+                        <td rowspan="2">
+                            মূসকের পরিমাণ (টাকা)
+                        </td>
+                        <td rowspan="2">    উৎসে কর্তনকৃত মুসকের পরিমাণ (টাকা)</td>
+                       
+
+                    </tr>
+                   
+
+                    <tr>
+
+                        <td>নাম</td>
+                        <td>বিআইএন </td>
+                        <td>নম্বর</td>
+                        <td>ইস্যুর তারিখ </td>
+
+                    </tr>
+
+
+                  @if (Model.Any())
+                  {
+                      int i = 1; 
+                      foreach (var item in Model)
+                      {
+
+
+                            <tr>
+
+                                <td>@i</td>
+                                <td>@item.Name</td>
+                                <td>@item.BinNo</td>
+                                <td>@item.VatChallanNo</td>
+                                <td>@item.VatChallanIssueDate</td>
+                                <td>@item.TotalPriceWithoutVat</td>
+                                <td>@item.TotalVAT</td>
+                                <td>@item.VDSAmount</td>
+
+
+
+
+                            </tr>
+
+                          i++;
+                      }
+                  }
+
+
+                </tbody>
+            </table>
+
+        </div>
+
+
+        <div class="col-xs-12">
+
+            <h5 style="font-weight: bold;">ক্ষমতাপ্রাপ্ত কর্মকর্তার - </h5>
+            <h5>
+                ___________________________
+            </h5>
+            <h5>  স্বাক্ষর : </h5>
+            <h5>  নাম : </h5>
+
+
+        </div>
+
+    </div>

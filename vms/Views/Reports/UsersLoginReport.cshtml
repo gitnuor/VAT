@@ -1,0 +1,134 @@
+﻿@model vms.entity.viewModels.ReportsViewModel.VmUserLoginHistory
+@{
+	ViewData["Title"] = "User Login Information";
+	Layout = "_LayoutReport";
+}
+
+
+@section contentheader
+{
+	<div class="p-3 pb-2 page-header">
+
+		@ViewData["Title"]
+		<form method="post">
+			<div class="row">
+
+				<div class="col-3">
+					<label asp-for="UserId" ></label>
+					<select asp-for="UserId" asp-items="Model.UserList.CustomSelectListToSelectList()" >
+						<option value="0">All Users</option>
+					</select>
+					<span asp-validation-for="UserId" class="invalid-feedback"></span>
+				</div>
+				<div class="col-2">
+					<label asp-for="FromDate" ></label>
+					<input autocomplete="off" asp-for="FromDate"  type="date"/>
+					<span asp-validation-for="FromDate" class="invalid-feedback"></span>
+				</div>
+				<div class="col-2">
+					<label asp-for="ToDate" ></label>
+					<input autocomplete="off" asp-for="ToDate"  type="date"/>
+					<span asp-validation-for="ToDate" class="invalid-feedback"></span>
+				</div>
+
+				<div class="col-2">
+
+					<button type="submit" class="btn btn-sm btn-success inline-sm-button"><i class="bi bi-file-text"></i> View</button>
+					<button type="button" class="btn btn-sm btn-primary inline-sm-button" id="btnPrint"><i class="bi bi-printer"></i> Print</button>
+				</div>
+
+			</div>
+		</form>
+
+	</div>
+
+}
+
+<div class="gray-slim-scroll-container">
+	<div class="long-table-scroll-container">
+		<div id="printableArea">
+			<div class="report-margin">
+				<div class="report-header">
+					<div class="company-name">@Model.OrganizationName</div>
+					<div class="company-other-info">@Model.OrganizationAddress</div>
+					<div class="report-name">@Model.HeaderDateString</div>
+					@if (!string.IsNullOrEmpty(Model.HeaderOtherString))
+					{
+						<div class="report-name">@Model.HeaderOtherString</div>
+					}
+				</div>
+
+				<table class="table table-bordered">
+					<thead>
+					<tr>
+						<th>
+							SL
+						</th>
+						<th>
+							User Name
+						</th>
+						<th>
+							Login Time
+						</th>
+						<th>
+							Is Success?
+						</th>
+						<th>
+							Reason of Fail
+						</th>
+					</tr>
+					</thead>
+
+					@if (Model.UserLoginHistories.Any())
+					{
+						var slNo = 1;
+						<tbody>
+						@foreach (var item in Model.UserLoginHistories)
+						{
+							<tr>
+								<td class="text-right">
+									@slNo
+								</td>
+								<td>
+									@item.User.FullName
+								</td>
+								<td class="text-center">
+									@StringGenerator.DateTimeToString(item.LoginTime)
+								</td>
+								<td>
+									@item.LoginStatus
+								</td>
+
+								<td>
+									@item.ReasonOfFail
+								</td>
+							</tr>
+							slNo++;
+						}
+						</tbody>
+					}
+
+					else
+					{
+						<tr>
+							<td colspan="5">
+								<p style="text-align: center">No Records Found</p>
+							</td>
+						</tr>
+					}
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+@section scripts{
+	<script>
+		$(document).ready(function() {
+			$("#btnPrint").click(function() {
+				window.vmsPrint.printA4Portrait('printableArea');
+			});
+		});
+	</script>
+}

@@ -1,0 +1,38 @@
+﻿@model vms.entity.models.SupplimentaryDuty
+@{
+    ViewData["Title"] = "SupplementaryDuty";
+    
+    
+}
+@section contentheader
+    {
+    <div class="p-3 page-header">
+        Add Supplementary Duty
+    </div>
+}
+
+<div class="row">
+    <div class="col-md-4 offset-4">
+        <form asp-action="SupplimentaryDuty" class="form-horizontal" id="frmusercreate">
+
+            <div class="form-body">
+                <input type="hidden" asp-for="ProductId" />
+
+
+                <div class="form-group required mt-3">
+                    <label class="form-label">Supplimentary Duty (%) : </label>
+                    <div>
+                        <input asp-for="SdPercent" class="form-control form-control-sm" maxlength="10" />
+                        <span asp-validation-for="SdPercent" class="text-danger"></span>
+                    </div>
+                </div>
+
+            </div>
+            <div class="text-right mt-3 float-end">
+                <button type="submit" class="btn  btn-primary btn-sm"><i class="bi bi-check-lg"></i> Submit</button>
+                <button type="button" value="Reset" onclick="location.reload();" class="btn  btn-warning btn-sm"><i class="bi bi-arrow-repeat"></i> Reset</button>
+                <a asp-controller="Products" asp-action="Index" class="btn btn-secondary btn-sm"><i class="bi bi-slash-circle"></i> Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>

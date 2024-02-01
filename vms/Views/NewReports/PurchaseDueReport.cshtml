@@ -1,0 +1,282 @@
+﻿@model vms.entity.viewModels.NewReports.vmPurchaseDueReport
+
+
+@{
+    var session = Context.Session.GetComplexData<VmUserSession>(ControllerStaticData.SESSION);
+}
+
+
+
+@{
+    ViewData["Title"] = "Purchase Due Report";
+}
+@using (Html.BeginForm())
+{
+
+    <input type="hidden" class="form-control" id="vendorId" name="vendorId" />
+
+    <div class="row">
+        <div class="col-md-2">
+            <div class="form-group">
+                <label>From Date</label>
+                <input class="form-control" autocomplete="off" id="FromDate" name="FromDate" value="@Model.FromDate" type="text">
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="form-group">
+                <label>To Date</label>
+                <input class="form-control" autocomplete="off" id="ToDate" name="ToDate" value="@Model.ToDate" type="text">
+            </div>
+        </div>
+
+        <div class="col-md-2">
+
+
+            <div class="form-group pull-left">
+                <input class="btn  btn-success" style="margin-top:25px;" type="submit" value="View Report" />
+            </div>
+
+        </div>
+
+
+
+
+
+    </div>
+
+
+}
+@section Scripts{
+
+
+    <script src="~/js/typeahead.bundle.js"></script>
+    <script src="~/js/jquery-ui.js"></script>
+    <script>
+
+
+        $("#FromDate").datepicker();
+        $("#FromDate").datepicker('option', 'dateFormat', 'dd M, yy');
+
+        $("#ToDate").datepicker();
+        $("#ToDate").datepicker('option', 'dateFormat', 'dd M, yy');
+
+
+
+        $(document).ready(function () {
+
+            Report.product.InvoiceAutoComplete();
+
+        });
+
+        $("#btnprint").click(function () {
+            window.print();
+        });
+
+    </script>
+
+}
+<style>
+
+    .MreturnHeader {
+        text-align: center;
+        background-color: #ffedbe;
+    }
+
+    .parthead {
+        font-size: 16px;
+    }
+
+    .Returntd {
+        text-align: left;
+    }
+
+    .Returntdhead {
+        text-align: center;
+        background-color: #cfcfcf;
+    }
+
+    .ReturntdEmpty {
+        background-color: lightgray;
+    }
+
+    .tdp1 {
+        width: 320px;
+    }
+
+    .tdp2 {
+        width: 30px;
+        text-align: center;
+    }
+
+    .report-margin {
+        width: 97%;
+        margin-left: 2%;
+        margin-right: auto;
+    }
+
+    .table td, .table th {
+        font-size: 12px;
+    }
+
+    .wrap tr td, .wrap thead tr th {
+        word-break: break-all;
+        width: 150px;
+        font-size: 10px !important;
+        vertical-align: middle;
+    }
+
+    .manual {
+        background-color: #C5CAE9;
+    }
+
+    .footer {
+        display: none !important;
+    }
+
+    .table thead tr th {
+        font-size: 14px;
+        font-weight: normal;
+    }
+
+    @@media print {
+        @@page {
+            size: A4;
+            margin-left: 0px;
+            margin-right: 0px;
+            margin-top: 15px;
+            margin-bottom: 30px;
+            
+        }
+
+        .parthead {
+            font-size: 14px;
+        }
+
+        td.text-right, th.text-right {
+            text-align: right !important
+        }
+
+        .text-right {
+            text-align: right !important;
+        }
+
+        body {
+        }
+
+        .page-break-avoid {
+            page-break-inside: avoid;
+        }
+
+        .page-break {
+            page-break-inside: auto;
+        }
+
+        .page-break-after {
+            page-break-after: always;
+        }
+
+        .page-break-before {
+            page-break-before: always;
+        }
+
+        div.footer {
+            position: fixed;
+            display: block !important;
+            bottom: 0px;
+            width: 100%;
+            border-top: 1px solid #eee; 
+            height: 30px;
+        }
+        
+    }
+</style>
+@using (Html.BeginForm("Mushok9P1", "Reports", FormMethod.Post, new { @class = "hidden-print" }))
+{
+
+
+    <div class="form-group col-sm-3 pull-right">
+        <button id="btnprint" type="button" class="btn btn-primary" style="margin-top:10px;">Print</button>
+    </div>
+
+
+}
+
+
+
+<div id="" class="report-margin">
+    <div class="row " style="padding:25px;">
+        <partial name="partials/_Header" model="Model.head" />
+    </div>
+
+
+    <table class="table  table-bordered">
+        <thead>
+            <tr>
+                <th class="text-center">
+                    Vat Invo.No
+                </th>
+                <th class="text-center">
+                    Inv. No
+                </th>
+
+                <th class="text-center">
+                    Expt. Del. Date
+                </th>
+
+
+                <th class="text-center">
+                    Type
+                </th>
+                <th class="text-center">
+                    Vendor
+                </th>
+            </tr>
+        </thead>
+
+        @if (Model.purchaseDueList.Any())
+        {
+            <tbody>
+                @foreach (var item in Model.purchaseDueList)
+                {
+                    <tr>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.VendorInvoiceNo)
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.InvoiceNo)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ExpectedDeliveryDate)
+                        </td>
+
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PurchaseType.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Vendor.Address)
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        }
+
+        else
+        {
+            <tr>
+                <td colspan="10">
+                    <p style="text-align: center">No Records Found</p>
+                </td>
+            </tr>
+        }
+
+    </table>
+
+
+    <div class="row">
+        <partial name="partials/_Footer" />
+    </div>
+</div>

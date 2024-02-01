@@ -1,0 +1,142 @@
+﻿
+
+@model IEnumerable<vms.entity.models.Organization>
+@{
+    ViewData["Title"] = "Details";
+    
+
+}
+@{
+    var session = Context.Session.GetComplexData<VmUserSession>(ControllerStaticData.SESSION);
+}
+
+@section contentheader
+    {
+    <div class="p-3 page-header">
+        Branch Details
+        <div class="d-flex justify-content-start">
+
+
+        </div>
+    </div>
+    <div class="col-12 d-flex">
+        <ul class="nav nav-pills mt-3 mr-auto align-bottom">
+        </ul>
+        @using (Html.BeginForm("BranchDetails", "Organizations", FormMethod.Get, new { id = "frmPurchase", @class = "d-flex pr-1" }))
+        {
+    <input class="form-control mr-1 form-control-sm" type="search" placeholder="Search" aria-label="Search" id="search" name="search" value="@ViewBag.searchText">
+            <button class="btn btn-primary btn-sm" type="submit">Search</button>
+        }
+    </div>
+}
+
+<div class="row">
+    <div class="col-12">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th class="text-left">
+                        Name
+                    </th>
+                    <th class="text-left">
+                        Address
+                    </th>
+                    @*<th class="text-left">
+                        Code
+                    </th>
+                    <th class="text-left">
+                        Vat Reg. No.
+                    </th>
+                    <th class="text-left">
+                        Bin
+                    </th>
+                    <th class="text-left">
+                        Certificate
+                    </th>
+                    <th class="text-left">
+                        Enlisted No
+                    </th>*@
+                    <th class="text-left">
+                        Postal Code
+                    </th>
+
+
+                </tr>
+            </thead>
+
+            @if (Model.Any())
+            {
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+
+                            <td class="text-left">
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td class="text-left">
+                                @Html.DisplayFor(modelItem => item.Address)
+                            </td>
+                            @*<td class="text-left">
+                                @Html.DisplayFor(modelItem => item.Code)
+                            </td>
+                            <td class="text-left">
+                                @Html.DisplayFor(modelItem => item.VatregNo)
+                            </td>
+                            <td class="text-left">
+                                @Html.DisplayFor(modelItem => item.Bin)
+                            </td>
+                            <td class="text-left">
+                                @Html.DisplayFor(modelItem => item.CertificateNo)
+                            </td>
+                            <td class="text-left">
+                                @Html.DisplayFor(modelItem => item.EnlistedNo)
+                            </td>*@
+                            <td class="text-left">
+                                @Html.DisplayFor(modelItem => item.PostalCode)
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            }
+
+            else
+            {
+                <tr>
+                    <td colspan="10">
+                        <p class="text-center">No Records Found</p>
+                    </td>
+                </tr>
+            }
+
+        </table>
+
+
+        @*<div class="form-actions">
+            <div class="row" style="margin-bottom:20px">
+                <div class="" style="padding-top: 30px;">
+                    <a href="~/Organizations/Index" class="btn btn-info"><i class="bi bi-chevron-double-left"></i> Back</a>
+                </div>
+            </div>
+        </div>*@
+
+
+
+        <div class="pager" style="z-index: 0;">
+            @if ((int)ViewBag.PageCount <= 10)
+            {
+
+            }
+            else
+            {
+               @* @Html.PagedListPager(
+                    (IPagedList)Model,
+                    page => Url.Action("BranchDetails", new { page })
+                    )*@
+            }
+
+        </div>
+        <a asp-action="Index" class="btn btn-secondary btn-sm"><i class="bi bi-chevron-double-left"></i> Back</a>
+    </div>
+</div>

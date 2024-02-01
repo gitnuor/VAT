@@ -1,0 +1,231 @@
+﻿@model IEnumerable<vms.entity.StoredProcedureModel.HTMLMushak.SpCreditNoteMushak>
+@{
+    ViewData["Title"] = "Mushak- 6.7 (Chalan)";
+	var firstElement = new vms.entity.StoredProcedureModel.HTMLMushak.SpCreditNoteMushak(); 
+	if (Model.Any())
+	{
+		firstElement = Model.First();
+	}
+	var watermarkStatusClass = "";
+	if (!string.IsNullOrEmpty(firstElement.InvoiceStatus))
+	{
+		watermarkStatusClass = "copy-watermark";
+	}
+	Layout = "_LayoutMushak";
+}
+
+@section contentheader
+{
+	<div class="p-3 page-header">
+		@*<div></div>*@
+		<div class="row">
+			<div class="col-8">
+				Mushak- 6.7 (Chalan)
+			</div>
+			<div class="col-4">
+				<form method="post">
+
+					<div class="form-group float-end">
+						<button id="btnPrint" type="button" class="btn btn-sm btn-primary inline-sm-button"><i class="bi bi-printer-fill"></i> Print</button>
+
+					</div>
+
+				</form>
+			</div>
+		</div>
+
+	</div>
+
+}
+
+<div class="report-section mt-3">
+
+<div class="report-margin" id="printableArea">
+	<div class="row">
+		<div class="col-3">
+
+			<img src="~/images/logo_bd_govt.svg" style="height :100px;" />
+
+		</div>
+
+
+			<div class="col-6 report-header mt-3">
+
+				<div>GOVERNMENT OF THE PEOPLE'S REPUBLIC OF BANGLADESH</div>
+				<div class="sub-header">NATIONAL BOARD OF REVENUE</div>
+			<div class="sub-header">CREDIT NOTE </div>
+			<div class="sub-header">
+					[Note clause (g) of sub-rule (1) of rule 40]
+			</div>
+
+		</div>
+
+		<div class="col-3">
+				<div class="mushak-name"> Mushak- 6.7</div>
+
+		</div>
+		<div class="col-12 mt-5"></div>
+
+			
+
+			<div class="col-8">
+
+
+				<div>Name of the registered person :@firstElement.OrganizationName </div>
+				<div>BIN of the registered person : @firstElement.OrganizationBin </div>
+				<div>Address of the registered person : @firstElement.OrganizationAddress </div>
+				<div>Customer Name : @firstElement.CustomerName </div>
+				<div>Customer BIN : @firstElement.CustomerBinOrNid </div>
+				<div>Customer Address : @firstElement.CustomerAddress </div>
+				<div>Vehicle Type & Registration No. : @firstElement.VehicleTypeAndRegistrationNo </div>
+
+			</div>
+
+			<div class="col-4">
+
+					<div>Credit Note No.: @firstElement.CreditNoteChallanNo</div>
+				<div>Issue Date: @StringGenerator.DateTimeToStringWithoutTime(firstElement.CreditNoteChallanPrintTime) </div>
+				<div>Issue Time: @StringGenerator.DateTimeToTimeString(firstElement.CreditNoteChallanPrintTime) </div>
+
+			</div>
+
+
+
+
+		<div class="col-12 mt-3 @watermarkStatusClass">
+
+			<table class="table table-bordered">
+
+				<tbody>
+
+
+						<tr class="text-center">
+					<td rowspan="2">
+						SL.
+					</td>
+					<td rowspan="2">Tax Invoice No & Rate </td>
+					<td rowspan="2">
+								Reasons for issue of credit note
+					</td>
+					<td colspan="4">
+						Information of tax invoice
+					</td>
+
+							<td colspan="4">Corresponds with the reducing adjustment </td>
+
+				</tr>
+						<tr class="text-center">
+					<td><sup>1</sup>Price</td>
+					<td>Quantity  </td>
+					<td>VAT</td>
+					<td>SD </td>
+					<td><sup>1</sup>Price</td>
+							<td>Quantity</td>
+					<td>VAT</td>
+					<td>SD </td>
+				</tr>
+
+
+						<tr class="text-center">
+
+							<td>(1)</td>
+							<td>(2)</td>
+							<td>(3)</td>
+							<td>(4)</td>
+							<td>(5)</td>
+							<td>(6)</td>
+							<td>(7)</td>
+							<td>(8)</td>
+							<td>(9)</td>
+							<td>(10)</td>
+							<td>(11)</td>
+
+				</tr>
+
+
+				@if (Model.Any())
+				{
+					int i = 1;
+					foreach (var item in Model)
+					{
+
+
+						<tr>
+
+							<td>@i</td>
+							<td>
+								@item.SalesVatChallanNo
+								<br/>
+								@StringGenerator.DateTimeToString(item.CreditNoteChallanPrintTime)
+							</td>
+							<td>@item.ReasonOfReturn</td>
+							<td class="text-right">@StringGenerator.DecimalToCommaSeparated(item.SalesPrice)</td>
+							<td class="text-right">@StringGenerator.DecimalToCommaSeparated(item.SalesQuantity)</td>
+							<td class="text-right">@StringGenerator.DecimalToCommaSeparated(item.SalesVatAmount)</td>
+							<td class="text-right">@StringGenerator.DecimalToCommaSeparated(item.SalesSupplementaryDutyAmount)</td>
+							<td class="text-right">@StringGenerator.DecimalToCommaSeparated(item.ReturnedPrice)</td>
+							<td class="text-right">@StringGenerator.DecimalToCommaSeparated(item.ReturnQuantity)</td>
+							<td class="text-right">@StringGenerator.DecimalToCommaSeparated(item.ReturnedVatAmount)</td>
+							<td class="text-right">@StringGenerator.DecimalToCommaSeparated(item.ReturnedSupplementaryDutyAmount)</td>
+
+						</tr>
+
+						i++;
+					}
+				}
+
+				</tbody>
+
+			</table>
+
+
+
+		</div>
+		<div class="col-12 mt-5">
+				<div>Name of Responsible Person: @firstElement.VatResponsiblePersonName </div>
+				<div>Designation: @firstElement.VatResponsiblePersonDesignation </div>
+				<div class="mt-3 mb-3">
+					Signature: @if (!string.IsNullOrEmpty(firstElement.VatResponsiblePersonSignUrl))
+			                                 {
+				                                 <img src="@Url.Content(StringGenerator.RemoveWwwRoot(firstElement.VatResponsiblePersonSignUrl))" alt="@firstElement.VatResponsiblePersonName" class="signature-image"/>
+			                                 }</div>
+				<div>Seal: </div>
+		</div>
+
+
+
+			<div class="col-12 mt-2">
+				<div class="row">
+					<div class="col-4">
+						<hr class="black-hr">
+						<sup>1</sup>Goods/services inclusive of cess and supplementary duty
+					</div>
+				</div>
+			</div>
+
+		<div class="col-12">
+			<div class="print-footer">
+					<div class="text-center">** This document is system-generated. No signature is required. **</div>
+				Generated on: @StringGenerator.DateTimeToString(DateTime.Now)
+			</div>
+		</div>
+
+	</div>
+	
+	
+</div>
+</div>
+
+@section Scripts{
+
+	<script>
+
+		$(document).ready(function () {
+			window.$("#btnPrint").click(function () {
+				window.vmsPrint.printA4Portrait('printableArea');
+
+			});
+		});
+
+	</script>
+}

@@ -1,0 +1,51 @@
+﻿@model vms.entity.viewModels.SubscriptionAndBilling.SubscriptionBillInitiationViewModel
+@{
+	ViewData["Title"] = "Initialize Bill";
+}
+
+@section contentheader
+{
+	<div class="p-3 page-header">
+		@ViewData["Title"]
+	</div>
+}
+
+<div class="row">
+	<div class="col-md-4 offset-4">
+		<form asp-action="GenerateBill" class="form-horizontal">
+			<div class="form-group mt-3">
+				<label asp-for="BillingOfficeId"></label>
+				<select asp-for="BillingOfficeId" asp-items="Model.OrgBranchList.CustomSelectListToSelectList()">
+					<option value="@null">Select Billing Office</option>
+				</select>
+				<span asp-validation-for="BillingOfficeId"></span>
+			</div>
+			<div class="form-group mt-3">
+				<label asp-for="CollectionOfficeId"></label>
+				<select asp-for="CollectionOfficeId" asp-items="Model.OrgBranchList.CustomSelectListToSelectList()">
+					<option value="@null">Select Collection Office</option>
+				</select>
+				<span asp-validation-for="CollectionOfficeId"></span>
+			</div>
+			<div class="form-group mt-3">
+				<label asp-for="BillYear"></label>
+				<div>
+					<input asp-for="BillYear" />
+					<span asp-validation-for="BillYear"></span>
+				</div>
+			</div>
+			<div class="form-group mt-3">
+				<label asp-for="BillMonth"></label>
+				<select asp-for="BillMonth" asp-items="Model.MonthList.CustomSelectListToSelectList()">
+					<option value="@null">Select Billing Month</option>
+				</select>
+				<span asp-validation-for="BillMonth"></span>
+			</div>
+			<div class="form-group mt-3 float-end mt-3">
+				<button type="submit" class="btn  btn-primary btn-sm">Next <i class="bi bi-chevron-double-right"></i></button>
+				<button type="button" value="Reset" onclick="location.reload();" class="btn  btn-warning btn-sm"><i class="bi bi-arrow-repeat"></i> Reset</button>
+				<a asp-action="Index" class="btn btn-secondary btn-sm"><i class="bi bi-slash-circle"></i> Cancel</a>
+			</div>
+		</form>
+	</div>
+</div>

@@ -1,0 +1,85 @@
+﻿@model vms.entity.viewModels.VmInputOutputCoEfficient
+
+<h5> Product Cost</h5>
+<form method="post" id="productCostFrm">
+	<table class="table table-bordered form-table">
+		<thead>
+			<tr>
+				<th>Item</th>
+				<th class="w-px-150">Qty</th>
+				<th class="w-px-150">Cost</th>
+				<th class="w-px-150">Unit Price</th>
+				<th class="w-px-100">M. Unit</th>
+				<th class="w-px-100">Wastage(%)</th>
+				<th class="single-button-action-column"></th>
+			</tr>
+			<tr>
+
+				<td>
+					<select asp-for="ProductId">
+						<option value="@null">Select Product</option>
+						@if (Model.RawMaterialForInputOutputCoEfficientList.Any())
+						{
+							foreach (var product in Model.RawMaterialForInputOutputCoEfficientList)
+							{
+								<option value="@product.ProductId" id="pid"
+										data-product-Unit-Price="@product.UnitPrice"
+										data-product-measurement-unit-id="@product.MeasurementUnitId"
+										data-product-measurement-unit-name="@product.MeasurementUnitName">
+									@product.ProductDescription
+								</option>
+								@* <span id="pid" hidden> @product.value</span> *@
+							}
+						}
+					</select>
+					<span asp-validation-for="ProductId" class="text-danger"></span>
+				</td>
+				<td>
+					<div>
+						<input type="number" class="form-control form-control-sm" id="RequiredQty" asp-for="RequiredQty">
+						<span asp-validation-for="RequiredQty" class="text-danger"></span>
+					</div>
+				</td>
+				<td>
+					<div>
+						<input type="number" class="form-control form-control-sm ppcost" asp-for="ProductCost" id="ProductCost" />
+						<span asp-validation-for="ProductCost" class="text-danger"></span>
+
+					</div>
+				</td>
+				<td>
+					@*<input type="text" asp-for="UnitPrice" readonly="readonly" class="form-control form-control-sm">*@
+					<input type="text" asp-for="UnitPrice" class="form-control form-control-sm unitPrice" />
+				</td>
+				<td>
+					<input type="hidden" asp-for="MeasurementUnitId" class="form-control form-control-sm" id="munitid">
+					<input type="text" asp-for="MeasurementUnitName" readonly="readonly" class="form-control form-control-sm">
+					<span asp-validation-for="MeasurementUnitId" class="text-danger"></span>
+				</td>
+				<td>
+					<input type="number" class="form-control form-control-sm" id="WastagePercentage" asp-for="WastagePercentage">
+					<span asp-validation-for="WastagePercentage" class="text-danger"></span>
+				</td>
+
+				<td>
+					<a id="btnAddRelatedProductCost" class="btn btn-sm btn-success" aria-label="Left Align">
+						<i class="bi bi-plus-lg"></i>
+					</a>
+				</td>
+			</tr>
+		</thead>
+
+		<tbody id="tbdProductCost"></tbody>
+
+		<tfoot>
+			<tr class="text-end">
+				<th colspan="2">Total</th>
+				<th id="totalProductCost"></th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
+			</tr>
+		</tfoot>
+	</table>
+</form>

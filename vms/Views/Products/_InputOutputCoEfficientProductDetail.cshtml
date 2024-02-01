@@ -1,0 +1,48 @@
+﻿@model vms.entity.viewModels.VmInputOutputCoEfficient
+
+<table class="table table-bordered form-table form-table-heading-highlighted form-table-heading-w-150px">
+	<tbody>
+	<tr>
+		<th>Product Name</th>
+		<td>@Model.ProductName</td>
+		<th>HS Code</th>
+		<td>@Model.HSCode.EmptyStringToNa()</td>
+		<th>Code</th>
+		<td>@Model.Code.EmptyStringToNa()</td>
+		<th>Product Type</th>
+		<td>@Model.ProductTypeName.EmptyStringToNa()</td>
+		<th>Model</th>
+		<td>@Model.ModelNo.EmptyStringToNa()</td>
+	</tr>
+	<tr>
+		<th>Brand</th>
+		<td>@Model.BrandName.EmptyStringToNa()</td>
+		<th>Color</th>
+		<td>@Model.Color.EmptyStringToNa()</td>
+		<th>Variant</th>
+		<td>@Model.Variant.EmptyStringToNa()</td>
+		<th>Weight</th>
+		<td>@Model.Weight.EmptyStringToNa()</td>
+		<th>Specification</th>
+		<td>@Model.Specification.EmptyStringToNa()</td>
+	</tr>
+	<tr>
+		<th>
+			<label asp-for="SalesUnitPrice" class="control-label">Sales Unit Price</label>
+		</th>
+		<td class="w-min-px-200">
+			<input asp-for="SalesUnitPrice" class="form-control" readonly/>
+			<input asp-for="MeasurementUnitId" hidden value="@Model.MeasurementUnitId" class="form-control" readonly/>
+			<span asp-validation-for="SalesUnitPrice" class="text-danger"></span>
+		</td>
+		<th>Measurement Unit</th>
+		<td>@Model.MeasurementUnitName</td>
+		<th>Size</th>
+		<td>@Model.Size.EmptyStringToNa()</td>
+		<th>Product Group</th>
+		<td>@Model.ProductGroupName.EmptyStringToNa()</td>
+		<th>Product Category</th>
+		<td>@Model.ProductCategoryName.EmptyStringToNa()</td>
+	</tr>
+	</tbody>
+</table>

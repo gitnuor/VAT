@@ -1,0 +1,94 @@
+﻿@model vms.entity.viewModels.VendorViewModel.VendorForeignCreateViewModel
+<div class="accordion mt-3" id="accordionForm">
+	<div class="accordion-item">
+		<div class="accordion-header" id="headingBankingInformation">
+			<button class="accordion-button collapsed vms-accordion-button"
+				type="button"
+				data-bs-toggle="collapse"
+				data-bs-target="#bankingInformation"
+				aria-expanded="false"
+				aria-controls="bankingInformation"
+			>
+				Banking Information
+			</button>
+		</div>
+		<div
+			id="bankingInformation"
+			class="accordion-collapse collapse"
+			aria-labelledby="headingBankingInformation"
+			data-bs-parent="#accordionForm"
+		>
+			<div class="accordion-body">
+				<div class="row">
+					<div class="col-6">
+						<div class="form-group">
+							<label  asp-for="BankAccountNo"></label>
+							<div>
+								<input asp-for="BankAccountNo" />
+								<span asp-validation-for="BankAccountNo" ></span>
+							</div>
+						</div>
+					</div>
+					
+					<div class="col-6">
+						<div class="form-group">
+							<label  asp-for="BankRoutingCode"></label>
+							<div>
+								<input asp-for="BankRoutingCode" />
+								<span asp-validation-for="BankRoutingCode" ></span>
+							</div>
+						</div>
+					</div>
+					
+					<div class="col-6">
+						<div class="form-group mt-3">
+							<label asp-for="BankId" ></label>
+							<select asp-for="BankId" asp-items="Model.BankList.CustomSelectListToSelectList()" >
+								<option value="@null">Select Bank</option>
+							</select>
+							<span asp-validation-for="BankId" ></span>
+						</div>
+					</div>
+					
+					<div class="col-6">
+						<div class="form-group mt-3">
+							<label  asp-for="BankBranchName"></label>
+							<div>
+								<input asp-for="BankBranchName" />
+								<span asp-validation-for="BankBranchName" ></span>
+							</div>
+						</div>
+					</div>
+					
+					<div class="col-6">
+						<div class="form-group mt-3">
+							<label asp-for="BankBranchCountryId" ></label>
+							<select asp-for="BankBranchCountryId" asp-items="Model.Countries.CustomSelectListToSelectList()" >
+								<option value="@null">Select Bank Branch Country</option>
+							</select>
+							<span asp-validation-for="BankBranchCountryId" ></span>
+						</div>
+					</div>
+					
+					<div class="col-6">
+						<div class="form-group mt-3">
+							<label asp-for="BankBranchDistrictOrCityName" ></label>
+							<input asp-for="BankBranchDistrictOrCityName"  />
+							<span asp-validation-for="BankBranchDistrictOrCityName" ></span>
+						</div>
+					</div>
+					
+					<div class="col-6">
+						<div class="form-group mt-3">
+							<label  asp-for="BankBranchAddress"></label>
+							<div>
+								<input asp-for="BankBranchAddress" />
+								<span asp-validation-for="BankBranchAddress" ></span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

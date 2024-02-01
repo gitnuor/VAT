@@ -1,0 +1,325 @@
+﻿@model IEnumerable<vms.entity.StoredProcedureModel.HTMLMushak.SpPurchaseCalcBook>
+
+<style>
+
+    .MreturnHeader {
+        text-align: center;
+        background-color: #ffedbe;
+    }
+
+
+    .Returntd {
+        text-align: left;
+    }
+
+    .Returntdhead {
+        text-align: center;
+        background-color: #cfcfcf;
+    }
+
+    .ReturntdEmpty {
+        background-color: lightgray;
+    }
+
+    .tdp1 {
+        width: 320px;
+    }
+
+    .tdp2 {
+        width: 30px;
+        text-align: center;
+    }
+
+    .report-margin {
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+</style>
+
+
+
+<div class="report-margin">
+    <div class="col-xs-12">
+
+        <div class="col-xs-3">
+
+            <img src="~/images/logo_bd_govt.svg" style="height :100px;" />
+
+
+        </div>
+
+        
+        <div class="col-xs-6" style="text-align:center">
+
+            <h4>গণপ্রজাতন্ত্রী বাংলাদেশ সরকার</h4>
+            <h4>জাতীয় রাজস্ব বোর্ড</h4>
+            <h4>মূল্য সংযোজন কর দলিলপত্র</h4>
+            <h4>[বিধি ৪৭ এর উপ-বিধি (১) দ্রষ্টব্য]</h4>
+
+        </div>
+
+        <div class="col-xs-3 pull-right">
+            <h4 style="color:green; border:solid; border-color:cornflowerblue; text-align:center"> মূসক-৬.১</h4>
+
+
+
+        </div>
+
+        <div class="col-xs-12">
+
+
+            <div class="col-xs-12" style="text-align:center">
+                <h5>প্রতিষ্ঠানের নাম : : </h5>
+
+                <h5>ঠিকানা::   </h5>
+                <h5> বিন:   </h5>
+                <h5>ক্রয় হিসাব পুস্তক</h5>
+                <h5>(পণ্য বা সেবা প্রক্রিয়াকরণে সম্পৃক্ত  এমন নিবন্ধিত বা তালিকাভুক্ত ব্যক্তির জন্য প্রযোজ্য)</h5>
+                <h5>
+                    [বিধি ৪০ (১) এর দফা (ক) ও বিধি ৪১ এর দফা (ক) দ্রষ্টব্য]
+                </h5>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="col-xs-12">
+
+        <table class="table table-bordered">
+
+            <thead>
+                <tr>
+                    <th colspan="21" style="text-align:center">
+
+                        পণ্য / সেবার উপকরণ ক্রয়
+
+
+
+                    </th>
+
+
+
+
+                </tr>
+
+
+
+            </thead>
+            <tbody style="text-align:center">
+
+                <tr>
+                    <td rowspan="3">
+
+                        ক্রমিক
+                        সংখ্যা
+
+
+                    </td>
+                    <td rowspan="3">
+
+                        তারিখ
+
+
+                    </td>
+
+                    <td colspan="2">
+                        মজুদ উপকরণের প্রারম্ভিক জের
+
+
+                    </td>
+
+                    <td colspan="14">
+                        ক্রয় কৃত উপকরণ
+
+
+
+
+                    </td>
+
+                    <td colspan="2">
+                        উপকরণের প্রান্তিক জের
+
+
+                    </td>
+                    <td>
+                        মন্তব্য
+
+
+                    </td>
+                </tr>
+
+                <tr>
+
+                    <td rowspan="2">
+                        পরিমাণ
+                        (একক)
+                    </td>
+                    <td rowspan="2">
+                        মূল্য
+                        (সকল
+                        প্রকার
+                        কর
+                        ব্যতীত)
+                    </td>
+                    <td rowspan="2">চালান .. বিল অব এন্ট্ররি নম্বর</td>
+                    <td rowspan="2">তারিখ </td>
+                    <td colspan="3">বিক্রেতা /সরবরাহকারী</td>
+                    <td rowspan="2">বিবরণ  </td>
+                    <td rowspan="2">পরিমাণ</td>
+                    <td rowspan="2">
+                        মূল্য
+                        (সকল
+                        প্রকার
+                        কর
+                        ব্যতীত)
+                    </td>
+                    <td rowspan="2">সম্পূরক শুল্ক (যদি থাকে)   </td>
+                    <td rowspan="2">মুসক   </td>
+                    <td colspan="2">মোট উপকরনের পরিমান</td>
+                    <td colspan="2">পণ্য প্রস্তুত প্রক্রিয়া করনে উপকরণের ব্যবহার</td>
+                    <td rowspan="2">পরিমাণ (একক)</td>
+                    <td rowspan="2">
+                        মূল্য
+                        (সকল
+                        প্রকার
+                        কর
+                        ব্যতীত)
+                    </td>
+                    <td rowspan="2"></td>
+
+
+                </tr>
+
+
+                <tr>
+
+                    <td>নাম</td>
+                    <td>ঠিকানা </td>
+                    <td>নিবন্ধন/তালিকাভুক্তি/জাতীয় পরিচয়পত্র নং  </td>
+                    <td>পরিমাণ (একক)  </td>
+                    <td>
+                        মূল্য
+                        (সকল
+                        প্রকার
+                        কর
+                        ব্যতীত)
+                    </td>
+                    <td>পরিমাণ (একক)  </td>
+                    <td>
+                        মূল্য
+                        (সকল
+                        প্রকার
+                        কর
+                        ব্যতীত)
+                    </td>
+
+
+
+
+
+                </tr>
+                <tr>
+                    <td>১</td>
+                    <td>২</td>
+                    <td>৩</td>
+                    <td>৪</td>
+                    <td>৫</td>
+                    <td>৬</td>
+                    <td>৭</td>
+                    <td>৮</td>
+                    <td>৯</td>
+                    <td>১০</td>
+                    <td>১১</td>
+                    <td>১২</td>
+                    <td>১৩</td>
+                    <td>১৪</td>
+                    <td>
+                        (১৫)
+                        =(৩+১১)
+                    </td>
+                    <td>
+                        (১৬)
+                        =(৪+১২)
+                    </td>
+                    <td>১৭</td>
+                    <td>১৮</td>
+                    <td>১৯</td>
+                    <td>২০</td>
+                    <td>২১</td>
+
+
+
+
+
+
+                </tr>
+
+
+
+                @if (Model.Any())
+                {
+
+                    foreach (var item in Model)
+                    {
+
+
+                        <tr>
+                            <td>@item.SlNo</td>
+                            <td>@item.OperationTime</td>
+                            <td>@item.InitialQty</td>
+                            <td>@item.InitPriceWithoutVat</td>
+                            <td>@item.VatChallanOrBillOfEntry</td>
+                            <td>@item.VatChallanOrBillOfEntryDate</td>
+                            <td>@item.VendorName</td>
+                            <td>@item.VendorAddress</td>
+                            <td>@item.VendorBinOrNid</td>
+                            <td>@item.ProductName</td>
+                            <td>@item.PurchaseQty</td>
+                            <td>@item.PriceWithoutVat</td>
+                            <td>@item.SupplimentaryDuty</td>
+                            <td>@item.VATAmount</td>
+                            <td>@{ var x = item.InitialQty + item.PurchaseQty;} @x</td>
+                            <td>@{ var y = item.InitPriceWithoutVat + item.PriceWithoutVat;} @y</td>
+                            <td>@item.UsedInProductionQty</td>
+                            <td>@item.PriceWithoutVatForUsedInProduction</td>
+                            <td>@item.ClosingProdQty</td>
+                            <td>@item.ClosingTotalPrice</td>
+                            <td>@item.OperationType</td>
+
+
+
+
+
+
+                        </tr>
+
+
+                    }
+                }
+
+
+            </tbody>
+
+        </table>
+
+
+
+    </div>
+
+
+    <div class="col-xs-12">
+
+        <h5 style="font-weight: bold;">বিশেষ দ্রষ্টব্য:</h5>
+        <h5>
+            ১ .অর্থনৈতিক কার্যক্রম সংশ্লিষ্ট সকল প্রকার ক্রয়ের তথ্য এই ফরমে অন্তর্ভুক্ত করিতে হইবে|
+        </h5>
+        <h5>
+            ২. যে ক্ষেত্রে অনিবন্ধিত ব্যক্তির নিকট হইতে পণ্য ক্রয় করা হইবে সেই ক্ষেত্রে উক্ত ব্যক্তির পূর্ণাঙ্গ নাম, ঠিকানা ও জাতীয় পরিচয়পত্র নম্বর যথাযথভাবে সংশ্লিষ্ট কলাম [(৭),(৮) ও (৯)] এ আবশ্যিকভাবে উল্লেখ করিতে হইবে|
+        </h5>
+        <h5>৩. পণ্য ক্রয়ের সাপেক্ষে প্রামানিক দলিল হিসাবে বিল অব এন্ট্রি বা চালানের কপি সংরক্ষণ করিতে হইবে|</h5>
+
+    </div>
+
+</div>

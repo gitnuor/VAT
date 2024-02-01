@@ -1,0 +1,12 @@
+﻿MIS Report Style:
+
+Header: 				font-size: 10pt 		font-weight: bold		font: arial
+sub-header: 			font-size: 9pt 			font-weight: bold       font: Arial
+Table Alias: 			font-size: 8pt 			font-weight: bold       font: Arial
+Table header/Footer: 	font-size: 8pt 			font-weight: bold		font: arial				background: LightGrey
+Table-cell: 			font-size: 8pt 									font: Arial Narrow
+Page Number: 			font-size: 8pt 									font: Arial
+
+
+Report Margin:	Left, Right 0.5
+				Top, Bottom 0.25

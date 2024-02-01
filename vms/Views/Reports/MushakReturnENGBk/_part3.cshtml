@@ -1,0 +1,164 @@
+﻿@model vms.entity.StoredProcedureModel.MushakReturn.MushakReturnPartThree
+
+
+<table class="table table-bordered">
+    <thead>
+
+        <tr>
+
+            <th class="MreturnHeader" colspan="6">
+
+                <h4> Part-3:SUPPLY - OUTPUT TAX</h4>
+
+            </th>
+            <th class="border-0"></th>
+        </tr>
+
+
+    </thead>
+    <tbody class="Returntd">
+
+        <tr class="Returntdhead">
+            <td colspan="2">Nature of Supply</td>
+            <td>Note</td>
+            <td>Value (a)</td>
+            <td>SD (b) </td>
+            <td>VAT (c)</td>
+            <td class="border-0"></td>
+
+        </tr>
+
+        <tr>
+            <td rowspan="2">
+                Zero Rated Goods/Service
+            </td>
+            <td>Direct Export</td>
+            <td style="text-align:center;">1</td>
+            <td style="text-align:right;">@Model.DirectExportAmount</td>
+            <td class="ReturntdEmpty"></td>
+            <td class="ReturntdEmpty"></td>
+            <td> <a href="#subFormKa" class="ReturntdEmpty">Sub-form </a> </td>
+
+
+
+        </tr>
+        <tr>
+
+            <td>Deemed Export </td>
+            <td style="text-align:center;">2</td>
+            <td style="text-align:right;">@Model.IndirectExportAmount</td>
+            <td class="ReturntdEmpty"></td>
+            <td class="ReturntdEmpty"></td>
+            <td><a href="#subFormKa" class="ReturntdEmpty">Sub-form </a> </td>
+
+
+
+        </tr>
+
+        <tr>
+            <td colspan="2">
+              Exempted Goods/Service
+            </td>
+
+            <td style="text-align:center;">3</td>
+            <td style="text-align:right;">@Model.VatExemptedProdSellAmount</td>
+            <td class="ReturntdEmpty"></td>
+            <td class="ReturntdEmpty"></td>
+            <td><a href="#subFormKa" class="ReturntdEmpty">Sub-form </a></td>
+
+
+
+        </tr>
+
+        <tr>
+            <td colspan="2">
+                Standard Rated Goods/Service
+            </td>
+
+            <td style="text-align:center;">4</td>
+            <td style="text-align:right;">@Model.StandardVatRateProdSellAmount</td>
+            <td style="text-align:right;">@Model.StandardVatRateProdSellSdAmount</td>
+            <td style="text-align:right;">@Model.StandardVatRateProdSellVatAmount</td>
+            <td><a href="#subFormKa">Sub-form </a></td>
+
+
+
+        </tr>
+
+
+        <tr>
+            <td colspan="2">
+                Goods Based on MRP
+            </td>
+
+            <td style="text-align:center;">5</td>
+            <td style="text-align:right;">@Model.MrpProdSellAmount</td>
+            <td style="text-align:right;">@Model.MrpProdSellSdAmount</td>
+            <td style="text-align:right;">@Model.MrpProdSellVatAmount</td>
+            <td><a href="#subFormKa">Sub-form </a></td>
+
+
+
+        </tr>
+
+        <tr>
+            <td colspan="2">
+                Goods/Service Based on Specific VAT
+            </td>
+
+            <td style="text-align:center;">6</td>
+            <td style="text-align:right;">@Model.FixedVatProdSellAmount    </td>
+            <td style="text-align:right;">@Model.FixedVatProdSellSdAmount  </td>
+            <td style="text-align:right;">@Model.FixedVatProdSellVatAmount </td>
+            <td>Sub-form </td>
+
+
+
+        </tr>
+
+
+
+        <tr>
+            <td colspan="2">
+                Goods/Service Other than Standard Rate
+            </td>
+
+            <td style="text-align:center;">7</td>
+            <td style="text-align:right;">@Model.OtherThanStandardVatRateProdSellAmount    </td>
+            <td style="text-align:right;">@Model.OtherThanStandardVatRateProdSellSdAmount  </td>
+            <td style="text-align:right;">@Model.OtherThanStandardVatRateProdSellVatAmount </td>
+            <td><a href="#subFormKa">Sub-form </a></td>
+
+
+
+        </tr>
+
+        <tr>
+            <td colspan="2">
+               Retail/Wholesale/Trade Based Supply
+            </td>
+
+            <td style="text-align:center;">8</td>
+            <td style="text-align:right;">@Model.TradingSellAmount</td>
+            <td style="text-align:right;">@Model.TradingSellSdAmount</td>
+            <td style="text-align:right;" class="ReturntdEmpty">@Model.TradingSellVatAmount</td>
+            <td><a href="#subFormKha">Sub-form </a></td>
+
+
+
+        </tr>
+
+        <tr>
+            <td colspan="2">
+                Total Sales Value & Total Payable Taxes
+            </td>
+
+            <td style="text-align:center;">9</td>
+            <td style="text-align:right;" class="ReturntdEmpty">@Model.TotalAmount   </td>
+            <td style="text-align:right;">@Model.TotalSdAmount </td>
+            <td style="text-align:right;">@Model.TotalVatAmount</td>
+
+        </tr>
+    </tbody>
+
+</table>

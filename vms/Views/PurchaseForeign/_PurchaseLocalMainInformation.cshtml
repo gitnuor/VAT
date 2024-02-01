@@ -1,0 +1,81 @@
+﻿@model vms.entity.viewModels.VmPurchaseLocal
+<div class="font-weight-bold mb-3">
+	Main Information
+</div>
+<form class="row g-3" id="frmMainInformation" method="post">
+	<div class="col-md-6 complex-form-col">
+		<label asp-for="OrgBranchId" class="form-label complex-form-label"></label>
+		<select asp-for="OrgBranchId" asp-items="Model.OrgBranchList.CustomSelectListToSelectList()" class="searchable-dropdown" data-live-search="true" data-style="bootstrap-select-option">
+			<option value="@null">Select Branch</option>
+		</select>
+		<span asp-validation-for="OrgBranchId" class="text-danger"></span>
+	</div>
+	<div class="col-md-6 complex-form-col">
+		<label asp-for="PurchaseReasonId" class="form-label complex-form-label"></label>
+		<select asp-for="PurchaseReasonId" asp-items="Model.PurchaseReasonSelectList.CustomSelectListToSelectList()" class="searchable-dropdown" data-live-search="true" data-style="bootstrap-select-option">
+			<option value="@null">Select Reason</option>
+		</select>
+		<span asp-validation-for="PurchaseReasonId" class="text-danger"></span>
+	</div>
+	<div class="col-md-6 complex-form-col d-none">
+		<label asp-for="InvoiceNo" class="form-label complex-form-label"></label>
+		<input type="text" asp-for="InvoiceNo" class="form-control form-control-sm">
+		<span asp-validation-for="InvoiceNo" class="text-danger"></span>
+	</div>
+	<div class="col-md-6 complex-form-col">
+		<label asp-for="VoucherNo" class="form-label complex-form-label"></label>
+		<input type="text" asp-for="VoucherNo" class="form-control form-control-sm">
+		<span asp-validation-for="VoucherNo" class="text-danger"></span>
+	</div>
+	<div class="col-md-6 complex-form-col">
+		<label asp-for="PurchaseDate" class="form-label complex-form-label"></label>
+		<input type="date" asp-for="PurchaseDate" min='2000-01-01' max='@DateTime.Now.ToString("yyyy-MM-dd")' class="form-control form-control-sm">
+		<span asp-validation-for="PurchaseDate" class="text-danger"></span>
+	</div>
+	<div class="col-md-6 complex-form-col">
+		<label asp-for="VendorId" class="form-label complex-form-label"></label>
+		<select asp-for="VendorId" asp-items="Model.VendorSelectList.CustomSelectListToSelectList()" class="searchable-dropdown" data-live-search="true" data-style="bootstrap-select-option">
+			<option value="@null">Select Vendor</option>
+		</select>
+		<span asp-validation-for="VendorId" class="text-danger"></span>
+	</div>
+	<div class="col-md-6 complex-form-col">
+		<label asp-for="VendorInvoiceNo" class="form-label complex-form-label"></label>
+		<input type="text" asp-for="VendorInvoiceNo" class="form-control form-control-sm">
+		<span asp-validation-for="VendorInvoiceNo" class="text-danger"></span>
+	</div>
+	<div class="col-md-6 complex-form-col">
+		<label asp-for="VatChallanNo" class="form-label complex-form-label"></label>
+		<input type="text" asp-for="VatChallanNo" class="form-control form-control-sm">
+		<span asp-validation-for="VatChallanNo" class="text-danger"></span>
+	</div>
+	<div class="col-md-6 complex-form-col">
+		<label asp-for="VatChallanIssueDate" class="form-label complex-form-label"></label>
+		<input type="datetime-local" asp-for="VatChallanIssueDate" min='2000-01-01' max='@((DateTime.Now).ToString("yyyy-MM-ddTHH:mm"))' class="form-control form-control-sm">
+		<span asp-validation-for="VatChallanIssueDate" class="text-danger"></span>
+	</div>
+	<div class="col-md-6 complex-form-col">
+		<div class="form-check form-switch complex-form-checkbox">
+			<input type="checkbox" asp-for="IsVatDeductedInSource" class="form-check-input">
+			<label asp-for="IsVatDeductedInSource" class="form-check-label"></label>
+			<span asp-validation-for="IsVatDeductedInSource" class="text-danger"></span>
+		</div>
+	</div>
+	<div class="col-md-6 complex-form-col vds-related d-none">
+		<label asp-for="VdsAmount" class="form-label complex-form-label"></label>
+		<input type="number" asp-for="VdsAmount" class="form-control form-control-sm">
+		<span asp-validation-for="VdsAmount" class="text-danger"></span>
+	</div>
+	<div class="col-md-6 complex-form-col">
+		<div class="form-check form-switch complex-form-checkbox">
+			<input type="checkbox" asp-for="IsTds" class="form-check-input">
+			<label asp-for="IsTds" class="form-check-label"></label>
+			<span asp-validation-for="IsTds" class="text-danger"></span>
+		</div>
+	</div>
+	<div class="col-md-6 complex-form-col tds-related d-none">
+		<label asp-for="TdsAmount" class="form-label complex-form-label"></label>
+		<input type="number" asp-for="TdsAmount" class="form-control form-control-sm">
+		<span asp-validation-for="TdsAmount" class="text-danger"></span>
+	</div>
+</form>

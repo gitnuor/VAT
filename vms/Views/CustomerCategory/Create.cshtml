@@ -1,0 +1,37 @@
+﻿@model vms.entity.models.CustomerCategory
+@{
+	ViewData["Title"] = "Create Customer Category";
+}
+
+@section contentheader
+{
+	<div class="p-3 page-header">
+		@ViewData["Title"]
+	</div>
+}
+
+<div class="row">
+	<div class="col-md-4 offset-4">
+		<form asp-action="Create" class="form-horizontal">
+			<div class="form-group">
+				<label asp-for="CategoryName">Category Name</label>
+				<div>
+					<input asp-for="CategoryName" />
+					<span asp-validation-for="CategoryName"></span>
+				</div>
+			</div>
+			<div class="form-group mt-3">
+				<label asp-for="Remarks"></label>
+				<div>
+					<textarea asp-for="Remarks"></textarea>
+					<span asp-validation-for="Remarks"></span>
+				</div>
+			</div>
+			<div class="form-group mt-3 float-end mt-3">
+				<button type="submit" data-requiredconfirmation="true" class="btn  btn-primary btn-sm"><i class="bi bi-check-lg"></i> Submit</button>
+				<button type="button" value="Reset" onclick="location.reload();" class="btn  btn-warning btn-sm"><i class="bi bi-arrow-repeat"></i> Reset</button>
+				<a asp-action="Index" class="btn btn-secondary btn-sm"><i class="bi bi-slash-circle"></i> Cancel</a>
+			</div>
+		</form>
+	</div>
+</div>

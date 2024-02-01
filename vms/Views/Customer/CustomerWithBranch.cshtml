@@ -1,0 +1,20 @@
+﻿@model IEnumerable<vms.entity.models.ViewCustomerWithBranch>
+@{
+	ViewData["Title"] = "All Customers with Branch";
+
+	var session = Context.Session.GetComplexData<VmUserSession>(ControllerStaticData.SESSION);
+}
+
+@section contentheader
+{
+	<div class="p-3 pb-2 page-header">
+		@ViewData["Title"]
+	</div>
+	<partial name="Customer/_CustomerSubLink"/>
+}
+
+<div class="gray-slim-scroll-container">
+	<div class="table-scroll-container">
+		<partial name="_CustomerWithBranch" model="Model"/>
+	</div>
+</div>

@@ -1,0 +1,93 @@
+﻿@model vms.entity.models.Product 
+@{
+	var session = Context.Session.GetComplexData<VmUserSession>(ControllerStaticData.SESSION);
+}
+
+<div class="nav navbar-nav">
+	<div class="dropdown dropdown-freeze-grid-action">
+		<a href="#" class="" data-bs-toggle="dropdown" data-close-others="true">
+			<i class="text-dark bi bi-three-dots-vertical"></i>
+		</a>
+		<ul class=" dropdown-menu dropdown-menu-right div-with-arrow-right-top">
+			@if (UserAuthorization.Check(FeatureList.PRODUCT_PRODUCT_LIST_CAN_EDIT, session.Rights))
+			{
+				<li>
+					<a class="dropdown-item" asp-action="Edit" asp-route-id="@Model.EncryptedId">Edit</a>
+				</li>
+			}
+			@if (UserAuthorization.Check(FeatureList.PRODUCT_PRODUCT_LIST_CAN_VIEW_DETAILS, session.Rights))
+			{
+				<li>
+					<a class="dropdown-item" asp-action="Details" asp-route-id="@Model.EncryptedId"><i class="bi bi-info-circle"></i> Details</a>
+				</li>
+			}
+			@if (UserAuthorization.Check(FeatureList.PRODUCT_PRODUCT_LIST_CAN_DELETE, session.Rights))
+			{
+				if (Model.IsActive == true)
+				{
+					<li>
+
+						<a class="dropdown-item" href="Products/ChangeProductStatus/@Model.EncryptedId" type="button" data-requiredconfirmation="true"><i class="bi bi-exclamation-diamond"></i> Inactive</a>
+					</li>
+				}
+				else
+				{
+					<li>
+
+						<a class="dropdown-item" href="Products/ChangeProductStatus/@Model.EncryptedId" type="button" data-requiredconfirmation="true"><i class="bi bi-check-circle"></i> Active</a>
+					</li>
+				}
+			}
+			@if (UserAuthorization.Check(FeatureList.PRODUCT_PRODUCT_LIST_CAN_ADD_NEW_PRICE, session.Rights))
+			{
+@*<li>
+        <a class="dropdown-item" asp-action="PriceSetup" asp-route-id="@Model.EncryptedId"><i class="fa fa-money"></i> Add New Price</a>
+
+    </li>*@
+				<li>
+					<a class="dropdown-item" asp-action="InputOutputCoEfficient" asp-route-id="@Model.EncryptedId"><i class="fa fa-money"></i> Add Input-Output Coefficient</a>
+
+				</li>
+			}
+			@if (Model.PriceSetups.Any())
+			{
+				var priceSetupId = Model.PriceSetups.Where(c => c.IsActive == true).FirstOrDefault();
+				if (priceSetupId.IsMushakSubmitted != true)
+				{
+					@if (UserAuthorization.Check(FeatureList.PRODUCT_PRODUCT_LIST_CAN_ADD_SUBMISSION, session.Rights))
+					{
+						<li>
+							<a class="dropdown-item" asp-action="AddSubmissionIndex" asp-route-id="@Model.EncryptedId"><i class="fa fa-save"></i> Add Submission</a>
+
+						</li>
+					}
+				}
+			}
+			@*@if (Model.PriceSetups.Any())
+                {
+                    var priceSetupId = Model.PriceSetups.Where(c => c.IsActive == true).FirstOrDefault();
+                    @if (UserAuthorization.Check(FeatureList.PRODUCT_PRODUCT_LIST_CAN_PRINT_MUSHAK_4_3, session.Rights))
+                    {
+                        <li>
+                            <a class="dropdown-item" href="@ViewBag.ReportUrl@priceSetupId.PriceSetupId" target="_blank"><i class="bi bi-printer"></i> Print Mushak 4.3 </a>
+
+                        </li>
+    }}*@
+
+			@if (UserAuthorization.Check(FeatureList.PRODUCT_PRODUCT_LIST_CAN_ADD_SUPPLIMENTARY_DUTY, session.Rights))
+			{
+				<li>
+					<a class="dropdown-item" asp-action="SupplimentaryDuty" asp-route-id="@Model.EncryptedId"><i class="fa fa-file"></i> Supplementary Duty</a>
+
+				</li>
+			}
+
+			<li>
+				<a class="dropdown-item" asp-action="VAtEdit" asp-route-id="@Model.EncryptedId"><i class="bi bi-pencil-square"></i>VAT Edit</a>
+
+			</li>
+
+
+		</ul>
+	</div>
+</div>

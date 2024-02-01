@@ -1,0 +1,101 @@
+﻿@model vms.entity.models.User
+
+@{
+	ViewData["Title"] = "User Details";
+}
+
+
+
+@section contentheader
+{
+	<div class="p-3 page-header">
+		<div>
+			@ViewData["Title"]
+		</div>
+	</div>
+}
+
+<div class="row">
+
+	<div class="col-md-12 ">
+		<div class="col-md-5 ">
+
+			<div class="col-md-12 ">
+				<div class="form-group">
+
+					<label for="form_control">Full Name : @Model.FullName</label>
+				</div>
+			</div>
+
+			<div class="col-md-12 ">
+				<div class="form-group">
+
+					<label for="form_control">User Name : @Model.UserName</label>
+				</div>
+			</div>
+			<div class="col-md-12 ">
+				<div class="form-group">
+					<label for="form_control_1">Email : @Model.EmailAddress</label>
+				</div>
+			</div>
+
+
+		</div>
+
+		<div class="col-md-5 ">
+			<div class="col-md-12 ">
+				<div class="form-group">
+
+					<label for="form_control_1">Role : @Model.Role.RoleName</label>
+				</div>
+			</div>
+
+			<div class="col-md-12 ">
+				<div class="form-group">
+
+					<label for="form_control_1">User Type : @Model.UserType.UserTypeName</label>
+				</div>
+			</div>
+			<div class="col-md-12 ">
+				<div class="form-group">
+
+					<label for="form_control_1">Mobile : @Model.Mobile</label>
+				</div>
+			</div>
+
+			<div class="col-md-12 ">
+				<div class="form-group">
+
+					<label for="form_control_1">NID : @Model.NidNo</label>
+				</div>
+			</div>
+
+			<div class="col-md-12 ">
+				<div class="form-group">
+
+					<label for="form_control_1">Address : @Model.Address</label>
+				</div>
+			</div>
+			@if (!string.IsNullOrEmpty(Model.UserImageUrl))
+			{
+				<div class="col-md-12 ">
+					<div class="form-group">
+						<img src="@(StringGenerator.RemoveWwwRoot(Model.UserImageUrl))" class="img-thumbnail w-25" alt="@Model.FullName"/>
+					</div>
+				</div>
+			}
+
+		</div>
+
+
+	</div>
+
+	<div class="form-actions">
+		<div class="row mb-2">
+			<div class="col-md-12 pt-3 pl-5">
+				<a asp-action="Index" class="btn btn-info"><i class="bi bi-chevron-double-left"></i> Back</a>
+			</div>
+		</div>
+	</div>
+
+</div>

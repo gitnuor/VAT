@@ -1,0 +1,147 @@
+﻿@model vms.entity.viewModels.NewReports.vmAuditLogReport
+
+
+@{
+    var session = Context.Session.GetComplexData<VmUserSession>(ControllerStaticData.SESSION);
+    ViewData["Title"] = "Audit Log Report";
+    Layout = "_LayoutReport";
+}
+
+@section contentheader
+    {
+    <div class="p-3 page-header">
+       Audit Log Report
+        <form method="post">
+            <div class="row">
+
+                <div class="col-3">
+                    <label asp-for="FromDate" class="form-label"></label>
+                    <input autocomplete="off" asp-for="FromDate" class="form-control form-control-sm" type="date" />
+                    <span asp-validation-for="FromDate" class="text-danger"></span>
+                </div>
+
+                <div class="col-3">
+                    <label asp-for="ToDate" class="form-label"> </label>
+                    <input autocomplete="off" asp-for="ToDate" class="form-control form-control-sm" type="date" />
+                    <span asp-validation-for="ToDate" class="text-danger"></span>
+                </div>
+
+                <div class="col-2">
+                    <button type="submit" class="btn btn-sm btn-success inline-sm-button"> <i class="bi bi-file-text"></i> View</button>
+                    <button type="button" class="btn btn-sm btn-primary inline-sm-button" id="btnPrint"><i class="bi bi-printer"></i> Print</button>
+                </div>
+            </div>
+        </form>
+    </div>
+}
+
+@section Scripts{
+
+
+    <script src="~/js/typeahead.bundle.js"></script>
+    <script src="~/js/jquery-ui.js"></script>
+    <script>
+         $(document).ready(function () {
+            $("#btnPrint").click(function () {
+                window.printJS({ printable: 'printableArea', type: 'html', maxWidth: 700, maxHeight: 1000, css: ['@Url.Content("~/css/vmsprint.css")'] });
+            });
+        });
+
+    </script>
+
+}
+
+<div id="printableArea">
+    <div id="printableArea">
+        <div class="section-to-print">
+            <div class="report-header">
+                <div class="company-name">@Model.head.CompanyName</div>
+                <div class="report-name">@Model.head.ReportName</div>
+                <div class="report-date-range">From @Model.FromDate.ToString("dd/MM/yyyy") to @Model.ToDate.ToString("dd/MM/yyyy")</div>
+            </div>
+            <div id="" class="report-margin">
+
+
+                <table class="table table-bordered" id="gridTable">
+                    <thead>
+                        <tr>
+                            <th class="text-center">
+                                Name
+                            </th>
+                            <th class="text-center">
+                                Operation
+                            </th>
+                            <th style="width:1px" class="text-center">
+                                Reason
+                                </>
+                            <th class="text-center">
+                                Action Taken By
+                            </th>
+                            <th class="text-center">
+                                Action Time
+                            </th>
+
+
+                        </tr>
+                    </thead>
+
+                    @if (Model.auditLogList.Any())
+                    {
+                        <tbody>
+                            @foreach (var item in Model.auditLogList)
+                            {
+                                <tr>
+                                    <td class="text-left">
+                                        @Html.DisplayFor(modelItem => item.ObjectType.Name)
+                                    </td>
+                                    <td class="text-left">
+                                        @Html.DisplayFor(modelItem => item.AuditOperation.Name)
+                                    </td>
+
+
+                                    @{
+
+                                        var description = item.Descriptions == null ? string.Empty : item.Descriptions;
+                                        var show = "";
+                                        if (description != null && description.Length > 35) { show = description.Substring(0, 35); }
+                                    }
+
+
+                                    <td align="left" valign="top" style="overflow:hidden;" nowrap="nowrap" width="280px">
+                                        @show
+                                    </td>
+                                    <td class="text-left">
+                                        @Html.DisplayFor(modelItem => item.User.UserName)
+                                    </td>
+
+
+                                    <td class="text-center">
+                                        @Html.DisplayFor(modelItem => item.CreatedTime)
+                                    </td>
+
+                                </tr>
+                            }
+                        </tbody>
+                    }
+
+                    else
+                    {
+                        <tr>
+                            <td colspan="10">
+                                <p style="text-align: center">No Records Found</p>
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+
+
+                <div class="row">
+                    <div class="col-12">
+                        <partial name="_PrintFooter" />
+                    </div>
+                </div>
+            </div>
+            </div>
+            </div>
+            </div>

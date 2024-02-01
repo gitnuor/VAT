@@ -1,0 +1,29 @@
+﻿@model vms.entity.models.UserType
+
+@{
+    ViewData["Title"] = "Delete";
+    
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>UserType</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.UserTypeName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UserTypeName)
+        </dd>
+        
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="UserTypeId" />
+        <input type="submit" value="Delete" class="btn btn-light" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

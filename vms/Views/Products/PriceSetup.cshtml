@@ -1,0 +1,666 @@
+﻿@model vms.entity.models.PriceSetup
+
+@{
+    ViewData["Title"] = "PriceSetup";
+    
+}
+
+
+
+
+@section contentheader
+    {
+    <div class="p-3 page-header">
+       Price Set Up
+        <div class="d-flex justify-content-start">
+
+            
+        </div>
+    </div>
+    <div class="col-12 d-flex">
+        <ul class="nav nav-pills mt-3 mr-auto align-bottom">
+        </ul>
+        @using (Html.BeginForm("Index", "Users", FormMethod.Get, new { id = "frmPurchase", @class = "d-flex pr-1" }))
+        {
+            
+        }
+    </div>
+}
+
+<input type="hidden" id="proId" name="proId" />
+<input type="hidden" id="ItemType" name="ItemType" />
+<form method="post" id="priceSetupFrm">
+    <div class="form-body">
+        <div class="row">
+
+            <div class="col-md-9 auto-height">
+                <div class="row">
+
+                    <div class="form-group col-md-6">
+                        <div>
+                            <label for="inputPassword4">Sales Unit Price</label>
+                            <input asp-for="SalesUnitPrice" class="form-control" name="SalesUnitPrice" readonly />
+                            <span asp-validation-for="SalesUnitPrice" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-12">
+
+                            <div class="form-body">
+                                <input type="hidden" asp-for="ProductId" />
+
+                            </div>
+                            <div class="col-md-12 ">
+                                <h5> Product Cost</h5>
+                                
+                                    <table class="table table-bordered" id="gridTable">
+                                        <thead>
+                                            <tr>
+                                                <th style="width:150px">Item</th>
+                                                <th style="width:100px">Qty</th>
+                                                <th style="width:100px">Cost</th>
+                                                @*<th style="width:100px">RawMaterial?</th>*@
+                                                <th style="width:100px">Unit Price</th>
+                                                <th style="width:150px">M. Unit</th>
+                                                <th>Wastage(%)</th>
+
+                                                <th></th>
+                                            </tr>
+                                            <tr>
+
+                                                <td class="form-group form-md-line-input">
+                                                    <input type="text" class="form-control" id="Product" name="Product">
+                                                </td>
+                                                <td class="form-group form-md-line-input">
+                                                    <div>
+                                                        <input type="text" class="form-control" id="RequireQty" maxlength="6" name="RequireQty">
+                                                    </div>
+                                                </td>
+                                                <td class="form-group form-md-line-input">
+                                                    <div>
+                                                        <input type="text" class="form-control" maxlength="6" name="cost" id="cost" />
+
+                                                    </div>
+                                                </td>
+                                                @*<td class="form-group form-md-line-input">
+                                                    <div>
+                                                        <input type="checkbox" name="IsApplicableAsRawMaterial" id="IsApplicableAsRawMaterial" />
+
+                                                    </div>
+                                                </td>*@
+                                                <td class="form-group form-md-line-input has-info">
+                                                    <label class="form-control" id="UnitPrice" maxlength="6" name="UnitPrice" />
+                                                </td>
+                                                <td class="form-group form-md-line-input has-info">
+                                                    @Html.DropDownListFor(x => Model.MeasurementUnitId, new SelectList(Model.MeasurementUnits, "Id", "Name"), "Select", htmlAttributes: new { @class = "form-control" })
+                                                </td>
+                                                <td class="form-group form-md-line-input">
+                                                    <div>
+                                                        <input type="text" class="form-control" id="WastagePercentage" name="WastagePercentage">
+                                                    </div>
+                                                </td>
+
+                                                <td>
+                                                    <a id="add" class="btn btn-sm btn-success" aria-label="Left Align">
+                                                        <i class="bi bi-plus-lg"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody id="tblPurchaseOD"></tbody>
+
+                                        <tfoot>
+                                            
+                                        </tfoot>
+                                    </table>
+                                
+                            </div>
+
+
+                            <div class="form-actions">
+                                <div class="row">
+                                    <div style="margin-left:30px">
+                                        <button type="button" id="save" class="btn btn-primary"><i class="bi bi-check-lg"></i> Submit</button>
+
+                                        <a href="~/Products/Index" class="btn btn-secondary"><i class="bi bi-slash-circle"></i> Cancel</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <h3 class="custom-page-title">Product Details</h3>
+                    </div>
+
+                    <div class="col-md-12 ">
+                        <div class="form-group ">
+                            <span class="label-text">Product Name</span> : @Model.ProductName
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <span class="label-text">M. Unit</span> : @Model.MeasurementUnitName
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 ">
+                        <div class="form-group">
+
+                            <span class="label-text">Product Group</span> : @Model.ProductGroupName
+                        </div>
+                    </div>
+                    <div class="col-md-12 ">
+                        <div class="form-group">
+                            <span class="label-text">Product Category</span> : @Model.ProductCategoryName
+                        </div>
+                    </div>
+
+                    @if (Model.HSCode != null)
+                    {
+                        <div class="col-md-12 ">
+                            <div class="form-group ">
+                                <span class="label-text">HSCode </span>: @Model.HSCode
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+
+    <script src="~/js/typeahead.bundle.js"></script>
+    <script src="~/js/jquery-ui.js"></script>
+    <script>
+
+        var ProductionReceive = {
+            init: function() {},
+            count: 1,
+            RawMaterialList: [],
+            item: [],
+            OverHead: [],
+            gridTableOverHeadEmpty: function() {
+
+                $('#OverHeadCost').attr("disabled", true);
+                $('#cost').attr("disabled", true);
+
+            },
+            CalculateSaleUnit: function(amount) {
+                var saleCost = $('#SalesUnitPrice').val();
+                $('#SalesUnitPrice').val(parseFloat(saleCost) - parseFloat(amount));
+            },
+            DisableItem: function() {
+                $("#RequireQty").attr("disabled", true);
+                $("#WastagePercentage").attr("disabled", true);
+                $('#MeasurementUnitId').attr('disabled', true);
+            },
+            calculate: function (qty) {
+                debugger
+                var unitPrice = $('#UnitPrice').text();
+                $('#cost').val(parseFloat(unitPrice * qty).toFixed(4));
+            },
+            GridInfoReset:function() {
+
+                $('#WastagePercentage').val('');
+                $('#UnitPrice').text('');
+                $('#unit').val('');
+                $('#RequireQty').val('');
+                $('#proId').val('');
+                $('#ItemType').val('');
+              /*  $("#IsApplicableAsRawMaterial").prop("checked", false);*/
+                $("#RequireQty").attr("disabled", false);
+                $('#cost').val('');
+                $('#MeasurementUnitId').attr('disabled', false);
+                $('#MeasurementUnitId').val($("#MeasurementUnitId option:contains('Select')").val());
+            },
+            gridTableEmpty: function() {
+                $('#Product').val('');
+
+                $('#WastagePercentage').val('');
+                $('#UnitPrice').text('');
+                $('#unit').val('');
+                $('#RequireQty').val('');
+                $('#proId').val('');
+                $('#ItemType').val('');
+
+              /*  $("#IsApplicableAsRawMaterial").prop("checked", false);*/
+                $("#RequireQty").attr("disabled", false);
+                $('#cost').val('');
+                $('#MeasurementUnitId').attr('disabled', false);
+                $('#MeasurementUnitId').val($("#MeasurementUnitId option:contains('Select')").val());
+
+            },
+
+            isNumber:function (n) {
+                return !isNaN(parseFloat(n)) && isFinite(n);
+            },
+
+            add: function () {
+                debugger
+                var productName = $('#Product').val();
+                var productId = $('#proId').val();
+                var unit = $('#MeasurementUnitId').val();
+                var unitName = $('#MeasurementUnitId option:selected').text();
+                var unitPrice = $('#UnitPrice').text();
+                var WastagePercentage = $('#WastagePercentage').val();
+                var RequireQty = $('#RequireQty').val();
+                var OverHeadCostName = $('#OverHeadCost option:selected').text();
+               /* var IsApplicableAsRawMaterial = $('#IsApplicableAsRawMaterial').is(":checked");*/
+                var ItemType = $('#ItemType').val();
+                if (OverHeadCostName == 'Select') {
+                    OverHeadCostName = '';
+                }
+                if (unitName == 'Select') {
+                    unitName = '';
+                }
+
+                var cost = $("#cost").val();
+                if (cost == null) {
+                    alert('Please Add unit Price');
+                    return false;
+                }
+                var table = document.getElementById('gridTable');
+                var rowCount = table.rows.length;
+                    var canAdd = true;
+
+                    if (canAdd) {
+                        var data = new Object();
+                        data.rowCount = rowCount;
+                        if (ItemType == "OH") {
+                            data.OverHeadCostId = productId;
+                        } else if ((ItemType == "RM")){
+                            data.productId = productId;
+                        }
+
+                        data.RequireQty = RequireQty;
+                        data.MeasurementUnitId = unit;
+                        data.WastagePercentage = WastagePercentage;
+
+                       /* data.IsRawMaterial = IsApplicableAsRawMaterial;*/
+                        data.cost = cost;
+                        ProductionReceive.RawMaterialList.push(data);
+                        var checkBoxHtml = "";
+                        //if (IsApplicableAsRawMaterial == true) {
+                        //    checkBoxHtml = ' <input type="checkbox" checked onclick="return false;"> ';
+                        //}
+                        //else {
+                        //    checkBoxHtml = ' <input type="checkbox" onclick="return false;"> ';
+                        //}
+                        var saleCost = $('#SalesUnitPrice').val() == "" ? 0.00 : $('#SalesUnitPrice').val();
+                        $('#SalesUnitPrice').val((parseFloat(cost) + parseFloat(saleCost)).toFixed(4))
+                        var html = '<tr id="' +
+                            data.rowCount +
+                            '">' +
+                            '<td>' +
+                            productName +
+                            '</td>' +
+                            '<td>' +
+                            RequireQty +
+                            '</td>' +
+                            '<td>' +
+                            cost +
+                            '</td>' +
+                            //'<td>' +
+                            //   checkBoxHtml
+                            // +
+                            //'</td>' +
+                            '<td>' +
+                            unitPrice +
+                            '</td>' +
+                            '<td>' +
+                            unitName +
+                            '</td>' +
+                            '<td>' +
+                            WastagePercentage
+                             +
+                            '</td>' +
+                            '<td><span onclick="Delete(' +
+                            rowCount +
+                            ')"  class="glyphicon glyphicon-minus btn-xs"></a></span></td>';
+
+                        html += '</tr>';
+
+                        $("table#gridTable > tbody").append(html);
+                        ProductionReceive.gridTableEmpty();
+                        ProductionReceive.count++;
+
+                    }
+
+
+            },
+
+            delete: function (id) {
+                debugger
+                $.each(ProductionReceive.RawMaterialList,
+                    function (i, v) {
+                        if (ProductionReceive.RawMaterialList[i].rowCount == id) {
+                            ProductionReceive.CalculateSaleUnit(ProductionReceive.RawMaterialList[i].cost);
+                            ProductionReceive.RawMaterialList.splice(i, 1);
+                            ProductionReceive.count--;
+
+                        }
+                        $("tr#" + id).remove().fadeOut();
+
+                    });
+
+            },
+            deleteDocument: function (id) {
+                debugger
+                $.each(ProductionReceive.OverHead,
+                    function (i, v) {
+                        if (ProductionReceive.OverHead[i].OverHeadCostId == id) {
+
+                            ProductionReceive.OverHead.splice(i, 1);
+
+                        }
+                        $(" tr#" + id).remove().fadeOut();
+
+                    });
+
+            },
+
+            Save: function () {
+                var SalesUnitPrice = $('#SalesUnitPrice').val();
+               if (Number(SalesUnitPrice) === NaN || Number(SalesUnitPrice) === 0) {
+                   alert("Please set price properly.");
+                   return;
+               }
+                var ProductId = $('#ProductId').val();
+                var MeasurementUnitId = $('#unitId').val();
+                 var reqEntry = new Object();
+                reqEntry.PurchaseUnitPrice = 0;
+                reqEntry.SalesUnitPrice = SalesUnitPrice;
+                reqEntry.ProductId = ProductId;
+                reqEntry.MeasurementUnitId = MeasurementUnitId;
+                reqEntry.RawMaterialLists = ProductionReceive.RawMaterialList;
+
+                 $.ajax({
+                     url: '@Url.Action("PriceSetups", "Products")',
+                     data: { vm: reqEntry, "__RequestVerificationToken": $("input[name=__RequestVerificationToken]").val()},
+                    type: "POST",
+
+                    dataType: "json",
+                    beforeSend: function () {
+                        $("#loading").show();
+                    },
+
+                    success: function (result) {
+                        $("#showData").html("");
+
+                        if (result == false) {
+                            alert("Please add atleast one BOM");
+                        }
+                        else {
+                            window.location.href = '@Url.Action("Index", "Products")';
+                        }
+                    },
+                    error: function (x, e) {
+                        $("#loading").hide();
+                        alert('error');
+                    }
+                });
+            },
+            product : {
+                init: function () { },
+
+                productAutoComplete: function () {
+                    var materialforrequsition = {
+                        Initialize: function () {
+                            materialforrequsition.Typehead();
+                        },
+
+                        Typehead: function () {
+                            $('#Product').typeahead('destroy');
+
+                            $('#Product').typeahead({
+                                    hint: true,
+                                    highlight: true,
+                                    minLength: 2,
+                                },
+                                {
+                                    items: 8,
+                                    name: 'Product',
+                                    displayKey: function (s) {
+                                        return s.name;
+                                    },
+                                    property: "proId",
+                                    source: function (strmaterial, process) {
+
+                                        var url = '@Url.Content("~/Products/ProductionReceiveAutoCompletePriceSetup")';
+                                        return $.getJSON(url,
+                                            {
+                                                 filterText: $("#Product").val()
+                                            }, function (Data) {
+                                                ProductionReceive.GridInfoReset();
+                                            return process(Data);
+                                        });
+                                    },
+                                    updater: function (item) {
+                                        return item.name;
+                                    }
+                                }).on('typeahead:selected', function (obj, datum) {
+
+                                    /*var checkBox = datum.isApplicableAsRawMaterial;*/
+                                    var itemType= datum.itemType;
+                                    $("#ItemType").val(itemType);
+
+                                    debugger
+                                    if (itemType == "RM") {
+                                        /*$("#IsApplicableAsRawMaterial").attr("disabled", false);*/
+                                        $("#proId").val(datum.id);
+                                        $("#MeasurementUnitId").val(datum.measurementUnitId);
+                                        $("#RequireQty").val("1");
+                                        $("#UnitPrice").text(datum.unitPrice);
+                                        $('#cost').val(parseFloat(datum.unitPrice * 1));
+                                      /*  $("#IsApplicableAsRawMaterial").prop("checked", true);*/
+                                        $("#cost").attr("disabled", true);
+                                        $("#WastagePercentage").attr("disabled", false);
+                                    } else if (itemType == "OH" && checkBox==true) {
+                                        $("#proId").val(datum.id);
+                                        /*$("#IsApplicableAsRawMaterial").prop("checked", false);*/
+                                        ProductionReceive.DisableItem();
+                                        $("#cost").attr("disabled", false);
+                                    } else {
+                                        $("#proId").val(datum.id);
+                                        ProductionReceive.DisableItem();
+                                        //$("#IsApplicableAsRawMaterial").prop("checked", false);
+                                        //$("#IsApplicableAsRawMaterial").prop("disabled", true);
+                                        $("#cost").attr("disabled", false);
+                                    }
+
+                            });
+                            $("#Product").focus();
+
+                        }
+                    }
+                    materialforrequsition.Initialize();
+                }
+            }
+        }
+        $('#priceSetupFrm').validate({
+            errorClass: 'help-block animation-slideDown',
+            errorElement: 'div',
+            errorPlacement: function (error, e) {
+                e.parents('.form-group >div').append(error);
+            },
+            highlight: function (e) {
+                $(e).closest('.form-group').removeClass('has-success has-error').addClass('has-error');
+                $(e).closest('.help-block').remove();
+            },
+
+            success: function (e) {
+                e.closest('.form-group').removeClass('has-success has-error');
+                e.closest('.help-block').remove();
+            },
+            rules: {
+                SalesUnitPrice: {
+                    required: function (element) {
+                        if (element.value == "0.00") {
+                            return true;
+                        }
+
+                        else {
+                            return false;
+                        }
+                    }
+
+                },
+                Product: {
+                    required: true,
+                },
+                cost: {
+                    required: true,
+                    number: true,
+                    maxlength:8
+                },
+                RequireQty: {
+                    number: true
+                },
+                WastagePercentage: {
+                    number: true
+                }
+
+
+            },
+            messages: {
+                SalesUnitPrice: {
+                    required: 'Please provide Price'
+
+                },
+                Product: {
+                    required: 'Please add product',
+                },
+                cost: {
+                    required: 'Please provide Cost',
+                    number: 'Enter Number',
+                    maxlength:'Please add a valid number'
+                },
+                RequireQty: {
+                    number: 'Enter Number'
+                },
+                WastagePercentage: {
+                    number: 'Enter Number'
+                }
+
+
+
+            }
+        });
+        $(document).ready(function() {
+
+
+            $('#add').click(function () {
+                const costAmount = $("#cost").val();
+                if (Number(costAmount) === NaN || Number(costAmount) === 0) {
+                    return false;
+                }
+                $("#SalesUnitPrice").rules('remove', 'required');
+                $("#cost").rules('add', 'required');
+                $("#Product").rules('add', 'required');
+                if ($("#priceSetupFrm").valid()) {
+                    ProductionReceive.add();
+                    return true
+                }
+                else {
+                    return false;
+                }
+
+            });
+
+            $('#save').click(function (e) {
+
+                $("#SalesUnitPrice").rules('add', {
+                    required: function (element) {
+                        if (element.value == "0.00") {
+                            return true;
+                        }
+
+                        else {
+                            return false;
+                        }
+                    }
+                });
+                $("#cost").rules('remove', 'required');
+                $("#Product").rules('remove', 'required');
+                if ($("#priceSetupFrm").valid()) {
+                    var rowPurchase = $('#tblPurchaseOD tr').length;
+
+                    if (rowPurchase > 0) {
+                        if (confirm('Are you sure?')) {
+                            ProductionReceive.Save();
+                            return true
+                        }
+                    }
+                    else {
+                        alert('Add Product');
+                    }
+                }
+                else {
+                    return false;
+                }
+
+
+            });
+
+
+            ProductionReceive.product.productAutoComplete();
+            $("#ExpectedDate").datepicker();
+            $("#ExpectedDate").datepicker('option', 'dateFormat', 'dd M, yy');
+            $("#ReceiveTime").datepicker();
+            $("#ReceiveTime").datepicker('option', 'dateFormat', 'dd M, yy');
+            $("#EndDate").datepicker();
+            $("#EndDate").datepicker('option', 'dateFormat', 'dd M, yy');
+        });
+        function DeleteDocument(id) {
+            ProductionReceive.deleteDocument(id);
+        };
+        function Delete(id) {
+            ProductionReceive.delete(id);
+        }
+
+        $("#RequireQty").keyup(function () {
+            var that = this,
+            numberOfItem = $(this).val();
+            ProductionReceive.calculate(numberOfItem);
+
+        });
+
+        $("#amount").keyup(function () {
+            var that = this,
+                amount = $(this).val();
+
+        });
+        //$('#IsApplicableAsRawMaterial').change(function() {
+        //    debugger
+        //    if ($('#IsApplicableAsRawMaterial:checked').length == 0) {
+
+        //        $("#WastagePercentage").attr("disabled", true);
+
+        //    } else {
+
+        //        $("#WastagePercentage").attr("disabled", false);
+        //    }
+
+        //});
+
+    </script>
+
+}

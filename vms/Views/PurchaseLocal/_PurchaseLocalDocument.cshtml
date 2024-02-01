@@ -1,0 +1,38 @@
+﻿@model vms.entity.viewModels.VmPurchaseLocal
+
+<div class="font-weight-bold mt-3 form-5">
+    Document
+</div>
+    <form id="frmDocument">
+        <table class="table table-bordered form-table mt-3 table-3-column-equally-distributed-with-single-action-button" id="docTable">
+            <thead>
+                <tr>
+                    <th>Document Type<span class="required-sign"></span></th>
+                    <th>Document<span class="required-sign"></span></th>
+                    <th>Remarks</th>
+                    <th class="single-button-action-column"></th>
+                </tr>
+                <tr class="control-row">
+                    <td>
+                        <select asp-for="DocumentTypeId" asp-items="Model.DocumentTypeSelectList.CustomSelectListToSelectList()" >
+                            <option value="@null">Select Document Type</option>
+                        </select>
+                        <span asp-validation-for="DocumentTypeId" ></span>
+                    </td>
+                    <td>
+                        <input type="file" asp-for="UploadedFile" class="form-control form-control-sm" multiple="multiple" accept="image/png, image/jpeg, .csv, .xls, .xlsx, .doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document, .pdf">
+                        <span asp-validation-for="UploadedFile" ></span>
+                    </td>
+                    <td>
+                        <input type="text" asp-for="DocumentRemarks" >
+                        <span asp-validation-for="DocumentRemarks" ></span>
+                    </td>
+                    <td class="single-button-action-column">
+                        <button type="button" class="btn  btn-primary btn-sm" id="btnAddDocument"><i class="bi bi-plus-lg"></i></button>
+                    </td>
+                </tr>
+            </thead>
+            <tbody id="docTableBody">
+            </tbody>
+        </table>
+    </form>

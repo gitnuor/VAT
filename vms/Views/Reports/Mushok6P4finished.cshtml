@@ -1,0 +1,193 @@
+﻿@model vms.entity.viewModels.ReportsViewModel.vmContractualChalan
+@{
+    ViewData["Title"] = "Mushak 6.4";
+
+    var firstElement = Model.Sp6P4Result.First();
+    Layout = "_LayoutMushak";
+}
+
+
+<style>
+
+    .MreturnHeader {
+        text-align: center;
+        background-color: #ffedbe;
+    }
+
+
+    .Returntd {
+        text-align: left;
+    }
+
+    .Returntdhead {
+        text-align: center;
+        background-color: #cfcfcf;
+    }
+
+    .ReturntdEmpty {
+        background-color: lightgray;
+    }
+
+    .tdp1 {
+        width: 320px;
+    }
+
+    .tdp2 {
+        width: 30px;
+        text-align: center;
+    }
+
+    .report-margin {
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+</style>
+
+@section contentheader
+    {
+    <div class="p-3 page-header">
+        @*<h5></h5>*@
+        <div class="row">
+            <div class="col-8">
+                Mushak-6.4(Contractual Chalan)
+            </div>
+            <div class="col-4">
+                <form method="post">
+
+                    <input type="hidden" asp-for="ContractualProductionId" />
+                    <div class="form-group float-end">
+                        <button id="btnPrint" type="button" class="btn btn-sm btn-primary inline-sm-button"><i class="bi bi-printer-fill"></i> Print</button>
+                        @*<button type="submit" asp-action="Mushok6P4RawExportToExcel" class="btn btn-sm btn-warning inline-sm-button"><i class="bi bi-file-excel-fill"></i> Export Excel</button>*@
+                        @*<button type="button" href="@Url.Action("Mushok6P4", "Reports")" class="btn btn-info btn-sm inline-sm-button"><i class="bi bi-arrow-90deg-left"></i> Back</button>*@
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+}
+<div class="report-section">
+
+    <div class="report-margin" id="printableArea">
+        <div class="row">
+            <div class="col-12">
+                <div class="mushak-name">মূসক - ৬.৪</div>
+            </div>
+
+            <div class="col-12 report-header">
+
+                <h4>গণপ্রজাতন্ত্রী বাংলাদেশ সরকার</h4>
+                <h4>জাতীয় রাজস্ব বোর্ড</h4>
+                <h6>চুক্তিভিত্তিক উৎপাদনের চালানপত্র</h6>
+                <h6>[বিধি ৪০ এর উপ-বিধি (১) এর দফা (ঘ) দ্রষ্টব্য]</h6>
+
+            </div>
+            <br />
+            <div class="col-12" style="text-align:center">
+
+
+                <h6>নিবন্ধিত ব্যক্তির নাম: @firstElement.OrgName </h6>
+                <h6>নিবন্ধিত ব্যক্তির বিআইএন: @firstElement.OrgBin </h6>
+                <h6>চালানপত্র ইস্যুর ঠিকানা: @firstElement.OrgAddress</h6>
+
+
+
+            </div>
+            <div class="col-8" style="text-align:left">
+
+                <h6>পণ্য গ্রহীতার নামঃ  @firstElement.VenName </h6>
+                <h6> গ্রহীতার বিআইএনঃ  @firstElement.VenBin </h6>
+                <h6>গন্তব্যস্থলঃ  @firstElement.VenAddress</h6>
+
+            </div>
+
+            <div class="col-4" style="text-align:left">
+
+                <h6>ফেরত গ্রহণকারী  ব্যাক্তির - </h6>
+                <h6>চালানপত্র নাম্বর: @firstElement.ChallanNo </h6>
+                <h6>ইস্যুর তারিখ:@firstElement.ChallanIssueDate.Value.ToString("dd/MM/yyyy")</h6>
+                <h6>ইস্যুর সময়:  @firstElement.ChallanIssueDate.Value.ToString("hh:MM tt")</h6>
+
+            </div>
+
+            <div class="col-12">
+                <table class="table table-bordered">
+
+                    <tbody style="text-align:center">
+                        <tr>
+                            <td>
+                                ক্রমিক
+                                সংখ্যা
+                            </td>
+                            <td>প্রকৃতি (উপকরণ বা উৎপাদিত পণ্য)</td>
+                            <td>
+                                পণ্যের বিবরণ
+                            </td>
+                            <td>
+                                পরিমাণ
+                            </td>
+                            <td>
+                                মন্তব্য
+                            </td>
+
+                        </tr>
+
+                        <tr>
+                            <td>(১)</td>
+                            <td>(২)</td>
+                            <td>(৩)</td>
+                            <td>(৪)</td>
+                            <td>(৫)</td>
+                        </tr>
+
+                        @if (Model.Sp6P4Result.Any())
+                        {
+                            int i = 1;
+                            foreach (var item in Model.Sp6P4Result)
+                            {
+                                <tr>
+                                    <td>@i</td>
+                                    <td>উপকরণ : @item.MesurementName</td>
+                                    <td>@item.ProductName</td>
+                                    <td>@item.Quantity</td>
+                                    <td> </td>
+                                </tr>
+                                i++;
+                            }
+                        }
+
+                    </tbody>
+
+                </table>
+            </div>
+
+            <div class="col-12">
+
+                <h6>প্রতিষ্ঠান কর্তৃপক্ষদায়িত্ব প্রাপ্ত ব্যক্তির নাম: @firstElement.VatResponsiblePersonName </h6>
+                <h6>পদবী:  @firstElement.VatResponsiblePersonDesignation </h6>
+
+                <h6>  স্বাক্ষর : </h6>
+                <h6>  সীল: </h6>
+
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+
+    <script>
+
+        $(document).ready(function () {
+            $("#btnPrint").click(function () {
+                window.vmsPrint.printA4Landscape('printableArea');
+
+            });
+        });
+
+    </script>
+}
+
+

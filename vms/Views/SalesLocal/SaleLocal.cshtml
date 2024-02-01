@@ -1,0 +1,50 @@
+﻿@model vms.entity.viewModels.VmSaleLocal
+@{
+    ViewData["Title"] = "Sale Local";
+}
+
+@section contentheader
+{
+    <div class="p-3 page-header">
+        @ViewData["Title"]
+        @*<a class="btn btn-sm btn-secondary float-end" asp-action="SaleExport">Add Foreign Sale(Export)</a>*@
+    </div>
+}
+
+<div class="row mt-3 form-margin">
+    <partial name="_SaleLocalMainInformation" model="Model" />
+    <partial name="_SaleLocalProductAdd" model="Model" />
+    <partial name="_SaleLocalProductList" />
+    <partial name="_SaleLocalPayment" model="Model" />
+    <partial name="_SaleLocalDocument" model="Model" />
+    <div class="col-md-12 pt-2 pb-2 form-6">
+	    <label asp-for="SalesRemarks" class="form-label complex-form-label"></label>
+	    <textarea asp-for="SalesRemarks" rows="2" class="form-control form-control-sm">
+                 </textarea>
+	    <span asp-validation-for="SalesRemarks" class="text-danger"></span>
+    </div>
+    <div class="col-md-12 pt-2 pb-2 form-7">
+	    <div class="float-end">
+		    <button type="button" class="btn btn-success btn-sm" id="btnSave"><i class="bi bi-check-lg"></i> Submit</button>
+		    <button type="button" class="btn btn-primary btn-sm d-none" id="btnSaveDraft"><i class="bi bi-card-list"></i> Draft</button>
+		    <button type="button" value="Reset" id="btnResetForm" class="btn btn-warning btn-sm"><i class="bi bi-arrow-repeat"></i> Reset</button>
+		    <a asp-action="Index" class="btn btn-secondary btn-sm"><i class="bi bi-slash-circle"></i> Cancel</a>
+	    </div>
+    </div>
+</div>
+<partial name="_SalesSummeryForConfirmation"/>
+
+
+
+@section Scripts{
+	<script>
+        var orgInfo = {
+            name: "@Model.OrganizationName",
+            bin: "@Model.OrganizationBin",
+            address: "@Model.OrganizationAddress",
+            vatResponsiblePersonName: "@Model.VatResponsiblePersonName",
+            vatResponsiblePersonDesignation: "@Model.VatResponsiblePersonDesignation"
+        }
+	</script>
+        <script src="~/CustomJs/SaleLocal.js?vguid=@ViewStaticData.StaticFileVersionGuid"></script>
+    }

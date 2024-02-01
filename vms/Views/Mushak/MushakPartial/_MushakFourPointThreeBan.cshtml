@@ -1,0 +1,226 @@
+﻿@model vms.entity.viewModels.VmPriceSetupReportParam
+@using vms.entity.StoredProcedureModel.HTMLMushak
+@{
+    var firstElement = new Sp4p3();
+    @if (Model.PriceDeclarationList.Any())
+    {
+        firstElement = Model.PriceDeclarationList.FirstOrDefault();
+    }
+    decimal sumOverHeadCost = 0, sumPurchasePrice = 0;
+}
+
+<div class="row ivat-bangla-font" style="padding-left: 100px !important; padding-right: 100px !important; font-size:14px !important">
+   @* <div class="col-12">
+        
+    </div>
+*@
+
+    <div class="col-12 report-header p-0">
+
+        <div class="company-name" style="font-size: 14px !important">গণপ্রজাতন্ত্রী বাংলাদেশ সরকার</div>
+        <div class="company-name" style="font-size: 14px !important">জাতীয় রাজস্ব বোর্ড</div>
+    </div>
+
+    <div class="col-12 p-0" style="border-width: 1px 1px 0px 1px; border-color:black;border-style:solid;">
+        <div style="display:flow-root">
+            <div class="mushak-name" style="font-size: 14px !important"><b>মূসক - ৪.৩</b></div>
+        </div>
+        <div class="sub-header" style="font-size: 14px !important; display: flex; justify-content: center;">
+            <b>
+                উপকরণ-উৎপাদ সহগ
+             (Input-Output Coefficient)  ঘোষণা </b>
+
+        </div>
+        <div class="sub-header" style="font-size: 14px !important; display: flex; justify-content: center;">
+            <b>
+                (বিধি ২১ দ্রষ্টব্য)
+            </b>
+        </div>
+        <div class="row">
+            <div class="col-12" style="text-align:left; font-size:14px!important">
+
+                <div class="company-other-info"><b style="margin-left:10px !important">প্রতিষ্ঠানের নাম :</b> @Model.OrgName </div>
+                <div class="company-other-info"><b style="margin-left:10px !important">ঠিকানা:</b> @Model.OrgAddress</div>
+                <div class="company-other-info"><b style="margin-left:10px !important">বিন:</b> @Model.OrgBin</div>
+                <div class="company-other-info"><b style="margin-left:10px !important">দাখিলের তারিখ :</b> @StringGenerator.DateTimeToStringWithoutTime(firstElement.DateOfSubmission)</div>
+                <div class="company-other-info"><b style="margin-left:10px !important">ঘোষিত সহগ অনুযায়ী পণ্য/সেবার প্রথম সরবরাহের তারিখ :</b> @StringGenerator.DateTimeToStringWithoutTime(firstElement.FirstSupplyDate)</div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="col-12 p-0">
+
+        <table class="table table-bordered align-middle" style="text-align:center">
+            <thead>
+                <tr>
+                    <td rowspan="2">
+                        ক্রমিক সংখ্যা
+                    </td>
+                    <td rowspan="2">
+                        পণ্যের এইচ এস কোড/সেবা কোড
+                    </td>
+                    <td rowspan="2">
+                        সরবরাহতব্য পণ্য/সেবার নাম ও বর্ণনা (প্রযোজ্য ক্ষেত্রে ব্রান্ড নামসহ)
+                    </td>
+                    <td rowspan="2">
+                        সরবরাহের একক
+                    </td>
+                    <td colspan="5">
+                        একক পণ্য/সেবাসরবরাহে ব্যবহায যাবতীয় উপকরণের/কাঁচামালের ও প্যাকিং সামগ্রীর বিবরণ, পরিমাণ ও ক্রয়মূল্য(উপকরনভিত্তিক অপচয়ের শতকরা হারসহ)
+                    </td>
+                    <td colspan="2">
+                        মূল্য সংযোজনের বিবরণ
+                    </td>
+                    <td rowspan="2">
+                        মন্তব্য
+                    </td>
+
+                </tr>
+                <tr>
+
+                    <td>
+                        বিবরণ
+                    </td>
+                    <td>
+                        অপচয়সহ পরিমাণ
+                    </td>
+                    <td>
+                        ক্রয় মূল্য
+                    </td>
+                    <td>
+                        অপচয়ের পরিমাণ
+                    </td>
+                    <td>
+                        শতকরা হার
+                    </td>
+                    <td>
+                        মূল্য সংযোজনের খাত
+                    </td>
+                    <td>
+                        মূল্য
+                    </td>
+
+                </tr>
+
+
+                <tr>
+                    <td>(১)</td>
+                    <td>(২)</td>
+                    <td>(৩)</td>
+                    <td>(৪)</td>
+                    <td>(৫)</td>
+                    <td>(৬)</td>
+                    <td>(৭)</td>
+                    <td>(৮)</td>
+                    <td>(৯)</td>
+                    <td>(১০)</td>
+                    <td>(১১)</td>
+                    <td>(১২)</td>
+
+                </tr>
+            </thead>
+            <tbody style="text-align:center">
+                @if (Model.PriceDeclarationList.Any())
+                {
+                    var SlNo = 1;
+
+                    foreach (var type in Model.PriceDeclarationList)
+                    {
+                <tr>
+                    <td class="text-right">@SlNo</td>
+                    <td>@type.FinishedProductHsCode</td>
+                    <td>@type.FinishedProductName</td>
+                    <td>@type.FinishedProductMeasurementUnit</td>
+                    <td>@type.RawmaterialName</td>
+                    <td class="text-right">@(type.RawmaterialRequiredQtyWithWastage == null? "":StringGenerator.DecimalToCommaSeparated(type.RawmaterialRequiredQtyWithWastage))</td>
+                    <td class="text-right">@(type.RawmaterialPurchasePrice==null? "":StringGenerator.DecimalToCommaSeparated(type.RawmaterialPurchasePrice))</td>
+                    <td class="text-right">@(type.RawmaterialWastageQty == null ? "":StringGenerator.DecimalToCommaSeparated(type.RawmaterialWastageQty))</td>
+                    <td class="text-right">@(type.RawmaterialWastagePercentage == null ? "":StringGenerator.DecimalToCommaSeparated(type.RawmaterialWastagePercentage))</td>
+                    <td>@type.OverHeadCostName</td>
+                    <td class="text-right">@(type.OverHeadCostAmount == null? "":StringGenerator.DecimalToCommaSeparated(type.OverHeadCostAmount))</td>
+                    <td></td>
+                </tr>
+                        SlNo++;
+                        sumPurchasePrice += type.RawmaterialPurchasePrice == null ? 0 : type.RawmaterialPurchasePrice.Value;
+                        sumOverHeadCost += type.OverHeadCostAmount == null ? 0 : type.OverHeadCostAmount.Value;
+                    }
+
+                    <tr>
+                        <td>@SlNo</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td style="text-align:right;">Profit Amount</td>
+                        <td class="text-right">@StringGenerator.DecimalToCommaSeparated(firstElement.ProfitAmount)</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td colspan="6" style="text-align:right;">সর্বমোট</td>
+                        <td class="text-right">@StringGenerator.DecimalToCommaSeparated(sumPurchasePrice)</td>
+                        <td colspan="3" style="text-align:right;">সর্বমোট</td>
+                        <td class="text-right">@StringGenerator.DecimalToCommaSeparated(sumOverHeadCost + firstElement.ProfitAmount)</td>
+                        <td></td>
+                    </tr>
+
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="12">
+                            No Data Found
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <div class="col-12 p-0" style="margin-top:0px !important">
+
+        <div class="company-other-info row">
+            <div class="col-9 d-flex justify-content-end"><b>প্রতিষ্ঠান কর্তৃপক্ষের দায়িত্বপ্রাপ্ত ব্যক্তির নাম :</b></div>
+            <div class="col-3">@Model.PriceDeclarationList.Select(x => x.VatResponsiblePersonName).FirstOrDefault()</div>
+        </div>
+        <div class="company-other-info row">
+            <div class="col-9 d-flex justify-content-end"><b>পদবী :</b></div>
+            <div class="col-3">@Model.PriceDeclarationList.Select(x => x.VatResponsiblePersonDesignation).FirstOrDefault()</div>
+        </div>
+        <div class="company-other-info row">
+            <div class="col-9 d-flex justify-content-end"><b>স্বাক্ষর :</b></div>
+            <div class="col-3"></div>
+        </div>
+        <div class="company-other-info row">
+            <div class="col-9 d-flex justify-content-end"><b>সীল :</b></div>
+            <div class="col-3"></div>
+        </div>
+        @*<div class="company-other-info col-12"><b>পদবী :</b> @Model.PriceDeclarationList.Select(x => x.VatResponsiblePersonDesignation).FirstOrDefault()</div>
+        <div class="company-other-info col-12">
+            <b>স্বাক্ষর :</b>
+        </div>
+        <div class="company-other-info ">
+            <b>সীল :</b>
+        </div>
+*@
+    </div>
+
+    <div class="col-12 p-0" style="margin-top:0px !important">
+        <div class="special-note-title"><b>বিশেষ দ্রষ্টব্য:</b></div>
+        <div class="special-note-items">
+            <div class="special-note-list-item" style="margin-left:35px !important">১. যেকোন পণ্য বা সেবা প্রথম সরবরাহের পূর্ববর্তী ১৫ দিনের মধ্যে অনলাইনে মূসক কম্পিউটার সিস্টেমে অথবা সংশ্লিষ্ট বিভাগীয় কর্মকর্তার দপ্তরে উপকরণ-উৎপাদ সহগ ঘোষণা দাখিল করিতে হইবে।</div>
+
+            <div class="special-note-list-item" style="margin-left:35px !important">২. পণ্য মূল্য বা মোট উপকরণ কাঁচামালের মূল্য ৭.৫% এর বেশি পরিবর্তন হইলে নতুন ঘোষণা দাখিল করিতে হইবে।</div>
+
+            <div class="special-note-list-item" style="margin-left:35px !important">৩. উপকরণ ক্রয়ের স্বপক্ষে প্রামানিক দলিল হিসাবে  পণ্য ক্রয়ের সাপেক্ষে প্রামানিক দলিল হিসাবে বিল অব এন্ট্রি বা চালানপত্রের কপি সংযুক্ত করিতে হইবে।</div>
+        </div>
+    </div>
+
+</div>

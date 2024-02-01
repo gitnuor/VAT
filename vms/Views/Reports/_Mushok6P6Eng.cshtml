@@ -1,0 +1,220 @@
+﻿@model List<vms.entity.StoredProcedureModel.HTMLMushak.SpVdsPurchaseCertificate>
+@{
+    ViewData["Title"] = "Mushak 6.6";
+
+    var firstElement = Model.First();
+   
+    int SlNo = 0;
+    Layout = "_LayoutMushak";
+}
+
+
+<style>
+
+    .MreturnHeader {
+        text-align: center;
+        background-color: #ffedbe;
+    }
+
+
+    .Returntd {
+        text-align: left;
+    }
+
+    .Returntdhead {
+        text-align: center;
+        background-color: #cfcfcf;
+    }
+
+    .ReturntdEmpty {
+        background-color: lightgray;
+    }
+
+    .tdp1 {
+        width: 320px;
+    }
+
+    .tdp2 {
+        width: 30px;
+        text-align: center;
+    }
+
+    .report-margin {
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+</style>
+
+@section contentheader
+    {
+    <div class="p-3 page-header">
+        @*<h5></h5>*@
+        <div class="row">
+            <div class="col-8">
+                Mushak-6.6(Purchase VDS Invoice)
+            </div>
+            <div class="col-4">
+                <form method="post">
+                                        
+                    <div class="form-group float-end">
+                        <button id="btnPrint" type="button" class="btn btn-sm btn-primary inline-sm-button"><i class="bi bi-printer-fill"></i> Print</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+}
+<div class="report-section">
+
+    <div class="report-margin" id="printableArea">
+        <div class="row">
+            <div class="col-12">
+                <div class="mushak-name">মূসক - ৬.৬</div>
+            </div>
+
+            <div class="col-12 report-header">
+
+                <div class="company-name">গণপ্রজাতন্ত্রী বাংলাদেশ সরকার</div>
+                <div class="company-name">জাতীয় রাজস্ব বোর্ড</div>
+                <div class="company-other-info">উৎসে কর কর্তন সনদপত্র</div>
+                <div class="company-other-info">[বিধি ৪০ এর উপবিধি (১) এর দফা (চ) দ্রষ্টব্য]</div>
+
+            </div>
+            <br />
+            <div class="col-12 mt-3">
+
+
+                <div class="company-other-info">উৎসে কর কর্তনকারী সত্তার নাম : @firstElement.OrgName </div>
+                <div class="company-other-info">উৎসে কর কর্তনকারী সত্তার ঠিকানা : @firstElement.OrgAddress </div>
+                <div class="company-other-info">উৎসে কর কর্তনকারী সত্তার বিআইএন (প্রযোজ্য ক্ষেত্রে)  : @firstElement.OrgBin </div>
+
+            </div>
+            <div class="col-8" style="text-align:left">
+
+                <div class="company-other-info">উৎসে কর কর্তন সনদপত্র নং :  @firstElement.VDSCertificateNo</div>
+
+            </div>
+
+            <div class="col-4" style="text-align:left">
+
+                @* <h6>জারির তারিখ : @firstElement.VatChallanNo </h6> *@
+                <div class="company-other-info">জারির তারিখ :@firstElement.VDSCertificateDate?.ToString("dd/MM/yyyy hh:mm tt")</div>
+            </div>
+
+            <div class="col-12 mt-3">
+                এই মর্মে প্রত্যয়ন করা যাইতেছে যে, আইনের ধারা ৪৯ অনুযায়ী উৎসে কর কর্তনযোগ্য  সরবরাহ হইতে প্রযোজ্য মূল্য সংযোজন কর বাবদ
+                উৎসে কর কর্তন করা হইল । কর্তনকৃত মূল্য সংযোজন করের অর্থ বুক ট্রান্সফার/ট্রেজারি চালান/দাখিলপত্রে বৃদ্ধিকারী সমন্বয়ের মাধ্যমে সরকারি
+                কোষাগারে জমা প্রদান করা হইয়াছে । কপি এতদসংগে সংযুক্ত করা হইল (প্রযোজ্য ক্ষেত্রে) ।
+
+            </div>
+            
+            <div class="col-12 mt-3">
+                <table class="table table-bordered">
+
+                    <tbody style="text-align:center">
+                        <tr>
+                            <td rowspan="2">
+                                ক্রমিক সংখ্যা
+                            </td>
+                            <td colspan="2">সরবরাহকারী</td>
+                            <td colspan="2">সংশ্লিষ্ট কর চালানপত্র </td>
+                            <td rowspan="2">
+                                মোট সরবরাহ মূল্য (টাকা)
+                            </td>
+                            <td rowspan="2">
+                                মূসকের পরিমাণ (টাকা)
+                            </td>
+                            <td rowspan="2">
+                                উৎসে কর্তনকৃত মুসকের পরিমাণ (টাকা)
+                            </td>
+
+                        </tr>
+
+                        <tr>
+                            <td>
+                                নাম
+                            </td>
+                            <td>বিআইএন</td>
+                            <td>নম্বর</td>
+                            <td>
+                                ইস্যুর তারিখ
+                            </td>
+
+                        </tr>
+
+                        <tr>
+                            <td>(১)</td>
+                            <td>(২)</td>
+                            <td>(৩)</td>
+                            <td>(৪)</td>
+                            <td>(৫)</td>
+                            <td>(৬)</td>
+                            <td>(৭)</td>
+                            <td>(৮)</td>
+
+                        </tr>
+
+                        @if (Model.Any())
+                        {
+                            SlNo = 1;
+                            foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@SlNo</td>
+                                    <td>@item.VendorName</td>
+                                    <td>@item.VendorBin</td>
+                                    <td>@item.VatChallanNo</td>
+                                    <td>@item.VatChallanIssueDate</td>
+                                    <td>@StringGenerator.DecimalToCommaSeparated(item.TotalPriceWithoutVat)</td>
+                                    <td>@StringGenerator.DecimalToCommaSeparated(item.TotalVAT)</td>
+                                    <td>@StringGenerator.DecimalToCommaSeparated(item.VDSAmount)</td>
+                                </tr>
+                                SlNo++;
+                            }
+
+                        }
+
+                    </tbody>
+
+                </table>
+            </div>
+
+            <div class="row">
+                <div class="col-4">
+
+                    <div class="company-other-info">ক্ষমতাপ্রাপ্ত কর্মকর্তার - </div>
+                    
+                    <div class="company-other-info">  স্বাক্ষর : </div>
+                    <div class="company-other-info">  নাম :  @firstElement.VatResponsiblePersonName</div>
+                                       
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <hr>
+                    <div class="special-note-list-item">১ মূসক ও সম্পূরক শুল্ক (যদি থাকে ) সহ মূল্য</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+@section Scripts{
+   
+    <script>
+
+        $(document).ready(function () {
+            $("#btnPrint").click(function () {
+                window.vmsPrint.printA4Portrait('printableArea');
+
+            });
+        });
+
+    </script>
+}
+
+

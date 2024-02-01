@@ -1,0 +1,218 @@
+[
+  {
+    "outputFileName": "wwwroot/css/vmslib.css",
+    "inputFiles": [
+      "wwwroot/lib/bootstrap/css/bootstrap.min.css",
+      "wwwroot/lib/bootstrap-icons/font/bootstrap-icons.css",
+      "wwwroot/lib/bootstrap-select/css/bootstrap-select.css",
+      "wwwroot/mvc-grid/mvc-grid.css",
+      "wwwroot/lib/toastr/toastr.scss",
+      "wwwroot/CustomCss/vmsicon.css",
+      "wwwroot/CustomCss/sidebars.css",
+      "wwwroot/CustomCss/site.css"
+    ],
+    "minify": {
+      "enabled": true
+    }
+  },
+  {
+    "outputFileName": "wwwroot/css/vmsprint.css",
+    "inputFiles": [
+      "wwwroot/lib/bootstrap/css/bootstrap.css",
+      "wwwroot/CustomCss/siteprintable.css"
+    ],
+    "minify": {
+      "enabled": true
+    }
+  },
+  {
+    "outputFileName": "wwwroot/css/a4protrait.css",
+    "inputFiles": [
+      "wwwroot/lib/bootstrap/css/bootstrap.css",
+      "wwwroot/CustomCss/site.css",
+      "wwwroot/CustomCss/vms-print-option.css",
+      "wwwroot/CustomCss/a4protrait.css"
+    ],
+    "minify": {
+      "enabled": true
+    }
+  },
+  {
+    "outputFileName": "wwwroot/css/a4landscape.css",
+    "inputFiles": [
+      "wwwroot/lib/bootstrap/css/bootstrap.css",
+      "wwwroot/CustomCss/site.css",
+      "wwwroot/CustomCss/vms-print-option.css",
+      "wwwroot/CustomCss/a4landscape.css"
+    ],
+    "minify": {
+      "enabled": true
+    }
+  },
+  {
+    "outputFileName": "wwwroot/css/a3protrait.css",
+    "inputFiles": [
+      "wwwroot/lib/bootstrap/css/bootstrap.css",
+      "wwwroot/CustomCss/site.css",
+      "wwwroot/CustomCss/vms-print-option.css",
+      "wwwroot/CustomCss/a3protrait.css"
+    ],
+    "minify": {
+      "enabled": true
+    }
+  },
+  {
+    "outputFileName": "wwwroot/css/a3landscape.css",
+    "inputFiles": [
+      "wwwroot/lib/bootstrap/css/bootstrap.css",
+      "wwwroot/CustomCss/site.css",
+      "wwwroot/CustomCss/vms-print-option.css",
+      "wwwroot/CustomCss/a3landscape.css"
+    ],
+    "minify": {
+      "enabled": true
+    }
+  },
+  {
+    "outputFileName": "wwwroot/css/legalprotrait.css",
+    "inputFiles": [
+      "wwwroot/lib/bootstrap/css/bootstrap.css",
+      "wwwroot/CustomCss/site.css",
+      "wwwroot/CustomCss/vms-print-option.css",
+      "wwwroot/CustomCss/legalprotrait.css"
+    ],
+    "minify": {
+      "enabled": true
+    }
+  },
+  {
+    "outputFileName": "wwwroot/css/legallandscape.css",
+    "inputFiles": [
+      "wwwroot/lib/bootstrap/css/bootstrap.css",
+      "wwwroot/CustomCss/site.css",
+      "wwwroot/CustomCss/vms-print-option.css",
+      "wwwroot/CustomCss/legallandscape.css"
+    ],
+    "minify": {
+      "enabled": true
+    }
+  },
+  {
+    "outputFileName": "wwwroot/css/toastr.css",
+    "inputFiles": [
+      "wwwroot/lib/toastr/toastr.scss"
+    ],
+    "minify": {
+      "enabled": true
+    }
+  },
+  //JS Bundle
+  {
+    "outputFileName": "wwwroot/js/site.js",
+    "inputFiles": [
+      "wwwroot/js/site.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  },
+  {
+    "outputFileName": "wwwroot/js/vmslib.js",
+    "inputFiles": [
+      "wwwroot/lib/jquery/jquery.js",
+      "wwwroot/lib/moment-js/moment.js",
+      "wwwroot/lib/bootstrap/js/bootstrap.bundle.js",
+      "wwwroot/lib/bootstrap-select/js/bootstrap-select.js",
+      "wwwroot/mvc-grid/mvc-grid.js",
+      "wwwroot/lib/toastr/toastr.js",
+      "wwwroot/CustomJs/Site.js"
+    ],
+    "minify": {
+      "enabled": false
+    }
+  },
+  {
+    "outputFileName": "wwwroot/js/validation.js",
+    "inputFiles": [
+      "wwwroot/js/jquery.validate.min.js",
+      "wwwroot/js/jquery.validate.unobtrusive.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  },
+  {
+    "outputFileName": "wwwroot/js/validation.min.js",
+    "inputFiles": [
+      "wwwroot/js/jquery.validate.min.js",
+      "wwwroot/js/jquery.validate.unobtrusive.min.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  },
+  {
+    "outputFileName": "wwwroot/js/vms-validation.js",
+    "inputFiles": [
+      "wwwroot/lib/imask/dist/imask.js",
+      "wwwroot/lib/jquery-validate/jquery.validate.js",
+      "wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js",
+      "wwwroot/CustomJs/FormOptions.js"
+    ],
+    "minify": {
+      "enabled": false,
+      "renameLocals": false
+    },
+    "sourceMap": false
+  },
+  {
+    "outputFileName": "wwwroot/js/toastr.js",
+    "inputFiles": [
+      "wwwroot/lib/toastr/toastr.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  },
+  {
+    "outputFileName": "wwwroot/js/jquery.js",
+    "inputFiles": [
+      "wwwroot/lib/jquery/jquery.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  },
+  {
+    "outputFileName": "wwwroot/js/print.js",
+    "inputFiles": [
+      "wwwroot/lib/print-js/print.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  },
+  {
+    "outputFileName": "wwwroot/js/typeahead.bundle.js",
+    "inputFiles": [
+      "wwwroot/lib/typeahead.js/typeahead.bundle.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  }
+]

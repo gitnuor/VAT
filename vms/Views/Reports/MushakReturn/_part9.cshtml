@@ -1,0 +1,39 @@
+﻿@model IEnumerable<vms.entity.StoredProcedureModel.MushakReturn.MushakReturnPartNine>
+<table class="table table-bordered">
+    @*<thead>*@
+
+        <tr>
+
+            <th class="MreturnHeader" colspan="5" style="background-color: #FBD4B4!important">
+
+                <div class="parthead">অংশ-৯: কর পরিশোধের তফসিল (ট্রেজারী জমা) </div>
+            </th> 
+        </tr>
+    @*</thead>
+    <tbody class="Returntd">*@
+
+        <tr class="Returntdhead text-center font-weight-bold" style="background-color: #BFBFBF !important">
+            <td class="Returntdhead" style="text-align:center !important"><b> আইটেম</b></td>
+            <td><b>নোট</b></td>
+            <td><b>অর্থনৈতিক কোড</b></td>
+            <td><b>পরিমাণ</b></td>
+            <td><b></b></td>
+        </tr>
+
+        @if (Model.Any())
+        {
+
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.TypeNameBn</td>
+                    <td class="text-center" style="text-align:center !important">@item.NoteNo</td>
+                    <td style="text-align:center !important">@item.EconomicCode</td>
+                    <td class="text-right" style="text-align:right !important">@StringGenerator.DecimalToCommaSeparated(item.PaidAmount)</td>
+                    <td><a asp-action="Mushok9P1SubChha" asp-route-year="@ViewBag.Year" asp-route-month="@ViewBag.Month" target="_blank" class="ReturntdEmpty">সাবফর্ম-ছ  </a></td>
+                </tr>
+
+            }
+        }
+    @*</tbody>*@
+</table>

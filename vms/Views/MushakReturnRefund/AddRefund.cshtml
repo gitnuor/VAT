@@ -1,0 +1,86 @@
+﻿@model vms.entity.models.MushakReturnRefund
+
+@{
+    ViewData["Title"] = "Create";
+    
+}
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="custom-page-title">Add Refund Info.</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="AddRefund" class="form-horizontal" id="frmusercreate">
+            @Html.HiddenFor(c => c.MushakReturnRefundId)
+            <div class="form-body">
+
+                <div class="form-group required">
+                    <label class="col-md-3 control-label">VAT Amount: </label>
+                    <div class="col-md-4">
+                        <input asp-for="RefundedVatamount" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group required">
+                    <label class="col-md-3 control-label">VAT Cheque No.: </label>
+                    <div class="col-md-4">
+                        <input asp-for="RefundedVatchequeNo" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group required">
+                    <label class="col-md-3 control-label">VAT Cheque Date: </label>
+                    <div class="col-md-4">
+                        <input type="text" id="RefundedVatchequeDate" name="RefundedVatchequeDate" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group required">
+                    <label class="col-md-3 control-label">SD Amount: </label>
+                    <div class="col-md-4">
+                        <input asp-for="RefundedSdamount" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group required">
+                    <label class="col-md-3 control-label">SD Cheque No.: </label>
+                    <div class="col-md-4">
+                        <input asp-for="RefundedSdchequeNo" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group required">
+                    <label class="col-md-3 control-label">SD Cheque Date: </label>
+                    <div class="col-md-4">
+                        <input type="text" id="RefundedSdchequeDate" name="RefundedSdchequeDate" class="form-control" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <div class="row">
+                    <div class="col-md-offset-3 col-md-9 mb-3">
+                        <button type="submit" data-requiredconfirmation="true" class="btn  green"><i class="bi bi-check-lg"></i> Submit</button>
+
+                        <a href="~/MushakReturnRefund/Index" class="btn btn-secondary btn-sm"><i class="bi bi-slash-circle"></i> Cancel</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts{
+
+    <script src="~/js/jquery-ui.js"></script>
+    <script>
+
+        $(document).ready(function () {
+
+            $("#RefundedSdchequeDate").datepicker();
+            $("#RefundedSdchequeDate").datepicker('option', 'dateFormat', 'dd M, yy');
+
+            $("#RefundedVatchequeDate").datepicker();
+            $("#RefundedVatchequeDate").datepicker('option', 'dateFormat', 'dd M, yy');
+        });
+    </script>
+}

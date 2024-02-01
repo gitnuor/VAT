@@ -1,0 +1,132 @@
+﻿@model vms.entity.viewModels.ReportsViewModel.vmMushakReturnPaymentChallan
+@{   
+    var firstElement = Model.ChallanList.First();
+}
+<div class="col-12 report-header">
+
+    <h4>চালান ফরম</h4>
+    <h6>টি. আর ফরম নং ৬ ( এস আর ৩৭ দ্রষ্টব্য)</h6>
+    <h6>চালান নং: @(firstElement.TreasuryChallanNo?? ".....................................") &nbsp; তারিখ: @firstElement.PaymentDate.ToString("dd/MM/yyyy")</h6>
+    <h6>@firstElement.BankName এর @firstElement.DistrictName জেলার , @firstElement.BankBranchName শাখায় টাকা জমা দেওয়ার চালান</h6>
+
+</div>
+<br />
+
+<div class="col-12">
+    <div class="row">
+        <div class="col-2" style="text-align:right;"><h6 class="mt-2">কোড নং</h6></div> 
+        <div class="col-1">
+            <table class="table table-bordered ml-2 mr-2" style="text-align:center;">
+                <tr>
+                    <td>@firstElement.EconomicCode1stDisit</td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-3">
+            <table class="table table-bordered ml-2 mr-2" style="text-align:center;">
+                <tr>
+
+                    <td>@firstElement.EconomicCode2ndDisit</td>
+                    <td>@firstElement.EconomicCode3rdDisit</td>
+                    <td>@firstElement.EconomicCode4thDisit</td>
+                    <td>@firstElement.EconomicCode5thDisit</td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-3">
+            <table class="table table-bordered ml-2 mr-2" style="text-align:center;">
+                <tr>
+
+                    <td>@firstElement.EconomicCode6thDisit</td>
+                    <td>@firstElement.EconomicCode7thDisit</td>
+                    <td>@firstElement.EconomicCode8thDisit</td>
+                    <td>@firstElement.EconomicCode9thDisit</td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-3">
+            <table class="table table-bordered ml-2 mr-2" style="text-align:center;">
+                <tr>
+                    <td>@firstElement.EconomicCode10thDisit</td>
+                    <td>@firstElement.EconomicCode11thDisit</td>
+                    <td>@firstElement.EconomicCode12thDisit</td>
+                    <td>@firstElement.EconomicCode13thDisit</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="col-12">
+    <table class="table table-bordered">
+
+        <tbody style="text-align:center">
+            <tr>
+                <td colspan="4">
+                    জমা প্রদানকারী কর্তৃক পূরণ করিতে হইবে
+                </td>
+                <td colspan="2">টাকার অংক</td>
+                <td rowspan="2">
+                    বিভাগের নাম এবং চালানের পৃষ্ঠাংকনকারী কর্মকর্তার নাম, পদবী ও দপ্তর
+                </td>
+
+            </tr>
+            <tr>
+                <td>
+                    যাহার মারফত প্রদত্ত হইলো তাহার নাম ও ঠিকানা
+                </td>
+                <td>
+                    যে ব্যক্তির/প্রতিষ্ঠানের পক্ষ হইতে টাকা প্রদত্ত হইলো তাহার নাম, পদবী ও ঠিকানা
+                </td>
+                <td>
+                    কি বাবদ জমা দেয়া হইলো তাহার বিবরণ
+                </td>
+                <td>
+                    মুদ্রা ও নোটের নিনরন/ড্রাফ্‌ট, পে-অর্ডার ও চেকের বিবরন
+                </td>
+                <td>
+                    টাকা
+                </td>
+                <td>
+                    পয়সা
+                </td>
+            </tr>
+            <tr>
+                <td rowspan="2">
+                    নাম: @firstElement.OrganizationName
+                    ঠিকানা: @firstElement.OrganizationAddress
+                </td>
+                <td rowspan="2">
+                    
+                </td>
+                <td rowspan="2">@firstElement.TypeNameBn</td>
+                <td></td>
+                <td>@firstElement.PaidAmountTaka</td>
+                <td>@firstElement.PaidAmountPoisha</td>
+                <td rowspan="2"></td>
+            </tr>
+
+            <tr>
+                <td>মোট টাকা</td>
+                <td>@firstElement.PaidAmountTaka</td>
+                <td>@firstElement.PaidAmountPoisha</td>
+            </tr>
+
+            <tr>
+                <td colspan="4">টাকা (কথায়): @firstElement.PaidAmountInWords</td>
+                <td rowspan="3" colspan="3" style="align-content:baseline">
+                    <h6 class="mt-5">ম্যানেজার <br />@firstElement.BankName</h6>
+                </td>
+
+            </tr>
+            <tr style="text-align:left">
+                <td colspan="4">টাকা পাওয়া গেল : </td>
+            </tr>
+            <tr style="text-align:left">
+                <td colspan="4">তারিখ : </td>
+            </tr>
+        </tbody>
+
+    </table>
+
+</div>

@@ -1,0 +1,610 @@
+﻿@{
+    ViewData["Title"] = "Create";
+    
+}
+
+
+@section contentheader
+    {
+    <div class="p-3 page-header">
+        
+            Add Contractual Production
+        
+        <div class="d-flex justify-content-start">
+
+
+        </div>
+    </div>
+    <div class="col-12 d-flex">
+        <ul class="nav nav-pills mt-3 mr-auto align-bottom">
+        </ul>
+        @using (Html.BeginForm("", "", FormMethod.Get, new { id = "frmPurchase", @class = "d-flex pr-1" }))
+        {
+
+        }
+    </div>
+}
+
+<input type="hidden" class="form-control" id="ProductId" name="ProductId" />
+
+
+
+<form method="post" id="productionConCreate">
+    <div class="row">
+        <div class="col-md-12 ">
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="form-group form-md-line-input">
+                        <div>
+                            <label style="color:#327ad5;">Contract No<span class="label-color">*</span></label>
+                            <input type="text" class="form-control" id="ContractNo" name="ContractNo" placeholder="#">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="form-group form-md-line-input">
+                        <div>
+                            <label style="color:#327ad5;">ChallanNo</label>
+                            <input type="text" class="form-control" id="ChallanNo" name="ChallanNo" placeholder="#">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group form-md-line-input">
+                        <div>
+                            <label style="color:#327ad5;">Issue Date</label>
+                            <input type="datetime" class="form-control" id="IssueDate" name="IssueDate" placeholder="#" value="@DateTime.Now.ToString(DefinedDateFormat.DateFormatForControl)">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group form-md-line-input">
+                        <div>
+                            <label style="color:#327ad5;">Contract Type</label>
+                            <select id="ContractTypeId" name="ContractTypeId" class="form-control" asp-items="ViewBag.ContractTypeId">
+                                <option value=null></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-2 vendor" hidden>
+                    <div class="form-group form-md-line-input">
+                        <div>
+                            <label style="color:#327ad5;">Vendor</label>
+                            <select id="VendorId" name="VendorId" class="form-control" asp-items="ViewBag.VendorId">
+                                <option value=null></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 customer" hidden>
+                    <div class="form-group form-md-line-input">
+                        <div>
+                            <label style="color:#327ad5;">Customer</label>
+                            <select id="CustomerId" name="CustomerId" class="form-control" asp-items="ViewBag.Customer">
+                                <option value=null></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group form-md-line-input">
+                        <div>
+                            <label style="color:#327ad5;">Contract Date<span class="label-color">*</span></label>
+                            <input type="datetime" class="form-control" id="ContractDate" name="ContractDate" value="@DateTime.Now.ToString(DefinedDateFormat.DateFormatForControl)">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group form-md-line-input">
+                        <div>
+                            <label style="color:#327ad5;">Closing Date<span class="label-color">*</span></label>
+                            <input type="datetime" class="form-control" id="ClosingDate" name="ClosingDate" value="@DateTime.Now.ToString(DefinedDateFormat.DateFormatForControl)">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-md-12 ">
+            <h4>Contractual Production Product Details</h4>
+            <table class="table table-bordered" id="gridTable">
+                <thead>
+                    <tr>
+                        <th>Serial</th>
+                        <th>Finish Goods</th>
+                        <th>Qty.</th>
+                        <th>M. Unit</th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tbody id="tblCVPD"></tbody>
+
+                <tfoot>
+                    <tr>
+
+                        <td></td>
+                        <td class="form-group form-md-line-input">
+                            <div>
+                                <input type="text" class="form-control" id="Product" name="Product">
+                            </div>
+                        </td>
+                        <td class="form-group form-md-line-input">
+                            <div>
+                                <input type="text" class="form-control" id="UsedQuantity" name="UsedQuantity">
+                            </div>
+                        </td>
+                        <td class="form-group form-md-line-input has-info">
+                            <select id="unit" name="unit" class="form-control" asp-items="ViewBag.MeasurementUnitId">
+                                <option value=null></option>
+                            </select>
+                        </td>
+                        <td class="single-button-action-column">
+                            <a id="add" class="btn btn-sm btn-success" aria-label="Left Align">
+                                <i class="bi bi-plus-lg"></i>
+                            </a>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+
+    </div>
+    <div class="form-actions">
+        <button type="button" class="btn btn-primary" id="save"><i class="bi bi-check-lg"></i> Submit</button>
+        <button type="button" value="Reset" class="btn  btn-warning btn-sm" onclick="location.reload();"><i class="bi bi-arrow-repeat"></i> Reset</button>
+        <a asp-action="Index" class="btn btn-secondary btn-sm"><i class="bi bi-slash-circle"></i> Cancel</a>
+    </div>
+</form>
+@section Scripts{
+
+    <script src="~/js/typeahead.bundle.js"></script>
+    <script src="~/js/jquery-ui.js"></script>
+    <script>
+
+        var ProductionContractVendor = {
+            init: function() {},
+            count: 1,
+            ProductionContractVendorDetailList: [],
+            item: [],
+            gridTableEmpty: function() {
+                $('#ProductId').val('');
+                $('#Product').val('');
+                $('#UsedQuantity').val('');
+                $('#unit').val('');
+            },
+
+            isNumber:function (n) {
+                return !isNaN(parseFloat(n)) && isFinite(n);
+            },
+
+            add: function () {
+
+                var productName = $('#Product').val();
+                var productId = $('#ProductId').val();
+                var unit = $('#unit').val();
+                var unitName  =$("#unit option:selected").text();
+                var qty = $('#UsedQuantity').val();
+                if (productId>0) {
+
+                    var canAdd = true;
+
+                    $.each(ProductionContractVendor.ProductionContractVendorDetailList,
+                        function (i, v) {
+                            if (ProductionContractVendor.ProductionContractVendorDetailList[i].ProductId == productId) {
+                                alert('Sorry! Raw Material Exists.');
+                                canAdd = false;
+
+                            }
+
+                        });
+                    if (!parseInt(qty)) {
+                        alert('Number of used qty is inValid!');
+                        canAdd = false;
+                    }
+                    if (canAdd) {
+                        var data = new Object();
+                        data.ProductId = productId;
+                        data.Quantity = qty;
+                        data.MeasurementUnitId = unit;
+
+                        ProductionContractVendor.ProductionContractVendorDetailList.push(data);
+
+                        var html = '<tr id="' +
+                            data.ProductId +
+                            '">' +
+                            '<td>' +
+                            ProductionContractVendor.count +
+                            '</td>' +
+                            '<td>' +
+                            productName +
+                            '</td>' +
+                            '<td>' +
+                            qty +
+                            '</td>' +
+                            '<td>' +
+                            unitName +
+                            '</td>' +
+                            '<td><span onclick="Delete(' +
+                            data.ProductId +
+                            ')"  class="glyphicon glyphicon-minus btn-xs"></a></span></td>';
+
+                        html += '</tr>';
+
+                        $("table#gridTable > tbody").append(html);
+                        ProductionContractVendor.gridTableEmpty();
+                        ProductionContractVendor.count++;
+
+                    }
+                }
+
+            },
+
+            delete: function (id) {
+
+                $.each(ProductionContractVendor.ProductionContractVendorDetailList,
+                    function (i, v) {
+                        if (ProductionContractVendor.ProductionContractVendorDetailList[i].ProductId == id) {
+
+                            ProductionContractVendor.ProductionContractVendorDetailList.splice(i, 1);
+                            ProductionContractVendor.count--;
+                        }
+                        $("tr#" + id).remove().fadeOut();
+
+                    });
+
+            },
+
+
+             Save: function () {
+
+                 var ContractNo = $('#ContractNo').val();
+                 var VendorId = $('#VendorId').val();
+                 var ContractDate = $('#ContractDate').val();
+                 var ClosingDate = $('#ClosingDate').val();
+                 var IssueDate = $('#IssueDate').val();
+                 var ChallanNo = $('#ChallanNo').val();
+                 var CustomerId = $('#CustomerId').val();
+                 var ContractTypeId = $('#ContractTypeId').val();
+                 var reqEntry = new Object();
+                 reqEntry.ContractNo = ContractNo;
+                 reqEntry.VendorId = VendorId;
+                 reqEntry.ContractDate = ContractDate;
+                 reqEntry.ClosingDate = ClosingDate;
+                 reqEntry.IssueDate = IssueDate;
+                 reqEntry.ChallanNo = ChallanNo;
+                 reqEntry.CustomerId = CustomerId;
+                 reqEntry.ContractTypeId = ContractTypeId;
+
+                 reqEntry.ContractVendorProductDetailses = ProductionContractVendor.ProductionContractVendorDetailList;
+                 $.ajax({
+                     url: '@Url.Action("CreateContractVendor", "ProductionContractual")',
+                     data: { contract: reqEntry, "__RequestVerificationToken": $("input[name=__RequestVerificationToken]").val()},
+                     type: "POST",
+
+                     dataType: "json",
+                     beforeSend: function () {
+                         $("#loading").show();
+                     },
+
+                     success: function (result) {
+                         $("#showData").html("");
+
+                         if (result == false) {
+                             alert("Please add atleast one BOM");
+                         }
+                         else {
+                             window.location.href = '@Url.Action("Index", "ProductionContractual")';
+                         }
+                     },
+                     error: function (x, e) {
+                         $("#loading").hide();
+                         alert('error');
+                     }
+                 });
+            },
+            product : {
+                init: function () { },
+
+                productAutoComplete: function () {
+                    var materialforrequsition = {
+                        Initialize: function () {
+                            materialforrequsition.Typehead();
+                        },
+
+                        Typehead: function () {
+                            $('#Product').typeahead('destroy');
+                            $('#Product').typeahead({
+                                    hint: true,
+                                    highlight: true,
+                                    minLength: 2,
+                                },
+                                {
+                                    items: 8,
+                                    name: 'Product',
+                                    displayKey: function (s) {
+                                        return s.name;
+                                    },
+                                    property: "ProductId",
+                                    source: function (strmaterial, process) {
+                                        var url = '@Url.Content("~/Products/ContractVendorProductAutoComplete")';
+                                        return $.getJSON(url,
+                                            {
+                                                 filterText: $("#Product").val()
+                                            }, function (Data) {
+
+                                            return process(Data);
+                                        });
+                                    },
+                                    updater: function (item) {
+                                        return item.name;
+                                    }
+                                }).on('typeahead:selected', function (obj, datum) {
+
+                                    $("#ProductId").val(datum.id);
+                                    $("#unit").val(datum.unit);
+
+                            });
+                            $("#Product").focus();
+
+                        }
+                    }
+                    materialforrequsition.Initialize();
+                }
+            }
+        }
+
+        $(document).ready(function () {
+            $('#productionConCreate').validate({
+                errorClass: 'help-block animation-slideDown',
+                errorElement: 'div',
+                errorPlacement: function (error, e) {
+                    e.parents('.form-group >div').append(error);
+                },
+                highlight: function (e) {
+                    $(e).closest('.form-group').removeClass('has-success has-error').addClass('has-error');
+                    $(e).closest('.help-block').remove();
+                },
+
+                success: function (e) {
+                    e.closest('.form-group').removeClass('has-success has-error');
+                    e.closest('.help-block').remove();
+                },
+                rules: {
+                    ChallanNo: {
+                        maxlength: 50
+                    },
+                    ContractNo: {
+                        required: true,
+                        maxlength: 50
+                    },
+                    IssueDate: {
+                        date:true
+                    },
+                    ContractDate: {
+                        required: true,
+                        date: true
+                    },
+                    ClosingDate: {
+                        required: true,
+                        date: true
+                    },
+                    Product: {
+                        required: true
+                    },
+                    UsedQuantity: {
+                        required: true,
+                        number: true
+                    },
+                    ContractTypeId: {
+                        required: true
+                    },
+                    VendorId: {
+                        required: function () {
+                            if ($("#ContractTypeId").val() == "1") {
+                                return true;
+                            }
+
+                            else {
+                                return false;
+                            }
+                        },
+                        maxlength: 20
+                    },
+                    CustomerId: {
+                        required: function () {
+                            if ($("#ContractTypeId").val() == "2") {
+                                return true;
+                            }
+
+                            else {
+                                return false;
+                            }
+                        },
+                        maxlength:20
+                    }
+
+
+                },
+                messages: {
+                    ChallanNo: {
+                        maxlength: 'ChallanNo Can not be more than 50 char'
+                    },
+                    ContractNo: {
+                        required: 'Provide Contract No',
+                        maxlength: 'ContractNo Can not be more than 50 char'
+                    },
+                    IssueDate: {
+                        date: 'Provide a valid Date'
+                    },
+                    ContractDate: {
+                        required: 'Please provide ContractDate',
+                        date: 'Provide a valid Date'
+                    },
+                    ClosingDate: {
+                        required: 'Please provide ClosingDate',
+                        date: 'Provide a valid Date'
+                    },
+                    Product: {
+                        required: 'Please provide Product'
+                    },
+                    UsedQuantity: {
+                        required: 'Please provide UsedQuantity',
+                        number:'Provide Valid Number'
+                    },
+                    ContractTypeId: {
+                        required: 'Select Contract Type'
+                    },
+                    VendorId: {
+                        required: 'Select Vendor',
+                        maxlength: 'Check'
+                    },
+                    CustomerId: {
+                        required: 'Select Customer',
+                        maxlength:'Check'
+                    }
+
+
+                }
+            });
+            $('#add').click(function() {
+                $("#Product").rules('add', 'required');
+                $("#UsedQuantity").rules('add', 'required');
+                $("#ClosingDate").rules('remove', 'required');
+                $("#ContractDate").rules('remove', 'required');
+                $("#ContractNo").rules('remove', 'required');
+                $("#ContractTypeId").rules('remove', 'required');
+                $("#VendorId").rules('remove', 'required');
+                $("#CustomerId").rules('remove', 'required');
+                if ($("#productionConCreate").valid()) {
+                    ProductionContractVendor.add();
+                    return true
+                }
+                else {
+                    return false;
+                }
+
+            });
+
+            $('#save').click(function () {
+                $("#ClosingDate").rules('add', 'required');
+                $("#ContractDate").rules('add', 'required');
+                $("#ContractNo").rules('add', 'required');
+                $("#ContractTypeId").rules('add', 'required');
+                $("#VendorId").rules('add', {
+                    required: function () {
+                        if ($("#ContractTypeId").val() == "1") {
+                            return true;
+                        }
+
+                        else {
+                            return false;
+                        }
+                    }
+                });
+                $("#CustomerId").rules('add', {
+                    required: function () {
+                        if ($("#ContractTypeId").val() == "2") {
+                            return true;
+                        }
+
+                        else {
+                            return false;
+                        }
+                    }
+                });
+                $("#Product").rules('remove', 'required');
+                $("#UsedQuantity").rules('remove', 'required');
+
+                if ($("#productionConCreate").valid()) {
+                   var rowPurchase = $('#tblCVPD tr').length;
+
+                    if (rowPurchase > 0) {
+                        if (confirm('Are you sure?')) {
+                            ProductionContractVendor.Save();
+                            return true
+                        }
+                    }
+                    else {
+                        alert('Add Product Details');
+                    }
+                }
+                else {
+                    alert('Please Enter Required Fields!');
+                    return false;
+                }
+            });
+            ProductionContractVendor.product.productAutoComplete();
+            @*$("#ContractDate").datepicker();
+            $("#ContractDate").datepicker('option', 'dateFormat', '@DefinedDateFormat.DISPLAY_DATE_FORMAT');
+            $("#ClosingDate").datepicker();
+            $("#ClosingDate").datepicker('option', 'dateFormat', '@DefinedDateFormat.DISPLAY_DATE_FORMAT');
+            $("#IssueDate").datepicker();
+            $("#IssueDate").datepicker('option', 'dateFormat', '@DefinedDateFormat.DISPLAY_DATE_FORMAT');*@
+
+
+        });
+        function DeleteDocument(id) {
+            ProductionContractVendor.deleteDocument(id);
+        };
+        function Delete(id) {
+            ProductionContractVendor.delete(id);
+        }
+
+        function reset() {
+
+            $("#ContractNo").val('');
+            $("#ChallanNo").val('');
+            $("#ContractTypeId").val('');
+            $("#CustomerId").val('');
+            $("#VendorId").val('');
+
+            $("#IssueDate").datepicker().datepicker("setDate", new Date());
+            $("#ContractDate").datepicker().datepicker("setDate", new Date());
+            $("#ClosingDate").datepicker().datepicker("setDate", new Date());
+
+
+            $("#ContractDate").datepicker('option', 'dateFormat', '@DefinedDateFormat.DisplayDateFormat');
+            $("#ClosingDate").datepicker('option', 'dateFormat','@DefinedDateFormat.DisplayDateFormat');
+            $("#IssueDate").datepicker('option', 'dateFormat', '@DefinedDateFormat.DisplayDateFormat');
+        }
+
+        $("#item").keyup(function () {
+            var that = this,
+            numberOfItem = $(this).val();
+
+        });
+        $('#addDocument').click(function() {
+            ProductionContractVendor.addDocument();
+        });
+        $("#amount").keyup(function () {
+            var that = this,
+                amount = $(this).val();
+
+        });
+        $('#ContractTypeId').change(function() {
+            var value = $('#ContractTypeId').val();
+            if (value == 1) {
+                $('.vendor').show();
+                $('.customer').hide();
+            }
+            else if (value == 2) {
+                $('.vendor').hide();
+                $('.customer').show();
+            }
+            else {
+                $('.vendor').hide();
+                $('.customer').hide();
+            }
+
+
+        });
+
+
+    </script>
+
+}

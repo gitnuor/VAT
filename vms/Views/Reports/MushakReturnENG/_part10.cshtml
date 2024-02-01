@@ -1,0 +1,38 @@
+﻿@model vms.entity.StoredProcedureModel.MushakReturn.MushakReturnPartTen
+
+<table class="table table-bordered">
+    @*<thead>*@
+
+        <tr>
+            <th class="MreturnHeader" colspan="3" style="background-color: #FBD4B4!important">
+                <div class="parthead">Part-10: CLOSING BALANCE (OPENING BALANCE FOR NEXT TAX PERIOD)  </div>
+            </th>
+        </tr>
+    @*</thead>
+    <tbody class="Returntd">*@
+
+        <tr class="Returntdhead text-center font-weight-bold" style="background-color: #BFBFBF !important">
+            <td class="Returntdhead" style="text-align:center !important"><b>Items</b></td>
+            <td><b>Note</b></td>
+
+            <td><b>Amount</b></td>
+
+          
+        </tr>
+
+        <tr>
+            <td>Closing Balance (VAT)  [58-(50+67) + the refund amount not approved</td>
+            <td class="text-center" style="text-align:center !important">৬৫</td>
+            <td class="text-right" style="text-align:right !important">@StringGenerator.DecimalToCommaSeparated(Model.CurrentClosingVatAmount)</td>
+           
+        </tr>
+
+        <tr>
+            <td>Closing Balance (SD) [59-(51+68) + the refund amount not approved</td>
+            <td class="text-center" style="text-align:center !important">৬৬</td>
+            <td class="text-right" style="text-align:right !important">@StringGenerator.DecimalToCommaSeparated(Model.CurrentClosingSuppDutyAmount)</td>
+            
+        </tr>
+    @*</tbody>*@
+
+</table>

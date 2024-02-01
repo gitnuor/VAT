@@ -1,0 +1,38 @@
+﻿@model vms.entity.StoredProcedureModel.MushakReturn.MushakReturnPartTen
+
+<table class="table table-bordered">
+    @*<thead>*@
+
+        <tr>
+            <th class="MreturnHeader" colspan="3" style="background-color: #FBD4B4!important">
+                <div class="parthead">অংশ-১০: সমাপনী জের (পরবর্তী কর মেয়াদের প্রারম্ভিক জের)  </div>
+            </th>
+        </tr>
+    @*</thead>
+    <tbody class="Returntd">*@
+
+        <tr class="Returntdhead text-center font-weight-bold" style="background-color: #BFBFBF !important">
+            <td class="Returntdhead" style="text-align:center !important"><b> আইটেম</b></td>
+            <td><b>নোট</b></td>
+
+            <td><b>পরিমাণ</b></td>
+
+          
+        </tr>
+
+        <tr>
+            <td>সমাপনী জের (মূল্য সংযোজন  কর) [৫৮-(৫০+৬৭)] + ফেরতের পরিমাণ যা অনুমোদিত হয়নি</td>
+            <td class="text-center" style="text-align:center !important">৬৫</td>
+            <td class="text-right" style="text-align:right !important">@StringGenerator.DecimalToCommaSeparated(Model.CurrentClosingVatAmount)</td>
+           
+        </tr>
+
+        <tr>
+            <td>সমাপনী জের (সম্পূরক শুল্ক) [৫৯-(৫১+৬৮)] + ফেরতের পরিমাণ যা অনুমোদিত হয়নি</td>
+            <td class="text-center" style="text-align:center !important">৬৬</td>
+            <td class="text-right" style="text-align:right !important">@StringGenerator.DecimalToCommaSeparated(Model.CurrentClosingSuppDutyAmount)</td>
+            
+        </tr>
+    @*</tbody>*@
+
+</table>

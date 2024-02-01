@@ -1,0 +1,321 @@
+﻿@model vms.entity.viewModels.vmProductPriceSetup
+
+@{
+    ViewData["Title"] = "Details";
+    
+}
+
+@section contentheader
+    {
+    <div class="p-3 page-header">
+       Product Details- @Model.Name
+    </div>
+
+}
+
+
+<div class="row">
+    <div class="col-md-6 pt-4">
+        <div class="form-group">
+            Product Name : @Model.Name
+        </div>
+        @if (Model.Hscode != null)
+        {
+            <div>
+                <div class="form-group">
+                    Model No. : @Model.ModelNo
+                </div>
+            </div>
+        }
+        else
+        {
+
+        }
+        <div class="form-group">
+            Code : @Model.Code
+        </div>
+        @if (Model.Hscode != null)
+        {
+            <div>
+                <div class="form-group">
+                    HS Code : @Model.Hscode
+                </div>
+            </div>
+        }
+        else
+        {
+
+        }
+    </div>
+    <div class="col-md-6 pt-4">
+        <div class="form-group">
+            Company Name : @Model.OrganizationName
+        </div>
+        <div class="form-group">
+            Measurement Unit : @Model.MeasurementUnitName
+        </div>
+        <div class="form-group">
+            Product Group : @Model.ProductGroupName
+        </div>
+        <div class="form-group">
+            Product Category : @Model.ProductCategoryName
+        </div>
+    </div>
+    <div class="col-md-12">
+        <h6> Price Setup</h6>
+        <table class="table table-bordered" id="gridTable">
+            <thead>
+                <tr>
+
+                    <th class="width150">Product Name</th>
+                    <th class="width150">M. Unit</th>
+                    <th class="width100">Unit Price</th>
+
+                </tr>
+            </thead>
+
+            <tbody id="tblPriceSetup">
+                @if (Model.PriceSetups.Any())
+                {
+                    foreach (var modelPriceSetup in Model.PriceSetups)
+                    {
+                        <tr>
+                            <td>@Model.Name</td>
+                            <td>@Model.MeasurementUnitName</td>
+                            <td>@modelPriceSetup.SalesUnitPrice</td>
+                        </tr>
+
+                    }
+                }
+            </tbody>
+
+
+        </table>
+    </div>
+    <div class="col-md-12">
+        <h6> Price Setup Product Cost</h6>
+        <table class="table table-bordered" id="gridTable">
+            <thead>
+                <tr>
+
+                    <th class="width150">Over Head</th>
+                    <th class="width150">Raw Material</th>
+                    <th class="width150">M. Unit</th>
+                    <th class="width150">Cost</th>
+                    <th class="width100">Wastage Percent</th>
+
+                </tr>
+            </thead>
+
+            <tbody id="tblPriceSetup">
+                @if (Model.PriceSetupProductCosts.Any())
+                {
+                    foreach (var modelPriceSetup in Model.PriceSetupProductCosts)
+                    {
+                        <tr>
+                            @if (@modelPriceSetup.OverHeadCost != null)
+                            {
+                                <td>@modelPriceSetup.OverHeadCost.Name</td>
+                            }
+                            else
+                            {
+                                <td></td>
+                            }
+                            @if (modelPriceSetup.RawMaterial != null)
+                            {
+                                <td>@modelPriceSetup.RawMaterial.Name</td>
+                            }
+                            else
+                            {
+                                <td></td>
+                            }
+                            @if (modelPriceSetup.MeasurementUnit != null)
+                            {
+                                <td>@modelPriceSetup.MeasurementUnit.Name</td>
+                            }
+                            else
+                            {
+                                <td></td>
+                            }
+                            <td>@modelPriceSetup.Cost</td>
+                            <td>@modelPriceSetup.WastagePercentage</td>
+                        </tr>
+
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="col-12">
+        <a asp-action="Index" class="btn btn-secondary btn-sm"><i class="bi bi-chevron-double-left"></i> Back</a>
+    </div>
+
+
+
+
+        @*<div class="col-md-6">
+            <div class="col-md-5 ">
+
+                <div class="col-md-12 ">
+                    <div class="form-group">
+
+                        Product Name : @Model.Name
+                    </div>
+                </div>
+
+                <div class="col-md-12 ">
+                    <div class="form-group">
+
+                        Code : @Model.Code
+                    </div>
+                </div>
+                @if (Model.Hscode != null)
+                {
+                    <div class="col-md-12 ">
+                        <div class="form-group">
+                            HS Code : @Model.Hscode
+                        </div>
+                    </div>
+                }
+                else
+                {
+
+                }
+
+
+                
+            </div>
+
+            <div class="col-md-5 ">
+                <div class="col-md-12 ">
+                    <div class="form-group">
+
+                        Company Name : @Model.OrganizationName
+                    </div>
+                </div>
+                <div class="col-md-12 ">
+                    <div class="form-group">
+
+                        Measurement Unit : @Model.MeasurementUnitName
+                    </div>
+                </div>
+
+                <div class="col-md-12 ">
+                    <div class="form-group">
+
+                        Product Group : @Model.ProductGroupName
+                    </div>
+                </div>
+                <div class="col-md-12 ">
+                    <div class="form-group">
+
+                        Product Category : @Model.ProductCategoryName
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-12 ">
+                    <h6> Price Setup</h6>
+                    <table class="table table-bordered" id="gridTable">
+                        <thead>
+                            <tr>
+
+                                <th class="width150">Product Name</th>
+                                <th class="width150">M.Unit</th>
+                                <th class="width100">Sale Unit Price</th>
+
+                            </tr>
+                        </thead>
+
+                        <tbody id="tblPriceSetup">
+                            @if (Model.PriceSetups.Any())
+                            {
+                                foreach (var modelPriceSetup in Model.PriceSetups)
+                                {
+                                    <tr>
+                                        <td>@Model.Name</td>
+                                        <td>@Model.MeasurementUnitName</td>
+                                        <td>@modelPriceSetup.SalesUnitPrice</td>
+                                    </tr>
+
+                                }
+                            }
+                        </tbody>
+
+
+                    </table>
+                </div>
+                <div class="col-md-12 ">
+                    <h6> Price Setup Product Cost</h6>
+                    <table class="table table-bordered" id="gridTable">
+                        <thead>
+                            <tr>
+
+                                <th class="width150">Over Head</th>
+                                <th class="width150">Raw Material</th>
+                                <th class="width150">M. Unit</th>
+                                <th class="width150">Cost</th>
+                                <th class="width100">Wastage Percent</th>
+
+                            </tr>
+                        </thead>
+
+                        <tbody id="tblPriceSetup">
+                            @if (Model.PriceSetupProductCosts.Any())
+                            {
+                                foreach (var modelPriceSetup in Model.PriceSetupProductCosts)
+                                {
+                                    <tr>
+                                        @if (@modelPriceSetup.OverHeadCost != null)
+                                        {
+                                            <td>@modelPriceSetup.OverHeadCost.Name</td>
+                                        }
+                                        else
+                                        {
+                                            <td></td>
+                                        }
+                                        @if (modelPriceSetup.RawMaterial != null)
+                                        {
+                                            <td>@modelPriceSetup.RawMaterial.Name</td>
+                                        }
+                                        else
+                                        {
+                                            <td></td>
+                                        }
+                                        @if (modelPriceSetup.MeasurementUnit != null)
+                                        {
+                                            <td>@modelPriceSetup.MeasurementUnit.Name</td>
+                                        }
+                                        else
+                                        {
+                                            <td></td>
+                                        }
+                                        <td>@modelPriceSetup.Cost</td>
+                                        <td>@modelPriceSetup.WastagePercentage</td>
+                                    </tr>
+
+                                }
+                            }
+                        </tbody>
+
+
+                    </table>
+                </div>
+
+            </div>
+        </div>*@
+
+
+
+
+    @*<div class="form-actions text-left">
+        <div class="row mb-2">
+            <div class="col-md-12 pt-3">
+                <a href="~/Products/Index" class="btn btn-info"><i class="bi bi-chevron-double-left"></i> Back</a>
+            </div>
+        </div>
+    </div>*@
+
+</div>

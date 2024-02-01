@@ -1,0 +1,10 @@
+﻿@model IEnumerable<vms.entity.models.PurchaseReason>
+@(Html.Grid(Model).Build(columns =>
+{
+    columns.Add(model => model.Reason).Titled("Reason");
+})
+	.AppendCss("large-index-grid")
+	.Empty("No data found")
+	.Filterable(GridFilterType.Double)
+	.Sortable()
+	.Pageable())

@@ -1,0 +1,39 @@
+﻿@model vms.entity.viewModels.SalesPriceAdjustment.SalesPriceAdjustmentCreditNoteViewModel
+
+@{
+    ViewData["Title"] = "Credit Note for Price Change";
+}
+
+@section contentheader
+    {
+    <div class="p-3 page-header">
+        @ViewData["Title"]
+    </div>
+}
+
+
+<div class="row mt-3">
+	<div class="col-md-5">
+		<partial name="_MainInformation" model="Model"/>
+	</div>
+	<div class="col-md-7 md-left-border">
+		<partial name="_ProductAdd" model="Model" />
+	</div>
+	<div class="col-md-12">
+		<partial name="_ProductList" model="Model" />
+	</div>
+
+
+	<div class="col-md-12">
+		<div class="float-end">
+			<button type="button" class="btn btn-success btn-sm" id="btnSave"><i class="bi bi-check-lg"></i> Submit</button>
+			<button type="button" class="btn btn-primary btn-sm d-none" id="btnSaveDraft"><i class="bi bi-card-list"></i> Draft</button>
+			<button type="button" value="Reset" id="btnResetForm" class="btn btn-warning btn-sm"><i class="bi bi-arrow-repeat"></i> Reset</button>
+			<a asp-action="Index" class="btn btn-secondary btn-sm"><i class="bi bi-slash-circle"></i> Cancel</a>
+		</div>
+	</div>
+</div>
+
+@section Scripts{
+	<script src="~/CustomJs/Sales/SalesPriceAdjustmentCreditNote.js?vguid=@ViewStaticData.StaticFileVersionGuid"></script>
+}

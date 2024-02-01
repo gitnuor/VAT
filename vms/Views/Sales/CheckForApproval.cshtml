@@ -1,0 +1,190 @@
+﻿@model vms.entity.viewModels.SalesApproveOrRejectDisplayViewModel
+
+@{
+    ViewData["Title"] = "Approve/Reject Sales";
+
+    var i = 1;
+}
+
+@section contentheader
+    {
+    <div class="p-3 page-header">
+        <h5>@ViewData["Title"]</h5>
+    </div>
+}
+
+<div class="mt-3">
+    <div class="font-weight-bold mb-3">General Information</div>
+    <div class="row">
+        <div class="col-4">
+            <div class="row">
+                <div class="col-12">
+                    Customer Name: @Model.Sale.Customer.Name
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    Contact: @Model.Sale.Customer.PhoneNo
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    Shipping Address: @Model.Sale.ShippingAddress
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    Sales Type: @Model.Sale.SalesType.SalesTypeName
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    Export Type: @Model.Sale?.ExportType?.ExportTypeName
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    Invoice No: @Model.Sale?.InvoiceNo
+                </div>
+            </div>
+        </div>
+
+        <div class="col-4">
+            <div class="row">
+                <div class="col-12">
+                    Work Order No: @Model.Sale.WorkOrderNo
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    Sales Delivery Type: @Model.Sale.SalesDeliveryType.Name
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    Delivery Date: @Model.Sale.DeliveryDate.DateTimeToStringWithoutTime()
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    LC Number: @Model.Sale.LcNo
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    PO Number: @Model.Sale.CustomerPoNumber
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    LC Date: @Model.Sale.LcDate.DateTimeToStringWithoutTime()
+                </div>
+            </div>
+        </div>
+
+        <div class="col-4">
+
+
+            <div class="row">
+                <div class="col-12">
+                    Com Date: @StringGenerator.DateTimeToStringWithoutTime(Model.Sale.SalesDate)
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    Due Date: @Model.Sale.DueDate.DateTimeToStringWithoutTime()
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    Sales Reason: @Model.Sale.SalesRemarks
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    Receivable Amount: @Model.Sale.ReceivableAmount.DecimalToCommaSeparated()
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    Discount: @StringGenerator.DecimalToCommaSeparated(Model.Sale.TotalDiscountOnIndividualProduct)
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    Payment Receive Amount: @Model.Sale.PaymentReceiveAmount.DecimalToCommaSeparated()
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    Payment Due Amount: @Model.Sale.PaymentDueAmount.DecimalToCommaSeparated()
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="col-md-12 mt-3">
+    <div class="font-weight-bold mb-3">Product Information</div>
+
+    <table class="table table-bordered" id="gridTable">
+        <thead>
+            <tr class="table-light">
+                <th>Serial</th>
+                <th>Product</th>
+                <th>M. Unit</th>
+                <th>Qty</th>
+                <th>Unit Price</th>
+                <th>Total Price Without Vat</th>
+                <th>VAT Type</th>
+                <th>VAT (%)</th>
+                <th>Vat Amount</th>
+                <th>SD (%)</th>
+                <th>SD Amount</th>
+                <th>Total Price</th>
+
+
+
+            </tr>
+        </thead>
+
+        <tbody id="tblPurchaseOD">
+            @foreach (var item in Model.SalesDetails)
+            {
+	            var itemPrice = item.UnitPrice * item.Quantity;
+	            var itemDiscount = item.DiscountPerItem * item.Quantity;
+	            var itemVat = itemPrice * item.Vatpercent / 100;
+	            var itemSd = itemPrice * item.SupplementaryDutyPercent / 100;
+                <tr class="table-light">
+                    <td class="text-right">@i</td>
+                    <td>@item.Product.Name</td>
+                    <td>@item.MeasurementUnit.Name</td>
+                    <td class="text-right">@StringGenerator.DecimalToCommaSeparated(item.Quantity)</td>
+                    <td class="text-right">@StringGenerator.DecimalToCommaSeparated(item.UnitPrice)</td>
+                    <td class="text-right"> @StringGenerator.DecimalToCommaSeparated(itemPrice)</td>
+                    <td>@(item.ProductVattype.Name)</td>
+                    <td class="text-right">@StringGenerator.DecimalToCommaSeparated(item.Vatpercent)</td>
+                    <td class="text-right">@StringGenerator.DecimalToCommaSeparated(itemVat)</td>
+                    <td class="text-right">@StringGenerator.DecimalToCommaSeparated(item.SupplementaryDutyPercent)</td>
+                    <td class="text-right">@StringGenerator.DecimalToCommaSeparated(itemSd)</td>
+                    <td class="text-right">@StringGenerator.DecimalToCommaSeparated(itemPrice + itemVat + itemSd - itemDiscount)</td>
+                </tr>
+                i++;
+
+            }
+        </tbody>
+
+    </table>
+</div>
+<partial name="_ApproveOrReject" model="Model.ApproveOrRejectViewModel"/>

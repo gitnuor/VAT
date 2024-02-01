@@ -1,0 +1,46 @@
+﻿@{
+	var session = Context.Session.GetComplexData<VmUserSession>(ControllerStaticData.SESSION);
+}
+<div class="p-2 page-header d-flex">
+	<div class="flex-grow-1">
+		@ViewData["Title"]
+	</div>
+	<div class="d-flex justify-content-start">
+
+		@if (UserAuthorization.Check(FeatureList.PURCHASE_PURCHASE_LIST_CAN_ADD, session.Rights))
+		{
+			<div class="me-1">
+				<a asp-controller="PurchaseLocal" asp-action="PurchaseLocal" class="btn btn-primary btn-sm"><i class="bi bi-plus"></i> Local</a>
+			</div>
+			<div class="me-1">
+				<a asp-controller="PurchaseForeign" asp-action="PurchaseImport" class="btn btn-success btn-sm"><i class="bi bi-plus"></i> Foreign (Import)</a>
+			</div>
+			<div class="me-1">
+				<a asp-controller="PurchaseForeignSubscription" asp-action="PurchaseImportSubscription" class="btn btn-secondary btn-sm"><i class="bi bi-plus"></i> Foreign Subscription (Import)</a>
+			</div>
+		}
+	</div>
+</div>
+
+<div class="col-12">
+	<ul class="nav nav-pills mr-auto align-bottom purchaseNavBar">
+		<li class="nav-item">
+			<a class="nav-link" asp-controller="Purchase" asp-action="Index">All</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" asp-controller="PurchaseLocal" asp-action="Index">Local</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" asp-controller="PurchaseForeign" asp-action="Index">Foreign</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" asp-controller="Purchase" asp-action="VdsIndex">VDS List</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" asp-controller="Purchase" asp-action="PurchaseDue">Due</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" asp-controller="PurchaseLocal" asp-action="UploadSimplifiedLocalPurchaseList">Upload</a>
+		</li>
+	</ul>
+</div>

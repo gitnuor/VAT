@@ -1,0 +1,128 @@
+﻿
+
+@model vms.entity.StoredProcedureModel.SpAddMushakReturnPaymentInfo
+
+@{
+    ViewData["Title"] = "AddMushakReturnPaymentInfo";
+    
+}
+@section breadcrumb
+    {
+    <ul class="page-breadcrumb">
+        <li>
+            <a href="@Url.Action("Dashboard", "Home")">Root</a>
+            <i class="fa fa-circle"></i>
+        </li>
+   
+        <li>
+            <a href="@Url.Action("Index", "MushakGenerations")">MushakGenerations</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a href="@Url.Action("AddMushakReturnPaymentInfo","MushakGenerations")">Return Payment Info</a>
+        </li>
+    </ul>
+}
+
+
+<div class="row">
+    <div class="col-lg-12 mb-3">
+        <h1 class="custom-page-title">Add Mushak Return Payment Info</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+
+        <form asp-action="AddMushakReturnPaymentInfo" class="form-horizontal" >
+            @Html.HiddenFor(c=>c.MushakGenerationId)
+            <div class="form-body">
+                <div class="form-group">
+                    <label class="col-md-3 control-label">VAT Payment Challan No: </label>
+                    <div class="col-md-4">
+                        <input asp-for="VatPaymentChallanNo" class="form-control" />
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Supplementary Duty Challan No.: </label>
+                    <div class="col-md-4">
+                        <input asp-for="SuppDutyChallanNo" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Interest Due VAT Challan No.: </label>
+                    <div class="col-md-4">
+                        <input asp-for="InterestForDueVatChallanNo" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Interest Due Supplementary Duty Challan No.: </label>
+                    <div class="col-md-4">
+                        <input asp-for="InterestForDueSuppDutyChallanNo" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Financial Penalty Challan No.: </label>
+                    <div class="col-md-4">
+                        <input asp-for="FinancialPenaltyChallanNo" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Excise Duty Challan No.: </label>
+                    <div class="col-md-4">
+                        <input asp-for="ExciseDutyChallanNo" class="form-control" />
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Development Surcharge Challan No.: </label>
+                    <div class="col-md-4">
+                        <input asp-for="DevelopmentSurchargeChallanNo" class="form-control" />
+
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="col-md-3 control-label">It Development Surcharge Challan No.: </label>
+                    <div class="col-md-4">
+                        <input asp-for="ItDevelopmentSurchargeChallanNo" class="form-control" />
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Health Development Surcharge Challan No.: </label>
+                    <div class="col-md-4">
+                        <input asp-for="HealthDevelopmentSurchargeChallanNo" class="form-control" />
+
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Environment Protect Surcharge Challan No.: </label>
+                    <div class="col-md-4">
+                        <input asp-for="EnvironmentProtectSurchargeChallanNo" class="form-control" />
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="form-actions">
+                <div class="row">
+                    <div class="col-md-offset-3 col-md-9 mb-3">
+                        <button type="submit" data-requiredconfirmation="true" class="btn  green">Submit</button>
+
+                        <a href="~/MushakGenerations/Index" class="btn btn-info btn-sm">Cancel</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+

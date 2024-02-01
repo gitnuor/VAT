@@ -1,0 +1,19 @@
+﻿@model IEnumerable<vms.entity.models.ExcelSimplifiedSalse>
+
+@(Html.Grid(Model).Build(columns =>
+{
+    columns.Add(model => model.SalesType).Titled("Type");
+    columns.Add(model => model.CustomerName).Titled("Customer Name");
+    columns.Add(model => model.CustomerAddress).Titled("Customer Address");
+    columns.Add(model => model.BranchName).Titled("Branch");
+    columns.Add(model => model.ProductGroupName).Titled("Product Group");
+    columns.Add(model => model.ProductName).Titled("Product");
+    columns.Add(model => model.Quantity).Titled("Qty");
+    columns.Add(model => model.MeasurementUnitName).Titled("Unit");
+    columns.Add(model => model.UnitPrice).Titled("Unit Price");
+})
+    .Using(GridFilterMode.Excel)
+    .Empty("No data found")
+    .Filterable()
+    .Sortable()
+    .Pageable()) 

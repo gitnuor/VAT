@@ -1,0 +1,15 @@
+﻿@model IEnumerable<vms.entity.models.PurchaseReason>
+@{
+	ViewData["Title"] = "Purchase Reasons";
+}
+
+@section contentheader
+{
+	<div class="p-3 page-header">
+		@ViewData["Title"]
+	</div>
+}
+
+<scrollable-grid-container>
+	<partial name="_Index" model="Model"/>
+</scrollable-grid-container>

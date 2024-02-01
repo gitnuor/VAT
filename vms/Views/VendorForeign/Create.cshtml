@@ -1,0 +1,38 @@
+﻿@model vms.entity.viewModels.VendorViewModel.VendorForeignCreateViewModel
+@{
+	ViewData["Title"] = "Create Foreign Suppliers/Vendors";
+
+}
+
+@section contentheader
+{
+	<div class="p-3 page-header">
+		@ViewData["Title"]
+	</div>
+}
+
+<div class="row">
+	<div class="col-md-8 offset-2">
+
+		<form asp-action="Create" class="form-horizontal" id="frmCreate">
+			<div class="form-body">
+				<partial name="_CreateForeignBasicInformation" model="Model"/>
+				<partial name="_CreateForeignBankInformation" model="Model"/>
+				<partial name="_VendorDocument" model="Model"/>
+				@* <partial name="_CreateForeignOtherInformation" model="Model"/> *@
+				
+			</div>
+
+			<div class="float-end mt-3">
+				<button type="submit" class="btn  btn-primary btn-sm"><i class="bi bi-check-lg"></i> Submit</button>
+				<button type="button" value="Reset" class="btn  btn-warning btn-sm" onclick="location.reload();"><i class="bi bi-arrow-repeat"></i> Reset</button>
+				<a asp-action="Index" class="btn btn-secondary btn-sm"><i class="bi bi-slash-circle"></i> Cancel</a>
+			</div>
+
+		</form>
+	</div>
+</div>
+
+@section Scripts{
+	<script src="~/CustomJs/Vendor.js?vguid=@ViewStaticData.StaticFileVersionGuid"></script>
+}

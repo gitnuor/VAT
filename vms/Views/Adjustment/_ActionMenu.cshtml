@@ -1,0 +1,24 @@
+﻿@model vms.entity.models.Adjustment
+@{
+	var session = Context.Session.GetComplexData<VmUserSession>(ControllerStaticData.SESSION);
+}
+
+<grid-freeze-menu>
+	@if (UserAuthorization.Check(FeatureList.ADMINSTRATION_MISCELLANEOUS_ADJUSTMENT_CAN_DELETE, session.Rights))
+	{
+		<li>
+			<a class="dropdown-item" asp-action="Delete" asp-route-id="@Model.AdjustmentId" type="button" data-requiredconfirmation="true">
+				@if (Model.IsActive)
+				{
+					<i class="bi bi-exclamation-diamond"></i>
+					<text>Inactive</text>
+				}
+				else
+				{
+					<i class="bi bi-check-circle"></i>
+					<text>Active</text>
+				}
+			</a>
+		</li>
+	}
+</grid-freeze-menu>

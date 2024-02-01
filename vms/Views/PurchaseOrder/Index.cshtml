@@ -1,0 +1,155 @@
+﻿@model IEnumerable<vms.entity.models.Purchase>
+@using X.PagedList.Mvc.Core;
+@using X.PagedList;
+@{
+    ViewData["Title"] = "Index";
+}
+@section breadcrumb
+    {
+    <ul class="page-breadcrumb">
+        <li>
+            <a href="@Url.Action("Dashboard", "Home")">Root</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a href="@Url.Action("Index","PurchaseOrder")">Purchase List</a>
+        </li>
+    </ul>
+}
+@using (Html.BeginForm("Index", "PurchaseOrder", FormMethod.Get, new { id = "frmPurchase" }))
+{
+    <div class="row">
+        <div class="col-md-6">
+            <h1 class="custom-page-title">Purchase List</h1>
+        </div>
+        <div class="col-md-5">
+            <div class="input-group" style="margin-top:10px">
+                <input type="text" class="form-control" id="search" name="search" placeholder="Search..." value="@ViewBag.searchText">
+                <span class="input-group-btn">
+                    <button type="submit" class="btn submit ">
+                        <i class="icon-magnifier"></i>
+                    </button>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-1">
+            <a style="margin-top:10px" href="@Url.Action("PurchaseOrder", "PurchaseOrder")" class="btn btn-success btn-sm pull-right"><i class="fa fa-plus"></i> Add</a>
+        </div>
+    </div>
+}
+<table class="table  table-bordered">
+    <thead>
+        <tr>
+            <th>
+                @*@Html.DisplayNameFor(model => model.VendorInvoiceNo)*@
+                V.Invo.No
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.InvoiceNo)
+            </th>
+
+            @*<th>
+                    @Html.DisplayNameFor(model => model.Iteams)
+                </th>*@
+            @*<th>
+                    @Html.DisplayNameFor(model => model.Vat)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Amount)
+                </th>*@
+
+            <th>
+                @Html.DisplayNameFor(model => model.ExpectedDeliveryDate)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Organization)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PurchaseType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Vendor)
+            </th>
+            <th>
+                Status
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VendorInvoiceNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.InvoiceNo)
+                </td>
+
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.Iteams)
+                    </td>*@
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.Vat)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Amount)
+                    </td>*@
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.ExpectedDeliveryDate)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Organization.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PurchaseType.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Vendor.Address)
+                </td>
+                <td>
+
+                    @*@if (item.IsCanceled == false)
+                        {
+                            <span>Active</span>
+                        }
+                        else
+                        {
+                            <span>Canceled</span>
+                        }*@
+                </td>
+                <td>
+                    <div class="nav navbar-nav ">
+                        <div class="dropdown dropdown-user">
+                            <a style="text-decoration:none" href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                                <span class=""> Action </span>
+                                <i class="fa fa-angle-down"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-default pull-right">
+                                <li>
+                                    <a asp-action="Cancel" asp-route-id="@item.PurchaseId"><i class="icon-user"></i> Cancel</a>
+                                </li>
+                                <li>
+                                    <a asp-action="CancelAdd" asp-route-id="@item.PurchaseId"><i class="icon-user"></i> Add Cancellation</a>
+                                </li>
+                                <li>
+                                    <a asp-action="Details" asp-route-id="@item.PurchaseId"><i class="icon-user"></i> Details</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div class="pager">
+    @Html.PagedListPager(
+        (IPagedList)Model,
+        page => Url.Action("Index", new { page })
+        )
+</div>

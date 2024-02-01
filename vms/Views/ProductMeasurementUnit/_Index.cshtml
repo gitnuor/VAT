@@ -1,0 +1,19 @@
+﻿@model IEnumerable<vms.entity.viewModels.ProductMeasurementUnit.ProductMeasurementUnitIndexViewModel>
+@(Html.Grid(Model).Build(columns =>
+{
+	columns.Add(model => model.ProductName)
+		.Titled("Product").AppendCss("text-left");
+	columns.Add(model => model.MeasurementUnitName)
+		.Titled("Unit").AppendCss("text-center");
+	columns.Add(model => model.ConversionRatio)
+		.Titled("Conversion Ratio")
+		.AppendCss("text-center")
+		.RenderedAs(model => StringGenerator.DecimalToCommaSeparated(model.ConversionRatio));
+	columns.Add().Encoded(false).RenderedAs(data => Html.PartialAsync("_ActionMenu", data).Result)
+		.Titled(Html.Raw("<i class='bi bi-activity'></i>")).AppendCss("action-col-freez");
+})
+	.AppendCss("large-index-grid")
+	.Empty("No data found")
+	.Filterable(GridFilterType.Double)
+	.Sortable()
+	.Pageable())

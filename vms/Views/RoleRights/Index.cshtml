@@ -1,0 +1,87 @@
+﻿@model IEnumerable<vms.entity.models.RoleRight>
+
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-6">
+                <h1 class="custom-page-title">Users</h1>
+            </div>
+            <div class="col-md-6">
+                <div class="input-group mt-2">
+                    <input type="text" class="form-control" placeholder="Search...">
+                    <span class="input-group-btn">
+                        <a href="javascript:;" class="btn submit">
+                            <i class="icon-magnifier"></i>
+                        </a>
+                    </span>
+                </div>
+            </div>
+
+            
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-2">
+               
+            </div>
+            <div class="col-md-10">
+                <div class="col-md-2">
+                    <a class="mt-2" href="@Url.Action("Create","RoleRights")" class="btn btn-success btn-sm pull-right"><i class="bi bi-plus-lg"></i> Add RoleRights</a>
+                </div>
+                <div class="col-md-2">
+                    <a class="mt-2" href="@Url.Action("Create","Roles")" class="btn btn-success btn-sm pull-right"><i class="bi bi-plus-lg"></i> Add Roles</a>
+                </div>
+                <div class="col-md-2">
+                    <a class="mt-2" href="@Url.Action("Create","Rights")" class="btn btn-success btn-sm pull-right"><i class="bi bi-plus-lg"></i> Add Rights</a>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.RightId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Role)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RightId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Role.RoleName)
+                        </td>
+                        <td>
+                            <div class="btn-group">
+                                <div class="dropdown">
+                                    <a href="javascript:;" class="dropdown-toggle text-decoration-none" data-bs-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                                        <span class=""> Action </span>
+                                        <i class="fa fa-angle-down"></i>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu-default">
+                                        <li>
+                                            <a asp-action="Edit" asp-route-id="@item.RoleRightId"><i class="icon-user"></i> Edit</a>
+
+                                        </li>
+                                        <li>
+                                            <a asp-action="Details" asp-route-id="@item.RoleRightId"><i class="icon-calendar"></i> Details</a>
+                                        </li>
+                                        
+                                    </ul>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>

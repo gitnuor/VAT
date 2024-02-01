@@ -1,0 +1,14 @@
+﻿@model IEnumerable<vms.entity.models.DebitNote>
+
+@(Html.Grid(Model).Build(columns =>
+{
+    columns.Add(model => model.Purchase.InvoiceNo).Titled("Invoice No.");
+    columns.Add(model => model.ReturnDate).Titled("Return Date").Formatted("{0:dd/MM/yyyy}");
+    columns.Add(model => model.ReasonOfReturn).Titled("Reason Of Return");
+    columns.Add().Encoded(false).RenderedAs(data =>$"<a class='btn btn-primary btn-sm' href='{Url.Action("DebitNoteViewById")}/{data.DebitNoteId}' role='button' target='_blank'> View</a>" );
+})
+    .Using(GridFilterMode.Excel)
+    .Empty("No data found")
+    .Filterable()
+    .Sortable()
+    .Pageable())

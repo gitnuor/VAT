@@ -1,0 +1,93 @@
+﻿@model IEnumerable<vmIntegrationSetup>
+@{
+    ViewData["Title"] = "Index";
+    
+    var session = Context.Session.GetComplexData<VmUserSession>(ControllerStaticData.SESSION);
+}
+
+
+
+@section contentheader
+    {
+    <div class="p-3 page-header">
+       Nbr Economic Code
+        <div class="d-flex justify-content-start">
+
+            @if (UserAuthorization.Check(FeatureList.INTEGRATION_SETUP_NBR_ECONOMIC_CODE_CAN_ADD, session.Rights))
+            {
+                <div class="pr-1">
+                    <a href="@Url.Action("NbrEconomicCodeCreate", "IntegrationSetup")" class="btn btn-primary btn-sm"><i class="bi bi-plus-lg"></i> Add Nbr Economic Code</a>
+                </div>
+
+            }
+
+
+        </div>
+    </div>
+    <div class="col-12 d-flex">
+        <ul class="nav nav-pills mt-3 mr-auto align-bottom">
+        </ul>
+        @using (Html.BeginForm("NbrEconomicCodeIndex", "IntegrationSetup", FormMethod.Get, new { id = "frmPurchase", @class = "d-flex pr-1 mt-3" }))
+        {
+            <input class="form-control me-2 mr-1 btn-sm" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn-height-fc btn btn-primary btn-sm" type="submit">Search</button>
+        }
+    </div>
+}
+<div class="row">
+    <div class="col-12">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Economic Title
+                    </th>
+                    <th>
+                        Reference Key
+                    </th>
+
+                </tr>
+            </thead>
+
+            @if (Model.Any())
+            {
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @item.DataName
+                            </td>
+                            <td>
+                                @item.ReferenceKey
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            }
+
+            else
+            {
+                <tr>
+                    <td colspan="10">
+                        <p class="text-center">No Records Found</p>
+                    </td>
+                </tr>
+            }
+        </table>
+
+        <div class="pager">
+            @if ((int)ViewBag.PageCount <= 10)
+            {
+
+            }
+            else
+            {
+              @*  @Html.PagedListPager(
+                        (IPagedList)Model,
+                        page => Url.Action("NbrEconomicCodeIndex", new { page })
+                        )*@
+            }
+        </div>
+    </div>
+</div>

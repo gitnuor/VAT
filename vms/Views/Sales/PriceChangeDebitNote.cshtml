@@ -1,0 +1,252 @@
+﻿@model vms.entity.viewModels.SalesPriceAdjustment.SalesPriceAdjustmentDebitNoteViewModel
+
+@{
+	ViewData["Title"] = "Debit Note for Price Change";
+}
+
+@section contentheader
+{
+	<div class="p-3 page-header">
+		@ViewData["Title"]
+	</div>
+}
+
+
+<div class="row mt-3">
+<div class="col-md-5">
+	<div class="font-weight-bold mb-3">
+		Main Information
+	</div>
+	<form class="row g-3" method="post" id="frmMainInformation">
+		<input type="hidden" class="form-control" id="SalesId" asp-for="SalesId" value="@Model.Sale.SalesId"/>
+
+		<div class="col-md-6 complex-form-col">
+			<label asp-for="VehicleTypeId" class="form-label complex-form-label"></label>
+			<select asp-for="VehicleTypeId" class="searchable-dropdown" data-live-search="true" data-style="bootstrap-select-option" asp-items="ViewBag.VType">
+				<option value="@null">Select VehicleType</option>
+			</select>
+			<span asp-validation-for="VehicleTypeId" class="text-danger"></span>
+		</div>
+
+		<div class="col-md-6 complex-form-col">
+			<label asp-for="VoucherNo" class="form-label complex-form-label"></label>
+			<input type="text" asp-for="VoucherNo" class="form-control form-control-sm">
+			<span asp-validation-for="VoucherNo" class="text-danger"></span>
+		</div>
+
+		<div class="col-md-6 complex-form-col">
+			<label asp-for="VehicleRegNo" class="form-label complex-form-label"></label>
+			<input type="text" asp-for="VehicleRegNo" class="form-control form-control-sm">
+			<span asp-validation-for="VehicleRegNo" class="text-danger"></span>
+		</div>
+
+		<div class="col-md-6 complex-form-col">
+			<label asp-for="ChangeDate" class="form-label complex-form-label"></label>
+			<input type="datetime-local" asp-for="ChangeDate" min='2000-01-01' max='@((DateTime.Now).ToString("yyyy-MM-ddTHH:mm"))' class="form-control form-control-sm">
+			<span asp-validation-for="ChangeDate" class="text-danger"></span>
+		</div>
+
+	</form>
+</div>
+<div class="col-md-7 md-left-border">
+	<div class="font-weight-bold mb-3">
+		Product Information
+	</div>
+	<form class="row g-3 detail-form" id="frmProductInformation">
+
+		<div class="col-md-4 complex-form-col">
+			<label asp-for="ProductId" class="form-label complex-form-label"></label>
+			<input type="text" hidden asp-for="SalesDetailId" readonly class="form-control form-control-sm">
+			<select asp-for="ProductId" class="searchable-dropdown" data-live-search="true" data-style="bootstrap-select-option">
+				<option value="@null">Select Product</option>
+				@if (Model.SalesDetails.Any())
+				{
+					foreach (var product in Model.SalesDetails)
+					{
+						<option value="@product.ProductId"
+						        data-Measurement-Unit-Id="@product.MeasurementUnitId"
+						        data-Measurement-Unit-Name="@product.MeasurementUnit.Name"
+						        data-Sd="@product.SupplementaryDutyPercent"
+						        data-Vat="@product.Vatpercent"
+						        data-Quantity="@product.Quantity"
+						        data-UnitPrice="@product.UnitPrice"
+						        data-SalesDetailId="@product.SalesDetailId">
+							@product.Product.Name
+						</option>
+					}
+				}
+			</select>
+			<span asp-validation-for="ProductId" class="text-danger"></span>
+		</div>
+
+		<div class="col-md-2 complex-form-col">
+			<label asp-for="MeasurementUnitName" class="form-label complex-form-label"></label>
+			<input type="text" hidden asp-for="MeasurementUnitId" readonly class="form-control form-control-sm">
+			<input type="text" asp-for="MeasurementUnitName" readonly class="form-control form-control-sm">
+			<span asp-validation-for="MeasurementUnitName" class="text-danger"></span>
+		</div>
+
+		<div class="col-md-2 complex-form-col">
+			<label asp-for="Quantity" class="form-label complex-form-label"></label>
+			<input type="text" asp-for="Quantity" readonly class="form-control form-control-sm">
+			<span asp-validation-for="Quantity" class="text-danger"></span>
+		</div>
+
+
+		<div class="col-md-2 complex-form-col">
+			<label asp-for="UnitPrice" class="form-label complex-form-label"></label>
+			<input type="text" asp-for="UnitPrice" readonly class="form-control form-control-sm">
+			<span asp-validation-for="UnitPrice" class="text-danger"></span>
+		</div>
+
+		<div class="col-md-2 complex-form-col">
+			<label asp-for="Amount" class="form-label complex-form-label"></label>
+			<input type="text" asp-for="Amount" readonly class="form-control form-control-sm">
+			<span asp-validation-for="Amount" class="text-danger"></span>
+		</div>
+
+		<div class="col-md-2 complex-form-col">
+			<label asp-for="VatParcent" class="form-label complex-form-label"></label>
+			<input type="text" asp-for="VatParcent" readonly class="form-control form-control-sm">
+			<span asp-validation-for="VatParcent" class="text-danger"></span>
+		</div>
+
+		<div class="col-md-2 complex-form-col">
+			<label asp-for="Vat" class="form-label complex-form-label"></label>
+			<input type="text" asp-for="Vat" readonly class="form-control form-control-sm">
+			<span asp-validation-for="Vat" class="text-danger"></span>
+		</div>
+
+
+		<div class="col-md-2 complex-form-col">
+			<label asp-for="SdParcent" class="form-label complex-form-label"></label>
+			<input type="text" asp-for="SdParcent" readonly class="form-control form-control-sm">
+			<span asp-validation-for="SdParcent" class="text-danger"></span>
+		</div>
+
+		<div class="col-md-2 complex-form-col">
+			<label asp-for="Sd" class="form-label complex-form-label"></label>
+			<input type="text" asp-for="Sd" readonly class="form-control form-control-sm">
+			<span asp-validation-for="Sd" class="text-danger"></span>
+		</div>
+
+
+		<div class="col-md-4 complex-form-col">
+				<label asp-for="QuantityToChange" class="form-label complex-form-label"></label>
+				<input type="text" asp-for="QuantityToChange" class="form-control form-control-sm">
+				<span asp-validation-for="QuantityToChange" class="text-danger"></span>
+		</div>
+
+
+		<div class="col-md-2 complex-form-col">
+			<label asp-for="ChangeAmountPerItem" class="form-label complex-form-label"></label>
+				<input type="text" asp-for="ChangeAmountPerItem" readonly class="form-control form-control-sm">
+				<span asp-validation-for="ChangeAmountPerItem" class="text-danger"></span>
+		</div>
+
+		<div class="col-md-2 complex-form-col">
+			<label asp-for="ChangeAmount" class="form-label complex-form-label"></label>
+			<input type="text" asp-for="ChangeAmount" readonly class="form-control form-control-sm">
+			<span asp-validation-for="ChangeAmount" class="text-danger"></span>
+		</div>
+
+		<div class="col-md-2 complex-form-col">
+			<label asp-for="ChangeVatParcent" class="form-label complex-form-label"></label>
+			<input type="text" asp-for="ChangeVatParcent" readonly class="form-control form-control-sm">
+			<span asp-validation-for="ChangeVatParcent" class="text-danger"></span>
+		</div>
+
+		<div class="col-md-2 complex-form-col">
+			<label asp-for="ChangeVat" class="form-label complex-form-label"></label>
+			<input type="text" asp-for="ChangeVat" readonly class="form-control form-control-sm">
+			<span asp-validation-for="ChangeVat" class="text-danger"></span>
+		</div>
+
+
+		<div class="col-md-2 complex-form-col">
+			<label asp-for="ChangeSdParcent" class="form-label complex-form-label"></label>
+			<input type="text" asp-for="ChangeSdParcent" readonly class="form-control form-control-sm">
+			<span asp-validation-for="ChangeSdParcent" class="text-danger"></span>
+		</div>
+
+		<div class="col-md-2 complex-form-col">
+			<label asp-for="ChangeSd" class="form-label complex-form-label"></label>
+			<input type="text" asp-for="ChangeSd" readonly class="form-control form-control-sm">
+			<span asp-validation-for="ChangeSd" class="text-danger"></span>
+		</div>
+
+
+		<div class="col-md-8 complex-form-col">
+			<label asp-for="ReasonOfChange" class="form-label complex-form-label"></label>
+			<input type="text" asp-for="ReasonOfChange" class="form-control form-control-sm">
+			<span asp-validation-for="ReasonOfChange" class="text-danger"></span>
+		</div>
+
+		<div class="col-md-2 mt-2">
+			<button type="button" class="btn  btn-primary btn-sm inline-sm-button-complex-form w-100" id="btnAddProduct"><i class="bi bi-plus-lg"></i> Add</button>
+		</div>
+		<div class="col-md-2 mt-2">
+			<button type="button" class="btn  btn-warning btn-sm inline-sm-button-complex-form w-100" id="btnResetProduct"><i class="bi bi-arrow-repeat"></i> Reset</button>
+		</div>
+	</form>
+</div>
+<div class="col-md-12">
+	<div class="font-weight-bold mt-3">
+		Product List
+	</div>
+	<table id="productTable" class="table table-bordered form-table mt-3">
+		<thead>
+		<tr>
+			<th>Product</th>
+			<th>M. Unit</th>
+			<th>Quantity</th>
+			<th>U. Price</th>
+			<th>Amount</th>
+			<th>VAT (%)</th>
+			<th>VAT</th>
+			<th>SD (%)</th>
+			<th>SD</th>
+			<th>Change Quantity</th>
+			<th>Change U.Price</th>
+			<th>Change Amount</th>
+			<th>Change VAT (%)</th>
+			<th>Change VAT</th>
+			<th>Change SD (%)</th>
+			<th>Change SD</th>
+			<th>Reason Of Change</th>
+			<th></th>
+		</tr>
+		</thead>
+		<tbody id="productTableBody">
+		</tbody>
+		<tfoot>
+		<tr class="text-end">
+			<td colspan="9">Total</td>
+			<td id="changeQuantity"></td>
+			<td id="changeUnitPrice"></td>
+			<td id="changeAmount"></td>
+			<td id="changeVatParcent"></td>
+			<td id="changeVat"></td>
+			<td id="changeSdParcent"></td>
+			<td id="changeSd"></td>
+			<td></td>
+		</tr>
+		</tfoot>
+	</table>
+</div>
+
+
+<div class="col-md-12">
+	<div class="float-end">
+		<button type="button" class="btn btn-success btn-sm" id="btnSave"><i class="bi bi-check-lg"></i> Submit</button>
+		<button type="button" class="btn btn-primary btn-sm d-none" id="btnSaveDraft"><i class="bi bi-card-list"></i> Draft</button>
+		<button type="button" value="Reset" id="btnResetForm" class="btn btn-warning btn-sm"><i class="bi bi-arrow-repeat"></i> Reset</button>
+		<a asp-action="Index" class="btn btn-secondary btn-sm"><i class="bi bi-slash-circle"></i> Cancel</a>
+	</div>
+</div>
+</div>
+
+
+@section Scripts{
+	<script src="~/CustomJs/CreditNote.js?vguid=@ViewStaticData.StaticFileVersionGuid"></script>
+}

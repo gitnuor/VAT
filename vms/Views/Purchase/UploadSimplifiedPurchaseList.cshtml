@@ -1,0 +1,43 @@
+﻿@model VmViewSimplifiedPurchase
+@{
+    ViewData["Title"] = "Upload Purchase";
+    var session = Context.Session.GetComplexData<VmUserSession>(ControllerStaticData.SESSION);
+}
+
+@section contentheader
+{
+	<div class="p-2 page-header d-flex">
+		<div class="flex-grow-1">
+			@ViewData["Title"]
+		</div>
+        <div>
+
+            <form asp-action="UploadSimplifiedPurchase" enctype="multipart/form-data" class="row">
+                <div class="col-3">
+                    <input asp-for="UploadedFile" class="form-control form-control-sm">
+                    <span asp-validation-for="UploadedFile" class="text-danger"></span>
+                </div>
+                <div class="col-2 d-flex"><input type="submit" value="Upload" class="btn btn-primary btn-sm" /></div>
+
+            </form>
+        </div>
+    </div>
+    <div class="col-12 d-flex">
+        <ul class="nav nav-pills mr-auto align-bottom purchaseNavBar">
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Action("Index", "Purchase")">Purchase</a>
+            </li>
+            @if (UserAuthorization.Check(FeatureList.PURCHASE_PURCHASE_DUE_LIST_CAN_VIEW, session.Rights))
+            {
+                <li class="nav-item pull-right">
+                    <a class="nav-link" href="@Url.Action("PurchaseDue", "Purchase")">Purchase Due</a>
+                </li>
+            }
+            <li class="nav-item active">
+                <a class="nav-link" href="@Url.Action("UploadSimplifiedPurchaseList", "Purchase")">Upload Purchase</a>
+            </li>
+        </ul>
+    </div>
+}
+
+@await Html.PartialAsync("_UploadedSimplifiedPurchase", Model.Purchases)

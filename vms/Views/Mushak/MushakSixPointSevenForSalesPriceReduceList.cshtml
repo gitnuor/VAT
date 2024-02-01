@@ -1,0 +1,42 @@
+﻿@model IEnumerable<vms.entity.models.SalesPriceAdjustment>
+@{
+    Layout = "_LayoutMushak";
+	ViewData["Title"] = "Mushak- 6.7 (Credit note for Sales price reduce list)";
+	var session = Context.Session.GetComplexData<VmUserSession>(ControllerStaticData.SESSION);
+    
+}
+
+@section contentheader
+    {
+    <div class="p-3 page-header">
+		@ViewData["Title"]
+    </div>
+}
+
+<scrollable-grid-container>
+	@(Html.Grid(Model).Build(columns =>
+	{
+		columns.Add(model => model.OrgBranch.Name)
+			.Titled("Branch");
+		columns.Add(model => model.Sales.VatChallanNo)
+			.Titled("Sales Challan No").AppendCss("text-center");
+		columns.Add(model => model.Sales.TaxInvoicePrintedTime)
+			.Titled("Sales Challan Time").Formatted("{0:dd/MM/yyyy hh:mm:ss tt}").AppendCss("text-center");
+
+		columns.Add(model => model.Sales.Customer.Name)
+			.Titled("Customer");
+		columns.Add(model => model.InvoiceNo)
+			.Titled(session.InvoiceNameEng).AppendCss("text-center");
+		columns.Add(model => model.NoteNo)
+			.Titled("Credit Note No").AppendCss("text-center");
+		columns.Add(model => model.NotePrintedTime)
+			.Titled("Credit Note Time").Formatted("{0:dd/MM/yyyy hh:mm:ss tt}").AppendCss("text-center");
+			columns.Add().Encoded(false).RenderedAs(data => Html.PartialAsync("LinkPartial/_MushakSixPointSevenForSalesPriceReduceListActionMenu", data).Result)
+			.Titled(Html.Raw("<i class='bi bi-activity'></i>")).AppendCss("action-col-freez");
+	})
+		.AppendCss("large-index-grid")
+		.Empty("No data found")
+		.Filterable(GridFilterType.Double)
+		.Sortable()
+		.Pageable())
+</scrollable-grid-container>

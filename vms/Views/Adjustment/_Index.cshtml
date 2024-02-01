@@ -1,0 +1,18 @@
+﻿
+@model IEnumerable<vms.entity.models.Adjustment>
+@(Html.Grid(Model).Build(columns =>
+{
+    columns.Add(model => model.AdjustmentType.Name).Titled("Type").AppendCss("text-center");
+    columns.Add(model => model.Year).Titled("Year").AppendCss("text-center");
+    columns.Add(model => model.Month).Titled("Month").AppendCss("text-center").RenderedAs(model => (EnumMonth)model.Month);
+    columns.Add(model => model.Amount).Titled("Amount").AppendCss("text-right").RenderedAs(model => StringGenerator.DecimalToCommaSeparated(model.Amount));
+    columns.Add(model => model.Description).Titled("Description");
+    columns.Add(model => model.Status).Titled("Status");
+	columns.Add().Encoded(false).RenderedAs(data => Html.PartialAsync("_ActionMenu", data).Result)
+		.Titled(Html.Raw("<i class='bi bi-activity'></i>")).AppendCss("action-col-freez");
+})
+	.AppendCss("large-index-grid")
+	.Empty("No data found")
+	.Filterable(GridFilterType.Double)
+	.Sortable()
+	.Pageable())

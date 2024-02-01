@@ -1,0 +1,247 @@
+﻿@model vms.entity.viewModels.NewReports.vmProductReport
+
+
+@{
+    var session = Context.Session.GetComplexData<VmUserSession>(ControllerStaticData.SESSION);
+}
+
+
+@{
+    ViewData["Title"] = "Sales Report";
+}
+
+<style>
+
+    .MreturnHeader {
+        text-align: center;
+        background-color: #ffedbe;
+    }
+
+    .parthead {
+        font-size: 16px;
+    }
+
+    .Returntd {
+        text-align: left;
+    }
+
+    .Returntdhead {
+        text-align: center;
+        background-color: #cfcfcf;
+    }
+
+    .ReturntdEmpty {
+        background-color: lightgray;
+    }
+
+    .tdp1 {
+        width: 320px;
+    }
+
+    .tdp2 {
+        width: 30px;
+        text-align: center;
+    }
+
+    .report-margin {
+        width: 97%;
+        margin-left: 2%;
+        margin-right: auto;
+    }
+
+    .table td, .table th {
+        font-size: 12px;
+    }
+
+    .wrap tr td, .wrap thead tr th {
+        word-break: break-all;
+        width: 150px;
+        font-size: 10px !important;
+        vertical-align: middle;
+    }
+
+    .manual {
+        background-color: #C5CAE9;
+    }
+
+    .footer {
+        display: none !important;
+    }
+
+    .table thead tr th {
+        font-size: 14px;
+        font-weight: normal;
+    }
+
+    @@media print {
+        @@page {
+            size: A4;
+            margin-left: 0px;
+            margin-right: 0px;
+            margin-top: 15px;
+            margin-bottom: 30px;
+            
+        }
+
+        .parthead {
+            font-size: 14px;
+        }
+
+        td.text-right, th.text-right {
+            text-align: right !important
+        }
+
+        .text-right {
+            text-align: right !important;
+        }
+
+        body {
+        }
+
+        .page-break-avoid {
+            page-break-inside: avoid;
+        }
+
+        .page-break {
+            page-break-inside: auto;
+        }
+
+        .page-break-after {
+            page-break-after: always;
+        }
+
+        .page-break-before {
+            page-break-before: always;
+        }
+
+        div.footer {
+            position: fixed;
+            display: block !important;
+            bottom: 0px;
+            width: 100%;
+            border-top: 1px solid #eee; 
+            height: 30px;
+        }
+        
+    }
+</style>
+@using (Html.BeginForm("Mushok9P1", "Reports", FormMethod.Post, new { @class = "hidden-print" }))
+{
+
+
+    <div class="form-group col-sm-3 pull-right">
+        <button id="btnprint" type="button" class="btn btn-primary" style="margin-top:10px;">Print</button>
+    </div>
+
+
+}
+
+
+
+    <div id="" class="report-margin">
+        <div class="row " style="padding:25px;">
+            <partial name="partials/_Header" model="Model.head" />
+        </div>
+
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th colspan="2" class="text-center">
+                        Name
+                    </th>
+                    <th colspan="2" class="text-center">
+                       Code
+                    </th>
+                    <th colspan="2" class="text-center">
+                     Hscode
+                    </th>
+                    
+                    <th class="text-center">
+                      ProductCategoryId
+                    </th>
+
+                    <th class="text-center">
+                       IsActive
+                    </th>
+                   
+
+                    <th class="text-center">
+                       MeasurementUnitId
+                    </th>
+                    <th class="text-center">
+                       ProductGroupId
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            @if (Model.productsList.Any())
+            {
+                <tbody>
+                    @foreach (var item in Model.productsList)
+                    {
+                        <tr>
+                            <td colspan="2">
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td colspan="2" class="text-center">
+                                @Html.DisplayFor(modelItem => item.Code)
+                            </td>
+                            <td colspan="2" class="text-center">
+                                @Html.DisplayFor(modelItem => item.Hscode)
+                            </td>
+
+                            <td class="text-left">
+                                @Html.DisplayFor(modelItem => item.ProductCategory.Name)
+                            </td>
+
+                            @if (item.IsActive)
+                            {
+                                <td class="text-left">
+                                    Active
+                                </td>
+                            }
+                            else
+                            {
+                                <td class="text-left">In Active</td>
+                            }
+                            
+
+                            <td class="text-left">
+                                @Html.DisplayFor(modelItem => item.MeasurementUnit.Name)
+                            </td>
+                            <td class="text-left">
+                                @Html.DisplayFor(modelItem => item.ProductGroup.Name)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            }
+
+            else
+            {
+                <tr>
+                    <td colspan="15">
+                        <p style="text-align: center">No Records Found</p>
+                    </td>
+                </tr>
+            }
+
+        </table>
+
+
+
+
+        <div class="row">
+            <partial name="partials/_Footer" />
+        </div>
+    </div>
+@section Scripts{
+    <script type="text/javascript">
+        $("#btnprint").click(function () {
+            window.print();
+        });
+    </script>
+
+}

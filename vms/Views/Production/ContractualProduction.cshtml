@@ -1,0 +1,170 @@
+﻿@model vms.entity.viewModels.VmContractualProduction
+@{
+    ViewData["Title"] = "Create";
+
+
+}
+
+@section contentheader
+    {
+    <div class="p-3 page-header">
+
+        Contractual Production
+
+        <div class="d-flex justify-content-start">
+
+
+        </div>
+    </div>
+    <div class="col-12 d-flex">
+        <ul class="nav nav-pills mt-3 mr-auto align-bottom">
+        </ul>
+    </div>
+}
+
+<form method="post" id="SelfproductionFrm">
+    <div class="row">
+        <h4>Main Information</h4>
+        <div class="col-md-4 complex-form-col">
+            <label asp-for="ProductId" class="form-label "></label>
+            <select asp-for="ProductId" class="searchable-dropdown" data-live-search="true" data-style="bootstrap-select-option">
+                <option value="@null">Select Product</option>
+                @if (Model.ProductSelectList.Any())
+                {
+                    foreach (var product in Model.ProductSelectList)
+                    {
+                        <option value="@product.ProductId"
+                                data-product-measurement-unit-id="@product.MeasurementUnitId"
+                                data-product-measurement-unit-name="@product.MeasurementUnitName">
+                            @product.ProductName
+                        </option>
+                    }
+                }
+            </select>
+            <span asp-validation-for="ProductId" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-4 complex-form-col">
+            <label asp-for="ContractualProductionId" class="form-label complex-form-label"></label>
+            <select asp-for="ContractualProductionId" asp-items="Model.ContractualProductionContactSelectList" class="searchable-dropdown" data-live-search="true" data-style="bootstrap-select-option">
+                <option value="@null">Select Contract</option>
+            </select>
+            <span asp-validation-for="ContractualProductionId" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-4 complex-form-col">
+            <label asp-for="ChallanNo" class="form-label complex-form-label"></label>
+            <input type="text" asp-for="ChallanNo" class="form-control form-control-sm" placeholder="#">
+            <span asp-validation-for="ChallanNo" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-3 complex-form-col">
+            <label asp-for="BatchNo" class="form-label complex-form-label"></label>
+            <input type="text" asp-for="BatchNo" class="form-control form-control-sm" placeholder="#">
+            <span asp-validation-for="BatchNo" class="text-danger"></span>
+        </div>
+
+
+
+        <div class="col-md-3 complex-form-col">
+            <label asp-for="MeasurementName" class="form-label complex-form-label"></label>
+            <input type="text" asp-for="MeasurementName" readonly class="form-control form-control-sm">
+            <input type="text" hidden asp-for="MeasurementUnitId" readonly class="form-control form-control-sm">
+            <span asp-validation-for="MeasurementName" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-3 complex-form-col">
+            <label asp-for="ReceiveQuantity" class="form-label complex-form-label"></label>
+            <input type="text" asp-for="ReceiveQuantity" class="form-control form-control-sm" placeholder="0">
+            <span asp-validation-for="ReceiveQuantity" class="text-danger"></span>
+        </div>
+
+
+        <div class="col-md-3 complex-form-col">
+            <label asp-for="ReceiveTime" class="form-label complex-form-label"></label>
+            <input type="datetime-local" asp-for="ReceiveTime" min='2000-01-01' max='@((DateTime.Now).ToString("yyyy-MM-ddTHH:mm"))' class="form-control form-control-sm">
+            <span asp-validation-for="ReceiveTime" class="text-danger"></span>
+        </div>
+    </div>
+    </form>
+<div class="row">
+    <div class="col-md-12 mt-3">
+        <h4>BOM</h4>
+        <table class="table table-bordered" id="gridTable">
+            <thead>
+                <tr>
+
+                    <th>Raw Material</th>
+                    <th>Required PerUnit</th>
+                    <th>Max Qty.</th>
+                    <th>Used Qty.</th>
+                    <th>M. Unit</th>
+
+                </tr>
+            </thead>
+
+            <tbody id="BomInfo"></tbody>
+        </table>
+    </div>
+    </div>
+
+<form id="documentFrm">
+    <div class="row">
+        <div class="col-md-12">
+            <h4>Document Info</h4>
+            <table class="table table-bordered" id="contentTable">
+                <thead>
+                    <tr>
+
+                        <th>Type</th>
+                        <th>File</th>
+                        <th>Document Remarks</th>
+                        <th class="single-button-action-column"></th>
+                    </tr>
+                    <tr>
+
+                        <td class="form-group form-md-line-input has-info">
+                            <select asp-for="DocumentTypeId" asp-items="Model.DocumentTypeSelectList.CustomSelectListToSelectList()" class="searchable-dropdown DocumentType" data-live-search="true" data-style="bootstrap-select-option" id="drpFileType">
+                                <option value="@null">Select Document Type</option>
+                            </select>
+                            <small id="msgFileType" class="form-text text-danger"></small>
+                            <span asp-validation-for="DocumentTypeId" class="text-danger"></span>
+                        </td>
+                        <td class="form-group form-md-line-input has-info">
+                            <input type="file" asp-for="UploadedFile" id="fileDocument" multiple="multiple" class="form-control form-control-sm FileUpload" accept=".jpg,.jpeg,.png,.tif,.tiff,.gif,.bmp,.pdf,.doc,.docx,.xlsx,.xlx,.ppt,.pptx" />
+
+                            <small id="msgFileDocument" class="form-text text-danger"></small>
+                            <span asp-validation-for="UploadedFile" class="text-danger"></span>
+                        </td>
+                        <td>
+                            <input type="text" asp-for="DocumentRemarks" id="DocumentRemarks" class="form-control form-control-sm" />
+                            <span asp-validation-for="DocumentRemarks" class="text-danger"></span>
+                        </td>
+                        <td class="single-button-action-column">
+                            <a id="btnAddRelatedFile" class="btn btn-sm btn-success" aria-label="Left Align">
+                                <i class="bi bi-plus-lg"></i>
+                            </a>
+                        </td>
+
+                    </tr>
+                </thead>
+                <tbody id="tbdAttachedFiles"></tbody>
+                <tfoot>
+
+                </tfoot>
+            </table>
+        </div>
+        </div>
+    </form>
+
+        <div class="col-md-12">
+            <div class="float-end">
+                <button type="button" class="btn btn-success btn-sm" id="save"><i class="bi bi-check-lg"></i> Submit</button>
+                <button type="button" class="btn btn-primary btn-sm d-none" id="draft"><i class="bi bi-card-list"></i> Draft</button>
+                <button type="button" value="Reset" onclick="location.reload();" class="btn btn-warning btn-sm"><i class="bi bi-arrow-repeat"></i> Reset</button>
+                <a asp-action="Index" class="btn btn-secondary btn-sm"><i class="bi bi-slash-circle"></i> Cancel</a>
+            </div>
+        </div>
+        @section Scripts{
+            <script src="~/CustomJs/ContractualProduction.js?vguid=@ViewStaticData.StaticFileVersionGuid"></script>
+        }

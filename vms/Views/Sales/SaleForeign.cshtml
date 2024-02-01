@@ -1,0 +1,1288 @@
+﻿@{
+    var session = Context.Session.GetComplexData<VmUserSession>(ControllerStaticData.SESSION);
+}
+@{
+    ViewData["Title"] = "Index";
+}
+
+@section breadcrumb
+    {
+    <ul class="page-breadcrumb">
+        <li>
+            <a href="@Url.Action("Dashboard", "Home")">Root</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a href="@Url.Action("Index","Sales")">Sale </a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a href="@Url.Action("Index","Sales")">Sale List</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a href="@Url.Action("Create","Sales")"> Sale Foreign</a>
+        </li>
+    </ul>
+}
+
+<input type="hidden" class="form-control" id="ProductId" name="ProductId" />
+
+<div class="custom-page-title">
+    Sale Foreign
+</div>
+<head>
+
+    
+</head>
+<form method="post" id="salesForeign">
+    <div class="row">
+        <div class="col-md-8" >
+            <div class="row">
+
+                <div class="col-md-2 ">
+                    <div class="form-group form-md-line-input">
+                        <div>
+                            <input type="text" class="form-control" id="InvoiceNo" name="InvoiceNo" placeholder="##">
+
+                            <label style="color:#327ad5;">Invoice</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-2 ">
+                    <div class="form-group form-md-line-input has-info">
+
+                        <select id="CustomerId" name="CustomerId" class="form-control" asp-items="ViewBag.CustomerId"></select>
+                        <label>Org. Name</label>
+                    </div>
+                </div>
+                <div class="col-md-2 ">
+                    <div class="form-group form-md-line-input">
+                        <div>
+                            <input type="text" class="form-control" id="CustomerContactNo" name="CustomerContactNo" placeholder="01####">
+                            <label style="color:#327ad5;">Mobile</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 ">
+                    <div class="form-group form-md-line-input">
+                        <div>
+                            <input type="text" class="form-control" id="WorkOrderNo" name="WorkOrderNo" placeholder="##">
+                            <label style="color:#327ad5;">Order No.</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-2 ">
+                    <div class="form-group form-md-line-input has-info">
+
+                        <select id="SalesDeliveryTypeId" name="SalesDeliveryTypeId" class="form-control" asp-items="ViewBag.SalesDeliveryTypeId"></select>
+                        <label>Sal.Del.Typ.</label>
+                    </div>
+                </div>
+                <div class="col-md-2 ">
+                    <div class="form-group form-md-line-input has-info">
+
+                        <select id="ExportTypeId" name="ExportTypeId" class="form-control" asp-items="ViewBag.ExportTypeId"></select>
+
+                        <label>Export Type</label>
+                    </div>
+                </div>
+
+                <div class="col-md-2 ">
+                    <div class="form-group form-md-line-input">
+                        <div>
+                            <input type="text" class="form-control" id="ExpectedDeleveryDate" name="ExpectedDeleveryDate" value="@DateTime.Now">
+                            <label style="color:#327ad5;">Expt.Date</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 ">
+                    <div class="form-group form-md-line-input">
+                        <div>
+                            <input type="text" class="form-control" id="DeliveryDate" name="DeliveryDate" value="@DateTime.Now">
+                            <label style="color:#327ad5;">Date</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-2 ">
+                    <div class="form-group form-md-line-input">
+                        <div>
+                            <input type="text" class="form-control" id="Discount" name="Discount" placeholder="00" value="0">
+                            <label style="color:#327ad5;">Discount</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-2 ">
+                    <div class="form-group form-md-line-input">
+                        <div>
+                            <input type="text" name="ReceiverName" id="ReceiverName" class="form-control" />
+                            <label style="color:#327ad5;">Name</label>
+                        </div>
+                    </div>
+                </div>
+
+                    <div class="col-md-2 ">
+                        <div class="form-group form-md-line-input">
+                            <div>
+                                <input type="text" name="ReceiverContactNo" id="ReceiverContactNo" class="form-control" />
+                                <label style="color:#327ad5;">Contact</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2 ">
+                        <div class="form-group form-md-line-input">
+                            <div>
+                                <input type="text" name="ShippingAddress" id="ShippingAddress" class="form-control" />
+                                <label style="color:#327ad5;">Address</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2 ">
+                        <div class="form-group form-md-line-input has-info">
+                            <select id="DeliveryMethodId" name="DeliveryMethodId" class="form-control" asp-items="ViewBag.DeliveryMethodId"></select>
+                            <label for="form_control_1">Del. Meth.</label>
+                        </div>
+                    </div>
+                    <div class="col-md-2 ">
+                        <div class="form-group form-md-line-input">
+                            <div>
+                                <input type="text" name="VatChallanNo" id="VatChallanNo" class="form-control" />
+                                <label style="color:#327ad5;">Vat Chln. No.</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2 ">
+                        <div class="form-group form-md-line-input has-info">
+                            <select name="ShippingCountryId" id="ShippingCountryId" class="form-control">
+                                <option value="volvo">Bangladesh</option>
+                                <option value="saab">India</option>
+                            </select>
+                            <label>Country</label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2 ">
+                        <div class="form-group form-md-line-input">
+                            <div>
+                                <input type="text" name="LcNo" id="LcNo" class="form-control" />
+                                <label style="color:#327ad5;">LC No.</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2 ">
+                        <div class="form-group form-md-line-input">
+                            <div>
+                                <input type="text" name="LcDate" id="LcDate" class="form-control" value="@DateTime.Now"/>
+                                <label style="color:#327ad5;">LC Date</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2 ">
+                        <div class="form-group form-md-line-input">
+                            <div>
+                                <input type="text" name="BillOfEntry" id="BillOfEntry" class="form-control" />
+                                <label style="color:#327ad5;">Bill Of Entry</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2 ">
+                        <div class="form-group form-md-line-input">
+                            <div>
+                                <input type="text" name="BillOfEntryDate" id="BillOfEntryDate" class="form-control" value="@DateTime.Now"/>
+                                <label style="color:#327ad5;">BOE Date</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2 ">
+                        <div class="form-group form-md-line-input">
+                            <div>
+                                <input type="text" name="TermsOfLc" id="TermsOfLc" class="form-control" />
+                                <label style="color:#327ad5;">LC Terms</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2 ">
+                        <div class="form-group form-md-line-input">
+                            <div>
+                                <input type="text" name="DueDate" id="DueDate" class="form-control" value="@DateTime.Now"/>
+                                <label style="color:#327ad5;">Due Date</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2 ">
+                        <div class="form-group form-md-line-input">
+                            <div>
+                                <input type="text" name="CustomerPoNumber" id="CustomerPoNumber" class="form-control" />
+                                <label style="color:#327ad5;">PO. No.</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+
+                        <div class="mt-repeater-input mt-radio-inline">
+                            <label style="padding-top:19px">
+                                <input type="checkbox" name="IsVatDeductedInSource" id="IsVatDeductedInSource" value="IsVatDeductedInSource"> VDS?
+                                <span></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+        </div>
+
+        <div class="col-md-4" style="border-left: 1px solid #eee">
+            <div class="row">
+                <div class="col-md-12">
+                    <h4>Document Info.</h4>
+                    <table class="table table-bordered" id="contentTable">
+                        <thead>
+                            <tr>
+
+                                <th>Type</th>
+                                <th>File</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                        <tfoot>
+                            <tr>
+
+                                <td class="form-group form-md-line-input has-info col-md-3">
+                                    <select id="DocumentTypeId" name="DocumentTypeId" class="form-control" asp-items="ViewBag.DocumentTypeId"></select>
+
+                                </td>
+                                <td class="form-group form-md-line-input has-info">
+                                    <input type="file" name="FileUpload" id="FileUpload" class="form-control" />
+                                </td>
+                                <td>
+                                    <a id="addDocument" class="btn btn-sm btn-success" aria-label="Left Align">
+                                        <i class="bi bi-plus-lg"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <div class="col-md-12">
+                    <h4>Payment Info.</h4>
+                    <table class="table table-bordered" id="payment">
+                        <thead>
+                            <tr>
+                                <th>SL</th>
+                                <th class="col-md-3 ">Method</th>
+                                <th>Amount</th>
+                                <th>Date</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                        <tfoot>
+                            <tr>
+                                <td></td>
+                                <td class="form-group form-md-line-input has-info">
+                                    <select id="PaymentMethodId" name="PaymentMethodId" class="form-control" asp-items="ViewBag.PaymentMethodId"></select>
+
+                                </td>
+                                <td class="form-group form-md-line-input">
+                                    <div>
+                                        <input type="text" name="PaidAmount" id="PaidAmount" class="form-control" />
+                                    </div>
+                                </td>
+                                <td class="form-group form-md-line-input">
+                                    <div>
+                                        <input type="text" name="PaymentDate" id="PaymentDate" class="form-control" value="@DateTime.Now"/>
+                                    </div>
+                                </td>
+                                <td>
+                                    <a id="addPayment" class="btn btn-sm btn-success" aria-label="Left Align">
+                                        <i class="bi bi-plus-lg"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 ">
+            <h3>Sale Details</h3>
+        </div>
+
+        <div class="col-md-12">
+
+            <table class="table table-bordered form-table" id="gridTable">
+                <thead>
+                    <tr>
+                        <th>SL</th>
+                        <th>Product</th>
+                        <th>Stock</th>
+                        <th>Qty</th>
+                        <th>Rate</th>
+                        <th>SD.(%)</th>
+                        <th>Amount</th>
+                        <th class="col-md-1 ">Unit</th>
+                        <th>VAT(%)</th>
+                        <th>VAT</th>
+                        <th>Total</th>
+                        <th></th>
+                            
+                        
+                    </tr>
+                    <tr>
+
+                        <td></td>
+                        <td class="form-group form-md-line-input">
+                            <div>
+                                <input type="text" class="form-control" id="Product" name="Product">
+                            </div>
+                        </td>
+                        <td class="form-group form-md-line-input has-info">
+                            <input type="text" readonly="readonly" class="form-control" id="MaxSaleQty" name="MaxSaleQty">
+                        </td>
+
+                        <td class="form-group form-md-line-input">
+                            <div>
+                                <input type="text" class="form-control" id="item" name="item">
+                            </div>
+                        </td>
+
+                        <td class="form-group form-md-line-input has-info">
+                            <input type="text" readonly class="form-control" id="Amount" name="Amount" />
+                        </td>
+                        <td class="form-group form-md-line-input">
+                            <div>
+                                <input type="text" class="form-control" id="SupplementaryDutyPercent" name="SupplementaryDutyPercent" />
+                            </div>
+                        </td>
+                        <td class="form-group form-md-line-input has-info">
+                            <input type="text" readonly class="form-control" id="amount" name="amount">
+                        </td>
+                        <td class="form-group form-md-line-input has-info">
+
+                            <select id="unit" name="unit" class="form-control" asp-items="ViewBag.MeasurementUnitId"></select>
+                        </td>
+
+                        <td class="form-group form-md-line-input has-info">
+                            <input type="text" readonly class="form-control" id="VAT" name="VAT" />
+                        </td>
+                        <td>
+                            <label id="vatValue" name="vatValue"></label>
+                        </td>
+                        <td>
+                            <label id="totalValue" name="totalValue"></label>
+                        </td>
+                        <td>
+                            <a id="add" class="btn btn-sm btn-success" aria-label="Left Align">
+                                <i class="bi bi-plus-lg"></i>
+                            </a>
+                        </td>
+                    </tr>
+                </thead>
+
+                <tbody id="tblPurchaseOD"></tbody>
+                <tfoot>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+
+    <div class="form-actions" style="margin-bottom:20px">
+        
+
+            <button type="button" class="btn blue" id="save"><i class="bi bi-check-lg"></i> Submit</button>
+        
+            <a href="~/Sales/Index" class="btn btn-secondary btn-sm"><i class="bi bi-slash-circle"></i> Cancel</a>
+        
+    </div>
+</form>
+@section Scripts{
+
+    <script src="~/js/typeahead.bundle.js"></script>
+    <script src="~/js/jquery-ui.js"></script>
+    <script>
+
+        var SalesOrder = {
+            init: function() {},
+            count: 1,
+            unitAmount: 0,
+            totalPrice: 0,
+            totalVat: 0,
+            SalesDetailList: [],
+            ContentInfoJson: [],
+            SalesPaymentReceiveJson:[],
+            item: [],
+            calculateTotal: function () {
+                var vatPercent = $('#VAT').val();
+                var unitAmount = $('#amount').val();
+                var vatValue = parseFloat(unitAmount);
+                var vat = parseFloat(vatPercent) / 100;
+                vatValue = vatValue * (vat);
+                var total = parseFloat(unitAmount) + vatValue;
+                $('#vatValue').text(vatValue);
+                $('#totalValue').text(total);
+            },
+            getPurchaseOrder: function () {
+                var purchaseOrder = new Object();
+                var OrganizationId = $('#OrganizationId').val();
+                var VendorId = $('#VendorId').val();
+                var Amount = $('#PurchaseAmount').val();
+                var ExtDeliveryDate = $('#ExpectedDeleveryDate').val();
+                var DeliveryDate = $('#DeliveryDate').val();
+                var Iteams = $('#PurchaseIteams').val();
+                var Vat = $('#PurchaseVat').val();
+                var Discount = $('#Discount').val();
+                purchaseOrder.OrganizationId = OrganizationId;
+                purchaseOrder.VendorId = VendorId;
+                purchaseOrder.Amount = Amount;
+                purchaseOrder.ExtDeliveryDate = ExtDeliveryDate;
+                purchaseOrder.DeliveryDate = DeliveryDate;
+                purchaseOrder.Iteams = Iteams;
+                purchaseOrder.Vat = Vat;
+                purchaseOrder.Discount = Discount;
+            },
+            CalculateTotalPriceAndVat: function(totalPrice,totalVat) {
+                SalesOrder.totalPrice += totalPrice;
+                SalesOrder.totalVat += totalVat;
+                $('#TotalPrice').text(SalesOrder.totalPrice);
+                $('#TotalVat').text(SalesOrder.totalVat);
+            },
+            gridTableEmpty: function() {
+                $('#ProductId').val('');
+                $('#Product').val('');
+                $('#Amount').val('');
+                $('#item').val('');
+                $('#amount').val('');
+                $('#VAT').val('');
+                $('#MaxSaleQty').val('');
+                $('#SupplementaryDutyPercent').val('');
+                $('#InitialAmount').val('');
+                $('#InvoiceNo').val('');
+                $('#vatValue').text('');
+                $('#totalValue').text('');
+            },
+            addDocument: function () {
+                debugger
+                var DocumentName = $('#DocumentTypeId option:selected').text();
+                var DocumentTypeId = $('#DocumentTypeId').val();
+                var files = $("#FileUpload").get(0).files;
+                var table = document.getElementById('contentTable');
+                var rowCount = table.rows.length;
+                if (DocumentTypeId > 0) {
+                    var canAdd = true;
+
+                    if (canAdd) {
+                        var data = new Object();
+                        data.rowCount = rowCount;
+                        data.DocumentTypeId = DocumentTypeId;
+                        data.UploadFile = files[0];
+                        SalesOrder.ContentInfoJson.push(data);
+
+                        var html = '<tr id="' +
+                            rowCount +
+                            '">' +
+                            
+                            '<td>' +
+                            DocumentName +
+                            '</td>' +
+                            '<td>' +
+                            files[0].name +
+                            '</td>' +
+                            '<td><span onclick="DeleteDocument(' +
+                            rowCount +
+                            ')"  class="glyphicon glyphicon-minus btn-xs"></a></span></td>';
+
+                        html += '</tr>';
+
+                        $("table#contentTable > tbody").append(html);
+
+                    }
+                }
+
+            },
+            isNumber:function (n) {
+                return !isNaN(parseFloat(n)) && isFinite(n);
+            },
+            addPayment: function () {
+
+                var PaymentMethod = $('#PaymentMethodId option:selected').text();
+                var PaymentMethodId = $('#PaymentMethodId').val();
+                var PaidAmount = $("#PaidAmount").val();
+                var PaymentDate = $("#PaymentDate").val();
+                var table = document.getElementById('payment');
+                var rowCount = table.rows.length;
+                if (PaymentMethodId > 0) {
+                    var canAdd = true;
+
+                    if (canAdd) {
+                        var data = new Object();
+                        data.rowCountPayment = rowCount;
+                        data.ReceivedPaymentMethodId = PaymentMethodId;
+                        data.ReceiveAmount = PaidAmount;
+                        data.ReceiveDate = PaymentDate;
+                        SalesOrder.SalesPaymentReceiveJson.push(data);
+
+                        var html = '<tr id="' +
+                            rowCount +
+                            '">' +
+                            '<td>' +
+                            rowCount +
+                            '</td>' +
+                            '<td>' +
+                            PaymentMethod +
+                            '</td>' +
+                            '<td>' +
+                            PaidAmount +
+                            '</td>' +
+                            '<td>' +
+                            PaymentDate +
+                            '</td>' +
+                            '<td><span onclick="DeletePayment(' +
+                            rowCount +
+                            ')"  class="glyphicon glyphicon-minus btn-xs"></a></span></td>';
+
+                        html += '</tr>';
+
+                        $("table#payment > tbody").append(html);
+
+                    }
+                }
+
+            },
+            add: function () {
+                debugger
+                var productName = $('#Product').val();
+                var productId = $('#ProductId').val();
+                var vendor = $('#VendorId option:selected').text();
+                var vendorId = $('#VendorId').val();
+                var PurchaseInvoice = $('#PurchaseInvoice').val();
+                var item = $('#item').val();
+                var InitialAmount = $('#InitialAmount').val();
+                var amount = $('#amount').val();
+                var vatPercent = $('#VAT').val();
+                var unit = $('#unit option:selected').text();
+                var unitId = $('#unit').val();
+                var unitAmount = $('#Amount').val();
+                var MaxSaleQty = $('#MaxSaleQty').val();
+                var SupplementaryDutyPercent = $('#SupplementaryDutyPercent').val();
+                if (productId>0) {
+
+                    var canAdd = true;
+
+                    $.each(SalesOrder.SalesDetailList,
+                        function (i, v) {
+                            if (SalesOrder.SalesDetailList[i].ProductId == productId) {
+                                alert('Sorry! product Order Exists.');
+                                canAdd = false;
+
+                            }
+
+                        });
+
+                    if (canAdd) {
+
+                        if (!SalesOrder.isNumber(vatPercent)) {
+                            return alert("Input VAT %");
+                        }
+                        var vat = parseFloat(vatPercent) / 100;
+                        var data = new Object();
+                        data.ProductId = productId
+                        data.ProductVattypeId = 1;
+                        data.Quantity = item;
+                        data.UnitPrice = amount;
+                        data.VATPercent = vatPercent;
+                        data.DiscountPerItem = 0;
+                        data.MeasurementUnitId = unitId;
+                        data.SupplementaryDutyPercent = SupplementaryDutyPercent;
+                        data.UnitAmount = unitAmount;
+                        var vatValue = parseFloat(amount);
+                        vatValue = (vatValue * (vat));
+                        var total = parseFloat(amount) + vatValue;
+                        data.totalPrice = total;
+                        data.totalVat = vatValue;
+                        SalesOrder.SalesDetailList.push(data);
+
+                        var html = '<tr id="' +
+                            data.ProductId +
+                            '">' +
+                            '<td>' +
+                            SalesOrder.count +
+                            '</td>' +
+                            '<td>' +
+                            productName +
+                            '</td>' +
+                            '<td>' +
+                            MaxSaleQty +
+                            '</td>' +
+
+                            '<td>' +
+                            item +
+                            '</td>' +
+                            '<td>' +
+                            unitAmount+
+                            '</td>' +
+                            '<td>' +
+                            SupplementaryDutyPercent+
+                            '</td>' +
+                            '<td>' +
+                            amount +
+                            '</td>' +
+                            '<td>' +
+                            unit +
+                            '</td>' +
+                            '<td>' +
+                            vatPercent +
+                            '</td>' +
+
+                            '<td>' +
+                            vatValue +
+                            '</td>' +
+                            '<td>' +
+                            total +
+                            '</td>' +
+                            '<td><span onclick="Delete(' +
+                            data.ProductId +
+                            ')"  class="btn-xs glyphicon glyphicon-minus"></a></span></td>';
+
+                        html += '</tr>';
+
+                        $("table#gridTable > tbody").append(html);
+                        SalesOrder.CalculateTotalPriceAndVat(total, vatValue);
+                        SalesOrder.gridTableEmpty();
+                        SalesOrder.count++;
+
+                    }
+                }
+
+            },
+
+            delete: function (id) {
+                for (var key in SalesOrder.SalesDetailList) {
+                    var value = SalesOrder.SalesDetailList[key].ProductId;
+                    if (SalesOrder.SalesDetailList[key].ProductId == id) {
+                        SalesOrder.CalculateTotalPriceAndVat(-SalesOrder.SalesDetailList[key].totalPrice, -SalesOrder.SalesDetailList[key].totalVat);
+                    }
+                }
+
+                $.each(SalesOrder.SalesDetailList,
+                    function (i, v) {
+                        if (SalesOrder.SalesDetailList[i].ProductId == id) {
+                            SalesOrder.SalesDetailList.splice(i, 1);
+                        }
+                        $("tr#" + id).remove().fadeOut();
+
+                    });
+
+            },
+            deleteDocument: function (id) {
+
+                $.each(SalesOrder.ContentInfoJson,
+                    function (i, v) {
+                        if (SalesOrder.ContentInfoJson[i].rowCount == id) {
+
+                            SalesOrder.ContentInfoJson.splice(i, 1);
+
+                        }
+                        $(" tr#" + id).remove().fadeOut();
+
+                    });
+
+            },
+            deletePayment: function (id) {
+
+                $.each(SalesOrder.SalesPaymentReceiveJson,
+                    function (i, v) {
+                        if (SalesOrder.SalesPaymentReceiveJson[i].rowCountPayment == id) {
+
+                            SalesOrder.SalesPaymentReceiveJson.splice(i, 1);
+
+                        }
+                        $("tr#" + id).remove().fadeOut();
+
+                    });
+
+            },
+            calculate: function (value) {
+
+                var unitAmount = $('#amount').val();
+
+                if (!SalesOrder.isNumber(unitAmount) || !(SalesOrder.isNumber(value))) {
+                    return; 
+                } else {
+
+                    unitAmount = SalesOrder.unitAmount * value;
+                    $('#amount').val(unitAmount);
+                    $("#Amount").text(unitAmount / value);
+
+                    SalesOrder.calculateTotal();
+                }
+
+            },
+            calculateUnitPrice: function (value) {
+                var qty = $('#item').val();
+                if (!SalesOrder.isNumber(qty) || !(SalesOrder.isNumber(value))) {
+
+                    return;
+                } else {
+                    $("#Amount").text(Math.floor(value / qty));
+                }
+
+            },
+            Save: function () {
+                var InvoiceNo = $('#InvoiceNo').val();
+                var VatChallanNo = $('#VatChallanNo').val();
+                var Discount = $('#Discount').val();
+                var IsVatDeductedInSource = $('#IsVatDeductedInSource').is(":checked");
+                var ReceiverName = $('#ReceiverName').val();
+                var ReceiverContactNo = $('#ReceiverContactNo').val();
+
+                var CustomerId = $('#CustomerId').val();
+                var WorkOrderNo = $('#WorkOrderNo').val();
+                var ShippingAddress = $('#ShippingAddress').val();
+                var ShippingCountryId = $('#ShippingCountryId').val();
+                var SalesTypeId = 2;
+                var ExportTypeId = $('#ExportTypeId').val();
+
+                var ExpectedDeleveryDate = $('#ExpectedDeleveryDate').val();
+                var DeliveryDate = $('#DeliveryDate').val();
+
+                var LcNo = $('#LcNo').val();
+                var LcDate = $('#LcDate').val();
+                var BillOfEntry = $('#BillOfEntry').val();
+                var BillOfEntryDate = $('#BillOfEntryDate').val();
+                var DueDate = $('#DueDate').val();
+                var TermsOfLc = $('#TermsOfLc').val();
+                var CustomerPoNumber = $('#CustomerPoNumber').val();
+                var SalesDeliveryTypeId = $('#SalesDeliveryTypeId').val();
+                var DeliveryMethodId = $('#DeliveryMethodId').val();
+                var data = new FormData();
+
+                for (var i = 0; i < SalesOrder.SalesDetailList.length; i++) {
+                    data.append('SalesDetailList[' + i + '].ProductId', SalesOrder.SalesDetailList[i].ProductId);
+                    data.append('SalesDetailList[' + i + '].Quantity', SalesOrder.SalesDetailList[i].Quantity);
+                    data.append('SalesDetailList[' + i + '].UnitPrice', SalesOrder.SalesDetailList[i].UnitAmount);
+                    data.append('SalesDetailList[' + i + '].DiscountPerItem', SalesOrder.SalesDetailList[i].DiscountPerItem);
+                    data.append('SalesDetailList[' + i + '].SupplementaryDutyPercent', SalesOrder.SalesDetailList[i].SupplementaryDutyPercent);
+                    data.append('SalesDetailList[' + i + '].VATPercent', SalesOrder.SalesDetailList[i].VATPercent);
+                    data.append('SalesDetailList[' + i + '].MeasurementUnitId', SalesOrder.SalesDetailList[i].MeasurementUnitId);
+                }
+                for (var i = 0; i < SalesOrder.ContentInfoJson.length; i++) {
+                    data.append('ContentInfoJson[' + i + '].DocumentTypeId', SalesOrder.ContentInfoJson[i].DocumentTypeId);
+                    data.append('ContentInfoJson[' + i + '].UploadFile', SalesOrder.ContentInfoJson[i].UploadFile);
+
+                }
+                for (var i = 0; i < SalesOrder.SalesPaymentReceiveJson.length; i++) {
+                    data.append('SalesPaymentReceiveJson[' + i + '].ReceivedPaymentMethodId', SalesOrder.SalesPaymentReceiveJson[i].ReceivedPaymentMethodId);
+                    data.append('SalesPaymentReceiveJson[' + i + '].ReceiveAmount', SalesOrder.SalesPaymentReceiveJson[i].ReceiveAmount);
+                    data.append('SalesPaymentReceiveJson[' + i + '].ReceiveDate', SalesOrder.SalesPaymentReceiveJson[i].ReceiveDate);
+                }
+
+                data.append("InvoiceNo", InvoiceNo);
+                data.append("VatChallanNo", VatChallanNo);
+                data.append("OrganizationId", 1);
+                data.append("DiscountOnTotalPrice", Discount);
+                data.append("IsVatDeductedInSource", IsVatDeductedInSource);
+                data.append("CustomerId", CustomerId);
+                data.append("ReceiverName", ReceiverName);
+                data.append("ReceiverContactNo", ReceiverContactNo);
+                data.append("ShippingAddress", ShippingAddress);
+                data.append("ShippingCountryId", ShippingCountryId);
+                data.append("SalesTypeId", SalesTypeId);
+                data.append("SalesDeliveryTypeId", SalesDeliveryTypeId);
+                data.append("WorkOrderNo", WorkOrderNo);
+                data.append("SalesDate", '2019-01-01');
+                data.append("ExpectedDeliveryDate", ExpectedDeleveryDate);
+                data.append("DeliveryDate", DeliveryDate);
+                data.append("DeliveryMethodId", DeliveryMethodId);
+                data.append("ExportTypeId", ExportTypeId);
+                data.append("LcNo", LcNo);
+                data.append("LcDate", LcDate);
+                data.append("BillOfEntry", BillOfEntry);
+                data.append("BillOfEntryDate", BillOfEntryDate);
+                data.append("DueDate", DueDate);
+                data.append("TermsOfLc", TermsOfLc);
+                data.append("CustomerPoNumber", CustomerPoNumber);
+                data.append("IsTaxInvoicePrined", 0);
+                data.append("CreatedBy", 1);
+                data.append("CreatedTime", '2019-01-01');
+                data.append("__RequestVerificationToken", $("input[name=__RequestVerificationToken]").val());
+
+                $.ajax({
+                    url: '@Url.Action("CreateAsync", "Sales")',
+                    data: data,
+                    type: "POST",
+                    processData: false,
+                    contentType: false,
+                    dataType: "json",
+                    beforeSend: function () {
+                        $("#loading").show();
+                    },
+
+                    success: function (result) {
+                        $("#showData").html("");
+
+                        if (result == false) {
+                            alert("Please add atleast on Sale Details");
+                        }
+                        else {
+                            window.location.href = '@Url.Action("Index", "Sales")';
+                        }
+                    },
+                    error: function (x, e) {
+                        $("#loading").hide();
+                        alert('error');
+                    }
+                });
+            },
+            product : {
+                init: function () { },
+                productAutoComplete: function () {
+                    var materialforrequsition = {
+                        Initialize: function () {
+                            materialforrequsition.Typehead();
+                        },
+
+                        Typehead: function () {
+                            $('#Product').typeahead('destroy');
+                            $('#Product').typeahead({
+                                    hint: true,
+                                    highlight: true,
+                                    minLength: 2,
+                                },
+                                {
+                                    items: 8,
+                                    name: 'Product',
+                                    displayKey: function (s) {
+                                        return s.name;
+                                    },
+                                    property: "ProductId",
+                                    source: function (strmaterial, process) {
+                                        var url = '@Url.Content("~/Products/SaleProductAutoComplete")';
+                                        return $.getJSON(url, { filterText: $("#Product").val() }, function (Data) {
+
+                                            return process(Data);
+                                        });
+                                    },
+                                    updater: function (item) {
+                                        return item.name;
+                                    }
+                                }).on('typeahead:selected', function (obj, datum) {
+
+                                    $("#ProductId").val(datum.id);
+                                    $('#Amount').val(datum.unitPrice);
+                                     $('#item').val(1);
+                                    $('#amount').val(datum.unitPrice);
+                                    $('#VAT').val(datum.vat);
+                                    $('#MaxSaleQty').val(datum.maxSaleQty);
+                                    $('#SupplementaryDutyPercent').val(datum.supplimentaryDuty);
+                                    SalesOrder.unitAmount = datum.unitPrice;
+                                    SalesOrder.calculateTotal();
+
+                            });
+                            $("#Product").focus();
+
+                        }
+                    }
+                    materialforrequsition.Initialize();
+                }
+            }
+        }
+
+        $(document).ready(function() {
+            $('#salesForeign').validate({
+                errorClass: 'help-block animation-slideDown',
+                errorElement: 'div',
+                errorPlacement: function (error, e) {
+                    e.parents('.form-group >div').append(error);
+                },
+                highlight: function (e) {
+                    $(e).closest('.form-group').removeClass('has-success has-error').addClass('has-error');
+                    $(e).closest('.help-block').remove();
+                },
+
+                success: function (e) {
+                    e.closest('.form-group').removeClass('has-success has-error');
+                    e.closest('.help-block').remove();
+                },
+                rules: {
+
+                    CustomerContactNo: {
+                        number: true,
+                        minlength: 11,
+                        maxlength: 11
+                    },
+                    WorkOrderNo: {
+                        maxlength: 50
+                    },
+                    ExpectedDeleveryDate: {
+                        date: true,
+                    },
+                    DeliveryDate: {
+                        date: true,
+                    },
+                    Discount: {
+                        required: true,
+                        number: true
+                    },
+                    ReceiverName: {
+                        required: function (element) {
+                            if ($("#CustomerId").val() == "0") {
+                                return true;
+                            }
+
+                            else {
+                                return false;
+                            }
+                        },
+                        maxlength: 200
+                    },
+                    ReceiverContactNo: {
+                        required: function (element) {
+                            if ($("#CustomerId").val() == "0") {
+                                return true;
+                            }
+
+                            else {
+                                return false;
+                            }
+                        },
+                        number: true,
+                        minlength: 11,
+                        maxlength: 11
+                    },
+                    ShippingAddress: {
+                        required: function (element) {
+                            if ($("#CustomerId").val() == "0") {
+                                return true;
+                            }
+
+                            else {
+                                return false;
+                            }
+                        },
+                        maxlength: 200
+                    },
+                    VatChallanNo: {
+                        maxlength: 50
+                    },
+                    item: {
+                        required: true,
+                        greaterThan: true,
+                        number: true
+                    },
+                    amount: {
+                        required: $("#amount").val() < 0,
+
+                        number: true
+                    },
+                    Product: {
+                        required: true
+                    },
+                    DiscountPerItem: {
+                        number: true
+                    },
+                    SupplementaryDutyPercent: {
+                        number: true
+                    },
+                    LcNo: {
+                        maxlength: 50
+                    },
+                    LcDate: {
+                        date: true,
+                    },
+                    BillOfEntry: {
+                        maxlength: 50
+                    },
+                    BillOfEntryDate: {
+                        date: true,
+                    },
+                    DueDate: {
+                        date: true,
+                    },
+                    CustomerPoNumber: {
+                        maxlength: 50
+                    },
+                    PaidAmount: {
+                        number: true
+                    },
+                    PaymentDate: {
+                        required: true,
+                        date: true
+                    }
+                },
+                messages: {
+
+                    CustomerContactNo: {
+                        number: 'Enter Mobile Number',
+                        minlength:'Number need to be 11 digit',
+                        maxlength: 'Number need to be 11 digit'
+                    },
+                    WorkOrderNo: {
+                        maxlength: 'WorkOrderNo Can not be more than 50 char'
+                    },
+                    ExpectedDeleveryDate: {
+                        date: 'Provide a valid Date',
+                    },
+                    DeliveryDate: {
+                        date: 'Provide a valid Date',
+                    },
+                    ReceiverName: {
+                        required: 'Please provide ReceiverName',
+                        maxlength: 'ReceiverName Can not more than 200 char'
+                    },
+                    ReceiverContactNo: {
+                        required: 'Enter Number',
+                        number: 'Enter Mobile Number',
+                        minLength: 'Number need to be 11 digit',
+                        maxlength: 'Number need to be 11 digit'
+                    },
+                    Discount: {
+                        required: 'Please provide Discount',
+                        number: 'Entrer Number'
+                    },
+                    ShippingAddress: {
+                        required: 'Enter Address',
+                        maxlength: 'ShippingAddress Can not more than 200 char'
+                    },
+                    VatChallanNo: {
+                        maxlength: 'VatChallanNo Can not more than 50 char'
+                    },
+                    item: {
+                        required: 'Please provide Quantity',
+                        number: 'Entrer Number'
+                    },
+                    amount: {
+                        required: 'Please provide amount',
+                        number: 'Entrer Number'
+                    },
+                    Product: {
+                        required: 'Please Enter Product',
+                    },
+                    DiscountPerItem: {
+                        number: 'Entrer Number'
+                    },
+                    SupplementaryDutyPercent: {
+                        number: 'Entrer Number'
+                    },
+                    LcNo: {
+                        maxlength: 'Value Can not more than 50 char'
+                    },
+                    LcDate: {
+                        date: 'Provide a valid Date',
+                    },
+                    BillOfEntry: {
+                        maxlength: 'Value Can not more than 50 char'
+                    },
+                    BillOfEntryDate: {
+                        date: 'Provide a valid Date'
+                    },
+                    DueDate: {
+                        date: 'Provide a valid Date'
+                    },
+                    CustomerPoNumber: {
+                        maxlength: 'Value Can not more than 50 char'
+                    },
+                    PaidAmount: {
+                        number: 'Entrer Number'
+                    },
+                    PaymentDate: {
+                        required: 'Provide Payment date',
+                        date: 'Provide a valid Date'
+                    }
+
+
+                }
+            });
+            $.validator.addMethod("greaterThan", function (value, element, param) {
+                var val_a = parseInt($("#MaxSaleQty").val());
+                return this.optional(element)
+                    || (parseInt(value) != 0 && parseInt(value) <= val_a);
+            }, "Please Check Quantity");
+
+            $('#add').click(function () {
+                $("#Product").rules('add', 'required');
+                $("#item").rules('add', 'required');
+                $("#amount").rules('add', 'required');
+                $("#PaymentDate").rules('remove', 'required');
+                $("#Discount").rules('remove', 'required');
+                $("#ReceiverName").rules('remove', 'required');
+                $("#ReceiverContactNo").rules('remove', 'required');
+                $("#ShippingAddress").rules('remove', 'required');
+                if ($("#salesForeign").valid()) {
+
+                    SalesOrder.add();
+                    return true
+                }
+                else {
+                    return false;
+                }
+                
+            });
+
+            $('#save').click(function () {
+                $("#Product").rules('remove', 'required');
+                $("#item").rules('remove', 'required');
+                $("#amount").rules('remove', 'required');
+                $("#PaymentDate").rules('remove', 'required');
+                $("#Discount").rules('add', 'required');
+                $("#ReceiverName").rules('add', {
+                    required: function () {
+                        if ($("#CustomerId").val() == "0") {
+                            return true;
+                        }
+
+                        else {
+                            return false;
+                        }
+                    }
+                  });
+
+                $("#ReceiverContactNo").rules('add', {
+                    required: function () {
+                        if ($("#CustomerId").val() == "0") {
+                            return true;
+                        }
+
+                        else {
+                            return false;
+                        }
+                    }
+                });
+                $("#ShippingAddress").rules('add', {
+                    required: function () {
+                        if ($("#CustomerId").val() == "0") {
+                            return true;
+                        }
+
+                        else {
+                            return false;
+                        }
+                    }
+                });
+                if ($("#salesForeign").valid()) {
+                    var rowPurchase = $('#tblPurchaseOD tr').length;
+                    
+                    if (rowPurchase > 0) {
+                        if (confirm('Are you sure?')) {
+                            SalesOrder.Save();
+                            return true;
+                        }
+                    }
+                    else {
+                        alert('Add Product');
+                    }
+                }
+                else {
+                    return false;
+                }
+               
+            });
+            $("#ExpectedDeleveryDate").datepicker();
+            $("#ExpectedDeleveryDate").datepicker('option', 'dateFormat', 'dd M, yy');
+            $("#PaymentDate").datepicker();
+            $("#PaymentDate").datepicker('option', 'dateFormat', 'dd M, yy');
+            $("#DeliveryDate").datepicker();
+            $("#DeliveryDate").datepicker('option', 'dateFormat', 'dd M, yy');
+            $("#LcDate").datepicker();
+            $("#LcDate").datepicker('option', 'dateFormat', 'dd M, yy');
+            $("#BillOfEntryDate").datepicker();
+            $("#BillOfEntryDate").datepicker('option', 'dateFormat', 'dd M, yy');
+            $("#DueDate").datepicker();
+            $("#DueDate").datepicker('option', 'dateFormat', 'dd M, yy');
+            SalesOrder.product.productAutoComplete();
+        });
+        function DeleteDocument(id) {
+            SalesOrder.deleteDocument(id);
+        };
+        function DeletePayment(id) {
+            SalesOrder.deletePayment(id);
+        };
+        function Delete(id) {
+            SalesOrder.delete(id);
+        };
+
+        $("#item").keyup(function (evt) {
+            var theEvent = evt || window.event;
+
+            if (theEvent.type === 'paste') {
+                key = event.clipboardData.getData('text/plain');
+            } else {
+                var key = theEvent.keyCode || theEvent.which;
+                key = String.fromCharCode(key);
+            }
+            var regex = /[0-9]|\./;
+            if( !regex.test(key) ) {
+                theEvent.returnValue = false;
+                if (theEvent.preventDefault)
+                    $("#item").val("");
+                return theEvent.preventDefault();
+            }
+            var that = this,
+            numberOfItem = $(this).val();
+            SalesOrder.calculate(numberOfItem);
+
+        });
+        $('#addDocument').click(function() {
+            SalesOrder.addDocument();
+        });
+        $('#addPayment').click(function() {
+            $("#Product").rules('remove', 'required');
+            $("#item").rules('remove', 'required');
+            $("#amount").rules('remove', 'required');
+            $("#PaymentDate").rules('add', 'required');
+            
+              $("#ReceiverName").rules('remove', 'required');
+            $("#ReceiverContactNo").rules('remove', 'required');
+            $("#ShippingAddress").rules('remove', 'required');
+            $("#Discount").rules('remove', 'required');
+            if ($("#salesForeign").valid()) {
+                SalesOrder.addPayment();
+                return true
+            }
+            else {
+                return false;
+            }
+            
+        });
+        $("#amount").keyup(function () {
+            var that = this,
+                amount = $(this).val();
+            SalesOrder.calculateUnitPrice(amount);
+
+        });
+        $("#CustomerId").change(function () {
+            debugger
+            var end = this.value;
+            var id = $('#CustomerId').val();
+            $.ajax({
+                url: '@Url.Action("GetCustomerDetails", "Customer")',
+                dataType: "json",
+                type: "GET",
+                data: { id: id },
+                beforeSend: function () {
+                    $("#loading").show();
+                },
+                success: function (result) {
+                    $("#loading").hide();
+
+                    if (result == false) {
+                        alert("Please add atleast on purchase Details");
+                    }
+                    else {
+                        $('#CustomerContactNo').val(result.phoneNo);
+                    }
+                },
+                error: function (x, e) {
+                    $("#loading").hide();
+                    alert("Error");
+                }
+            });
+        });
+    </script>
+
+}

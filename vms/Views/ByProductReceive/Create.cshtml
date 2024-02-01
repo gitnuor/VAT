@@ -1,0 +1,90 @@
+﻿@model vms.entity.viewModels.ByProductReceive.VmByProductReceivePostModel
+@{
+    ViewData["Title"] = "By product receive entry";
+}
+
+@section contentheader
+    {
+    <div class="p-3 page-header">
+        @ViewData["Title"]
+    </div>
+}
+
+<div class="row">
+    <div class="col-md-4 offset-4">
+        <form asp-action="Create" class="form-horizontal" id="frmMainInformation">
+            <div class="form-group mt-3">
+                <label asp-for="OrgBranchId" ></label>
+                <div>
+                    <select asp-for="OrgBranchId" asp-items="Model.OrgBranchList.CustomSelectListToSelectList()" >
+                        <option value="@null">Select Branch</option>
+                    </select>
+                    <span asp-validation-for="OrgBranchId" ></span>
+                </div>
+            </div>
+            <div class="form-group mt-3">
+                <label asp-for="ReceiveDate"></label>
+                <div>
+                    <input type="date" asp-for="ReceiveDate" >
+                    <span asp-validation-for="ReceiveDate" ></span>
+                </div>
+            </div>
+            <div class="form-group mt-3">
+                <label asp-for="ProductId" ></label>
+                <div>
+                    <select asp-for="ProductId" >
+                        <option value="@null">Select Product</option>
+                    </select>
+                    <span asp-validation-for="ProductId" ></span>
+                </div>
+            </div>
+            <div class="form-group mt-3">
+                <label class="form-label" asp-for="Quantity"></label>
+                <div>
+                    <input asp-for="Quantity" />
+                    <span asp-validation-for="Quantity" ></span>
+                </div>
+            </div>
+            <div class="form-group mt-3">
+                <label class="form-label" asp-for="UnitPrice"></label>
+                <div>
+                    <input asp-for="UnitPrice"  />
+                    <span asp-validation-for="UnitPrice" ></span>
+                </div>
+            </div>
+            <div class="form-group mt-3">
+                <label asp-for="MeasurementUnitId" ></label>
+                <div>
+                    <select asp-for="MeasurementUnitId" >
+                        <option value="@null">Select Unit</option>
+                    </select>
+                    <span asp-validation-for="MeasurementUnitId" ></span>
+                </div>
+            </div>
+            <div class="form-group mt-3">
+                <label class="form-label" asp-for="ProductDescription"></label>
+                <div>
+                    <textarea asp-for="ProductDescription" ></textarea>
+                    <span asp-validation-for="ProductDescription" ></span>
+                </div>
+            </div>
+            <div class="form-group mt-3">
+                <label class="form-label" asp-for="Remarks"></label>
+                <div>
+                    <textarea asp-for="Remarks" ></textarea>
+                    <span asp-validation-for="Remarks" ></span>
+                </div>
+            </div>
+            <div class="form-group mt-3 float-end mt-3">
+                <button type="submit" data-requiredconfirmation="true" class="btn  btn-primary btn-sm" id="btnSave"><i class="bi bi-check-lg"></i> Submit</button>
+                <button type="button" value="Reset" onclick="location.reload();" class="btn  btn-warning btn-sm" id="btnResetForm"><i class="bi bi-arrow-repeat"></i> Reset</button>
+                <a asp-action="Index" class="btn btn-secondary btn-sm"><i class="bi bi-slash-circle"></i> Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script src="~/CustomJs/ByProductReceive.js?vguid=@ViewStaticData.StaticFileVersionGuid"></script>
+    }

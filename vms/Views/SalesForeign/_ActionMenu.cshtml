@@ -1,0 +1,24 @@
+﻿@model vms.entity.models.ViewSalesExport
+@{
+    var session = Context.Session.GetComplexData<VmUserSession>(ControllerStaticData.SESSION);
+}
+
+<div class="nav navbar-nav">
+	<div class="dropdown dropdown-freeze-grid-action">
+        <a href="#" class="" data-bs-toggle="dropdown" data-close-others="true">
+            <i class="text-dark bi bi-three-dots-vertical"></i>
+        </a>
+        <ul class=" dropdown-menu dropdown-menu-right div-with-arrow-right-top">
+            @if (UserAuthorization.Check(FeatureList.MUSHAK_MUSHAK_6_3_CAN_VIEW, session.Rights) && Model.IsComplete)
+            {
+                <li>
+                    <a class="dropdown-item" asp-controller="Mushak" asp-action="MushakSixPointThree" asp-route-language="0" asp-route-id="@Model.EncryptedId" target="_blank"><i class="bi bi-printer"></i> Print Mushak- 6.3 (Bangla)</a>
+                </li>
+                <li>
+                    <a class="dropdown-item"asp-controller="Mushak" asp-action="MushakSixPointThree" asp-route-language="1" asp-route-id="@Model.EncryptedId" target="_blank"><i class="bi bi-printer"></i> Print Mushak- 6.3 (English)</a>
+                </li>
+            }
+
+        </ul>
+    </div>
+</div>

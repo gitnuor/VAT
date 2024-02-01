@@ -1,0 +1,546 @@
+﻿@{
+    var session = Context.Session.GetComplexData<VmUserSession>(ControllerStaticData.SESSION);
+}
+
+<div class="page-sidebar navbar-collapse collapse">
+    
+    <ul class="page-sidebar-menu" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+        
+        <li class="sidebar-toggler-wrapper hide">
+            <div class="sidebar-toggler">
+                <span></span>
+            </div>
+        </li>
+        
+
+        @if (UserAuthorization.Check(FeatureList.DASHBOARD, session.Rights))
+        {
+
+            <li class="nav-item start">
+                <a href="@Url.Action("Dashboard", "Home")" class="nav-link nav-toggle">
+                    <i class="icon-home"></i>
+                    <span class="title">Dashboard</span>
+                    <span class="selected"></span>
+                </a>
+            </li>
+        }
+
+        @if (UserAuthorization.Check(FeatureList.ADMINSTRATION, session.Rights))
+        {
+            <li class="nav-item  ">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="icon-wrench"></i>
+                    <span class="title">Adminstration</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+
+                    @if (UserAuthorization.Check(FeatureList.ADMINSTRATION_COMPANY_BASIC_INFO_CAN_VIEW, session.Rights))
+                    {
+                        <li class="nav-item  ">
+
+                            <a href="@Url.Action("Index", "Organizations")" class="nav-link ">
+                                <span class="title">Organizations</span>
+                            </a>
+                        </li>
+                    }
+
+                    @if (UserAuthorization.Check(FeatureList.ADMINSTRATION_USERS_CAN_VIEW, session.Rights))
+                    {
+                        <li class="nav-item  ">
+
+                            <a href="@Url.Action("Index", "Users")" class="nav-link ">
+                                <span class="title">Users</span>
+                            </a>
+                        </li>
+                    }
+
+         
+                    @if (UserAuthorization.Check(FeatureList.MUSHAK_RETURN_MUSHAK_RETURN_PAYMENT_CAN_VIEW, session.Rights))
+                    {
+                        <li class="nav-item">
+
+                            <a href="@Url.Action("Index", "MushakReturnPayment")" class="nav-link ">
+
+                                <span class="title">Mushak Return Payment</span>
+                            </a>
+                        </li>
+
+                    }
+                    @if (UserAuthorization.Check(FeatureList.ADMINSTRATION_ROLES_CAN_VIEW, session.Rights))
+                    {
+                        <li class="nav-item  ">
+
+                            <a href="@Url.Action("Index", "Roles")" class="nav-link ">
+                                <span class="title">Roles</span>
+                            </a>
+                        </li>
+                    }
+                    @if (UserAuthorization.Check(FeatureList.ADMINSTRATION_PRODUCT_CATEGORY_CAN_VIEW, session.Rights))
+                    {
+                        <li class="nav-item  ">
+
+                            <a href="@Url.Action("Index", "ProductCategories")" class="nav-link ">
+                                <span class="title">Product Category</span>
+                            </a>
+                        </li>
+                    }
+
+                    <li class="nav-item  ">
+
+                        <a href="@Url.Action("Index", "OverHeadCost")" class="nav-link ">
+                            <span class="title">Over Head Cost</span>
+                        </a>
+                    </li>
+                    @if (UserAuthorization.Check(FeatureList.ADMINSTRATION_DAMAGE_TYPE_CAN_VIEW, session.Rights))
+                    {
+                        <li class="nav-item  ">
+
+                            <a href="@Url.Action("Index", "DamageTypes")" class="nav-link ">
+                                <span class="title">Damage Type</span>
+                            </a>
+                        </li>
+                    }
+                    @if (UserAuthorization.Check(FeatureList.ADMINSTRATION_DELIVERY_METHOD_CAN_VIEW, session.Rights))
+                    {
+                        <li class="nav-item  ">
+
+                            <a href="@Url.Action("Index", "DeliveryMethods")" class="nav-link ">
+                                <span class="title">Delivery Method</span>
+                            </a>
+                        </li>
+                    }
+                    @if (UserAuthorization.Check(FeatureList.ADMINSTRATION_DOCUMENT_TYPE_CAN_VIEW, session.Rights))
+                    {
+                        <li class="nav-item  ">
+
+                            <a href="@Url.Action("Index", "DocumentTypes")" class="nav-link ">
+                                <span class="title">Document Type</span>
+                            </a>
+                        </li>
+                    }
+                    @if (UserAuthorization.Check(FeatureList.ADMINSTRATION_EXPORT_TYPE_CAN_VIEW, session.Rights))
+                    {
+                        <li class="nav-item  ">
+
+                            <a href="@Url.Action("Index", "ExportTypes")" class="nav-link ">
+                                <span class="title">Export Type</span>
+                            </a>
+                        </li>
+                    }
+                    @if (UserAuthorization.Check(FeatureList.ADMINSTRATION_MEASURMENT_UNIT_CAN_VIEW, session.Rights))
+                    {
+                        <li class="nav-item  ">
+
+                            <a href="@Url.Action("Index", "MeasurementUnits")" class="nav-link ">
+                                <span class="title">Measurement Unit</span>
+                            </a>
+                        </li>
+                    }
+
+                    @if (UserAuthorization.Check(FeatureList.ADMINSTRATION_PAYMENT_METHODS_CAN_VIEW, session.Rights))
+                    {
+                        <li class="nav-item  ">
+
+                            <a href="@Url.Action("Index", "PaymentMethods")" class="nav-link ">
+                                <span class="title">Payment Methods</span>
+                            </a>
+                        </li>
+                    }
+                    @if (UserAuthorization.Check(FeatureList.ADMINSTRATION_PRODUCT_GROUPS_CAN_VIEW, session.Rights))
+                    {
+                        <li class="nav-item  ">
+                            <a href="@Url.Action("Index", "ProductGroups")" class="nav-link ">
+                                <span class="title">Product Groups</span>
+                            </a>
+                        </li>
+                    }
+                    @if (UserAuthorization.Check(FeatureList.ADMINSTRATION_PRODUCT_VAT_TYPES_CAN_VIEW, session.Rights))
+                    {
+                        <li class="nav-item  ">
+                            <a href="@Url.Action("Index", "ProductVattypes")" class="nav-link ">
+                                <span class="title">Product Vat Types</span>
+                            </a>
+                        </li>
+                    }
+                    @if (UserAuthorization.Check(FeatureList.ADMINSTRATION_PURCHASE_REASONES_CAN_VIEW, session.Rights))
+                    {
+                        <li class="nav-item  ">
+                            <a href="@Url.Action("Index", "PurchaseReasons")" class="nav-link ">
+                                <span class="title">Purchase Reasons</span>
+                            </a>
+                        </li>
+                    }
+                    @if (UserAuthorization.Check(FeatureList.ADMINSTRATION_SALES_DELIVERY_TYPE_CAN_VIEW, session.Rights))
+                    {
+                        <li class="nav-item  ">
+                            <a href="@Url.Action("Index", "SalesDeliveryTypes")" class="nav-link ">
+                                <span class="title">Sales Delivery Type</span>
+                            </a>
+                        </li>
+                    }
+
+                    <li class="nav-item  ">
+
+                        <a href="@Url.Action("Index", "Adjustment")" class="nav-link ">
+                            <span class="title">Adjustment</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item  ">
+
+                        <a href="@Url.Action("Index", "AdjustmentType")" class="nav-link ">
+                            <span class="title">Adjustment Type</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item  ">
+
+                        <a href="@Url.Action("Index", "CustomsAndVatcommissionarate")" class="nav-link ">
+                            <span class="title">Customs &amp; VAT Commissionerate</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        }
+
+        @if (UserAuthorization.Check(FeatureList.PRODUCT, session.Rights))
+        {
+            <li class="nav-item  ">
+                <a href="@Url.Action("Index", "Products")" class="nav-link nav-toggle">
+                    <i class="icon-bag"></i>
+                    <span class="title">Product</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    @if (UserAuthorization.Check(FeatureList.PRODUCT, session.Rights))
+                    {
+                        <li class="nav-item  ">
+                            <a href="@Url.Action("Index", "Products")" class="nav-link ">
+                                <i class="icon-dislike"></i>
+                                <span class="title">Product List</span>
+                            </a>
+                        </li>
+                    }
+                    @if (UserAuthorization.Check(FeatureList.PRODUCT_DAMAGE_LIST_CAN_VIEW, session.Rights))
+                    {
+                        <li class="nav-item  ">
+                            <a href="@Url.Action("Index", "Damage")" class="nav-link ">
+                                <i class="icon-dislike"></i>
+                                <span class="title">Damage</span>
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </li>
+        }
+        @if (UserAuthorization.Check(FeatureList.THIRD_PARTY, session.Rights))
+        {
+            <li class="nav-item  ">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="icon-pie-chart"></i>
+                    <span class="title">Third Party</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    @if (UserAuthorization.Check(FeatureList.THIRD_PARTY_VENDOR_CAN_VIEW, session.Rights))
+                    {
+                        <li class="nav-item  ">
+                            <a href="@Url.Action("Index", "Vendor")" class="nav-link ">
+                                <span class="title">Vendor</span>
+                            </a>
+                        </li>
+                    }
+                    @if (UserAuthorization.Check(FeatureList.THIRD_PARTY_CUSTOMER_CAN_VIEW, session.Rights))
+                    {
+                        <li class="nav-item  ">
+                            <a href="@Url.Action("Index", "Customer")" class="nav-link ">
+                                <span class="title">Customer</span>
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </li>
+        }
+        @if (UserAuthorization.Check(FeatureList.PURCHASE, session.Rights))
+        {
+            <li class="nav-item  ">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="icon-basket"></i>
+                    <span class="title">Purchase</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    @if (UserAuthorization.Check(FeatureList.PURCHASE, session.Rights))
+                    {
+                        <li class="nav-item  ">
+                            <a href="@Url.Action("Index", "Purchase")" class="nav-link ">
+                                <span class="title">Purchase List</span>
+                            </a>
+                        </li>
+                    }
+                    
+                    @if (UserAuthorization.Check(FeatureList.PURCHASE_PURCHASE_DUE_LIST_CAN_VIEW, session.Rights))
+                    {
+                        <li class="nav-item  ">
+                            <a href="@Url.Action("PurchaseDue", "Purchase")" class="nav-link ">
+                                <span class="title">Purchase Due</span>
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </li>
+        }
+        @if (UserAuthorization.Check(FeatureList.PRODUCTION, session.Rights))
+        {
+            <li class="nav-item  ">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="icon-list"></i>
+                    <span class="title">Production</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    @if (UserAuthorization.Check(FeatureList.PRODUCTION, session.Rights))
+                    {
+                        <li class="nav-item  ">
+                            <a href="@Url.Action("Index", "Production")" class="nav-link ">
+                                <span class="title">Production List</span>
+                            </a>
+                        </li>
+                    }
+                    @if (UserAuthorization.Check(FeatureList.PRODUCTION, session.Rights))
+                    {
+                        <li class="nav-item  ">
+                            <a href="@Url.Action("Index", "ProductionContractual")" class="nav-link ">
+                                <span class="title">Contractual Production </span>
+                            </a>
+                        </li>
+                    }
+                    @if (UserAuthorization.Check(FeatureList.PRODUCTION, session.Rights))
+                    {
+                        <li class="nav-item  ">
+                            <a href="@Url.Action("TransferRawMaterialList", "ProductionContractual")" class="nav-link ">
+                                <span class="title">Transfer List</span>
+                            </a>
+                        </li>
+                    }
+                    
+                </ul>
+            </li>
+        }
+        @if (UserAuthorization.Check(FeatureList.SALE, session.Rights))
+        {
+            <li class="nav-item  ">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="icon-compass"></i>
+                    <span class="title">Sale</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    @if (UserAuthorization.Check(FeatureList.SALE, session.Rights))
+                    {
+                        <li class="nav-item  ">
+                            <a href="@Url.Action("Index", "Sales")" class="nav-link ">
+                                <span class="title">Sale List</span>
+                            </a>
+                        </li>
+                    }
+                    
+                    @if (UserAuthorization.Check(FeatureList.SALE_SALE_DUE_CAN_VIEW, session.Rights))
+                    {
+                        <li class="nav-item  ">
+                            <a href="@Url.Action("SalesDue", "Sales")" class="nav-link ">
+                                <span class="title">Sale Due</span>
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </li>
+        }
+        
+        @if (UserAuthorization.Check(FeatureList.REPORTS, session.Rights))
+        {
+            <li class="nav-item  ">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="icon-calculator"></i>
+                    <span class="title">Reports</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    @if (UserAuthorization.Check(FeatureList.REPORTS_PURCHASE_REPORT_BY_VENDOR, session.Rights))
+                    {
+                        <li class="nav-item  ">
+                            <a href="@Url.Action("PurchaseReport", "Reports")" class="nav-link ">
+                                <span class="title">Purchase Report	by Vendor</span>
+                            </a>
+                        </li>
+                    }
+                    @if (UserAuthorization.Check(FeatureList.REPORTS_PURCHASE_REPORT_BY_GR_NO, session.Rights))
+                    {
+
+                        <li class="nav-item  ">
+                            <a href="@Url.Action("PurchaseReportGr", "Reports")" class="nav-link ">
+                                <span class="title">Purchase Report by GR No.</span>
+                            </a>
+                        </li>
+                    }
+
+                    
+                    @if (UserAuthorization.Check(FeatureList.REPORTS_FOR_EXPENSE, session.Rights))
+                    {
+                        <li class="nav-item  ">
+                            <a href="@Url.Action("ExpenceReport", "Reports")" class="nav-link ">
+                                <span class="title">Expence Report</span>
+                            </a>
+                        </li>
+                    }
+                    
+
+                    @if (UserAuthorization.Check(FeatureList.REPORTS_MONTHLY_PURCHASE_REPORT, session.Rights))
+                    {
+                        <li class="nav-item  ">
+                            <a href="@Url.Action("PurchaseReportMonth", "Reports")" class="nav-link ">
+                                <span class="title">Monthly	Purchase Report</span>
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </li>
+        }
+
+        @if (UserAuthorization.Check(FeatureList.MUSHAK, session.Rights))
+        {
+
+            <li class="nav-item  ">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="icon-bar-chart"></i>
+                    <span class="title">Mushak</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+
+                    @if (UserAuthorization.Check(FeatureList.MUSHAK_MUSHAK_2_1, session.Rights))
+                    {
+                        <li class="nav-item  ">
+                            <a href="@Url.Action("Mushok2P1", "Reports")" class="nav-link ">
+                                <span class="title">Mushak-2.1</span>
+                            </a>
+                        </li>
+                    }
+                    @if (UserAuthorization.Check(FeatureList.MUSHAK_MUSHAK_2_3, session.Rights))
+                    {
+                        <li class="nav-item  ">
+                            <a href="@Url.Action("Mushok2P3", "Reports")" class="nav-link ">
+                                <span class="title">Mushak-2.3</span>
+                            </a>
+                        </li>
+                    }
+                    @if (UserAuthorization.Check(FeatureList.MUSHAK_MUSHAK_4_3, session.Rights))
+                    {
+                        <li class="nav-item  ">
+                            <a href="@Url.Action("Mushok4P3", "Reports")" class="nav-link ">
+                                <span class="title">Mushak-4.3</span>
+                            </a>
+                        </li>
+                    }
+                    @if (UserAuthorization.Check(FeatureList.MUSHAK_MUSHAK_6_1, session.Rights))
+                    {
+                        <li class="nav-item  ">
+                            <a href="@Url.Action("Mushok6P1", "Reports")" class="nav-link ">
+                                <span class="title">Mushak-6.1(Purchase Book)</span>
+                            </a>
+                        </li>
+                    }
+                    @if (UserAuthorization.Check(FeatureList.MUSHAK_MUSHAK_6_2_1, session.Rights))
+                    {
+
+                        <li class="nav-item  ">
+                            <a href="@Url.Action("Mushok6P2P1", "Reports")" class="nav-link ">
+                                <span class="title">Mushak-6.2.1(Sale AND Purchase Book)</span>
+                            </a>
+                        </li>
+                    }
+                    @if (UserAuthorization.Check(FeatureList.REPORTS, session.Rights))
+                    {
+
+                        <li class="nav-item  ">
+                            <a href="@Url.Action("Mushok6P2", "Reports")" class="nav-link ">
+                                <span class="title">Mushak-6.2(Sale Book)</span>
+                            </a>
+                        </li>
+                    }
+                    @if (UserAuthorization.Check(FeatureList.MUSHAK_MUSHAK_6_3, session.Rights))
+                    {
+                        <li class="nav-item  ">
+                            <a href="@Url.Action("Mushok6P3", "Reports")" class="nav-link ">
+                                <span class="title">Mushak-6.3(Chalan)</span>
+                            </a>
+                        </li>
+                    }
+                    @if (UserAuthorization.Check(FeatureList.MUSHAK_MUSHAK_6_5, session.Rights))
+                    {
+                        <li class="nav-item">
+                            <a href="@Url.Action("Mushok6P4", "Reports")" class="nav-link ">
+                                <span class="title">Mushak-6.4(Contractual Chalan)</span>
+                            </a>
+                        </li>
+                    }
+
+                    @if (UserAuthorization.Check(FeatureList.MUSHAK_MUSHAK_6_5, session.Rights))
+                    {
+                        <li class="nav-item">
+                            <a href="@Url.Action("Mushok6P5", "Reports")" class="nav-link ">
+                                <span class="title">Mushak-6.5(Branch Transfer)</span>
+                            </a>
+                        </li>
+                    }
+
+                    @if (UserAuthorization.Check(FeatureList.MUSHAK_MUSHAK_6_3, session.Rights))
+                    {
+                        <li class="nav-item">
+                            <a href="@Url.Action("Mushok6P6", "Reports")" class="nav-link ">
+                                <span class="title">Mushak-6.6(VDS)</span>
+                            </a>
+                        </li>
+
+                        <li class="nav-item  ">
+                            <a href="@Url.Action("creditNoteView", "Sales")" class="nav-link ">
+                                <span class="title">Mushak-6.7 (Credit Note)</span>
+                            </a>
+                        </li>
+                        <li class="nav-item  ">
+                            <a href="@Url.Action("DebitNoteView", "Purchase")" class="nav-link ">
+                                <span class="title">Mushak-6.8 (Debit Note)</span>
+                            </a>
+                        </li>
+                    }
+
+                    @if (UserAuthorization.Check(FeatureList.MUSHAK_MUSHAK_6_10, session.Rights))
+                    {
+                        
+                    }
+                    @if (UserAuthorization.Check(FeatureList.MUSHAK_MUSHAK_9_1, session.Rights))
+                    {
+                        <li class="nav-item  ">
+                            <a href="@Url.Action("Mushok9P1", "Reports")" class="nav-link ">
+                                <span class="title">Mushak-9.1</span>
+                            </a>
+                        </li>
+                    }
+                    
+                </ul>
+            </li>
+        }
+        @if (UserAuthorization.Check(FeatureList.AUDIT, session.Rights))
+        {
+            <li class="nav-item  ">
+                <a href="@Url.Action("Index", "AuditLogs")" class="nav-link nav-toggle">
+                    <i class="icon-calculator"></i>
+                    <span class="title">Audit Logs</span>
+                </a>
+            </li>
+
+        }
+    </ul>
+    
+</div>

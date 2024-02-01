@@ -1,0 +1,27 @@
+﻿@model vms.entity.models.MushakReturnPayment 
+@{
+	var session = Context.Session.GetComplexData<VmUserSession>(ControllerStaticData.SESSION);
+}
+
+<div class="nav navbar-nav">
+	<div class="dropdown dropdown-freeze-grid-action">
+		<a href="#" class="" data-bs-toggle="dropdown" data-close-others="true">
+			<i class="text-dark bi bi-three-dots-vertical"></i>
+		</a>
+		<ul class=" dropdown-menu dropdown-menu-right div-with-arrow-right-top">
+			@if (UserAuthorization.Check(FeatureList.MUSHAK_RETURN_MUSHAK_RETURN_PAYMENT_CAN_ADD_CHALAN_NO, session.Rights) && string.IsNullOrEmpty(Model.TreasuryChallanNo))
+			{
+				<li>
+					<a class="dropdown-item" asp-action="AddChalan" asp-route-id="@Model.MushakReturnPaymentId"><i class="bi bi-pencil-square"></i> Add Chalan No.</a>
+				</li>
+			}
+
+			<li>
+				@if (UserAuthorization.Check(FeatureList.MUSHAK_RETURN_MUSHAK_RETURN_PAYMENT_CAN_PRINT_TR6, session.Rights))
+				{
+					<a class="dropdown-item" asp-action="MushakReturnPaymentChallanById" asp-route-id="@Model.MushakReturnPaymentId" target="_blank" \><i class="bi bi-printer"></i> Print TR-6 </a>
+				}
+			</li>
+		</ul>
+	</div>
+</div>

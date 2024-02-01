@@ -1,0 +1,82 @@
+﻿@model vms.entity.viewModels.VmPurchaseLocal
+
+<div class="font-weight-bold mb-3">
+	Main Information
+</div>
+<form class="row g-3" id="frmMainInformation" method="post">
+	<div class="col-md-6 complex-form-col">
+		<label asp-for="OrgBranchId" ></label>
+		<select asp-for="OrgBranchId" asp-items="Model.OrgBranchList.CustomSelectListToSelectList()" >
+			<option value="@null">Select Branch</option>
+		</select>
+		<span asp-validation-for="OrgBranchId"></span>
+	</div>
+	<div class="col-md-6 complex-form-col">
+		<label asp-for="PurchaseReasonId" ></label>
+		<select asp-for="PurchaseReasonId" asp-items="Model.PurchaseReasonSelectList.CustomSelectListToSelectList()" >
+			<option value="@null">Select Reason</option>
+		</select>
+		<span asp-validation-for="PurchaseReasonId"></span>
+	</div>
+	<div class="col-md-6 complex-form-col d-none">
+		<label asp-for="InvoiceNo" ></label>
+		<input type="text" asp-for="InvoiceNo" >
+		<span asp-validation-for="InvoiceNo"></span>
+	</div>
+	<div class="col-md-6 complex-form-col">
+		<label asp-for="VoucherNo" ></label>
+		<input type="text" asp-for="VoucherNo" >
+		<span asp-validation-for="VoucherNo"></span>
+	</div>
+	<div class="col-md-6 complex-form-col">
+		<label asp-for="PurchaseDate" ></label>
+		<input type="date" asp-for="PurchaseDate" min='2000-01-01' max='@DateTime.Now.ToString("yyyy-MM-dd")' >
+		<span asp-validation-for="PurchaseDate"></span>
+	</div>
+	<div class="col-md-6 complex-form-col">
+		<label asp-for="VendorId" ></label>
+		<select asp-for="VendorId" asp-items="Model.VendorSelectList.CustomSelectListToSelectList()" >
+			<option value="@null">Select Vendor</option>
+		</select>
+		<span asp-validation-for="VendorId"></span>
+	</div>
+	<div class="col-md-6 complex-form-col">
+		<label asp-for="VendorInvoiceNo" ></label>
+		<input type="text" asp-for="VendorInvoiceNo" >
+		<span asp-validation-for="VendorInvoiceNo"></span>
+	</div>
+	<div class="col-md-6 complex-form-col">
+		<label asp-for="VatChallanNo" ></label>
+		<input type="text" asp-for="VatChallanNo" >
+		<span asp-validation-for="VatChallanNo"></span>
+	</div>
+	<div class="col-md-6 complex-form-col">
+		<label asp-for="VatChallanIssueDate" ></label>
+		<input type="datetime-local" asp-for="VatChallanIssueDate" min='2000-01-01' max='@((DateTime.Now).ToString("yyyy-MM-ddTHH:mm"))' >
+		<span asp-validation-for="VatChallanIssueDate"></span>
+	</div>
+	<div class="col-md-6 complex-form-col">
+		<div class="form-check form-switch complex-form-checkbox">
+			<input type="checkbox" asp-for="IsVatDeductedInSource" class="form-check-input">
+			<label asp-for="IsVatDeductedInSource" class="form-check-label"></label>
+			<span asp-validation-for="IsVatDeductedInSource"></span>
+		</div>
+	</div>
+	<div class="col-md-6 complex-form-col vds-related d-none">
+		<label asp-for="VdsAmount" ></label>
+		<input type="number" asp-for="VdsAmount" >
+		<span asp-validation-for="VdsAmount"></span>
+	</div>
+	<div class="col-md-6 complex-form-col">
+		<div class="form-check form-switch complex-form-checkbox">
+			<input type="checkbox" asp-for="IsTds" class="form-check-input">
+			<label asp-for="IsTds" class="form-check-label"></label>
+			<span asp-validation-for="IsTds"></span>
+		</div>
+	</div>
+	<div class="col-md-6 complex-form-col tds-related d-none">
+		<label asp-for="TdsAmount" ></label>
+		<input type="number" asp-for="TdsAmount" >
+		<span asp-validation-for="TdsAmount"></span>
+	</div>
+</form>

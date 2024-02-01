@@ -1,0 +1,198 @@
+﻿@model vms.entity.StoredProcedureModel.MushakReturn.MushakReturnPartFour
+
+<table class="table table-bordered">
+    @*<thead>*@
+
+        <tr>
+
+            <th class="MreturnHeader" colspan="6" style="background-color: #FBD4B4!important">
+
+                <div class="parthead"> অংশ-৪: ক্রয় - উপকরণ কর</div>
+            </th>
+        </tr>
+    @*</thead>
+    <tbody class="Returntd">*@
+        <tr style="background-color: #FBD4B4!important">
+            <td colspan="5">
+                <div>
+                    (ক) আপনার সরবরাহকৃত সকল পণ্য যদি আদর্শ হারের হয়, সেক্ষেত্রে নোট ১০ - ২০ পূরণ করুন। <br />
+                    (খ) আপনার সরবরাহকৃত সকল পণ্য যদি আদর্শ হারের না হয়, সেক্ষেত্রে নোট ২১ - ২২ পূরণ করুন। <br />
+                    (গ) আপনার সরবরাহকৃত পণ্য যদি আদর্শ হারের এবং আদর্শহার ব্যতীত উভয় হয়, সেক্ষেত্রে পণ্য উৎপাদনে উপকরণের ব্যবহার অনুযায়ী উপকরণ মূল্য আনুপাতিক হরে প্রযোজ্যতা অনুযায়ী নোট ১০ - ২২ পূরণ করুন। <br />
+                </div>
+            </td>
+            <td  style="background-color: #FBD4B4!important"></td>
+        </tr>
+
+        <tr class="Returntdhead text-center font-weight-bold" style="background-color: #BFBFBF !important">
+            <td colspan="2"> <b>ক্রয়ের প্রকৃতি</b></td>
+            <td style="text-align:center"><b>নোট</b></td>
+            <td style="text-align:right"><b>মুল্য (ক)</b></td>
+             
+            <td style="text-align:right"><b>মুসক (খ)</b></td>
+            <td><b></b></td>
+        </tr>
+
+        <tr>
+            <td rowspan="2" style="width:300px;">
+                শূন্যহার বিশিষ্ট পণ্য/সেবা
+            </td>
+            <td>স্থানীয় ক্রয়</td>
+            <td class="text-center">১০</td>
+            <td class="text-right" style="text-align:right">@StringGenerator.DecimalToCommaSeparated(Model.ZeroVatProdLocalPurchaseAmount)</td>
+
+            <td class="ReturntdEmpty" style="background-color: #BFBFBF !important"></td>
+            <td style="background-color: #BFBFBF !important"><a asp-action="Mushok9P1SubKa" asp-route-year="@ViewBag.Year" asp-route-month="@ViewBag.Month" target="_blank" class="ReturntdEmpty">সাবফর্ম-ক </a></td>
+        </tr>
+
+        <tr>
+            <td>
+                আমদানি
+            </td>
+
+            <td class="text-center"> ১১</td>
+
+            <td class="text-right" style="text-align:right">@StringGenerator.DecimalToCommaSeparated(Model.ZeroVatProdImportAmount)       </td>
+            <td class="ReturntdEmpty" style="background-color: #BFBFBF !important"></td>
+            <td style="background-color: #BFBFBF !important"><a asp-action="Mushok9P1SubKa" asp-route-year="@ViewBag.Year" asp-route-month="@ViewBag.Month" target="_blank" class="ReturntdEmpty">সাবফর্ম-ক </a></td>
+        </tr>
+
+        <tr>
+            <td rowspan="2">
+                অব্যাহতিপ্রাপ্ত পণ্য/সেবা
+            </td>
+            <td>স্থানীয় ক্রয়</td>
+            <td class="text-center">১২</td>
+            <td class="text-right" style="text-align:right">@StringGenerator.DecimalToCommaSeparated(Model.VatExemptedProdLocalPurchaseAmount)</td>
+
+            <td class="ReturntdEmpty" style="background-color: #BFBFBF !important"></td>
+            <td style="background-color: #BFBFBF !important"><a asp-action="Mushok9P1SubKa" asp-route-year="@ViewBag.Year" asp-route-month="@ViewBag.Month" target="_blank" class="ReturntdEmpty">সাবফর্ম-ক </a></td>
+        </tr>
+
+        <tr>
+            <td>
+                আমদানি
+            </td>
+
+            <td class="text-center">১৩</td>
+            <td class="text-right" style="text-align:right">@StringGenerator.DecimalToCommaSeparated(Model.VatExemptedProdImportAmount)</td>
+
+            <td class="ReturntdEmpty" style="background-color: #BFBFBF !important"></td>
+            <td style="background-color: #BFBFBF !important"><a asp-action="Mushok9P1SubKa" asp-route-year="@ViewBag.Year" asp-route-month="@ViewBag.Month" target="_blank" class="ReturntdEmpty">সাবফর্ম-ক </a></td>
+        </tr>
+
+        <tr>
+            <td rowspan="2">
+                আদর্শ হারের পণ্য/সেবা
+            </td>
+            <td>স্থানীয় ক্রয়</td>
+            <td class="text-center">১৪</td>
+            <td class="text-right" style="text-align:right">@StringGenerator.DecimalToCommaSeparated(Model.StandardVatProdLocalPurchaseAmount)</td>
+            <td class="text-right" style="text-align:right">@StringGenerator.DecimalToCommaSeparated(Model.StandardVatProdLocalPurchaseVatAmount)</td>
+
+            <td><a asp-action="Mushok9P1SubKa" asp-route-year="@ViewBag.Year" asp-route-month="@ViewBag.Month" target="_blank" class="ReturntdEmpty">সাবফর্ম-ক </a></td>
+        </tr>
+
+        <tr>
+            <td>
+                আমদানি
+            </td>
+
+            <td class="text-center">১৫</td>
+            <td class="text-right" style="text-align:right">@StringGenerator.DecimalToCommaSeparated(Model.StandardVatProdImportAmount) </td>
+            <td class="text-right" style="text-align:right">@StringGenerator.DecimalToCommaSeparated(Model.StandardVatProdImportVatAmount)</td>
+
+            <td><a asp-action="Mushok9P1SubKa" asp-route-year="@ViewBag.Year" asp-route-month="@ViewBag.Month" target="_blank" class="ReturntdEmpty">সাবফর্ম-ক </a></td>
+        </tr>
+        <tr>
+            <td rowspan="2">
+                আদর্শ হার ব্যতিত অন্যান্য হারের পণ্য/সেবা
+            </td>
+            <td>স্থানীয় ক্রয়</td>
+            <td class="text-center">১৬</td>
+            <td class="text-right" style="text-align:right">@StringGenerator.DecimalToCommaSeparated(Model.OtherThanStandardVatProdLocalPurchaseAmount)</td>
+            <td class="text-right" style="text-align:right">@StringGenerator.DecimalToCommaSeparated(Model.OtherThanStandardVatProdLocalPurchaseVatAmount)</td>
+
+            <td><a asp-action="Mushok9P1SubKa" asp-route-year="@ViewBag.Year" asp-route-month="@ViewBag.Month" target="_blank" class="ReturntdEmpty">সাবফর্ম-ক </a></td>
+        </tr>
+
+        <tr>
+            <td>
+                আমদানি
+            </td>
+
+            <td class="text-center">১৭</td>
+            <td class="text-right" style="text-align:right">@StringGenerator.DecimalToCommaSeparated(Model.OtherThanStandardVatProdImportAmount)</td>
+            <td class="text-right" style="text-align:right">@StringGenerator.DecimalToCommaSeparated(Model.OtherThanStandardVatProdImportVatAmount)</td>
+
+            <td><a asp-action="Mushok9P1SubKa" asp-route-year="@ViewBag.Year" asp-route-month="@ViewBag.Month" target="_blank" class="ReturntdEmpty">সাবফর্ম-ক </a></td>
+        </tr>
+
+        <tr>
+            <td>
+                সুনির্দিষ্ট কর ভিত্তিক পণ্য/সেবা
+            </td>
+            <td>স্থানীয় ক্রয়</td>
+            <td class="text-center">১৮</td>
+            <td class="text-right" style="text-align:right">@StringGenerator.DecimalToCommaSeparated(Model.FixedVatProdLocalPurchaseAmount)</td>
+            <td class="text-right" style="text-align:right">@StringGenerator.DecimalToCommaSeparated(Model.FixedVatProdLocalPurchaseVatAmount)</td>
+
+            <td><a asp-action="Mushok9P1SubGa" asp-route-year="@ViewBag.Year" asp-route-month="@ViewBag.Month" target="_blank" class="ReturntdEmpty">সাবফর্ম-গ</a></td>
+        </tr>
+
+        <tr>
+            <td rowspan="2">
+                রেয়াতযোগ্য নয় এরূপ পন্য/সেবা (স্থানীয় ক্রয়)
+            </td>
+            <td> টার্ণওভার প্রতিষ্ঠান হইতে</td>
+            <td class="text-center">১৯</td>
+            <td class="text-right" style="text-align:right">@StringGenerator.DecimalToCommaSeparated(Model.NonRebatableProdLocalPurchaseFromTurnOverOrgAmount)</td>
+            <td class="text-right" style="text-align:right">@StringGenerator.DecimalToCommaSeparated(Model.NonRebatableProdLocalPurchaseFromTurnOverOrgVatAmount)</td>
+
+            <td><a asp-action="Mushok9P1SubKa" asp-route-year="@ViewBag.Year" asp-route-month="@ViewBag.Month" target="_blank" class="ReturntdEmpty">সাবফর্ম-ক </a></td>
+        </tr>
+
+        <tr>
+            <td>
+                অনিবন্ধিত প্রতিষ্ঠান হইতে
+            </td>
+
+            <td class="text-center">২০</td>
+            <td class="text-right" style="text-align:right">@StringGenerator.DecimalToCommaSeparated(Model.NonRebatableProdLocalPurchaseFromNonRegOrgAmount) </td>
+            <td class="text-right" style="text-align:right">@StringGenerator.DecimalToCommaSeparated(Model.NonRebatableProdLocalPurchaseFromNonRegOrgVatAmount)</td>
+
+            <td><a asp-action="Mushok9P1SubKa" asp-route-year="@ViewBag.Year" asp-route-month="@ViewBag.Month" target="_blank" class="ReturntdEmpty">সাবফর্ম-ক </a></td>
+        </tr>
+
+        <tr>
+            <td rowspan="2">
+                রেয়াতযোগ্য নয় এরূপ পন্য/সেবা (যে সকল করদাতা শুধুমাত্র অব্যাহতিপ্রাপ্ত/ সুনির্দিষ্ট কর/আদর্শ হার ব্যতীত অন্যান্য হারের পণ্য /সেবা সরবরাহ করেন)
+            </td>
+            <td>স্থানীয় ক্রয়</td>
+            <td class="text-center">২১</td>
+            <td class="text-right" style="text-align:right">@StringGenerator.DecimalToCommaSeparated(Model.NonRebatableProdLocalPurchaseByOrgWhoSellOtherThanStandardVatProdAmount) </td>
+            <td class="text-right" style="text-align:right">@StringGenerator.DecimalToCommaSeparated(Model.NonRebatableProdLocalPurchaseByOrgWhoSellOtherThanStandardVatProdVatAmount)</td>
+
+            <td><a asp-action="Mushok9P1SubKa" asp-route-year="@ViewBag.Year" asp-route-month="@ViewBag.Month" target="_blank" class="ReturntdEmpty">সাবফর্ম-ক </a></td>
+        </tr>
+        <tr>
+            
+            <td>আমদানি </td>
+            <td class="text-center">২২</td>
+            <td class="text-right" style="text-align:right">@StringGenerator.DecimalToCommaSeparated(Model.NonRebatableProdImportByOrgWhoSellOtherThanStandardVatProdAmount)</td>
+            <td class="text-right" style="text-align:right">@StringGenerator.DecimalToCommaSeparated(Model.NonRebatableProdImportByOrgWhoSellOtherThanStandardVatProdVatAmount)</td>
+
+            <td><a asp-action="Mushok9P1SubKa" asp-route-year="@ViewBag.Year" asp-route-month="@ViewBag.Month" target="_blank" class="ReturntdEmpty">সাবফর্ম-ক </a></td>
+        </tr>
+
+    <tr class="font-weight-bold">
+            <td colspan="2">
+                <b>মোট উপকরণ কর রেয়াত</b>
+            </td>
+
+            <td class="text-center">২৩</td>
+            <td class="ReturntdEmpty text-right" style="background-color: #BFBFBF !important; text-align: right">@StringGenerator.DecimalToCommaSeparated(Model.TotalRawMaterialPurchaseAmount)</td>
+            <td class="text-right" style="text-align:right">@StringGenerator.DecimalToCommaSeparated(Model.TotalRawMaterialRebateAmount)</td>
+            <td> </td>
+        </tr>
+    @*</tbody>*@
+</table>

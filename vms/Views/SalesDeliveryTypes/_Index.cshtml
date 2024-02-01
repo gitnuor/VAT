@@ -1,0 +1,10 @@
+﻿@model IEnumerable<vms.entity.models.SalesDeliveryType>
+@(Html.Grid(Model).Build(columns =>
+{
+    columns.Add(model => model.Name).Titled("Name");
+})
+	.AppendCss("large-index-grid")
+	.Empty("No data found")
+	.Filterable(GridFilterType.Double)
+	.Sortable()
+	.Pageable())

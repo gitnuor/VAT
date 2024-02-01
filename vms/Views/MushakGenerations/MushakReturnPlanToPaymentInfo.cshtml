@@ -1,0 +1,221 @@
+﻿@model  vms.entity.StoredProcedureModel.SpAddMushakReturnPlanToPaymentInfo
+@{
+    ViewData["Title"] = "AddMushakReturnPlanToPaymentInfo";
+}
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<input type="hidden" class="form-control" id="ProductId" name="ProductId" />
+
+<div class="custom-page-title">
+    Add Mushak Return Plan To Payment Info
+</div>
+<head>
+</head>
+
+<form method="post">
+    @Html.HiddenFor(c=>c.MushakGenerationId)
+    <table class="table table-bordered table-responsive">
+        <thead>
+            <tr>
+                <td class="w-25">Type</td>
+                <td>Amount</td>
+                <td>Code</td>
+                <td>Date</td>
+                <td>Bank Branch</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>VAT</td>
+                <td>
+                    <input type="text" class="form-control" id="PaidVatAmount" name="PaidVatAmount" value="@Model.PaidVatAmount">
+                </td>
+                <td>
+                    <select id="VatEconomicCodeId" name="VatEconomicCodeId" class="form-control" asp-items="ViewBag.NbrEconomicCodeId"></select>
+                </td>
+                <td>
+                    <input type="text" class="form-control" id="VatPaymentDate" name="VatPaymentDate" value="@DateTime.Now">
+                </td>
+                <td>
+                    <select id="VatPaymentBankBranchId" name="VatPaymentBankBranchId" class="form-control" asp-items="ViewBag.BankBranchId"></select>
+                </td>
+            </tr>
+            <tr>
+                <td>Supp Duty</td>
+                <td>
+                    <input type="text" class="form-control" id="PaidSuppDutyAmount" name="PaidSuppDutyAmount" value="@Model.PaidSuppDutyAmount">
+                </td>
+                <td>
+                    <select id="SuppDutyEconomicCodeId" name="SuppDutyEconomicCodeId" class="form-control" asp-items="ViewBag.NbrEconomicCodeId"></select>
+                </td>
+                <td>
+                    <input type="text" class="form-control" id="SuppDutyPaymentDate" name="SuppDutyPaymentDate" value="@DateTime.Now">
+                </td>
+                <td>
+                    <select id="SuppDutyBankBranchId" name="SuppDutyBankBranchId" class="form-control" asp-items="ViewBag.BankBranchId"></select>
+                </td>
+            </tr>
+            <tr>
+                <td>Inter. Due Vat</td>
+                <td>
+                    <input type="text" class="form-control" id="PaidInterestAmountForDueVat" name="PaidInterestAmountForDueVat" value="@Model.PaidInterestAmountForDueVat">
+                </td>
+                <td>
+                    <select id="InterestForDueVatEconomicCodeId" name="InterestForDueVatEconomicCodeId" class="form-control" asp-items="ViewBag.NbrEconomicCodeId"></select>
+                </td>
+                <td>
+                    <input type="text" class="form-control" id="InterestForDueVatPaymentDate" name="InterestForDueVatPaymentDate" value="@DateTime.Now">
+                </td>
+                <td>
+                    <select id="InterestForDueVatBankBranchId" name="InterestForDueVatBankBranchId" class="form-control" asp-items="ViewBag.BankBranchId"></select>
+                </td>
+            </tr>
+            <tr>
+                <td>Inter. Due Supp Duty</td>
+                <td>
+                    <input type="text" name="PaidInterestAmountForDueSuppDuty" id="PaidInterestAmountForDueSuppDuty" class="form-control" value="@Model.PaidInterestAmountForDueSuppDuty"/>
+                </td>
+                <td>
+                    <select name="InterestForDueSuppDutyEconomicCodeId" id="InterestForDueSuppDutyEconomicCodeId" asp-items="ViewBag.NbrEconomicCodeId" class="form-control"></select>
+                </td>
+                <td>
+                    <input type="text" name="InterestForDueSuppDutyPaymentDate" id="InterestForDueSuppDutyPaymentDate" class="form-control" value="@DateTime.Now"/>
+                </td>
+                <td>
+                    <select id="InterestForDueSuppDutyBankBranchId" name="InterestForDueSuppDutyBankBranchId" class="form-control" asp-items="ViewBag.BankBranchId"></select>
+                </td>
+            </tr>
+            <tr>
+                <td>Financial Penalty</td>
+                <td>
+                    <input type="text" name="PaidFinancialPenalty" id="PaidFinancialPenalty" class="form-control" value="@Model.PaidFinancialPenalty"/>
+                </td>
+                <td>
+                    <select id="FinancialPenaltyEconomicCodeId" name="FinancialPenaltyEconomicCodeId" class="form-control" asp-items="ViewBag.NbrEconomicCodeId"></select>
+                </td>
+                <td>
+                    <input type="text" name="FinancialPenaltyPaymentDate" id="FinancialPenaltyPaymentDate" class="form-control" value="@DateTime.Now"/>
+                </td>
+                <td>
+                    <select id="FinancialPenaltyBankBranchId" name="FinancialPenaltyBankBranchId" class="form-control" asp-items="ViewBag.BankBranchId"></select>
+                </td>
+            </tr>
+            <tr>
+                <td>Excise Duty</td>
+                <td>
+                    <input type="text" name="PaidExciseDuty" id="PaidExciseDuty" class="form-control" value="@Model.PaidExciseDuty"/>
+                </td>
+                <td>
+                    <select id="ExciseDutyEconomicCodeId" name="ExciseDutyEconomicCodeId" class="form-control" asp-items="ViewBag.NbrEconomicCodeId"></select>
+                </td>
+                <td>
+                    <input type="text" name="ExciseDutyPaymentDate" id="ExciseDutyPaymentDate" class="form-control" value="@DateTime.Now"/>
+                </td>
+                <td>
+                    <select id="ExciseDutyBankBranchId" name="ExciseDutyBankBranchId" class="form-control" asp-items="ViewBag.BankBranchId"></select>
+                </td>
+            </tr>
+            <tr>
+                <td>Development Surcharge</td>
+                <td>
+                    <input type="text" name="PaidDevelopmentSurcharge" id="PaidDevelopmentSurcharge" class="form-control" value="@Model.PaidDevelopmentSurcharge"/>
+                </td>
+                <td>
+                    <select id="DevelopmentSurchargeEconomicCodeId" name="DevelopmentSurchargeEconomicCodeId" class="form-control" asp-items="ViewBag.NbrEconomicCodeId"></select>
+                </td>
+                <td>
+                    <input type="text" name="DevelopmentSurchargePaymentDate" id="DevelopmentSurchargePaymentDate" class="form-control" value="@DateTime.Now"/>
+                </td>
+                <td>
+                    <select id="DevelopmentSurchargeBankBranchId" name="DevelopmentSurchargeBankBranchId" class="form-control" asp-items="ViewBag.BankBranchId"></select>
+                </td>
+            </tr>
+            <tr>
+                <td>It Development Surcharge</td>
+                <td>
+                    <input type="text" name="PaidItDevelopmentSurcharge" id="PaidDevelopmentSurcharge" class="form-control" value="@Model.PaidDevelopmentSurcharge"/>
+                </td>
+                <td>
+                    <select id="ItDevelopmentSurchargeEconomicCodeId" name="ItDevelopmentSurchargeEconomicCodeId" class="form-control" asp-items="ViewBag.NbrEconomicCodeId"></select>
+                </td>
+                <td>
+                    <input type="text" name="ItDevelopmentSurchargePaymentDate" id="ItDevelopmentSurchargePaymentDate" class="form-control" value="@DateTime.Now"/>
+                </td>
+                <td>
+                    <select id="ItDevelopmentSurchargeBankBranchId" name="ItDevelopmentSurchargeBankBranchId" class="form-control" asp-items="ViewBag.BankBranchId"></select>
+                </td>
+            </tr>
+            <tr>
+                <td>Health Development Surcharge</td>
+                <td>
+                    <input type="text" name="PaidHealthDevelopmentSurcharge" id="PaidHealthDevelopmentSurcharge" class="form-control" value="@Model.PaidHealthDevelopmentSurcharge"/>
+                </td>
+                <td>
+                    <select id="HealthDevelopmentSurchargeEconomicCodeId" name="HealthDevelopmentSurchargeEconomicCodeId" class="form-control" asp-items="ViewBag.NbrEconomicCodeId"></select>
+                </td>
+                <td>
+                    <input type="text" name="HealthDevelopmentSurchargePaymentDate" id="HealthDevelopmentSurchargePaymentDate" class="form-control" value="@DateTime.Now"/>
+                </td>
+                <td>
+                    <select id="HealthDevelopmentSurchargeBankBranchId" name="HealthDevelopmentSurchargeBankBranchId" class="form-control" asp-items="ViewBag.BankBranchId"></select>
+                </td>
+            </tr>
+            <tr>
+                <td>Environment Protect Surcharge</td>
+                <td>
+                    <input type="text" name="PaidEnvironmentProtectSurcharge" id="PaidEnvironmentProtectSurcharge" class="form-control" value="@Model.PaidEnvironmentProtectSurcharge"/>
+                </td>
+                <td>
+                    <select id="EnvironmentProtectSurchargeEconomicCodeId" name="EnvironmentProtectSurchargeEconomicCodeId" class="form-control" asp-items="ViewBag.NbrEconomicCodeId"></select>
+                </td>
+                <td>
+                    <input type="text" name="EnvironmentProtectSurchargePaymentDate" id="EnvironmentProtectSurchargePaymentDate" class="form-control" value="@DateTime.Now"/>
+                </td>
+                <td>
+                    <select id="EnvironmentProtectSurchargeBankBranchId" name="EnvironmentProtectSurchargeBankBranchId" class="form-control" asp-items="ViewBag.BankBranchId"></select>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="form-actions pb-3">
+        <button type="submit" data-requiredconfirmation="true" class="btn blue" id="save"><i class="bi bi-check-lg"></i> Submit</button>
+        <a href="~/MushakGenerations/Index" class="btn btn-info btn-sm">Cancel</a>
+    </div>
+</form>
+
+
+@section Scripts{
+
+
+    <script src="~/js/jquery-ui.js"></script>
+    <script>
+
+        $(document).ready(function() {
+
+            $("#VatPaymentDate").datepicker();
+            $("#VatPaymentDate").datepicker('option', 'dateFormat', 'dd M, yy');
+            $("#SuppDutyPaymentDate").datepicker();
+            $("#SuppDutyPaymentDate").datepicker('option', 'dateFormat', 'dd M, yy');
+            $("#InterestForDueVatPaymentDate").datepicker();
+            $("#InterestForDueVatPaymentDate").datepicker('option', 'dateFormat', 'dd M, yy');
+            $("#InterestForDueSuppDutyPaymentDate").datepicker();
+            $("#InterestForDueSuppDutyPaymentDate").datepicker('option', 'dateFormat', 'dd M, yy');
+            $("#FinancialPenaltyPaymentDate").datepicker();
+            $("#FinancialPenaltyPaymentDate").datepicker('option', 'dateFormat', 'dd M, yy');
+            $("#ExciseDutyPaymentDate").datepicker();
+            $("#ExciseDutyPaymentDate").datepicker('option', 'dateFormat', 'dd M, yy');
+            $("#DevelopmentSurchargePaymentDate").datepicker();
+            $("#DevelopmentSurchargePaymentDate").datepicker('option', 'dateFormat', 'dd M, yy');
+            $("#ItDevelopmentSurchargePaymentDate").datepicker();
+            $("#ItDevelopmentSurchargePaymentDate").datepicker('option', 'dateFormat', 'dd M, yy');
+            $("#HealthDevelopmentSurchargePaymentDate").datepicker();
+            $("#HealthDevelopmentSurchargePaymentDate").datepicker('option', 'dateFormat', 'dd M, yy');
+            $("#EnvironmentProtectSurchargePaymentDate").datepicker();
+            $("#EnvironmentProtectSurchargePaymentDate").datepicker('option', 'dateFormat', 'dd M, yy');
+         
+        });
+    </script>
+}

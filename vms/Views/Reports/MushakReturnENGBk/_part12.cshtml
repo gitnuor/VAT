@@ -1,0 +1,74 @@
+﻿@model vms.entity.StoredProcedureModel.MushakReturn.MushakReturnPartOne
+
+
+<table class="table table-bordered">
+    <thead>
+
+        <tr>
+
+            <th class="Returntdhead" colspan="3">
+
+                <h4>Part-12:DECLARATION </h4>
+
+            </th>
+
+        </tr>
+
+
+    </thead>
+    <tbody class="Returntd">
+
+
+        <tr>
+            <td colspan="3"> 
+                I hereby declare that all information provided in this Return Form are complete,true & accurate.
+                In Case of any untrue/incomplete statement, I may be subjected to penal action under The Value 
+                Added Tax and Supplementary Duty Act, 2012 or any other applicable Act prevailing at present.             
+            
+            </td>
+
+        </tr>
+
+        <tr>
+
+            <td style="width:250px;"> Name</td>
+            <td colspan="2">@Model.VatResponsiblePersonName</td>
+
+        </tr>
+
+
+
+        <tr>
+
+            <td> Designationg </td>
+            <td>@Model.VatResponsiblePersonDesignation</td>
+            <td rowspan="4" style="width:300px;"></td>
+
+        </tr>
+
+        <tr>
+
+            <td> তারিখ</td>
+            <td></td>
+
+        </tr>
+        <tr>
+
+            <td> Mobile Number</td>
+            <td>@Model.VatResponsiblePersonMobileNo</td>
+
+        </tr>
+        <tr>
+
+            <td> Email</td>
+            <td>@Model.VatResponsiblePersonEmailAddress</td>
+
+        </tr>
+
+
+        <tr>
+          
+        </tr>
+    </tbody>
+
+</table>

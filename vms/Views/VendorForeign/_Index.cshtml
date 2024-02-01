@@ -1,0 +1,16 @@
+﻿@model IEnumerable<vms.entity.models.ViewVendorForeign>
+@(Html.Grid(Model).Build(columns =>
+{
+	columns.Add(model => model.VendorName).Titled("Supplier/Vendor's Name");
+	columns.Add(model => model.AccountCode).Titled("Acc. Code");
+    columns.Add(model => model.TinNo).Titled("TIN");
+    columns.Add(model => model.VendorAddress).Titled("Address");
+    columns.Add(model => model.PhoneNo).Titled("Contact No.");
+	columns.Add().Encoded(false).RenderedAs(data => Html.PartialAsync("_ActionMenu", data).Result)
+		.Titled(Html.Raw("<i class='bi bi-activity'></i>")).AppendCss("action-col-freez");
+})
+	.AppendCss("large-index-grid")
+	.Empty("No data found")
+	.Filterable(GridFilterType.Double)
+	.Sortable()
+	.Pageable())

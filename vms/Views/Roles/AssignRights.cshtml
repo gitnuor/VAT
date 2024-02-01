@@ -1,0 +1,120 @@
+﻿@model vms.entity.viewModels.vmRoleRights
+
+@{
+    ViewData["Title"] = "AssignRights";
+    
+
+}
+
+@section contentheader
+    {
+    <div class="p-3 page-header">
+       Assign Rights
+        <div class="d-flex justify-content-start">
+
+
+        </div>
+    </div>
+    <div class="col-12 d-flex">
+        <ul class="nav nav-pills mt-3 mr-auto align-bottom">
+        </ul>
+        @using (Html.BeginForm("Index", "Sales", FormMethod.Get, new { id = "frmPurchase", @class = "d-flex pr-1" }))
+        {
+
+        }
+    </div>
+}
+
+
+@Html.HiddenFor(Model => Model.RoleId, new { id = "RoleIdHidden" })
+<div class="row">
+    <div class="col-md-8">
+        <form asp-action="AssignRights" class="form-horizontal" id="frmusercreate">
+            <input type="hidden" id="RoleIdHidden" asp-for="RoleId" />
+
+            <table id="gridTable" class="table table-striped table-bordered rights">
+                <thead>
+
+                    <tr class="addOption roleRightsBackground">
+                        <td>
+                            Right Category
+                        </td>
+                        <td>
+                            Right Name
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        var curcategory = "ADMINSTRATION";
+                        var items = string.Empty;
+                        var curitem = new RoleRightModel();
+                        var prevCatId = 0;
+                        foreach (var item in Model.RoleFeatures.OrderBy(x => x.RightCategoryName))
+                        {
+                            curitem = item;
+                            if (item.RightCategoryName == curcategory)
+                            {
+                                string strchecked = item.IsAssigned == true ? "checked" : string.Empty;
+                                items += "<input type='checkbox' onchange=toggleRow(this)  id='" + item.RightId + "' name='cBox' data-rowid='row2' " + strchecked + " value='" + item.RightId + "' />" + item.RightName + "</br>";
+                                prevCatId = item.RightCategoryId;
+                            }
+                            else
+                            {
+                                if (@prevCatId == 0)
+                                {
+                                    <tr id="row @item.RightCategoryId">
+                                        <td>@Html.Raw("<input type='checkbox' id='" + item.RightCategoryId + "' data-rowid='row " + item.RightCategoryId + "' onchange=toggleRowCbs(this)  name=parentTd>" + curcategory)</td>
+
+                                        <td>@Html.Raw(items)</td>
+                                    </tr>
+                                }
+                                else
+                                {
+                                    <tr id="row @prevCatId">
+                                        <td>@Html.Raw("<input type='checkbox' id='" + @prevCatId + "' data-rowid='row " + @prevCatId + "' onchange=toggleRowCbs(this)  name=parentTd>" + curcategory)</td>
+
+                                        <td>@Html.Raw(items)</td>
+                                    </tr>
+                                }
+
+
+                                curcategory = item.RightCategoryName;
+                                curitem = item;
+                                items = string.Empty;
+                                string strchecked = item.IsAssigned == true ? "checked" : string.Empty;
+                                items += "<input type='checkbox' onchange=toggleRow(this)  id='" + item.RightId + "' name='cBox' data-rowid='row2' " + strchecked + " value='" + item.RightId + "' />" + item.RightName + "</br>";
+                            }
+
+                        }
+                        <tr id="row @curitem.RightCategoryId">
+                            <td>@Html.Raw("<input type='checkbox' id='" + curitem.RightCategoryId + "' data-rowid='row " + curitem.RightCategoryId + "' onchange=toggleRowCbs(this)  name=parentTd>" + curcategory)</td>
+
+                            <td>@Html.Raw(items)</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            <div class="form-actions">
+                <div class="row">
+                    <div class="col-md-offset-3 col-md-9 roleRightsBtn">
+
+                        <button type="submit" data-requiredconfirmation="true" class="btn btn-primary">Submit</button>
+                        <a href="~/Roles/Index" class="btn btn-secondary"><i class="bi bi-slash-circle"></i> Cancel</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script src="~/assets/global/plugins/fullcalendar/lib/jquery.min.js"></script>
+
+    <script>
+        function toggleRowCbs(cb) {
+            var cbs = document.getElementById(cb.dataset.rowid).querySelectorAll('[type="checkbox"]');
+            [].forEach.call(cbs, function (x) {
+                x.checked = cb.checked;
+            });
+        }
+    </script>

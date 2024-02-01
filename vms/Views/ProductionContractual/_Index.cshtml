@@ -1,0 +1,15 @@
+﻿@model IEnumerable<vms.entity.models.ContractualProduction>
+@(Html.Grid(Model).Build(columns =>
+{
+    columns.Add(model => model.ContractNo).Titled("Contract No");
+    columns.Add(model => model.VendorDisplayName).Titled("Vendor");
+    columns.Add(model => model.ContractType.Name).Titled("Contract Type");
+    columns.Add(model => model.ContractDate).Titled("Contract Date").Formatted("{0:dd/MM/yyyy}");
+    columns.Add().Encoded(false).RenderedAs(data => Html.PartialAsync("_ActionMenu", data).Result
+   ).Titled("Action");
+})
+    .Using(GridFilterMode.Excel)
+    .Empty("No data found")
+    .Filterable()
+    .Sortable()
+    .Pageable())

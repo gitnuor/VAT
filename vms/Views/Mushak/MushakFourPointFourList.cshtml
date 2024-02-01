@@ -1,0 +1,29 @@
+﻿@model IEnumerable<vms.entity.models.Damage>
+@{
+	Layout = "_LayoutMushak";
+	ViewData["Title"] = "Mushak - 4.4 (Normal Damage List)";
+
+}
+
+@section contentheader
+{
+	<div class="p-3 page-header">
+		Mushak - 4.4 (Normal Damage List)
+	</div>
+}
+
+<scrollable-grid-container>
+	@(Html.Grid(Model).Build(columns =>
+	{
+		columns.Add(model => model.VoucherNo).Titled("Voucher No");
+		columns.Add(model => model.Description).Titled("Description");
+		columns.Add(model => model.PreparedOn).Titled("Prepared On");
+			columns.Add().Encoded(false).RenderedAs(data => Html.PartialAsync("LinkPartial/_MushakFourPointFourListActionMenu", data).Result)
+			.Titled(Html.Raw("<i class='bi bi-activity'></i>")).AppendCss("action-col-freez");
+	})
+		.AppendCss("large-index-grid")
+		.Empty("No data found")
+		.Filterable(GridFilterType.Double)
+		.Sortable()
+		.Pageable())
+</scrollable-grid-container>

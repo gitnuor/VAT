@@ -1,0 +1,18 @@
+﻿@model IGrid<vms.entity.models.ViewPurchase>
+<tr>
+	<th class="text-right" colspan="11"><b>Total</b></th>
+	<th class="text-right">@(Model.Rows.Sum(row => row.Model.TotalPriceWithoutTax).DecimalToCommaSeparated())</th>
+	<th class="text-right">@(Model.Rows.Sum(row => row.Model.CustomDutyAmount).DecimalToCommaSeparated())</th>
+	<th class="text-right">@(Model.Rows.Sum(row => row.Model.ImportDutyAmount).DecimalToCommaSeparated())</th>
+	<th class="text-right">@(Model.Rows.Sum(row => row.Model.RegulatoryDutyAmount).DecimalToCommaSeparated())</th>
+	<th class="text-right">@(Model.Rows.Sum(row => row.Model.AdvanceIncomeTaxAmount).DecimalToCommaSeparated())</th>
+	<th class="text-right">@(Model.Rows.Sum(row => row.Model.SupplementaryDutyAmount).DecimalToCommaSeparated())</th>
+	<th class="text-right">@(Model.Rows.Sum(row => row.Model.VatOrAtImposablePrice).DecimalToCommaSeparated())</th>
+	<th class="text-right">@(Model.Rows.Sum(row => row.Model.VatAmount).DecimalToCommaSeparated())</th>
+	<th class="text-right">@(Model.Rows.Sum(row => row.Model.AdvanceTaxAmount).DecimalToCommaSeparated())</th>
+	<th class="text-right"></th>
+	<th class="text-right">@(Model.Rows.Sum(row => row.Model.Vdsamount).DecimalToCommaSeparated())</th>
+	<th class="text-right"></th>
+	<th class="text-right">@(Model.Rows.Sum(row => row.Model.TdsAmount).DecimalToCommaSeparated())</th>
+	<th class="action-col-freez"></th>
+</tr>

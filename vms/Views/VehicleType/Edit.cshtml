@@ -1,0 +1,67 @@
+﻿@model vms.entity.models.VehicleType
+@{
+    ViewData["Title"] = "Edit Vehicle Type";
+    
+    
+}
+@section contentheader
+    {
+    <div class="p-3 page-header">
+        Edit Vehicle Type
+    </div>
+}
+<div class="row">
+    <div class="col-md-4 offset-4">
+        <form asp-action="Edit" class="form-horizontal" id="frmusercreate">
+            <div asp-validation-summary="ModelOnly" ></div>
+            <input type="hidden" asp-for="VehicleTypeId" />
+            <input type="hidden" asp-for="EncryptedId" />
+            <span asp-validation-for="VehicleTypeId" ></span>
+            <div class="form-body">
+
+                <div class="form-group required">
+                    <label asp-for="VehicleTypeName" >Vehicle Type Name </label>
+                    <div>
+                        <input asp-for="VehicleTypeName" value="@Model.VehicleTypeName"  />
+                        <span asp-validation-for="VehicleTypeName" ></span>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label asp-for="Description" >Description </label>
+                    <div>
+                        <textarea type="text" asp-for="Description"  value="@Model.Description"></textarea>
+                        <span asp-validation-for="Description" ></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-check form-switch complex-form-checkbox">
+                        <input type="checkbox" asp-for="IsRequireRegistration" class="form-check-input">
+                        <label asp-for="IsRequireRegistration" class="form-check-label"></label>
+                        <span asp-validation-for="IsRequireRegistration"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-check form-switch complex-form-checkbox">
+                        <input type="checkbox" asp-for="IsActive" class="form-check-input">
+                        <label asp-for="IsActive" class="form-check-label"></label>
+                        <span asp-validation-for="IsActive"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="float-end mt-3">
+                <button type="submit" data-requiredconfirmation="true" class="btn  btn-primary btn-sm"><i class="bi bi-check-lg"></i> Update</button>
+                <button type="button" value="Reset" class="btn  btn-warning btn-sm" onclick="location.reload();"><i class="bi bi-arrow-repeat"></i> Reset</button>
+                <a asp-action="Index" class="btn btn-secondary btn-sm"><i class="bi bi-slash-circle"></i> Cancel</a>
+            </div>
+
+        </form>
+    </div>
+</div>
+@section Scripts{
+    
+
+
+}

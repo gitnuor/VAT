@@ -1,0 +1,143 @@
+﻿@model vms.entity.viewModels.vmBOM
+
+@{
+    ViewData["Title"] = "BOM";
+    
+}
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="custom-page-title">Add BOM</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Create" class="form-horizontal">
+            <input type="hidden" asp-for="ProductId" />
+            <div class="form-body">
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Product : </label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" id="Product" name="Product">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Quantity : </label>
+                    <div class="col-md-4">
+                        <input asp-for="Quantity" class="form-control" />
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">PurchaseDetails : </label>
+                    <div class="col-md-4">
+                        <input asp-for="PurchaseDetailsId" class="form-control" />
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="form-actions">
+                <div class="row">
+                    <div class="col-md-offset-3 col-md-9">
+
+                        <button type="button" data-requiredconfirmation="true" class="btn  green">Submit</button>
+                        <button type="button" class="btn grey-salsa btn-outline">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+@section Scripts{
+
+
+    <script src="~/js/typeahead.bundle.js"></script>
+    <script src="~/js/jquery-ui.js"></script>
+    <script>
+
+        var ProductionOrder = {
+            init: function() {},
+            count: 1,
+            unitAmount: 0,
+            totalPrice: 0,
+            totalVat: 0,
+            purchaseOrders:[],
+            ProductionOrderDetailList: [],
+            item: [],
+          
+            gridTableEmpty: function() {
+                $('#ProductId').val('');
+                $('#Product').val('');
+               
+            },
+           
+           
+            product : {
+                init: function () { },
+                productAutoComplete: function () {
+                    var materialforrequsition = {
+                        Initialize: function () {
+                            materialforrequsition.Typehead();
+                        },
+
+                        Typehead: function () {
+                            $('#Product').typeahead('destroy');
+                            $('#Product').typeahead({
+                                    hint: true,
+                                    highlight: true,
+                                    minLength: 2,
+                                },
+                                {
+                                    items: 8,
+                                    name: 'Product',
+                                    displayKey: function (s) {
+                                        return s.name;
+                                    },
+                                    property: "ProductId",
+                                    source: function (strmaterial, process) {
+                                        var url = '@Url.Content("~/Products/ProductAutoComplete")';
+                                        return $.getJSON(url, { filterText: $("#Product").val() }, function (Data) {
+
+                                            return process(Data);
+                                        });
+                                    },
+                                    updater: function (item) {
+                                        return item.name;
+                                    }
+                                }).on('typeahead:selected', function (obj, datum) {
+
+                                    $("#ProductId").val(datum.id);
+                                    $('#Amount').text(datum.unitPrice);
+                                     $('#item').val('1');
+                                    $('#amount').text(datum.unitPrice);
+                                    $('#VAT').text(0);
+                                   ProductionOrder.unitAmount = datum.unitPrice;
+
+                            });
+                            $("#Product").focus();
+
+                        }
+                    }
+                    materialforrequsition.Initialize();
+                }
+            }
+        }
+
+
+
+        $(document).ready(function() {
+          
+            ProductionOrder.product.productAutoComplete();
+           
+        });
+
+       
+
+    </script>
+
+}
+

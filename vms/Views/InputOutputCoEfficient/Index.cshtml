@@ -1,0 +1,28 @@
+﻿@model vms.entity.viewModels.vmProductsIndex
+@{ 
+    ViewData["Title"] = "Products/Services";
+
+                var session = Context.Session.GetComplexData<VmUserSession>(ControllerStaticData.SESSION);
+}
+@section contentheader
+    {
+	<div class="p-2 page-header d-flex">
+		<div class="flex-grow-1">
+			@ViewData["Title"]
+		</div>
+        <div class="d-flex justify-content-start col-12">
+
+            @if (UserAuthorization.Check(FeatureList.PRODUCT_PRODUCT_LIST_CAN_ADD, session.Rights))
+            {
+                <div class="pr-1 me-1">
+                    <a href="@Url.Action("Create", "Products")" class="btn btn-primary btn-sm"><i class="bi bi-plus-lg"></i> Add Product/Service</a>
+                </div>}
+        </div>
+    </div>
+}
+
+<div class="gray-slim-scroll-container">
+	<div class="table-scroll-container">
+		<partial name="_Index" model="Model.ProductList"/>
+	</div>
+</div>

@@ -1,0 +1,47 @@
+﻿.table-container {
+    width: 400px; /* Set the width of the container */
+    height: 250px; /* Set the height of the container */
+    overflow: auto; /* Enable scrolling for overflowing content */
+}
+
+.scrollable-table {
+    width: 100%; /* Set the width of the table to 100% */
+    border-collapse: collapse; /* Merge table borders */
+}
+    /* Optional styling */
+    .scrollable-table th, .scrollable-table td {
+        border: 1px solid #ccc; /* Add borders to table cells */
+        padding: 8px; /* Add padding for better readability */
+    }
+
+.table-wrapper {
+    position: relative;
+    height: 300px; /* Set the overall height of the table wrapper */
+    overflow: auto; /* Enable scrolling */
+}
+
+thead {
+    --bs-table-bg: cornsilk;
+    /* background-color:lightcoral; */ /* Header and footer background color #f5f5f5*/
+    position: sticky;
+    top: 0; /* Stick to the top of the table wrapper */
+    z-index: 1; /* Ensure it appears above the body content */
+}
+
+tfoot {
+    position: sticky;
+    bottom: 0;
+    --bs-table-bg: cornsilk;
+    */ /* Background color for footer */
+    z-index: 1;
+    /* Additional styles for the footer */
+}
+
+.table-body {
+    max-height: calc(100% - 40px); /* Adjust height excluding header and footer */
+    overflow-y: auto; /* Enable vertical scrolling */
+}
+/* Optional styles for table body */
+tbody tr:nth-child(even) {
+    background-color: #f2f2f2; /* Alternate row colors */
+}

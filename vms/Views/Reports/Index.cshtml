@@ -1,0 +1,511 @@
+﻿@{
+    ViewData["Title"] = "Reports";
+    Layout = "_LayoutReport";
+}
+
+
+@section contentheader
+    {
+    <div class="p-2 mb-auto pl-2rem ">
+        <h5>Reports</h5>
+    </div>
+}
+
+<div class="font-weight-bold mb-1">
+    <h6>Purchase</h6>
+</div>
+
+<div class="row">
+
+    <div class="col-lg-3 col-md-4 col-sm-6">
+        <a asp-controller="PurchaseReports" asp-action="Index"
+           class="btn btn-card btn-outline-primary btn-card mt-2 mb-2 align-center">
+            All Purchase
+        </a>
+    </div>
+
+    <div class="col-lg-3 col-md-4 col-sm-6">
+        <a asp-controller="PurchaseReports" asp-action="Summery"
+           class="btn btn-card btn-outline-secondary btn-card mt-2 mb-2 align-center">
+            All Purchase Summery
+        </a>
+    </div>
+    <div class="col-lg-3 col-md-4 col-sm-6">
+        <a asp-controller="PurchaseReports" asp-action="PuchaseDetailsListReport"
+           class="btn btn-card btn-outline-success btn-card mt-2 mb-2 align-center">
+            Puchase Details List
+        </a>
+    </div>
+
+</div>
+
+<hr />
+
+<div class="font-weight-bold mb-1">
+    <h6>Sales</h6>
+</div>
+
+<div class="row">
+
+    <div class="col-lg-3 col-md-4 col-sm-6">
+        <a asp-controller="SalesReports" asp-action="Index"
+           class="btn btn-card btn-outline-success btn-card mt-2 mb-2 align-center">
+            All Sales
+        </a>
+    </div>
+    <div class="col-lg-3 col-md-4 col-sm-6">
+        <a asp-controller="SalesReports" asp-action="SalesDetailsListReport"
+           class="btn btn-card btn-outline-danger btn-card mt-2 mb-2 align-center">
+            Sales Details List
+        </a>
+    </div>
+    <div class="col-lg-3 col-md-4 col-sm-6">
+        <a asp-controller="SalesReports" asp-action="Summery"
+           class="btn btn-card btn-outline-warning btn-card mt-2 mb-2 align-center">
+            All Sales Summery
+        </a>
+    </div>
+
+</div>
+
+<hr />
+
+
+<div class="font-weight-bold mb-1">
+    <h6>Product</h6>
+</div>
+
+<div class="row">
+
+    <div class="col-lg-3 col-md-4 col-sm-6">
+        <a asp-controller="ProductReport" asp-action="ProductCurrentStock"
+           class="btn btn-card btn-outline-danger btn-card mt-2 mb-2 align-center">
+            Current Stock
+        </a>
+    </div>
+
+	<div class="col-lg-3 col-md-4 col-sm-6">
+		<a asp-controller="ProductReport" asp-action="ProductStock"
+		   class="btn btn-card btn-outline-danger btn-card mt-2 mb-2 align-center">
+			Product Stock
+		</a>
+	</div>
+
+
+
+</div>
+
+<hr />
+
+
+<div class="font-weight-bold mb-1">
+    <h6>Miscellaneous</h6>
+</div>
+
+<div class="row">
+
+    <div class="col-lg-3 col-md-4 col-sm-6">
+        <a asp-controller="Reports" asp-action="YearlyComparisonReport"
+           class="btn btn-card btn-outline-info btn-card mt-2 mb-2 align-center">
+            Yearly Comparison Report
+        </a>
+    </div>
+    <div class="col-lg-3 col-md-4 col-sm-6">
+        <a asp-controller="Reports" asp-action="MonthlyComparisonReport"
+           class="btn btn-card btn-outline-dark btn-card mt-2 mb-2 align-center">
+            Monthly Comparison
+        </a>
+    </div>
+    <div class="col-lg-3 col-md-4 col-sm-6">
+        <a asp-controller="Reports" asp-action="InputOutputCoEfficientReport"
+           class="btn btn-card btn-outline-primary btn-card mt-2 mb-2 align-center">
+            Input-Output Co-Efficient
+        </a>
+    </div>
+
+</div>
+
+<hr />
+
+
+
+@* <fieldset>
+	<legend>Purchase</legend>
+	<div class="row">
+		<div class="col-lg-3 col-md-4 col-sm-6">
+			<a asp-controller="Mushak" asp-action="MushakFourPointThree"
+			   class="btn btn-card btn-outline-primary btn-card mt-2 mb-2 align-center">
+				Mushak 4.3
+			</a>
+		</div>
+		<div class="col-lg-3 col-md-4 col-sm-6">
+			<a asp-controller="Mushak" asp-action="MushakFourPointFourList"
+			   class="btn btn-card btn-outline-secondary btn-card mt-2 mb-2 align-center">
+				Mushak 4.4
+			</a>
+		</div>
+		<div class="col-lg-3 col-md-4 col-sm-6">
+			<a asp-controller="Mushak" asp-action="MushakFourPointFiveList"
+			   class="btn btn-card btn-outline-success btn-card mt-2 mb-2 align-center">
+				Mushak 4.5
+			</a>
+		</div>
+		<div class="col-lg-3 col-md-4 col-sm-6">
+			<a asp-controller="Mushak" asp-action="MushakSixPointOneNew"
+			   class="btn btn-card btn-outline-danger btn-card mt-2 mb-2 align-center">
+				Mushak 6.1 (Purchase Book)
+			</a>
+		</div>
+		<div class="col-lg-3 col-md-4 col-sm-6">
+			<a asp-controller="Mushak" asp-action="MushakSixPointTwoNew"
+			   class="btn btn-card btn-outline-warning btn-card mt-2 mb-2 align-center">
+				Mushak 6.2 (Sales Book)
+			</a>
+		</div>
+		<div class="col-lg-3 col-md-4 col-sm-6">
+			<a asp-controller="Mushak" asp-action="MushakSixPointTwoPointOneNew"
+			   class="btn btn-card btn-outline-info btn-card mt-2 mb-2 align-center">
+				Mushak 6.2.1 (Sales & Purchase Book)
+			</a>
+		</div>
+		<div class="col-lg-3 col-md-4 col-sm-6">
+			<a asp-controller="Mushak" asp-action="MushakSixPointThreeList"
+			   class="btn btn-card btn-outline-dark btn-card mt-2 mb-2 align-center">
+				Mushak 6.3 (VAT Challan)
+			</a>
+		</div>
+		<div class="col-lg-3 col-md-4 col-sm-6">
+			<a asp-controller="Mushak" asp-action="MushakFourPointThree"
+			   class="btn btn-card btn-outline-primary btn-card mt-2 mb-2 align-center">
+				Mushak 4.4
+			</a>
+		</div>
+		<div class="col-lg-3 col-md-4 col-sm-6">
+			<a asp-controller="Mushak" asp-action="MushakFourPointThree"
+			   class="btn btn-card btn-outline-secondary btn-card mt-2 mb-2 align-center">
+				Mushak 4.3
+			</a>
+		</div>
+		<div class="col-lg-3 col-md-4 col-sm-6">
+			<a asp-controller="Mushak" asp-action="MushakFourPointThree"
+			   class="btn btn-card btn-outline-success btn-card mt-2 mb-2 align-center">
+				Mushak 4.4
+			</a>
+		</div>
+		<div class="col-lg-3 col-md-4 col-sm-6">
+			<a asp-controller="Mushak" asp-action="MushakFourPointThree"
+			   class="btn btn-card btn-outline-danger btn-card mt-2 mb-2 align-center">
+				Mushak 4.3
+			</a>
+		</div>
+		<div class="col-lg-3 col-md-4 col-sm-6">
+			<a asp-controller="Mushak" asp-action="MushakFourPointThree"
+			   class="btn btn-card btn-outline-warning btn-card mt-2 mb-2 align-center">
+				Mushak 4.4
+			</a>
+		</div>
+		<div class="col-lg-3 col-md-4 col-sm-6">
+			<a asp-controller="Mushak" asp-action="MushakFourPointThree"
+			   class="btn btn-card btn-outline-info btn-card mt-2 mb-2 align-center">
+				Mushak 4.3
+			</a>
+		</div>
+		<div class="col-lg-3 col-md-4 col-sm-6">
+			<a asp-controller="Mushak" asp-action="MushakFourPointThree"
+			   class="btn btn-card btn-outline-dark btn-card mt-2 mb-2 align-center">
+				Mushak 4.4
+			</a>
+		</div>
+		<div class="col-lg-3 col-md-4 col-sm-6">
+			<a asp-controller="Mushak" asp-action="MushakFourPointThree"
+			   class="btn btn-card btn-outline-primary btn-card mt-2 mb-2 align-center">
+				Mushak 4.3
+			</a>
+		</div>
+	</div>
+</fieldset>
+<fieldset>
+	<legend>Sales</legend>
+	<div class="row">
+		<div class="col-lg-3 col-md-4 col-sm-6">
+			<a asp-controller="Mushak" asp-action="MushakFourPointThree"
+			   class="btn btn-card btn-outline-primary btn-card mt-2 mb-2 align-center">
+				Mushak 4.3
+			</a>
+		</div>
+		<div class="col-lg-3 col-md-4 col-sm-6">
+			<a asp-controller="Mushak" asp-action="MushakFourPointFourList"
+			   class="btn btn-card btn-outline-secondary btn-card mt-2 mb-2 align-center">
+				Mushak 4.4
+			</a>
+		</div>
+		<div class="col-lg-3 col-md-4 col-sm-6">
+			<a asp-controller="Mushak" asp-action="MushakFourPointFiveList"
+			   class="btn btn-card btn-outline-success btn-card mt-2 mb-2 align-center">
+				Mushak 4.5
+			</a>
+		</div>
+		<div class="col-lg-3 col-md-4 col-sm-6">
+			<a asp-controller="Mushak" asp-action="MushakSixPointOneNew"
+			   class="btn btn-card btn-outline-danger btn-card mt-2 mb-2 align-center">
+				Mushak 6.1 (Purchase Book)
+			</a>
+		</div>
+		<div class="col-lg-3 col-md-4 col-sm-6">
+			<a asp-controller="Mushak" asp-action="MushakSixPointTwoNew"
+			   class="btn btn-card btn-outline-warning btn-card mt-2 mb-2 align-center">
+				Mushak 6.2 (Sales Book)
+			</a>
+		</div>
+		<div class="col-lg-3 col-md-4 col-sm-6">
+			<a asp-controller="Mushak" asp-action="MushakSixPointTwoPointOneNew"
+			   class="btn btn-card btn-outline-info btn-card mt-2 mb-2 align-center">
+				Mushak 6.2.1 (Sales & Purchase Book)
+			</a>
+		</div>
+		<div class="col-lg-3 col-md-4 col-sm-6">
+			<a asp-controller="Mushak" asp-action="MushakSixPointThreeList"
+			   class="btn btn-card btn-outline-dark btn-card mt-2 mb-2 align-center">
+				Mushak 6.3 (VAT Challan)
+			</a>
+		</div>
+		<div class="col-lg-3 col-md-4 col-sm-6">
+			<a asp-controller="Mushak" asp-action="MushakFourPointThree"
+			   class="btn btn-card btn-outline-primary btn-card mt-2 mb-2 align-center">
+				Mushak 4.4
+			</a>
+		</div>
+		<div class="col-lg-3 col-md-4 col-sm-6">
+			<a asp-controller="Mushak" asp-action="MushakFourPointThree"
+			   class="btn btn-card btn-outline-secondary btn-card mt-2 mb-2 align-center">
+				Mushak 4.3
+			</a>
+		</div>
+		<div class="col-lg-3 col-md-4 col-sm-6">
+			<a asp-controller="Mushak" asp-action="MushakFourPointThree"
+			   class="btn btn-card btn-outline-success btn-card mt-2 mb-2 align-center">
+				Mushak 4.4
+			</a>
+		</div>
+		<div class="col-lg-3 col-md-4 col-sm-6">
+			<a asp-controller="Mushak" asp-action="MushakFourPointThree"
+			   class="btn btn-card btn-outline-danger btn-card mt-2 mb-2 align-center">
+				Mushak 4.3
+			</a>
+		</div>
+		<div class="col-lg-3 col-md-4 col-sm-6">
+			<a asp-controller="Mushak" asp-action="MushakFourPointThree"
+			   class="btn btn-card btn-outline-warning btn-card mt-2 mb-2 align-center">
+				Mushak 4.4
+			</a>
+		</div>
+		<div class="col-lg-3 col-md-4 col-sm-6">
+			<a asp-controller="Mushak" asp-action="MushakFourPointThree"
+			   class="btn btn-card btn-outline-info btn-card mt-2 mb-2 align-center">
+				Mushak 4.3
+			</a>
+		</div>
+		<div class="col-lg-3 col-md-4 col-sm-6">
+			<a asp-controller="Mushak" asp-action="MushakFourPointThree"
+			   class="btn btn-card btn-outline-dark btn-card mt-2 mb-2 align-center">
+				Mushak 4.4
+			</a>
+		</div>
+		<div class="col-lg-3 col-md-4 col-sm-6">
+			<a asp-controller="Mushak" asp-action="MushakFourPointThree"
+			   class="btn btn-card btn-outline-primary btn-card mt-2 mb-2 align-center">
+				Mushak 4.3
+			</a>
+		</div>
+	</div>
+</fieldset>
+<fieldset>
+	<legend>Miscellaneous</legend>
+	<div class="row">
+		<div class="col-lg-3 col-md-4 col-sm-6">
+			<a asp-controller="Mushak" asp-action="MushakFourPointThree"
+			   class="btn btn-card btn-outline-primary btn-card mt-2 mb-2 align-center">
+				Mushak 4.3
+			</a>
+		</div>
+		<div class="col-lg-3 col-md-4 col-sm-6">
+			<a asp-controller="Mushak" asp-action="MushakFourPointFourList"
+			   class="btn btn-card btn-outline-secondary btn-card mt-2 mb-2 align-center">
+				Mushak 4.4
+			</a>
+		</div>
+		<div class="col-lg-3 col-md-4 col-sm-6">
+			<a asp-controller="Mushak" asp-action="MushakFourPointFiveList"
+			   class="btn btn-card btn-outline-success btn-card mt-2 mb-2 align-center">
+				Mushak 4.5
+			</a>
+		</div>
+		<div class="col-lg-3 col-md-4 col-sm-6">
+			<a asp-controller="Mushak" asp-action="MushakSixPointOneNew"
+			   class="btn btn-card btn-outline-danger btn-card mt-2 mb-2 align-center">
+				Mushak 6.1 (Purchase Book)
+			</a>
+		</div>
+		<div class="col-lg-3 col-md-4 col-sm-6">
+			<a asp-controller="Mushak" asp-action="MushakSixPointTwoNew"
+			   class="btn btn-card btn-outline-warning btn-card mt-2 mb-2 align-center">
+				Mushak 6.2 (Sales Book)
+			</a>
+		</div>
+		<div class="col-lg-3 col-md-4 col-sm-6">
+			<a asp-controller="Mushak" asp-action="MushakSixPointTwoPointOneNew"
+			   class="btn btn-card btn-outline-info btn-card mt-2 mb-2 align-center">
+				Mushak 6.2.1 (Sales & Purchase Book)
+			</a>
+		</div>
+		<div class="col-lg-3 col-md-4 col-sm-6">
+			<a asp-controller="Mushak" asp-action="MushakSixPointThreeList"
+			   class="btn btn-card btn-outline-dark btn-card mt-2 mb-2 align-center">
+				Mushak 6.3 (VAT Challan)
+			</a>
+		</div>
+		<div class="col-lg-3 col-md-4 col-sm-6">
+			<a asp-controller="Mushak" asp-action="MushakFourPointThree"
+			   class="btn btn-card btn-outline-primary btn-card mt-2 mb-2 align-center">
+				Mushak 4.4
+			</a>
+		</div>
+		<div class="col-lg-3 col-md-4 col-sm-6">
+			<a asp-controller="Mushak" asp-action="MushakFourPointThree"
+			   class="btn btn-card btn-outline-secondary btn-card mt-2 mb-2 align-center">
+				Mushak 4.3
+			</a>
+		</div>
+		<div class="col-lg-3 col-md-4 col-sm-6">
+			<a asp-controller="Mushak" asp-action="MushakFourPointThree"
+			   class="btn btn-card btn-outline-success btn-card mt-2 mb-2 align-center">
+				Mushak 4.4
+			</a>
+		</div>
+		<div class="col-lg-3 col-md-4 col-sm-6">
+			<a asp-controller="Mushak" asp-action="MushakFourPointThree"
+			   class="btn btn-card btn-outline-danger btn-card mt-2 mb-2 align-center">
+				Mushak 4.3
+			</a>
+		</div>
+		<div class="col-lg-3 col-md-4 col-sm-6">
+			<a asp-controller="Mushak" asp-action="MushakFourPointThree"
+			   class="btn btn-card btn-outline-warning btn-card mt-2 mb-2 align-center">
+				Mushak 4.4
+			</a>
+		</div>
+		<div class="col-lg-3 col-md-4 col-sm-6">
+			<a asp-controller="Mushak" asp-action="MushakFourPointThree"
+			   class="btn btn-card btn-outline-info btn-card mt-2 mb-2 align-center">
+				Mushak 4.3
+			</a>
+		</div>
+		<div class="col-lg-3 col-md-4 col-sm-6">
+			<a asp-controller="Mushak" asp-action="MushakFourPointThree"
+			   class="btn btn-card btn-outline-dark btn-card mt-2 mb-2 align-center">
+				Mushak 4.4
+			</a>
+		</div>
+		<div class="col-lg-3 col-md-4 col-sm-6">
+			<a asp-controller="Mushak" asp-action="MushakFourPointThree"
+			   class="btn btn-card btn-outline-primary btn-card mt-2 mb-2 align-center">
+				Mushak 4.3
+			</a>
+		</div>
+	</div>
+</fieldset>
+<fieldset>
+	<legend>Product</legend>
+	<div class="row">
+		<div class="col-lg-3 col-md-4 col-sm-6">
+			<a asp-controller="Mushak" asp-action="MushakFourPointThree"
+			   class="btn btn-card btn-outline-primary btn-card mt-2 mb-2 align-center">
+				Mushak 4.3
+			</a>
+		</div>
+		<div class="col-lg-3 col-md-4 col-sm-6">
+			<a asp-controller="Mushak" asp-action="MushakFourPointFourList"
+			   class="btn btn-card btn-outline-secondary btn-card mt-2 mb-2 align-center">
+				Mushak 4.4
+			</a>
+		</div>
+		<div class="col-lg-3 col-md-4 col-sm-6">
+			<a asp-controller="Mushak" asp-action="MushakFourPointFiveList"
+			   class="btn btn-card btn-outline-success btn-card mt-2 mb-2 align-center">
+				Mushak 4.5
+			</a>
+		</div>
+		<div class="col-lg-3 col-md-4 col-sm-6">
+			<a asp-controller="Mushak" asp-action="MushakSixPointOneNew"
+			   class="btn btn-card btn-outline-danger btn-card mt-2 mb-2 align-center">
+				Mushak 6.1 (Purchase Book)
+			</a>
+		</div>
+		<div class="col-lg-3 col-md-4 col-sm-6">
+			<a asp-controller="Mushak" asp-action="MushakSixPointTwoNew"
+			   class="btn btn-card btn-outline-warning btn-card mt-2 mb-2 align-center">
+				Mushak 6.2 (Sales Book)
+			</a>
+		</div>
+		<div class="col-lg-3 col-md-4 col-sm-6">
+			<a asp-controller="Mushak" asp-action="MushakSixPointTwoPointOneNew"
+			   class="btn btn-card btn-outline-info btn-card mt-2 mb-2 align-center">
+				Mushak 6.2.1 (Sales & Purchase Book)
+			</a>
+		</div>
+		<div class="col-lg-3 col-md-4 col-sm-6">
+			<a asp-controller="Mushak" asp-action="MushakSixPointThreeList"
+			   class="btn btn-card btn-outline-dark btn-card mt-2 mb-2 align-center">
+				Mushak 6.3 (VAT Challan)
+			</a>
+		</div>
+		<div class="col-lg-3 col-md-4 col-sm-6">
+			<a asp-controller="Mushak" asp-action="MushakFourPointThree"
+			   class="btn btn-card btn-outline-primary btn-card mt-2 mb-2 align-center">
+				Mushak 4.4
+			</a>
+		</div>
+		<div class="col-lg-3 col-md-4 col-sm-6">
+			<a asp-controller="Mushak" asp-action="MushakFourPointThree"
+			   class="btn btn-card btn-outline-secondary btn-card mt-2 mb-2 align-center">
+				Mushak 4.3
+			</a>
+		</div>
+		<div class="col-lg-3 col-md-4 col-sm-6">
+			<a asp-controller="Mushak" asp-action="MushakFourPointThree"
+			   class="btn btn-card btn-outline-success btn-card mt-2 mb-2 align-center">
+				Mushak 4.4
+			</a>
+		</div>
+		<div class="col-lg-3 col-md-4 col-sm-6">
+			<a asp-controller="Mushak" asp-action="MushakFourPointThree"
+			   class="btn btn-card btn-outline-danger btn-card mt-2 mb-2 align-center">
+				Mushak 4.3
+			</a>
+		</div>
+		<div class="col-lg-3 col-md-4 col-sm-6">
+			<a asp-controller="Mushak" asp-action="MushakFourPointThree"
+			   class="btn btn-card btn-outline-warning btn-card mt-2 mb-2 align-center">
+				Mushak 4.4
+			</a>
+		</div>
+		<div class="col-lg-3 col-md-4 col-sm-6">
+			<a asp-controller="Mushak" asp-action="MushakFourPointThree"
+			   class="btn btn-card btn-outline-info btn-card mt-2 mb-2 align-center">
+				Mushak 4.3
+			</a>
+		</div>
+		<div class="col-lg-3 col-md-4 col-sm-6">
+			<a asp-controller="Mushak" asp-action="MushakFourPointThree"
+			   class="btn btn-card btn-outline-dark btn-card mt-2 mb-2 align-center">
+				Mushak 4.4
+			</a>
+		</div>
+		<div class="col-lg-3 col-md-4 col-sm-6">
+			<a asp-controller="Mushak" asp-action="MushakFourPointThree"
+			   class="btn btn-card btn-outline-primary btn-card mt-2 mb-2 align-center">
+				Mushak 4.3
+			</a>
+		</div>
+	</div>
+</fieldset> *@

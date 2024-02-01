@@ -1,0 +1,81 @@
+﻿html, body {
+    width: 210mm;
+    height: 297mm;
+}
+
+body {
+    margin: 0;
+}
+.table thead th {
+    text-align: center;
+    font-weight: 500;
+}
+
+.table th, .table td {
+    padding: .4rem;
+}
+
+.table {
+    border-bottom: 1px solid lightgray;
+    font-size: .9rem;
+    margin-bottom: 50px;
+}
+
+    .table .dropdown-menu {
+        font-size: .9rem;
+    }
+
+    .table > :not(:first-child) {
+        border-top: 1px solid lightgray;
+    }
+
+.table-responsive {
+    overflow: visible;
+}
+
+
+.report-header {
+    text-align: center;
+}
+    .report-header .company-name {
+        font-size: 2rem;
+        font-weight: 500;
+    }
+    .report-header .report-name {
+        font-size: 1.5rem;
+    }
+    .report-header .report-date-range {
+        font-size: 1.2rem;
+    }
+/*End*/
+@media print {
+    @page {
+        size: A3 landscape;
+
+        margin-bottom: 50px !important;
+    }
+
+    .section-to-print {
+        margin: 30px;
+    }
+
+    .test-div {
+        page-break-inside: auto;
+        width: 500mm;
+        padding-bottom: 100mm;
+    }
+
+    .page-number:before {
+        counter-increment: page;
+        content: counter(page);
+    }
+
+    .print-footer {
+        color: black;
+        display: block !important;
+        position: fixed;
+        bottom: 40px;
+        border-top: 1px solid #eee;
+        height: 30px;
+    }
+}

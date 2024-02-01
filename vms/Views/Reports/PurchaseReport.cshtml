@@ -1,0 +1,203 @@
+﻿@model vms.entity.viewModels.ReportsViewModel.vmPurchaseReportByVendor
+@{
+	ViewData["Title"] = "Purchase Report By Supplier/Vendor";
+	var session = Context.Session.GetComplexData<VmUserSession>(ControllerStaticData.SESSION);
+	Layout = "_LayoutReport";
+	int SlNo = 0;
+}
+
+
+@section contentheader
+{
+	<div class="p-3 page-header">
+
+		Purchase Report By Vendor
+		<form method="post">
+			<div class="row">
+
+				<div class="col-2">
+					<label asp-for="FromDate" class="form-label"></label>
+					<input autocomplete="off" asp-for="FromDate" class="form-control form-control-sm" type="date"/>
+					<span asp-validation-for="FromDate" class="text-danger"></span>
+				</div>
+
+				<div class="col-2">
+					<label asp-for="ToDate" class="form-label"></label>
+					<input autocomplete="off" asp-for="ToDate" class="form-control form-control-sm" type="date"/>
+					<span asp-validation-for="ToDate" class="text-danger"></span>
+				</div>
+
+				<div class="col-3">
+					<label asp-for="VendorId" class="form-label"></label>
+					<select asp-for="VendorId" asp-items="Model.VendorList" class="searchable-dropdown" data-live-search="true" data-style="bootstrap-select-option">
+						<option value="@null">Select</option>
+					</select>
+					<span asp-validation-for="VendorId" class="invalid-feedback"></span>
+				</div>
+
+				<div class="col-3">
+
+					<button type="submit" class="btn btn-sm btn-success inline-sm-button"><i class="bi bi-file-text"></i> View</button>
+					<button type="button" class="btn btn-sm btn-primary inline-sm-button" id="btnPrint"><i class="bi bi-printer"></i> Print</button>
+					<button type="submit" asp-action="PurchaseReportExcel" class="btn btn-sm btn-warning inline-sm-button"><i class="bi bi-file-excel-fill"></i> Excel</button>
+
+				</div>
+
+			</div>
+		</form>
+
+	</div>
+
+}
+
+<div class="gray-slim-scroll-container">
+	<div class="long-table-scroll-container">
+		@if (Model.VendorId != 0)
+		{
+			<div id="printableArea">
+				<div class="report-margin">
+					<div class="report-header">
+						<div class="company-name">@Model.OrgName</div>
+						<div class="company-other-info">@Model.OrgAddress</div>
+						<div class="report-name">Purchase Report</div>
+						<div class="report-date-range">From @Model.FromDate.ToString("dd/MM/yyyy") to @Model.ToDate.ToString("dd/MM/yyyy")</div>
+					</div>
+
+					@if (Model.PurchaseList.Any())
+					{
+						<div class="row">
+							<div class="col-6">
+								<p class="company-other-info">Vendor Name : @Model.PurchaseList.FirstOrDefault().VendorName</p>
+								<p class="company-other-info">Vendor BIN : @Model.PurchaseList.FirstOrDefault().VendorBIN</p>
+							</div>
+							<div class="col-6" style="text-align: right;">
+								<p class="company-other-info">Vendor Address : @Model.PurchaseList.FirstOrDefault().VendorAddress</p>
+
+							</div>
+						</div>
+					}
+
+					<table class="table table-bordered text-center">
+						<thead>
+						<tr>
+							<th>
+								SL
+							</th>
+							<th>
+								Type
+							</th>
+							<th>
+								Invoice No.
+							</th>
+							<th>
+								Date
+							</th>
+							<th>
+								Reason
+							</th>
+							<th>
+								Product Name
+							</th>
+							<th>
+								Quantity
+							</th>
+							<th>
+								Unit
+							</th>
+							<th>
+								Unit Price
+							</th>
+							<th>
+								Price
+							</th>
+							<th>
+								VAT %
+							</th>
+							<th>
+								VAT
+							</th>
+							<th>
+								Total
+							</th>
+						</tr>
+						</thead>
+
+						@if (Model.PurchaseList.Any())
+						{
+							SlNo = 1;
+							<tbody>
+							@foreach (var item in Model.PurchaseList)
+							{
+								<tr>
+									<td class="text-right">
+										@SlNo
+									</td>
+									<td>
+										@item.PurchaseTypeName
+									</td>
+									<td>
+										@item.InvoiceNo
+									</td>
+									<td class="text-center">
+										@item.PurchaseDate.ToString("dd/MM/yyyy")
+									</td>
+
+									<td>
+										@item.PurchaseReason
+									</td>
+									<td>
+										@item.ProductName
+									</td>
+									<td class="text-right">
+										@StringGenerator.DecimalToCommaSeparated(item.PurchaseQty)
+									</td>
+									<td class="text-center">
+										@item.MeasurementUnitName
+									</td>
+									<td class="text-right">
+										@StringGenerator.DecimalToCommaSeparated(item.UnitPrice)
+									</td>
+									<td class="text-right">
+										@StringGenerator.DecimalToCommaSeparated(item.ProductPrice)
+									</td>
+									<td class="text-right">
+										@StringGenerator.DecimalToCommaSeparated(item.VatPercent)
+									</td>
+									<td class="text-right">
+										@StringGenerator.DecimalToCommaSeparated(item.ProductVAt)
+									</td>
+									<td class="text-right">
+										@StringGenerator.DecimalToCommaSeparated(item.ProductPriceWithVat)
+									</td>
+								</tr>
+								SlNo++;
+							}
+							</tbody>
+						}
+
+						else
+						{
+							<tr>
+								<td colspan="13">
+									<p style="text-align: center">No Records Found</p>
+								</td>
+							</tr>
+						}
+					</table>
+				</div>
+			</div>
+		}
+	</div>
+</div>
+
+
+@section scripts{
+	<script>
+
+		$(document).ready(function() {
+			$("#btnPrint").click(function() {
+				window.vmsPrint.printA4Landscape('printableArea');
+			});
+		});
+	</script>
+}

@@ -1,0 +1,14 @@
+﻿@model IEnumerable<vms.entity.models.CustomerCategory>
+@(Html.Grid(Model).Build(columns =>
+{
+	columns.Add(model => model.CategoryName).Titled("Category Name");
+	columns.Add(model => model.Remarks).Titled("Remarks");
+	columns.Add(model => model.IsActive).Titled("Status");
+	columns.Add().Encoded(false).RenderedAs(data => Html.PartialAsync("_ActionMenu", data).Result)
+		.Titled(Html.Raw("<i class='bi bi-activity'></i>")).AppendCss("action-col-freez");
+})
+	.AppendCss("large-index-grid")
+	.Empty("No data found")
+	.Filterable(GridFilterType.Double)
+	.Sortable()
+	.Pageable())

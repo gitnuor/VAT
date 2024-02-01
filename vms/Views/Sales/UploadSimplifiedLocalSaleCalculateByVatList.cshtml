@@ -1,0 +1,30 @@
+﻿@model VmViewSimplifiedSales
+@{
+	ViewData["Title"] = "Upload Simplified Local Sales Calculated by VAT";
+}
+
+@section contentheader
+{
+	<div class="p-3 pb-2 page-header">
+		@ViewData["Title"]
+		<div>
+
+			<form asp-action="UploadSimplifiedLocalSaleCalculateByVat" enctype="multipart/form-data" class="row">
+				<div class="col-3">
+					<input asp-for="UploadedFile" class="form-control form-control-sm">
+					<span asp-validation-for="UploadedFile" class="text-danger"></span>
+				</div>
+				<div class="col-2">
+					<input type="submit" value="Upload" class="btn btn-primary btn-sm"/>
+				</div>
+
+			</form>
+		</div>
+	</div>
+	<partial name="Sales/_SalesSubLink"/>
+}
+
+
+<scrollable-grid-container>
+	<partial name="_UploadedSimplifiedSales" model="Model.Salses"/>
+</scrollable-grid-container>

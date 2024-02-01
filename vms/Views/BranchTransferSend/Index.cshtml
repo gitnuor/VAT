@@ -1,0 +1,30 @@
+﻿@model IEnumerable<vms.entity.models.BranchTransferSend>
+@{
+	var session = Context.Session.GetComplexData<VmUserSession>(ControllerStaticData.SESSION);
+}
+@{
+	ViewData["Title"] = "Branch Transfer";
+
+}
+
+@section contentheader
+{
+	<div class="p-2 page-header d-flex">
+		<div class="flex-grow-1">
+			@ViewData["Title"]
+		</div>
+		<div class="d-flex justify-content-start">
+
+			@if (UserAuthorization.Check(FeatureList.SALE_SALE_LIST_CAN_ADD, session.Rights))
+			{
+				<div class="me-1">
+					<a asp-action="Create" class="btn btn-primary btn-sm"><i class="bi bi-plus"></i> Add Branch Transfer</a>
+				</div>
+			}
+		</div>
+	</div>
+}
+
+<scrollable-grid-container>
+	<partial name="_Index" model="Model" />
+</scrollable-grid-container>

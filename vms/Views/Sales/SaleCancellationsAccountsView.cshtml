@@ -1,0 +1,96 @@
+﻿@section breadcrumb
+    {
+    <ul class="page-breadcrumb">
+        <li>
+            <a href="@Url.Action("SaleOrder","Sales")">Sale</a>   
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a href="@Url.Action("SaleCancellationsAccountsView","Sales")">Sale Cancellation Accounts View</a>
+        </li>
+    </ul>
+}
+
+<h1 class="custom-page-title">Sales Order Accounts View</h1>
+
+<ul class="nav nav-tabs">
+    <li><a href="#">Details</a></li>
+    <li><a href="#">Deliveries</a></li>
+    <li><a href="#">Attachments</a></li>
+    <li class="active"><a href="#">Accountant View</a></li>
+</ul>
+
+<div class="row">
+    <div class="col-md-12">
+
+        <table class="table table-bordered small">
+            <tbody>
+                <tr>
+                    <td>
+                        <u>Voucher Information</u><br />
+                        <span>2018-12-27</span> <br />
+                        <span>SO/CL-00012</span> <br />
+                        <span>Abedin Glass House(GM)</span> <br />
+                        <span>Created at: 2018-12-26</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Ledgers
+                        <!--Table-->
+
+                        <table class="table table-bordered small">
+                            <thead>
+                                <tr>
+                                    <th>SL</th>
+                                    <th>Account Name</th>
+                                    <th>Debit</th>
+                                    <th></th>
+                                    <th>Credit</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Income</td>
+                                    <td class="text-right">2,400.00</td>
+                                    <td>BDT</td>
+                                    <td class="text-right"></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>VAT Payable Sales</td>
+                                    <td class="text-right">360.00</td>
+                                    <td>BDT</td>
+                                    <td class="text-right"></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Goods Receivable</td>
+                                    <td class="text-right"></td>
+                                    <td></td>
+                                    <td class="text-right">2,760.00</td>
+                                    <td>BDT</td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                    <th class="text-right">2,760.00</th>
+                                    <th>BDT</th>
+                                    <th class="text-right">2,760.00</th>
+                                    <th>BDT</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                        <!--Table End-->
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

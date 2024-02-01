@@ -1,0 +1,640 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <TargetLatestRuntimePatch>true</TargetLatestRuntimePatch>
+	  <ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
+    <UserSecretsId>1060af11-189c-4443-81cd-3c07ef058cfa</UserSecretsId>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <Compile Remove="Controllers\AddressInfo\**" />
+    <Compile Remove="Controllers\Adjustment\**" />
+    <Compile Remove="Controllers\Inventory\**" />
+    <Compile Remove="Controllers\Order\**" />
+    <Compile Remove="Controllers\Payment\**" />
+    <Compile Remove="Controllers\Procurement\**" />
+    <Compile Remove="Controllers\Purchase\**" />
+    <Compile Remove="Controllers\Salse\**" />
+    <Compile Remove="Controllers\VATAccounts\**" />
+    <Compile Remove="Controllers\VATReturn\**" />
+    <Compile Remove="obj\**" />
+    <Compile Remove="Views\AddressInfo\**" />
+    <Compile Remove="Views\BasicInfo\**" />
+    <Compile Remove="Views\Contact\**" />
+    <Compile Remove="Views\ContraVoucher\**" />
+    <Compile Remove="Views\Delivery\**" />
+    <Compile Remove="Views\Inventory\**" />
+    <Compile Remove="Views\IssueMaterial\**" />
+    <Compile Remove="Views\JournalVoucher\**" />
+    <Compile Remove="Views\Journal\**" />
+    <Compile Remove="Views\Jurnal\**" />
+    <Compile Remove="Views\ListOfProducts\**" />
+    <Compile Remove="Views\MeasurementUnits\**" />
+    <Compile Remove="Views\Organization\**" />
+    <Compile Remove="Views\Payment\**" />
+    <Compile Remove="Views\PurchaseCancellations\**" />
+    <Compile Remove="Views\PurchaseOrders\**" />
+    <Compile Remove="Views\PurchaseOrder\**" />
+    <Compile Remove="Views\ReceiveWorkOrder\**" />
+    <Compile Remove="Views\SaleCancellationOrder\**" />
+    <Compile Remove="Views\SaleOrders\**" />
+    <Compile Remove="Views\SaleOrder\**" />
+    <Compile Remove="Views\VatAccounts\**" />
+    <Compile Remove="Views\VendorInfoes\**" />
+    <Compile Remove="wwwroot\assets\**" />
+    <Compile Remove="wwwroot\CustomJs\Production\**" />
+    <Compile Remove="wwwroot\Reports\**" />
+    <Compile Remove="wwwroot\Sales\**" />
+    <Compile Remove="wwwroot\tooltipHtml\**" />
+    <Compile Remove="wwwroot\UploadedFiles\7\**" />
+    <Content Remove="Controllers\AddressInfo\**" />
+    <Content Remove="Controllers\Adjustment\**" />
+    <Content Remove="Controllers\Inventory\**" />
+    <Content Remove="Controllers\Order\**" />
+    <Content Remove="Controllers\Payment\**" />
+    <Content Remove="Controllers\Procurement\**" />
+    <Content Remove="Controllers\Purchase\**" />
+    <Content Remove="Controllers\Salse\**" />
+    <Content Remove="Controllers\VATAccounts\**" />
+    <Content Remove="Controllers\VATReturn\**" />
+    <Content Remove="obj\**" />
+    <Content Remove="Views\AddressInfo\**" />
+    <Content Remove="Views\BasicInfo\**" />
+    <Content Remove="Views\Contact\**" />
+    <Content Remove="Views\ContraVoucher\**" />
+    <Content Remove="Views\Delivery\**" />
+    <Content Remove="Views\Inventory\**" />
+    <Content Remove="Views\IssueMaterial\**" />
+    <Content Remove="Views\JournalVoucher\**" />
+    <Content Remove="Views\Journal\**" />
+    <Content Remove="Views\Jurnal\**" />
+    <Content Remove="Views\ListOfProducts\**" />
+    <Content Remove="Views\MeasurementUnits\**" />
+    <Content Remove="Views\Organization\**" />
+    <Content Remove="Views\Payment\**" />
+    <Content Remove="Views\PurchaseCancellations\**" />
+    <Content Remove="Views\PurchaseOrders\**" />
+    <Content Remove="Views\PurchaseOrder\**" />
+    <Content Remove="Views\ReceiveWorkOrder\**" />
+    <Content Remove="Views\SaleCancellationOrder\**" />
+    <Content Remove="Views\SaleOrders\**" />
+    <Content Remove="Views\SaleOrder\**" />
+    <Content Remove="Views\VatAccounts\**" />
+    <Content Remove="Views\VendorInfoes\**" />
+    <Content Remove="wwwroot\assets\**" />
+    <Content Remove="wwwroot\CustomJs\Production\**" />
+    <Content Remove="wwwroot\Reports\**" />
+    <Content Remove="wwwroot\Sales\**" />
+    <Content Remove="wwwroot\tooltipHtml\**" />
+    <Content Remove="wwwroot\UploadedFiles\7\**" />
+    <EmbeddedResource Remove="Controllers\AddressInfo\**" />
+    <EmbeddedResource Remove="Controllers\Adjustment\**" />
+    <EmbeddedResource Remove="Controllers\Inventory\**" />
+    <EmbeddedResource Remove="Controllers\Order\**" />
+    <EmbeddedResource Remove="Controllers\Payment\**" />
+    <EmbeddedResource Remove="Controllers\Procurement\**" />
+    <EmbeddedResource Remove="Controllers\Purchase\**" />
+    <EmbeddedResource Remove="Controllers\Salse\**" />
+    <EmbeddedResource Remove="Controllers\VATAccounts\**" />
+    <EmbeddedResource Remove="Controllers\VATReturn\**" />
+    <EmbeddedResource Remove="obj\**" />
+    <EmbeddedResource Remove="Views\AddressInfo\**" />
+    <EmbeddedResource Remove="Views\BasicInfo\**" />
+    <EmbeddedResource Remove="Views\Contact\**" />
+    <EmbeddedResource Remove="Views\ContraVoucher\**" />
+    <EmbeddedResource Remove="Views\Delivery\**" />
+    <EmbeddedResource Remove="Views\Inventory\**" />
+    <EmbeddedResource Remove="Views\IssueMaterial\**" />
+    <EmbeddedResource Remove="Views\JournalVoucher\**" />
+    <EmbeddedResource Remove="Views\Journal\**" />
+    <EmbeddedResource Remove="Views\Jurnal\**" />
+    <EmbeddedResource Remove="Views\ListOfProducts\**" />
+    <EmbeddedResource Remove="Views\MeasurementUnits\**" />
+    <EmbeddedResource Remove="Views\Organization\**" />
+    <EmbeddedResource Remove="Views\Payment\**" />
+    <EmbeddedResource Remove="Views\PurchaseCancellations\**" />
+    <EmbeddedResource Remove="Views\PurchaseOrders\**" />
+    <EmbeddedResource Remove="Views\PurchaseOrder\**" />
+    <EmbeddedResource Remove="Views\ReceiveWorkOrder\**" />
+    <EmbeddedResource Remove="Views\SaleCancellationOrder\**" />
+    <EmbeddedResource Remove="Views\SaleOrders\**" />
+    <EmbeddedResource Remove="Views\SaleOrder\**" />
+    <EmbeddedResource Remove="Views\VatAccounts\**" />
+    <EmbeddedResource Remove="Views\VendorInfoes\**" />
+    <EmbeddedResource Remove="wwwroot\assets\**" />
+    <EmbeddedResource Remove="wwwroot\CustomJs\Production\**" />
+    <EmbeddedResource Remove="wwwroot\Reports\**" />
+    <EmbeddedResource Remove="wwwroot\Sales\**" />
+    <EmbeddedResource Remove="wwwroot\tooltipHtml\**" />
+    <EmbeddedResource Remove="wwwroot\UploadedFiles\7\**" />
+    <None Remove="Controllers\AddressInfo\**" />
+    <None Remove="Controllers\Adjustment\**" />
+    <None Remove="Controllers\Inventory\**" />
+    <None Remove="Controllers\Order\**" />
+    <None Remove="Controllers\Payment\**" />
+    <None Remove="Controllers\Procurement\**" />
+    <None Remove="Controllers\Purchase\**" />
+    <None Remove="Controllers\Salse\**" />
+    <None Remove="Controllers\VATAccounts\**" />
+    <None Remove="Controllers\VATReturn\**" />
+    <None Remove="obj\**" />
+    <None Remove="Views\AddressInfo\**" />
+    <None Remove="Views\BasicInfo\**" />
+    <None Remove="Views\Contact\**" />
+    <None Remove="Views\ContraVoucher\**" />
+    <None Remove="Views\Delivery\**" />
+    <None Remove="Views\Inventory\**" />
+    <None Remove="Views\IssueMaterial\**" />
+    <None Remove="Views\JournalVoucher\**" />
+    <None Remove="Views\Journal\**" />
+    <None Remove="Views\Jurnal\**" />
+    <None Remove="Views\ListOfProducts\**" />
+    <None Remove="Views\MeasurementUnits\**" />
+    <None Remove="Views\Organization\**" />
+    <None Remove="Views\Payment\**" />
+    <None Remove="Views\PurchaseCancellations\**" />
+    <None Remove="Views\PurchaseOrders\**" />
+    <None Remove="Views\PurchaseOrder\**" />
+    <None Remove="Views\ReceiveWorkOrder\**" />
+    <None Remove="Views\SaleCancellationOrder\**" />
+    <None Remove="Views\SaleOrders\**" />
+    <None Remove="Views\SaleOrder\**" />
+    <None Remove="Views\VatAccounts\**" />
+    <None Remove="Views\VendorInfoes\**" />
+    <None Remove="wwwroot\assets\**" />
+    <None Remove="wwwroot\CustomJs\Production\**" />
+    <None Remove="wwwroot\Reports\**" />
+    <None Remove="wwwroot\Sales\**" />
+    <None Remove="wwwroot\tooltipHtml\**" />
+    <None Remove="wwwroot\UploadedFiles\7\**" />
+    <TypeScriptCompile Remove="obj\**" />
+    <TypeScriptCompile Remove="wwwroot\CustomJs\Production\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controllers\BasicInfoController.cs" />
+    <Compile Remove="Controllers\ContactController.cs" />
+    <Compile Remove="Controllers\DeliveryController.cs" />
+    <Compile Remove="Controllers\IssueMaterialController.cs" />
+    <Compile Remove="Controllers\JournalController.cs" />
+    <Compile Remove="Controllers\JurnalController.cs" />
+    <Compile Remove="Controllers\ListOfProductsController.cs" />
+    <Compile Remove="Controllers\PurchaseOrdersController.cs" />
+    <Compile Remove="Controllers\VendorInfoesController.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Views\ProductMeasurementUnit\Delete.cshtml" />
+    <Content Remove="Views\ProductMeasurementUnit\Details.cshtml" />
+    <Content Remove="Views\Products\Create -apu.cshtml" />
+    <Content Remove="Views\Products\Index - Copy.cshtml" />
+    <Content Remove="Views\Purchase\Index - Copy.cshtml" />
+    <Content Remove="Views\Sales\SaleCancellations.cshtml" />
+    <Content Remove="Views\Sales\SaleCancellationsAccountsView.cshtml" />
+    <Content Remove="Views\Sales\SaleOrder.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="bundleconfig.json.bindings" />
+    <None Remove="Views\Customer\jron2ol5.1yv~" />
+    <None Remove="Views\Home\Dashboard.cshtml.css" />
+    <None Remove="Views\Home\dashboard.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\Home\About.cshtml" />
+    <None Include="Views\Home\Contact.cshtml" />
+    <None Include="Views\Home\Index.cshtml" />
+    <None Include="Views\Home\Privacy.cshtml" />
+    <Content Include="Views\MeasurementUnits\Create.cshtml" />
+    <Content Include="Views\MeasurementUnits\Delete.cshtml" />
+    <Content Include="Views\MeasurementUnits\Details.cshtml" />
+    <Content Include="Views\MeasurementUnits\Edit.cshtml" />
+    <Content Include="Views\MeasurementUnits\Index.cshtml" />
+    <Content Include="Views\MeasurementUnits\_ActionMenu.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Views\MeasurementUnits\_Index.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <None Include="Views\Shared\Error.cshtml" />
+    <None Include="Views\Shared\MvcGrid\_Grid.cshtml" />
+    <None Include="Views\Shared\MvcGrid\_Pager.cshtml" />
+    <None Include="Views\Shared\_CookieConsentPartial.cshtml" />
+    <None Include="Views\Shared\_Layout.cshtml" />
+    <None Include="Views\Shared\_ValidationScriptsPartial.cshtml" />
+    <None Include="Views\_ViewImports.cshtml" />
+    <None Include="Views\_ViewStart.cshtml" />
+    <None Include="wwwroot\images\login_image.svg" />
+    <None Include="wwwroot\mvc-grid\mvc-grid.js" />
+    <None Include="wwwroot\js\site.js" />
+    <None Include="wwwroot\js\site.min.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="JetBrains.Annotations" Version="2023.3.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="8.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.4">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.CodeAnalysis.Common" Version="4.8.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.8.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Features" Version="4.8.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Scripting" Version="4.8.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.8.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.Scripting.Common" Version="4.8.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.VisualBasic" Version="4.8.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.VisualBasic.Features" Version="4.8.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.Workspaces.Common" Version="4.8.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.Workspaces.MSBuild" Version="4.8.0" />
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.1.2" />
+    <PackageReference Include="Microsoft.DotNet.Scaffolding.Shared" Version="8.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
+    <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="5.3.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.0" />
+    <PackageReference Include="NonFactors.Grid.Mvc6" Version="7.2.0" />
+    <PackageReference Include="RecaptchaNet" Version="3.1.0" />
+    <PackageReference Include="ReportViewerCore.NETCore" Version="15.1.19" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Utility\Middleware\" />
+    <Folder Include="wwwroot\lib\" />
+    <Folder Include="wwwroot\ts\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\vms.entity\vms.entity.csproj" />
+    <ProjectReference Include="..\vms.ioc\vms.ioc.csproj" />
+    <ProjectReference Include="..\vms.service\vms.service.csproj" />
+    <ProjectReference Include="..\vms.utility\vms.utility.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Views\Adjustment\Create.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Authentication\Index (old).cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\CustomerLocal\Details.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\CustomerSubscriptionCategory\Edit.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\CustomerSubscriptionCategory\Index.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\CustomerSubscriptionCategory\_ActionMenu.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\CustomerSubscriptionCategory\_index.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\Mushak\MushakSixPointSevenForSalesPriceReduceList.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Mushak\TdsCertificateList.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Mushak\MushakSixPointSixList.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Mushak\MushakSixPointFiveList.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Mushak\MushakSixPointThreeList.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\NewReports\partials\_Footer.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\InputOutputCoEfficient\Create.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\InputOutputCoEfficient\Delete.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\InputOutputCoEfficient\Details.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\InputOutputCoEfficient\Edit.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\InputOutputCoEfficient\Index.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Products\CreateProductByType.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\PurchaseForeign\Details.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\PurchaseLocal\Details.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\PurchaseReports\partials\_Footer.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\SalesReports\partials\_Footer.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Products\Create.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Products\Delete.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Products\Details.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Products\Edit.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Products\Index.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Reports\Highvalue\_part1.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Reports\Highvalue\_part2.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Reports\HTMLMushaks\_PurchaseSaleCalBook.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Reports\HTMLMushaks\_VDSMushak.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Reports\HTMLMushaks\_SaleCalBook.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Reports\HTMLMushaks\_PurchaseCalBook.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Reports\MushakReturnEng\_ca.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Reports\MushakReturnEng\_cha.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Reports\MushakReturnEng\_ga.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Reports\MushakReturnEng\_gha.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Reports\MushakReturnEng\_kha.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Reports\MushakReturnEng\_part10.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Reports\MushakReturnEng\_part11.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Reports\MushakReturnEng\_part12.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Reports\MushakReturnEng\_part2.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Reports\MushakReturnEng\_part3.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Reports\MushakReturnEng\_part4.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Reports\MushakReturnEng\_part5.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Reports\MushakReturnEng\_part6.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Reports\MushakReturnEng\_part7.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Reports\MushakReturnEng\_part8.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Reports\MushakReturnEng\_part9.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Reports\MushakReturnEng\_ungho.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Reports\MushakReturnENGBk\_ca.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Reports\MushakReturnENGBk\_cha.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Reports\MushakReturnENGBk\_ga.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Reports\MushakReturnENGBk\_gha.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Reports\MushakReturnENGBk\_ka.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Reports\MushakReturnENGBk\_kha.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Reports\MushakReturnENGBk\_part1.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Reports\MushakReturnENGBk\_part10.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Reports\MushakReturnENGBk\_part11.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Reports\MushakReturnENGBk\_part12.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Reports\MushakReturnENGBk\_part2.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Reports\MushakReturnENGBk\_part3.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Reports\MushakReturnENGBk\_part4.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Reports\MushakReturnENGBk\_part5.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Reports\MushakReturnENGBk\_part6.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Reports\MushakReturnENGBk\_part7.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Reports\MushakReturnENGBk\_part8.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Reports\MushakReturnENGBk\_part9.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Reports\MushakReturnENGBk\_ungho.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Reports\MushakReturn\_part8.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Reports\MushakReturn\_part9.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Reports\_MushakHighValue.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Reports\_MushakReturnRowRemovedEng.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Reports\_MushakReturnRowRemoved.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Reports\_MushakReturnENG.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Reports\_MushakReturn.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Reports\MushakReturn\_cha.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Reports\MushakReturn\_ca.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Reports\MushakReturn\_ungho.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Reports\MushakReturn\_gha.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Reports\MushakReturn\_ga.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Reports\MushakReturn\_kha.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Reports\MushakReturn\_part12.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Reports\MushakReturn\_part11.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Reports\MushakReturn\_part10.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Reports\MushakReturn\_part7.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Reports\MushakReturn\_part6.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Reports\MushakReturn\_part5.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Reports\MushakReturn\_part4.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Reports\MushakReturn\_part3.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Reports\MushakReturn\_part2.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Sales\DetailsNew.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Shared\Purchase\_PurchaseSubLink.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\Shared\_Confirmation.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Shared\_HeaderPartialBk.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Shared\_LayoutBk.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Shared\_LeftPanelPartialBk.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\SubscriptionBill\InitializeBill.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\RdlcDataSet\Mushak\MushakDataSet.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>MushakDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Update="wwwroot\RdlcDataSet\Mushak\MushakDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>MushakDataSet.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Update="wwwroot\RdlcDataSet\Mushak\MushakReturnDataSet.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>MushakReturnDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Update="wwwroot\RdlcDataSet\Mushak\MushakReturnDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>MushakReturnDataSet.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Update="wwwroot\RdlcDataSet\Report\ReportDataSet.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ReportDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Update="wwwroot\RdlcDataSet\Report\ReportDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ReportDataSet.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Update="wwwroot\RdlcDataSet\Report\ReportDataSet.xss">
+      <DependentUpon>ReportDataSet.xsd</DependentUpon>
+    </Content>
+  </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\CustomerSubscriptionCategory\Create.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\CustomerSubscriptionCategory\Create.cshtml" />
+  </ItemGroup>
+  </Project>

@@ -1,0 +1,396 @@
+﻿@using Microsoft.Extensions.Options
+@inject IOptions<PrivateDataModel> PrivateDataModelAccessor
+@{
+    var session = Context.Session.GetComplexData<VmUserSession>(ControllerStaticData.SESSION);
+    var defaultDropdownValue = PrivateDataModelAccessor.Value.DefaultDropDownValue;
+}
+@{
+    ViewData["Title"] = "Index";
+    
+}
+
+@section contentheader
+    {
+    <div class="p-3 page-header">
+        Purchase
+    </div>
+
+    <div class="form-group p-2">
+        <div class="custom-control custom-checkbox custom-control-inline">
+            <input type="checkbox" id="IsImport" name="IsImport" class="custom-control-input">
+            <label class="custom-control-label" for="IsImport">
+                Is Import?
+            </label>
+        </div> 
+        <div class="custom-control custom-checkbox custom-control-inline">
+            <input type="checkbox" name="IsVatDeductedInSource" id="IsVatDeductedInSource" class="custom-control-input">
+            <label class="custom-control-label" for="IsVatDeductedInSource">
+                Is VDS?
+            </label>
+        </div>
+    </div>
+
+
+}
+<input type="hidden" class="form-control form-control-sm" id="ProductId" name="ProductId" />
+
+
+
+
+<form class="from-group-custom" method="post" id="purchaseForeign">
+    <div class="row pl-3">
+        <div class="col-md-3 vds_element form-group">
+            <label class="form-label">VDS Amount</label>
+            <div class="input-group ">
+                <input type="text" class="form-control form-control-sm " id="VDSAmount" name="VDSAmount" value="0" maxlength="10">
+            </div>
+        </div>
+        <div class="col-md-3 vds_element form-group">
+            <label class="form-label">Vendor<span class="label-color">*</span> </label>
+            <select id="VendorId" name="VendorId" class="form-select form-select-sm" asp-items="ViewBag.VendorId">
+                <option value="@defaultDropdownValue"></option>
+            </select>
+        </div>
+        <div class="col-md-3 p_element  form-group">
+            <label class="form-label">Vendor<span class="label-color">*</span> </label>
+            <select id="VendorIdImport" name="VendorIdImport" class="form-select form-select-sm " asp-items="ViewBag.VendorIdImport">
+                <option value="@defaultDropdownValue"></option>
+            </select>
+
+        </div>
+        <div class="col-md-3 form-group">
+            <label class="form-label">Reason<span class="label-color">*</span> </label>
+
+            <select id="PurchaseReasonId" name="PurchaseReasonId" class="form-select form-select-sm " asp-items="ViewBag.PurchaseReasonId">
+                <option value=@defaultDropdownValue></option>
+            </select>
+
+        </div>
+        <div class="col-md-3 form-group">
+            <label class="form-label">V.Inv. No.<span class="label-color">*</span></label>
+            <input type="text" name="VendorInvoiceNo" id="VendorInvoiceNo" class="form-control form-control-sm" placeholder="Vendor Invoice No">
+        </div>
+
+        <div class="col-md-3 form-group">
+            <label class="form-label">Disc.Total</label>
+            <input type="text" name="Discount" id="Discount" class="form-control form-control-sm " placeholder="00" maxlength="10">
+        </div>
+        <div class="col-md-3 form-group vds_element">
+            <label class="form-label">Vat Cha. No.<span class="label-color">*</span></label>
+            <input type="text" class="form-control form-control-sm " id="VatChallanNo" name="VatChallanNo" placeholder="#">
+        </div>
+
+        <div class="col-md-3 form-group vds_element">
+            <label class="form-label">Challan Date</label>
+
+            <input type="datetime-local" class="form-control form-control-sm " id="VatChallanIssueDate" name="VatChallanIssueDate" value="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")">
+
+        </div>
+        <div class="col-md-3 p_element form-group">
+            <label class="form-label">Lc No.</label>
+
+            <input type="text" class="form-control form-control-sm " id="LcNo" name="LcNo" placeholder="">
+
+        </div>
+        <div class="col-md-3 p_element form-group">
+            <label class="form-label">Lc Date</label>
+            <input type="date" class="form-control form-control-sm " id="LcDate" name="LcDate" placeholder="" value="@DateTime.Now.ToString(DefinedDateFormat.DateFormatForControl)">
+
+        </div>
+        <div class="col-md-3 p_element form-group">
+            <label class="form-label">Bill Of Entry</label>
+            <input type="text" class="form-control form-control-sm " id="BillOfEntry" name="BillOfEntry" placeholder="">
+        </div>
+        <div class="col-md-3  p_element form-group">
+            <label class="form-label">BOE Date</label>
+            <input type="date" class="form-control form-control-sm " id="BillOfEntryDate" name="BillOfEntryDate" placeholder="" value="@DateTime.Now.ToString(DefinedDateFormat.DateFormatForControl)">
+        </div>
+        <div class="col-md-3  p_element form-group">
+            <label class="form-label">Due Date</label>
+            <input type="date" class="form-control form-control-sm " id="DueDate" name="DueDate" placeholder="" value="@DateTime.Now.AddDays(60).ToString(DefinedDateFormat.DateFormatForControl)">
+
+        </div>
+        <div class="col-md-3 p_element form-group">
+            <label class="form-label">Terms Of Lc</label>
+            <input type="text" class="form-control form-control-sm " id="TermsOfLc" name="TermsOfLc" placeholder="">
+        </div>
+        <div class="col-md-3  p_element form-group">
+            <label class="form-label">P/O No.</label>
+            <input type="text" class="form-control form-control-sm " id="PoNumber" name="PoNumber" placeholder="">
+
+        </div>
+        <div class="col-md-3 p_element form-group">
+            <label class="form-label">ATP Date</label>
+            <input type="date" class="form-control form-control-sm " name="ATPDate" id="ATPDate" value="@DateTime.Now.ToString(DefinedDateFormat.DateFormatForControl)" />
+
+        </div>
+        <div class="col-md-3 p_element form-group">
+            <label class="form-label">VAT Commissionarate</label>
+            <select id="CustomsAndVATCommissionarateId" name="CustomsAndVATCommissionarateId" class="form-select form-select-sm" asp-items="ViewBag.CustomsAndVatcommissionarateId">
+                <option value=@defaultDropdownValue></option>
+            </select>
+
+        </div>
+        <div class="col-md-3 p_element form-group">
+            <label class="form-label">ATP Bank Branch</label>
+            <select id="ATPBankBranchId" name="ATPBankBranchId" class="form-select form-select-sm" asp-items="ViewBag.ATPBankBranchId">
+                <option value=@defaultDropdownValue></option>
+            </select>
+
+        </div>
+        <div class="col-md-3 p_element form-group">
+            <label class="form-label">ATP Bank Branch Name</label>
+            <input type="text" class="form-control form-control-sm " name="ATPBankBranchName" id="ATPBankBranchName" />
+
+        </div>
+        <div class="col-md-3 p_element form-group">
+            <label class="form-label">Economic Code</label>
+            <select id="ATPNbrEconomicCodeId" name="ATPNbrEconomicCodeId" class="form-select form-select-sm" asp-items="ViewBag.NbrEconomicCodeId">
+                <option value=null></option>
+            </select>
+        </div>
+        <div class="col-md-3 p_element form-group">
+            <label class="form-label">ATP Challan No</label>
+            <input type="text" class="form-control form-control-sm " id="ATPChallanNo" name="ATPChallanNo">
+
+
+        </div>
+        <div class="col-md-3 p_element form-group">
+            <label class="form-label">Adv. Tax Paid Amount</label>
+            <input type="text" class="form-control form-control-sm " id="AdvanceTaxPaidAmount" name="AdvanceTaxPaidAmount" value="0" maxlength="10">
+
+        </div>
+
+
+
+        <div class="col-md-12">
+            <h6>Purchase Details</h6>
+            <table class="table table-bordered form-table" id="gridTable">
+                <thead>
+                    <tr>
+                        <th>Sl</th>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th>AV</th>
+                        <th>Discount</th>
+                        <th class="minWidth100">M. Unit</th>
+                        <th>Unit Price</th>
+                        <th>SD.(%)</th>
+                        <th class="details_element">CD (%)</th>
+                        <th class="details_element">ID (%)</th>
+                        <th class="details_element">RD (%)</th>
+                        <th class="details_element">AT (%)</th>
+                        <th class="details_element">AIT (%)</th>
+                        <th>VAT Type</th>
+                        <th>VAT Rate</th>
+                        <th>VAT</th>
+                        <th>Total</th>
+                        <th>
+                        </th>
+                    </tr>
+                    <tr>
+
+                        <td></td>
+                        <td class="form-group">
+                            <div>
+                                <input type="text" class="form-control form-control-sm " id="Product" name="Product">
+                            </div>
+                        </td>
+                        <td class="form-group">
+                            <div>
+                                <input type="text" class="form-control form-control-sm " id="item" name="item" readonly>
+                            </div>
+                        </td>
+
+                        <td class="form-group">
+                            <div>
+                                <input type="text" class="form-control form-control-sm " id="amount" name="amount" />
+                            </div>
+                        </td>
+                        <td class="form-group">
+                            <div>
+                                <input type="text" class="form-control form-control-sm" id="DiscountPerItem" value="0" name="DiscountPerItem" />
+                            </div>
+                        </td>
+                        <td class="form-group">
+
+                            <select id="unit" name="unit" class="form-select form-select-sm" asp-items="ViewBag.MeasurementUnitId">
+                                <option value=null></option>
+                            </select>
+                        </td>
+                        <td class="form-group">
+                            <input type="text" class="form-control form-control-sm" id="Amount" name="Amount" readonly />
+                        </td>
+
+                        <td class="form-group">
+                            <div>
+                                <input type="text" class="form-control form-control-sm" id="SupplementaryDutyPercent" name="SupplementaryDutyPercent" />
+                            </div>
+                        </td>
+
+                        <td class="form-group details_element">
+                            <div>
+                                <input type="text" class="form-control form-control-sm" id="customDuty" name="customDuty" />
+                            </div>
+                        </td>
+                        <td class="form-group details_element" hidden>
+                            <div>
+                                <input type="text" class="form-control form-control-sm" id="DefaultImportDutyPercent" name="DefaultImportDutyPercent" />
+                            </div>
+                        </td>
+                        <td class="form-group details_element">
+                            <div>
+                                <input type="text" class="form-control form-control-sm" id="DefaultRegulatoryDutyPercent" name="DefaultRegulatoryDutyPercent" />
+                            </div>
+                        </td>
+                        <td class="form-group details_element">
+                            <div>
+                                <input type="text" class="form-control form-control-sm" id="DefaultAdvanceTaxPercent" name="DefaultAdvanceTaxPercent" />
+                            </div>
+                        </td>
+                        <td class="form-group details_element">
+                            <div>
+                                <input type="text" class="form-control form-control-sm" id="DefaultAdvanceIncomeTaxPercent" name="DefaultAdvanceIncomeTaxPercent" />
+                            </div>
+                        </td>
+                        <td class="form-group">
+                            <select id="VatTypeId" name="VatTypeId" class="form-select form-select-sm" asp-items="ViewBag.VatType"></select>
+                        </td>
+                        <td class="form-group">
+                            <input type="text" id="VAT" name="VAT" class="form-control form-control-sm" />
+                        </td>
+                        <td>
+                            <label id="vatValue" name="vatValue"></label>
+                        </td>
+                        <td>
+                            <label id="totalValue" name="totalValue"></label>
+                        </td>
+                        <td class="single-button-action-column">
+                            <a id="add" class="btn btn-sm btn-success" aria-label="Left Align">
+                                <i class="bi bi-plus-lg"></i>
+
+                            </a>
+                        </td>
+                    </tr>
+                </thead>
+
+                <tbody id="tblPurchaseOD"></tbody>
+                <tfoot>
+                </tfoot>
+            </table>
+
+        </div>
+    </div>
+
+
+    <div class="row pl-3">
+        <div class="col-md-4">
+            <h6>Document</h6>
+            <table class="table table-bordered form-table" id="contentTable">
+                <thead>
+                    <tr>
+                        <th>Sl</th>
+                        <th>Type</th>
+                        <th>File</th>
+                        <th></th>
+                    </tr>
+                <tr>
+                    <td></td>
+                    <td class="form-group">
+                        <select id="DocumentTypeId" name="DocumentTypeId" class="form-select form-select-sm" asp-items="ViewBag.DocumentTypeId">
+                            <option value="@null"></option>
+                        </select>
+                    </td>
+                    <td class="form-group">
+                        <div class="custom-file">
+                            <input type="file" name="FileUpload" id="FileUpload" class="form-control form-control-sm"/>
+                        </div>
+                    </td>
+                    <td class="single-button-action-column">
+                        <a id="addDocument" class="btn btn-sm btn-success" aria-label="Left Align">
+                            <i class="bi bi-plus-lg"></i>
+                        </a>
+                    </td>
+                </tr>
+                </thead>
+                <tbody id="contentTabledt"></tbody>
+                <tfoot>
+                </tfoot>
+            </table>
+        </div>
+
+        <div class="col-md-8">
+            <h6>Payment Info</h6>
+            <table class="table table-bordered form-table" id="payment">
+                <thead>
+                    <tr>
+                        <th>Sl</th>
+                        <th>Method</th>
+                        <th>Cheque No.</th>
+                        <th>Amount</th>
+                        <th>Date</th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td class="form-group">
+
+                            <select id="PaymentMethodId" name="PaymentMethodId" class="form-select form-select-sm" asp-items="ViewBag.PaymentMethodId">
+                                <option value=null></option>
+                            </select>
+                        </td>
+                        <td class="form-group">
+                            <div>
+                                <input type="text" name="ChequeNumber" id="ChequeNumber" class="form-control form-control-sm chequeSelection" autocomplete="off" hidden />
+                            </div>
+                        </td>
+                        <td class="form-group">
+                            <div>
+                                <input type="text" name="PaidAmount" id="PaidAmount" class="form-control form-control-sm" autocomplete="off" value="0" maxlength="10" />
+                            </div>
+                        </td>
+                        <td class="form-group">
+                            <div>
+                                <input type="date" name="PaymentDate" id="PaymentDate" class="form-control form-control-sm" value="@DateTime.Now.ToString(DefinedDateFormat.DateFormatForControl)" autocomplete="off" />
+                            </div>
+                        </td>
+                        <td class="single-button-action-column">
+                            <a id="addPayment" class="btn btn-sm btn-success" aria-label="Left Align">
+                                <i class="bi bi-plus-lg"></i>
+                            </a>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody id="paymentdt"></tbody>
+                <tfoot>
+                </tfoot>
+            </table>
+        </div>
+        <div class="col-md-12 text-right">
+            <button type="button" class="btn btn-primary btn-sm" id="save"><i class="bi bi-check-lg"></i> Submit</button>
+            <button type="button" value="Reset" onclick="location.reload();" class="btn btn-warning btn-sm"><i class="bi bi-arrow-repeat"></i> Reset</button>
+            <a asp-action="Index" class="btn btn-secondary btn-sm"><i class="bi bi-slash-circle"></i> Cancel</a>
+        </div>
+    </div>
+</form>
+
+
+@section Scripts{
+
+    <script src="~/js/typeahead.bundle.js"></script>
+    <script src="~/js/jquery-ui.js"></script>
+    <script src="~/CustomJs/Purchase.js?vguid=@ViewStaticData.StaticFileVersionGuid"></script>
+    <script type="text/javascript">
+     
+        $('.p_element').hide();
+        $('.vds_element').show();
+        $('.details_element').hide();
+
+        var getVDS = '@Url.Action("GetAllProductType", "ProductVattypes")';
+        var save='@Url.Action("CreateAsync", "Purchase")';
+        var returnURL = '@Url.Action("Index", "Purchase")';
+        var detailsAutoComplete='@Url.Action("PurchaseProductAutoComplete", "Products")';
+    </script>
+
+
+}

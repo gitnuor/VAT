@@ -1,0 +1,69 @@
+﻿@model vms.entity.models.VehicleType
+
+@{
+    ViewData["Title"] = "Create Vehicle Type";
+
+}
+@section contentheader
+    {
+    <div class="p-3 page-header">
+        Create Vehicle Type
+    </div>
+}
+
+
+
+<div class="row">
+    <div class="col-md-4 offset-4">
+        <form asp-action="Create" method="post" class="form-horizontal" id="frmusercreate">
+            <div class="form-body">
+                <div class="form-group ">
+                    <label asp-for="VehicleTypeName">Vehicle Type Name</label>
+                    <div>
+                        <input asp-for="VehicleTypeName" />
+                        <span asp-validation-for="VehicleTypeName"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Description">Description </label>
+                    <div>
+                        <textarea asp-for="Description"></textarea>
+                        <span asp-validation-for="Description"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @* <div class="custom-control custom-checkbox custom-control-inline">
+                        <input asp-for="IsRequireRegistration" class="custom-control-input" />
+                        <label asp-for="IsRequireRegistration" class="control-label"></label>
+                    </div> *@
+                    <div class="form-check form-switch complex-form-checkbox">
+                        <input type="checkbox" asp-for="IsRequireRegistration" class="form-check-input">
+                        <label asp-for="IsRequireRegistration" class="form-check-label"></label>
+                        <span asp-validation-for="IsRequireRegistration"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @* <div class="custom-control custom-checkbox custom-control-inline">
+                        <input asp-for="IsActive" class="custom-control-input" />
+                        <label asp-for="IsActive" >Is Active?</label>
+                    </div> *@
+                    <div class="form-check form-switch complex-form-checkbox">
+                        <input type="checkbox" asp-for="IsActive" class="form-check-input">
+                        <label asp-for="IsActive" class="form-check-label"></label>
+                        <span asp-validation-for="IsActive"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="float-end mt-3">
+                <button type="submit" data-requiredconfirmation="true" class="btn  btn-primary btn-sm"><i class="bi bi-check-lg"></i> Submit</button>
+                <button type="button" value="Reset" onclick="location.reload();" class="btn  btn-warning btn-sm"><i class="bi bi-arrow-repeat"></i> Reset</button>
+                <a asp-controller="VehicleType" asp-action="Index" class="btn btn-secondary btn-sm"><i class="bi bi-slash-circle"></i> Cancel</a>
+            </div>
+
+
+        </form>
+    </div>
+</div>
+

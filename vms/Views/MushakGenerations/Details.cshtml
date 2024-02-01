@@ -1,0 +1,42 @@
+﻿@model vms.entity.models.MushakGeneration
+
+@{
+    ViewData["Title"] = "Details";
+    
+}
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="custom-page-title">Mushak Generation Details</h1>
+    </div>
+</div>
+
+<div class="row">
+
+    <div class="col-md-12 ">
+        <div class="col-md-5 ">
+
+            <div class="col-md-12 ">
+                <div class="form-group">
+
+                    <label for="form_control">Mushak For Year :@Model.MushakForYear</label>
+                </div>
+            </div>
+
+            <div class="col-md-12 ">
+                <div class="form-group">
+
+                    <label for="form_control">Mushak For Month : @Model.MushakForMonth</label>
+                </div>
+            </div>
+            <div class="col-md-12 ">
+                <div class="form-group">
+                    <label for="form_control_1">Generate Date : @Model.GenerateDate</label>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+</div>

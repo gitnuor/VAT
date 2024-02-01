@@ -1,0 +1,42 @@
+﻿@model IEnumerable<vms.entity.models.Sale>
+@{
+    Layout = "_LayoutMushak";
+    ViewData["Title"] = "Mushak- 6.3 (Chalan List)";
+    
+}
+
+@section contentheader
+    {
+    <div class="p-3 page-header">
+        Mushak-6.3 (Chalan List)
+    </div>
+}
+
+
+<scrollable-grid-container>
+	@(Html.Grid(Model).Build(columns =>
+	{
+		columns.Add(model => model.InvoiceNo).Titled("Invoice");
+		columns.Add(model => model.SalesDate).Titled("Sales Date").Formatted("{0:dd/MM/yyyy}");
+		columns.Add(model => model.InvoiceDate).Titled("Invoice Date").Formatted("{0:dd/MM/yyyy}");
+		columns.Add(model => model.VatChallanNo).Titled("Challan No");
+		columns.Add(model => model.TaxInvoicePrintedTime).Titled("Challan Time").Formatted("{0:dd/MM/yyyy hh:mm:ss tt}");
+		columns.Add(model => model.Customer.Name).Titled("Customer Name");
+		columns.Add(model => model.TotalPriceWithoutVat)
+			.Titled(Html.Raw("<div style='min-width: 60px;' data-bs-toggle='tooltip' title='Price Excluding VAT'>Price<sup><i class='bi bi-question-circle'></i></sup><div>"))
+			.AppendCss("text-right").RenderedAs(model => StringGenerator.DecimalToCommaSeparated(model.TotalPriceWithoutVat));
+		columns.Add(model => model.TotalVat)
+			.Titled(Html.Raw("<div style='min-width: 60px;' data-bs-toggle='tooltip' title='Total VAT'>Price<sup><i class='bi bi-question-circle'></i></sup><div>"))
+			.AppendCss("text-right").RenderedAs(model => StringGenerator.DecimalToCommaSeparated(model.TotalVat));
+		columns.Add(model => model.PaymentDueAmount)
+			.Titled(Html.Raw("<div style='min-width: 60px;' data-bs-toggle='tooltip' title='Due Amount'>Price<sup><i class='bi bi-question-circle'></i></sup><div>"))
+			.AppendCss("text-right").RenderedAs(model => StringGenerator.DecimalToCommaSeparated(model.PaymentDueAmount));
+			columns.Add().Encoded(false).RenderedAs(data => Html.PartialAsync("LinkPartial/_MushakSixPointThreeListActionMenu", data).Result)
+			.Titled(Html.Raw("<i class='bi bi-activity'></i>")).AppendCss("action-col-freez");
+	})
+		.AppendCss("large-index-grid")
+		.Empty("No data found")
+		.Filterable(GridFilterType.Double)
+		.Sortable()
+		.Pageable())
+</scrollable-grid-container>

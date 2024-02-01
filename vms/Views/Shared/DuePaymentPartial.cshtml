@@ -1,0 +1,78 @@
+﻿@model vms.entity.viewModels.VmDuePayment
+
+<div class="form-group">
+    <label class="form-label" asp-for="PaymentMethodId"></label>
+    <select asp-for="PaymentMethodId" class="searchable-dropdown" data-live-search="true" data-style="bootstrap-select-option">
+        <option value="@null">Select Method</option>
+        @if (Model.PaymentMethodList.Any())
+        {
+            foreach (var paymentMethod in Model.PaymentMethodList)
+            {
+                <option value="@paymentMethod.PaymentMethodId" data-is-banking-channel="@paymentMethod.IsBankingChannel" data-is-mobile-transaction="@paymentMethod.IsMobileTransaction">@paymentMethod.Name</option>
+            }
+        }
+    </select>
+    <span asp-validation-for="PaymentMethodId" class="text-danger"></span>
+</div>
+<div class="form-group mt-3 payment-bank d-none">
+    <label class="form-label" asp-for="BankId"></label>
+    <select asp-for="BankId" id="bankId" asp-items="Model.BankSelectList.CustomSelectListToSelectList()" class="searchable-dropdown" data-live-search="true" data-style="bootstrap-select-option">
+        <option value="@null">Select Bank</option>
+    </select>
+    <span asp-validation-for="BankId" class="text-danger"></span>
+</div>
+<div class="form-group mt-3 payment-mobile d-none">
+    <label class="form-label" asp-for="MobilePaymentWalletNo"></label>
+    <input type="text" id="mobilePaymentWalletNo" asp-for="MobilePaymentWalletNo" class="form-control form-control-sm">
+    <span asp-validation-for="MobilePaymentWalletNo" class="text-danger"></span>
+</div>
+
+
+<div class="form-group mt-3 payment-bank payment-mobile d-none">
+    <label class="form-label" asp-for="DocumentNoOrTransactionId"></label>
+    <input type="text" id="documentNoOrTransactionId" asp-for="DocumentNoOrTransactionId" class="form-control form-control-sm">
+    <span asp-validation-for="DocumentNoOrTransactionId" class="text-danger"></span>
+</div>
+
+
+<div class="form-group mt-3 payment-bank payment-mobile d-none">
+    <label class="form-label" asp-for="PaymentDocumentOrTransDate"></label>
+    <input type="date" id="paymentDocumentOrTransDate" asp-for="PaymentDocumentOrTransDate" min='2000-01-01' max='@DateTime.Now.ToString("yyyy-MM-dd")' class="form-control form-control-sm">
+    <span asp-validation-for="PaymentDocumentOrTransDate" class="text-danger"></span>
+</div>
+
+<div class="form-group mt-3">
+    <label class="form-label" asp-for="PaymentDate"></label>
+    <input type="date" asp-for="PaymentDate" id="paymentDate" min='2000-01-01' max='@DateTime.Now.ToString("yyyy-MM-dd")' class="form-control form-control-sm">
+    <span asp-validation-for="PaymentDate" class="text-danger"></span>
+</div>
+
+<div class="form-group mt-3">
+    <label class="form-label">Payable Amount : </label>
+    <div>
+        <input asp-for="PayableAmount" class="form-control form-control-sm" readonly />
+        <span asp-validation-for="PayableAmount" class="text-danger"></span>
+    </div>
+</div>
+<div class="form-group mt-3">
+    <label class="form-label">Paid Amount : </label>
+    <div>
+        <input asp-for="PrevPaidAmount" class="form-control form-control-sm" readonly />
+        <span asp-validation-for="PrevPaidAmount" class="text-danger"></span>
+    </div>
+</div>
+<div class="form-group mt-3">
+    <label class="form-label">Due Amount : </label>
+    <div>
+        <input asp-for="DueAmount" class="form-control form-control-sm" readonly />
+        <span asp-validation-for="DueAmount" class="text-danger"></span>
+    </div>
+</div>
+
+<div class="form-group mt-3">
+    <label class="form-label" asp-for="PaidAmount"></label>
+    <div>
+        <input type="number" asp-for="PaidAmount" class="form-control form-control-sm" />
+        <span asp-validation-for="PaidAmount" class="text-danger"></span>
+    </div>
+</div>

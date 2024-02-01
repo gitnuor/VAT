@@ -1,0 +1,244 @@
+﻿@model vms.entity.viewModels.VmCalculationBookParam
+
+
+     
+            <div class="row">
+                
+                <div class="col-12">
+                    <div class="mushak-name">Mushak- 6.2.1</div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 report-header">
+                    
+                    <div class="company-other-info">"Government of the People's Republic of Bangladesh"</div>
+                    <div class="company-other-info">National Board of Revenue (NBR)</div>
+                    <div class="company-name mt-2">@Model.OrgName</div>
+                    <div class="company-other-info">@Model.OrgAddress</div>
+                    <div class="company-other-info">@Model.OrgBin</div>
+                    <div class="sub-header">Purchase-Sales Ledger</div>
+                    <div class="sub-header">
+                        (Applicable to registered or enlisted persons involved in the processing of goods or services)
+                    </div>
+                    <div class="sub-header">
+                        [Note clause (kha kha) of sub-rule (1) of rule 40 and rule 41 (ka)]
+                    </div>
+
+                </div>
+            </div>
+ 
+            <div class="row">
+                <div class="col-12">
+
+                    <table class="table table-bordered align-middle" style="text-align:center">
+                        <thead>
+
+                            <tr>
+                                <td rowspan="3">
+                                    Serial No.
+                                </td>
+                                <td rowspan="3">
+                                    Date
+                                </td>
+                                <td colspan="2">
+                                    Salable Products Initial
+                                </td>
+                                <td colspan="2">
+                                    Purchase
+                                </td>
+                                <td>
+                                    Total Products
+                                </td>
+                                <td colspan="3" rowspan="2">
+                                    Vendor Information
+                                </td>
+                                <td colspan="2">
+                                    Purchase Invoice/Bill
+                                </td>
+                                <td colspan="5">
+                                    Description of Products Sold/Supplied
+                                </td>
+                                <td colspan="3" rowspan="2">
+                                    Buyer Information
+                                </td>
+                                <td colspan="2">
+                                    Details of Sales Invoices
+                                </td>
+                                <td>
+                                    Product Margin
+                                </td>
+                                <td rowspan="3">
+                                    Remarks
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td rowspan="2">
+                                    Description
+                                </td>
+                                <td rowspan="2">
+                                    Quantity (Unit)
+                                </td>
+                                <td rowspan="2">
+                                    Price (Excluding All Types of Taxes)
+                                </td>
+                                <td rowspan="2">
+                                    Price (Excluding All Types of Taxes)
+                                </td>
+                                <td rowspan="2">
+                                    Quantity (Unit)
+                                </td>
+                                @*<td rowspan="2">
+            Price (Excluding All Types of Taxes)
+        </td>*@
+
+                                <td rowspan="2">
+                                    Number
+                                </td>
+                                <td rowspan="2">
+                                    Date
+                                </td>
+                                <td rowspan="2">
+                                    Description
+                                </td>
+                                <td rowspan="2">
+                                    Quantity
+                                </td>
+                                <td rowspan="2">
+                                    Taxable Value (All Types)
+                                </td>
+                                <td rowspan="2">
+                                    Supplementary Duty (If Any)
+                                </td>
+                                <td rowspan="2">
+                                    Mushak
+                                </td>
+
+                                <td rowspan="2">
+                                    Number
+                                </td>
+                                <td rowspan="2">
+                                    Date
+                                </td>
+                                <td rowspan="2">
+                                    Quantity (Unit)
+                                </td>
+                                @*<td rowspan="2">
+            Price (Excluding All Types of Taxes)
+        </td>*@
+
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    Name
+                                </td>
+                                <td>
+                                    Address
+                                </td>
+                                <td>
+                                    Registration/Enrollment/National Identity Card
+                                </td>
+                                <td>
+                                    Name
+                                </td>
+                                <td>
+                                    Address
+                                </td>
+                                <td>
+                                    Registration/Enrollment/National Identity Card
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <td>(1)</td>
+                                <td>(2)</td>
+                                <td>(3)</td>
+                                <td>(4)</td>
+                                <td>(5)</td>
+                                <td>(6)</td>
+                                <td>(7) = (4+5)</td>
+                                <td>(8)</td>
+                                <td>(9)</td>
+                                <td>(10)</td>
+                                <td>(11)</td>
+                                <td>(12)</td>
+                                <td>(13)</td>
+                                <td>(14)</td>
+                                <td>(15)</td>
+                                <td>(16)</td>
+                                <td>(17)</td>
+                                <td>(18)</td>
+                                <td>(19)</td>
+                                <td>(20)</td>
+                                <td>(21)</td>
+                                <td>(22)</td>
+                                <td>(23) = (7-14)</td>
+                                <td>(24)</td>
+                                @*<td>(25)</td>*@
+                                @*<td>(26)</td>*@
+                            </tr>
+                        </thead>
+                        <tbody style="text-align:center">
+                            @if (Model.PurchaseSaleCalcBook.Count() > 0)
+                            {
+                                foreach (var type in Model.PurchaseSaleCalcBook)
+                                {
+                            <tr>
+                                <td class="text-right">@type.SlNo</td>
+                                <td class="text-center">@StringGenerator.DateTimeToStringWithoutTime(type.TransactionTime)</td>
+                                <td>@type.ProductName</td>
+                                <td class="text-right">@StringGenerator.DecimalToCommaSeparated(type.InitialQty) (@type.MeasurementUnitName)</td>
+                                <td class="text-right">@StringGenerator.DecimalToCommaSeparated(type.PurchaseQty) (@type.MeasurementUnitName)</td>
+                                <td class="text-right">@StringGenerator.DecimalToCommaSeparated(type.PurchasePriceWithoutVat)</td>
+                                <td class="text-right">@StringGenerator.DecimalToCommaSeparated(type.QtyAfterPurchase) (@type.MeasurementUnitName)</td>
+                                <td>@type.VendorName</td>
+                                <td>@type.VendorAddress</td>
+                                <td>@type.VendorBinOrNidNo</td>
+                                <td>@type.PurcVatChallanOrBillOfEntryNo</td>
+                                <td class="text-center">@StringGenerator.DateTimeToStringWithoutTime(type.PurcVatChallanOrBillOfEntryDate)</td>
+                                <td>@type.ProductName</td>
+                                <td class="text-right">@StringGenerator.DecimalToCommaSeparated(type.SoldQty) (@type.MeasurementUnitName)</td>
+                                <td class="text-right">@StringGenerator.DecimalToCommaSeparated(type.SalesPriceWithoutVat)</td>
+                                <td class="text-right">@StringGenerator.DecimalToCommaSeparated(type.SalesSupplimentaryDuty)</td>
+                                <td class="text-right">@StringGenerator.DecimalToCommaSeparated(type.SalesVat)</td>
+                                <td>@type.CustomerName</td>
+                                <td>@type.CustomerAddress</td>
+                                <td>@type.CustomerBinOrNidNo</td>
+                                <td>@type.SalesVatChallanNo</td>
+                                <td class="text-center">@StringGenerator.DateTimeToString(type.SalesVatChallanDate)</td>
+                                <td class="text-right">@StringGenerator.DecimalToCommaSeparated(type.ClosingProdQty) (@type.MeasurementUnitName)</td>
+                                @*<td>@StringGenerator.DecimalToCommaSeparated(type.ClosingTotalPriceWithoutVat)</td>*@
+                                <td>@type.OperationTypeEng</td>
+                            </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="26">
+                                        No Data Found
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+
+                    </table>
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 mt-3">
+                    <div class="special-note-title">Special Note:</div>
+
+                    <div class="special-note-items">
+                        <div class="special-note-list-item">
+                            * In case the goods are to be purchased from an unregistered person or the goods are to be sold from an unregistered person, the full name, address and national identity card number of that person are appropriately related columns [(9), (10), (11), (19), ( 20) and (21)] must be mentioned.
+                        </div>
+                    </div>
+
+                </div>
+            </div>

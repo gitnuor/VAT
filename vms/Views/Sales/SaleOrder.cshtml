@@ -1,0 +1,434 @@
+﻿
+@{
+    ViewData["Title"] = "SaleOrders";
+}
+@section breadcrumb
+    {
+    <ul class="page-breadcrumb">
+        <li>
+            <a href="@Url.Action("Index","Sales")">Sale List</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a href="@Url.Action("SaleOrder","Sales")">Sale Orders</a> 
+        </li>
+    </ul>
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <h1 class="custom-page-title">Sale Orders</h1>
+    </div>
+    <div class="col-md-5">
+        <div class="input-group" style="margin-top:10px">
+            <input type="text" class="form-control" placeholder="Search...">
+            <span class="input-group-btn">
+                <a href="javascript:;" class="btn submit">
+                    <i class="icon-magnifier"></i>
+                </a>
+            </span>
+        </div>
+    </div>
+    <div class="col-md-1">
+        <a style="margin-top:10px" href="@Url.Action("Create")" class="btn btn-success btn-sm pull-right"><i class="fa fa-plus"></i> Add</a>
+    </div>
+</div>
+
+<hr>
+<div class="row">
+    <div class="col-md-12">
+
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>
+                        <div class="md-checkbox">
+                            <input type="checkbox" id="checkbox1" class="md-check">
+                            <label for="checkbox1">
+                                <span></span>
+                                <span class="check"></span>
+                                <span class="box"></span>
+                            </label>
+                        </div>
+                    </th>
+                    <th>Number</th>
+                    <th>Posted</th>
+                    <th>Voucher Date</th>
+                    <th>Party</th>
+                    <th>Amount</th>
+                    <th>Desc.</th>
+                    <th>Pay. Method</th>
+                    <th>Branch</th>
+                    <th>Created By</th>
+                    <th>Approved By</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>
+                        <div class="md-checkbox">
+                            <input type="checkbox" id="checkbox2" class="md-check">
+                            <label for="checkbox2">
+                                <span></span>
+                                <span class="check"></span>
+                                <span class="box"></span>
+                            </label>
+                        </div>
+                    </td>
+                    <td>SOO-1001</td>
+                    <td>
+                        <div class="md-checkbox">
+                            <input type="checkbox" id="checkbox3" class="md-check" checked>
+                            <label for="checkbox3">
+                                <span></span>
+                                <span class="check"></span>
+                                <span class="box"></span>
+                            </label>
+                        </div>
+                    </td>
+                    <td>2018-12-27</td>
+                    <td>Abedin Glass House</td>
+                    <td>2700</td>
+                    <td></td>
+                    <td>Credit</td>
+                    <td>Head Office</td>
+                    <td>System Admin</td>
+                    <td>Admin</td>
+                    <td>
+                        <div class="dropdown">
+                            <button class="btn btn-link  dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                Action
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                <li><a href="@Url.Action("SaleOrders","SaleOrders")">Detail</a></li>
+                          
+                            </ul>
+                        </div>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>
+                        <div class="md-checkbox">
+                            <input type="checkbox" id="checkbox2" class="md-check">
+                            <label for="checkbox2">
+                                <span></span>
+                                <span class="check"></span>
+                                <span class="box"></span>
+                            </label>
+                        </div>
+                    </td>
+                    <td>SOO-1002</td>
+                    <td>
+                        <div class="md-checkbox">
+                            <input type="checkbox" id="checkbox3" class="md-check" checked>
+                            <label for="checkbox3">
+                                <span></span>
+                                <span class="check"></span>
+                                <span class="box"></span>
+                            </label>
+                        </div>
+                    </td>
+                    <td>2019-12-27</td>
+                    <td>Ali House</td>
+                    <td>2700</td>
+                    <td></td>
+                    <td>Credit</td>
+                    <td>Head Office</td>
+                    <td>30</td>
+                    <td>30</td>
+                    <td>
+                        <div class="dropdown">
+                            <button class="btn btn-link  dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                Action
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                <li><a href="@Url.Action("SaleOrders","SaleOrders")">Detail</a></li>
+
+                            </ul>
+                        </div>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>
+                        <div class="md-checkbox">
+                            <input type="checkbox" id="checkbox2" class="md-check">
+                            <label for="checkbox2">
+                                <span></span>
+                                <span class="check"></span>
+                                <span class="box"></span>
+                            </label>
+                        </div>
+                    </td>
+                    <td>SOO-1003</td>
+                    <td>
+                        <div class="md-checkbox">
+                            <input type="checkbox" id="checkbox3" class="md-check" checked>
+                            <label for="checkbox3">
+                                <span></span>
+                                <span class="check"></span>
+                                <span class="box"></span>
+                            </label>
+                        </div>
+                    </td>
+                    <td>2018-12-27</td>
+                    <td>Abedin Glass House</td>
+                    <td>2700</td>
+                    <td></td>
+                    <td>Credit</td>
+                    <td>Head Office</td>
+                    <td>30</td>
+                    <td>30</td>
+                    <td>
+                        <div class="dropdown">
+                            <button class="btn btn-link  dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                Action
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                <li><a href="@Url.Action("SaleOrders","SaleOrders")">Detail</a></li>
+                          
+                            </ul>
+                        </div>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>
+                        <div class="md-checkbox">
+                            <input type="checkbox" id="checkbox2" class="md-check">
+                            <label for="checkbox2">
+                                <span></span>
+                                <span class="check"></span>
+                                <span class="box"></span>
+                            </label>
+                        </div>
+                    </td>
+                    <td>SOO-1004</td>
+                    <td>
+                        <div class="md-checkbox">
+                            <input type="checkbox" id="checkbox3" class="md-check" checked>
+                            <label for="checkbox3">
+                                <span></span>
+                                <span class="check"></span>
+                                <span class="box"></span>
+                            </label>
+                        </div>
+                    </td>
+                    <td>2018-12-27</td>
+                    <td>Abedin Glass House</td>
+                    <td>2700</td>
+                    <td></td>
+                    <td>Credit</td>
+                    <td>Head Office</td>
+                    <td>30</td>
+                    <td>30</td>
+                    <td>
+                        <div class="dropdown">
+                            <button class="btn btn-link  dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                Action
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                <li><a href="@Url.Action("SaleOrders","SaleOrders")">Detail</a></li>
+
+                            </ul>
+                        </div>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>
+                        <div class="md-checkbox">
+                            <input type="checkbox" id="checkbox2" class="md-check">
+                            <label for="checkbox2">
+                                <span></span>
+                                <span class="check"></span>
+                                <span class="box"></span>
+                            </label>
+                        </div>
+                    </td>
+                    <td>SOO-1005</td>
+                    <td>
+                        <div class="md-checkbox">
+                            <input type="checkbox" id="checkbox3" class="md-check" checked>
+                            <label for="checkbox3">
+                                <span></span>
+                                <span class="check"></span>
+                                <span class="box"></span>
+                            </label>
+                        </div>
+                    </td>
+                    <td>2018-12-27</td>
+                    <td>Abedin Glass House</td>
+                    <td>2700</td>
+                    <td></td>
+                    <td>Credit</td>
+                    <td>Head Office</td>
+                    <td>30</td>
+                    <td>30</td>
+                    <td>
+                        <div class="dropdown">
+                            <button class="btn btn-link  dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                Action
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                <li><a href="@Url.Action("SaleOrders","SaleOrders")">Detail</a></li>
+
+                            </ul>
+                        </div>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>
+                        <div class="md-checkbox">
+                            <input type="checkbox" id="checkbox2" class="md-check">
+                            <label for="checkbox2">
+                                <span></span>
+                                <span class="check"></span>
+                                <span class="box"></span>
+                            </label>
+                        </div>
+                    </td>
+                    <td>SOO-1006</td>
+                    <td>
+                        <div class="md-checkbox">
+                            <input type="checkbox" id="checkbox3" class="md-check" checked>
+                            <label for="checkbox3">
+                                <span></span>
+                                <span class="check"></span>
+                                <span class="box"></span>
+                            </label>
+                        </div>
+                    </td>
+                    <td>2018-12-27</td>
+                    <td>Abedin Glass House</td>
+                    <td>2700</td>
+                    <td></td>
+                    <td>Credit</td>
+                    <td>Head Office</td>
+                    <td>30</td>
+                    <td>30</td>
+                    <td>
+                        <div class="dropdown">
+                            <button class="btn btn-link  dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                Action
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                <li><a href="@Url.Action("SaleOrders","SaleOrders")">Detail</a></li>
+
+                            </ul>
+                        </div>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>
+                        <div class="md-checkbox">
+                            <input type="checkbox" id="checkbox2" class="md-check">
+                            <label for="checkbox2">
+                                <span></span>
+                                <span class="check"></span>
+                                <span class="box"></span>
+                            </label>
+                        </div>
+                    </td>
+                    <td>SOO-1007</td>
+                    <td>
+                        <div class="md-checkbox">
+                            <input type="checkbox" id="checkbox3" class="md-check" checked>
+                            <label for="checkbox3">
+                                <span></span>
+                                <span class="check"></span>
+                                <span class="box"></span>
+                            </label>
+                        </div>
+                    </td>
+                    <td>2018-12-27</td>
+                    <td>Abedin Glass House</td>
+                    <td>2700</td>
+                    <td></td>
+                    <td>Credit</td>
+                    <td>Head Office</td>
+                    <td>30</td>
+                    <td>30</td>
+                    <td>
+                        <div class="dropdown">
+                            <button class="btn btn-link  dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                Action
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                <li><a href="@Url.Action("SaleOrders","SaleOrders")">Detail</a></li>
+
+                            </ul>
+                        </div>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>
+                        <div class="md-checkbox">
+                            <input type="checkbox" id="checkbox2" class="md-check">
+                            <label for="checkbox2">
+                                <span></span>
+                                <span class="check"></span>
+                                <span class="box"></span>
+                            </label>
+                        </div>
+                    </td>
+                    <td>SOO-1008</td>
+                    <td>
+                        <div class="md-checkbox">
+                            <input type="checkbox" id="checkbox3" class="md-check" checked>
+                            <label for="checkbox3">
+                                <span></span>
+                                <span class="check"></span>
+                                <span class="box"></span>
+                            </label>
+                        </div>
+                    </td>
+                    <td>2018-12-27</td>
+                    <td>Abedin Glass House</td>
+                    <td>2700</td>
+                    <td></td>
+                    <td>Credit</td>
+                    <td>Head Office</td>
+                    <td>30</td>
+                    <td>30</td>
+                    <td>
+                        <div class="dropdown">
+                            <button class="btn btn-link  dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                Action
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                <li><a href="@Url.Action("SaleOrders","SaleOrders")">Detail</a></li>
+
+                            </ul>
+                        </div>
+
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>

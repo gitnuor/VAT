@@ -1,0 +1,225 @@
+﻿@model vms.entity.viewModels.ReportsViewModel.vmCreditMushak
+@{
+    ViewData["Title"] = "Mushak 6.7 Credit Note";
+
+    var firstElement = Model.CreditMushakList.First();
+    decimal TotalSum = 0, vds = 0, vat = 0, sd = 0;
+    Layout = "_LayoutMushak";
+}
+
+
+<style>
+
+    .MreturnHeader {
+        text-align: center;
+        background-color: #ffedbe;
+    }
+
+
+    .Returntd {
+        text-align: left;
+    }
+
+    .Returntdhead {
+        text-align: center;
+        background-color: #cfcfcf;
+    }
+
+    .ReturntdEmpty {
+        background-color: lightgray;
+    }
+
+    .tdp1 {
+        width: 320px;
+    }
+
+    .tdp2 {
+        width: 30px;
+        text-align: center;
+    }
+
+    .report-margin {
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+</style>
+
+@section contentheader
+    {
+    <div class="p-3 page-header">
+        @*<h5></h5>*@
+        <div class="row">
+            <div class="col-8">
+                Mushak-6.7(Credit Note)
+            </div>
+            <div class="col-4">
+                <form method="post">
+
+                    <input type="hidden" asp-for="CreditNoteId" />
+                    <div class="form-group float-end">
+                        <button id="btnPrint" type="button" class="btn btn-sm btn-primary inline-sm-button"><i class="bi bi-printer-fill"></i> Print</button>
+                        <button type="submit" asp-action="Mushok6P7ExportToExcel" class="btn btn-sm btn-warning inline-sm-button"><i class="bi bi-file-excel-fill"></i> Export Excel</button>
+                        @*<button type="button" href="@Url.Action("DebitNoteView")" class="btn btn-info btn-sm inline-sm-button"><i class="bi bi-arrow-90deg-left"></i> Back</button>*@
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+}
+<div class="report-section">
+
+    <div class="report-margin" id="printableArea">
+        <div class="row">
+            <div class="col-12">
+                <div class="mushak-name">মূসক - ৬.৭</div>
+            </div>
+
+            <div class="col-12 report-header">
+
+                <div class="sub-header">গণপ্রজাতন্ত্রী বাংলাদেশ সরকার</div>
+                <div class="sub-header">জাতীয় রাজস্ব বোর্ড</div>
+                <div class="sub-header">ক্রেডিট নোট</div>
+                <div class="sub-header">[বিধি ৪০ এর উপ-বিধি (১) এর দফা (ছ) দ্রষ্টব্য]</div>
+
+            </div>
+            <br />
+
+            <div class="col-8" style="text-align:left">
+                <div class="company-other-info">ফেরত প্রদানকারী ব্যক্তির - </div>
+                <div class="company-other-info">নাম : @firstElement.CusName </div>
+                <div class="company-other-info">বিআইএন :  @firstElement.CusBin </div>
+                <div class="company-other-info">মূল চালান নম্বর : @firstElement.SaleInvoice</div>
+                <div class="company-other-info">মূল চালান ইস্যুর তারিখ : @(firstElement.SaleDate == null ? "" : firstElement.SaleDate.Value.ToString("dd/MM/yyyy"))</div>
+
+            </div>
+
+            <div class="col-4" style="text-align:left">
+
+                <div class="company-other-info">ফেরত গ্রহণকারী ব্যক্তির - </div>
+                <div class="company-other-info">নাম : @firstElement.OrgName </div>
+                <div class="company-other-info">বিআইএন : @firstElement.OrgBin </div>
+                <div class="company-other-info">ক্রেডিট নোট নম্বর : @firstElement.CreditNo </div>
+                <div class="company-other-info">ইস্যুর তারিখ: @(firstElement.CrTime==null?"":firstElement.CrTime.Value.ToString("dd/MM/yyyy"))</div>
+                <div class="company-other-info">ইস্যুর সময় :  @(firstElement.CrTime == null?"":firstElement.CrTime.Value.ToString("hh:mm tt"))</div>
+
+            </div>
+
+            <div class="col-12">
+                <table class="table table-bordered">
+
+                    <tbody style="text-align:center">
+                        <tr>
+                            <td>
+                                ক্রমিক সংখ্যা
+                            </td>
+                            <td>ফেরতপ্রাপ্ত সরবরাহের বিবরণ</td>
+                            <td>
+                                সরবরাহের একক
+                            </td>
+                            <td>
+                                পরিমাণ
+                            </td>
+                            <td>
+                                একক মূল্য (১) টাকায়
+                            </td>
+                            <td>
+                                মোট মূল্য  (টাকায়)
+                            </td>
+
+                        </tr>
+
+                        <tr>
+                            <td>(১)</td>
+                            <td>(২)</td>
+                            <td>(৩)</td>
+                            <td>(৪)</td>
+                            <td>(৫)</td>
+                            <td>(৬)</td>
+                        </tr>
+
+                        @if (Model.CreditMushakList.Any())
+                        {
+                            int SlNo = 1;
+                            foreach (var item in Model.CreditMushakList)
+                            {
+                                <tr>
+                                    <td class="serial-cell">@SlNo</td>
+                                    <td class="name-cell">@item.ProductName</td>
+                                    <td>@item.Quantity</td>
+                                    <td class="amount-quantity-cell">@StringGenerator.DecimalToCommaSeparated(item.ReturnQuantity)</td>
+                                    <td class="amount-quantity-cell">@StringGenerator.DecimalToCommaSeparated(item.UnitPrice)</td>
+                                    <td class="amount-quantity-cell">@StringGenerator.DecimalToCommaSeparated(item.TotalAmount)</td>
+                                </tr>
+                                TotalSum += item.TotalAmount == null ? 0 : item.TotalAmount.Value;
+                                vds += item.DeductionAmount == null ? 0 : item.DeductionAmount.Value;
+                                vat += item.VatAmount == null ? 0 : item.VatAmount.Value;
+                                sd += item.SupplementaryDutyAmount == null ? 0 : item.SupplementaryDutyAmount.Value;
+                                SlNo++;
+                            }
+
+                            <tr>
+                                <td colspan="5" style="text-align:right">মোট মূল্য :</td>
+                                <td class="amount-quantity-cell">@StringGenerator.DecimalToCommaSeparated(TotalSum)</td>
+                            </tr>
+                            <tr>
+                                <td colspan="5" style="text-align:right">বাদ কর্তন  :</td>
+                                <td class="amount-quantity-cell">@StringGenerator.DecimalToCommaSeparated(vds)</td>
+                            </tr>
+                            <tr>
+                                <td colspan="5" style="text-align:right">মূসকসহ মূল্য : </td>
+                                <td class="amount-quantity-cell">@(StringGenerator.DecimalToCommaSeparated(TotalSum +vat))</td>
+                            </tr>
+                            <tr>
+                                <td colspan="5" style="text-align:right">মূসকের পরিমাণ :</td>
+                                <td class="amount-quantity-cell">@StringGenerator.DecimalToCommaSeparated(vat)</td>
+                            </tr>
+                            <tr>
+                                <td colspan="5" style="text-align:right">সম্পূরক শুল্কের পরিমাণ :</td>
+                                <td class="amount-quantity-cell">@StringGenerator.DecimalToCommaSeparated(sd)</td>
+                            </tr>
+                            <tr>
+                                <td colspan="5" style="text-align:right">মোট কর :</td>
+                                <td class="amount-quantity-cell">@(StringGenerator.DecimalToCommaSeparated(sd + vat))</td>
+                            </tr>
+                        }
+
+                    </tbody>
+
+                </table>
+                
+            </div>
+
+            <div class="col-12 mt-3">
+
+                <div class="company-other-info"><b>ফেরতের কারণ:</b> @firstElement.ReasonOfReturn</div>
+                <div class="company-other-info"><b>দায়িত্বপ্রাপ্ত ব্যাক্তির স্বাক্ষর:</b></div>
+
+            </div>
+            <div class="col-12 mt-3">
+
+                <div class="company-other-info">১) প্রতি একক পণ্য / সেবার মূসক ও সম্পূরক শুল্ক সহ মূল্য।</div>
+                <div class="company-other-info">২) ফেরত প্রদানের জন্য কোন ধরনের কটন থাকিলে উহার পরিমাণ।</div>
+                <div class="company-other-info">৩) মূসক ও সম্পূরক শুল্কের যোগফল।</div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+   
+    <script>
+
+        $(document).ready(function () {
+            $("#btnPrint").click(function () {
+                window.vmsPrint.printA4Portrait('printableArea');
+
+            });
+        });
+
+    </script>
+}
+
+

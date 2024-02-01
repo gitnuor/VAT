@@ -1,0 +1,111 @@
+﻿@model vms.entity.viewModels.ReportsViewModel.VmMushakReturn
+
+<style>
+
+    .MreturnHeader {
+        text-align: center;
+        background-color: #ffedbe;
+    }
+
+
+    .Returntd {
+        text-align: left;
+    }
+
+    .Returntdhead {
+        text-align: center;
+        background-color: #cfcfcf;
+    }
+
+    .ReturntdEmpty {
+        background-color: lightgray;
+    }
+
+    .tdp1 {
+        width: 320px;
+    }
+
+    .tdp2 {
+        width: 30px;
+        text-align: center;
+    }
+
+    .report-margin {
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .manual {
+        background-color: red;
+    }
+</style>
+
+
+
+<div class="report-margin">
+    <div class="col-xs-12">
+
+        <div class="col-xs-3">
+
+            <img src="~/images/logo_bd_govt.svg" style="height :100px;" />
+
+
+        </div>
+
+        
+        <div class="col-xs-6" style="text-align:center">
+
+            <h3>GOVERNMENT OF THE PEOPLE'S REPUBLIC OF BANGLADESH</h3>
+            <h3>NATIONAL BOARD OF REVENUE</h3>
+            <h3>VALUE ADDED TAX RETURN FORM</h3>
+            <h4>[See rule 47(1)]</h4>
+
+        </div>
+
+        <div class="col-xs-3 pull-right">
+            <h3 style="color:green; border:solid; border-color:cornflowerblue; text-align:center"> Mushak-9.1</h3>
+
+
+
+        </div>
+
+
+    </div>
+    <div class="row">
+
+        <partial name="MushakReturnENG/_part1" model="Model.MushakReturnPartOne" />
+    </div>
+
+    <div class="row">
+
+        <partial name="MushakReturnENG/_part2" model="Model.MushakReturnPartTwo" />
+    </div>
+
+    <div class="row">
+
+        <partial name="MushakReturnENG/_part3" model="Model.MushakReturnPartThree" />
+    </div>
+
+    <div class="row">
+
+        <partial name="MushakReturnENG/_part4" model="Model.MushakReturnPartFour" />
+    </div>
+
+    <div class="row">
+
+        <partial name="MushakReturnENG/_part5" model="Model.MushakReturnPartFive" />
+    </div>
+
+    <div class="row">
+        <div class="page-break-avoid">
+            <partial name="MushakReturnENG/_part6" model="Model.MushakReturnPartSix" />
+        </div>
+    </div>
+
+    <div class="row">
+
+        <partial name="MushakReturnENG/_part7" model="Model.MushakReturnPartSeven" />
+    </div>
+    
+    </div>

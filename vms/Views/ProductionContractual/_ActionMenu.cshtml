@@ -1,0 +1,56 @@
+﻿@model vms.entity.models.ContractualProduction 
+@{
+    var session = Context.Session.GetComplexData<VmUserSession>(ControllerStaticData.SESSION);
+}
+
+<div class="nav navbar-nav">
+    <div class="dropdown">
+        <a href="#" class="dropdown-toggle btn btn-success btn-sm" data-bs-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+            Action
+        </a>
+        <ul class="dropdown-menu dropdown-menu-right">
+
+
+            @if (Model.ContractTypeId == 2)
+            {
+
+                string URL = ViewData["Report"].ToString() + Model.ContractualProductionId;
+
+                <li>
+                    @Html.ActionLink("Mushak 6.4", "Mushok6P4finished", "Reports", new { id = Model.ContractualProductionId }, new { @class = "btn btn-danger btn-sm pull-right " })
+
+                    <a class="dropdown-item" href="@URL" target="_blank"><i class="bi bi-printer"></i> Print Mushak 6.4 </a>
+                </li>
+
+                <li>
+                    <a class="dropdown-item" href="~/Production/Create"><i class="fa fa-random"></i> Production Receive </a>
+                </li>
+            }
+
+            else
+
+            {
+                @if (UserAuthorization.Check(FeatureList.PRODUCTION_CONTRACTUAL_PRODUCTION_CAN_ADD_TRANSFER, session.Rights))
+                {
+                    <li>
+                        <a class="dropdown-item" asp-action="TransferContract" asp-route-id="@Model.EncryptedId"><i class="fas fa-random"></i> Transfer</a>
+                    </li>
+                }
+                @if (UserAuthorization.Check(FeatureList.PRODUCTION_CONTRACTUAL_PRODUCTION_CAN_ADD_RAW, session.Rights))
+                {
+                    <li>
+                        <a class="dropdown-item" asp-action="TransferedRawMaterials" asp-route-id="@Model.EncryptedId"><i class="far fa-registered"></i> Raw</a>
+                    </li>
+                }
+                @if (UserAuthorization.Check(FeatureList.PRODUCTION_CONTRACTUAL_PRODUCTION_CAN_ADD_PRODUCTION_TRANSFER, session.Rights))
+                {
+                    <li>
+                        <a class="dropdown-item" href="~/Production/Create"><i class="fa fa-random"></i>Production Transfer</a>
+                    </li>
+                }
+            }
+
+
+        </ul>
+    </div>
+</div>

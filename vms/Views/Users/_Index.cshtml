@@ -1,0 +1,22 @@
+﻿@model IEnumerable<vms.entity.models.ViewUser>
+@(Html.Grid(Model).Build(columns =>
+{
+    columns.Add(model => model.FullName).Titled("Name");
+    columns.Add(model => model.UserName).Titled("Username");
+    columns.Add(model => model.EmployeeId).Titled("Employee ID");
+	columns.Add(model => model.EmployeePin).Titled("Employee PIN");
+	columns.Add(model => model.Designation).Titled("Designation");
+    columns.Add(model => model.EmailAddress).Titled("Email Address");
+    columns.Add(model => model.Mobile).Titled("Mobile");
+    columns.Add(model => model.NidNo).Titled("NID");
+    columns.Add(model => model.TinNo).Titled("TIN");
+    columns.Add(model => model.RoleName).Titled("Role");
+    columns.Add(model => model.ActiveStatus).Titled("Status");
+	columns.Add().Encoded(false).RenderedAs(data => Html.PartialAsync("_ActionMenu", data).Result)
+		.Titled(Html.Raw("<i class='bi bi-activity'></i>")).AppendCss("action-col-freez");
+})
+	.AppendCss("large-index-grid")
+	.Empty("No data found")
+	.Filterable(GridFilterType.Double)
+	.Sortable()
+	.Pageable())

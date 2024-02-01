@@ -1,0 +1,192 @@
+﻿@model vms.entity.viewModels.ReportsViewModel.vmMushakBranchTransfer
+@{
+    ViewData["Title"] = "Mushak 6.5";
+
+    var firstElement = Model.TransferList.First();
+   
+    int SlNo = 0;
+    Layout = "_LayoutMushak";
+}
+
+
+<style>
+
+    .MreturnHeader {
+        text-align: center;
+        background-color: #ffedbe;
+    }
+
+
+    .Returntd {
+        text-align: left;
+    }
+
+    .Returntdhead {
+        text-align: center;
+        background-color: #cfcfcf;
+    }
+
+    .ReturntdEmpty {
+        background-color: lightgray;
+    }
+
+    .tdp1 {
+        width: 320px;
+    }
+
+    .tdp2 {
+        width: 30px;
+        text-align: center;
+    }
+
+    .report-margin {
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+</style>
+
+@section contentheader
+    {
+    <div class="p-3 page-header">
+        @*<h5></h5>*@
+        <div class="row">
+            <div class="col-8">
+                Mushak-6.5(Branch Transfer)
+            </div>
+            <div class="col-4">
+                <form method="post">
+                                        
+                    <div class="form-group float-end">
+                        <button id="btnPrint" type="button" class="btn btn-sm btn-primary inline-sm-button"><i class="bi bi-printer-fill"></i> Print</button>
+                        @*<button type="submit" asp-action="Mushok6P4RawExportToExcel" class="btn btn-sm btn-warning inline-sm-button"><i class="bi bi-file-excel-fill"></i> Export Excel</button>*@
+                        @*<button type="button" href="@Url.Action("Mushok6P4", "Reports")" class="btn btn-info btn-sm inline-sm-button"><i class="bi bi-arrow-90deg-left"></i> Back</button>*@
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+}
+<div class="report-section">
+
+    <div class="report-margin" id="printableArea">
+        <div class="row">
+            <div class="col-12">
+                <div class="mushak-name">মূসক - ৬.৫</div>
+            </div>
+
+            <div class="col-12 report-header">
+
+                <h4>গণপ্রজাতন্ত্রী বাংলাদেশ সরকার</h4>
+                <h4>জাতীয় রাজস্ব বোর্ড</h4>
+                <h5 style="font-weight:bold">কেন্দ্রীয় নিবন্ধিত প্রতিষ্ঠানের পণ্য হস্তান্তর চালানপত্র</h5>
+                <h6>[বিধি ৪০ এর উপ-বিধি (১) এর দফা (ঙ) দ্রষ্টব্য]</h6>
+
+            </div>
+            <br />
+            <div class="col-12 mt-3">
+
+                <h6>নিবন্ধিত ব্যক্তির নাম: @firstElement.PareName </h6>
+                <h6>নিবন্ধিত ব্যক্তির বিআইএন: @firstElement.PareBin </h6>
+                <h6>প্রেরণকারী ইউনিত/শাখা/পণ্যাগারের নাম ও ঠিকানা: @firstElement.SenName,@firstElement.SenAddre</h6>
+                <h6>গ্রহীতা ইউনিট/শাখা/পণ্যাগারের নাম ও ঠিকানা: @firstElement.ReciName,@firstElement.ReciAddre</h6>
+            </div>
+            <div class="col-8">
+
+            </div>
+            <div class="col-4" style="text-align:left">
+
+                <h6>চালান নম্বর :  @firstElement.InvoiceNo</h6>
+                <h6>ইস্যুর তারিখ :  @(firstElement.SalesDate ==null?"":firstElement.SalesDate.Value.ToString("dd/MM/yyyy"))</h6>
+                <h6>ইস্যুর তারিখ :  @(firstElement.SalesDate ==null?"":firstElement.SalesDate.Value.ToString("hh:mm tt"))</h6>
+
+            </div>
+                        
+            <div class="col-12 mt-3">
+                <table class="table table-bordered">
+
+                    <tbody style="text-align:center">
+                        <tr>
+                            <td>
+                                ক্রমিক সংখ্যা
+                            </td>
+                            <td>
+                                পণ্যের (প্রযোজ্য ক্ষেত্রে সুনির্দিষ্ট ব্রান্ড নামসহ) বিবরণ
+                            </td>
+                            <td>পরিমাণ</td>
+                            <td>
+                                কর ব্যতীত মূল্য
+                            </td>
+                            <td>
+                                প্রযোজ্য করের পরিমাণ
+                            </td>
+                            <td>
+                                মন্তব্য
+                            </td>
+
+                        </tr>                      
+
+                        <tr>
+                            <td>(১)</td>
+                            <td>(২)</td>
+                            <td>(৩)</td>
+                            <td>(৪)</td>
+                            <td>(৫)</td>
+                            <td>(৬)</td>
+                        </tr>
+
+                        @if (Model.TransferList.Any())
+                        {
+                            SlNo = 1;
+                            foreach (var item in Model.TransferList)
+                            {
+                                <tr>
+                                    <td>@SlNo</td>
+                                    <td>@item.ProduName</td>
+                                    <td>@StringGenerator.DecimalToCommaSeparated(item.Qty)</td>
+                                    <td>@StringGenerator.DecimalToCommaSeparated(item.Price)</td>
+                                    <td>@StringGenerator.DecimalToCommaSeparated(item.VtaAmount)</td>
+                                    <td></td>
+                                </tr>
+                                SlNo++;
+                            }
+
+                        }
+
+                    </tbody>
+
+                </table>
+            </div>
+
+            <div class="col-12 mt-3">
+
+                <h6>প্রতিষ্ঠান কর্তৃপক্ষদায়িত্ব প্রাপ্ত ব্যক্তির নাম: @firstElement.PareVatPName </h6>
+                <h6>পদবী:  @firstElement.PareVatPDes </h6>
+                <h6>  স্বাক্ষর : </h6>
+                <br />
+                <br />
+                <h6>  সীল: </h6>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+@section Scripts{
+   
+    <script>
+
+        $(document).ready(function () {
+            $("#btnPrint").click(function () {
+                window.vmsPrint.printA4Portrait('printableArea');
+
+            });
+        });
+
+    </script>
+}
+
+

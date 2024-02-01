@@ -1,0 +1,188 @@
+﻿@model vms.entity.StoredProcedureModel.MushakReturn.MushakReturnPartSeven
+
+<table class="table table-bordered">
+    @*<thead>*@ 
+
+        <tr>
+
+            <th class="MreturnHeader" colspan="3" style="background-color: #FBD4B4!important">
+
+                <div class="parthead">অংশ-৭: নীট কর হিসাব</div>
+            </th>
+        </tr>
+    @*</thead>
+    <tbody class="Returntd">*@
+
+        <tr class="Returntdhead text-center font-weight-bold" style="background-color: #BFBFBF !important">
+            <td class="Returntdhead"><b> আইটেম</b></td>
+            <td style="text-align:center"><b>নোট</b></td>
+            <td ><b>পরিমাণ</b></td>
+        </tr>
+
+        <tr>
+            <td> বর্তমান করমেয়াদে প্রদেয় মােট মূসক (সমাপনী জের ব্যতীত)। (৯গ-২৪খ+২৮-৩৩)  </td>
+            <td class="text-center" style="text-align: center">৩৪</td>
+
+            <td class="text-right" style="text-align: right">@StringGenerator.DecimalToCommaSeparated(Model.NetTaxTotalPayableVatAmountInCurrentTaxTerm)</td>
+        </tr>
+        <tr>
+            <td>সমাপনী জের এর সহিত সমন্বয়ের পর বর্তমান করমেয়াদে প্রদেয় । মােট মূসক [৩৪-(৫২+৫৬)]</td>
+            <td class="text-center" style="text-align: center">৩৫</td>
+
+            <td class="text-right" style="text-align: right">@StringGenerator.DecimalToCommaSeparated(Model.NetTaxTotalPayableVatAmountAfterAdjustmentWithEndingBalance)</td>
+        </tr>
+
+        <tr>
+            <td>বর্তমান করমেয়াদে প্রদেয় মােট সম্পূরক শুল্ক (সমাপনী জের ব্যতীত)। [৯খ+৩৮-(৩৯+৪০)]] </td>
+            <td class="text-center" style="text-align: center">৩৬</td>
+
+            <td class="text-right" style="text-align: right">@StringGenerator.DecimalToCommaSeparated(Model.NetTaxTotalPayableSdAmountInCurrentTaxTerm)</td>
+        </tr>
+
+        <tr>
+            <td>
+                সমাপনী জের এর সহিত সমন্বয়ের পর বর্তমান করমেয়াদে প্রদেয় মােট সম্পূরক শুল্ক [৩৬-(৫৩+৫৭)]
+            </td>
+            <td class="text-center" style="text-align: center">৩৭</td>
+
+            <td class="text-right" style="text-align: right">@StringGenerator.DecimalToCommaSeparated(Model.NetTaxTotalPayableSdAmountAfterAdjustmentWithEndingBalance)</td>
+        </tr>
+
+        <tr>
+            <td>
+                ডেবিট নােট ইস্যুর জন্য সমন্বয়কৃত সম্পূরক শুল্ক
+            </td>
+            <td class="text-center" style="text-align: center">৩৮</td>
+
+            <td class="text-right" style="text-align: right">@StringGenerator.DecimalToCommaSeparated(Model.NetTaxSdAmountForDebitNote)</td>
+        </tr>
+
+        <tr>
+            <td>
+                ক্রেডিট নােট ইস্যুর জন্য সমন্বয়কৃত সম্পূরক শুল্ক
+            </td>
+            <td class="text-center" style="text-align: center">৩৯</td>
+
+            <td class="text-right" style="text-align: right">@StringGenerator.DecimalToCommaSeparated(Model.NetTaxSdAmountForCreditNote)</td>
+        </tr>
+        <tr>
+            <td>
+                রপ্তানিকৃত কাঁচামালের বিপরীতে প্রদেয় সম্পূরক শুল্ক
+            </td>
+            <td class="text-center" style="text-align: center">৪০</td>
+
+            <td class="manual text-right" style="text-align: right">@StringGenerator.DecimalToCommaSeparated(Model.NetTaxPaidSdAmountForRawMaterialPurchaseToProduceExportProd)</td>
+        </tr>
+        <tr>
+            <td>
+                অপরিশােধিত মূসকের জন্য সুদ
+            </td>
+            <td class="text-center" style="text-align: center">৪১</td>
+
+            <td class="manual text-right" style="text-align: right">@StringGenerator.DecimalToCommaSeparated(Model.NetTaxInterstAmountForDeuVat)</td>
+        </tr>
+        <tr>
+            <td>
+                অপরিশােধিত সম্পূরক শুল্ক এর জন্য সুদ
+            </td>
+            <td class="text-center" style="text-align: center">৪২</td>
+
+            <td class="manual text-right" style="text-align: right">@StringGenerator.DecimalToCommaSeparated(Model.NetTaxInterstAmountForDeuSuppDuty)</td>
+        </tr>
+        <tr>
+            <td>
+                সময়মতো দাখিলপত্র জমা না দেওয়ার জন্য  অর্থদন্ড ও জরিমানা
+            </td>
+            <td class="text-center" style="text-align: center">৪৩</td>
+
+            <td class="manual text-right" style="text-align: right">@StringGenerator.DecimalToCommaSeparated(Model.NetTaxFineAndPenaltyForDelaySubmission)</td>
+        </tr>
+
+        <tr>
+            <td>
+                অন্যান্য অর্থদন্ড/ জরিমানা / সুদ
+            </td>
+            <td class="text-center" style="text-align: center">৪৪</td>
+
+            <td class="manual text-right" style="text-align: right">@StringGenerator.DecimalToCommaSeparated(Model.NetTaxFineAndPenaltyOthers)</td>
+        </tr>
+        <tr>
+            <td>
+                আবগারি শুল্ক
+            </td>
+            <td class="text-center" style="text-align: center">৪৫</td>
+
+            <td class="manual text-right" style="text-align: right">@StringGenerator.DecimalToCommaSeparated(Model.NetTaxExciseDuty)</td>
+        </tr>
+        <tr>
+            <td>
+                উন্নয়ন সারচার্জ
+            </td>
+            <td class="text-center" style="text-align: center">৪৬</td>
+
+            <td class="manual text-right" style="text-align: right">@StringGenerator.DecimalToCommaSeparated(Model.NetTaxDevelopmentSurcharge)</td>
+        </tr>
+        <tr>
+            <td>
+                তথ্য প্রযুক্তি উন্নয়ন সারচার্জ
+            </td>
+            <td class="text-center" style="text-align: center">৪৭</td>
+
+            <td class="manual text-right" style="text-align: right">@StringGenerator.DecimalToCommaSeparated(Model.NetTaxInformationTechnologyDevelopmentSurcharge)</td>
+        </tr>
+        <tr>
+            <td>
+                স্বাস্থ সুরক্ষা সারচার্জ
+            </td>
+            <td class="text-center" style="text-align: center">৪৮</td>
+
+            <td class="manual text-right" style="text-align: right">@StringGenerator.DecimalToCommaSeparated(Model.NetTaxHealthCareSurcharge)</td>
+        </tr>
+        <tr>
+            <td>
+
+                পরিবেশ সুরক্ষা সারচার্জ
+            </td>
+            <td class="text-center" style="text-align: center">৪৯</td>
+
+            <td class="manual text-right" style="text-align: right">@StringGenerator.DecimalToCommaSeparated(Model.NetTaxEnvironmentProtectionSurcharge)</td>
+        </tr>
+
+        <tr>
+            <td>
+
+                ট্রেজারি জমার জন্য নিট প্রদেয় মূল্য সংযোজন কর (৩৫+৪১+৪৩+৪৪)
+            </td>
+            <td class="text-center" style="text-align: center">৫০</td>
+
+            <td class="text-right" style="text-align: right">@StringGenerator.DecimalToCommaSeparated(Model.NetPayableVATForTreasurySubmission)</td>
+        </tr>
+
+        <tr>
+            <td>
+
+                ট্রেজারি জমার জন্য নেট প্রদেয় সম্পূরক শুল্ক (৩৭+৪২)
+            </td>
+            <td class="text-center" style="text-align: center">৫১</td>
+
+            <td class="text-right" style="text-align: right">@StringGenerator.DecimalToCommaSeparated(Model.NetPayableSDForTreasurySubmission)</td>
+        </tr>
+
+        <tr>
+            <td>
+                শেষ করমেয়াদের সমাপনী জের (মূল্য সংযোজন কর)।
+            </td>
+            <td class="text-center" style="text-align: center">৫২</td>
+
+            <td class="text-right" style="text-align:right">@StringGenerator.DecimalToCommaSeparated(Model.NetTaxVatEndingBalanceOfLastTerm)</td>
+        </tr>
+        <tr>
+            <td>
+                শেষ করমেয়াদের সমাপনী জের (সম্পূরক শুল্ক)
+            </td>
+            <td class="text-center" style="text-align:center">৫৩</td>
+
+            <td class="text-right" style="text-align:right">@StringGenerator.DecimalToCommaSeparated(Model.NetTaxSdEndingBalanceOfLastTerm)</td>
+        </tr>
+    @*</tbody>*@
+</table>

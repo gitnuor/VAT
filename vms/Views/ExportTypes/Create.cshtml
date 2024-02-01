@@ -1,0 +1,40 @@
+﻿@model vms.entity.models.ExportType
+@{
+    ViewData["Title"] = "Create";
+    
+    
+}
+@section contentheader
+    {
+    <div class="p-3 page-header">
+        Add Export Type
+    </div>
+}
+
+<div class="row">
+    <div class="col-md-4 offset-4">
+
+        <form asp-action="Create" class="form-horizontal" id="frmDamageCreate">
+            <div class="form-body">
+                <div class="form-group required">
+                    <label class="form-label">Name</label>
+                    <div>
+                        <input asp-for="ExportTypeName" class="form-control form-control-sm" />
+                        <span asp-validation-for="ExportTypeName" class="text-danger"></span>
+
+                    </div>
+                </div>
+            </div>
+            <div class="text-right">
+                <button type="submit" data-requiredconfirmation="true" class="btn  btn-primary btn-sm"><i class="bi bi-check-lg"></i> Submit</button>
+                <button type="button" value="Reset" onclick="location.reload();" class="btn  btn-warning btn-sm"><i class="bi bi-arrow-repeat"></i> Reset</button>
+                <a asp-controller="ExportTypes" asp-action="Index" class="btn btn-secondary btn-sm"><i class="bi bi-slash-circle"></i> Cancel</a>
+            </div>
+          
+        </form>
+    </div>
+</div>
+
+
+
+

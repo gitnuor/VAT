@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - iVAT</title>
+    <link rel="icon" type="image/svg+xml" href="~/images/logo.svg">
+    <link rel="shortcut icon" type="image/svg+xml" href="~/images/logo.svg">
+    <link href="~/css/vmslib.min.css" rel="stylesheet" type="text/css" />
+    @* <link href="~/css/typeahead.css" rel="stylesheet" /> *@
+    @* <link href="~/css/print.min.css" rel="stylesheet" /> *@
+</head>
+
+<body>
+    <partial name="_HeaderNewPartial" />
+    <div class="container-fluid">
+        <div class="row main-content">
+            <div class="col-2 mb-0 report-mushak-navbar">
+	            <div class="pt-2 report-mushak-navbar-header">Mushak List</div>
+	            <div class="gray-slim-scroll-container">
+		            <div class="report-left-nav-container">
+			            <partial name="_LeftNavbarMushak" />
+		            </div>
+	            </div>
+            </div>
+            <div class="col-10 mb-0 ps-0">
+                <div class="page-header-report-mushak">
+	                @await RenderSectionAsync("contentheader", required: false)
+                </div>
+                <div class="p-2">
+                    @RenderBody()
+                    <div id="large-grid-pager" class="large-grid-pager"></div>
+                </div>
+            </div>
+            @*<div style="clear: both; display: block; -ms-opacity: 0; opacity: 0;">a</div>*@
+            <div class="col-12 footer w-100 pb-2">
+                <partial name="_FooterNewPartial" />
+                <partial name="_Confirmation" />
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="~/js/vmslib.js?vguid=@ViewStaticData.StaticFileVersionGuid"></script>
+    <script src="~/js/vms-validation.js?vguid=@ViewStaticData.StaticFileVersionGuid"></script>
+    <script src="~/js/print.min.js?vguid=@ViewStaticData.StaticFileVersionGuid"></script>
+    
+    
+@await RenderSectionAsync("Scripts", required: false)
+<script type="text/javascript">
+    $(document).ready(function () {
+        if ('@TempData["message"]') {
+            window.showMessage('@TempData["message"]');
+        }
+    });
+</script>
+</body>
+</html>

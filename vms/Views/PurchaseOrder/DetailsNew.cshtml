@@ -1,0 +1,147 @@
+﻿@model vms.entity.viewModels.VmPurchaseDetail
+
+@{
+    ViewData["Title"] = "Details";
+    var i = 1;
+    decimal vatTotal = 0;
+    decimal total = 0;
+}
+
+@section breadcrumb
+    {
+    <ul class="page-breadcrumb">
+        <li>
+            <a href="@Url.Action("Dashboard","Home")">Home</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a href="@Url.Action("Index","PurchaseOrder")">Purchase List</a>
+        </li>
+    </ul>
+}
+
+<input type="hidden" class="form-control" id="PurchaseId" name="PurchaseId" value="@Model.Purchase.PurchaseId" />
+
+<input type="hidden" class="form-control" id="ProductId" name="ProductId" />
+<h2>Purchase Order Info</h2>
+@*<a style="margin-top:-50px" href="@Model.ReportUrl" target="_blank" class="btn btn-danger btn-sm pull-right "><i class="fa fa-print"></i> Print Mushak 6.3 </a>*@
+<div class="row">
+
+    <div class="col-md-12 ">
+        <div class="col-md-6 text-right " style="">
+            <!-- BEGIN SAMPLE FORM PORTLET-->
+            <div class="col-md-12 ">
+                <div class="form-group">
+
+                    <label for="form_control">Vendor : @Model.Purchase.Vendor.Name</label>
+                </div>
+            </div>
+
+            <div class="col-md-12 ">
+                <div class="form-group">
+
+                    <label for="form_control">Purchase Reason : @Model.Purchase.PurchaseReason.Reason</label>
+                </div>
+            </div>
+
+            <div class="col-md-12 ">
+                <div class="form-group">
+
+                    <label for="form_control">Vendor Invo.: @Model.Purchase.VendorInvoiceNo</label>
+                </div>
+            </div>
+            <div class="col-md-12 ">
+                <div class="form-group">
+                    <label for="form_control_1">InvoiceNo.: @Model.Purchase.InvoiceNo</label>
+                </div>
+            </div>
+
+            <div class="col-md-12 ">
+                <div class="form-group ">
+
+                    <label for="form_control_1">PurchaseType : @Model.Purchase.PurchaseType.Name</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-5  ">
+            @*<div class="col-md-12 ">
+                    <div class="form-group">
+
+                        <label for="form_control_1">Discount : @Model.Purchase.Discount</label>
+                    </div>
+                </div>*@
+            <div class="col-md-12 ">
+                <div class="form-group">
+
+                    <label for="form_control_1">Expt. Delivery Date : @Model.Purchase.ExpectedDeliveryDate</label>
+                </div>
+            </div>
+
+            <div class="col-md-12 ">
+                <div class="form-group">
+
+                    <label for="form_control_1">Delivery Date : @Model.Purchase.DeliveryDate</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-2 " style="margin-top:0px;">
+        </div>
+    </div>
+
+    <!-- END SAMPLE FORM PORTLET-->
+</div>
+<h2>Purchase Order Details</h2>
+<div class="col-md-12 ">
+    <!-- BEGIN SAMPLE FORM PORTLET-->
+
+    <table class="table table-bordered" id="gridTable">
+
+        <thead>
+            <tr>
+                <th class="text-center">Serial</th>
+                <th class="text-center">Product</th>
+                <th class="text-center">Qty</th>
+
+                <th class="text-center">Amount</th>
+                <th class="text-center">M.Unit</th>
+                <th class="text-center">Unit Price</th>
+                <th class="text-center">VAT(%)</th>
+                @*<th class="text-center">VAT </th>*@
+                @*<th class="text-center">Total</th>*@
+            </tr>
+        </thead>
+
+        <tbody id="tblPurchaseOD">
+            @foreach (var item in Model.PurchaseDetails)
+            {
+                <tr>
+                    <td>@i</td>
+                    <td>@item.Product.Name</td>
+                    <td>@item.Quantity</td>
+
+                    <td class="text-right"> @((item.UnitPrice / item.Quantity).ToString("#.##"))</td>
+                    <td style="width: 100px">@item.MeasurementUnit.Name</td>
+
+                    <td class="text-right">@item.UnitPrice</td>
+                    <td class="text-right">@item.Vatpercent</td>
+                    @*<td class="text-right">@item.Vat</td>*@
+                    @*<td class="text-right">@(item.Vat + item.Amount)</td>*@
+                </tr>
+                i++;
+                //vatTotal += item.Vat;
+                //total += (item.Vat + item.Amount);
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="8">Total</td>
+
+                <td colspan="1" class="text-right"><label id="TotalVat" name="TotalVat" />@vatTotal.ToString("N")</td>
+
+                <td class="text-right"><label id="TotalPrice" name="TotalPrice" />@total.ToString("N")</td>
+            </tr>
+        </tfoot>
+    </table>
+</div>

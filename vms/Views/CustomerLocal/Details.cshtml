@@ -1,0 +1,19 @@
+﻿@model vms.entity.viewModels.CustomerViewModel.CustomerLocalDetailViewModel
+@{
+    ViewData["Title"] = "Customer Details";
+
+    var session = Context.Session.GetComplexData<VmUserSession>(ControllerStaticData.SESSION);
+}
+
+@section contentheader
+    {
+    <div class="p-3 page-header">
+        @ViewData["Title"]
+    </div>
+}
+
+<div class="row">
+	<div class="col-12">
+
+	</div>
+</div>

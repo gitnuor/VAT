@@ -1,0 +1,73 @@
+﻿@model vms.entity.viewModels.vmAdjustment
+@{
+    ViewData["Title"] = "Add Miscellaneous Adjustment";
+
+}
+@section contentheader
+    {
+    <div class="p-3 page-header">
+	    @ViewData["Title"]
+    </div>
+}
+
+<div class="row">
+    <div class="col-md-4 offset-4">
+
+        <form asp-action="Create" class="form-horizontal" id="frmAdTypeCreate">
+            <div class="form-body">
+
+                <div class="form-group mt-3">
+                    <label asp-for="AdjustmentTypeId" ></label>
+                    <div>
+                        <select asp-for="AdjustmentTypeId" asp-items="Model.AdjustmentTypes.CustomSelectListToSelectList()" >
+                            <option value="@null">Select</option>
+                        </select>
+                        <span asp-validation-for="AdjustmentTypeId" ></span>
+                    </div>
+                </div>
+
+                <div class="form-group mt-3">
+                    <label asp-for="Amount" ></label>
+                    <div>
+                        <input asp-for="Amount"  />
+                        <span asp-validation-for="Amount" ></span>
+                    </div>
+                </div>
+
+                <div class="form-group mt-3">
+                    <label asp-for="Month" >Month</label>
+                    <div>
+                        <select asp-for="Month" asp-items="Model.MonthList" >
+                            <option value="@null">Select</option>
+                        </select>
+                        <span asp-validation-for="Month" ></span>
+                    </div>
+                </div>
+
+                <div class="form-group mt-3">
+                    <label asp-for="Year" ></label>
+                    <div>
+                        <select asp-for="Year" asp-items="Model.YearList" >
+                            <option value="@null">Select</option>
+                        </select>
+                        <span asp-validation-for="Year" ></span>
+                    </div>
+                </div>
+
+                <div class="form-group mt-3">
+                    <label asp-for="Description" ></label>
+                    <div>
+                        <textarea asp-for="Description" ></textarea>
+                        <span asp-validation-for="Description" ></span>
+                    </div>
+                </div>
+            </div>
+            <div class="float-end mt-3">
+                <button type="submit" data-requiredconfirmation="true" class="btn  btn-primary btn-sm"><i class="bi bi-check-lg"></i> Submit</button>
+                <button type="button" value="Reset" onclick="location.reload();" class="btn  btn-warning btn-sm"><i class="bi bi-arrow-repeat"></i> Reset</button>
+                <a asp-controller="Adjustment" asp-action="Index" class="btn btn-secondary btn-sm"><i class="bi bi-slash-circle"></i> Cancel</a>
+            </div>
+          
+        </form>
+    </div>
+</div>

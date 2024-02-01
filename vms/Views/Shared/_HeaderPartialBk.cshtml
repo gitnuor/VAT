@@ -1,0 +1,62 @@
+﻿@{
+    var session = Context.Session.GetComplexData<VmUserSession>(ControllerStaticData.SESSION);
+}
+<div class="page-header navbar navbar-fixed-top">
+    <div class="page-header-inner ">
+
+        <div class="page-sidebar-closed-hide-logo  ">
+            <div class="menu-toggler sidebar-toggler pull-left " style="margin-left:10px;margin-right:0.5px;">
+                <span></span>
+            </div>
+
+            <div class="page-logo">
+                <a href="#">
+                    <img src="~/assets/layouts/layout/img/logo.png" alt="logo" class="navbar-brand" style=" height: 55px; width: 95px;" />
+                </a>
+            </div>
+        </div>
+        <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse">
+            <span></span>
+        </a>
+        <div class="top-menu">
+
+            <ul class="nav navbar-nav pull-right">
+
+                <li class="btn">
+
+                    <h4 style="color:white ; font-weight: bold; font-style:italic;" class="pull-left">  @session.OrganizationName   </h4>
+                </li>
+                
+
+                @{
+
+                    var link = (@session.OrganizationId).ToString() + ".png";
+
+                }
+
+                <li class="dropdown dropdown-user">
+                    <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                        <img alt="" class="img-circle" src="~/assets/company/logos/download.png" />
+
+                        <span class="username username-hide-on-mobile">@session.UserName (@session.RoleName)</span>
+                        <i class="fa fa-angle-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-default">
+                        
+                        <li>
+                            <a href="@Url.Action("ChangePassword", "Users")" class="nav-link nav-toggle">
+                                <i class="icon-lock"></i> Change Password
+                            </a>
+                        </li>
+                        <li>
+                            <a href="~/">
+                                <i class="icon-key"></i> Log Out
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>

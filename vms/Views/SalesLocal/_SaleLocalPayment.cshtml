@@ -1,0 +1,118 @@
+﻿@model vms.entity.viewModels.VmSaleLocal
+<div class="form-4 d-none">
+	<div class="col-12">
+		<div class="float-end due-amount text-success" id="dueAmount">Due Amount: 0.00</div>
+
+		<div class="accordion" id="paymentAccordionFomr">
+			<div class="accordion-item">
+				<div class="accordion-header" id="headingPaymentAccordion">
+					<button class="accordion-button collapsed vms-accordion-button"
+							type="button"
+							data-bs-toggle="collapse"
+							data-bs-target="#paymentAccordion"
+							aria-expanded="false"
+							aria-controls="paymentAccordion">
+						Payment Information
+					</button>
+				</div>
+				<div id="paymentAccordion"
+					 class="accordion-collapse collapse"
+					 aria-labelledby="headingPaymentAccordion"
+					 data-bs-parent="#accordionForm">
+					<div class="accordion-body">
+						<form id="frmPayment">
+							<table class="table table-bordered form-table table-7-column-equally-distributed-with-single-action-button align-top" id="paymentTable">
+								<thead>
+									<tr>
+										<th>Method</th>
+										<th>Bank Name/Wallet No</th>
+										<th>Doc. No./Trans ID</th>
+										<th>Doc./Trans. Date</th>
+										<th>Payment Date</th>
+										<th>Amount</th>
+										<th>Payment Remarks</th>
+										<th class="single-button-action-column"></th>
+									</tr>
+									<tr>
+										<td>
+											<select asp-for="PaymentMethodId" >
+												<option value="@null">Select Method</option>
+												@if (Model.PaymentMethodList.Any())
+												{
+													foreach (var paymentMethod in Model.PaymentMethodList)
+													{
+														<option value="@paymentMethod.PaymentMethodId" data-is-banking-channel="@paymentMethod.IsBankingChannel" data-is-mobile-transaction="@paymentMethod.IsMobileTransaction">@paymentMethod.Name</option>
+													}
+												}
+											</select>
+											<span asp-validation-for="PaymentMethodId" ></span>
+										</td>
+
+										<td>
+											<div class="payment-bank d-none">
+												<select asp-for="BankId" id="bankId" asp-items="Model.BankSelectList.CustomSelectListToSelectList()" >
+													<option value="@null">Select Bank</option>
+												</select>
+												<span asp-validation-for="BankId" ></span>
+											</div>
+											<div class="payment-mobile d-none">
+												<input type="text" id="mobilePaymentWalletNo" asp-for="MobilePaymentWalletNo" >
+												<span asp-validation-for="MobilePaymentWalletNo" ></span>
+											</div>
+										</td>
+										<td>
+											<div class="payment-bank payment-mobile d-none">
+												<input type="text" id="documentNoOrTransactionId" asp-for="DocumentNoOrTransactionId" >
+												<span asp-validation-for="DocumentNoOrTransactionId" ></span>
+											</div>
+										</td>
+										<td>
+											<div class="payment-bank payment-mobile d-none">
+												<input type="date" id="paymentDocumentOrTransDate" asp-for="PaymentDocumentOrTransDate" min='2000-01-01' max='@DateTime.Now.ToString("yyyy-MM-dd")' >
+												<span asp-validation-for="PaymentDocumentOrTransDate" ></span>
+											</div>
+										</td>
+
+										<td>
+											<input type="date" asp-for="PaymentDate" id="paymentDate" min='2000-01-01' max='@DateTime.Now.ToString("yyyy-MM-dd")' >
+											<span asp-validation-for="PaymentDate" ></span>
+										</td>
+
+										<td>
+											<input type="text" asp-for="PaidAmount" id="paidAmount" >
+											<span asp-validation-for="PaidAmount" ></span>
+										</td>
+										<td>
+											<input type="text" asp-for="PaymentRemarks" id="paymentRemarks" >
+											<span asp-validation-for="PaymentRemarks" ></span>
+										</td>
+										<td>
+											<a id="btnAddPayment" class="btn btn-sm btn-success" aria-label="Left Align">
+												<i class="bi bi-plus-lg"></i>
+											</a>
+										</td>
+									</tr>
+								</thead>
+								<tbody id="paymentTableBody"></tbody>
+								<tfoot>
+									<tr class="text-end">
+										<th colspan="5">Total</th>
+										<th id="paymentTotalPaid"></th>
+										<th></th>
+										<th></th>
+									</tr>
+								</tfoot>
+							</table>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+	function formatAmount() {
+		let amount = new Intl.NumberFormat('en-IN').format(document.getElementById("paidAmount").value);
+		document.getElementById("paidAmount").value = amount;
+	}
+</script>

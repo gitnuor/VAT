@@ -1,0 +1,181 @@
+﻿@model vms.entity.viewModels.vmMushak4P4
+@{
+    ViewData["Title"] = "Mushak 4.4";
+    Layout = "_LayoutMushak";
+
+}
+
+@section contentheader
+{
+    <div class="p-3 page-header">
+        <div class="row">
+            <h5>Mushak-4.4</h5>
+            <div class="d-flex justify-content-start">
+                <button type="button" id="btnPrint" class="btn btn-sm btn-primary inline-sm-button"><i class="bi bi-printer-fill"></i> Print</button>
+            </div>
+        </div>
+        <div class="d-flex justify-content-start">
+
+        </div>
+    </div>
+    <div class="col-12 d-flex">
+        <ul class="nav nav-pills mt-3 mr-auto align-bottom">
+        </ul>
+    </div>
+}
+
+
+<style>
+
+    .report-margin {
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+</style>
+
+
+
+<div id="printableArea">
+    <div class="report-margin">
+        <div class="row">
+            <div class="col-12">
+                <div class="mushak-name">মূসক - ৪.৪</div>
+            </div>
+
+            <div class="col-12 report-header">
+
+                <p class="company-name">গণপ্রজাতন্ত্রী বাংলাদেশ সরকার</p>
+                <p class="company-name">জাতীয় রাজস্ব বোর্ড</p>
+                <p class="sub-header">
+                    অব্যবহৃত বা ব্যবহার অনুপযোগি উপকরণ নিষ্পত্তির আবেদনপত্র
+                </p>
+                <p class="sub-header">
+                    [বিধি ২৪(ক) এর উপ-বিধি (১) দ্রষ্টব্য]
+                </p>
+            </div>
+
+
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-6" style="text-align:left">
+                        <h6>নিবন্ধিত/তালিকাভুক্ত ব্যাক্তির নাম : @Model.OrgName</h6>
+                        <h6> ঠিকানা : @Model.OrgAddress </h6>
+                    </div>
+
+                    <div class="col-6" style="text-align:right">
+                        <h6>বি আই এন : @Model.OrgBin</h6>
+                        <h6>পণ্যের এইচ. এস. কোড : </h6>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="col-12">
+
+                <table class="table table-bordered">
+
+                    <tbody style="text-align:center">
+
+                        <tr>
+                            <td>
+                                ক্রমিক সংখ্যা
+                            </td>
+                            <td>
+                                উপকরণের নাম
+                            </td>
+                            <td>
+                                ক্রয় চালানপত্রের ক্রমিক সংখ্যা
+                            </td>
+                            <td>
+                                ক্রয় পুস্তকের ক্রমিক সংখ্যা
+                            </td>
+                            <td>
+                                অব্যবহৃত বা ব্যবহার অনুপযোগি উপকরণের পরিমাণ
+                            </td>
+                            <td>
+                                মূল্য
+                            </td>
+                            <td>
+                                প্রদত্ত মূল্য সংযোজন কর
+                            </td>
+                            <td>
+                                প্রস্তাবিত মূল্য
+                            </td>
+                            <td>
+                                অনুপোযোগিতার কারণ
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>(১)</td>
+                            <td>(২)</td>
+                            <td>(৩)</td>
+                            <td>(৪)</td>
+                            <td>(৫)</td>
+                            <td>(৬)</td>
+                            <td>(৭)</td>
+                            <td>(৮)</td>
+                            <td>(৯)</td>
+                        </tr>
+
+                        @if (Model.Details.Any())
+                        {
+                            int SlNo = 1;
+                            foreach (var item in Model.Details)
+                            {
+                                <tr>
+                                    <td>@SlNo</td>
+                                    <td>@item.ProductName</td>
+                                    <td>@item.PurchaseChallanNo</td>
+                                    <td>@item.PurchaseBookNo</td>
+                                    <td>@StringGenerator.DecimalToCommaSeparated(item.DamageQty)</td>
+                                    <td>@StringGenerator.DecimalToCommaSeparated(item.RealUnitPrice)</td>
+                                    <td>@(StringGenerator.DecimalToCommaSeparated((item.DamageQty*item.RealUnitPrice*(item.VATPercent/100))))</td>
+                                    <td>@StringGenerator.DecimalToCommaSeparated(item.SuggestedUnitPrice)</td>
+                                    <td>@item.ReasonOfDamage</td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="9">No Data Found</td>
+                            </tr>
+                        }
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <div class="col-12">
+                <h6>আমি ঘোষণা করিতেছি যে, এই আবেদনপত্রে প্রদত্ত সকল তথ্য সত্য ও সঠিক। </h6>
+                <br />
+
+                <h6>তারিখ : @DateTime.Now.ToString("dd/MM/yyyy")</h6>
+
+                <div class="text-right">
+                    <h6>প্রতিষ্ঠানের দায়িত্বপ্রাপ্ত ব্যাক্তির নাম : @Model.VatResponsiblePersonName</h6>
+                    <h6>পদবী : @Model.VatResponsiblePersonDesignation</h6>
+
+                    <h6>  স্বাক্ষর : </h6>
+                    <h6>  সিল : </h6>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+@section scripts{
+    <script>
+        $("#btnPrint").click(function () {
+            window.vmsPrint.printA4Landscape('printableArea');
+        });
+
+    </script>
+}

@@ -1,0 +1,157 @@
+﻿@model vms.entity.models.Organization
+
+@{
+    ViewData["Title"] = "Registration";
+    Layout = "_LayoutForChangePassword";
+}
+
+<div class="custom-page-title">
+    Company Registrations
+</div>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Registration" class="form-horizontal" id="frmusercreate">
+            <div class="form-body">
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Name</label>
+                    <div class="col-md-4">
+                        <input asp-for="Name" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Code</label>
+                    <div class="col-md-4">
+                        <input asp-for="Code" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Vat reg No.</label>
+                    <div class="col-md-4">
+                        <input asp-for="VatregNo" class="form-control" />
+
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Address</label>
+                    <div class="col-md-4">
+                        <input asp-for="Address" class="form-control" />
+
+                    </div>
+                </div>
+
+
+
+                <div class="form-group">
+                    <label class="col-md-3 control-label">BIN</label>
+                    <div class="col-md-4">
+                        <input asp-for="Bin" class="form-control" />
+
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Certificate No.</label>
+                    <div class="col-md-4">
+                        <input asp-for="CertificateNo" class="form-control" />
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Enlisted No.</label>
+                    <div class="col-md-4">
+                        <input asp-for="EnlistedNo" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Postal Code</label>
+                    <div class="col-md-4">
+                        <input asp-for="PostalCode" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Country</label>
+                    <div class="col-md-4">
+                        @Html.DropDownListFor(model => Model.SelectedCountryId, new SelectList(Model.CountryIds, "Key", "Value", Model.SelectedCountryId), new { @class = "form-control" })
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">City</label>
+                    <div class="col-md-4">
+                        @Html.DropDownListFor(model => Model.SelectedCityId, new SelectList(Model.CityIds, "Key", "Value", Model.SelectedCityId), new { @class = "form-control" })
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-3 control-label">VAT Responsible Person Name</label>
+                    <div class="col-md-4">
+                        <input asp-for="VatResponsiblePersonName" class="form-control" />
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="col-md-3 control-label">VAT Responsible Person Designation</label>
+                    <div class="col-md-4">
+                        <input asp-for="VatResponsiblePersonDesignation" class="form-control" />
+                    </div>
+                </div>
+                
+                
+                
+                
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Username</label>
+                    <div class="col-md-4">
+                        <input asp-for="UserName" class="form-control" />
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Mobile</label>
+                    <div class="col-md-4">
+                        <input asp-for="Mobile" class="form-control" />
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Email Address</label>
+                    <div class="col-md-4">
+                        <input asp-for="EmailAddress" class="form-control" />
+
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="col-md-3 control-label"></label>
+                    <div class="col-md-9">
+                        <div class="mt-checkbox-list">
+                            <label class="mt-checkbox">
+                                <input type="checkbox" asp-for="IsDeductVatInSource"> Is VDS?
+                                <span></span>
+                            </label>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="form-actions">
+                <div class="row">
+                    <div class="col-md-offset-3 col-md-9">
+                        <button type="button" data-requiredconfirmation="true" class="btn  green">Submit</button>
+                        <button type="button" class="btn grey-salsa btn-outline">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

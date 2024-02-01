@@ -1,0 +1,58 @@
+﻿@model vms.entity.viewModels.vmOldAccountCurrentBalance
+@{
+    ViewData["Title"] = "Create";
+    
+    
+}
+@section contentheader
+    {
+    <div class="p-3 page-header">
+        Add Remaining Amount From Mushak 18.6
+    </div>
+}
+
+
+
+<div class="row">
+    <div class="col-md-4 offset-4">
+        <form asp-action="Create" class="form-horizontal" id="frmusercreate">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-body">
+                <div class="form-group mt-3">
+                    <label asp-for="MushakYear" class="form-label"></label>
+                    <div>
+                        @Html.DropDownList("MushakYear", Model.YearList, "Select Year", new { @class = "form-control form-control-sm" })
+                        <span asp-validation-for="MushakYear" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group mt-3">
+                    <label asp-for="MushakMonth" class="form-label"></label>
+                    <div>
+                        @Html.DropDownList("MushakMonth", Model.MonthList, "Select Month", new { @class = "form-control form-control-sm" })
+                        <span asp-validation-for="MushakMonth" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group mt-3">
+                    <label asp-for="RemainingVatbalance" class="form-label"></label>
+                    <div>
+                        @Html.TextBoxFor(c => c.RemainingVatbalance, new { @class = "form-control form-control-sm" })
+                        <span asp-validation-for="RemainingVatbalance" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group mt-3">
+                    <label asp-for="RemainingSdbalance" class="form-label"></label>
+                    <div>
+                        @Html.TextBoxFor(c => c.RemainingSdbalance, new { @class = "form-control form-control-sm" })
+                        <span asp-validation-for="RemainingSdbalance" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="float-end mt-3">
+                <button type="submit" data-requiredconfirmation="true" class="btn  btn-primary btn-sm"><i class="bi bi-check-lg"></i> Submit</button>
+                <button type="button" value="Reset" onclick="location.reload();" class="btn  btn-warning btn-sm"><i class="bi bi-arrow-repeat"></i> Reset</button>
+                <a asp-controller="OldAccountCurrentBalance" asp-action="Index" class="btn btn-secondary btn-sm"><i class="bi bi-slash-circle"></i> Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>

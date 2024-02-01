@@ -1,0 +1,47 @@
+﻿@model vms.entity.models.OverHeadCost
+
+@{
+    ViewData["Title"] = "Edit Over Head Cost";
+    
+    
+}
+@section contentheader
+    {
+    <div class="p-3 page-header">
+        Edit Over Head Cost
+    </div>
+}
+
+
+<div class="row">
+    <div class="col-md-4 offset-4">
+
+        <form asp-action="Edit" class="form-horizontal" id="frmusercreate">
+            <input type="hidden" asp-for="OverHeadCostId" />
+            
+            <div class="form-body">
+                <div class="form-group required">
+                    <label asp-for="Name" >Name</label>
+                    <div>
+                        <input asp-for="Name"  />
+                        <span asp-validation-for="Name" ></span>
+                    </div>
+                </div>
+
+                
+                <div class="form-check mt-3">
+                    <input asp-for="IsActive" class="form-check-input" id="IsActive" />
+                    <label class="form-check-label" for="IsActive">
+                        Is Active?
+                    </label>
+                </div>
+            </div>
+
+            <div class="float-end mt-3">
+                <button type="submit" data-requiredconfirmation="true" class="btn  btn-primary btn-sm"><i class="bi bi-check-lg"></i> Update</button>
+                <button type="reset" value="Reset" onclick="location.reload();" class="btn  btn-warning btn-sm"><i class="bi bi-arrow-repeat"></i> Reset</button>
+                <a asp-controller="OverHeadCost" asp-action="Index" class="btn btn-secondary btn-sm"><i class="bi bi-slash-circle"></i> Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,58 @@
+﻿@model vms.entity.StoredProcedureModel.MushakReturn.MushakReturnPartOne
+
+
+<table class="table table-bordered">
+  
+         
+        <tr>
+            <th class="MreturnHeader" colspan="3" style="background-color: #FBD4B4!important">
+                <div class="parthead">Part-1: TAXPAYER'S INFORMATION</div>
+            </th>
+        </tr>
+
+
+ 
+    @*<tbody class="Returntd">*@
+
+        <tr>
+            <td class="tdp1">(1) BIN </td>
+            <td class="tdp2"> :</td>
+            <td>@Model.OrganizationBin</td>
+
+
+        </tr>
+
+        <tr>
+            <td>(2) Name of Taxpayer </td>
+            <td class="tdp2"> :</td>
+            <td>@Model.TaxPayersName</td>
+
+
+        </tr>
+        <tr>
+            <td>(3) Address of Taxpayer </td>
+            <td class="tdp2"> :</td>
+            <td>@Model.OrganizationAddress</td>
+
+
+        </tr>
+
+        <tr>
+            <td>(4) Type of Business </td>
+            <td class="tdp2"> :</td>
+            <td>@Model.BusinessNatureEng</td>
+
+
+        </tr>
+
+        <tr>
+            <td>(5) Type of Economic Activity</td>
+            <td class="tdp2"> :</td>
+            <td>@Model.FinancialActivityNatureEng</td>
+
+
+        </tr>
+
+    @*</tbody>*@
+
+</table>

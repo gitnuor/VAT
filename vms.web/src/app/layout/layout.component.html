@@ -1,0 +1,26 @@
+<app-header></app-header>
+<!-- <div class="container">
+  <div class="row">
+    <div class="col-sm-4">
+      <app-leftpanel></app-leftpanel>
+    </div>
+    <div class="col-sm-8">
+      <router-outlet name="layout"></router-outlet>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer> -->
+
+<div class="container-fluid">
+  <div class="row flex-xl-nowrap">
+    <div class="col-12 col-md-3 col-xl-2 bd-sidebar">
+      <app-leftpanel></app-leftpanel>
+
+     
+    <div class="d-none d-xl-block col-xl-2 bd-toc"></div>
+  </div>
+  <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main">
+    <router-outlet name="layout"></router-outlet>
+  </main>
+</div>
+<app-footer></app-footer>

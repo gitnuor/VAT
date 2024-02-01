@@ -1,0 +1,761 @@
+﻿{
+   "CodeGenerationMode": 4,
+   "ContextClassName": "VmsContext",
+   "ContextNamespace": null,
+   "DefaultDacpacSchema": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": false,
+   "ModelNamespace": null,
+   "OutputContextPath": null,
+   "OutputPath": "",
+   "PreserveCasingWithRegex": true,
+   "ProjectRootNamespace": "vms.entity.models",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 0,
+   "SelectedToBeGenerated": 1,
+   "T4TemplatePath": null,
+   "Tables": [
+      {
+         "Name": "[acc].[COAGroups]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Adjustment]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[AdjustmentType]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ApiTransaction]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ApiTransactionType]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ApprovalStatus]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[AuditLog]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[AuditOperation]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Bank]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BillOfMaterial]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BranchTransferReceive]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BranchTransferReceiveDetails]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BranchTransferSend]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BranchTransferSendDetails]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Brand]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BusinessCategory]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BusinessNature]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ByProductReceive]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Content]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ContractType]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ContractualProduction]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ContractualProductionProductDetails]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ContractualProductionTransferRawMaterial]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ContractualProductionTransferRawMaterialDetails]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Country]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[CreditNote]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[CreditNoteDetail]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Currency]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Customer]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[CustomerBranch]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[CustomerCategory]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[CustomerDeliveryAddress]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[CustomerSubscription]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[CustomerSubscriptionCategory]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[CustomerSubscriptionDetail]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[CustomsAndVATCommissionarate]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Damage]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[DamageDetail]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[DamageType]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[DebitNote]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[DebitNoteDetail]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[DefaultPercent]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[DeliveryMethod]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[District]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[DistrictOrCity]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[DivisionOrState]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[DocumentType]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ExcelDataUpload]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ExcelSimplifiedLocalPurchase]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ExcelSimplifiedLocalSaleCalculateByVat]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ExcelSimplifiedPurchase]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ExcelSimplifiedSalse]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ExcelUploadedDataType]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ExportType]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[FinancialActivityNature]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[InputOutputCoEfficient]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[IntegratedApplication]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[IntegratedApplicationRefData]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[IntegratedApplicationRefDataType]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MeasurementUnits]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MushakGeneration]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MushakGenerationStage]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MushakReturnPayment]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MushakReturnPaymentForVds]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MushakReturnPaymentType]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MushakReturnRefund]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MushakSubmission]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MushakSubmissionType]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[NbrEconomicCode]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[NbrEconomicCodeType]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ObjectType]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OldAccountCurrentBalance]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OrganizationConfig]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OrganizationConfigType]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OrganizationConfigurationArea]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OrganizationConfigurationBoolean]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OrganizationConfigurationBooleanType]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OrganizationConfigurationDecimalType]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OrganizationConfigurationIntType]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OrganizationConfigurationStringType]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Organizations]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OrgBranch]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OrgBranchType]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OrgStaticData]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OrgStaticDataType]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OverHeadCost]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PaymentMethod]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PaymentReason]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PriceSetup]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PriceSetupProductCost]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ProductCategory]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ProductGroups]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ProductionReceive]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ProductMeasurementUnit]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ProductOpeningBalance]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Products]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ProductTransactionBook]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ProductType]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ProductUsedInService]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ProductVATs]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ProductVATTypes]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Purchase]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PurchaseDetails]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PurchaseImportTariff]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PurchaseImportTaxPayment]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PurchaseImportTaxPaymentType]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PurchasePayment]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PurchaseReason]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PurchaseTypes]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[RightCategory]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Rights]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[RoleRights]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Roles]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Sales]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SalesDeliveryType]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SalesDetailBreakdown]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SalesDetails]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SalesPaymentReceive]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SalesPriceAdjustment]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SalesPriceAdjustmentDetail]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SalesType]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SubscriptionBill]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SubscriptionBillDetail]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SupplimentaryDuty]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TdsPayment]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TdsPaymentForPurchase]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TransectionTypes]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[UserBranch]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[UserLoginHistory]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Users]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[UserTypes]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[VehicleType]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Vendor]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[VendorBranch]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[VendorCategory]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[VendorType]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ViewContractualProduction]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[ViewCreditNote]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[ViewCreditNoteDetail]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[ViewCustomer]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[ViewCustomerBranch]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[ViewCustomerForeign]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[ViewCustomerLocal]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[ViewCustomerSubscription]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[ViewCustomerWithBranch]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[ViewDebitNote]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[ViewDebitNoteDetails]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[ViewInputOutputCoEfficient]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[ViewMushakReturnSelfPayment]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[ViewMushakReturnVdsPayment]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[ViewOrganizationConfigurationBoolean]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[ViewProduct]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[ViewProductionReceive]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[ViewProductMeasurementUnit]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[ViewProductVat]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[ViewPurchase]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[ViewPurchaseDetails]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[ViewPurchaseImport]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[ViewPurchaseLocal]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[ViewPurchaseVds]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[ViewReferenceCustomer]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[ViewReferenceProduct]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[ViewReferenceUser]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[ViewReferenceVendor]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[ViewSales]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[ViewSalesDetail]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[ViewSalesExport]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[ViewSalesLocal]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[ViewSalesPaymentAgingReport]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[ViewSubscriptionBill]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[ViewTdsPayment]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[ViewUploadedContent]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[ViewUser]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[ViewVdsPurchase]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[ViewVdsSale]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[ViewVdsSales]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[ViewVendor]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[ViewVendorBranch]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[ViewVendorForeign]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[ViewVendorLocal]",
+         "ObjectType": 3
+      }
+   ],
+   "UiHint": "hoer2406101642a.iVat_main.dbo",
+   "UncountableWords": null,
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": false,
+   "UseDateOnlyTimeOnly": false,
+   "UseDbContextSplitting": false,
+   "UseDecimalDataAnnotationForSprocResult": true,
+   "UseFluentApiOnly": true,
+   "UseHandleBars": false,
+   "UseHierarchyId": false,
+   "UseInflector": true,
+   "UseLegacyPluralizer": false,
+   "UseManyToManyEntity": false,
+   "UseNoDefaultConstructor": false,
+   "UseNoNavigations": false,
+   "UseNoObjectFilter": false,
+   "UseNodaTime": false,
+   "UseNullableReferences": false,
+   "UseSchemaFolders": false,
+   "UseSchemaNamespaces": false,
+   "UseSpatial": false,
+   "UseT4": false
+}

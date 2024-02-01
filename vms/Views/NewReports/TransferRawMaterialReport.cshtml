@@ -1,0 +1,110 @@
+﻿@model vms.entity.viewModels.NewReports.vmTransferRawMaterialReport
+
+
+@{ var session = Context.Session.GetComplexData<VmUserSession>(ControllerStaticData.SESSION);
+                ViewData["Title"] = "Transfer Raw Material Report";
+                Layout = "_LayoutReport"; }
+@section contentheader
+    {
+    <div class="p-3 page-header">
+        Transfer Raw Material Report
+        <form method="post">
+            <div class="row">
+
+                <div class="col-3">
+                    <label asp-for="FromDate" class="form-label"></label>
+                    <input autocomplete="off" asp-for="FromDate" class="form-control form-control-sm" type="date" />
+                    <span asp-validation-for="FromDate" class="text-danger"></span>
+                </div>
+
+                <div class="col-3">
+                    <label asp-for="ToDate" class="form-label"> </label>
+                    <input autocomplete="off" asp-for="ToDate" class="form-control form-control-sm" type="date" />
+                    <span asp-validation-for="ToDate" class="text-danger"></span>
+                </div>
+
+                <div class="col-2">
+                    <button type="submit" class="btn btn-sm btn-success inline-sm-button"> <i class="bi bi-file-text"></i> View</button>
+                    <button type="button" class="btn btn-sm btn-primary inline-sm-button" id="btnPrint"><i class="bi bi-printer"></i> Print</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+}
+
+<div id="printableArea">
+    <div class="report-margin">
+        <div class="report-header">
+            <div class="company-name">@Model.HeaderModel.CompanyName</div>
+            <div class="report-name">@Model.HeaderModel.ReportName</div>
+            <div class="report-date-range">From @Model.FromDate.ToString("dd/MM/yyyy") to @Model.ToDate.ToString("dd/MM/yyyy")</div>
+        </div>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th class="text-center">
+                        Transfer Date
+                    </th>
+
+                    <th class="text-center">
+                        Location
+                    </th>
+                    <th class="text-center">
+                        Challan No
+                    </th>
+                </tr>
+            </thead>
+
+            @if (Model.TransferRawMaterialList.Any())
+            {
+                <tbody>
+                    @foreach (var item in Model.TransferRawMaterialList)
+                    {
+                        <tr>
+
+                            <td class="text-center">
+                                @item.TransfereDate.ToString("MM/dd/yyyy")
+                            </td>
+
+                            <td class="text-center">
+                                @Html.DisplayFor(modelItem => item.Location)
+                            </td>
+
+                            <td class="text-center">
+                                @Html.DisplayFor(modelItem => item.ChallanNo)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            }
+
+            else
+            {
+                <tr>
+                    <td colspan="10">
+                        <p style="text-align: center">No Records Found</p>
+                    </td>
+                </tr>
+}
+
+        </table>
+        @*<div class="row">
+            <div class="col-12">
+                <partial name="_PrintFooter" />
+            </div>
+        </div>*@
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+
+        $(document).ready(function () {
+            $("#btnPrint").click(function () {
+                window.vmsPrint.printA4Landscape('printableArea');
+            });
+        });
+    </script>
+
+}

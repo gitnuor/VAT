@@ -1,0 +1,162 @@
+﻿@model vms.entity.viewModels.vmDamageDetails
+
+@{
+    ViewData["Title"] = "Damage";    
+    var i = 1;
+}
+
+@section contentheader
+    {
+    <div class="p-3 page-header">
+        Damage
+        <div class="d-flex justify-content-start">
+
+
+        </div>
+    </div>
+    <div class="col-12 d-flex">
+        <ul class="nav nav-pills mt-3 mr-auto align-bottom">
+        </ul>
+        @using (Html.BeginForm("", "", FormMethod.Get, new { id = "frmPurchase", @class = "d-flex pr-1" }))
+        {
+
+        }
+    </div>
+}
+
+<input type="hidden" class="form-control" id="ProductId" name="ProductId" />
+
+
+<form asp-action="Damage" id="damageFrm" method="post">
+    <div class="row">
+
+
+
+        <div class="col-md-2 ">
+            <div class="form-group form-md-line-input">
+                <div>
+                    <label for="form_control" class="labelColor">Voucher No<span class="label-color">*</span></label>
+                    @Html.EditorFor(Model => Model.Damage.VoucherNo, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-2 ">
+            <div class="form-group form-md-line-input has-info">
+                <label for="form_control" class="labelColor">Damage Type</label>
+                <select id="damageType" name="DamageType" asp-for="Damage.DamageTypeId" class="form-control" asp-items="ViewBag.damageType"></select>
+            </div>
+        </div>
+        <div class="col-md-2 ">
+            <div class="form-group form-md-line-input has-info">
+                <label for="form_control" class="labelColor">Description</label>
+                @Html.EditorFor(Model => Model.Damage.Description, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+        <div class="col-md-2 ">
+            <div class="form-group form-md-line-input">
+                <div>
+                    <label for="form_control" class="labelColor">NBR Verifier Name</label>
+                    @Html.EditorFor(Model => Model.Damage.NbrverifierName, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2 ">
+            <div class="form-group form-md-line-input">
+                <div>
+                    <label for="form_control" class="labelColor">NBR Verifier Designation</label>
+                    @Html.EditorFor(Model => Model.Damage.NbrverifierDesignation, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-2 ">
+            <div class="form-group form-md-line-input">
+                <div>
+                    <label for="form_control" class="labelColor">Reference Key</label>
+                    @Html.EditorFor(Model => Model.Damage.ReferenceKey, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+
+    <div class="col-md-12 ">
+
+        <table class="table table-bordered" id="damageDetails">
+            <thead>
+                <tr>
+                    <th hidden></th>
+                    <th hidden></th>
+                    <th hidden></th>
+                    <th>Serial</th>
+                    <th>Product</th>
+                    <th>Damage Qty</th>
+                    <th>Useable Qty</th>
+                    <th>Useable percnt</th>
+                    <th>New Unit Price</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @{int index = 0;}
+                @foreach (var item in Model.DamageDetails)
+                {
+                    <tr id="@item.PurchaseDetailId">
+                        <td hidden>
+                            @Html.HiddenFor(Model => Model.DamageDetails[index].PurchaseDetailId, new { htmlAttributes = new { @class = "form-control" } })
+                        </td>
+                        <td hidden>
+                            @Html.HiddenFor(Model => Model.DamageDetails[index].MeasurementUnitId, new { htmlAttributes = new { @class = "form-control" } })
+                        </td>
+                        <td hidden>
+                            @Html.HiddenFor(Model => Model.DamageDetails[index].ProductId, new { htmlAttributes = new { @class = "form-control" } })
+                        </td>
+                        <td>@i</td>
+                        <td>
+                            @item.Product.Name
+
+                        </td>
+
+                        <td class="form-group form-md-line-input col-md-2">
+                            <div>
+                                @Html.EditorFor(Model => Model.DamageDetails[index].DamageQty, new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                        </td>
+                        <td class="form-group form-md-line-input col-md-2">
+                            <div>
+                                @Html.EditorFor(Model => Model.DamageDetails[index].UsableQty, new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                        </td>
+                        <td class="form-group form-md-line-input col-md-2">
+                            <div>
+                                @Html.EditorFor(Model => Model.DamageDetails[index].UsablePercent, new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                        </td>
+                        <td class="form-group form-md-line-input col-md-2">
+                            <div>
+                                @Html.EditorFor(Model => Model.DamageDetails[index].SuggestedNewUnitPrice, new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                        </td>
+                        <td class="form-group form-md-line-input col-md-2">
+                            <div>
+                                @Html.EditorFor(Model => Model.DamageDetails[index].DamageDescription, new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                        </td>
+                    </tr>
+                    i++;
+                    index = index + 1;
+                }
+            </tbody>
+
+        </table>
+    </div>
+
+    <div class="form-actions pl-2">
+        <button type="submit" class="btn btn-primary" id="save"><i class="bi bi-check-lg"></i> Submit</button>
+        <a href="~/PurchaseLocal/Index" class="btn btn-secondary"><i class="bi bi-slash-circle"></i> Cancel</a>
+    </div>
+</form>

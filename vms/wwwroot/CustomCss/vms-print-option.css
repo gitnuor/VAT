@@ -1,0 +1,140 @@
+﻿
+@media print {
+    @page {
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+    }
+
+    @page :footer {
+        display: none
+    }
+
+    @page :header {
+        display: none
+    }
+
+    body {
+        padding-top: 20px;
+        print-color-adjust: exact !important;
+        -webkit-print-color-adjust: exact !important;
+        margin: 0;
+        font-size: 10px;
+    }
+
+    a {
+        color: #000;
+    }
+    .table thead th {
+        text-align: center;
+        font-weight: 500;
+    }
+
+    .table th, .table td {
+        padding: .4rem;
+    }
+
+    .table {
+        font-size: .9em;
+        margin-bottom: 50px;
+        page-break-inside: auto !important;
+    }
+
+
+
+    .table > :not(:first-child) {
+        border-top: 1px solid lightgray;
+    }
+
+    table > tr, table > tr > td, table > tr > th, table > tbody > tr, table > tbody > tr > td, table > tbody > tr > th, table > tbody > tr > td > div, table > tbody > tr > th > div {
+        page-break-inside: avoid !important;
+    }
+
+    .ivat-page-break {
+        page-break-after: always !important;
+        page-break-inside: avoid;
+    }
+
+    .report-header {
+        text-align: center;
+    }
+
+    .report-header .company-name {
+        font-size: 2rem;
+        font-weight: 500;
+    }
+
+    .report-header .report-name {
+        font-size: 1.5rem;
+    }
+
+    .report-header .report-date-range {
+        font-size: 1.2rem;
+    }
+
+    .section-to-print {
+        margin: 30px;
+    }
+
+    .page-number:before {
+        counter-increment: page;
+        content: counter(page);
+    }
+
+    .print-footer {
+        color: black;
+        display: block !important;
+        position: fixed;
+        bottom: 30px;
+        border-top: 1px solid #eee;
+        height: 30px;
+        width: 100%;
+    }
+
+    .report-margin {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+
+
+    thead, tbody, tfoot, tr, td, th {
+        border-color: #4d4d4d; 
+    }
+
+    .black-hr {
+        border-top: 1px solid #4d4d4d;
+    }
+
+    .amount-quantity-cell {
+        text-align: right;
+    }
+
+    .serial-cell {
+        text-align: center;
+    }
+
+    .unit-name-cell {
+        text-align: center; 
+    }
+
+    .name-cell {
+        text-align: left;
+    }
+
+    .total-text-cell {
+        text-align: right;
+    }
+
+    .print-page-break{
+        page-break-before: always;
+    }
+
+    .mushak-name {
+        width: 180px;
+        border: 1px solid #808080;
+        padding: 5px;
+        float: right;
+        text-align: center;
+    }
+}

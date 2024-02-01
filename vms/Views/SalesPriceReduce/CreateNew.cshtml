@@ -1,0 +1,564 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+
+
+<input type="hidden" class="form-control" id="ProductId" name="ProductId" />
+
+<div class="custom-page-title">
+    New Sale Order
+</div>
+<div class="row">
+
+    <div class="col-md-12 ">
+
+        <div class="col-md-2 ">
+            <div class="form-group form-md-line-input has-info">
+
+                <select id="CustomerId" name="CustomerId" class="form-control" asp-items="ViewBag.CustomerId"></select>
+                <label for="form_control_1">Name</label>
+
+            </div>
+
+        </div>
+        <div class="col-md-2 ">
+            <div class="form-group form-md-line-input has-info">
+                <input type="text" class="form-control" id="CustomerContactNo" name="CustomerContactNo" placeholder="01####">
+                <label for="form_control_1">Mbl.</label>
+
+            </div>
+
+        </div>
+        <div class="col-md-2 ">
+            <div class="form-group form-md-line-input has-info">
+                <input type="text" class="form-control" id="WorkOrderNo" name="WorkOrderNo" placeholder="##">
+                <label for="form_control_1">OrderNo</label>
+
+            </div>
+
+        </div>
+        
+        <div class="col-md-2 ">
+            <div class="form-group form-md-line-input has-info">
+                @*<select class="dropdown form-control" id="SalesTypeId" name="SalesTypeId">
+
+                        <option value="1">Local</option>
+                        <option value="2">Export</option>
+
+                    </select>*@
+                <select id="SalesTypeId" name="SalesTypeId" class="form-control" asp-items="ViewBag.SalesTypeId"></select>
+                <label for="form_control_1">Sales Type</label>
+
+            </div>
+
+        </div>
+        <div class="col-md-2 ">
+            <div class="form-group form-md-line-input has-info">
+                
+                <select id="SalesDeliveryTypeId" name="SalesDeliveryTypeId" class="form-control" asp-items="ViewBag.SalesDeliveryTypeId"></select>
+                <label for="form_control_1">Sales DeliveryType</label>
+
+            </div>
+
+        </div>
+        <div class="col-md-2 ">
+            <div class="form-group form-md-line-input has-info">
+                
+                <select id="ExportTypeId" name="ExportTypeId" class="form-control" asp-items="ViewBag.ExportTypeId"></select>
+
+                <label for="form_control_1">Export Type</label>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-2 ">
+            <div class="form-group form-md-line-input has-info">
+                <input type="text" class="form-control" id="ExpectedDeleveryDate" name="ExpectedDeleveryDate" placeholder="2018-12-17">
+                <label for="form_control_1">Expt. Delivery Date</label>
+
+            </div>
+
+        </div>
+        <div class="col-md-2 ">
+            <div class="form-group form-md-line-input has-info">
+                <input type="text" class="form-control" id="DeliveryDate" name="DeliveryDate" placeholder="2018-12-17">
+                <label for="form_control_1">Delivery Date</label>
+
+            </div>
+        </div>
+
+        <div class="col-md-2 ">
+            <div class="form-group form-md-line-input has-info">
+                <input type="text" class="form-control" id="Discount" name="Discount" placeholder="00" value="0">
+                <label for="form_control_1">Discount</label>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+<div class="col-md-12 ">
+
+    <table class="table table-bordered" id="gridTable">
+        <thead>
+            <tr>
+                <th>Serial</th>
+                <th>Product</th>
+                <th class="prgbarwidth">Vendor</th>
+                <th>Invoice No.</th>
+                <th>Qty.</th>
+                <th>InitialQty</th>
+                <th>Amount</th>
+                <th class="prgbarwidth">Unit</th>
+                <th> Price</th>
+                <th>VAT(%)</th>
+                <th>VAT</th>
+                <th>Total</th>
+                <th>Action</th>
+            </tr>
+
+        </thead>
+
+        <tbody id="tblPurchaseOD"></tbody>
+        <tfoot>
+            <tr>
+                <td colspan="10">Total</td>
+
+                <td colspan="1"><label id="TotalVat" name="TotalVat" /></td>
+
+                <td><label id="TotalPrice" name="TotalPrice" /></td>
+
+                <td></td>
+
+            </tr>
+        </tfoot>
+        <tfoot>
+            <tr>
+
+                <td></td>
+                <td class="form-group form-md-line-input has-info">
+                    <input type="text" class="form-control" id="Product" name="Product">
+                </td>
+                <td class="form-group form-md-line-input has-info">
+                    <select class="dropdown form-control" id="VendorId" name="VendorId">
+
+                        <option value="1">No.1</option>
+                        <option value="2">No.2</option>
+                        <option value="3">No.3</option>
+                        <option value="4">No.4</option>
+                    </select>
+
+                </td>
+                <td class="form-group form-md-line-input has-info">
+                    <input type="text" class="form-control" id="PurchaseInvoice" name="PurchaseInvoice">
+                </td>
+                <td class="form-group form-md-line-input has-info">
+                    <input type="text" class="form-control" id="item" name="item">
+                </td>
+                <td class="form-group form-md-line-input has-info">
+                    <input type="text" class="form-control" id="InitialAmount" name="InitialAmount">
+                </td>
+                <td class="form-group form-md-line-input has-info">
+                    <input type="text" class="form-control" id="amount" name="amount">
+                </td>
+                <td class="form-group form-md-line-input has-info">
+                    
+                    <select id="unit" name="unit" class="form-control" asp-items="ViewBag.MeasurementUnitId"></select>
+                </td>
+                <td class="form-group form-md-line-input has-info">
+                    <input type="text" readonly class="form-control" id="Amount" name="Amount" />
+                </td>
+                <td class="form-group form-md-line-input has-info">
+                    <input type="text" readonly class="form-control" id="VAT" name="VAT" />
+                </td>
+                <td></td>
+                <td></td>
+                <td>
+                    <a id="add" class="btn btn-sm btn-success" aria-label="Left Align">
+                        <i class="bi bi-plus-lg"></i>
+                    </a>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+
+
+</div>
+
+<div class="form-actions">
+    <button type="button" class="btn blue" id="save"><i class="bi bi-check-lg"></i> Submit</button>
+    <button type="button" class="btn warning"><i class="bi bi-slash-circle"></i> Cancel</button>
+</div>
+
+
+@section Scripts{
+
+
+    <script src="~/js/typeahead.bundle.js"></script>
+    <script src="~/js/jquery-ui.js"></script>
+    <script>
+
+        var SalesOrder = {
+            init: function() {},
+            count: 1,
+            unitAmount: 0,
+            totalPrice: 0,
+            totalVat: 0,
+            purchaseOrders:[],
+            SaleOrderDetailList: [],
+            item: [],
+            getPurchaseOrder: function () {
+                var purchaseOrder = new Object();
+                var OrganizationId = $('#OrganizationId').val();
+                var VendorId = $('#VendorId').val();
+                var Amount = $('#PurchaseAmount').val();
+                var ExtDeliveryDate = $('#ExpectedDeleveryDate').val();
+                var DeliveryDate = $('#DeliveryDate').val();
+                var Iteams = $('#PurchaseIteams').val();
+                var Vat = $('#PurchaseVat').val();
+                var Discount = $('#Discount').val();
+                purchaseOrder.OrganizationId = OrganizationId;
+                purchaseOrder.VendorId = VendorId;
+                purchaseOrder.Amount = Amount;
+                purchaseOrder.ExtDeliveryDate = ExtDeliveryDate;
+                purchaseOrder.DeliveryDate = DeliveryDate;
+                purchaseOrder.Iteams = Iteams;
+                purchaseOrder.Vat = Vat;
+                purchaseOrder.Discount = Discount;
+            },
+            CalculateTotalPriceAndVat: function(totalPrice,totalVat) {
+                SalesOrder.totalPrice += totalPrice;
+                SalesOrder.totalVat += totalVat;
+                $('#TotalPrice').text(Math.round(SalesOrder.totalPrice));
+                $('#TotalVat').text(Math.round(SalesOrder.totalVat));
+            },
+            gridTableEmpty: function() {
+                $('#ProductId').val('');
+                $('#Product').val('');
+                $('#Amount').val('');
+                $('#item').val('');
+                $('#amount').val('');
+                $('#VAT').val('');
+                $('#InitialAmount').val('');
+                $('#InvoiceNo').val('');
+            },
+            isNumber:function (n) {
+                return !isNaN(parseFloat(n)) && isFinite(n);
+            },
+            add: function () {
+
+                var productName = $('#Product').val();
+                var productId = $('#ProductId').val();
+                var vendor = $('#VendorId option:selected').text();
+                var vendorId = $('#VendorId').val();
+                var PurchaseInvoice = $('#PurchaseInvoice').val();
+                var item = $('#item').val();
+                var InitialAmount = $('#InitialAmount').val();
+                var amount = $('#amount').val();
+                var vatPercent = $('#VAT').val();
+                var unit = $('#unit option:selected').text();
+                var unitId = $('#unit').val();
+                var unitAmount = $('#Amount').val();
+
+                if (productId>0) {
+
+                    var canAdd = true;
+
+                    $.each(SalesOrder.SaleOrderDetailList,
+                        function (i, v) {
+                            if (SalesOrder.SaleOrderDetailList[i].ProductId == productId) {
+                                alert('Sorry! product Order Exists.');
+                                canAdd = false;
+
+                            }
+
+                        });
+                    if (!parseInt(item)) {
+                        alert('Number of item is inValid!');
+                        canAdd = false;
+                    }
+                    if (!parseInt(amount)) {
+                        alert('Amount of item is inValid!');
+                        canAdd = false;
+                    }
+                    if (canAdd) {
+
+                        if (!SalesOrder.isNumber(vatPercent)) {
+                            return alert("Input VAT %");
+                        }
+                        var vat = parseFloat(vatPercent) / 100;
+                        var data = new Object();
+                        data.ProductId = productId;
+                        data.SalesId = 0;
+                        data.ProductVattypeId = 1;
+                        data.Iteams = item;
+                        data.Amount = amount;
+                        data.Vat = vatPercent;
+                        data.InitialQty = InitialAmount;
+                        data.MeasurementUnitId = 3;
+                        data.PurchaseVendorId = vendorId;
+                        data.PurchaseInvoice = PurchaseInvoice;
+                        data.CreatedBy =3
+                        data.CreatedTime ='2019-01-15'
+                        var vatValue = parseFloat(amount);
+                        vatValue = Math.ceil(vatValue * (vat));
+                        var total = parseFloat(amount) + vatValue;
+                        data.totalPrice = total;
+                        data.totalVat = vatValue;
+                        SalesOrder.SaleOrderDetailList.push(data);
+
+                        var html = '<tr id="' +
+                            data.ProductId +
+                            '">' +
+                            '<td>' +
+                            SalesOrder.count +
+                            '</td>' +
+                            '<td>' +
+                            productName +
+                            '</td>' +
+                            '<td>' +
+                            vendor +
+                            '</td>' +
+                            '<td>' +
+                            PurchaseInvoice +
+                            '</td>' +
+                            '<td>' +
+                            item +
+                            '</td>' +
+                            '<td>' +
+                            InitialAmount +
+                            '</td>' +
+                            '<td>' +
+                            amount +
+                            '</td>' +
+                            '<td>' +
+                            unit +
+                            '</td>' +
+                            '<td>' +
+                            unitAmount+
+                            '</td>' +
+
+                            '<td>' +
+                            vatPercent +
+                            '</td>' +
+
+                            '<td>' +
+                            vatValue +
+                            '</td>' +
+                            '<td>' +
+                            total +
+                            '</td>' +
+                            '<td><span onclick="Delete(' +
+                            data.ProductId +
+                            ')"  class="btn-xs glyphicon glyphicon-minus"></a></span></td>';
+
+                        html += '</tr>';
+
+                        $("table#gridTable > tbody").append(html);
+                        SalesOrder.CalculateTotalPriceAndVat(total, vatValue);
+                        SalesOrder.gridTableEmpty();
+                        SalesOrder.count++;
+
+                    }
+                }
+
+
+
+            },
+
+            delete: function (id) {
+                for (var key in SalesOrder.SaleOrderDetailList) {
+                    var value = SalesOrder.SaleOrderDetailList[key].ProductId;
+                    if (SalesOrder.SaleOrderDetailList[key].ProductId == id) {
+                        SalesOrder.CalculateTotalPriceAndVat(-SalesOrder.SaleOrderDetailList[key].totalPrice, -SalesOrder.SaleOrderDetailList[key].totalVat);
+                    }
+                }
+
+                $.each(SalesOrder.SaleOrderDetailList,
+                    function (i, v) {
+                        if (SalesOrder.SaleOrderDetailList[i].ProductId == id) {
+                            SalesOrder.SaleOrderDetailList.splice(i, 1);
+                        }
+                        $("tr#" + id).remove().fadeOut();
+
+                    });
+
+            },
+            calculate: function (value) {
+
+                var unitAmount = $('#amount').val();
+                if (!SalesOrder.isNumber(unitAmount) || !(SalesOrder.isNumber(value))) {
+                    
+                    return; 
+                } else {
+                    $("#Amount").val(Math.ceil(unitAmount / value));
+                }
+
+            },
+            calculateUnitPrice: function (value) {
+                var qty = $('#item').val();
+                if (!SalesOrder.isNumber(qty) || !(SalesOrder.isNumber(value))) {
+                    
+                    return; 
+                } else {
+                    $("#Amount").val(Math.floor(value / qty));
+                }
+
+            },
+            Save: function () {
+                var CustomerId = $('#CustomerId').val();
+                var CustomerContactNo = $('#CustomerContactNo').val();
+                var WorkOrderNo = $('#WorkOrderNo').val();
+                var ShippingAddress = $('#ShippingAddress').val();
+                var CountryId = $('#CountryId').val();
+                var SalesTypeId = $('#SalesTypeId').val();
+                var ExportTypeId = $('#ExportTypeId').val();
+                var Amount = $('#PurchaseAmount').val();
+                var ExpectedDeleveryDate = $('#ExpectedDeleveryDate').val();
+                var DeliveryDate = $('#DeliveryDate').val();
+                var Iteams = $('#PurchaseIteams').val();
+                var Vat = $('#PurchaseVat').val();
+                var Discount = $('#Discount').val(); SalesDeliveryTypeId
+                var SalesDeliveryTypeId = $('#SalesDeliveryTypeId').val();
+                var reqEntry = new Object();
+                reqEntry.SaleOrderDetailList = SalesOrder.SaleOrderDetailList;
+                reqEntry.OrganizationId=1;
+                reqEntry.ExpectedDeleveryDate=ExpectedDeleveryDate;
+                reqEntry.CustomerId=CustomerId;
+                reqEntry.CustomerContactNo = CustomerContactNo;
+                reqEntry.Discount=Discount;
+                reqEntry.IsComplete=1;
+                reqEntry.WorkOrderNo = WorkOrderNo;
+                reqEntry.ShippingAddress = ShippingAddress;
+                reqEntry.CountryId = CountryId;
+                reqEntry.SalesTypeId = SalesTypeId;
+                reqEntry.CreatedBy=3;
+                reqEntry.ExportTypeId = ExportTypeId;
+                reqEntry.DeliveryDate = DeliveryDate;
+                reqEntry.SalesDeliveryTypeId = SalesDeliveryTypeId
+                $.ajax({
+                    url: '@Url.Action("CreateAsync", "Sales")',
+                    dataType: "json",
+                    type: "POST",
+                    data: { vmSale: reqEntry },
+                    beforeSend: function () {
+                        $("#loading").show();
+                    },
+                    success: function (result) {
+                        $("#loading").hide();
+
+                        if (result == false) {
+                            alert("Please add atleast on purchase Details");
+                        }
+                        else {
+                            window.location.href = '@Url.Action("Index", "Sales")';
+                        }
+                    },
+                    error: function (x, e) {
+                        $("#loading").hide();
+                        alert('error');
+                    }
+                });
+            },
+            product : {
+                init: function () { },
+                productAutoComplete: function () {
+                    var materialforrequsition = {
+                        Initialize: function () {
+                            materialforrequsition.Typehead();
+                        },
+
+                        Typehead: function () {
+                            $('#Product').typeahead('destroy');
+                            $('#Product').typeahead({
+                                    hint: true,
+                                    highlight: true,
+                                    minLength: 2,
+                                },
+                                {
+                                    items: 8,
+                                    name: 'Product',
+                                    displayKey: function (s) {
+                                        return s.name;
+                                    },
+                                    property: "ProductId",
+                                    source: function (strmaterial, process) {
+                                        var url = '@Url.Content("~/Products/ProductAutoComplete")';
+                                        return $.getJSON(url, { filterText: $("#Product").val() }, function (Data) {
+
+                                            return process(Data);
+                                        });
+                                    },
+                                    updater: function (item) {
+                                        return item.name;
+                                    }
+                                }).on('typeahead:selected', function (obj, datum) {
+
+                                    $("#ProductId").val(datum.id);
+                                    $('#Amount').val('');
+                                     $('#item').val('');
+                                    $('#amount').val('');
+                                    $('#VAT').val(datum.vat);
+
+                                   SalesOrder.unitAmount = 0;
+
+                            });
+                            $("#Product").focus();
+
+                        }
+                    }
+                    materialforrequsition.Initialize();
+                }
+            }
+        }
+
+
+
+        $(document).ready(function() {
+            $('#add').click(function() {
+                SalesOrder.add();
+            });
+
+            $('#save').click(function () {
+                SalesOrder.Save();
+            });
+            $("#ExpectedDeleveryDate").datepicker();
+            $("#ExpectedDeleveryDate").datepicker('option', 'dateFormat', 'dd M, yy');
+
+            $("#DeliveryDate").datepicker();
+            $("#DeliveryDate").datepicker('option', 'dateFormat', 'dd M, yy');
+            SalesOrder.product.productAutoComplete();
+        });
+
+        function Delete(id) {
+            SalesOrder.delete(id);
+        }
+
+        $("#item").keyup(function () {
+            var that = this,
+            numberOfItem = $(this).val();
+            SalesOrder.calculate(numberOfItem);
+
+        });
+
+        $("#amount").keyup(function () {
+            var that = this,
+                amount = $(this).val();
+            SalesOrder.calculateUnitPrice(amount);
+
+        });
+
+
+    </script>
+
+}
+
+
+
+
+

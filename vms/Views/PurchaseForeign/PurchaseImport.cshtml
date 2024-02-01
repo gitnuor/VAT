@@ -1,0 +1,54 @@
+﻿@model vms.entity.viewModels.VmPurchaseImport
+@{
+    ViewData["Title"] = "Foreign Purchase (Import)";
+
+}
+
+@section contentheader
+{
+    <div class="p-3 page-header">
+        @ViewData["Title"]
+        @*<a class="btn btn-sm btn-secondary float-end" asp-action="PurchaseLocal">Add Local Purchase</a>*@
+    </div>
+}
+
+<div class="row mt-3 form-margin">
+    <div class="col-md-5 form-1">
+        <partial name="_PurchaseImportMainInformation" model="Model" />
+    </div> 
+
+    <div class="col-md-7 md-left-border form-2">
+        <partial name="_PurchaseImportProductAdd" model="Model" />
+    </div>
+
+    <div class="col-md-12 form-3">
+	    <div id="notificationArea"></div>
+        <partial name="_PurchaseImportProductList" model="Model" />
+    </div>
+
+    <div class="col-md-12 d-none form-4">
+        <partial name="_PurchaseImportPayment" model="Model" />
+    </div>
+
+    <div class="col-md-12 form-5">
+        <partial name="_PurchaseImportTaxPayment" model="Model" />
+    </div>
+
+    <div class="col-md-12 form-6">
+        <partial name="_PurchaseImportDocument" model="Model" />
+    </div>
+
+	<div class="col-md-12 form-7">
+		<div class="float-end mt-2">
+			<button type="button" class="btn btn-success btn-sm" id="btnSave"><i class="bi bi-check-lg"></i> Submit</button>
+			<button type="button" class="btn btn-primary btn-sm d-none" id="btnSaveDraft"><i class="bi bi-card-list"></i> Draft</button>
+			<button type="button" class="btn btn-warning btn-sm" id="btnResetForm"><i class="bi bi-arrow-repeat"></i> Reset</button>
+			<a asp-action="Index" class="btn btn-secondary btn-sm"><i class="bi bi-slash-circle"></i> Cancel</a>
+		</div>
+	</div>
+</div>
+
+
+@section Scripts{
+	<script src="~/CustomJs/Purchase/PurchaseImport.js?vguid=@ViewStaticData.StaticFileVersionGuid"></script>
+}

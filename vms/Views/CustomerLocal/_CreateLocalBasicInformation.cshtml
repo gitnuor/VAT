@@ -1,0 +1,120 @@
+﻿@model vms.entity.viewModels.CustomerViewModel.CustomerLocalCreateViewModel
+<div class="form-subheading">
+	Basic Information
+</div>
+<div>
+	<div class="row">
+		<div class="col-6">
+			<div class="form-group mb-3">
+				<label class="form-label" asp-for="Name"></label>
+				<div>
+					<input asp-for="Name" class="form-control form-control-sm"/>
+					<span asp-validation-for="Name" class="text-danger"></span>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-6">
+			<div class="form-group mb-3">
+				<label class="form-label" asp-for="Nidno"></label>
+				<span class="text-warning">(Either NID or BIN is required.)</span>
+				<div>
+					<input asp-for="Nidno" class="form-control  form-control-sm"/>
+					<span asp-validation-for="Nidno" class="text-danger"></span>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-6">
+			<div class="form-group mb-3">
+				<label class="form-label" asp-for="Bin"></label>
+				<span class="text-warning">(Either NID or BIN is required.)</span>
+				<div>
+					<input asp-for="Bin" class="form-control form-control-sm"/>
+					<span asp-validation-for="Bin" class="text-danger"></span>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-6">
+			<div class="form-group mb-3">
+				<label class="form-label" asp-for="Tinno"></label>
+				<div>
+					<input asp-for="Tinno" class="form-control form-control-sm"/>
+					<span asp-validation-for="Tinno" class="text-danger"></span>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-6">
+			<div class="form-group mb-3">
+				<label class="form-label" asp-for="PhoneNo"></label>
+				<div>
+					<input asp-for="PhoneNo" class="form-control form-control-sm"/>
+					<span asp-validation-for="PhoneNo" class="text-danger"></span>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-6">
+			<div class="form-group mb-3">
+				<label class="form-label" asp-for="EmailAddress"></label>
+				<div>
+					<input asp-for="EmailAddress" class="form-control form-control-sm"/>
+					<span asp-validation-for="EmailAddress" class="text-danger"></span>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-6">
+			<div class="form-group mb-3">
+				<label class="form-label" asp-for="DistrictOrCityName"></label>
+				<div>
+					<input asp-for="DistrictOrCityName" class="form-control form-control-sm"/>
+					<span asp-validation-for="DistrictOrCityName" class="text-danger"></span>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-6">
+			<div class="form-group mb-3">
+				<label class="form-label" asp-for="DivisionOrStateName"></label>
+				<div>
+					<input asp-for="DivisionOrStateName" class="form-control form-control-sm"/>
+					<span asp-validation-for="DivisionOrStateName" class="text-danger"></span>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-12">
+			<div class="form-group mb-3">
+				<label class="form-label" asp-for="Address"></label>
+				<div>
+					<textarea asp-for="Address" class="form-control form-control-sm"></textarea>
+					<span asp-validation-for="Address" class="text-danger"></span>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-6">
+			<div class="form-group mb-3">
+				<label class="form-label" asp-for="PostCode"></label>
+				<div>
+					<input asp-for="PostCode" class="form-control form-control-sm"/>
+					<span asp-validation-for="PostCode" class="text-danger"></span>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-6">
+			<div class="form-group mb-3 form-group-checkbox">
+				<div class="form-check form-switch">
+					<input type="checkbox" asp-for="IsRequireBranch" class="form-check-input">
+					<label asp-for="IsRequireBranch" class="form-check-label"></label>
+					<span asp-validation-for="IsRequireBranch" class="text-danger"></span>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>

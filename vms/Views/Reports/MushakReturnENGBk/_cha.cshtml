@@ -1,0 +1,67 @@
+﻿@model IEnumerable<vms.entity.StoredProcedureModel.MushakReturn.MushakReturnSubFormChha>
+<table class="table table-bordered">
+
+    <thead>
+
+        <tr class="MreturnHeader">
+
+            <th>Serial No.</th>
+            <th>
+                Treasury Challan Number
+            </th>
+
+            <th>
+                Bank
+            </th>
+
+            <th>
+               Branch
+            </th>
+            <th>
+                Date
+            </th>
+            <th>
+                Tax Deposit Account Code
+            </th>
+            <th>
+                Amount
+            </th>
+
+            <th>Notes</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Any())
+        {
+
+            foreach (var item in Model)
+            {
+                <tr>
+
+                    <td>@item.SlNo</td>
+                    <td>@item.TreasuryChallanNo</td>
+                    <td>@item.BankNameInBangla</td>
+                    <td>@item.BankBranchNameInBangla</td>
+                    <td>@item.SubimissionDate</td>
+                    <td>@item.EconomicCode</td>
+                    <td class="text-right">@item.PaidAmount</td>
+                    <td></td>
+                </tr>
+
+            }
+        }
+    </tbody>
+    <tfoot>
+        <tr class="MreturnHeader">
+
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th class="text-right">Total</th>
+            <th class="text-right">@Model.Sum(c => c.PaidAmount)</th>
+            <th></th>
+        </tr>
+    </tfoot>
+</table>

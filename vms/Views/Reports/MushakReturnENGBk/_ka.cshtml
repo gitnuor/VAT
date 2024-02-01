@@ -1,0 +1,77 @@
+﻿@model IEnumerable<vms.entity.StoredProcedureModel.MushakReturn.MushakReturnSubFormKa>
+@{
+    decimal totTransSubFormKa = 0;
+    decimal totSdSubFormKa = 0;
+    decimal totMuskSubFormKa = 0;
+}
+
+<table class="table table-bordered">
+
+    <thead>
+
+        <tr class="MreturnHeader">
+
+            <th>Serial No.</th>
+            <th>
+                Goods/Service
+                Commercial
+                Description
+            </th>
+            <th>
+                Goods/Service
+                Code
+            </th>
+            <th>
+                Goods/Service
+                Name
+            </th>
+            <th>
+                Value (a)
+            </th>
+            <th>SD (b)</th>
+            <th>
+                VAT (c)
+            </th>
+            <th>Notes</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Any())
+        {
+
+            foreach (var item in Model)
+            {
+                totTransSubFormKa += item.ProductPrice ?? 0;
+                totSdSubFormKa += item.ProductPrice ?? 0;
+                totMuskSubFormKa += item.ProductPrice ?? 0;
+
+                <tr>
+
+                    <td>@item.SlNo                 </td>
+                    <td>@item.ProductCommercialDescription</td>
+                    <td>@item.ProductCode                 </td>
+                    <td>@item.ProductName                 </td>
+                    <td class="text-right">@item.ProductPrice.Value.ToString("N")                </td>
+                    <td class="text-right">@item.ProductSupplementaryDuty.Value.ToString("N")    </td>
+                    <td class="text-right">@item.ProductVat.Value.ToString("N")                  </td>
+                    <td>@item.Remarks                     </td>
+                </tr>
+
+            }
+        }
+
+
+    </tbody>
+    <tfoot>
+        <tr class="MreturnHeader">
+            <th></th>
+            <th></th>
+            <th></th>
+            <th class="text-right">Total</th>
+            <th class="text-right">@Model.Sum(x => x.ProductPrice).Value.ToString("N")</th>
+            <th class="text-right">@Model.Sum(x => x.ProductSupplementaryDuty).Value.ToString("N")</th>
+            <th class="text-right">@Model.Sum(x => x.ProductVat).Value.ToString("N")</th>
+            <th></th>
+        </tr>
+    </tfoot>
+</table>

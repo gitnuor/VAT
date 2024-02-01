@@ -1,0 +1,23 @@
+﻿@model IEnumerable<vms.entity.models.ViewSubscriptionBill>
+@(Html.Grid(Model).Build(columns =>
+{
+    columns.Add(model => model.BillingOfficeName).Titled("Billing Office");
+    columns.Add(model => model.CollectionOfficeName).Titled("Collection Office");
+    columns.Add(model => model.BillYear).Titled("Bill Year");
+    columns.Add(model => model.BillMonthName).Titled("Bill Month");
+    columns.Add(model => model.CustomerName).Titled("Customer");
+    columns.Add(model => model.CustomerBinOrNidNo).Titled("Customer BIN/NID");
+    columns.Add(model => model.PhoneNo).Titled("Customer Phone");
+    columns.Add(model => model.CustomerAddress).Titled("Customer Address");
+    columns.Add(model => model.SubscriptionPriceWithoutTax).Titled("Bill Amount (Without any Tax)");
+    columns.Add(model => model.SupplementaryDuty).Titled("SD");
+    columns.Add(model => model.VatAmount).Titled("VAT");
+    columns.Add(model => model.IsSentToSalesStatus).Titled("Is Sent to Sales?");
+    columns.Add().Encoded(false).RenderedAs(data => Html.PartialAsync("_ActionMenu", data).Result)
+		.Titled(Html.Raw("<i class='bi bi-activity'></i>")).AppendCss("action-col-freez");
+})
+	.AppendCss("large-index-grid")
+	.Empty("No data found")
+	.Filterable(GridFilterType.Double)
+	.Sortable()
+	.Pageable())

@@ -1,0 +1,216 @@
+﻿@model vms.entity.viewModels.ReportsViewModel.VmMushakHighValDisplay
+
+<div class="row">
+
+    <div class="col-12">
+        <div class="mushak-name">Mushak - 6.10</div>
+    </div>
+
+    <div class="col-12 report-header">
+
+        <div class="company-name">GOVERNMENT OF THE PEOPLE'S REPUBLIC OF BANGLADESH</div>
+        <div class="company-name">NATIONAL BOARD OF REVENUE</div>
+        <div class="sub-header"><b>Information of purchase and sale invoices worth more than 2 (two) lakh taka</b></div>
+
+        <div class="sub-header">
+            [Note sub-rule (1) of rule 42]
+        </div>
+
+    </div>
+
+    <div class="col-8" style="text-align:left">
+
+        <div class="sub-header">Name of the registered/enlisted person  : @Model.OrgName</div>
+
+    </div>
+
+    <div class="col-4" style="text-align:left">
+
+        <div class="sub-header">BIN : @Model.OrgBin</div>
+
+    </div>
+
+    <div class="col-12">
+        <div class="company-other-info"><b>Part-A: Purchase Account Information</b></div>
+        <table class="table table-bordered">
+            <thead>
+
+                <tr>
+                    <th rowspan="2">
+                        Serial No.
+                    </th>
+                    <th colspan="6">
+                        Purchase
+                    </th>
+
+                </tr>
+                <tr>
+                    <th>
+                        Invoice No
+                    </th>
+                    <th>
+                        Issue Date
+                    </th>
+                    <th>
+                        Price
+                    </th>
+                    <th>
+                        Vendor Name
+                    </th>
+                    <th>
+                        Vendor Address
+                    </th>
+                    <th>
+                        Vendor BIN/National
+                        Identity Card No. *
+                    </th>
+
+                </tr>
+
+
+                <tr>
+                    <th>(1)</th>
+                    <th>(2)</th>
+                    <th>(3)</th>
+                    <th>(4)</th>
+                    <th>(5)</th>
+                    <th>(6)</th>
+                    <th>(7)</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.VmHigh.SpPurcSalesChallanForHighValuePurchaseList.Any())
+                {
+                    foreach (var type in Model.VmHigh.SpPurcSalesChallanForHighValuePurchaseList)
+                    {
+                        <tr>
+	                        <td class="text-right">@type.Sl</td>
+	                        <td class="text-center">@type.VatChallanNo</td>
+	                        <td class="text-center">@StringGenerator.DateTimeToString(type.VatChallanIssueDate)</td>
+	                        <td class="text-right">@type.ProdPriceInclVATAndDuty.DecimalToCommaSeparated()</td>
+	                        <td>@type.VendorName</td>
+	                        <td>@type.VendorAddress</td>
+	                        <td class="text-center">@type.VendorBinOrNid</td>
+
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="7">
+                            No Data Found
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+        <br />
+    </div>
+
+    <div class="col-12">
+        <div class="company-other-info"><b>Part-B: Sales Account Information</b></div>
+        <table class="table table-bordered">
+            <thead>
+
+                <tr>
+                    <th rowspan="2">
+                        Serial No.
+                    </th>
+                    <th colspan="6">
+                        Sale
+                    </th>
+
+                </tr>
+                <tr>
+                    <th>
+                        Invoice No.
+                    </th>
+                    <th>
+                        Issue Date
+                    </th>
+                    <th>
+                        Price
+                    </th>
+                    <th>
+                        Customer Name
+                    </th>
+                    <th>
+                        Customer Address
+                    </th>
+                    <th>
+                        Customer BIN/National
+                        Identity Card No. *
+                    </th>
+
+                </tr>
+
+
+                <tr>
+	                <th>(1)</th>
+	                <th>(2)</th>
+	                <th>(3)</th>
+	                <th>(4)</th>
+	                <th>(5)</th>
+	                <th>(6)</th>
+	                <th>(7)</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.VmHigh.SpPurcSalesChallanForHighValueSaleList.Any())
+                {
+                    foreach (var type in Model.VmHigh.SpPurcSalesChallanForHighValueSaleList)
+                    {
+                        <tr>
+	                        <td class="text-right">@type.Sl</td>
+	                        <td class="text-center">@type.VatChallanNo</td>
+	                        <td class="text-center">@StringGenerator.DateTimeToString(type.SalesDate)</td>
+	                        <td class="text-right">@type.ProdPriceInclVATAndDuty.DecimalToCommaSeparated()</td>
+	                        <td>@type.CustomerName</td>
+	                        <td>@type.CustomerAddress</td>
+	                        <td class="text-center">@type.CustomerBIN</td>
+
+
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="7">
+                            No Data Found
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+        <br />
+    </div>
+
+    <div class="col-12 mt-4">
+
+        <div class="company-other-info">Signature of the person in charge : </div>
+
+        <div class="company-other-info">
+            Name : @Model.VmHigh.SpPurcSalesChallanForHighValuePurchaseList.Select(x => x.VatResponsiblePersonName).FirstOrDefault()
+        </div>
+        <div class="company-other-info">Designation : @Model.VmHigh.SpPurcSalesChallanForHighValuePurchaseList.Select(x => x.VatResponsiblePersonDesignation).FirstOrDefault()</div>
+        <div class="company-other-info">
+            Date :
+        </div>
+
+    </div>
+
+    <div class="col-12 mt-4">
+        <div class="company-other-info">
+            * In case the product is to be purchased from an unregistered person, the person's full name, address and national identity card number will be appropriate.
+            Relevant columns [(5), (6) and (6)] must be mentioned.
+        </div>
+    </div>
+</div>

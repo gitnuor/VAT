@@ -1,0 +1,41 @@
+﻿@model vms.entity.models.MushakGeneration
+
+@{
+    ViewData["Title"] = "Delete";
+    
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>MushakGeneration</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MushakForYear)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MushakForYear)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MushakForMonth)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MushakForMonth)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.GenerateDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.GenerateDate)
+        </dd>
+        
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="MushakGenerationId" />
+        <input type="submit" value="Delete" class="btn btn-light" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

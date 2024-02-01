@@ -1,0 +1,157 @@
+﻿@model vms.entity.viewModels.ReportsViewModel.VmSalesCalcBookNew
+
+
+<h1 class="custom-page-title">Mushak-6.2</h1>
+@using (Html.BeginForm())
+{<input type="hidden" class="form-control" id="productId" name="productId" value="@Model.productId" />
+    <input type="hidden" class="form-control" id="vendorId" name="vendorId" value="@Model.CustomerId\
+           " />
+    <div class="row">
+        <div class="col-md-2">
+            <div class="form-group">
+                <label>From Date</label>
+                <input class="form-control" autocomplete="off" id="FromDate" name="FromDate" value="@Model.fromDate" type="text">
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label>To Date</label>
+                <input class="form-control" autocomplete="off" id="ToDate" name="ToDate" value="@Model.toDate" type="text">
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label>Product</label>
+                <input type="text" class="form-control" id="Product" name="Product" value="@ViewBag.searchProduct">
+            </div>
+        </div>
+        
+        <div class="col-md-2">
+            <div class="form-group pull-left">
+                <input class="btn  btn-success" style="margin-top:25px;" type="submit" value="View Report" />
+            </div>
+        </div>
+    </div>
+}
+<div class="col-md-12">
+    <div style="overflow:scroll">
+        @if (Model.ogrId != 0)
+        {
+            <partial name="HTMLMushaks/_SaleCalBook" model="Model.SaleCallBook" />
+
+        }
+    </div>
+</div>
+@section scripts{
+    <script src="~/js/typeahead.bundle.js"></script>
+    <script src="~/js/jquery-ui.js"></script>
+    <script>
+
+        $("#FromDate").datepicker();
+        $("#FromDate").datepicker('option', 'dateFormat', 'dd M, yy');
+
+        $("#ToDate").datepicker();
+        $("#ToDate").datepicker('option', 'dateFormat', 'dd M, yy');
+
+    </script>
+    <script>
+        var report = {
+            product : {
+                init: function () { },
+                productAutoComplete: function () {
+                    var materialforrequsition = {
+                        Initialize: function () {
+                            materialforrequsition.Typehead();
+                        },
+
+                        Typehead: function () {
+                            $('#Product').typeahead('destroy');
+                            $('#Product').typeahead({
+                                    hint: true,
+                                    highlight: true,
+                                    minLength: 2,
+                                },
+                                {
+                                    items: 8,
+                                    name: 'Product',
+                                    displayKey: function (s) {
+                                        return s.name;
+                                    },
+                                    property: "productId",
+                                    source: function (strmaterial, process) {
+                                        var url = '@Url.Content("~/Products/ProductAutoComplete")';
+                                        return $.getJSON(url, { filterText: $("#Product").val() }, function (Data) {
+
+                                            return process(Data);
+                                        });
+                                    },
+                                    updater: function (item) {
+                                        return item.name;
+                                    }
+                                }).on('typeahead:selected', function (obj, datum) {
+
+                                    $("#productId").val(datum.id);
+
+
+                            });
+                            $("#Product").focus();
+
+                        }
+                    }
+                    materialforrequsition.Initialize();
+                }
+            },
+
+            vendor: {
+                init: function () { },
+                productAutoComplete: function () {
+                    var materialforrequsition = {
+                        Initialize: function () {
+                            materialforrequsition.Typehead();
+                        },
+
+                        Typehead: function () {
+                            $('#Vendor').typeahead('destroy');
+                            $('#Vendor').typeahead({
+                                    hint: true,
+                                    highlight: true,
+                                    minLength: 2,
+                                },
+                                {
+                                    items: 8,
+                                    name: 'Vendor',
+                                    displayKey: function (s) {
+                                        return s.name;
+                                    },
+                                    property: "vendorId",
+                                    source: function (strmaterial, process) {
+                                        var url = '@Url.Content("~/Vendor/VendorAutoComplete")';
+                                        return $.getJSON(url, { filterText: $("#Vendor").val() }, function (Data) {
+
+                                            return process(Data);
+                                        });
+                                    },
+                                    updater: function (item) {
+                                        return item.name;
+                                    }
+                                }).on('typeahead:selected', function (obj, datum) {
+
+                                    $("#vendorId").val(datum.id);
+
+
+                            });
+                            $("#Product").focus();
+
+                        }
+                    }
+                    materialforrequsition.Initialize();
+                }
+            }
+        }
+        $(document).ready(function() {
+
+            report.product.productAutoComplete();
+            report.vendor.productAutoComplete();
+        });
+    </script>
+}

@@ -1,0 +1,128 @@
+﻿@model vms.entity.models.Organization
+@{
+    ViewData["Title"] = "Branch Details";
+}
+@section contentheader
+    {
+    <div class="p-3 page-header">
+        Branch Details Information
+        <a class="btn btn-sm btn-info float-end m-1" asp-action="Index"><i class="bi bi-arrow-90deg-left"></i> Back</a>
+        <a class="btn btn-sm btn-primary float-end m-1" asp-action="Edit" asp-route-id="@Model.EncryptedId">Update Information</a>
+
+    </div>
+}
+<style>
+    .td-width {
+        width: 250px;
+    }
+</style>
+<div class="row">
+
+    <div class="col-12 p-3">
+        <div class="font-weight-bold mt-2">
+            General Information
+        </div>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover form-table mt-3 align-top">
+                <tbody style="text-align:left;">
+                    <tr>
+                        <th class="td-width">Name</th>
+                        <td>@Model.Name</td>
+                    </tr>
+                    <tr>
+                        <th class="td-width">Description</th>
+                        <td>@Model.BusinessCategoryDescription</td>
+                    </tr>
+                    <tr>
+                        <th>Business Category</th>
+                        <td>@Model.BusinessCategory.Name</td>
+                    </tr>
+                    <tr>
+                        <th>Business Nature</th>
+                        <td>@Model.BusinessNature.Name</td>
+                    </tr>
+                    <tr>
+                        <th>Code</th>
+                        <td>@Model.Code</td>
+                    </tr>
+                    <tr>
+                        <th>VAT Registration No.</th>
+                        <td>@Model.VatregNo</td>
+                    </tr>
+                    <tr>
+                        <th><b>BIN</b></th>
+                        <td>@Model.Bin</td>
+                    </tr>
+                    <tr>
+                        <th>Certificate No.</th>
+                        <td>@Model.CertificateNo</td>
+                    </tr>
+                    <tr>
+                        <th>Enlisted No.</th>
+                        <td>@Model.EnlistedNo</td>
+                    </tr>
+
+
+                </tbody>
+            </table>
+        </div>
+
+        <div class="font-weight-bold mt-3">
+            VAT Responsible Person's Information
+        </div>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover form-table mt-3 align-top">
+                <tbody style="text-align:left;">
+
+                    <tr>
+                        <th class="td-width">Name</th>
+                        <td>@Model.VatResponsiblePersonName</td>
+                    </tr>
+                    <tr>
+                        <th>Designation</th>
+                        <td>@Model.VatResponsiblePersonDesignation</td>
+                    </tr>
+                    <tr>
+                        <td><b>Email</b></td>
+                        <td>@Model.VatResponsiblePersonEmailAddress</td>
+                    </tr>
+                    <tr>
+                        <th><b>Mobile No.</b></th>
+                        <td>@Model.VatResponsiblePersonMobileNo</td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+        <div class="font-weight-bold mt-3">
+            Contact Information
+        </div>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover form-table mt-3 align-top">
+                <tbody style="text-align:left;">
+
+                    <tr>
+                        <th class="td-width">Email Address</th>
+                        <td>@Model.EmailAddress</td>
+                    </tr>
+                    <tr>
+                        <th>Address</th>
+                        <td>@Model.Address</td>
+                    </tr>
+
+                    <tr>
+                        <th>City</th>
+                        <td>@(((CityEnum)Model.CityId).ToString())</td>
+                    </tr>
+                    <tr>
+                        <th>Country</th>
+                        <td>@(((CountryEnum)Model.CountryId).ToString())</td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>

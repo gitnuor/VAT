@@ -1,0 +1,15 @@
+﻿@model IEnumerable<vms.entity.models.Sale>
+@{
+	ViewData["Title"] = "Sales Due";
+}
+
+@section contentheader
+{
+	<partial name="Sales/_SalesHeader"/>
+}
+
+<div class="gray-slim-scroll-container">
+	<div class="table-scroll-container">
+		<partial name="_SalesDue" model="Model"/>
+	</div>
+</div>

@@ -1,0 +1,133 @@
+﻿@{ var session = Context.Session.GetComplexData<VmUserSession>(ControllerStaticData.SESSION); }
+
+<a id="plusitem" class="nav-link p-2 header-icon header-plus-icon" role="button" data-bs-toggle="dropdown" aria-expanded="false" title="Quick Add">
+	<i class="bi bi-plus-circle-fill text-secondary"></i>
+</a>
+<div class="plus-menu dropdown-menu dropdown-menu-end">
+	<div class="header bg-aash p-2 mb-3">
+		<div class="mt-2 ml-4 font-weight-bold">Quick Add</div>
+	</div>
+	<div class="p-3">
+		<div class="row">
+			<div class="col-3">
+				<div class="menu-heading">
+					<span class="icon-Cart"> </span> Purchase
+				</div>
+				<ul>
+					@if (UserAuthorization.Check(FeatureList.PURCHASE_PURCHASE_LIST_CAN_ADD, session.Rights))
+					{
+						<li>
+							<a asp-controller="PurchaseLocal" asp-action="PurchaseLocal" class="text-decoration-none"> <span class="font-weight-bold large">+</span> Purchase Local</a>
+
+						</li>
+						<li>
+							<a asp-controller="PurchaseForeign" asp-action="PurchaseImport" class="text-decoration-none"><span class="font-weight-bold large">+</span> Purchase Import</a>
+						</li>
+					}
+
+				</ul>
+			</div>
+			@*<div class="col-3">
+                <div class="menu-heading">
+                    <span class="icon-Factory"> </span> Production
+                </div>
+                <ul>
+                    <li>
+                        @if (UserAuthorization.Check(FeatureList.PRODUCTION_PRODUCTION_LIST_CAN_ADD, session.Rights))
+                        {
+            <a href="@Url.Action("Create", "Production")" class="text-decoration-none"><span class="font-weight-bold large">+</span> Add Production</a>}
+                    </li>
+                    <li>&nbsp;</li>
+                </ul>
+            </div>*@
+			<div class="col-3">
+				<div class="menu-heading">
+					<span class="icon-Chart"> </span>Sales
+				</div>
+				<ul>
+					@if (UserAuthorization.Check(FeatureList.SALE_SALE_LIST_CAN_ADD, session.Rights))
+					{
+						<li>
+							<a asp-controller="SalesLocal" asp-action="SaleLocal" class="text-decoration-none"><span class="font-weight-bold large">+</span> Sales Local</a>
+						</li>
+						<li>
+							<a asp-controller="SalesForeign" asp-action="SaleExport" class="text-decoration-none"><span class="font-weight-bold large">+</span> Sales Export</a>
+						</li>
+					}
+
+				</ul>
+			</div>
+			<div class="col-3">
+				<div class="menu-heading">
+					<span class="icon-Vector-1"> </span>Product
+				</div>
+				<ul>
+					@if (UserAuthorization.Check(FeatureList.PRODUCT_PRODUCT_LIST_CAN_ADD, session.Rights))
+					{
+						<li>
+							<a asp-controller="Products" asp-action="Create" class="text-decoration-none"><span class="font-weight-bold large">+</span> Add Products</a>
+
+						</li>
+					}
+
+				</ul>
+			</div>
+		</div>
+	</div>
+	<hr class="w-100"/>
+	<div class="p-3">
+		<div class="row mb-2">
+			<div class="col-3">
+				<div class="menu-heading">
+					<span class="icon-User float-left"></span> User
+				</div>
+				<ul>
+					@if (UserAuthorization.Check(FeatureList.ADMINSTRATION_USERS_CAN_ADD, session.Rights))
+					{
+						<li>
+							<a asp-controller="Users" asp-action="Create" class="text-decoration-none"><span class="font-weight-bold large">+</span> Add User</a>
+						</li>
+					}
+					@if (UserAuthorization.Check(FeatureList.ADMINSTRATION_ROLES_CAN_ADD, session.Rights))
+					{
+						<li>
+							<a asp-controller="Roles" asp-action="Create" class="text-decoration-none"><span class="font-weight-bold large">+</span> Add Role</a>
+						</li>
+					}
+				</ul>
+			</div>
+			<div class="col-3">
+				<div class="menu-heading">
+					<i class="bi bi-people"></i> Customer
+				</div>
+				<ul>
+					@if (UserAuthorization.Check(FeatureList.THIRD_PARTY_CUSTOMER_CAN_ADD, session.Rights))
+					{
+					<li>
+							<a asp-controller="CustomerLocal" asp-action="Create" class="text-decoration-none"><span class="font-weight-bold large">+</span> Add Local</a>
+					</li>
+					<li>
+							<a asp-controller="CustomerForeign" asp-action="Create" class="text-decoration-none"><span class="font-weight-bold large">+</span> Add Foreign</a>
+					</li>
+					}
+				</ul>
+			</div>
+			<div class="col-3">
+				<div class="menu-heading">
+					<i class="bi bi-shop"></i> Suppliers/Vendors
+				</div>
+				<ul>
+					@if (UserAuthorization.Check(FeatureList.THIRD_PARTY_CUSTOMER_CAN_ADD, session.Rights))
+					{
+						<li>
+							<a asp-controller="VendorLocal" asp-action="Create" class="text-decoration-none"><span class="font-weight-bold large">+</span> Add Local</a>
+						</li>
+						<li>
+							<a asp-controller="VendorForeign" asp-action="Create" class="text-decoration-none"><span class="font-weight-bold large">+</span> Add Foreign</a>
+						</li>
+					}
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>

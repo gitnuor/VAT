@@ -1,0 +1,13 @@
+﻿@model vms.entity.models.DivisionOrState
+@{
+	var session = Context.Session.GetComplexData<VmUserSession>(ControllerStaticData.SESSION);
+}
+
+<grid-freeze-menu>
+	@if (UserAuthorization.Check(FeatureList.ADMINSTRATION_USERS_CAN_EDIT, session.Rights))
+	{
+		<li>
+			<a class="dropdown-item" asp-action="Edit" asp-route-id="@Model.EncryptedId"><i class="bi bi-pencil-square"></i> Edit</a>
+		</li>
+	}
+</grid-freeze-menu>

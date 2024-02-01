@@ -1,0 +1,25 @@
+﻿CREATE TABLE [dbo].[NbrEconomicCode] (
+    [NbrEconomicCodeId]     INT            NOT NULL,
+    [NbrEconomicCodeTypeId] INT            NOT NULL,
+    [EconomicTitle]         NVARCHAR (200) NOT NULL,
+    [EconomicCode]          NVARCHAR (200) NOT NULL,
+    [Code1stDisit]          NVARCHAR (2)   NOT NULL,
+    [Code2ndDisit]          NVARCHAR (2)   NOT NULL,
+    [Code3rdDisit]          NVARCHAR (2)   NOT NULL,
+    [Code4thDisit]          NVARCHAR (2)   NOT NULL,
+    [Code5thDisit]          NVARCHAR (2)   NOT NULL,
+    [Code6thDisit]          NVARCHAR (2)   NOT NULL,
+    [Code7thDisit]          NVARCHAR (2)   NOT NULL,
+    [Code8thDisit]          NVARCHAR (2)   NOT NULL,
+    [Code9thDisit]          NVARCHAR (2)   NOT NULL,
+    [Code10thDisit]         NVARCHAR (2)   NOT NULL,
+    [Code11thDisit]         NVARCHAR (2)   NOT NULL,
+    [Code12thDisit]         NVARCHAR (2)   NOT NULL,
+    [Code13thDisit]         NVARCHAR (2)   NOT NULL,
+    [IsActive]              BIT            CONSTRAINT [DF_NbrEconomicCode_IsActive] DEFAULT ((1)) NOT NULL,
+    [EffectiveFrom]         DATETIME       CONSTRAINT [DF_NbrEconomicCode_EffectiveFrom] DEFAULT (getdate()) NOT NULL,
+    [EffectiveTo]           DATETIME       NULL,
+    CONSTRAINT [PK_NbrEconomicCode] PRIMARY KEY CLUSTERED ([NbrEconomicCodeId] ASC),
+    CONSTRAINT [FK_NbrEconomicCode_NbrEconomicCodeType] FOREIGN KEY ([NbrEconomicCodeTypeId]) REFERENCES [dbo].[NbrEconomicCodeType] ([NbrEconomicCodeTypeId])
+);
+

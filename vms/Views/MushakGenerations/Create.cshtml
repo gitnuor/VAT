@@ -1,0 +1,166 @@
+﻿@model vms.entity.StoredProcedureModel.SpAddMushakReturnBasicInfo
+
+@{
+    ViewData["Title"] = "Create";
+    
+}
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="custom-page-title">Add Mushak Generation</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+
+        <form asp-action="Create" class="form-horizontal" id="frmusercreate">
+            <div class="form-body">
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Year : </label>
+                    <div class="col-md-4">
+                        <select asp-for="Year" class="form-control" asp-items="ViewBag.Years"></select>
+                        <span asp-validation-for="Year" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Month : </label>
+                    <div class="col-md-4">
+                        <select asp-for="Month" class="form-control" asp-items="ViewBag.Months"></select>
+                        <span asp-validation-for="Month" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Generate Date: </label>
+                        <div class="col-md-4">
+                            <input type="text" id="GenerateDate" name="GenerateDate" class="form-control" autocomplete="off"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Interest Due VAT: </label>
+                        <div class="col-md-4">
+                            <input type="text" id="InterestForDueVat" name="InterestForDueVat" class="form-control" />
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Interest For Due Supplementary Duty: </label>
+                        <div class="col-md-4">
+                            <input type="text" id="InterestForDueSd" name="InterestForDueSd" autocomplete="off" class="form-control" />
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Financial Penalty: </label>
+                        <div class="col-md-4">
+                            <input type="text" id="FinancialPenalty" name="FinancialPenalty" autocomplete="off" class="form-control" />
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Excise Duty: </label>
+                        <div class="col-md-4">
+                            <input type="text" id="ExciseDuty" name="ExciseDuty" autocomplete="off" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Development Surcharge: </label>
+                        <div class="col-md-4">
+                            <input type="text" id="DevelopmentSurcharge" name="DevelopmentSurcharge" autocomplete="off" class="form-control" />
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">IT Development Surcharge: </label>
+                        <div class="col-md-4">
+
+                            <input type="text" id="ItDevelopmentSurcharge" name="ItDevelopmentSurcharge" autocomplete="off" class="form-control" />
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Health Development Surcharge: </label>
+                        <div class="col-md-4">
+                            <input type="text" id="HealthDevelopmentSurcharge" name="HealthDevelopmentSurcharge" autocomplete="off" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Environment Protect Surcharge: </label>
+                        <div class="col-md-4">
+                            <input type="text" id="EnvironmentProtectSurcharge" name="EnvironmentProtectSurcharge" autocomplete="off" class="form-control" />
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Misc Incremental Adjustment Amount: </label>
+                        <div class="col-md-4">
+                            <input type="text" id="MiscIncrementalAdjustmentAmount" name="MiscIncrementalAdjustmentAmount" autocomplete="off" class="form-control" />
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Misc Incremental Adjustment Description: </label>
+                        <div class="col-md-4">
+                            <input type="text" id="MiscIncrementalAdjustmentDesc" name="MiscIncrementalAdjustmentDesc" autocomplete="off" class="form-control" />
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Misc Decremental Adjustment Amount: </label>
+                        <div class="col-md-4">
+                            <input type="text" id="MiscDecrementalAdjustmentAmount" name="MiscDecrementalAdjustmentAmount" autocomplete="off" class="form-control" />
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Misc Decremental Adjustment Description: </label>
+                        <div class="col-md-4">
+                            <input type="text" id="MiscDecrementalAdjustmentDesc" name="MiscDecrementalAdjustmentDesc" autocomplete="off" class="form-control" />
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label"> </label>
+                        <div class="col-md-9">
+                            <div class="mt-checkbox-list pt-1">
+                                <input type="checkbox" id="IsWantToGetBackClosingAmount" name="IsWantToGetBackClosingAmount" /> Get Back Closing Amount?
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <div class="row mb-3">
+                    <div class="col-md-offset-3 col-md-9">
+                        <button type="submit" data-requiredconfirmation="true" class="btn  green"><i class="bi bi-check-lg"></i> Submit</button>
+                        <a href="~/MushakGenerations/Index" class="btn btn-secondary btn-sm"><i class="bi bi-slash-circle"></i> Cancel</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts{
+
+
+    <script src="~/js/jquery-ui.js"></script>
+    <script>
+
+        $(document).ready(function () {
+
+            $("#GenerateDate").datepicker();
+            $("#GenerateDate").datepicker('option', 'dateFormat', 'dd M, yy');
+
+        });
+    </script>
+}

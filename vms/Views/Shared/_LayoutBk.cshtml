@@ -1,0 +1,159 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - vms</title>
+    
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
+    <link href="~/css/Search.css" rel="stylesheet" />
+    <link href="~/css/GlobalMandatory.css" rel="stylesheet" />
+    <link href="~/css/ThemeLayout.css" rel="stylesheet" />
+    <link href="~/css/site.css" rel="stylesheet" />
+
+    <link rel="shortcut icon" href="~/favicon.ico" />
+</head>
+<body class="page-header-fixed page-sidebar-closed-hide-logo page-content-white">
+
+    <div class="page-wrapper">
+    </div>
+
+    <partial name="_HeaderPartial" />
+    <div class="clearfix"> </div>
+    <div class="page-container">
+        <div class="page-sidebar-wrapper fixed-left">
+            <partial name="_LeftPanelPartial" />
+        </div>
+        
+        <div class="page-content-wrapper">
+            <div class="page-content">
+                
+
+                <div class="page-bar">
+                    @RenderSection("breadcrumb", required: false)
+
+                    <div class="page-toolbar">
+                        
+                    </div>
+                </div>
+
+                @RenderBody()
+                <div class=" " style="color:white;">
+                    .
+                </div>
+            </div>
+
+        </div>
+
+        
+    </div>
+    <partial name="_FooterPartial" />
+    <partial name="_Confirmation" />
+
+    
+    <script src="~/js/CorePlugins.js"></script>
+
+    
+    <script src="~/js/LevelPlugins.js"></script>
+    <script src="~/js/toaster.js"></script>
+    <link href="~/css/toastr.css" rel="stylesheet" />
+    
+    <script src="~/js/Global.js"></script>
+
+    
+    <environment include="Development">
+        <script src="~/js/validation.js"></script>
+    </environment>
+    <environment include="Production">
+
+        <script src="~/js/validation.min.js"></script>
+    </environment>
+    
+    <script>
+        $(function () {
+
+            var url = window.location.pathname,
+                urlRegExp = new RegExp(url.replace(/\/$/, '') + "$", 'i'); 
+            $('a.nav-link').each(function () {
+                if (urlRegExp.test(this.href.replace(/\/$/, ''), 'i')) {
+                    $(this).parent().addClass('active');
+                }
+            });
+
+            $("li.active").parent().parent(".nav-item").addClass("open active");
+            $("li.active").parent().parent().parent().parent(".nav-item").addClass("open active");
+
+        });
+    </script>
+
+    @RenderSection("Scripts", required: false)
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("[data-requiredconfirmation=true]").click(function (e) {
+
+                var tag = '';
+                var tagname = '';
+
+                tag = this;
+                tagname = $(tag).get(0).tagName.toLowerCase();
+                $("#uxConfMessage").empty();
+                $("#uxModalTitle").empty();
+                $("#uxModalTitle").html($(tag).text());
+                if (tagname == 'a') {
+                    $("#uxConfMessage").html("You are about to " + $(tag).text() + " this");
+                        $("#uxGlobalConfirmation").show();
+                         e.preventDefault();
+                        $("#uxModalBtnSave").click(function () {
+                           if (tagname == "a") {
+                                var actionUrl = $(tag).attr("href");
+                                window.location = actionUrl;
+                            }
+                        });
+                        $("button[data-dismiss='modal']").click(function () {
+                            $("#uxGlobalConfirmation").hide();
+                        });
+
+                }
+                else {
+                    $(tag).closest('form').data("validator").settings.submitHandler = function (form) {
+                    
+                    $("#uxConfMessage").html("You are about to " + $(tag).text() + " this");
+                    $("#uxGlobalConfirmation").show();
+
+                    $("#uxModalBtnSave").click(function () {
+                        if (tagname == "button") {
+                            form.submit();
+                        }
+                        else if (tagname == "a") {
+                            var actionUrl = $(tag).attr("data-url");
+                            window.location = actionUrl;
+                        }
+                    });
+                    $("button[data-dismiss='modal']").click(function () {
+                        $("#uxGlobalConfirmation").hide();
+                    });
+
+                    };
+                }
+                
+
+            });
+        });
+        $(document).ready(function () {
+            if ('@TempData["message"]' != null) {
+                  if('@TempData["message"]' == "Success"){
+                       toastr.success('Added Successsfully!');
+                      }
+
+                  else if ('@TempData["message"]' == 'Error') {
+                      toastr.error('Can Not be Processed! Please Check');
+                }
+                else if ('@TempData["message"]' == 'InActive') {
+                      toastr.success('In Active Successsfully!');
+                  }
+            }
+
+    });
+    </script>
+</body>
+</html>

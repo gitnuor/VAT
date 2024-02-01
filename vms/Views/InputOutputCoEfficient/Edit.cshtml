@@ -1,0 +1,128 @@
+﻿@model vms.entity.viewModels.vmProduct
+@{
+    ViewData["Title"] = "Edit";
+    
+    
+}
+@section contentheader
+    {
+    <div class="p-3 page-header">
+        Edit Product
+    </div>
+}
+
+
+<div class="row">
+    <div class="col-md-4 offset-4">
+        <form asp-action="Edit" class="form-horizontal" id="frmusercreate">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ProductId" />
+            <div class="form-body">
+                <div class="form-group required">
+                    <label class="form-label">Name  </label>
+                    <div>
+                        <input asp-for="Name" class="form-control form-control-sm" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group mt-3">
+                    <label class="form-label" asp-for="ModelNo"></label>
+                    <div>
+                        <input asp-for="ModelNo" class="form-control form-control-sm" />
+                        <span asp-validation-for="ModelNo" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group mt-3">
+                    <label class="form-label">Code  </label>
+                    <div>
+                        <input asp-for="Code" class="form-control form-control-sm" />
+                        <span asp-validation-for="Code" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group mt-3">
+                    <label class="form-label">Reference Key  </label>
+                    <div>
+                        <input asp-for="ReferenceKey" class="form-control form-control-sm" maxlength="10" />
+                        <span asp-validation-for="ReferenceKey" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group mt-3">
+                    <label class="form-label">HS/Service code  </label>
+                    <div>
+                        <input asp-for="Hscode" class="form-control form-control-sm" />
+                        <span asp-validation-for="Hscode" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group mt-3">
+                    <label class="form-label">Product Category</label>
+                    <div>
+
+                        @Html.DropDownListFor(x => Model.ProductCategoryId, new SelectList(Model.ProductCategories, "Id", "Name"), htmlAttributes: new { @class = "form-select form-select-sm" })
+                        <span asp-validation-for="ProductCategoryId" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group required mt-3">
+                    <label class="form-label">Product Group</label>
+                    <div>
+                        @Html.DropDownListFor(x => Model.ProductGroupId, new SelectList(Model.ProductGroups, "Id", "Name"), htmlAttributes: new { @class = "form-select form-select-sm" })
+                        <span asp-validation-for="ProductGroupId" class="text-danger"></span>
+                    </div>
+                </div>
+
+
+                <div class="form-group required mt-3">
+                    <label class="form-label">M. Unit</label>
+                    <div>
+
+                        @Html.DropDownListFor(x => Model.MeasurementUnitId, new SelectList(Model.MeasurementUnits, "Id", "Name"), htmlAttributes: new { @class = "form-select form-select-sm" })
+                        <span asp-validation-for="MeasurementUnitId" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group mt-3">
+                    <label class="control-label required" asp-for="ProductTypeId"></label>
+                    <div>
+
+                        @Html.DropDownListFor(x => Model.ProductTypeId, new SelectList(Model.ProductTypeSelectListItems, "Id", "Name"), "Select", htmlAttributes: new { @class = "form-select form-select-sm" })
+                        <span asp-validation-for="ProductTypeId" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group mt-3 d-none">
+                    <div>
+                        <input asp-for="IsNonRebateable" class="custom-control-input" />
+                        <label asp-for="IsNonRebateable" class="custom-control-label">Is NonRebateable?</label>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="float-end mt-3" >
+                <button type="submit" data-requiredconfirmation="true" class="btn  btn-primary btn-sm"><i class="bi bi-check-lg"></i> Update</button>
+                <button type="button" value="Reset" class="btn  btn-warning btn-sm" onclick="location.reload();"><i class="bi bi-arrow-repeat"></i> Reset</button>
+                <a asp-action="Index" class="btn btn-secondary btn-sm"><i class="bi bi-slash-circle"></i> Cancel</a>
+            </div>
+           
+        </form>
+    </div>
+</div>
+@section Scripts{
+
+    <script>
+        $.get({
+            url: "Products/Edit",
+            dataType: "html",
+            error: function (jqXHR, textStatus, errorThrown) {
+            },
+            success: function (newFormHTML) {
+                var container = document.getElementById("form-container");
+                container.insertAdjacentHTML("beforeend", newFormHTML);
+                var forms = container.getElementsByTagName("form");
+                var newForm = forms[forms.length - 1];
+                $.validator.unobtrusive.parse(newForm);
+            }
+        })
+    </script>
+}

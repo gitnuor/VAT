@@ -1,0 +1,25 @@
+﻿@model IEnumerable<vms.entity.models.Sale>
+@{
+    Layout = "_LayoutMushak";
+    ViewData["Title"] = "Mushak-6.5";
+}
+
+@section contentheader
+    {
+    <div class="p-3 page-header">
+        Mushak-6.5 (Branch Transfer)
+    </div>
+}
+
+@(Html.Grid(Model).Build(columns =>
+{
+    columns.Add(model => model.SalesSlNo).Titled("Serial");
+    columns.Add(model => model.InvoiceNo).Titled("Invoice");
+    columns.Add(model => model.Customer.Name).Titled("Customer Name");
+    columns.Add().Encoded(false).RenderedAs(data =>$"<a class='btn btn-primary btn-sm' href='{Url.Action("Mushok6P5ById")}/{data.SalesId}' role='button' target='_blank'> View</a>" );
+})
+    .Using(GridFilterMode.Excel)
+    .Empty("No data found")
+    .Filterable()
+    .Sortable()
+    .Pageable())

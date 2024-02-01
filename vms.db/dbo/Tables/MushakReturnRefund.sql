@@ -1,0 +1,25 @@
+﻿CREATE TABLE [dbo].[MushakReturnRefund] (
+    [MushakReturnRefundId]        INT             IDENTITY (1, 1) NOT NULL,
+    [OrganizationId]              INT             NOT NULL,
+    [MushakYear]                  INT             NOT NULL,
+    [MushakMonth]                 INT             NOT NULL,
+    [IsInterestedToGetRefund]     BIT             NOT NULL,
+    [InterestedToRefundVATAmount] DECIMAL (18, 2) NULL,
+    [InterestedToRefundSDAmount]  DECIMAL (18, 2) NULL,
+    [ApprovedToRefundVATAmount]   DECIMAL (18, 2) NULL,
+    [ApprovedToRefundSDAmount]    DECIMAL (18, 2) NULL,
+    [RefundedVATAmount]           DECIMAL (18, 2) NULL,
+    [RefundedVATChequeNo]         NVARCHAR (50)   NULL,
+    [RefundedVATChequeDate]       DATETIME        NULL,
+    [RefundedSDAmount]            DECIMAL (18, 2) NULL,
+    [RefundedSDChequeNo]          NVARCHAR (50)   NULL,
+    [RefundedSDChequeDate]        DATETIME        NULL,
+    [ReferenceKey]                NVARCHAR (100)  NULL,
+    [CreatedBy]                   INT             NULL,
+    [CreatedTime]                 DATETIME        NULL,
+    [ApiTransactionId]            BIGINT          NULL,
+    CONSTRAINT [PK_MushakReturnRefund] PRIMARY KEY CLUSTERED ([MushakReturnRefundId] ASC),
+    CONSTRAINT [FK_MushakReturnRefund_Organizations] FOREIGN KEY ([OrganizationId]) REFERENCES [dbo].[Organizations] ([OrganizationId]),
+    CONSTRAINT [UK_MushakReturnRefund_Organization_Month] UNIQUE NONCLUSTERED ([OrganizationId] ASC, [MushakYear] ASC, [MushakMonth] ASC)
+);
+

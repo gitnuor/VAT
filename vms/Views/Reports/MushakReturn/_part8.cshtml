@@ -1,0 +1,50 @@
+﻿@model vms.entity.StoredProcedureModel.MushakReturn.MushakReturnPartEight
+
+<table class="table table-bordered">
+    @* <thead> *@
+
+        <tr>
+
+            <th class="MreturnHeader" colspan="3" style="background-color: #FBD4B4!important">
+
+                <div class="parthead">অংশ-৮: পুরাতন চলতি হিসাবের জের সমন্বয় </div>
+            </th>
+        </tr>
+    @* </thead> *@
+    @* <tbody class="Returntd"> *@
+
+        <tr class="Returntdhead text-center font-weight-bold" style="background-color: #BFBFBF !important">
+
+            <td><b>আইটেম</b></td>
+            <td><b>নোট</b></td>
+            <td><b> পরিমাণ</b></td>
+        </tr>
+
+        <tr>
+
+            <td>মূসক-১৮.৬ হতে অবশিষ্ট জের (মূসক) [বিধি -১১৮(৫)]</td>
+            <td class="text-center">৫৪</td>
+            <td class="manual text-right" style="text-align:right !important">@StringGenerator.DecimalToCommaSeparated(Model.RemainingVATAmountFromMushak18p6)</td>
+        </tr>
+        <tr>
+
+            <td>মূসক-১৮.৬ হতে অবশিষ্ট জের (সম্পূরক শুল্ক) [বিধি -১১৮(৫)]</td>
+            <td class="text-center">৫৫</td>
+            <td class="manual text-right" style="text-align:right !important">@StringGenerator.DecimalToCommaSeparated(Model.RemainingSDAmountFromMushak18p6)</td>
+        </tr>
+
+        <tr>
+
+        <td>নোট ৫৪ হতে সমন্বয় (নোট ৩৪ এর সর্বোচ্চ ৩০%) </td>
+            <td class="text-center">৫৬</td>
+            <td class="text-right" style="text-align:right !important">@StringGenerator.DecimalToCommaSeparated(Model.AdjustableAmountFromNote54)</td>
+        </tr>
+
+        <tr>
+
+        <td>নোট ৫৫ হতে সমন্বয় (নোট ৩৬ এর সর্বোচ্চ ৩০%) </td>
+            <td class="text-center">৫৭</td>
+            <td class="text-right" style="text-align:right !important">@StringGenerator.DecimalToCommaSeparated(Model.AdjustableAmountFromNote55)</td>
+        </tr>
+    @* </tbody> *@
+</table>

@@ -1,0 +1,146 @@
+﻿<nav class="navbar">
+	<ul class="nav nav-pills flex-column mb-auto">
+		
+		<li class="nav-item">
+			<a class="nav-link report-mushak-navbar-sub-header" href="#">Purchase</a>
+		</li>
+
+		<li class="nav-item border-bottom">
+			<a class="nav-link" asp-controller="PurchaseReports" asp-action="Index">All Purchase</a>
+		</li>
+		<li class="nav-item border-bottom">
+			<a class="nav-link" asp-controller="PurchaseReports" asp-action="PurchaseReportVendorGrouped">All Purchase Supplier/Vendor Grouped</a>
+		</li>
+		<li class="nav-item border-bottom">
+			<a class="nav-link" asp-controller="PurchaseReports" asp-action="PurchaseReportByBranch">Purchase by Branch</a>
+		</li>
+		<li class="nav-item border-bottom">
+			<a class="nav-link" asp-controller="PurchaseReports" asp-action="PurchaseReportByVendor">Purchase by Supplier/Vendor</a>
+		</li>
+		<li class="nav-item border-bottom">
+			<a class="nav-link" asp-controller="PurchaseReports" asp-action="PurchaseReportByBranchAndVendor">Purchase by Branch and Supplier/Vendor</a>
+		</li>
+		<li class="nav-item border-bottom">
+			<a class="nav-link" asp-controller="PurchaseReports" asp-action="Summery">All Purchase Summery</a>
+		</li>
+
+
+		@*<li class="nav-item border-bottom">
+			<a class="nav-link" asp-controller="NewReports" asp-action="PurchaseReport">Purchase</a>
+		</li>
+		<li class="nav-item border-bottom">
+			<a class="nav-link" asp-controller="Reports" asp-action="PurchaseReport">Purchase by Supplier/Vendor</a>
+		</li>*@
+		@*<li class="nav-item border-bottom"> *@
+		@*     <a class="nav-link" href="@Url.Action("PurchaseReportGr", "Reports")">Purchase by GR No.</a> *@
+		@* </li> *@
+		@*        <li class="nav-item border-bottom">
+            <a class="nav-link" href="@Url.Action("ExpenceReport", "Reports")">Expense</a>
+        </li>*@
+		<li class="nav-item border-bottom">
+			<a class="nav-link" asp-controller="Reports" asp-action="PurchaseReportMonth">Monthly Purchase</a>
+		</li>
+		<li class="nav-item border-bottom">
+			<a class="nav-link" asp-controller="Reports" asp-action="PurchaseReportByProduct">Purchase By Product</a>
+		</li>
+		<li class="nav-item border-bottom">
+			<a class="nav-link" asp-controller="Reports" asp-action="ProductPurchaseList">Product Purchase List</a>
+		</li>
+		<li class="nav-item border-bottom">
+			<a class="nav-link" asp-controller="Reports" asp-action="PurchaseVDSListReport">Purchase VDS List</a>
+		</li>
+		<li class="nav-item border-bottom">
+			<a class="nav-link" asp-controller="PurchaseReports" asp-action="PuchaseDetailsListReport">Puchase Details List</a>
+		</li>
+		<li class="nav-item border-bottom">
+			<a class="nav-link" asp-controller="PurchaseReports" asp-action="DebitNoteDetailsReport">Debit Note Details Report</a>
+		</li>
+		@*<li class="nav-item">
+            <a class="nav-link" href="@Url.Action("DamageReport", "NewReports")">Damage</a>
+        </li>*@
+		<li class="nav-item border-bottom">
+			<a class="nav-link" asp-controller="Reports" asp-action="VendorReport">Supplier/Vendor</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link report-mushak-navbar-sub-header" href="#">Sales</a>
+		</li>
+		<li class="nav-item border-bottom">
+			<a class="nav-link" asp-controller="SalesReports" asp-action="Index">All Sales</a>
+		</li>
+		<li class="nav-item border-bottom">
+			<a class="nav-link" asp-controller="SalesReports" asp-action="SalesReportCustomerGrouped">All Sales Customer Grouped</a>
+		</li>
+		<li class="nav-item border-bottom">
+			<a class="nav-link" asp-controller="SalesReports" asp-action="SalesReportByBranch">Sales by Branch</a>
+		</li>
+		<li class="nav-item border-bottom">
+			<a class="nav-link" asp-controller="SalesReports" asp-action="SalesReportByCustomer">Sales by Customer</a>
+		</li>
+		<li class="nav-item border-bottom">
+			<a class="nav-link" asp-controller="SalesReports" asp-action="SalesReportByBranchAndCustomer">Sales by Branch and Customer</a>
+		</li>
+		<li class="nav-item border-bottom">
+			<a class="nav-link" asp-controller="Reports" asp-action="ProductSalesList">Product Sales List</a>
+		</li>
+		<li class="nav-item border-bottom">
+			<a class="nav-link" asp-controller="SalesReports" asp-action="SalesDetailsListReport">Sales Details List</a>
+		</li>
+		<li class="nav-item border-bottom">
+			<a class="nav-link" asp-controller="SalesReports" asp-action="CreditNoteDetailsReport">Credit Note Details Report</a>
+		</li>
+		<li class="nav-item border-bottom">
+			<a class="nav-link" asp-controller="SalesReports" asp-action="Summery">All Sales Summery</a>
+		</li>
+		<li class="nav-item border-bottom">
+			<a class="nav-link" asp-controller="SalesReports" asp-action="SalesVDSListReport">Sales VDS List</a>
+		</li>
+		<li class="nav-item border-bottom">
+			<a class="nav-link" asp-controller="Reports" asp-action="CustomerReport">Customer By Date</a>
+		</li>
+		<li class="nav-item border-bottom">
+			<a class="nav-link" asp-controller="Reports" asp-action="AllCustomerReport">All Customer</a>
+		</li>
+		<li class="nav-item border-bottom">
+			<a class="nav-link" asp-controller="SalesReports" asp-action="SalesDueAging">Sales Due Aging Report</a>
+		</li>
+		@*<li class="nav-item">
+            <a class="nav-link" href="@Url.Action("AuditLogReport", "NewReports")">Audit Log</a>
+        </li>*@
+		@*<li class="nav-item">
+            <a class="nav-link" href="@Url.Action("ProductionReport", "NewReports")">Production</a>
+        </li>*@
+		
+		<li class="nav-item border-bottom">
+			<a class="nav-link" asp-controller="Reports" asp-action="ContractualProductionReport">Contractual Production</a>
+		</li>
+		@*<li class="nav-item">
+            <a class="nav-link" href="@Url.Action("TransferRawMaterialReport", "NewReports")">Transfer Raw Material</a>
+		</li>*@
+		<li class="nav-item">
+			<a class="nav-link report-mushak-navbar-sub-header" href="#">Miscellaneous</a>
+		</li>
+		<li class="nav-item border-bottom">
+			<a class="nav-link" asp-controller="Reports" asp-action="YearlyComparisonReport">Yearly Comparison Report</a>
+		</li>
+		<li class="nav-item border-bottom">
+			<a class="nav-link" asp-controller="Reports" asp-action="MonthlyComparisonReport">Monthly Comparison Report</a>
+		</li>
+		<li class="nav-item border-bottom">
+			<a class="nav-link" asp-controller="Reports" asp-action="InputOutputCoEfficientReport">Input-Output Co-Efficient</a>
+		</li>
+		<li class="nav-item border-bottom">
+			<a class="nav-link" asp-controller="Reports" asp-action="UsersReport">Users</a>
+		</li>
+		<li class="nav-item border-bottom">
+			<a class="nav-link" asp-controller="Reports" asp-action="UsersLoginReport">Login History</a>
+		</li>
+		
+		<li class="nav-item">
+			<a class="nav-link report-mushak-navbar-sub-header" href="#">Product</a>
+		</li>
+
+		<li class="nav-item border-bottom">
+			<a class="nav-link" asp-controller="ProductReport" asp-action="ProductCurrentStock">Current Stock</a>
+		</li>
+	</ul>
+</nav>

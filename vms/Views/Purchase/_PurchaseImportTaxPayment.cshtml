@@ -1,0 +1,159 @@
+﻿@model vms.entity.viewModels.VmPurchaseImport
+
+<div class="font-weight-bold mb-3">
+    Tax Payment
+</div>
+<form id="frmTaxPayment" class="row g-3 tax-payment-form">
+    <div class="col-md-2 complex-form-col">
+        <label asp-for="PurchaseImportTaxPaymentTypeId" ></label>
+        <select asp-for="PurchaseImportTaxPaymentTypeId" asp-items="Model.PurchaseImportTaxPaymentTypeList.CustomSelectListToSelectList()" class="form-select form-select-sm" >
+            <option value="@null">Select Method</option>
+        </select>
+        <span asp-validation-for="PurchaseImportTaxPaymentTypeId" ></span>
+    </div> 
+    <div class="col-md-2 complex-form-col">
+        <label asp-for="PurchaseImportTaxPaymentVatCommissionarateId" ></label>
+        <select asp-for="PurchaseImportTaxPaymentVatCommissionarateId" asp-items="Model.VatCommissionarateList.CustomSelectListToSelectList()" class="form-select form-select-sm" >
+            <option value="@null">Select Customs &amp; VAT Commissionerate</option>
+        </select>
+        <span asp-validation-for="PurchaseImportTaxPaymentVatCommissionarateId" ></span>
+    </div>
+    <div class="col-md-2 complex-form-col">
+        <label asp-for="PurchaseImportTaxPaymentBankId" ></label>
+        <select asp-for="PurchaseImportTaxPaymentBankId" asp-items="Model.BankSelectList.CustomSelectListToSelectList()" class="searchable-dropdown" data-live-search="true" data-style="bootstrap-select-option">
+            <option value="@null">Select Bank</option>
+        </select>
+        <span asp-validation-for="PurchaseImportTaxPaymentBankId" ></span>
+    </div>
+    <div class="col-md-2 complex-form-col">
+        <label asp-for="PurchaseImportTaxPaymentBankBranch" ></label>
+        <input type="text" asp-for="PurchaseImportTaxPaymentBankBranch">
+        <span asp-validation-for="PurchaseImportTaxPaymentBankBranch" ></span>
+    </div>
+    <div class="col-md-2 complex-form-col">
+        <label asp-for="PurchaseImportTaxPaymentBankBranchDistrictId" ></label>
+        <select asp-for="PurchaseImportTaxPaymentBankBranchDistrictId" asp-items="Model.DistrictList.CustomSelectListToSelectList()" class="searchable-dropdown" data-live-search="true" data-style="bootstrap-select-option">
+            <option value="@null">Select District</option>
+        </select>
+        <span asp-validation-for="PurchaseImportTaxPaymentBankBranchDistrictId" ></span>
+    </div>
+    <div class="col-md-2 complex-form-col">
+        <label asp-for="PurchaseImportTaxPaymentAccCode" ></label>
+        <input type="text" asp-for="PurchaseImportTaxPaymentAccCode" class="form-control form-control-sm">
+        <span asp-validation-for="PurchaseImportTaxPaymentAccCode" ></span>
+    </div>
+    <div class="col-md-2 complex-form-col">
+        <label asp-for="PurchaseImportTaxPaymentDocOrChallanNo" ></label>
+        <input type="text" asp-for="PurchaseImportTaxPaymentDocOrChallanNo" class="form-control form-control-sm">
+        <span asp-validation-for="PurchaseImportTaxPaymentDocOrChallanNo" ></span>
+    </div>
+    <div class="col-md-2 complex-form-col">
+        <label asp-for="PurchaseImportTaxPaymentDocOrChallanDate" ></label>
+        <input type="date" asp-for="PurchaseImportTaxPaymentDocOrChallanDate" min='2000-01-01' max='@DateTime.Now.ToString("yyyy-MM-dd")' class="form-control form-control-sm">
+        <span asp-validation-for="PurchaseImportTaxPaymentDocOrChallanDate" ></span>
+    </div>
+    <div class="col-md-2 complex-form-col">
+        <label asp-for="PurchaseImportTaxPaymentDate" ></label>
+        <input type="date" asp-for="PurchaseImportTaxPaymentDate"  min='2000-01-01' max='@DateTime.Now.ToString("yyyy-MM-dd")' class="form-control form-control-sm">
+        <span asp-validation-for="PurchaseImportTaxPaymentDate" ></span>
+    </div>
+    <div class="col-md-2 complex-form-col">
+        <label asp-for="PurchaseImportTaxPaymentPaidAmount" ></label>
+        <input type="number" asp-for="PurchaseImportTaxPaymentPaidAmount" class="form-control form-control-sm">
+        <span asp-validation-for="PurchaseImportTaxPaymentPaidAmount" ></span>
+    </div>
+    <div class="col-md-2 complex-form-col">
+        <label asp-for="PurchaseImportTaxPaymentRemarks" ></label>
+        <input type="text" asp-for="PurchaseImportTaxPaymentRemarks" class="form-control form-control-sm">
+        <span asp-validation-for="PurchaseImportTaxPaymentRemarks" ></span>
+    </div>
+    <div class="col-md-2 mt-2">
+        <div class="float-end">
+            <button type="button" class="btn  btn-primary btn-sm inline-sm-button-complex-form" id="btnAddTaxPayment"><i class="bi bi-plus-lg"></i> Add</button>
+            <button type="button" class="btn  btn-warning btn-sm inline-sm-button-complex-form" id="btnResetTaxPayment"><i class="bi bi-arrow-repeat"></i> Reset</button>
+        </div>
+    </div>
+</form>
+
+    <table class="table table-bordered form-table mt-3 table-7-column-equally-distributed-with-single-action-button align-top" id="taxPaymentTable">
+        <thead>
+            <tr>
+                <th>Type</th>
+                <th>Vat Commissionarate</th>
+                <th>Bank</th>
+                <th>Acc. Code</th>
+                <th>Doc./Challan</th>
+                <th>Payment Date</th>
+                <th>Amount</th>
+                <th>Remarks</th>
+                <th class="single-button-action-column"></th>
+            </tr>
+            @*<tr class="control-row">
+                <td>
+                    <select asp-for="PurchaseImportTaxPaymentTypeId" asp-items="Model.PurchaseImportTaxPaymentTypeList" class="form-select form-select-sm" >
+                        <option value="@null">Select Method</option>
+                    </select>
+                    <span asp-validation-for="PurchaseImportTaxPaymentTypeId" ></span>
+                </td>
+                <td>
+                        <select asp-for="PurchaseImportTaxPaymentVatCommissionarateId" asp-items="Model.VatCommissionarateList" class="form-select form-select-sm" >
+                            <option value="@null">Select Vat Commissionarate</option>
+                        </select>
+                        <span asp-validation-for="PurchaseImportTaxPaymentVatCommissionarateId" ></span>
+                </td>
+                <td>
+                        <select asp-for="PurchaseImportTaxPaymentBankId" asp-items="Model.BankSelectList" class="searchable-dropdown" data-live-search="true" data-style="bootstrap-select-option">
+                            <option value="@null">Select Bank</option>
+                        </select>
+                        <span asp-validation-for="PurchaseImportTaxPaymentBankId" ></span>
+                </td>
+                <td>
+                    <input type="text" asp-for="PurchaseImportTaxPaymentBankBranch" class="form-control form-control-sm">
+                    <span asp-validation-for="PurchaseImportTaxPaymentBankBranch" ></span>
+                </td>
+                <td>
+                    <select asp-for="PurchaseImportTaxPaymentBankBranchDistrictId" asp-items="Model.DistrictList" class="searchable-dropdown" data-live-search="true" data-style="bootstrap-select-option">
+                        <option value="@null">Select District</option>
+                    </select>
+                    <span asp-validation-for="PurchaseImportTaxPaymentBankBranchDistrictId" ></span>
+                </td>
+                <td>
+                    <input type="text" asp-for="PurchaseImportTaxPaymentAccCode" class="form-control form-control-sm">
+                    <span asp-validation-for="PurchaseImportTaxPaymentAccCode" ></span>
+                </td>
+                <td>
+                        <input type="text" asp-for="PurchaseImportTaxPaymentDocOrChallanNo" class="form-control form-control-sm">
+                        <span asp-validation-for="PurchaseImportTaxPaymentDocOrChallanNo" ></span>
+                </td>
+                <td>
+                        <input type="date" asp-for="PurchaseImportTaxPaymentDocOrChallanDate" min='2000-01-01' max='@DateTime.Now.ToString("yyyy-MM-dd")' class="form-control form-control-sm">
+                        <span asp-validation-for="PurchaseImportTaxPaymentDocOrChallanDate" ></span>
+                </td>
+                <td>
+                    <input type="date" asp-for="PurchaseImportTaxPaymentDate"  min='2000-01-01' max='@DateTime.Now.ToString("yyyy-MM-dd")' class="form-control form-control-sm">
+                    <span asp-validation-for="PurchaseImportTaxPaymentDate" ></span>
+                </td>
+                <td>
+                    <input type="number" asp-for="PurchaseImportTaxPaymentPaidAmount" class="form-control form-control-sm">
+                    <span asp-validation-for="PurchaseImportTaxPaymentPaidAmount" ></span>
+                </td>
+                <td>
+                    <input type="text" asp-for="PurchaseImportTaxPaymentRemarks" class="form-control form-control-sm">
+                    <span asp-validation-for="PurchaseImportTaxPaymentRemarks" ></span>
+                </td>
+                <td class="single-button-action-column">
+                    <button type="button" class="btn  btn-primary btn-sm" id="btnAddTaxPayment"><i class="bi bi-plus-lg"></i></button>
+                </td>
+            </tr>*@
+        </thead>
+        <tbody id="taxPaymentTableBody">
+        </tbody>
+        <tfoot>
+            <tr class="text-end">
+                <th colspan="6">Total</th>
+                <th id="importTaxPaymentTotalPaid"></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </tfoot>
+    </table>

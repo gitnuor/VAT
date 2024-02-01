@@ -1,0 +1,45 @@
+﻿@model vms.entity.StoredProcedureModel.MushakReturn.MushakReturnPartEleven
+<table class="table table-bordered">
+    @*<thead>*@
+
+        <tr>
+
+            <th class="Returntdhead" colspan="4" style="background-color: #FBD4B4!important">
+
+                <div class="parthead">অংশ-১১: ফেরত </div>
+            </th>
+        </tr>
+    @*</thead>
+    <tbody class="Returntd">*@
+
+        <tr>
+            <td rowspan="3"> আমি সমাপনী জেরে উল্লেখিত অর্থ ফেরত গ্রহণে ইচ্ছুক</td>
+            <td style="text-align:center !important">আইটেম</td>
+            <td style="text-align:center !important">নোট</td>
+            <td style="text-align:right !important">
+
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" style="float: revert;" id="IsWantToGetBackClosingAmountYes" disabled="disabled" checked="@Model.IsWantToGetBackClosingBalance">
+                    <label class="form-check-label" for="IsWantToGetBackClosingAmountYes">হ্যাঁ</label>
+                    
+                    <input type="checkbox"  checked="@(!Model.IsWantToGetBackClosingBalance)">
+                    <label class="form-check-label" for="IsWantToGetBackClosingAmountNo">না</label>
+                </div>
+            </td>
+        </tr>
+
+        <tr>
+
+            <td>দাবীকৃত ফেরতের পরিমাণ (ভ্যাট)</td>
+            <td class="text-center" style="text-align:center !important">৬৭</td>
+            <td class="manual text-right" style="text-align:right !important">@StringGenerator.DecimalToCommaSeparated(Model.ClaimedRefundVatAmount)</td>
+        </tr>
+        <tr>
+
+            <td>দাবীকৃত ফেরতের পরিমাণ (সম্পূরক শুল্ক)</td>
+            <td class="text-center" style="text-align:center !important">৬৮</td>
+            <td class="manual text-right" style="text-align:right !important">@StringGenerator.DecimalToCommaSeparated(Model.ClaimedRefundSDAmount)</td>
+        </tr>
+    @*</tbody>*@
+
+</table>

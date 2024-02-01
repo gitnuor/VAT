@@ -1,0 +1,24 @@
+﻿@model IEnumerable<vms.entity.models.ViewProductionReceive>
+@(Html.Grid(Model).Build(columns =>
+{
+	columns.Add(model => model.ReceiveTime).Titled("Received On").Formatted("{0:dd/MM/yyyy}").AppendCss("text-center");
+	columns.Add(model => model.ProductName).Titled("Product");
+	columns.Add(model => model.Hscode).Titled("Hscode").AppendCss("text-center");
+	columns.Add(model => model.ProductTypeName).Titled("Product Type");
+	columns.Add(model => model.ModelNo).Titled("ModelNo");
+	columns.Add(model => model.Color).Titled("Color");
+	columns.Add(model => model.Size).Titled("Size");
+	columns.Add(model => model.ProductWeight).Titled("Weight");
+	columns.Add(model => model.ProductionType).Titled("Production Type").AppendCss("text-center");
+	columns.Add(model => model.BatchNo).Titled("Batch No.").AppendCss("text-center");
+	columns.Add(model => model.ReceiveQuantity).Titled("Receive Qty.").AppendCss("text-right")
+		.RenderedAs(model => StringGenerator.DecimalToCommaSeparated(model.ReceiveQuantity));
+	columns.Add(model => model.MeasurementUnitName).Titled("Measurement Unit").AppendCss("text-center");
+	columns.Add(model => model.MaterialCost).Titled("Material Cost").AppendCss("text-right")
+		.RenderedAs(model => StringGenerator.DecimalToCommaSeparated(model.MaterialCost));
+})
+	.AppendCss("large-index-grid")
+	.Empty("No data found")
+	.Filterable(GridFilterType.Double)
+	.Sortable()
+	.Pageable())

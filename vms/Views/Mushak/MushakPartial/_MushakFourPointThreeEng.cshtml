@@ -1,0 +1,216 @@
+﻿@model vms.entity.viewModels.VmPriceSetupReportParam
+@using vms.entity.StoredProcedureModel.HTMLMushak
+@{
+    var firstElement = new Sp4p3();
+    @if (Model.PriceDeclarationList.Any())
+    {
+        firstElement = Model.PriceDeclarationList.FirstOrDefault();
+    }
+
+    decimal sumOverHeadCost = 0, sumPurchasePrice = 0;
+}
+<div class="container-fluid">
+
+
+
+        <div class="row">
+	        <div class="col-12">
+		        <div class="mushak-name">Mushak - 4.3</div>
+	        </div>
+
+            <div class="col-12 text-center">
+	            <div class="company-name">GOVERNMENT OF THE PEOPLE'S REPUBLIC OF BANGLADESH</div>
+                <div class="company-name">NATIONAL BOARD OF REVENUE</div>
+                <div class="sub-header">
+                    Materials-Product Coefficient (Input-Output Coefficient) Declaration
+                </div> 
+                <div class="sub-header">
+                    (Note Rule 21)
+                </div>
+            </div>
+
+	    <br />
+        
+                <div class="col-12" style="text-align:left">
+                   
+                        <div class="company-other-info">Organization Name : @Model.OrgName </div>
+                        <div class="company-other-info"> Address : @Model.OrgAddress</div>
+                        <div class="company-other-info">BIN : @Model.OrgBin</div>
+                    
+                   
+                    <div class="company-other-info mt-2">Date of submission : @StringGenerator.DateTimeToStringWithoutTime(firstElement.DateOfSubmission)</div>
+                    <div class="company-other-info">Date of first delivery of goods/services as per declared coefficient : @StringGenerator.DateTimeToStringWithoutTime(firstElement.FirstSupplyDate)</div>
+                </div>
+
+
+
+
+    <div class="col-12">
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th rowspan="2">
+                        SL No.
+                    </th>
+                    <th rowspan="2">
+                        Product HS Code / Service Code
+                    </th>
+                    <th rowspan="2">
+                        Names and descriptions of products / services (including brand names where applicable)
+                    </th>
+                    <th rowspan="2">
+                        Unit of supply
+                    </th>
+                    <th colspan="5">
+                        Details, quantity and purchase price of all materials / raw materials and packing materials used in a single product / service delivery (including percentage of waste based on equipment)
+                    </th>
+                    <th colspan="2">
+                        Details of value addition
+                    </th>
+                    <th rowspan="2">
+                        Remarks
+                    </th>
+
+                </tr>
+                <tr>
+
+                    <th>
+                        Description
+                    </th>
+                    <th>
+                        Quantity with waste
+                    </th>
+                    <th>
+                        Purchase Price
+                    </th>
+                    <th>
+                        Waste Quantity
+                    </th>
+                    <th>
+                        Percentage (%)
+                    </th>
+                    <th>
+                        The value addition sector
+                    </th>
+                    <th>
+                        Price
+                    </th>
+
+                </tr>
+
+
+                <tr>
+                    <td class="text-center">(1) </td>
+                    <td class="text-center">(2) </td>
+                    <td class="text-center">(3) </td>
+                    <td class="text-center">(4) </td>
+                    <td class="text-center">(5) </td>
+                    <td class="text-center">(6) </td>
+                    <td class="text-center">(7) </td>
+                    <td class="text-center">(8) </td>
+                    <td class="text-center">(9) </td>
+                    <td class="text-center">(10)</td>
+                    <td class="text-center">(11)</td>
+                    <td class="text-center">(12)</td>
+
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.PriceDeclarationList.Any())
+                {
+                    var SlNo = 1;
+
+                    foreach (var type in Model.PriceDeclarationList)
+                    {
+                <tr>
+                    <td class="text-right">@SlNo</td>
+                    <td>@type.FinishedProductHsCode</td>
+                    <td>@type.FinishedProductName</td>
+                    <td>@type.FinishedProductMeasurementUnit</td>
+                    <td>@type.RawmaterialName</td>
+                                <td class="text-right">@(type.RawmaterialRequiredQtyWithWastage == null ? "" : StringGenerator.DecimalToCommaSeparatedWithEightDigit(type.RawmaterialRequiredQtyWithWastage))</td>
+                                <td class="text-right">@(type.RawmaterialPurchasePrice == null ? "" : StringGenerator.DecimalToCommaSeparatedWithFourDigit(type.RawmaterialPurchasePrice))</td>
+                                <td class="text-right">@(type.RawmaterialWastageQty == null ? "" : StringGenerator.DecimalToCommaSeparatedWithEightDigit(type.RawmaterialWastageQty))</td>
+                                <td class="text-right">@(type.RawmaterialWastagePercentage == null ? "" : StringGenerator.DecimalToCommaSeparated(type.RawmaterialWastagePercentage))</td>
+                    <td>@type.OverHeadCostName</td>
+                                <td class="text-right">@(type.OverHeadCostAmount == null ? "" : StringGenerator.DecimalToCommaSeparatedWithFourDigit(type.OverHeadCostAmount))</td>
+                    <td></td>
+                </tr>
+                        SlNo++;
+                        sumPurchasePrice += type.RawmaterialPurchasePrice == null ? 0 : type.RawmaterialPurchasePrice.Value;
+                        sumOverHeadCost += type.OverHeadCostAmount == null ? 0 : type.OverHeadCostAmount.Value;
+                    }
+
+                    <tr>
+                        <td class="text-right">@SlNo</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>Profit Amount (+/-)</td>
+                            <td class="text-right">@StringGenerator.DecimalToCommaSeparatedWithFourDigit(firstElement.ProfitAmount)</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th colspan="6" style="text-align:right;">Total</th>
+                        <th class="text-right">@StringGenerator.DecimalToCommaSeparated(sumPurchasePrice)</th>
+                        <th colspan="3" style="text-align:right;">Total</th>
+                        <th class="text-right">@StringGenerator.DecimalToCommaSeparated(sumOverHeadCost + firstElement.ProfitAmount)</th>
+                        <th></th>
+                    </tr>
+	                <tr>
+		                <th colspan="4" style="text-align:right;">Grand Total</th>
+		                <th colspan="7" class="text-right">@StringGenerator.DecimalToCommaSeparated(sumPurchasePrice + sumOverHeadCost + firstElement.ProfitAmount)</th>
+                        <th></th>
+	                </tr>
+	                <tr>
+		                <th colspan="4" style="text-align:right;">Grand Total (in words)</th>
+                            <th colspan="8">@VmsNumberToWord.ConvertAmountUsingTakaPoishaInEng(sumPurchasePrice + sumOverHeadCost + firstElement.ProfitAmount)</th>
+	                </tr>
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="12">
+                            No Data Found
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+
+    </div>
+
+
+    <div class="col-12 mt-3">
+
+        <div class="company-other-info">Name of the person in charge of the institution authority : @Model.PriceDeclarationList.Select(x => x.VatResponsiblePersonName).FirstOrDefault()</div>
+        <div class="company-other-info">Designation : @Model.PriceDeclarationList.Select(x => x.VatResponsiblePersonDesignation).FirstOrDefault()</div>
+        <div class="company-other-info">
+            Signature :
+        </div>
+        <div class="company-other-info">
+            Seal :
+        </div>
+
+    </div>
+    <div class="col-12 mt-4">
+        <div class="special-note-title">Special Note: </div>
+        <div class="special-note-items">
+            <div class="special-note-list-item">1. Any product or service must be submitted online within 15 days prior to the first delivery of VAT on the computer system or in the office of the concerned departmental officer.</div>
+
+            <div class="special-note-list-item">2. If the price of commodity or total material raw material changes more than 7.5%, new declaration has to be submitted.</div>
+
+            <div class="special-note-list-item">3. A copy of the bill of entry or invoice should be attached as an authentic document in case of purchase of goods as an authentic document in favor of purchase of materials.</div>
+        </div>
+    </div>
+
+        </div>
+
+</div>

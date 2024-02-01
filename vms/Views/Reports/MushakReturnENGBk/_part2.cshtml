@@ -1,0 +1,61 @@
+﻿@model vms.entity.StoredProcedureModel.MushakReturn.MushakReturnPartTwo
+
+
+<table class="table table-bordered">
+    <thead>
+
+        <tr>
+
+            <th class="MreturnHeader" colspan="3">
+
+                <h4> Part-2:RETURN SUBMISSION DATA </h4>
+
+            </th>
+
+        </tr>
+
+
+    </thead>
+    <tbody class="Returntd">
+
+        <tr>
+            <td class="tdp1">1. Tax Period </td>
+            <td class="tdp2"> :</td>
+            <td>@Model.TermOfTax</td>
+
+
+        </tr>
+
+        <tr>
+            <td>
+                2.Type of Return
+                  [Please select your dsire option]
+            </td>
+            <td class="tdp2"> :</td>
+            <td>@Model.TypeOfSubmission</td>
+
+
+        </tr>
+        <tr>
+            <td>3. Any activities in this Tax Period?
+                  [If Selected "No" Please Fill Only the relevant
+                  Part] 
+            </td>
+            <td class="tdp2"> :</td>
+            <td>@Model.IsTransactionOccuredInLastTermInWords</td>
+
+
+        </tr>
+
+        <tr>
+            <td>4. Date of Submission</td>
+            <td class="tdp2"> :</td>
+            <td>@Model.SubmissionDate</td>
+
+
+        </tr>
+
+
+    </tbody>
+
+</table>

@@ -1,0 +1,96 @@
+﻿@model vms.entity.viewModels.VmSaleExport
+
+<div class="col-md-4 md-left-border form-2">
+	<div class="font-weight-bold mb-3">
+		Product Information
+	</div>
+	<form class="row g-3 detail-form" id="frmProductInformation">
+		<div class="col-md-12 complex-form-col">
+			<label asp-for="ProductId" ></label>
+			<select asp-for="ProductId" >
+				<option value="@null">Select Product</option>
+				@*@if (Model.ProductForSaleList.Any())
+				{
+					foreach (var product in Model.ProductForSaleList)
+					{
+						<option value="@product.ProductId"
+						        data-product-model="@product.ModelNo"
+						        data-product-code="@product.ProductCode"
+						        data-product-sales-unit-price="@product.SalesUnitPrice"
+						        data-product-vat-type-id="@product.ProductVatTypeId"
+						        data-product-default-vat-percent="@product.DefaultVatPercent"
+						        data-product-sd-percent="@product.SupplementaryDutyPercent"
+						        data-product-max-sale-quantity="@product.MaxSaleQty"
+						        data-product-measurement-unit-id="@product.MeasurementUnitId"
+						        data-product-measurement-unit-name="@product.MeasurementUnitName">
+							@product.ProductName
+						</option>
+					}
+				}*@
+			</select>
+			<span asp-validation-for="ProductId" ></span>
+		</div>
+
+		<div class="col-md-6 complex-form-col d-none">
+			<label asp-for="SKUNo" ></label>
+			<input type="text" asp-for="SKUNo" >
+			<span asp-validation-for="SKUNo" ></span>
+		</div>
+
+		<div class="col-md-6 complex-form-col d-none">
+			<label asp-for="SKUId" ></label>
+			<input type="text" asp-for="SKUId" >
+			<span asp-validation-for="SKUId" ></span>
+		</div>
+
+		<div class="col-md-6 complex-form-col d-none">
+			<label asp-for="MeasurementUnitName" ></label>
+			@* <input type="hidden" asp-for="MeasurementUnitId" > *@
+			<input type="text" asp-for="MeasurementUnitName" readonly="readonly" >
+			<span asp-validation-for="MeasurementUnitName" ></span>
+		</div>
+
+		<div class="col-md-6 complex-form-col">
+			<label asp-for="MeasurementUnitId" ></label>
+			<select asp-for="MeasurementUnitId" >
+				<option value="@null">Select Unit</option>
+			</select>
+			<span asp-validation-for="MeasurementUnitId" ></span>
+		</div>
+
+		<div class="col-md-6 complex-form-col">
+			<label asp-for="CurrentStock" ></label>
+			<input type="number" asp-for="CurrentStock"  readonly="readonly">
+			<span asp-validation-for="CurrentStock" ></span>
+		</div>
+
+		<div class="col-md-6 complex-form-col">
+			<label asp-for="UnitPrice" ></label>
+			<input type="number" asp-for="UnitPrice" >
+			<span asp-validation-for="UnitPrice" ></span>
+		</div>
+
+		<div class="col-md-6 complex-form-col">
+			<label asp-for="Quantity" ></label>
+			<input type="number" asp-for="Quantity" >
+			<span asp-validation-for="Quantity" ></span>
+		</div>
+
+		<div class="col-md-6 complex-form-col">
+			<label asp-for="TotalPrice" ></label>
+			<input type="number" asp-for="TotalPrice" >
+			<span asp-validation-for="TotalPrice" ></span>
+		</div>
+
+		<div class="col-md-3 mt-2">
+
+			<button type="button" class="btn  btn-primary btn-sm inline-sm-button-complex-form w-100" id="btnAddProduct"><i class="bi bi-plus-lg"></i> Add</button>
+
+		</div>
+
+		<div class="col-md-3 mt-2">
+			<button type="button" value="Reset" id="btnResetProduct" class="btn  btn-warning btn-sm inline-sm-button-complex-form w-100"><i class="bi bi-arrow-repeat"></i> Reset</button>
+
+		</div>
+	</form>
+</div>

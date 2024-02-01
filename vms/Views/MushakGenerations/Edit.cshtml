@@ -1,0 +1,42 @@
+﻿@model vms.entity.models.MushakGeneration
+
+@{
+    ViewData["Title"] = "Edit";
+    
+}
+
+<h2>Edit</h2>
+
+<h4>MushakGeneration</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="MushakGenerationId" />
+            <div class="form-group">
+                <label asp-for="MushakForYear" class="form-label"></label>
+                <input asp-for="MushakForYear" class="form-control" />
+                <span asp-validation-for="MushakForYear" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MushakForMonth" class="form-label"></label>
+                <input asp-for="MushakForMonth" class="form-control" />
+                <span asp-validation-for="MushakForMonth" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GenerateDate" class="form-label"></label>
+                <input asp-for="GenerateDate" class="form-control" />
+                <span asp-validation-for="GenerateDate" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <input type="submit" value="Update" class="btn btn-light" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

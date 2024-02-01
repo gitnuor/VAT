@@ -1,0 +1,66 @@
+﻿@model vms.entity.StoredProcedureModel.MushakReturn.MushakReturnPartSix
+
+<table class="table table-bordered">
+    <thead>
+
+        <tr>
+
+            <th class="MreturnHeader" colspan="3">
+
+                <h4>Part-6: DECREASING ADJUSTMENTS(VAT)</h4>
+            </th>
+        </tr>
+    </thead>
+    <tbody class="Returntd">
+
+        <tr class="Returntdhead">
+            <td class="Returntdhead"> Adjustment Details</td>
+            <td>Note</td>
+            <td>VAT Amount</td>
+        </tr>
+
+        <tr>
+            <td>Due to VAT Deducted at Source from the supplies delivered</td>
+            <td style="text-align:center;">29</td>
+
+            <td style="text-align:right;">@Model.DecrementalAdjustmentAmountForVdsPurchase</td>
+            <td><a href="#note29SubForm">Sub-form</a></td>
+        </tr>
+
+        <tr>
+            <td> Advance tax Paid at Import Stage </td>
+            <td style="text-align:center;">30</td>
+
+            <td style="text-align:right;">@Model.DecrementalAdjustmentAmountForAdvanceTaxInImport</td>
+            <td><a href="#subFormCa">Sub-form</a></td>
+        </tr>
+
+        
+        <tr>
+            <td>Issuance of Credit Note</td>
+            <td style="text-align:center;">31</td>
+
+            <td style="text-align:right;">@Model.DecrementalAdjustmentVatAmountForCreditNote</td>
+        </tr>
+
+        <tr>
+            <td>
+                Any Other Adjustment (please specify below)
+
+                <div class="border" style="border-color:black;   height:25px ; width:450px;">
+                    @Model.MiscDecrementalAdjustmentDesc
+                </div>
+            </td>
+            <td style="text-align:center;">32</td>
+
+            <td style="text-align:right;">@Model.MiscDecrementalAdjustmentAmount</td>
+        </tr>
+
+        <tr>
+            <td>Total Decreasing Adjustment</td>
+            <td style="text-align:center;">33</td>
+
+            <td style="text-align:right;">@Model.TotalDecrementalAdjustmentVatAmount</td>
+        </tr>
+    </tbody>
+</table>

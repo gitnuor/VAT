@@ -1,0 +1,362 @@
+﻿@{
+    var session = Context.Session.GetComplexData<VmUserSession>(ControllerStaticData.SESSION);
+}
+@{
+    ViewData["Title"] = "Index";
+    
+}
+
+@section contentheader
+    {
+    <div class="p-3 page-header">
+        Sales
+    </div>
+    <div class="form-group p-2">
+        <div class="custom-control custom-checkbox custom-control-inline">
+            <input type="checkbox" id="IsExport" name="IsExport" class="custom-control-input">
+            <label class="custom-control-label" for="IsExport">
+                Is Export?
+            </label>
+        </div>
+        <div class="custom-control custom-checkbox custom-control-inline">
+            <input type="checkbox" name="IsVatDeductedInSource" id="IsVatDeductedInSource" class="custom-control-input">
+            <label class="custom-control-label" for="IsVatDeductedInSource">
+                Is VDS?
+            </label>
+        </div>
+    </div>
+
+
+}
+
+<input type="hidden" class="form-control" id="ProductId" name="ProductId" />
+ 
+
+
+<form method="post" id="salesForeign">
+    <div class="row pl-3">
+
+
+        <div class="col-md-3 p_element form-group" hidden>
+            <label class="form-label">Export Type</label>
+            <select id="ExportTypeId" name="ExportTypeId" class="form-select form-select-sm" asp-items="ViewBag.ExportTypeId">
+                <option value=null></option>
+            </select>
+        </div>
+        <div class="col-md-3 vds_element form-group">
+            <label class="form-label">VDS Amount</label>
+            <div class="input-group ">
+
+                <input type="text" class="form-control form-control-sm" id="VDSAmount" name="VDSAmount" value="0" maxlength="10">
+
+                @*<span class="input-group-addon ">
+                    <input type="checkbox" name="IsVatDeductedInSource" id="IsVatDeductedInSource" value="IsVatDeductedInSource">
+
+                </span>*@
+            </div>
+
+        </div>
+        <div class="col-md-3 vds_element form-group ">
+            <label class="form-label">Cus. Name<span class="label-color">*</span></label>
+
+            <select id="CustomerId" name="CustomerId" class="form-select form-select-sm" asp-items="ViewBag.CustomerId"></select>
+
+        </div>
+        <div class="col-md-3 p_element form-group" hidden>
+            <label class="form-label">Cus. Name<span class="label-color">*</span></label>
+
+            <select id="CustomerIdExport" name="CustomerIdExport" class="form-select form-select-sm" asp-items="ViewBag.CustomerIdExport"></select>
+
+        </div>
+
+        <div class="col-md-3 form-group">
+            <label class="form-label">Mobile</label>
+            <input type="text" class="form-control form-control-sm" id="CustomerContactNo" name="CustomerContactNo" placeholder="01####">
+
+
+        </div>
+        <div class="col-md-3 form-group">
+            <label class="form-label">Order No.</label>
+            <input type="text" class="form-control form-control-sm" id="WorkOrderNo" name="WorkOrderNo" placeholder="##">
+
+        </div>
+
+        <div class="col-md-3 form-group ">
+            <label class="form-label">Sal.Del.Typ.<span class="label-color">*</span></label>
+
+            <select id="SalesDeliveryTypeId" name="SalesDeliveryTypeId" class="form-select form-select-sm" asp-items="ViewBag.SalesDeliveryTypeId">
+                <option value=null></option>
+            </select>
+
+        </div>
+
+
+        <div class="col-md-3 form-group">
+            <label class="form-label">Del. Date</label>
+            <input type="date" class="form-control form-control-sm" id="DeliveryDate" name="DeliveryDate" value="@DateTime.Now.Date.ToString(DefinedDateFormat.DateFormatForControl)">
+        </div>
+
+        <div class="col-md-3 form-group">
+            <label class="form-label">Name</label>
+
+            <input type="text" name="ReceiverName" id="ReceiverName" class="form-control form-control-sm" />
+
+        </div>
+
+        <div class="col-md-3 form-group">
+            <label class="form-label">Contact</label>
+            <input type="text" name="ReceiverContactNo" id="ReceiverContactNo" class="form-control form-control-sm" />
+
+        </div>
+        <div class="col-md-3 form-group ">
+            <label class="form-label">Address</label>
+            <input type="text" name="ShippingAddress" id="ShippingAddress" class="form-control form-control-sm" />
+
+
+        </div>
+
+        <div class="col-md-3 p_element form-group" hidden>
+            <label class="form-label">Country</label>
+            <select id="ShippingCountryId" name="ShippingCountryId" class="form-select form-select-sm" asp-items="ViewBag.ShippingCountryId">
+                <option value=null></option>
+            </select>
+
+        </div>
+
+        <div class="col-md-3 p_element form-group" hidden>
+            <label class="form-label">LC No.</label>
+            <input type="text" name="LcNo" id="LcNo" class="form-control form-control-sm" />
+
+
+        </div>
+        <div class="col-md-3 p_element form-group" hidden>
+            <label class="form-label">LC Date</label>
+            <input type="date" name="LcDate" id="LcDate" class="form-control form-control-sm" value="@DateTime.Now.ToString(DefinedDateFormat.DateFormatForControl)" />
+        </div>
+        <div class="col-md-3 p_element form-group" hidden>
+            <label class="form-label">Com. Inv. No.</label>
+            <input type="text" name="BillOfEntry" id="BillOfEntry" class="form-control form-control-sm" />
+        </div>
+        <div class="col-md-3 p_element form-group" hidden>
+            <label class="form-label">Com. Date</label>
+            <input type="date" name="BillOfEntryDate" id="BillOfEntryDate" class="form-control form-control-sm" value="@DateTime.Now.Date.ToString(DefinedDateFormat.DateFormatForControl)" />
+        </div>
+        <div class="col-md-3 p_element form-group" hidden>
+            <label class="form-label">LC Terms</label>
+            <input type="text" name="TermsOfLc" id="TermsOfLc" class="form-control form-control-sm" />
+        </div>
+        <div class="col-md-3 p_element form-group" hidden>
+            <label class="form-label">Due Date</label>
+            <input type="date" name="DueDate" id="DueDate" class="form-control form-control-sm" value="@DateTime.Now.AddDays(60).ToString(DefinedDateFormat.DateFormatForControl)" />
+
+        </div>
+        <div class="col-md-3 form-group ">
+            <label class="form-label">PO. No.</label>
+            <input type="text" name="CustomerPoNumber" id="CustomerPoNumber" class="form-control form-control-sm" />
+        </div>
+        <div class="col-md-3 form-group">
+            <label class="form-label">Vehicle Type</label>
+            <select id="VehicleType" name="VehicleType" class="form-select form-select-sm" asp-items="ViewBag.VType"></select>
+        </div>
+        <div class="col-md-3 form-group">
+            <label class="form-label">Vehicle Reg</label>
+            <input type="text" class="form-control form-control-sm" id="VehicleRegNo" name="VehicleRegNo">
+        </div>
+        <div class="col-md-12">
+            <div class="alert alert-danger hidden" id="sevenPointFiveDiv">
+                <lable class="text-danger" id="alertMessage">
+
+                </lable>
+            </div>
+        </div>
+        <div class="col-md-12 ">
+            <h6>Sale Details</h6>
+
+            <table class="table table-bordered form-table" id="gridTable">
+                <thead>
+                    <tr>
+                        <th>SL</th>
+                        <th>Product</th>
+                        <th>Stock</th>
+                        <th>Qty</th>
+                        <th>AV</th>
+                        <th class="details_element">SD.(%)</th>
+                        <th>Rate</th>
+                        <th class="" style="min-width:100px;">Unit</th>
+                        <th class="details_element">VAT(%)</th>
+                        <th class="details_element">VAT Type</th>
+                        <th class="details_element">VAT</th>
+                        <th class="details_element">Total</th>
+                        <th></th>
+                    </tr>
+                    <tr>
+
+                        <td></td>
+                        <td class="form-group">
+
+                            <input type="text" class="form-control form-control-sm" id="Product" name="Product">
+
+                        </td>
+                        <td class="form-group">
+                            <input type="text" readonly="readonly" class="form-control form-control-sm" id="MaxSaleQty" name="MaxSaleQty">
+                        </td>
+
+                        <td class="form-group">
+                            <input type="text" class="form-control form-control-sm" id="item" name="item">
+                        </td>
+
+                        <td class="form-group">
+                            <input type="text" class="form-control form-control-sm" id="Amount" name="Amount" />
+                        </td>
+                        <td class="form-group details_element">
+                            <div>
+                                <input type="text" class="form-control form-control-sm" id="SupplementaryDutyPercent" name="SupplementaryDutyPercent" />
+                            </div>
+                        </td>
+                        <td class="form-group">
+                            <input type="text" class="form-control form-control-sm" id="amount" name="amount">
+                        </td>
+                        <td class="form-group">
+
+                            <select id="unit" name="unit" class="form-select form-select-sm" asp-items="ViewBag.MeasurementUnitId">
+                                <option value=null></option>
+                            </select>
+                        </td>
+
+                        <td class="form-group details_element">
+                            <input type="text" class="form-control form-control-sm" id="VAT" name="VAT" />
+                        </td>
+                        <td class="form-group details_element">
+                            <select id="VatTypeId" name="VatTypeId" class="form-select form-select-sm" asp-items="ViewBag.VatType">
+                            </select>
+                        </td>
+                        <td class="details_element">
+                            <label id="vatValue" name="vatValue"></label>
+                        </td>
+                        <td class="details_element">
+                            <label id="totalValue" name="totalValue"></label>
+                        </td>
+                        <td class="single-button-action-column">
+                            <button id="add" class="btn btn-sm btn-success" aria-label="Left Align">
+                                <i class="bi bi-plus-lg"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </thead>
+
+                <tbody id="tblPurchaseOD"></tbody>
+                <tfoot>
+                </tfoot>
+            </table>
+        </div>
+
+    </div>
+
+    <div class="row pl-3">
+        <div class="col-md-4">
+            <h6>Document Info.</h6>
+            <table class="table table-bordered form-table" id="contentTable">
+                <thead>
+                    <tr>
+
+                        <th>Type</th>
+                        <th>File</th>
+                        <th></th>
+                    </tr>
+                <tr>
+                    <td class="form-group">
+                        <select id="DocumentTypeId" name="DocumentTypeId" class="form-select form-select-sm" asp-items="ViewBag.DocumentTypeId">
+                            <option value=null></option>
+                        </select>
+                    </td>
+                    <td class="form-group">
+                        <div class="custom-file">
+                            <input type="file" name="FileUpload" id="FileUpload" class="custom-file-input"/>
+                            <label class="custom-file-label" for="FileUpload"></label>
+                        </div>
+                    </td>
+
+                    <td class="single-button-action-column">
+                        <a id="addDocument" class="btn btn-sm btn-success" aria-label="Left Align">
+                            <i class="bi bi-plus-lg"></i>
+                        </a>
+                    </td>
+                </tr>
+                </thead>
+                <tbody id="contentTabledt"></tbody>
+                <tfoot>
+                </tfoot>
+            </table>
+        </div>
+        <div class="col-md-8">
+            <h6>Payment Info.</h6>
+            <table id="payment" class="table table-bordered form-table">
+                <thead>
+                    <tr>
+                        <th>SL</th>
+                        <th class="col-md-3 ">Method</th>
+                        <th>Cheque No.</th>
+                        <th>Amount</th>
+                        <th>Date</th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td class="form-group">
+                            <select id="PaymentMethodId" name="PaymentMethodId" class="form-select form-select-sm" asp-items="ViewBag.PaymentMethodId">
+                                <option value=null></option>
+                            </select>
+                        </td>
+                        <td class="form-group">
+                            <div>
+                                <input type="text" name="ChequeNumber" id="ChequeNumber" class="form-control form-control-sm chequeSelection" autocomplete="off" hidden />
+                            </div>
+                        </td>
+                        <td class="form-group">
+                            <div>
+                                <input type="text" name="PaidAmount" id="PaidAmount" class="form-control form-control-sm" value="0" maxlength="10" />
+                            </div>
+                        </td>
+                        <td class="form-group">
+
+                            <input type="date" name="PaymentDate" id="PaymentDate" class="form-control form-control-sm" value="@DateTime.Now.ToString(DefinedDateFormat.DateFormatForControl)" />
+
+                        </td>
+
+                        <td class="single-button-action-column">
+                            <a id="addPayment" class="btn btn-sm btn-success" aria-label="Left Align">
+                                <i class="bi bi-plus-lg"></i>
+                            </a>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody id="paymentdt"></tbody>
+                <tfoot>
+                </tfoot>
+            </table>
+        </div>
+        <div class="col-md-12 text-right">
+            <button type="button" class="btn btn-primary btn-sm" id="save"><i class="bi bi-check-lg"></i> Submit</button>
+            <button type="button" value="Reset" onclick="location.reload();" class="btn btn-warning btn-sm"><i class="bi bi-arrow-repeat"></i> Reset</button>
+            <a asp-action="Index" class="btn btn-secondary btn-sm"><i class="bi bi-slash-circle"></i> Cancel</a>
+        </div>
+    </div>
+</form>
+@section Scripts{
+
+    <script src="~/js/typeahead.bundle.js"></script>
+    <script src="~/js/jquery-ui.js"></script>
+    <script src="~/CustomJs/Sale.js"></script>
+    <script type="text/javascript">
+        var getForeignCust = '@Url.Action("GetForeignCustomer", "Customer")';
+        var getFullExportOriented='@Url.Action("GetFullExportOriented", "Customer")';
+        var productVatType = '@Url.Action("GetAllProductTypeSale", "ProductVattypes")';
+        var productTypeSaleVds = '@Url.Action("GetAllProductTypeForSaleVDS", "ProductVattypes")';
+        var save = '@Url.Action("CreateAsync", "Sales")';
+        var returnUrl = '@Url.Action("Index", "Sales")';
+        var prodDetailsAutoComplt = '@Url.Action("SaleProductAutoComplete", "Products")';
+        var getLocalCust = '@Url.Action("GetCustomerDetails", "Customer")';
+    </script>
+
+
+}

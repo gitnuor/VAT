@@ -1,0 +1,96 @@
+﻿@model vms.entity.viewModels.VendorViewModel.VendorForeignCreateViewModel
+<div class="font-weight-bold mb-3">
+	Basic Information
+</div>
+<div>
+	<div class="row">
+		<div class="col-6">
+			<div class="form-group">
+				<label  asp-for="Name"></label>
+				<div>
+					<input asp-for="Name"/>
+					<span asp-validation-for="Name" ></span>
+				</div>
+			</div>
+			<div class="form-group mt-3">
+				<label  asp-for="ContactNo"></label>
+				<div>
+					<input asp-for="ContactNo" />
+					<span asp-validation-for="ContactNo" ></span>
+				</div>
+			</div>
+			<div class="form-group mt-3">
+				<label  asp-for="Address"></label>
+				<div>
+					<textarea asp-for="Address"></textarea>
+					<span asp-validation-for="Address" ></span>
+				</div>
+			</div>
+			<div class="form-group mt-3">
+				<label asp-for="DivisionOrStateName" ></label>
+				<input asp-for="DivisionOrStateName" />
+				<span asp-validation-for="DivisionOrStateName" ></span>
+			</div>
+			<div class="form-group mt-3">
+				<label asp-for="DistrictOrCityName" ></label>
+				<input asp-for="DistrictOrCityName" />
+				<span asp-validation-for="DistrictOrCityName" ></span>
+			</div>
+			<div class="form-group mt-3">
+				<label  asp-for="PostCode"></label>
+				<div>
+					<input asp-for="PostCode"/>
+					<span asp-validation-for="PostCode" ></span>
+				</div>
+			</div>
+			<div class="form-group mt-3">
+				<label asp-for="CountryId" ></label>
+				<select asp-for="CountryId" asp-items="Model.Countries.CustomSelectListToSelectList()" >
+					<option value="@null">Select Country</option>
+				</select>
+				<span asp-validation-for="CountryId" ></span>
+			</div>
+		</div>
+		<div class="col-6">
+			<div class="form-group">
+				<label  asp-for="ContactPerson"></label>
+				<div>
+					<input asp-for="ContactPerson" />
+					<span asp-validation-for="ContactPerson" ></span>
+				</div>
+			</div>
+
+
+			<div class="form-group mt-3">
+				<label  asp-for="ContactPersonDesignation"></label>
+				<div>
+					<input asp-for="ContactPersonDesignation"  />
+					<span asp-validation-for="ContactPersonDesignation" ></span>
+				</div>
+			</div>
+			
+			<div class="form-group mt-3">
+				<label  asp-for="ContactPersonMobile"></label>
+				<div>
+					<input asp-for="ContactPersonMobile" />
+					<span asp-validation-for="ContactPersonMobile" ></span>
+				</div>
+			</div>
+			<div class="form-group mt-3">
+				<label  asp-for="ContactPersonEmailAddress"></label>
+				<div>
+					<input asp-for="ContactPersonEmailAddress"  />
+					<span asp-validation-for="ContactPersonEmailAddress" ></span>
+				</div>
+			</div>
+			<div class="form-group mt-3">
+				<label  asp-for="ReferenceKey"></label>
+				<div>
+					<input asp-for="ReferenceKey"/>
+					<span asp-validation-for="ReferenceKey" ></span>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>

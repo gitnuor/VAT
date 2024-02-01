@@ -1,0 +1,49 @@
+﻿@model vms.entity.viewModels.VmPurchaseImportSubscription
+
+<div class="font-weight-bold mt-3">
+    Product List
+</div>
+<div>
+    <table id="productTable" class="table table-bordered form-table mt-3">
+        <thead>
+            <tr>
+                <th>Product</th>
+                @*<th>SKU</th>
+                <th>GOODS ID</th>*@
+                <th>M. Unit</th>
+                <th>Unit Price</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                @* <th>CD</th>
+                <th>ID</th>
+                <th>RD</th>
+                <th>AIT</th>
+                <th>SD</th> *@
+                @* <th>VAT Type</th>
+                <th>VAT</th> *@
+                @* <th>AT</th> *@
+                <th>Total</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody id="productTableBody">
+        </tbody>
+        <tfoot>
+            <tr class="text-end">
+                @*<th colspan="6">Total</th>*@
+                <th colspan="4">Total</th>
+                <th id="productTotalPrice"></th>
+               @*  <th id="productTotalCd"></th>
+                <th id="productTotalId"></th>
+                <th id="productTotalRd"></th>
+                <th id="productTotalAit"></th>
+                <th id="productTotalSd"></th> *@
+                <th></th>
+               @*  <th id="productTotalVat"></th> *@
+                @* <th id="productTotalAt"></th> *@
+                @* <th id="productTotalPriceIncAllTax"></th> *@
+                <th></th>
+            </tr>
+        </tfoot>
+    </table>
+</div>

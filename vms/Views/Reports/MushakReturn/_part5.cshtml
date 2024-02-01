@@ -1,0 +1,68 @@
+﻿@model vms.entity.StoredProcedureModel.MushakReturn.MushakReturnPartFive
+
+<table class="table table-bordered">
+    @*<thead>*@
+
+        <tr>
+
+            <th class="MreturnHeader" colspan="4" style="background-color: #FBD4B4!important">
+
+                <div class="parthead">অংশ-৫: বৃদ্ধিকারী সমন্বয় (মূল্য সংযোজন কর)</div>
+            </th>
+        </tr> 
+    @*</thead>
+    <tbody class="Returntd">*@
+
+        <tr class="Returntdhead text-center font-weight-bold" style="background-color: #BFBFBF !important">
+            <td class="Returntdhead"> <b>সমন্বয় ঘটনা</b></td>
+            <td style="text-align:center"><b>নোট</b></td>
+            <td style="text-align:right!important"><b>পরিমাণ</b></td>
+            <td><b></b></td>
+        </tr>
+
+        <tr>
+            <td>সরবরাহ গ্রহীতা কর্তৃক উৎসে কর্তনের জন্য </td>
+            <td class="text-center">২৪</td>
+
+            <td class="text-right" style="text-align:right !important">@StringGenerator.DecimalToCommaSeparated(Model.IncrementalAdjustmentAmountForVdsSale)</td>
+            <td><a asp-action="Mushok9P1SubGha" asp-route-year="@ViewBag.Year" asp-route-month="@ViewBag.Month" target="_blank" class="ReturntdEmpty">সাবফর্ম-ঘ</a> </td>
+        </tr>
+        <tr>
+            <td>ব্যাংকিং চ্যানেলে মূল্য পরিশোধিত হয় নাই এমন সরবরাহের জন্য </td>
+            <td class="text-center">২৫</td>
+
+            <td class="text-right"  style="text-align:right !important">@StringGenerator.DecimalToCommaSeparated(Model.IncrementalAdjustmentAmountForNotPaidInBankingChannel)</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>ডেবিট নোটের জন্য </td>
+            <td class="text-center">২৬</td>
+
+            <td class="text-right" style="text-align:right !important">@StringGenerator.DecimalToCommaSeparated(Model.IncrementalAdjustmentVatAmountForDebitNote)</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>
+                অন্যকোনো সমন্বয় ঘটনার জন্য (নিচে বর্ণনা করুন)
+
+                <div class="border" style="border-color:black;   min-height:25px ; min-width:400px;">
+                    @Model.MiscIncrementalAdjustmentDesc
+                </div>
+            </td>
+            <td class="text-center">২৭</td>
+
+            <td class="manual text-right" style="text-align:right !important">@StringGenerator.DecimalToCommaSeparated(Model.MiscIncrementalAdjustmentAmount)</td>
+            <td></td>
+        </tr>
+
+    <tr class="font-weight-bold">
+            <td><b>মোট বৃদ্ধিকারী সমন্বয়</b> </td>
+            <td class="text-center"><b>২৮</b></td>
+
+            <td class="text-right" style="text-align:right !important">@StringGenerator.DecimalToCommaSeparated(Model.TotalIncrementalAdjustmentVatAmount)</td>
+            <td></td>
+        </tr>
+    @*</tbody>*@
+</table>

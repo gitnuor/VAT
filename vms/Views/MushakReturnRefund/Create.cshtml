@@ -1,0 +1,86 @@
+﻿@model vms.entity.viewModels.vmMushakReturnRefund
+@{
+    ViewData["Title"] = "Create";
+    
+    
+}
+@section contentheader
+    {
+    <div class="p-3 page-header">
+        Add Mushak Return Refund
+    </div>
+}
+
+<div class="row">
+    <div class="col-md-4 offset-4">
+        <form asp-action="Create" class="form-horizontal" id="frmusercreate">
+
+            <div class="form-body">
+                <div class="form-group required">
+                    <label class="form-label">Month : </label>
+                    <div>
+                        @Html.DropDownList("MushakMonth", Model.MonthList, "Select Month", new { @class = "form-control form-control-sm" })
+                        <span asp-validation-for="MushakMonth" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Year : </label>
+                    <div>
+                        @Html.DropDownList("MushakYear", Model.YearList, "Select Year", new { @class = "form-control form-control-sm" })
+                        <span asp-validation-for="MushakYear" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group p_element" hidden>
+                    <label class="form-label">Interested Refund VAT Amount</label>
+                    <div>
+                        @Html.TextBoxFor(c => c.InterestedToRefundVatamount, new { @class = "form-control form-control-sm" })
+                        <span asp-validation-for="InterestedToRefundVatamount" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group p_element" hidden>
+                    <label class="form-label">Interested Refund SD Amount</label>
+                    <div>
+                        @Html.TextBoxFor(c => c.InterestedToRefundSdamount, new { @class = "form-control form-control-sm" })
+                        <span asp-validation-for="InterestedToRefundSdamount" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-offset-3">
+                    <div class="form-group form-md-line-input">
+                        <div>
+                            @Html.CheckBoxFor(c => c.IsInterestedToGetRefund) Is Interested to Get Refund?
+
+                        </div>
+                    </div>
+                </div>
+                
+
+            </div>
+            <div class="text-right">
+                <button type="submit" data-requiredconfirmation="true" class="btn  btn-primary btn-sm"><i class="bi bi-check-lg"></i> Submit</button>
+                <button type="button" value="Reset" onclick="location.reload();" class="btn  btn-warning btn-sm"><i class="bi bi-arrow-repeat"></i> Reset</button>
+                <a asp-controller="MushakReturnRefund" asp-action="Index" class="btn btn-secondary btn-sm"><i class="bi bi-slash-circle"></i> Cancel</a>
+            </div>
+          
+        </form>
+    </div>
+</div>
+
+
+@section Scripts{
+
+
+    <script>
+        $('#IsInterestedToGetRefund').change(function () {
+            if ($('#IsInterestedToGetRefund:checked').length == 0) {
+
+                $('.p_element').hide();
+            }
+            else {
+                $('.p_element').show();
+
+            }
+        });
+    </script>
+}

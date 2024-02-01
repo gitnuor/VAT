@@ -1,0 +1,197 @@
+﻿@model vms.entity.StoredProcedureModel.MushakReturn.MushakReturnPartFour
+
+<table class="table table-bordered">
+    @*<thead>*@
+
+        <tr>
+
+            <th class="MreturnHeader" colspan="6" style="background-color: #FBD4B4!important">
+
+                <div class="parthead"> Part-4: PURCHASE-INPUT TAX</div>
+            </th>
+        </tr>
+    @*</thead>
+    <tbody class="Returntd">*@
+        <tr style="background-color: #FBD4B4!important">
+            <td colspan="5">
+                <div>
+                    (k) If all the products/services you supply are Standard Rated, fill Note 10-20.<br />
+                    (kh) If all the products/services you supply are not standard rated or input tax credit not taken within stipulated time period under section 46, fill up note 21-22<br />
+                    (g)  If the products/services you supply consist of both standard rated and non-standard rated, then fill up note 10-20 for the raw materials that ware used to produce/supply standard rated goods/services and fill up note 21-22 for the raw materials that ware used to produce/supply non-standard rated goods/services and show the value proportionately in note 10-22 as applicable.<br />
+                </div>
+            </td>
+            <td  style="background-color: #FBD4B4!important"></td>
+        </tr>
+
+        <tr class="Returntdhead text-center font-weight-bold" style="background-color: #BFBFBF !important">
+            <td colspan="2"> <b>Nature of Purchase</b></td>
+            <td style="text-align:center"><b>Note</b></td>
+            <td style="text-align:right"><b>Value (k)</b></td>
+            <td style="text-align:right"><b>VAT (kh)</b></td>
+            <td><b></b></td>
+        </tr>
+
+        <tr>
+            <td rowspan="2" style="width:300px;">
+                Zero Rated Goods/Service
+            </td>
+            <td>Local Purchase</td>
+            <td class="text-center">10</td>
+            <td class="text-right" style="text-align:right">@StringGenerator.DecimalToCommaSeparated(Model.ZeroVatProdLocalPurchaseAmount)</td>
+
+            <td class="ReturntdEmpty" style="background-color: #BFBFBF !important"></td>
+            <td style="background-color: #BFBFBF !important"><a href="#subFormKa" class="ReturntdEmpty">Subform-k</a></td>
+        </tr>
+
+        <tr>
+            <td>
+                Import
+            </td>
+
+            <td class="text-center"> 11</td>
+
+            <td class="text-right" style="text-align:right">@StringGenerator.DecimalToCommaSeparated(Model.ZeroVatProdImportAmount)       </td>
+            <td class="ReturntdEmpty" style="background-color: #BFBFBF !important"></td>
+            <td style="background-color: #BFBFBF !important"><a href="#subFormKa" class="ReturntdEmpty">Subform-k</a></td>
+        </tr>
+
+        <tr>
+            <td rowspan="2">
+                Exempted Goods/Service
+            </td>
+            <td>Local Purchase</td>
+            <td class="text-center">12</td>
+            <td class="text-right" style="text-align:right">@StringGenerator.DecimalToCommaSeparated(Model.VatExemptedProdLocalPurchaseAmount)</td>
+
+            <td class="ReturntdEmpty" style="background-color: #BFBFBF !important"></td>
+            <td style="background-color: #BFBFBF !important"><a href="#subFormKa" class="ReturntdEmpty">Subform-k</a></td>
+        </tr>
+
+        <tr>
+            <td>
+                Import
+            </td>
+
+            <td class="text-center">13</td>
+            <td class="text-right" style="text-align:right">@StringGenerator.DecimalToCommaSeparated(Model.VatExemptedProdImportAmount)</td>
+
+            <td class="ReturntdEmpty" style="background-color: #BFBFBF !important"></td>
+            <td style="background-color: #BFBFBF !important"><a href="#subFormKa" class="ReturntdEmpty">Subform-k</a></td>
+        </tr>
+
+        <tr>
+            <td rowspan="2">
+                Standard Rated Goods/Service
+            </td>
+            <td>Local Purchase</td>
+            <td class="text-center">14</td>
+            <td class="text-right" style="text-align:right">@StringGenerator.DecimalToCommaSeparated(Model.StandardVatProdLocalPurchaseAmount)</td>
+            <td class="text-right" style="text-align:right">@StringGenerator.DecimalToCommaSeparated(Model.StandardVatProdLocalPurchaseVatAmount)</td>
+
+            <td><a href="#subFormKa">Subform-k</a></td>
+        </tr>
+
+        <tr>
+            <td>
+                Import
+            </td>
+
+            <td class="text-center">15</td>
+            <td class="text-right" style="text-align:right">@StringGenerator.DecimalToCommaSeparated(Model.StandardVatProdImportAmount) </td>
+            <td class="text-right" style="text-align:right">@StringGenerator.DecimalToCommaSeparated(Model.StandardVatProdImportVatAmount)</td>
+
+            <td><a href="#subFormKa">Subform-k</a></td>
+        </tr>
+        <tr>
+            <td rowspan="2">
+                Goods/Service Other than Standard Rate
+            </td>
+            <td>Local Purchase</td>
+            <td class="text-center">16</td>
+            <td class="text-right" style="text-align:right">@StringGenerator.DecimalToCommaSeparated(Model.OtherThanStandardVatProdLocalPurchaseAmount)</td>
+            <td class="text-right" style="text-align:right">@StringGenerator.DecimalToCommaSeparated(Model.OtherThanStandardVatProdLocalPurchaseVatAmount)</td>
+
+            <td><a href="#subFormKa"> Subform-k</a></td>
+        </tr>
+
+        <tr>
+            <td>
+                Import
+            </td>
+
+            <td class="text-center">17</td>
+            <td class="text-right" style="text-align:right">@StringGenerator.DecimalToCommaSeparated(Model.OtherThanStandardVatProdImportAmount)</td>
+            <td class="text-right" style="text-align:right">@StringGenerator.DecimalToCommaSeparated(Model.OtherThanStandardVatProdImportVatAmount)</td>
+
+            <td><a href="#subFormKa">Subform-k</a></td>
+        </tr>
+
+        <tr>
+            <td>
+                Goods/Service Based on Specific VAT
+            </td>
+            <td>Local Purchase</td>
+            <td class="text-center">18</td>
+            <td class="text-right" style="text-align:right">@StringGenerator.DecimalToCommaSeparated(Model.FixedVatProdLocalPurchaseAmount)</td>
+            <td class="text-right" style="text-align:right">@StringGenerator.DecimalToCommaSeparated(Model.FixedVatProdLocalPurchaseVatAmount)</td>
+
+            <td><a href="#subFormGa">Subform-g</a></td>
+        </tr>
+
+        <tr>
+            <td rowspan="2">
+                Goods/Service Not Admissible for Credit (Local Purchase)
+            </td>
+            <td>From Turnover Tax Units</td>
+            <td class="text-center">19</td>
+            <td class="text-right" style="text-align:right">@StringGenerator.DecimalToCommaSeparated(Model.NonRebatableProdLocalPurchaseFromTurnOverOrgAmount)</td>
+            <td class="text-right" style="text-align:right">@StringGenerator.DecimalToCommaSeparated(Model.NonRebatableProdLocalPurchaseFromTurnOverOrgVatAmount)</td>
+
+            <td><a href="#subFormKa">Subform-k</a></td>
+        </tr>
+
+        <tr>
+            <td>
+                From Unregistered Entities
+            </td>
+
+            <td class="text-center">20</td>
+            <td class="text-right" style="text-align:right">@StringGenerator.DecimalToCommaSeparated(Model.NonRebatableProdLocalPurchaseFromNonRegOrgAmount) </td>
+            <td class="text-right" style="text-align:right">@StringGenerator.DecimalToCommaSeparated(Model.NonRebatableProdLocalPurchaseFromNonRegOrgVatAmount)</td>
+
+            <td><a href="#subFormKa">Subform-k</a></td>
+        </tr>
+
+        <tr>
+            <td rowspan="2">
+                Goods/Service Not Admissible for Credit (Taxpayers who sell only Exempted/Specific VAT and Goods/Service Other than Standard Rate/Credits not taken within stipulated time)
+            </td>
+            <td>Local Purchase</td>
+            <td class="text-center">21</td>
+            <td class="text-right" style="text-align:right">@StringGenerator.DecimalToCommaSeparated(Model.NonRebatableProdLocalPurchaseByOrgWhoSellOtherThanStandardVatProdAmount) </td>
+            <td class="text-right" style="text-align:right">@StringGenerator.DecimalToCommaSeparated(Model.NonRebatableProdLocalPurchaseByOrgWhoSellOtherThanStandardVatProdVatAmount)</td>
+
+            <td><a href="#subFormKa">Subform-k</a></td>
+        </tr>
+        <tr>
+            
+            <td>Import </td>
+            <td class="text-center">22</td>
+            <td class="text-right" style="text-align:right">@StringGenerator.DecimalToCommaSeparated(Model.NonRebatableProdImportByOrgWhoSellOtherThanStandardVatProdAmount)</td>
+            <td class="text-right" style="text-align:right">@StringGenerator.DecimalToCommaSeparated(Model.NonRebatableProdImportByOrgWhoSellOtherThanStandardVatProdVatAmount)</td>
+
+            <td><a href="#subFormKa">Subform-k</a></td>
+        </tr>
+
+    <tr class="font-weight-bold">
+            <td colspan="2">
+                <b>Total Input Tax Credit</b>
+            </td>
+
+            <td class="text-center">23</td>
+            <td class="ReturntdEmpty text-right" style="background-color: #BFBFBF !important; text-align: right">@StringGenerator.DecimalToCommaSeparated(Model.TotalRawMaterialPurchaseAmount)</td>
+            <td class="text-right" style="text-align:right">@StringGenerator.DecimalToCommaSeparated(Model.TotalRawMaterialRebateAmount)</td>
+            <td> </td>
+        </tr>
+    @*</tbody>*@
+</table>

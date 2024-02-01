@@ -1,0 +1,85 @@
+﻿@model vms.entity.models.MushakSubmission
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+
+<h4>MushakSubmission</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="MushakSubmissionId" />
+            <div class="form-group">
+                <label asp-for="MushakSubmissionTypeId" class="form-label"></label>
+                <select asp-for="MushakSubmissionTypeId" class="form-control" asp-items="ViewBag.MushakSubmissionTypeId"></select>
+                <span asp-validation-for="MushakSubmissionTypeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OrganizationId" class="form-label"></label>
+                <select asp-for="OrganizationId" class="form-control" asp-items="ViewBag.OrganizationId"></select>
+                <span asp-validation-for="OrganizationId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MushakForYear" class="form-label"></label>
+                <input asp-for="MushakForYear" class="form-control" />
+                <span asp-validation-for="MushakForYear" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MushakForMonth" class="form-label"></label>
+                <input asp-for="MushakForMonth" class="form-control" />
+                <span asp-validation-for="MushakForMonth" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GenerateDate" class="form-label"></label>
+                <input asp-for="GenerateDate" class="form-control" />
+                <span asp-validation-for="GenerateDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SubmissionDate" class="form-label"></label>
+                <input asp-for="SubmissionDate" class="form-control" />
+                <span asp-validation-for="SubmissionDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VatResponsiblePersonId" class="form-label"></label>
+                <input asp-for="VatResponsiblePersonId" class="form-control" />
+                <span asp-validation-for="VatResponsiblePersonId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="IsWantToGetBackClosingBalance" /> @Html.DisplayNameFor(model => model.IsWantToGetBackClosingBalance)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="IsActive" /> @Html.DisplayNameFor(model => model.IsActive)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreatedBy" class="form-label"></label>
+                <input asp-for="CreatedBy" class="form-control" />
+                <span asp-validation-for="CreatedBy" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreatedTime" class="form-label"></label>
+                <input asp-for="CreatedTime" class="form-control" />
+                <span asp-validation-for="CreatedTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Update" class="btn btn-light" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

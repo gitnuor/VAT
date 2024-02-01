@@ -1,0 +1,69 @@
+﻿@model IEnumerable<vms.entity.StoredProcedureModel.MushakReturn.MushakReturnSubFormKa>
+@{
+    decimal totTransSubFormKa = 0;
+    decimal totSdSubFormKa = 0;
+    decimal totMuskSubFormKa = 0;
+}
+
+<table class="table table-bordered ">
+
+
+        <tr class="MreturnHeader" style="background-color: #FBD4B4!important">
+
+            <th>ক্রমিক নং</th>
+            <th>
+	            পণ্য/ সেবার বাণিজ্যিক বর্ণনা
+            </th>
+            <th>
+	            পণ্য/ সেবার
+	            কোড
+            </th>
+            <th>পণ্য/ সেবার নাম</th>
+            <th>
+	            মূল্য
+	            (ক)
+            </th>
+            <th>সম্পূরক শুল্ক (খ)</th>
+            <th>
+	            মূল্য সংযোজন কর
+	            (গ)
+            </th>
+            <th>মন্তব্য</th>
+        </tr>
+  
+        @if (Model.Any())
+        {
+
+            foreach (var item in Model)
+            {
+                totTransSubFormKa += item.ProductPrice ?? 0;
+                totSdSubFormKa += item.ProductPrice ?? 0;
+                totMuskSubFormKa += item.ProductPrice ?? 0;
+
+        <tr>
+
+            <td>@item.SlNo                 </td>
+            <td>@item.ProductCommercialDescription</td>
+            <td>@item.ProductCode                 </td>
+            <td>@item.ProductName                 </td>
+            <td class="text-right" style="text-align:right!important">@StringGenerator.DecimalToCommaSeparated(item.ProductPrice           ) </td>
+            <td class="text-right" style="text-align:right!important">@StringGenerator.DecimalToCommaSeparated(item.ProductSupplementaryDuty  ) </td>
+            <td class="text-right" style="text-align:right!important">@StringGenerator.DecimalToCommaSeparated(item.ProductVat                ) </td>
+            <td style="text-align:center !important">@item.Remarks                     </td>
+        </tr>
+
+            }
+        <tr class="MreturnHeader" style="background-color: #FBD4B4!important">
+            <th></th>
+            <th></th>
+            <th></th>
+            <th class="text-right" style="text-align:right!important">Total</th>
+            <th class="text-right" style="text-align:right!important">@StringGenerator.DecimalToCommaSeparated(Model.Sum(x => x.ProductPrice))</th>
+            <th class="text-right" style="text-align:right!important">@StringGenerator.DecimalToCommaSeparated(Model.Sum(x => x.ProductSupplementaryDuty))</th>
+            <th class="text-right" style="text-align:right!important">@StringGenerator.DecimalToCommaSeparated(Model.Sum(x => x.ProductVat))</th>
+            <th></th>
+        </tr>
+        }
+
+
+</table>

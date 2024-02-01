@@ -1,0 +1,40 @@
+﻿@model vms.entity.models.ViewCustomer
+@{
+	var session = Context.Session.GetComplexData<VmUserSession>(ControllerStaticData.SESSION);
+}
+<grid-freeze-menu>
+	@if (UserAuthorization.Check(FeatureList.THIRD_PARTY_CUSTOMER_CAN_EDIT, session.Rights))
+	{
+		<li>
+			<a class="dropdown-item" asp-action="Manage" asp-route-id="@Model.EncryptedId">
+				<i class="bi bi-pencil-square"></i> Manage
+			</a>
+		</li>
+	}
+	@if (UserAuthorization.Check(FeatureList.THIRD_PARTY_CUSTOMER_CAN_EDIT, session.Rights))
+	{
+		<li>
+			<a class="dropdown-item" asp-action="Edit" asp-route-id="@Model.EncryptedId">
+				<i class="bi bi-pencil-square"></i> Edit
+			</a>
+		</li>
+	}
+
+	@if (UserAuthorization.Check(FeatureList.THIRD_PARTY_CUSTOMER_CAN_DELETE, session.Rights))
+	{
+		<li>
+			<a class="dropdown-item" asp-action="ChangeCustomerStatus" asp-route-id="@Model.EncryptedId" type="button" data-requiredconfirmation="true">
+				@if (Model.IsActive)
+				{
+					<i class="bi bi-exclamation-diamond"></i>
+					<text>Inactive</text>
+				}
+				else
+				{
+					<i class="bi bi-check-circle"></i>
+					<text>Active</text>
+				}
+			</a>
+		</li>
+	}
+</grid-freeze-menu>

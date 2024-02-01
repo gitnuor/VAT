@@ -1,0 +1,83 @@
+﻿@model vms.entity.viewModels.CustomerViewModel.CustomerLocalCreateViewModel
+<div class="font-weight-bold mb-3">
+	Basic Information
+</div>
+<div>
+	<div class="row">
+		<div class="col-6">
+			<div class="form-group">
+				<label class="form-label" asp-for="Name"></label>
+				<div>
+					<input asp-for="Name" class="form-control form-control-sm"/>
+					<span asp-validation-for="Name" class="text-danger"></span>
+				</div>
+			</div>
+		</div>
+		<div class="col-6">
+			<div class="form-group">
+				<label class="form-label" asp-for="Nidno"></label>
+				<span class="text-warning">(Either NID or BIN is required.)</span>
+				<div>
+					<input asp-for="Nidno" class="form-control  form-control-sm"/>
+					<span asp-validation-for="Nidno" class="text-danger"></span>
+				</div>
+			</div>
+
+		</div>
+
+		<div class="col-6">
+			<div class="form-group non-foreign mt-3">
+				<label class="form-label" asp-for="Bin"></label>
+				<span class="text-warning">(Either NID or BIN is required.)</span>
+				<div>
+					<input asp-for="Bin" class="form-control form-control-sm"/>
+					<span asp-validation-for="Bin" class="text-danger"></span>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="col-6">
+			<div class="form-group non-foreign mt-3">
+				<label class="form-label" asp-for="Tinno"></label>
+				<div>
+					<input asp-for="Tinno" class="form-control form-control-sm"/>
+					<span asp-validation-for="Tinno" class="text-danger"></span>
+				</div>
+			</div>
+
+		</div>
+
+
+		<div class="col-6">
+			<div class="form-group mt-3">
+				<label class="form-label" asp-for="Address"></label>
+				<div>
+					<input asp-for="Address" class="form-control form-control-sm"/>
+					<span asp-validation-for="Address" class="text-danger"></span>
+				</div>
+			</div>
+
+		</div>
+
+
+		<div class="col-6">
+			<div class="form-group mt-3">
+				<label class="form-label" asp-for="PhoneNo"></label>
+				<div>
+					<input asp-for="PhoneNo" class="form-control form-control-sm"/>
+					<span asp-validation-for="PhoneNo" class="text-danger"></span>
+				</div>
+			</div>
+		</div>
+		<div class="col-6">
+			<div class="form-group mt-3">
+				<div class="custom-control custom-checkbox custom-control-inline">
+					<input asp-for="IsRequireBranch" class="custom-control-input"/>
+					<label asp-for="IsRequireBranch" class="custom-control-label"></label>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>

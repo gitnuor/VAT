@@ -1,0 +1,148 @@
+﻿@model vms.entity.viewModels.VmSelfProduction
+@{
+	ViewData["Title"] = "Production Receive";
+
+
+}
+
+@section contentheader
+{
+	<div class="p-3 page-header">
+		@ViewData["Title"]
+	</div>
+}
+
+<form method="post" id="SelfproductionFrm" class="row  form-1">
+	<div class="font-weight-bold mt-3 col-12">Main Information</div>
+	<div class="col-md-6 complex-form-col">
+		<label asp-for="OrgBranchId" ></label>
+		<select asp-for="OrgBranchId"  asp-items="Model.BranchSelectList.CustomSelectListToSelectList()">
+			<option value="@null">Select Branch</option>
+		</select>
+		<span asp-validation-for="OrgBranchId" ></span>
+	</div>
+	<div class="col-md-3 complex-form-col">
+		<label asp-for="BatchNo" ></label>
+		<input type="text" asp-for="BatchNo"  placeholder="#">
+		<span asp-validation-for="BatchNo" ></span>
+	</div>
+	<div class="col-md-3 complex-form-col">
+		<label asp-for="ReceiveTime" ></label>
+		<input type="date" asp-for="ReceiveTime" min='2000-01-01' max='@((DateTime.Now).ToString("yyyy-MM-dd"))' >
+		<span asp-validation-for="ReceiveTime" ></span>
+	</div>
+	<div class="col-md-6 complex-form-col">
+		<label asp-for="ProductId" ></label>
+		<select asp-for="ProductId" >
+			<option value="@null">Select Product</option>
+			@if (Model.ProductSelectList.Any())
+			{
+				foreach (var product in Model.ProductSelectList)
+				{
+					<option value="@product.ProductId"
+					        data-product-measurement-unit-id="@product.MeasurementUnitId"
+					        data-product-measurement-unit-name="@product.MeasurementUnitName">
+						@product.ProductDescription
+					</option>
+				}
+			}
+		</select>
+		<span asp-validation-for="ProductId" ></span>
+	</div>
+	<div class="col-md-3 complex-form-col d-none">
+		<label asp-for="MeasurementName"></label>
+		<input type="text" asp-for="MeasurementName" readonly >
+		@* <input type="text" hidden asp-for="MeasurementUnitId" readonly > *@
+		<span asp-validation-for="MeasurementName" ></span>
+	</div>
+	<div class="col-md-3 complex-form-col">
+		<label asp-for="MeasurementUnitId" ></label>
+		<select asp-for="MeasurementUnitId" >
+			<option value="@null">Select Unit</option>
+		</select>
+		<span asp-validation-for="MeasurementUnitId" ></span>
+	</div>
+
+	<div class="col-md-3 complex-form-col">
+		<label asp-for="ReceiveQuantity" ></label>
+		<input type="number" asp-for="ReceiveQuantity"  placeholder="0">
+		<span asp-validation-for="ReceiveQuantity" ></span>
+	</div>
+</form>
+<div class="row form-3">
+	<div class="col-md-12 mt-3">
+		<div class="font-weight-bold mt-3">BOM</div>
+		<table class="table table-bordered" id="gridTable">
+			<thead>
+			<tr>
+				<th>Raw Material</th>
+				<th>Required Qty./Unit</th>
+				<th>Stock</th>
+				<th>Total Required Qty.</th>
+				<th>M. Unit</th>
+			</tr>
+			</thead>
+			<tbody id="BomInfo"></tbody>
+		</table>
+	</div>
+</div>
+
+<form id="documentFrm" class="row form-5">
+	<div class="col-md-12">
+		<div class="font-weight-bold mt-3">Document Info</div>
+		<table class="table table-bordered" id="contentTable">
+			<thead>
+			<tr>
+
+				<th>Type</th>
+				<th>File</th>
+				<th>Document Remarks</th>
+				<th class="single-button-action-column"></th>
+			</tr>
+			<tr>
+
+				<td class="form-group form-md-line-input has-info">
+						<select asp-for="DocumentTypeId" asp-items="Model.DocumentTypeSelectList.CustomSelectListToSelectList()"  id="drpFileType">
+						<option value="@null">Select Document Type</option>
+					</select>
+					<small id="msgFileType" class="form-text text-danger"></small>
+					<span asp-validation-for="DocumentTypeId" ></span>
+				</td>
+				<td class="form-group form-md-line-input has-info">
+					<input type="file" asp-for="UploadedFile" id="fileDocument" multiple="multiple" class="form-control form-control-sm FileUpload" accept=".jpg,.jpeg,.png,.tif,.tiff,.gif,.bmp,.pdf,.doc,.docx,.xlsx,.xlx,.ppt,.pptx"/>
+
+					<small id="msgFileDocument" class="form-text text-danger"></small>
+					<span asp-validation-for="UploadedFile" ></span>
+				</td>
+				<td>
+					<input type="text" asp-for="DocumentRemarks" id="DocumentRemarks" />
+					<span asp-validation-for="DocumentRemarks" ></span>
+				</td>
+				<td class="single-button-action-column">
+					<a id="btnAddRelatedFile" class="btn btn-sm btn-success" aria-label="Left Align">
+						<i class="bi bi-plus-lg"></i>
+					</a>
+				</td>
+			</tr>
+			</thead>
+			<tbody id="tbdAttachedFiles"></tbody>
+			<tfoot>
+
+			</tfoot>
+		</table>
+	</div>
+</form>
+<div class="row">
+	<div class="col-md-12">
+		<div class="float-end">
+			<button type="button" class="btn btn-success btn-sm" id="save"><i class="bi bi-check-lg"></i> Submit</button>
+			<button type="button" class="btn btn-primary btn-sm d-none" id="draft"><i class="bi bi-card-list"></i> Draft</button>
+			<button type="button" value="Reset" onclick="location.reload();" class="btn btn-warning btn-sm"><i class="bi bi-arrow-repeat"></i> Reset</button>
+			<a asp-action="Index" class="btn btn-secondary btn-sm"><i class="bi bi-slash-circle"></i> Cancel</a>
+		</div>
+	</div>
+</div>
+
+@section Scripts{
+	<script src="~/CustomJs/SelfProduction.js?vguid=@ViewStaticData.StaticFileVersionGuid"></script>
+}

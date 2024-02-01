@@ -1,0 +1,148 @@
+﻿@{
+    var session = Context.Session.GetComplexData<VmUserSession>(ControllerStaticData.SESSION);
+    Layout = "_LayoutReport";
+}
+@model vms.entity.viewModels.ReportsViewModel.VmPurchaseReport
+
+
+@section contentheader
+    {
+    <div class="p-3 page-header">
+        <h5>Purchase Report By GR NO.</h5>
+        <div class="d-flex justify-content-start">
+        </div>
+    </div>
+    <div class="col-12 d-flex">
+        <ul class="nav nav-pills mt-3 mr-auto align-bottom">
+        </ul>
+    </div>
+}
+@{
+    ViewData["Title"] = "Purchase Report By GR No.";
+}
+
+<form method="post">
+
+    <input type="hidden" class="form-control" id="InvoiceNo" name="InvoiceNo" />
+
+    <div class="portlet-body form">
+
+        <div class="row mt-2">
+
+            <div class="col-md-2">
+                <div class="form-group">
+                    <input type="hidden" name="IsReportVisible" id="IsReportVisible" value="true" />
+                    <label for="VendorInfo">Invoice No</label>
+                    <input type="text" class="form-control" id="Invoice">
+
+                </div>
+            </div>
+            <div class="col-md-2">
+                @if (UserAuthorization.Check(FeatureList.REPORTS_PURCHASE_REPORT_BY_GR_NO_CAN_VIEW, session.Rights))
+                {
+
+
+                    <div class="form-group " style="margin-top: -2px;">
+                        <input class="btn  btn-success" style="margin-top:32px;" type="submit" value="View Report" />
+                    </div>
+                }
+            </div>
+
+        </div>
+
+
+    </div>
+</form>
+@if (Model.InvoiceNo != "" || Model.InvoiceNo != null)
+{
+    <iframe src="@Model.ReportUrl" style="width: 100%; min-height: 1000px;border:0px;"></iframe>
+}
+
+@section Scripts{
+
+
+    <script src="~/js/typeahead.bundle.js"></script>
+    <script src="~/js/jquery-ui.js"></script>
+    <script>
+
+
+        $("#FromDate").datepicker();
+        $("#FromDate").datepicker('option', 'dateFormat', 'dd M, yy');
+
+        $("#ToDate").datepicker();
+        $("#ToDate").datepicker('option', 'dateFormat', 'dd M, yy');
+
+        var Report = {
+            init: function () { },
+            count: 1,
+            unitAmount: 0,
+            totalPrice: 0,
+            totalVat: 0,
+            purchaseOrders: [],
+            PurchaseOrderDetailList: [],
+            item: [],
+            product: {
+                init: function () { },
+                InvoiceAutoComplete: function () {
+                    var materialforrequsition = {
+                        Initialize: function () {
+                            materialforrequsition.Typehead();
+                        },
+
+                        Typehead: function () {
+                            $('#Invoice').typeahead('destroy');
+
+                            $('#Invoice').typeahead({
+                                hint: true,
+                                highlight: true,
+                                minLength: 2,
+                            },
+                                {
+                                    items: 8,
+                                    name: 'Product',
+
+                                    displayKey: function (s) {
+
+                                        return s.invoiceNo;
+                                    },
+                                    property: "Invoice",
+                                    source: function (strmaterial, process) {
+                                        var url = '@Url.Content("~/Purchase/InvoiceKeyWordSearch")';
+                                        return $.getJSON(url, { filterText: $("#Invoice").val() }, function (Data) {
+
+                                            return process(Data);
+                                        });
+                                    },
+                                    updater: function (item) {
+                                        return item.invoiceNo;
+                                    }
+                                }).on('typeahead:selected', function (obj, datum) {
+                                    $("#Invoice").text(datum.invoiceNo);
+                                    document.getElementById("InvoiceNo").value = datum.invoiceNo;
+
+                                 });
+                            $("#Invoice").focus();
+
+                        }
+                    }
+                    materialforrequsition.Initialize();
+                },
+
+
+            }
+        }
+        $(document).ready(function () {
+
+            Report.product.InvoiceAutoComplete();
+
+        });
+
+    </script>
+
+}
+
+
+
+
+
+

@@ -1,0 +1,83 @@
+﻿@model vms.entity.viewModels.vmCustomer
+<div class="accordion mt-3" id="accordionForm">
+	<div class="accordion-item">
+		<div class="accordion-header" id="headingdeliveryAddressInformation">
+			<button
+				class="accordion-button collapsed vms-accordion-button"
+				type="button"
+				data-bs-toggle="collapse"
+				data-bs-target="#deliveryAddressInformation"
+				aria-expanded="false"
+				aria-controls="deliveryAddressInformation"
+			>
+				Delivery Address
+			</button>
+		</div>
+		<div
+			id="deliveryAddressInformation"
+			class="accordion-collapse collapse"
+			aria-labelledby="headingdeliveryAddressInformation"
+			data-bs-parent="#accordionForm"
+		>
+			<div class="accordion-body">
+				<div class="row">
+					<div class="col-6">
+						<div class="form-group mt-3">
+							<label  asp-for="DeliveryAddress"></label>
+							<div>
+								<input asp-for="DeliveryAddress"  />
+								<span asp-validation-for="DeliveryAddress" ></span>
+							</div>
+						</div>
+
+					</div>
+
+					<div class="col-6">
+						<div class="form-group mt-3">
+							<label  asp-for="DeliveryContactPerson"></label>
+							<div>
+								<input asp-for="DeliveryContactPerson"  />
+								<span asp-validation-for="DeliveryContactPerson" ></span>
+							</div>
+						</div>
+
+					</div>
+
+					<div class="col-6">
+						<div class="form-group mt-3">
+							<label  asp-for="DeliveryContactPersonDesignation"></label>
+							<div>
+								<input asp-for="DeliveryContactPersonDesignation"  />
+								<span asp-validation-for="DeliveryContactPersonDesignation" ></span>
+							</div>
+						</div>
+
+					</div>
+
+					<div class="col-6">
+						<div class="form-group mt-3">
+							<label  asp-for="DeliveryContactPersonEmailAddress"></label>
+							<div>
+								<input asp-for="DeliveryContactPersonEmailAddress"  />
+								<span asp-validation-for="DeliveryContactPersonEmailAddress" ></span>
+							</div>
+						</div>
+
+					</div>
+
+					<div class="col-6">
+						<div class="form-group mt-3">
+							<label  asp-for="DeliveryContactPersonMobile"></label>
+							<div>
+								<input asp-for="DeliveryContactPersonMobile"  />
+								<span asp-validation-for="DeliveryContactPersonMobile" ></span>
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

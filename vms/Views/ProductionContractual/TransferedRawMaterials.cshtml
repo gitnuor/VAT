@@ -1,0 +1,100 @@
+﻿@model IEnumerable<vms.entity.models.ContractualProductionTransferRawMaterial>
+@{
+    ViewData["Title"] = "TransferedRawMaterials";
+    
+}
+@section contentheader
+    {
+    <div class="p-3 page-header">
+       Transferred Raw Materials
+        <div class="d-flex justify-content-start">
+
+
+        </div>
+    </div>
+    <div class="col-12 d-flex">
+        <ul class="nav nav-pills mt-3 mr-auto align-bottom">
+        </ul>
+
+    </div>
+}
+
+
+<div class="row">
+    <div class="col-12">
+        <table class="table table-bordered table-responsive">
+            <thead>
+                <tr>
+
+
+
+                    <th class="text-center">
+                        Issue Date
+                    </th>
+                    <th class="text-center">
+                        Chalan No
+                    </th>
+                    <th class="text-center">
+                        Action
+                    </th>
+                </tr>
+            </thead>
+
+            @if (Model.Any())
+            {
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+
+
+
+                            <td class="text-center">
+                                @Html.DisplayFor(modelItem => item.ChallanIssueDate)
+                            </td>
+                            <td class="text-center">
+                                @Html.DisplayFor(modelItem => item.ChallanNo)
+                            </td>
+                            <td class="text-center">
+                                @{
+                                    string URL = ViewData["Report"].ToString() + item.ContractualProductionTransferRawMaterialId;
+
+
+
+                                }
+
+
+                                <div class="btn-group">
+                                    <a href="@URL" target="_blank" class="btn btn-info btn-sm pull-right "><i class="bi bi-printer"></i> Print Mushak 6.4 </a>
+
+                                    @Html.ActionLink("Mushak 6.4", "Mushok6P4raw", "Reports", new { id = item.ContractualProductionTransferRawMaterialId }, new { @class = "btn btn-danger btn-sm pull-right " })
+
+
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            }
+
+            else
+            {
+                <tr>
+                    <td colspan="10">
+                        <p class="text-center">No Records Found</p>
+                    </td>
+                </tr>
+            }
+
+        </table>
+        </div>
+    </div>
+
+        <div class="form-actions">
+            <div class="row mb-3">
+                <div class="col-md-12 pt-4 pl-5">
+                    <a href="~/ProductionContractual/Index" class="btn btn-info"><i class="bi bi-chevron-double-left"></i> Back</a>
+                </div>
+            </div>
+        </div>
+

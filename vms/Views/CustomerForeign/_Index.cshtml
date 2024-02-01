@@ -1,0 +1,18 @@
+﻿@model IEnumerable<vms.entity.models.ViewCustomerForeign>
+@(Html.Grid(Model).Build(columns =>
+{
+	columns.Add(model => model.CustomerName).Titled("Name");
+	columns.Add(model => model.AccountCode).Titled("Acc. Code");
+	columns.Add(model => model.CustomerAddress).Titled("Address");
+	columns.Add(model => model.TinNo).Titled("TIN");
+	columns.Add(model => model.EmailAddress).Titled("Email");
+	columns.Add(model => model.PhoneNo).Titled("Phone No");
+	columns.Add(model => model.IsActiveStatus).Titled("Status");
+	columns.Add().Encoded(false).RenderedAs(data => Html.PartialAsync("_ActionMenu", data).Result)
+		.Titled(Html.Raw("<i class='bi bi-activity'></i>")).AppendCss("action-col-freez");
+})
+	.AppendCss("large-index-grid")
+	.Empty("No data found")
+	.Filterable(GridFilterType.Double)
+	.Sortable()
+	.Pageable())

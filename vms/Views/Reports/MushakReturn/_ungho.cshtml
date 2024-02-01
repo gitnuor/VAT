@@ -1,0 +1,95 @@
+﻿@model IEnumerable<vms.entity.StoredProcedureModel.MushakReturn.MushakReturnSubFormUma>
+<div class="parthead" id="note29SubForm">
+    <b>সাবফর্ম- ঙ ( নোট ২৯-"প্রদত্ত সরবরাহ হইতে উৎসে কর্তনের জন্য" এর জন্য প্রযোজ্য)</b>
+</div>
+<table class="table table-bordered wrap">
+
+    @*<thead>*@
+
+        <tr class="MreturnHeader" style="background-color: #FBD4B4!important">
+
+            <th>ক্রমিক নং</th>
+            <th>
+                ক্রেতার বিআইএন নম্বর
+            </th>
+            <th>
+                ক্রেতার নাম
+            </th>
+            <th>ক্রেতার ঠিকানা</th>
+            <th>
+                মূল্য
+            </th>
+
+            <th>
+                কর্তিত মূল্য সংযোজন কর
+            </th>
+            <th>
+                ইনভয়েস নং (চালানপত্র/বিল নম্বর ইত্যাদি)
+            </th>
+            <th>ইনভয়েস বিলের তারিখ</th>
+            <th>
+                উৎসে মূসক কর্তন সনদ নম্বর
+            </th>
+            <th>
+                উৎসে মূসক কর্তন সনদ নম্বর এর তারিখ
+            </th>
+            <th>
+                একাউন্ট কোডে কর পরিশোধিত
+            </th>
+            <th>
+                উৎসে কর্তনকৃত মূসক জমার বুকট্রন্সফার নম্বর
+            </th>
+            <th>
+                কর্তনকৃত উৎসে মূসক জমাদানের তারিখ
+            </th>
+            <th>
+                নোট
+            </th>
+        </tr>
+    @*</thead>
+    <tbody>*@
+        @if (Model.Any())
+        {
+
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.SlNo</td>
+                    <td>@item.CustomerBinNo</td>
+                    <td>@item.CustomerName</td>
+                    <td>@item.CustomerAddress</td>
+                    <td class="text-right" style="text-align:right!important">@StringGenerator.DecimalToCommaSeparated(item.Price)</td>
+                    <td class="text-right" style="text-align:right!important">@StringGenerator.DecimalToCommaSeparated(item.DeductedVat)</td>
+                    <td>@item.VatChallanNo</td>
+                    <td>@item.TaxInvoicePrintedTime</td>
+                    <td>@item.VDSCertificateNo </td>
+                    <td>@StringGenerator.DateTimeToString(item.VDSCertificateIssueTime) </td>
+                    <td>@item.EconomicCode</td>
+                    <td>@item.VDSPaymentBookTransferNo</td>
+                    <td>@StringGenerator.DateTimeToString(item.VDSPaymentDate, false)</td>
+                    <td>@item.Note</td>
+                </tr>
+
+            }
+        }
+    @*</tbody>
+    <tfoot>*@
+        <tr class="MreturnHeader" style="background-color: #FBD4B4!important">
+
+            <th></th>
+            <th></th>
+            <th></th>
+            <th class="text-right" style="text-align:right!important">মোট</th>
+            <th class="text-right" style="text-align:right!important">@StringGenerator.DecimalToCommaSeparated(Model.Sum(c => c.Price))</th>
+            <th class="text-right" style="text-align:right!important">@StringGenerator.DecimalToCommaSeparated(Model.Sum(c => c.DeductedVat))</th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+    @*</tfoot>*@
+</table>

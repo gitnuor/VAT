@@ -1,0 +1,272 @@
+﻿
+@{
+    ViewData["Title"] = "Vouchers";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h2 class="custom-page-title">Vouchers</h2>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-11">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-3">
+                        <div class="form-group form-md-line-input has-success">
+                            <label for="form_control_1">Voucher No</label>
+                            <input type="text" class="form-control" id="form_control_1" placeholder="Vocuher No">
+                            <div class="form-control-focus"> </div>
+                        </div>
+
+
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group form-md-line-input has-success">
+                            <label for="form_control_1">Branch</label>
+                            <select class="form-control" id="form_control_1">
+                                <option value="All" selected>All</option>
+                                <option value="1">Option 1</option>
+                                <option value="2">Option 2</option>
+                                <option value="3">Option 3</option>
+                                <option value="4">Option 4</option>
+                            </select>
+                            <div class="form-control-focus"> </div>
+                        </div>
+
+
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group form-md-line-input has-success">
+                            <label for="form_control_1">Party</label>
+                            <select class="form-control" id="form_control_1">
+                                <option value="All" selected>All</option>
+                                <option value="1">Option 1</option>
+                                <option value="2">Option 2</option>
+                                <option value="3">Option 3</option>
+                                <option value="4">Option 4</option>
+                            </select>
+                            <div class="form-control-focus"> </div>
+                        </div>
+
+
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group form-md-line-input has-success">
+                            <label for="form_control_1">Voucher Type</label>
+                            <select class="form-control" id="form_control_1">
+                                <option value="All" selected>All</option>
+                                <option value="1">Option 1</option>
+                                <option value="2">Option 2</option>
+                                <option value="3">Option 3</option>
+                                <option value="4">Option 4</option>
+                            </select>
+                            <div class="form-control-focus"> </div>
+                        </div>
+
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <div class="col-md-3 ">
+                                <div class="form-group form-md-line-input has-success">
+                                    <label for="form_control_1">Status</label>
+                                    <select class="form-control" id="form_control_1">
+                                        <option value="All" selected>All</option>
+                                        <option value="1">Option 1</option>
+                                        <option value="2">Option 2</option>
+                                        <option value="3">Option 3</option>
+                                        <option value="4">Option 4</option>
+                                    </select>
+                                    <div class="form-control-focus"> </div>
+                                </div>
+
+
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group form-md-line-input has-success">
+                                    <label for="form_control_1">From</label>
+                                    <input type="date" class="form-control" id="form_control_1">
+                                    <div class="form-control-focus"> </div>
+                                </div>
+
+
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group form-md-line-input has-success">
+                                    <label for="form_control_1">To</label>
+                                    <input type="date" class="form-control" id="form_control_1">
+                                    <div class="form-control-focus"> </div>
+                                </div>
+
+
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group form-md-line-input has-success">
+                                    <label for="form_control_1">Pay. Mthd</label>
+                                    <select class="form-control" id="form_control_1">
+                                        <option value=""></option>
+                                        <option value="1">Option 1</option>
+                                        <option value="2">Option 2</option>
+                                        <option value="3">Option 3</option>
+                                        <option value="4">Option 4</option>
+                                    </select>
+                                    <div class="form-control-focus"> </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <button type="submit" class="btn blue"><i class="bi bi-search"></i> Search</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr>
+<div class="row">
+    <div class="col-md-12">
+        <div class="container containerwidth">
+
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>
+                            <div class="md-checkbox">
+                                <input type="checkbox" id="checkbox1" class="md-check">
+                                <label for="checkbox1">
+                                    <span></span>
+                                    <span class="check"></span>
+                                    <span class="box"></span>
+                                </label>
+                            </div>
+                        </th>
+                        <th>Number</th>
+                        <th>Posted</th>
+                        <th>Order Date</th>
+                        <th>Party</th>
+                        <th>Amount</th>
+                        <th>Paid Amount</th>
+                        <th>Due Amount</th>
+                        <th>Branch</th>
+                        <th>Created By</th>
+                        <th>Approved By</th>
+                        <th>Delivery Status</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>
+                            <div class="md-checkbox">
+                                <input type="checkbox" id="checkbox2" class="md-check">
+                                <label for="checkbox2">
+                                    <span></span>
+                                    <span class="check"></span>
+                                    <span class="box"></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>SOO-1001</td>
+                        <td>
+                            <div class="md-checkbox">
+                                <input type="checkbox" id="checkbox3" class="md-check" checked>
+                                <label for="checkbox3">
+                                    <span></span>
+                                    <span class="check"></span>
+                                    <span class="box"></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>2018-12-27</td>
+                        <td>Ali Enterprise</td>
+                        <td>2700</td>
+                        <td>2,270</td>
+                        <td>2,270</td>
+                        <td>Head Office</td>
+                        <td>30</td>
+                        <td>30</td>
+                        <td>Complete</td>
+                        <td>
+                            <div class="md-checkbox">
+                                <input type="checkbox" id="checkbox4" class="md-check">
+                                <label for="checkbox4">
+                                    <span></span>
+                                    <span class="check"></span>
+                                    <span class="box"></span>
+                                </label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>
+                            <div class="md-checkbox">
+                                <input type="checkbox" id="checkbox6" class="md-check">
+                                <label for="checkbox6">
+                                    <span></span>
+                                    <span class="check"></span>
+                                    <span class="box"></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>SOO-1001</td>
+                        <td>
+                            <div class="md-checkbox">
+                                <input type="checkbox" id="checkbox3" class="md-check" checked>
+                                <label for="checkbox3">
+                                    <span></span>
+                                    <span class="check"></span>
+                                    <span class="box"></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>2018-12-27</td>
+                        <td>Ali Enterprise</td>
+                        <td>2700</td>
+                        <td>2,270</td>
+                        <td>2,270</td>
+                        <td>Head Office</td>
+                        <td>30</td>
+                        <td>30</td>
+                        <td>Complete</td>
+                        <td>
+                            <div class="md-checkbox">
+                                <input type="checkbox" id="checkbox5" class="md-check">
+                                <label for="checkbox5">
+                                    <span></span>
+                                    <span class="check"></span>
+                                    <span class="box"></span>
+                                </label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td><button type="submit" class="btn blue">Accept</button></td>
+                        <td><button type="submit" class="btn blue">Reject</button></td>
+                        <td><button type="submit" class="btn blue">Pending</button></td>
+                        <td><button type="submit" class="btn blue">Approve</button></td>
+                        <td><button type="submit" class="btn blue">Close</button></td>
+
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

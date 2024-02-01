@@ -1,0 +1,25 @@
+﻿<div class="col-12">
+	<ul class="nav nav-pills mr-auto align-bottom purchaseNavBar">
+		<li class="nav-item">
+			<a class="nav-link" asp-controller="Purchase" asp-action="Index">All</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" asp-controller="PurchaseLocal" asp-action="Index">Local</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" asp-controller="PurchaseForeign" asp-action="Index">Foreign</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" asp-controller="Purchase" asp-action="VdsIndex">VDS List</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" asp-controller="Purchase" asp-action="PurchaseDue">Due</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" asp-controller="PurchaseLocal" asp-action="UploadSimplifiedLocalPurchaseList">Upload</a>
+		</li>
+		@*<li class="nav-item">
+			<a class="nav-link" asp-controller="Purchase" asp-action="DebitNote">Purchase Return (Debit Note)</a>
+		</li>*@
+	</ul>
+</div>

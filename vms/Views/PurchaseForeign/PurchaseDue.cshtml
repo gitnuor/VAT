@@ -1,0 +1,22 @@
+﻿@model IEnumerable<vms.entity.models.Purchase>
+@{
+    var session = Context.Session.GetComplexData<VmUserSession>(ControllerStaticData.SESSION);
+}
+@{
+    ViewData["Title"] = "Purchase Due";
+
+}
+
+@section contentheader
+    {
+    <div class="p-3 pb-2 page-header">
+        @ViewData["Title"]
+    </div>
+	<partial name="_PurchaseSubLink"/>
+}
+
+<div class="gray-slim-scroll-container">
+	<div class="table-scroll-container">
+		<partial name="_PurchaseDueIndex" model="Model"/>
+	</div>
+</div>

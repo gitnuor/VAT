@@ -1,0 +1,98 @@
+﻿@using System.Reflection
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using Recaptcha.Web.Mvc
+@model VmUserLogin
+@{
+	ViewData["Title"] = "Login";
+	Layout = null;
+}
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8"/>
+	<title>Welcome To iVAT</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta content="width=device-width, initial-scale=1" name="viewport"/>
+	<meta content="Top VAT Management System in Bangladesh" name="description"/>
+	<meta content="" name="author"/>
+	<link rel="icon" type="image/svg+xml" href="~/images/logo.svg">
+	<link href="~/css/vmslib.min.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div class="container-fluid">
+	<div class="row ">
+		<div class="col-6 bg-color-gray h-100vh ">
+			<div class="p-2 logo">
+				<img src="~/images/logo.svg" alt="iVAT"/>
+			</div>
+			<div class="col d-flex justify-content-center">
+				<img src="~/images/login_image.svg" alt="" class="img-fluid login-image">
+			</div>
+			<div class="text-center">
+				We’re authorized by <a target="_blank" href="https://nbr.gov.bd/">NBR</a>
+			</div>
+			<div class="text-center">
+				Version: @Assembly.GetEntryAssembly()?.GetName().Version
+			</div>
+			<div class="text-center footer-login">
+				<a target="_blank" href="#">Terms of Use</a>
+				<a target="_blank" href="#">Privacy</a>
+				<a target="_blank" href="#">Help Center</a>
+			</div>
+		</div>
+		<div class="col-6">
+			<div class="row">
+				<div class="col-12">
+					<div class="container">
+						<div class="row login-container justify-content-center align-items-center">
+							<div class="col-8">
+								<div class="login-title">Login to iVAT </div>
+								@if (TempData["message"] != null)
+								{
+									<div class="alert alert-danger alert-dismissible fade show" role="alert">
+										<strong>Sorry!</strong> @Html.Raw(TempData["message"])
+									</div>
+								}
+								<form id="pform" method="post">
+									@Html.AntiForgeryToken()
+									<div class="mb-1">
+										<label asp-for="UserName"></label>
+										<input asp-for="UserName" class="form-control" tabindex="1">
+										<span asp-validation-for="UserName" class="text-danger"></span>
+									</div>
+									<div class="mb-1">
+										<label asp-for="Password"></label>
+										<input asp-for="Password" class="form-control" tabindex="2"/>
+										<span asp-validation-for="Password" class="text-danger"></span>
+									</div>
+									@*<div class="mb-1">
+										<!-- Render recaptcha widget with default properties. -->
+										@Html.RecaptchaWidget(renderApiScript: false)
+									</div>*@
+
+									<div class="mt-3">
+										<button class="btn btn-primary w-100" type="submit" tabindex="3"><i class="bi bi-box-arrow-in-right"></i> Login</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="login-footer" id="footer">
+				<div class="page-footer-inner">
+					Powered by &nbsp;
+					<a target="_blank" href="https://bracits.com">
+						<img src="~/images/logo_bracits.svg" class="footer-bits-logo" alt="BRAC IT Services Ltd."/>
+					</a> &nbsp;
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+@* @Html.RecaptchaApiScript() *@
+<script src="~/js/vmslib.js?vguid=@ViewStaticData.StaticFileVersionGuid"></script>
+<script src="~/js/vms-validation.js?vguid=@ViewStaticData.StaticFileVersionGuid"></script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+﻿@model IEnumerable<vms.entity.models.ViewCustomer>
+@(Html.Grid(Model).Build(columns =>
+{
+    columns.Add(model => model.CustomerName).Titled("Name");
+    columns.Add(model => model.AccountCode).Titled("Acc. Code");
+    columns.Add(model => model.CustomerAddress).Titled("Address");
+    columns.Add(model => model.BinNo).Titled("BIN");
+    columns.Add(model => model.NidNo).Titled("NID");
+    columns.Add(model => model.TinNo).Titled("TIN");
+    columns.Add(model => model.EmailAddress).Titled("Email");
+    columns.Add(model => model.PhoneNo).Titled("Phone No");
+})
+	.AppendCss("large-index-grid")
+	.Empty("No data found")
+	.Filterable(GridFilterType.Double)
+	.Sortable()
+	.Pageable())

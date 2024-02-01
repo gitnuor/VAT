@@ -1,0 +1,139 @@
+﻿@model vms.entity.viewModels.VmDamage
+@{
+    ViewData["Title"] = "Create";
+    
+    
+}
+@section contentheader
+    {
+    <div class="p-3 page-header">
+        Create Damage
+    </div>
+}
+
+
+<div class="row">
+    <div class="col-md-4 offset-4">
+
+
+        <form asp-action="Create" class="form-horizontal" id="frmusercreate">
+            <input asp-for="ProductId" id="productId" type="text" />
+
+            <div class="form-body">
+
+                <div class="form-group required">
+                    <label class="form-label">Product</label>
+                    <div>
+                        <input type="text" class="form-control form-control-sm" id="Product" name="ProductId" required>
+                        <span asp-validation-for="ProductId" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group required">
+                    <label class="form-label">Damage Qty</label>
+                    <div>
+                        <input asp-for="DamageQty" class="form-control form-control-sm" id="DamageQtyID" name="DamageQty" required />
+                        <span asp-validation-for="DamageQty" class="text-danger"></span>
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Available Qty : </label>
+                    <div>
+                        <input type="text" class="form-control form-control-sm" id="maxQut" name="maxQut" disabled />
+                    </div>
+                </div>
+
+                <div class="form-group required">
+                    <label class="form-label">Damage Type</label>
+                    <div>
+                        @Html.DropDownListFor(x => Model.DamageTypeId, new SelectList(Model.DamageTypes, "Id", "Name"), "Select", htmlAttributes: new { @class = "form-control form-control-sm" })
+                        <span asp-validation-for="DamageTypeId" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group required">
+                    <label class="form-label">Description</label>
+                    <div>
+                        <input id="Description" name="Description" class="form-control form-control-sm" type="text" required />
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="text-right mt-3 float-end">
+                <button type="submit" data-requiredconfirmation="true" class="btn  btn-primary btn-sm"><i class="bi bi-check-lg"></i> Submit</button>
+                <button type="button" value="Reset" class="btn  btn-warning btn-sm" onclick="location.reload();"><i class="bi bi-arrow-repeat"></i> Reset</button>
+                <a asp-controller="Damage" asp-action="Index" class="btn btn-secondary btn-sm"><i class="bi bi-slash-circle"></i> Cancel</a>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/js/typeahead.bundle.js?vguid=@ViewStaticData.StaticFileVersionGuid"></script>
+
+    <script>
+        var report = {
+            product : {
+                init: function () { },
+                productAutoComplete: function () {
+                    var materialforrequsition = {
+                        Initialize: function () {
+                            materialforrequsition.Typehead();
+                        },
+
+                        Typehead: function () {
+                            $('#Product').typeahead('destroy');
+                            $('#Product').typeahead({
+                                    hint: true,
+                                    highlight: true,
+                                    minLength: 2,
+                                },
+                                {
+                                    items: 8,
+                                    name: 'Product',
+                                    displayKey: function (s) {
+                                        return s.name;
+                                    },
+                                    property: "ProductId",
+                                    source: function (strmaterial, process) {
+                                        var url = '@Url.Content("~/Products/SaleProductAutoComplete")';
+                                        return $.getJSON(url, { filterText: $("#Product").val() }, function (Data) {
+
+                                            return process(Data);
+                                        });
+                                    },
+                                    updater: function (item) {
+                                        return item.name;
+                                    }
+                                }).on('typeahead:selected', function (obj, datum) {
+
+                                    $("#ProductId").val(datum.id);
+                                    $('#maxQut').val(datum.maxSaleQty);
+
+                            });
+                            $("#Product").focus();
+
+                        }
+                    }
+                    materialforrequsition.Initialize();
+
+                }
+            }
+        }
+
+
+            $("#Product").change(function () {
+
+                report.product.productAutoComplete();
+            });
+        $(document).ready(function () {
+            report.product.productAutoComplete();
+        });
+    </script>
+
+}

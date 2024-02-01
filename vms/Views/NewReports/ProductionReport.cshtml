@@ -1,0 +1,132 @@
+﻿@model vms.entity.viewModels.NewReports.vmProductionReport
+
+
+@{
+    var session = Context.Session.GetComplexData<VmUserSession>(ControllerStaticData.SESSION);
+    ViewData["Title"] = "Production Report";
+    Layout = "_LayoutReport";
+}
+@section contentheader
+    {
+    <div class="p-3 page-header">
+        Production Report
+        <form method="post">
+            <div class="row">
+
+                <div class="col-3">
+                    <label asp-for="FromDate" class="form-label"></label>
+                    <input autocomplete="off" asp-for="FromDate" class="form-control form-control-sm" type="date" />
+                    <span asp-validation-for="FromDate" class="text-danger"></span>
+                </div>
+
+                <div class="col-3">
+                    <label asp-for="ToDate" class="form-label"> </label>
+                    <input autocomplete="off" asp-for="ToDate" class="form-control form-control-sm" type="date" />
+                    <span asp-validation-for="ToDate" class="text-danger"></span>
+                </div>
+
+                <div class="col-2">
+                    <button type="submit" class="btn btn-sm btn-success inline-sm-button"> <i class="bi bi-file-text"></i> View</button>
+                    <button type="button" class="btn btn-sm btn-primary inline-sm-button" id="btnPrint"><i class="bi bi-printer"></i> Print</button>
+                </div>
+            </div>
+        </form>
+    </div>
+}
+
+
+
+@section Scripts{
+
+
+    <script src="~/js/typeahead.bundle.js"></script>
+    <script src="~/js/jquery-ui.js"></script>
+    <script>
+
+        $(document).ready(function () {
+            $("#btnPrint").click(function () {
+                window.vmsPrint.printA4Landscape('printableArea');
+            });
+        });
+    </script>
+
+}
+
+<div id="printableArea">
+    <div id="printableArea">
+        <div class="section-to-print">
+            <div class="report-header">
+                <div class="company-name">@Model.head.CompanyName</div>
+                <div class="report-name">@Model.head.ReportName</div>
+                <div class="report-date-range">From @Model.FromDate.ToString("dd/MM/yyyy") to @Model.ToDate.ToString("dd/MM/yyyy")</div>
+            </div>
+
+
+            <div id="" class="report-margin">
+
+
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th class="text-center">
+                                Product
+                            </th>
+                            <th class="text-center">
+                                Batch No.
+                            </th>
+
+                            <th class="text-center">
+                                Receive Qty.
+                            </th>
+                            <th class="text-center">
+                                Material Cost
+                            </th>
+
+                        </tr>
+                    </thead>
+
+                    @if (Model.productionList.Any())
+                    {
+                        <tbody>
+                            @foreach (var item in Model.productionList)
+                            {
+                                <tr>
+                                    <td class="text-left">
+                                        @Html.DisplayFor(modelItem => item.Product.Name)
+                                    </td>
+                                    <td class="text-center">
+                                        @Html.DisplayFor(modelItem => item.BatchNo)
+                                    </td>
+
+                                    <td class="text-center">
+                                        @Html.DisplayFor(modelItem => item.ReceiveQuantity)
+                                    </td>
+                                    <td class="text-right">
+                                        @Html.DisplayFor(modelItem => item.MaterialCost)
+                                    </td>
+
+
+                                </tr>
+                            }
+                        </tbody>
+                    }
+
+                    else
+                    {
+                        <tr>
+                            <td colspan="10">
+                                <p style="text-align: center">No Records Found</p>
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+                @*<div class="row">
+                    <div class="col-12">
+                        <partial name="_PrintFooter" />
+                    </div>
+                </div>*@
+            </div>
+        </div>
+    </div>
+    </div>

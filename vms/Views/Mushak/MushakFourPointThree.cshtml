@@ -1,0 +1,68 @@
+﻿@model vms.entity.viewModels.VmPriceSetupReportParam
+@{
+    Layout = "_LayoutMushak";
+    ViewData["Title"] = "Mushak- 4.3";
+}
+
+@section contentheader
+    {
+    <div class="p-3 page-header">
+        <h5>Mushak-4.3</h5>
+
+        <form method="post">
+            <div class="row">
+                <div class="col-3">
+                    <label asp-for="PriceDeclarId"> </label>
+                    <select asp-for="PriceDeclarId" asp-items="Model.PriceSetupList">
+                        <option value="@null">Select</option>
+                    </select>
+                    <span asp-validation-for="PriceDeclarId" class="invalid-feedback"></span>
+                </div>
+
+                <div class="col-2">
+                    <label asp-for="Language" ></label>
+                    <select asp-for="Language" asp-items="Html.GetEnumSelectList<EnumLanguage>()">
+                        <option value="@null">Select</option>
+                    </select>
+                    <span asp-validation-for="Language" ></span>
+                </div>
+
+                <div class="col-4">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-sm btn-success inline-sm-button"><i class="bi bi-file-text"></i> View</button>
+                        <button type="button" id="btnPrint" class="btn btn-sm btn-primary inline-sm-button"><i class="bi bi-printer-fill"></i> Print</button>
+                        <button type="submit" class="btn btn-sm btn-warning inline-sm-button" asp-action="MushakFourPointThreeExportToExcel"><i class="bi bi-file-excel-fill"></i> Export Excel</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+}
+
+<div class="report-section w-100">
+    <div id="printableArea" class="report-margin w-100" >
+
+        @if (Model.OrgId != 0)
+        {
+            if (Model.Language == 0)
+            {
+                <partial name="MushakPartial/_MushakFourPointThreeBan" model="Model" />
+            }
+            else if (Model.Language == 1)
+            {
+                <partial name="MushakPartial/_MushakFourPointThreeEng" model="Model" />
+            }
+
+        }
+    </div>
+</div>
+
+
+@section scripts{
+    <script>
+                $("#btnPrint").click(function () {
+                    window.vmsPrint.printA4Landscape('printableArea');
+                });
+
+    </script>
+}

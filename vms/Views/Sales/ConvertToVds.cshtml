@@ -1,0 +1,105 @@
+﻿@model vms.entity.viewModels.VmConvertToVds
+
+@{
+    ViewData["Title"] = "Convert Sale to VAT Deducted at Source";
+	var session = Context.Session.GetComplexData<VmUserSession>(ControllerStaticData.SESSION);
+}
+
+
+@section contentheader
+{
+    <div class="p-3 page-header">
+        @ViewData["Title"]
+    </div>
+}
+
+
+<div class="row">
+    <div class="col-md-4 offset-4">
+        <h3>@ViewData["Message"]</h3>
+
+        <form asp-action="ConvertToVds" class="form-horizontal" method="post">
+            <input type="hidden" asp-for="SalesId" />
+            <input type="hidden" asp-for="EncryptedId" />
+            <div class="form-body">
+
+                <div>
+                    <div class="form-group">
+                        <label class="control-label">@session.InvoiceNameEng</label>
+                        <div>
+                            <input asp-for="InvoiceNo" class="form-control" readonly="readonly" />
+                            <span asp-validation-for="InvoiceNo" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" asp-for="CustomerName"></label>
+                        <div>
+                            <input asp-for="CustomerName" class="form-control" readonly="readonly" />
+                            <span asp-validation-for="CustomerName" class="text-danger"></span>
+                        </div>
+                    </div>
+	                <div class="form-group">
+		                <label class="control-label" asp-for="VatChallanNo"></label>
+		                <div>
+			                <input asp-for="VatChallanNo" class="form-control" readonly="readonly" />
+			                <span asp-validation-for="VatChallanNo" class="text-danger"></span>
+		                </div>
+	                </div>
+	                <div class="form-group">
+                        <label class="control-label" asp-for="VatChallanTime"></label>
+		                <div>
+			                <input asp-for="VatChallanTime" class="form-control" readonly="readonly" />
+                            <span asp-validation-for="VatChallanTime" class="text-danger"></span>
+		                </div>
+	                </div>
+	                <div class="form-group">
+                        <label class="control-label" asp-for="SalesDate"></label>
+		                <div>
+                            <input asp-for="SalesDate" class="form-control" readonly="readonly" />
+                            <span asp-validation-for="SalesDate" class="text-danger"></span>
+		                </div>
+	                </div>
+                    <div class="form-group">
+                        <label class="control-label" asp-for="TotalPriceWithoutVat"></label>
+                        <div>
+                            <input asp-for="TotalPriceWithoutVat" class="form-control" readonly="readonly" />
+                            <span asp-validation-for="TotalPriceWithoutVat" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" asp-for="TotalVat"></label>
+                        <div>
+                            <input asp-for="TotalVat" class="form-control" readonly="readonly" />
+                            <span asp-validation-for="TotalVat" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" asp-for="VdsDate"></label>
+                        <div>
+                            <input asp-for="VdsDate" class="form-control" type="date" />
+                            <span asp-validation-for="VdsDate" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" asp-for="Vdsamount"></label>
+                        <div>
+                            <input asp-for="Vdsamount" class="form-control" />
+                            <span asp-validation-for="Vdsamount" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <div class="row float-end mt-3">
+                    <div class="col-md-offset-3 col-md-12">
+                        <button type="submit" data-requiredconfirmation="true" class="btn  btn-primary btn-sm"><i class="bi bi-check-lg"></i> Submit</button>
+                        <button type="button" value="Reset" class="btn  btn-warning btn-sm" onclick="location.reload();"><i class="bi bi-arrow-repeat"></i> Reset</button>
+                        <a asp-action="Index" class="btn btn-secondary btn-sm"><i class="bi bi-slash-circle"></i> Cancel</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

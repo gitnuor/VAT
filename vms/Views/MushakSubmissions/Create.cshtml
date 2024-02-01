@@ -1,0 +1,110 @@
+﻿@model vms.entity.viewModels.vmMushakSubmission
+@{
+    ViewData["Title"] = "Create";
+    
+    
+}
+@section contentheader
+    {
+    <div class="p-3 page-header">
+        Add Mushak Submission
+    </div>
+}
+
+<div class="row">
+    <div class="col-md-4 offset-4">
+        <form asp-action="Create" class="form-horizontal" id="frmusercreate">
+
+            <div class="form-body">
+                <div class="form-group mt-2">
+                    <label asp-for="MushakForYear" class="form-label"></label>
+                    <div>
+                        @Html.DropDownList("MushakForYear", Model.YearList, "Select Year", new { @class = "form-control form-control-sm" })
+                        <span asp-validation-for="MushakForYear" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group mt-3">
+                    <label asp-for="MushakForMonth" class="form-label"></label>
+                    <div>
+                        @Html.DropDownList("MushakForMonth", Model.MonthList, "Select Month", new { @class = "form-control form-control-sm" })
+                        <span asp-validation-for="MushakForMonth" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group mt-3">
+                    <label asp-for="MushakSubmissionTypeId" class="form-label"></label>
+                    <div>
+                        <select asp-for="MushakSubmissionTypeId" class="form-select form-select-sm" asp-items="ViewBag.MushakSubmissionTypeId">
+                            <option value="@null">Select</option>
+                        </select>
+                        <span asp-validation-for="MushakSubmissionTypeId" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group mt-3 required">
+                    <label asp-for="GenerateDate" class="form-label"></label>
+                    <div>
+                        <input type="date" id="GenerateDate" asp-for="GenerateDate" class="form-control form-control-sm" />
+                        <span asp-validation-for="GenerateDate" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group mt-3">
+                    <label asp-for="SubmissionDate" class="form-label"></label>
+                    <div>
+                        <input type="date" id="SubmissionDate" asp-for="SubmissionDate" class="form-control form-control-sm" />
+                        <span asp-validation-for="SubmissionDate" class="text-danger"></span>
+                    </div>
+                </div>
+
+                @*<div class="form-group">
+                    <label asp-for="VatResponsiblePersonId" class="form-label"></label>
+                    <div>
+                        <select id="VatResponsiblePersonId" name="VatResponsiblePersonId" class="form-select form-select-sm">
+                            <option value="0"></option>
+
+                            <option value="4">Rajon Chandro Saha</option>
+
+                        </select>
+                        <span asp-validation-for="VatResponsiblePersonId" class="text-danger"></span>
+                    </div>
+                </div>*@
+
+                <div class="col-md-offset-3">
+                    <div class="form-group form-md-line-input">
+                        <div>
+                            @Html.CheckBoxFor(c => c.IsWantToGetBackClosingBalance) Is GetBack Closing Balance?
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="float-end mt-3">
+                <button type="submit" onclick="return datecom()" data-requiredconfirmation="true" class="btn  btn-primary btn-sm"><i class="bi bi-check-lg"></i> Submit</button>
+                <button type="button" value="Reset" onclick="location.reload();" class="btn  btn-warning btn-sm"><i class="bi bi-arrow-repeat"></i> Reset</button>
+                <a asp-controller="MushakSubmissions" asp-action="Index" class="btn btn-secondary btn-sm"><i class="bi bi-slash-circle"></i> Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts{
+
+
+    <script src="~/js/jquery-ui.js"></script>
+    <script>
+        function datecom() {
+            var output = true;
+            var fit_start_time = $("#GenerateDate").val(); 
+            var fit_end_time = $("#SubmissionDate").val();
+
+            if (Date.parse(fit_start_time) >= Date.parse(fit_end_time)) {
+                alert("Please select a different Submission Date.");
+                output = false;
+            }
+            return output;
+        }
+      
+    </script>
+}

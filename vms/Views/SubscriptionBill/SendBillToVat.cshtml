@@ -1,0 +1,113 @@
+﻿@model vms.entity.viewModels.SubscriptionAndBilling.SubscriptionBillCreateViewModel
+@{
+	ViewData["Title"] = "Generate Bill";
+	var i = 0;
+}
+
+@section contentheader
+{
+	<div class="p-2 page-header d-flex">
+		<div class="flex-grow-1">
+			@ViewData["Title"]
+		</div>
+	</div>
+}
+
+<form asp-action="SaveSendingBillToVat" class="form-horizontal">
+	<input type="hidden" asp-for="BillingOfficeId"/>
+	<input type="hidden" asp-for="BillingOfficeName"/>
+	<input type="hidden" asp-for="CollectionOfficeId"/>
+	<input type="hidden" asp-for="CollectionOfficeName"/>
+	<input type="hidden" asp-for="BillYear"/>
+	<input type="hidden" asp-for="BillMonth"/>
+	<input type="hidden" asp-for="BillMonthName"/>
+	<div class="row">
+		<div class="col-md-4 offset-4">
+			<table class="table table-bordered form-table">
+				<tbody>
+				<tr>
+					<th>
+						Billing Office
+					</th>
+					<td>
+						@Model.BillingOfficeName
+					</td>
+					<th>
+						Collection Office
+					</th>
+					<td>
+						@Model.CollectionOfficeName
+					</td>
+				</tr>
+				<tr>
+					<th>
+						Billing Year
+					</th>
+					<td>
+						@Model.BillYear
+					</td>
+					<th>
+						Billing Month
+					</th>
+					<td>
+						@Model.BillMonthName
+					</td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="col-12">
+			<table class="table table-bordered form-table">
+				<thead>
+				<tr>
+					<th></th>
+					<th>Customer Name</th>
+					<th>Customer BIN/NID</th>
+					<th>Subscription Price</th>
+					<th>SD</th>
+					<th>VAT</th>
+				</tr>
+				</thead>
+				<tbody>
+				@foreach (var item in Model.SubscriptionBillDetails)
+					{
+						<tr>
+							<td>
+								<input type="checkbox" name="SubscriptionBillDetails[@i].IsSelected" checked="checked" value="@item.IsSelected" />
+								<input type="hidden" name="SubscriptionBillDetails[@i].CustomerSubscriptionId" value="@item.CustomerSubscriptionId" />
+								<input type="hidden" name="SubscriptionBillDetails[@i].OrganizationId" value="@item.OrganizationId" />
+								<input type="hidden" name="SubscriptionBillDetails[@i].BillingOfficeId" value="@item.BillingOfficeId" />
+								<input type="hidden" name="SubscriptionBillDetails[@i].BillingOfficeName" value="@item.BillingOfficeName" />
+								<input type="hidden" name="SubscriptionBillDetails[@i].BillingOfficeAddress" value="@item.BillingOfficeAddress" />
+								<input type="hidden" name="SubscriptionBillDetails[@i].CollectionOfficeId" value="@item.CollectionOfficeId" />
+								<input type="hidden" name="SubscriptionBillDetails[@i].CollectionOfficeName" value="@item.CollectionOfficeName" />
+								<input type="hidden" name="SubscriptionBillDetails[@i].CollectionOfficeAddress" value="@item.CollectionOfficeAddress" />
+								<input type="hidden" name="SubscriptionBillDetails[@i].CustomerId" value="@item.CustomerId" />
+								<input type="hidden" name="SubscriptionBillDetails[@i].CustomerName" value="@item.CustomerName" />
+								<input type="hidden" name="SubscriptionBillDetails[@i].CustomerBin" value="@item.CustomerBin" />
+								<input type="hidden" name="SubscriptionBillDetails[@i].CustomerNidNo" value="@item.CustomerNidNo" />
+								<input type="hidden" name="SubscriptionBillDetails[@i].CustomerAddress" value="@item.CustomerAddress" />
+								<input type="hidden" name="SubscriptionBillDetails[@i].SubscriptionPriceWithoutTax" value="@item.SubscriptionPriceWithoutTax" />
+								<input type="hidden" name="SubscriptionBillDetails[@i].SupplementaryDuty" value="@item.SupplementaryDuty" />
+								<input type="hidden" name="SubscriptionBillDetails[@i].VatAmount" value="@item.VatAmount" />
+							</td>
+							<td>@item.CustomerName</td>
+							<td>@(item.CustomerBin ?? item.CustomerNidNo)</td>
+							<td>@item.CustomerAddress</td>
+							<td>@item.SubscriptionPriceWithoutTax</td>
+							<td>@item.SupplementaryDuty</td>
+							<td>@item.VatAmount</td>
+						</tr>
+						i++;
+					}
+				</tbody>
+			</table>
+		</div>
+		<div class="col-12">
+			<div class="form-group mt-3 float-end mt-3">
+				<button type="submit" data-requiredconfirmation="true" class="btn  btn-primary btn-sm"><i class="bi bi-check-lg"></i> Submit</button>
+				<a asp-action="Index" class="btn btn-secondary btn-sm"><i class="bi bi-slash-circle"></i> Cancel</a>
+			</div>
+		</div>
+	</div>
+</form>

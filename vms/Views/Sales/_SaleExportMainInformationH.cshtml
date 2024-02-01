@@ -1,0 +1,217 @@
+﻿@model vms.entity.viewModels.VmSaleExport
+
+<div class="col-md-6">
+<div class="font-weight-bold mb-3">
+	Main Information
+</div>
+<form class="g-3" id="frmMainInformation" method="post">
+
+<div class="row mb-3">
+	<label asp-for="OrgBranchId" class="col-sm-4 col-form-label"></label>
+	<div class="col-sm-8">
+		<select asp-for="OrgBranchId" asp-items="Model.OrgBranchList.CustomSelectListToSelectList()" class="searchable-dropdown" data-live-search="true" data-style="bootstrap-select-option">
+			<option value="@null">Select Branch</option>
+		</select>
+		<span asp-validation-for="OrgBranchId" class="text-danger"></span>
+	</div>
+</div>
+<div class="row mb-3">
+	<label asp-for="ExportTypeId" class="col-sm-4 col-form-label"></label>
+	<div class="col-sm-8">
+		<select asp-for="ExportTypeId" asp-items="Model.ExportTypeSelectList.CustomSelectListToSelectList()" class="searchable-dropdown" data-live-search="true" data-style="bootstrap-select-option">
+			<option value="@null">Select ExportType</option>
+		</select>
+		<span asp-validation-for="ExportTypeId" class="text-danger"></span>
+	</div>
+</div>
+
+<div class="row mb-3">
+	<label asp-for="CustomerId" class="col-sm-4 col-form-label"></label>
+	<div class="col-sm-8">
+		<select asp-for="CustomerId" class="searchable-dropdown" data-live-search="true" data-style="bootstrap-select-option">
+			@*<select asp-for="CustomerId" class="form-select form-select-sm">*@
+			<option value="@null">Select Customer</option>
+			@if (Model.CustomerList.Any())
+			{
+				foreach (var customer in Model.CustomerList)
+				{
+					<option value="@customer.CustomerId"
+					        data-address="@customer.DeliveryAddress"
+					        data-rec-mobile="@customer.DeliveryContactPersonMobile"
+					        data-rec-name="@customer.DeliveryContactPerson"
+					        data-cus-mobile="@customer.PhoneNo"
+					        data-del-country="@customer.DeliveryCountryId">
+						@customer.Name
+					</option>
+				}
+			}
+		</select>
+		<span asp-validation-for="CustomerId" class="text-danger"></span>
+	</div>
+</div>
+<div class="row mb-3">
+	<label asp-for="CustomerPhoneNumber" class="col-sm-4 col-form-label"></label>
+	<div class="col-sm-8">
+		<input type="text" asp-for="CustomerPhoneNumber" class="form-control form-control-sm" placeholder="01####">
+		<span asp-validation-for="CustomerPhoneNumber" class="text-danger"></span>
+	</div>
+</div>
+<div class="row mb-3">
+	<label asp-for="WorkOrderNo" class="col-sm-4 col-form-label"></label>
+	<div class="col-sm-8">
+		<input type="text" asp-for="WorkOrderNo" class="form-control form-control-sm" placeholder="##">
+		<span asp-validation-for="WorkOrderNo" class="text-danger"></span>
+	</div>
+</div>
+<div class="row mb-3">
+	<label asp-for="SalesDeliveryTypeId" class="col-sm-4 col-form-label"></label>
+	<div class="col-sm-8">
+				<select asp-for="SalesDeliveryTypeId" asp-items="Model.DeliveryMethodSelectList.CustomSelectListToSelectList()" class="searchable-dropdown" data-live-search="true" data-style="bootstrap-select-option">
+			<option value="@null">Select Method</option>
+		</select>
+		<span asp-validation-for="SalesDeliveryTypeId" class="text-danger"></span>
+	</div>
+</div>
+<div class="row mb-3">
+	<label asp-for="DeliveryDate" class="col-sm-4 col-form-label"></label>
+	<div class="col-sm-8">
+		<input type="date" asp-for="DeliveryDate" min='2000-01-01' max='@DateTime.Now.ToString("yyyy-MM-dd")' class="form-control form-control-sm">
+		<span asp-validation-for="DeliveryDate" class="text-danger"></span>
+	</div>
+</div>
+<div class="row mb-3">
+	<label asp-for="ReceiverName" class="col-sm-4 col-form-label"></label>
+	<div class="col-sm-8">
+		<input type="text" asp-for="ReceiverName" class="form-control form-control-sm">
+		<span asp-validation-for="ReceiverName" class="text-danger"></span>
+	</div>
+</div>
+
+<div class="row mb-3">
+	<label asp-for="ReceiverContactNo" class="col-sm-4 col-form-label"></label>
+	<div class="col-sm-8">
+		<input type="text" asp-for="ReceiverContactNo" class="form-control form-control-sm" placeholder="01####">
+		<span asp-validation-for="ReceiverContactNo" class="text-danger"></span>
+	</div>
+</div>
+
+<div class="row mb-3">
+	<label asp-for="ShippingAddress" class="col-sm-4 col-form-label"></label>
+	<div class="col-sm-8">
+		<input type="text" asp-for="ShippingAddress" class="form-control form-control-sm">
+		<span asp-validation-for="ShippingAddress" class="text-danger"></span>
+	</div>
+</div>
+
+<div class="row mb-3">
+	<label asp-for="ShippingCountryId" class="col-sm-4 col-form-label"></label>
+	<div class="col-sm-8">
+		<select asp-for="ShippingCountryId" asp-items="Model.CountrySelectList.CustomSelectListToSelectList()" class="searchable-dropdown" data-live-search="true" data-style="bootstrap-select-option">
+			<option value="@null">Select Country</option>
+		</select>
+		<span asp-validation-for="ShippingCountryId" class="text-danger"></span>
+	</div>
+</div>
+
+<div class="row mb-3">
+	<label asp-for="LcNo" class="col-sm-4 col-form-label"></label>
+	<div class="col-sm-8">
+		<input type="text" asp-for="LcNo" class="form-control form-control-sm">
+		<span asp-validation-for="LcNo" class="text-danger"></span>
+	</div>
+</div>
+
+<div class="row mb-3">
+	<label asp-for="LcDate" class="col-sm-4 col-form-label"></label>
+	<div class="col-sm-8">
+		<input type="date" asp-for="LcDate" min='2000-01-01' max='@DateTime.Now.ToString("yyyy-MM-dd")' class="form-control form-control-sm">
+		<span asp-validation-for="LcDate" class="text-danger"></span>
+	</div>
+</div>
+
+<div class="row mb-3">
+	<label asp-for="BillOfEntry" class="col-sm-4 col-form-label"></label>
+	<div class="col-sm-8">
+		<input type="text" asp-for="BillOfEntry" class="form-control form-control-sm">
+		<span asp-validation-for="BillOfEntry" class="text-danger"></span>
+	</div>
+</div>
+
+<div class="row mb-3">
+	<label asp-for="BillOfEntryDate" class="col-sm-4 col-form-label"></label>
+	<div class="col-sm-8">
+		<input type="date" asp-for="BillOfEntryDate" min='2000-01-01' max='@DateTime.Now.ToString("yyyy-MM-dd")' class="form-control form-control-sm">
+		<span asp-validation-for="BillOfEntryDate" class="text-danger"></span>
+	</div>
+</div>
+
+<div class="row mb-3">
+	<label asp-for="TermsOfLc" class="col-sm-4 col-form-label"></label>
+	<div class="col-sm-8">
+		<input type="text" asp-for="TermsOfLc" class="form-control form-control-sm">
+		<span asp-validation-for="TermsOfLc" class="text-danger"></span>
+	</div>
+</div>
+
+<div class="row mb-3">
+	<label asp-for="DueDate" class="col-sm-4 col-form-label"></label>
+	<div class="col-sm-8">
+		<input type="date" asp-for="DueDate" min='2000-01-01' max='@DateTime.Now.ToString("yyyy-MM-dd")' class="form-control form-control-sm">
+		<span asp-validation-for="DueDate" class="text-danger"></span>
+	</div>
+</div>
+
+<div class="row mb-3">
+	<label asp-for="PONo" class="col-sm-4 col-form-label"></label>
+	<div class="col-sm-8">
+		<input type="text" asp-for="PONo" class="form-control form-control-sm">
+		<span asp-validation-for="PONo" class="text-danger"></span>
+	</div>
+</div>
+@*Vechile Information*@
+<div class="row mb-3">
+	<label asp-for="VehicleTypeId" class="col-sm-4 col-form-label"></label>
+	<div class="col-sm-8">
+		<select asp-for="VehicleTypeId" class="searchable-dropdown" data-live-search="true" data-style="bootstrap-select-option">
+			<option value="@null">Select VehicleType</option>
+			@if (Model.VehicleTypesList.Any())
+			{
+				foreach (var VehicleType in Model.VehicleTypesList)
+				{
+					<option value="@VehicleType.VehicleTypeId"
+					        data-Is-Require-Registration="@VehicleType.IsRequireRegistration">
+						@VehicleType.VehicleTypeName
+					</option>
+				}
+			}
+		</select>
+		<span asp-validation-for="VehicleTypeId" class="text-danger"></span>
+	</div>
+</div>
+
+<div class="row mb-3">
+	<label asp-for="DriverName" class="col-sm-4 col-form-label"></label>
+	<div class="col-sm-8">
+		<input type="text" asp-for="DriverName" class="form-control form-control-sm">
+		<span asp-validation-for="DriverName" class="text-danger"></span>
+	</div>
+</div>
+
+<div class="row mb-3">
+	<label asp-for="DriverMobile" class="col-sm-4 col-form-label"></label>
+	<div class="col-sm-8">
+		<input type="text" asp-for="DriverMobile" class="form-control form-control-sm">
+		<span asp-validation-for="DriverMobile" class="text-danger"></span>
+	</div>
+</div>
+
+<div class="row mb-3 vehicle-registration-no d-none">
+	<label asp-for="VehicleRegistrationNo" class="col-sm-4 col-form-label"></label>
+	<div class="col-sm-8">
+		<input type="text" asp-for="VehicleRegistrationNo" class="form-control form-control-sm">
+		<span asp-validation-for="VehicleRegistrationNo" class="text-danger"></span>
+	</div>
+</div>
+
+</form>
+</div>

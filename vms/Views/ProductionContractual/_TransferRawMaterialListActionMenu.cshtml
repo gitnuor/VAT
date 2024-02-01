@@ -1,0 +1,21 @@
+﻿@model vms.entity.models.ContractualProductionTransferRawMaterial
+@{
+    var session = Context.Session.GetComplexData<VmUserSession>(ControllerStaticData.SESSION);
+}
+
+<div class="btn-group">
+    <div class="dropdown">
+        <a href="javascript:;" class="dropdown-toggle text-decoration-none dropdown-toggle btn btn-success btn-sm" data-bs-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+            <span class=""> Action </span>
+            <i class="fa fa-angle-down"></i>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-default pull-right">
+            @if (UserAuthorization.Check(FeatureList.PRODUCTION_TRANSFER_LIST_CAN_VIEW_DETAILS, session.Rights))
+            {
+                <li>
+                    <a class="dropdown-item" asp-action="RawMaterialsDetails" asp-route-id="@Model.EncryptedId" asp-route-fromdate="@Model.FromDateEn" asp-route-todate="@Model.TodateEn"><i class="far fa-registered"></i> Details</a>
+                </li>
+            }
+        </ul>
+    </div>
+</div>

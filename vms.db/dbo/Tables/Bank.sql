@@ -1,0 +1,7 @@
+﻿CREATE TABLE [dbo].[Bank] (
+    [BankId]       INT            IDENTITY (1, 1) NOT NULL,
+    [Name]         VARCHAR (250)  NOT NULL,
+    [NameInBangla] NVARCHAR (250) NOT NULL,
+    CONSTRAINT [PK_Bank] PRIMARY KEY CLUSTERED ([BankId] ASC)
+);
+

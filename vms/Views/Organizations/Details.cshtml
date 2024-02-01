@@ -1,0 +1,82 @@
+﻿@model vms.entity.models.Organization
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Organization Details</h2>
+<style>
+    .td-width{
+        width:200px;
+    }
+</style>
+<div class="row" style="text-align:center;">
+    
+    <div class="col-12 p-3">
+        <table class="table table-bordered table-responsive table-striped">
+            <tbody style="text-align:left;">
+                <tr>
+                    <td class="td-width"><b>Name</b></td>
+                    <td>@Model.Name</td>
+                </tr>
+                <tr>
+                    <td class="td-width"><b>Parent Organization ID</b></td>
+                    <td>@Model.ParentOrganizationId</td>
+                </tr>
+                <tr>
+                    <td><b>Code</b></td>
+                    <td>@Model.Code</td>
+                </tr>
+                <tr>
+                    <td><b>Var Registration No.</b></td>
+                    <td>@Model.VatregNo</td>
+                </tr>
+                <tr>
+                    <td><b>BIN</b></td>
+                    <td>@Model.Bin</td>
+                </tr>
+                <tr>
+                    <td><b>Certificate</b></td>
+                    <td>@Model.CertificateNo</td>
+                </tr>
+                <tr>
+                    <td><b>Country ID</b></td>
+                    <td>@Model.CountryId</td>
+                </tr>
+                <tr>
+                    <td><b>City ID</b></td>
+                    <td>@Model.CityId</td>
+                </tr>
+                @if (Model.IsActive == true)
+                {
+                    <tr>
+                        <td><b>IsActive</b></td>
+                        <td>Yes</td>
+                    </tr>
+                }
+                else
+                {
+                    <tr>
+                        <td><b>IsActive</b></td>
+                        <td>No</td>
+                    </tr>
+                }
+                <tr>
+                    <td><b>Enlisted No.</b></td>
+                    <td>@Model.EnlistedNo</td>
+                </tr>
+                <tr>
+                    <td><b>Postal Code</b></td>
+                    <td>@Model.PostalCode</td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+    
+</div>
+@*<div class="row">
+    <div class="col-1 ms-1">
+        <a type="button" style="width:100%" href="@Url.Action("Index", "Organizations")" class="btn btn-sm btn-info" value="" >Back</a>
+    </div>
+</div>*@

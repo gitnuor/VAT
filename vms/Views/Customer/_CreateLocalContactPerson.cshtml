@@ -1,0 +1,63 @@
+﻿@model vms.entity.viewModels.CustomerViewModel.CustomerLocalCreateViewModel
+<div class="accordion mt-3" id="accordionContactPersonForm">
+	<div class="accordion-item">
+		<div class="accordion-header" id="headingContactPersonForm">
+			<button class="accordion-button collapsed vms-accordion-button"
+			        type="button"
+			        data-bs-toggle="collapse"
+			        data-bs-target="#contactPersonInformation"
+			        aria-expanded="false"
+			        aria-controls="contactPersonInformation">
+				Contact person related to customer
+			</button>
+		</div>
+		<div id="contactPersonInformation"
+		     class="accordion-collapse collapse"
+		     aria-labelledby="headingContactPersonInformation"
+		     data-bs-parent="#accordionForm">
+			<div class="accordion-body">
+				<div class="row">
+					<div class="col-6">
+						<div class="form-group mt-3">
+							<label class="form-label" asp-for="ContactPerson"></label>
+							<div>
+								<input asp-for="ContactPerson" class="form-control  form-control-sm"/>
+								<span asp-validation-for="ContactPerson" class="text-danger"></span>
+							</div>
+						</div>
+
+					</div>
+					<div class="col-6">
+						<div class="form-group mt-3">
+							<label class="form-label" asp-for="ContactPersonDesignation"></label>
+							<div>
+								<input asp-for="ContactPersonDesignation" class="form-control  form-control-sm"/>
+								<span asp-validation-for="ContactPersonDesignation" class="text-danger"></span>
+							</div>
+						</div>
+
+					</div>
+					<div class="col-6">
+						<div class="form-group mt-3">
+							<label class="form-label" asp-for="ContactPersonMobile"></label>
+							<div>
+								<input asp-for="ContactPersonMobile" class="form-control  form-control-sm"/>
+								<span asp-validation-for="ContactPersonMobile" class="text-danger"></span>
+							</div>
+						</div>
+
+					</div>
+					<div class="col-6">
+						<div class="form-group mt-3">
+							<label class="form-label" asp-for="ContactPersonEmailAddress"></label>
+							<div>
+								<input asp-for="ContactPersonEmailAddress" class="form-control  form-control-sm"/>
+								<span asp-validation-for="ContactPersonEmailAddress" class="text-danger"></span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

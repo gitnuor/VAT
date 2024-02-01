@@ -1,0 +1,46 @@
+﻿@model vms.entity.viewModels.VmInputOutputCoEfficient
+
+<h5> Overhead Cost</h5>
+<form id="frmOverHeadCost">
+	<table class="table table-bordered form-table">
+		<thead>
+		<tr>
+			<th>Item</th>
+			<th class="w-px-150">Cost</th>
+		</tr>
+		</thead>
+		<tbody id="tbdOverheadCost">
+		@foreach (var costName in Model.OverheadCostSelectList)
+		{
+			<tr>
+				<td>
+					<span id="OverheadCostId" hidden>@costName.Value</span>
+					<span>@costName.Text</span>
+					<span asp-validation-for="OverheadCostId" class="text-danger"></span>
+				</td>
+				<td>
+					<input type="number" class="form-control form-control-sm ovhdcost" asp-for="OverheadCostAmount" id="OvHeadCost">
+					<span asp-validation-for="OverheadCostAmount" class="text-danger"></span>
+				</td>
+
+			</tr>
+		}
+		<tr>
+			<td>
+				Profit
+			</td>
+			<td>
+				<input type="number" class="form-control form-control-sm ovhdProfit" asp-for="ProfitAmount">
+				<span asp-validation-for="ProfitAmount" class="text-danger"></span>
+			</td>
+
+		</tr>
+		</tbody>
+		<tfoot>
+		<tr class="text-end">
+			<th class="text">Total</th>
+			<th id="totalOverHeadCost"></th>
+		</tr>
+		</tfoot>
+	</table>
+</form>

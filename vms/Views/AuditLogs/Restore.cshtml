@@ -1,0 +1,55 @@
+﻿@model vms.entity.models.AuditLog
+
+@{
+    ViewData["Title"] = "Restore";
+    
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="custom-page-title">Restore</h1>
+    </div>
+</div>
+<h2></h2>
+
+<div class="row">
+    <div class="col-md-12">
+
+        <form asp-action="Restore" class="form-horizontal" id="frmusercreate">
+            <div class="form-body">
+                <div class="form-group">
+                    <input type="hidden" asp-for="AuditLogId" />
+                    <input type="hidden" asp-for="PrimaryKey" />
+                    <label class="col-md-3 control-label">Table Name : </label>
+                    <div class="col-md-4">
+                        <input asp-for="ObjectType.Name" readonly class="form-control" />
+                        <span asp-validation-for="ObjectType.Name" class="text-danger"></span>
+
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="form-body">
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Action Taken By : </label>
+                    <div class="col-md-4">
+                        <input asp-for="User.FullName" readonly class="form-control" />
+                        <span asp-validation-for="User.FullName" class="text-danger"></span>
+
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="form-actions">
+                <div class="row">
+                    <div class="col-md-offset-3 col-md-9">
+                        <button type="submit" data-requiredconfirmation="true" class="btn  green">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

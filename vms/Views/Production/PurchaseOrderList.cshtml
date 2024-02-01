@@ -1,0 +1,313 @@
+﻿
+@{
+    ViewData["Title"] = "Purchase Order List";
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <h1 class="custom-page-title">Purchase Order List</h1>
+    </div>
+    <div class="col-md-5">
+        <div class="input-group mt-2">
+            <input type="text" class="form-control" placeholder="Search...">
+            <span class="input-group-btn">
+                <a href="javascript:;" class="btn submit">
+                    <i class="icon-magnifier"></i>
+                </a>
+            </span>
+        </div>
+    </div>
+    <div class="col-md-1">
+        <a href="@Url.Action("PurchaseOrder","PurchaseOrder")" class="btn btn-success btn-sm pull-right mt-2"><i class="bi bi-plus-lg"></i> Add</a>
+    </div>
+</div>
+
+
+
+<div class="row">
+    <div class="col-md-12">
+     
+
+            <table class="table table-bordered" >
+                <thead>
+                    <tr>
+                        <th>SL</th>
+                        <th>
+                            <div class="md-checkbox">
+                                <input type="checkbox" id="checkbox1" class="md-check">
+                                <label for="checkbox1">
+                                    <span></span>
+                                    <span class="check"></span>
+                                    <span class="box"></span>
+                                </label>
+                            </div>
+                        </th>
+                        <th>Number</th>
+                        <th>Posted</th>
+                        <th>Order Date</th>
+                        <th>Party</th>
+                        <th>Amount</th>
+                        <th>Paid </th>
+                        <th>Due </th>
+                        <th>Branch</th>
+                        
+                        <th>Delivery Status</th>
+                        <th>Progress</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>
+                            <div class="md-checkbox">
+                                <input type="checkbox" id="checkbox2" class="md-check">
+                                <label for="checkbox2">
+                                    <span></span>
+                                    <span class="check"></span>
+                                    <span class="box"></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>AOO-1002</td>
+                        <td>
+                            <div class="md-checkbox">
+                                <input type="checkbox" id="checkbox3" class="md-check" checked>
+                                <label for="checkbox3">
+                                    <span></span>
+                                    <span class="check"></span>
+                                    <span class="box"></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>2018-12-27</td>
+                        <td>Ali Enterprise</td>
+                        <td>700</td>
+                        <td>2,270</td>
+                        <td>2,270</td>
+                        <td>Head Office</td>
+                        
+                        <td>Mat.Issue</td>
+                        <td>
+                            <div class="progress">
+                                <div class="progress-bar progressbarstyle" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        <td>
+                            <div class="dropdown">
+                                <button class="btn btn-link  dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    Action
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                    <li><a href="">Detail</a></li>
+                                    <li><a href="">Edit</a></li>
+                                    <li><a href="@Url.Action("Index","IssueMaterial")">Material Issue</a></li>
+                                </ul>
+                            </div>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>
+                            <div class="md-checkbox">
+                                <input type="checkbox" id="checkbox6" class="md-check">
+                                <label for="checkbox6">
+                                    <span></span>
+                                    <span class="check"></span>
+                                    <span class="box"></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>SOO-1001</td>
+                        <td>
+                            <div class="md-checkbox">
+                                <input type="checkbox" id="checkbox3" class="md-check" checked>
+                                <label for="checkbox3">
+                                    <span></span>
+                                    <span class="check"></span>
+                                    <span class="box"></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>2018-12-27</td>
+                        <td>XYZ Enterprise</td>
+                        <td>2700</td>
+                        <td>2,270</td>
+                        <td>2,270</td>
+                        <td>Head Office</td>
+                        
+                        <td>Complete</td>
+                        <td>
+                            <div class="progress">
+                                <div class="progress-bar prgbarwidth" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="dropdown">
+                                <button class="btn btn-link  dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    Action
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                    <li><a href="">Detail</a></li>
+                                    <li><a href="">Edit</a></li>
+                                    <li><a href="@Url.Action("Index","IssueMaterial")">Material Issue</a></li>
+
+                                </ul>
+                            </div>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>
+                            <div class="md-checkbox">
+                                <input type="checkbox" id="checkbox2" class="md-check">
+                                <label for="checkbox2">
+                                    <span></span>
+                                    <span class="check"></span>
+                                    <span class="box"></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>XOZ-1003</td>
+                        <td>
+                            <div class="md-checkbox">
+                                <input type="checkbox" id="checkbox3" class="md-check" checked>
+                                <label for="checkbox3">
+                                    <span></span>
+                                    <span class="check"></span>
+                                    <span class="box"></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>2019-06-18</td>
+                        <td>HF Enterprise</td>
+                        <td>3700</td>
+                        <td>7,270</td>
+                        <td>3,270</td>
+                        <td>Sub Office</td>
+                        <td>Pending</td>
+                        <td>
+                            <div class="progress">
+                                <div class="progress-bar progressBar25" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        <td>
+                            <div class="dropdown">
+                                <button class="btn btn-link  dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    Action
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                    <li><a href="">Detail</a></li>
+                                    <li><a href="">Edit</a></li>
+                                    <li><a href="@Url.Action("Index","IssueMaterial")">Material Issue</a></li>
+                                </ul>
+                            </div>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>
+                            <div class="md-checkbox">
+                                <input type="checkbox" id="checkbox2" class="md-check">
+                                <label for="checkbox2">
+                                    <span></span>
+                                    <span class="check"></span>
+                                    <span class="box"></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>SAS-1001</td>
+                        <td>
+                            <div class="md-checkbox">
+                                <input type="checkbox" id="checkbox3" class="md-check" checked>
+                                <label for="checkbox3">
+                                    <span></span>
+                                    <span class="check"></span>
+                                    <span class="box"></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>2019-06-18</td>
+                        <td>ABC Enterprise</td>
+                        <td>3700</td>
+                        <td>7,270</td>
+                        <td>3,270</td>
+                        <td>Head Office</td>
+                        <td>Pending</td>
+                        <td>
+                            <div class="progress">
+                                <div class="progress-bar progressBar75" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        <td>
+                            <div class="dropdown">
+                                <button class="btn btn-link  dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    Action
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                    <li><a href="">Detail</a></li>
+                                    <li><a href="">Edit</a></li>
+                                    <li><a href="@Url.Action("Index","IssueMaterial")">Material Issue</a></li>
+                                </ul>
+                            </div>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>
+                            <div class="md-checkbox">
+                                <input type="checkbox" id="checkbox2" class="md-check">
+                                <label for="checkbox2">
+                                    <span></span>
+                                    <span class="check"></span>
+                                    <span class="box"></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>PPO-2001</td>
+                        <td>
+                            <div class="md-checkbox">
+                                <input type="checkbox" id="checkbox3" class="md-check" checked>
+                                <label for="checkbox3">
+                                    <span></span>
+                                    <span class="check"></span>
+                                    <span class="box"></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>2019-06-18</td>
+                        <td>LF Enterprise</td>
+                        <td>1200</td>
+                        <td>9,270</td>
+                        <td>3,270</td>
+                        <td>Head Office</td>
+                        <td>Pending</td>
+                        <td>
+                            <div class="progress">
+                                <div class="progress-bar progressBar75" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        <td>
+                            <div class="dropdown">
+                                <button class="btn btn-link  dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    Action
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                    <li><a href="">Detail</a></li>
+                                    <li><a href="">Edit</a></li>
+                                    <li><a href="@Url.Action("Index","IssueMaterial")">Material Issue</a></li>
+                                </ul>
+                            </div>
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+      
+    </div>
+</div>

@@ -1,0 +1,119 @@
+﻿@model vms.entity.viewModels.CustomerViewModel.CustomerSubscriptionCreateViewModel
+@{
+	ViewData["Title"] = "Create Customer Subscription";
+	var i = 0;
+}
+
+@section contentheader
+{
+	<div class="p-3 page-header">
+		@ViewData["Title"]
+	</div>
+}
+
+<form asp-action="Create" class="form-horizontal">
+	<input type="hidden" asp-for="CustomerSubscriptionId"/>
+	<div class="row">
+		<div class="col-md-4 offset-4">
+
+			<div class="form-group">
+				<label asp-for="OrgBranchId"></label>
+				<select asp-for="OrgBranchId" asp-items="Model.OrgBranchList.CustomSelectListToSelectList()">
+					<option value="@null">Select Billing Office</option>
+				</select>
+				<span asp-validation-for="OrgBranchId"></span>
+			</div>
+			<div class="form-group mt-3">
+				<label asp-for="CollectionOfficeId"></label>
+				<select asp-for="CollectionOfficeId" asp-items="Model.OrgBranchList.CustomSelectListToSelectList()">
+					<option value="@null">Select Collection Office</option>
+				</select>
+				<span asp-validation-for="CollectionOfficeId"></span>
+			</div>
+			<div class="form-group mt-3">
+				<label asp-for="CustomerId"></label>
+				<select asp-for="CustomerId">
+					<option value="@null">Select Customer</option>
+					@if (Model.CustomerList.Any())
+					{
+						foreach (var customer in Model.CustomerList)
+						{
+							<option value="@customer.CustomerId"
+							        data-address="@customer.DeliveryAddress"
+							        data-bin="@customer.Bin"
+							        data-rec-mobile="@customer.DeliveryContactPersonMobile"
+							        data-rec-name="@customer.DeliveryContactPerson"
+							        data-cus-mobile="@customer.PhoneNo">
+								@(customer.Name + " (BIN-" + customer.Bin + ")")
+							</option>
+						}
+					}
+				</select>
+				<span asp-validation-for="CustomerId"></span>
+			</div>
+			<div class="form-group mt-3">
+				<label asp-for="Remarks"></label>
+				<div>
+					<textarea asp-for="Remarks"></textarea>
+					<span asp-validation-for="Remarks"></span>
+				</div>
+			</div>
+
+		</div>
+		<div class="col-12">
+			<div class="form-group mt-3 mt-3">
+				<table class="table table-bordered form-table align-top">
+					<thead>
+					<tr>
+						<th>Service</th>
+						<th>Subscription Fee</th>
+						<th>VAT Type</th>
+						<th>VAT Rate (%)</th>
+						<th>SD (%)</th>
+					</tr>
+					</thead>
+					<tbody>
+					@if (Model.CustomerSubscriptionDetails.Any())
+					{
+						foreach (var item in Model.CustomerSubscriptionDetails)
+						{
+							<tr>
+								<td>
+									<input type="hidden" readonly="readonly" name="CustomerSubscriptionDetails[@i].ProductId" value="@item.ProductId"/>
+									<input type="hidden" readonly="readonly" name="CustomerSubscriptionDetails[@i].MeasurementUnitId" value="@item.MeasurementUnitId"/>
+									<input type="hidden" readonly="readonly" name="CustomerSubscriptionDetails[@i].MeasurementUnitName" value="@item.MeasurementUnitName"/>
+									<input type="hidden" readonly="readonly" name="CustomerSubscriptionDetails[@i].ConversionRatio" value="@item.ConversionRatio"/>
+									<input type="hidden" readonly="readonly" name="CustomerSubscriptionDetails[@i].Quantity" value="@item.Quantity"/>
+										<input type="hidden" readonly="readonly" name="CustomerSubscriptionDetails[@i].ProductVatTypeId" value="@item.ProductVatTypeId" />
+									<input type="text" readonly="readonly" name="CustomerSubscriptionDetails[@i].ProductName" value="@item.ProductName" class="form-control form-control-sm"/>
+								</td>
+								<td>
+									<input type="number" name="CustomerSubscriptionDetails[@i].UnitPrice" value="@item.UnitPrice" class="form-control form-control-sm"/>
+								</td>
+								<td>
+									<input type="text" readonly="readonly" name="CustomerSubscriptionDetails[@i].ProductVatTypeName" value="@item.ProductVatTypeName" class="form-control form-control-sm"/>
+								</td>
+								<td>
+									<input type="number" readonly="readonly" name="CustomerSubscriptionDetails[@i].ProductVatPercent" value="@item.ProductVatPercent" class="form-control form-control-sm"/>
+								</td>
+								<td>
+									<input type="number" readonly="readonly" name="CustomerSubscriptionDetails[@i].SupplementaryDutyPercent" value="@item.SupplementaryDutyPercent" class="form-control form-control-sm"/>
+								</td>
+							</tr>
+							i++;
+						}
+					}
+
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="col-12">
+			<div class="form-group mt-3 float-end mt-3">
+				<button type="submit" data-requiredconfirmation="true" class="btn  btn-primary btn-sm"><i class="bi bi-check-lg"></i> Submit</button>
+				<button type="button" value="Reset" onclick="location.reload();" class="btn  btn-warning btn-sm"><i class="bi bi-arrow-repeat"></i> Reset</button>
+				<a asp-action="Index" class="btn btn-secondary btn-sm"><i class="bi bi-slash-circle"></i> Cancel</a>
+			</div>
+		</div>
+	</div>
+</form>

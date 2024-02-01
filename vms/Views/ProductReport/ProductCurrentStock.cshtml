@@ -1,0 +1,48 @@
+﻿@model vms.entity.viewModels.ProductReport.ProductReportParameterViewModel
+@{
+	ViewData["Title"] = "Product Current Stock Report";
+	Layout = "_LayoutReport";
+}
+
+
+
+@section contentheader
+	{
+	<div class="p-3 page-header">
+		@ViewData["Title"]
+	</div>
+}
+
+
+<div class="row">
+	<div class="col-md-6 offset-3">
+		<form asp-action="ProductCurrentStock" class="form-horizontal" target="_blank">
+			<div class="form-group mt-3">
+				<label asp-for="OgrBranchId" > </label>
+				<select asp-for="OgrBranchId" asp-items="Model.BranchList.CustomSelectListToSelectList()" >
+					<option value="@null">All Branch</option>
+				</select>
+				<span asp-validation-for="OgrBranchId" ></span>
+			</div>
+			<div class="form-group mt-3">
+				<label asp-for="ProductTypeId"> </label>
+				<select asp-for="ProductTypeId" asp-items="Model.ProductTypeSelectListItems.CustomSelectListToSelectList()">
+					<option value="@null">All Inventory Type</option>
+				</select>
+				<span asp-validation-for="ProductTypeId"></span>
+			</div>
+			<div class="form-group mt-3">
+				<label  asp-for="ReportProcessOptionId"></label>
+				<div>
+					<select asp-for="ReportProcessOptionId" asp-items="Model.ReportOptionSelectListItems.CustomSelectListToSelectList()" >
+						<option value="@null">Select Option</option>
+					</select>
+					<span asp-validation-for="ReportProcessOptionId" ></span>
+				</div>
+			</div>
+			<div class="form-group mt-3 float-end">
+				<button type="submit" class="btn btn-sm btn-primary"> <i class="bi bi-file-text"></i> Process Report</button>
+			</div>
+		</form>
+	</div>
+</div>

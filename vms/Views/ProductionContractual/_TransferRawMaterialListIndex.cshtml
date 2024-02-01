@@ -1,0 +1,14 @@
+﻿@model IEnumerable<vms.entity.models.ContractualProductionTransferRawMaterial>
+@(Html.Grid(Model).Build(columns =>
+{
+    columns.Add(model => model.TransfereDate).Titled("Transfer Date").Formatted("{0:dd/MM/yyyy}");
+    columns.Add(model => model.Location).Titled("Location");
+    columns.Add(model => model.ChallanNo).Titled("Challan No");
+    columns.Add().Encoded(false).RenderedAs(data => Html.PartialAsync("_TransferRawMaterialListActionMenu", data).Result
+   );
+})
+    .Using(GridFilterMode.Excel)
+    .Empty("No data found")
+    .Filterable()
+    .Sortable()
+    .Pageable())

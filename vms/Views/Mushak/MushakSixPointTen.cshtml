@@ -1,0 +1,75 @@
+﻿@model vms.entity.viewModels.ReportsViewModel.VmMushakHighValDisplay
+@{
+	Layout = "_LayoutMushak";
+	ViewData["Title"] = "Mushak- 6.10 (High value sales and purchases)";
+}
+
+@section contentheader
+{
+	<div class="p-3 pb-2 page-header">
+		@ViewData["Title"]
+		<form method="post">
+			<div class="row">
+				<div class="col-3">
+					<label asp-for="Month" class="form-label"> </label>
+					@* <select asp-for="Month" asp-items="Html.GetEnumSelectList<EnumMonth>()" class="searchable-dropdown" data-live-search="true" data-style="bootstrap-select-option"> *@
+					<select asp-for="Month" asp-items="Model.MonthList.CustomSelectListToSelectList()" class="searchable-dropdown" data-live-search="true" data-style="bootstrap-select-option">
+						<option value="@null">Select Month</option>
+					</select>
+					<span asp-validation-for="Month" class="invalid-feedback"></span>
+				</div>
+
+				<div class="col-2">
+					<label asp-for="Year" class="form-label"> </label>
+					<select asp-for="Year" asp-items="Model.YearList.CustomSelectListToSelectList()" class="searchable-dropdown" data-live-search="true" data-style="bootstrap-select-option">
+						<option value="@null">Select Year</option>
+					</select>
+					<span asp-validation-for="Year" class="invalid-feedback"></span>
+				</div>
+
+				<div class="col-2">
+					<label asp-for="Language" class="form-label"> </label>
+					<select asp-for="Language" asp-items="Html.GetEnumSelectList<EnumLanguage>()" class="form-select form-select-sm">
+						<option value="@null">Select</option>
+					</select>
+					<span asp-validation-for="Language" class="text-danger"></span>
+				</div>
+
+				<div class="col-4">
+					<button type="submit" class="btn btn-sm btn-success inline-sm-button"><i class="bi bi-file-text"></i> View</button>
+					<button type="button" id="btnPrint" class="btn btn-sm btn-primary inline-sm-button"><i class="bi bi-printer-fill"></i> Print</button>
+					<button type="submit" class="btn btn-sm btn-warning inline-sm-button" asp-action="MushakSixPointTenExportToExcel"><i class="bi bi-file-excel-fill"></i> Export Excel</button>
+				</div>
+			</div>
+		</form>
+	</div>
+}
+
+<div class="gray-slim-scroll-container">
+	<div class="long-table-scroll-container">
+		<div class="report-section">
+			<div id="printableArea" class="report-margin">
+				@if (Model.OrgId != 0)
+				{
+					switch (Model.Language)
+					{
+						case 0:
+							<partial name="MushakPartial/_MushakSixPointTenBan" model="@Model"/>
+							break;
+						case 1:
+							<partial name="MushakPartial/_MushakSixPointTenEng" model="@Model"/>
+							break;
+					}
+				}
+			</div>
+		</div>
+	</div>
+</div>
+
+@section scripts{
+	<script>
+		$("#btnPrint").click(function() {
+			window.vmsPrint.printA4Landscape('printableArea');
+		});
+	</script>
+}

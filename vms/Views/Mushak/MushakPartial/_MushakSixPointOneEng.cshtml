@@ -1,0 +1,199 @@
+﻿@model vms.entity.viewModels.VmCalculationBookParam
+
+<div class="row">
+	<div class="col-12">
+		<h4 class="mushak-name">Mushak- 6.1</h4>
+	</div>
+	<div class="col-12 report-header">
+
+		<div class="company-other-info">"Government of the People's Republic of Bangladesh"</div>
+		<div class="company-other-info">National Board of Revenue (NBR)</div>
+		<div class="company-name mt-2">@Model.OrgName</div>
+		<div class="company-other-info">@Model.OrgAddress</div>
+		<div class="company-other-info">@Model.OrgBin</div>
+		<div class="sub-header">
+			(Applicable to registered or enlisted persons involved in the processing of goods or services)
+		</div>
+		<div class="sub-header">
+			[Note clause (a) of rule 40 (1) and clause (a) of rule 41]
+
+		</div>
+
+	</div>
+	<div class="col-12">
+
+		<table class="table table-bordered align-middle" style="text-align: center">
+			<thead>
+			<tr>
+				<td colspan="21">Purchase of Goods/Services</td>
+			</tr>
+			<tr>
+				<td rowspan="3">
+					Serial No.
+				</td>
+				<td rowspan="3">
+					Date
+				</td>
+				<td colspan="2">
+					Initial resale of stock materials
+				</td>
+				<td colspan="14">
+					Purchased Goods
+				</td>
+				<td colspan="2">
+					Marginal perforation of materials
+				</td>
+				<td>
+					Remarks
+				</td>
+
+			</tr>
+			<tr>
+				<td rowspan="2">
+					Quantity (Unit)
+				</td>
+				<td rowspan="2">
+					Price (Excluding All Types of Taxes)
+				</td>
+				<td rowspan="2">
+					Challan (Bill of entry no.)
+				</td>
+				<td rowspan="2">
+					Date
+				</td>
+				<td colspan="3">
+					Vendor/Supplier
+				</td>
+				<td rowspan="2">
+					Description
+				</td>
+				<td rowspan="2">
+					Quantity
+				</td>
+				<td rowspan="2">
+					Price (Excluding All Types of Taxes)
+				</td>
+				<td rowspan="2">
+					Supplementary Duty (if any)
+				</td>
+				<td rowspan="2">
+					Mushak
+				</td>
+				<td colspan="2">
+					Total Material Quantity
+				</td>
+				<td colspan="2">
+					Use of materials in product preparation processing
+				</td>
+				<td rowspan="2">
+					Quantity
+				</td>
+				<td rowspan="2">
+					Price (Excluding All Types of Taxes)
+				</td>
+				<td rowspan="2">
+				</td>
+			</tr>
+
+			<tr>
+				<td>
+					Name
+				</td>
+				<td>
+					Address
+				</td>
+				<td>
+					Registration/Enrollment/National Identity Card
+				</td>
+				<td>
+					Quantity
+				</td>
+				<td>
+					Price (Excluding All Types of Taxes)
+				</td>
+				<td>
+					Quantity
+				</td>
+				<td>
+					Price (Excluding All Types of Taxes)
+				</td>
+			</tr>
+
+			<tr>
+				<td>(1)</td>
+				<td>(2)</td>
+				<td>(3)</td>
+				<td>(4)</td>
+				<td>(5)</td>
+				<td>(6)</td>
+				<td>(7)</td>
+				<td>(8)</td>
+				<td>(9)</td>
+				<td>(10)</td>
+				<td>(11)</td>
+				<td>(12)</td>
+				<td>(13)</td>
+				<td>(14)</td>
+				<td>(15)</td>
+				<td>(16)</td>
+				<td>(17)</td>
+				<td>(18)</td>
+				<td>(19)</td>
+				<td>(20)</td>
+				<td>(21)</td>
+			</tr>
+			</thead>
+			<tbody style="text-align: center">
+			@if (Model.PurchaseCalcBook.Any())
+			{
+				foreach (var type in Model.PurchaseCalcBook)
+				{
+					<tr>
+						<td class="text-right">@type.SlNo</td>
+						<td class="text-center">@($"{type.OperationTime:dd/MM/yyyy}")</td>
+						<td class="text-right">@type.InitialQty.DecimalToCommaSeparated() (@type.MeasurementUnitName)</td>
+						<td class="text-right">@type.InitPriceWithoutVat.DecimalToCommaSeparated()</td>
+						<td>@type.VatChallanOrBillOfEntry</td>
+						<td>@type.VatChallanOrBillOfEntryDate</td>
+						<td>@type.VendorName</td>
+						<td>@type.VendorAddress</td>
+						<td>@type.VendorBinOrNid</td>
+						<td>@type.ProductName</td>
+						<td class="text-right">@type.PurchaseQty.DecimalToCommaSeparated() (@type.MeasurementUnitName)</td>
+						<td class="text-right">@type.PriceWithoutVat.DecimalToCommaSeparated()</td>
+						<td class="text-right">@type.SupplimentaryDuty.DecimalToCommaSeparated()</td>
+						<td class="text-right">@type.VATAmount.DecimalToCommaSeparated()</td>
+						<td class="text-right">@type.TotalProdQty.DecimalToCommaSeparated()</td>
+						<td class="text-right">@type.TotalProdPrice.DecimalToCommaSeparated()</td>
+						<td class="text-right">@type.UsedInProductionQty.DecimalToCommaSeparated() (@type.MeasurementUnitName)</td>
+						<td class="text-right">@type.PriceWithoutVatForUsedInProduction.DecimalToCommaSeparated()</td>
+						<td class="text-right">@type.ClosingProdQty.DecimalToCommaSeparated() (@type.MeasurementUnitName)</td>
+						<td class="text-right">@type.ClosingTotalPrice.DecimalToCommaSeparated()</td>
+						<td></td>
+					</tr>
+				}
+			}
+			else
+			{
+				<tr>
+					<td colspan="21">
+						No Data Found
+					</td>
+				</tr>
+			}
+			</tbody>
+
+		</table>
+
+	</div>
+	<div class="col-12 mt-3">
+		<div class="special-note-title">Special Note:</div>
+		<div class="special-note-items">
+			<div class="special-note-list-item">
+				1. Information on all types of purchases related to economic activities should be included in this form.
+			</div>
+			<div class="special-note-list-item">2. In case the product is to be purchased from an unregistered person, the full name, address and national identity card number of the person must be mentioned in the relevant columns [(6), (8) and (9)].</div>
+			<div class="special-note-list-item">3. A copy of the bill of entry or invoice should be kept as an authentic document subject to purchase of goods</div>
+		</div>
+	</div>
+</div>

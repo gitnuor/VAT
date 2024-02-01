@@ -1,0 +1,289 @@
+﻿@model IEnumerable<vms.entity.StoredProcedureModel.HTMLMushak.SpSalesCalcBook>
+
+<style>
+
+    .MreturnHeader {
+        text-align: center;
+        background-color: #ffedbe;
+    }
+
+
+    .Returntd {
+        text-align: left;
+    }
+
+    .Returntdhead {
+        text-align: center;
+        background-color: #cfcfcf;
+    }
+
+    .ReturntdEmpty {
+        background-color: lightgray;
+    }
+
+    .tdp1 {
+        width: 320px;
+    }
+
+    .tdp2 {
+        width: 30px;
+        text-align: center;
+    }
+
+    .report-margin {
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+</style>
+
+
+
+<div class="report-margin">
+    <div class="col-xs-12">
+
+        <div class="col-xs-3">
+
+            <img src="~/images/logo_bd_govt.svg" style="height :100px;" />
+
+
+        </div>
+
+        
+        <div class="col-xs-6" style="text-align:center">
+
+            <h4>গণপ্রজাতন্ত্রী বাংলাদেশ সরকার</h4>
+            <h4>জাতীয় রাজস্ব বোর্ড</h4>
+            <h4>মূল্য সংযোজন কর দলিলপত্র</h4>
+            <h4>[বিধি ৪৭ এর উপ-বিধি (১) দ্রষ্টব্য]</h4>
+
+        </div>
+
+        <div class="col-xs-3 pull-right">
+            <h4 style="color:green; border:solid; border-color:cornflowerblue; text-align:center"> মূসক-৬.২</h4>
+
+
+
+        </div>
+
+        <div class="col-xs-12">
+
+
+            <div class="col-xs-12" style="text-align:center">
+                <h5>প্রতিষ্ঠানের নাম : </h5>
+
+                <h5>ঠিকানা::   </h5>
+                <h5> বিন:   </h5>
+                <h5>বিক্রয় হিসাব পুস্তক</h5>
+                <h5>(পণ্য বা সেবা প্রক্রিয়াকরণে সম্পৃক্ত  এমন নিবন্ধিত বা তালিকাভুক্ত ব্যক্তির জন্য প্রযোজ্য)</h5>
+                <h5>
+                    [বিধি ৪০ এর উপ-বিধি (১) এর দফা (খ) ও বিধি ৪১ এর দফা (ক) দ্রষ্টব্য]
+                </h5>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="col-xs-12">
+
+        <table class="table table-bordered">
+
+            <thead>
+                <tr>
+                    <th colspan="21" style="text-align:center">
+
+                        পণ্য / সেবার  বিক্রয়
+
+
+                    </th>
+                </tr>
+
+            </thead>
+            <tbody style="text-align:center">
+
+
+                <tr>
+                    <td rowspan="2">
+                        ক্রমিক
+                        সংখ্য
+                    </td>
+                    <td rowspan="2">তারিখ</td>
+                    <td colspan="2">
+                        উৎপাদিত পণ্য / সেবার  প্রারম্ভিক
+                        জের
+                    </td>
+                    <td colspan="2">উৎপাদন</td>
+                    <td colspan="2">
+                        মোট উৎপাদিত
+                        পণ্য / সেবার
+                    </td>
+                    <td colspan="3">    ক্রেতা /সরবরাহকারী</td>
+                    <td colspan="2"> চালানপত্রের বিবরণ </td>
+                    <td colspan="5"> বিক্রিত/সরবরাহকৃত   পণ্যের বিবরণ </td>
+                    <td colspan="2"> পণ্যের প্রান্তিক জের </td>
+                    <td > মন্তব্য </td>
+
+
+                </tr>
+
+
+                <tr></tr>
+
+
+                <tr>
+                 <td></td>
+                 <td></td>
+                    <td>
+                        পরিমাণ
+                        (একক)
+                    </td>
+                    <td>
+                        মূল্য
+                        (সকল
+                        প্রকার
+                        কর
+                        ব্যতীত)
+                    </td>
+                    <td>
+                        পরিমাণ
+                        (একক)
+                    </td>
+                    <td>
+                        মূল্য
+                        (সকল
+                        প্রকার
+                        কর
+                        ব্যতীত
+                    </td>
+                    <td>
+                        পরিমাণ
+                        (একক)
+                    </td>
+                    <td>
+                        মূল্য
+                        (সকল
+                        প্রকার
+                        কর
+                        ব্যতীত
+                    </td>
+                    <td>নাম</td>
+                    <td>ঠিকানা </td>
+                    <td>নিবন্ধন/তালিকাভুক্তি/জাতীয় পরিচয়পত্র নং  </td>
+                    <td>নম্বর</td>
+                    <td>তারিখ </td>
+                    <td>বিবরণ </td>
+                    <td>
+                        পরিমাণ
+                    </td>
+                    <td>
+                        করযোগ্য মূল্য
+                    </td>
+                    <td>সম্পূরক শুল্ক (যদি থাকে)  </td>
+                    <td>মুসক</td>
+                    <td>পরিমাণ </td>
+                    <td>
+                        মূল্য
+                        (সকল
+                        প্রকার
+                        কর
+                        ব্যতীত)
+                    </td>
+                    <td></td>
+
+
+                </tr>
+
+                <tr>
+                    <td>১</td>
+                    <td>২</td>
+                    <td>৩</td>
+                    <td>৪</td>
+                    <td>৫</td>
+                    <td>৬</td>
+                    <td>
+                        ৭
+                        =৩+৫
+                    </td>
+                    <td>
+                        ৮
+                        =৪+৬
+                    </td>
+                    <td>৯</td>
+                    <td>১০</td>
+                    <td>১১</td>
+                    <td>১২</td>
+                    <td>১৩</td>
+                    <td>১৪</td>
+                    <td>
+                        (১৫)
+                       
+                    </td>
+                    <td>
+                        (১৬)
+                       
+                    </td>
+                    <td>১৭</td>
+                    <td>১৮</td>
+                    <td>১৯</td>
+                    <td>২০</td>
+                    <td>২১</td>
+
+                </tr>
+
+
+
+                @if (Model.Any())
+                {
+
+                    foreach (var item in Model)
+                    {
+
+
+                <tr>
+
+                    <td>@item.SlNo</td>
+                    <td>@item.OperationTime</td>
+                    <td>@item.InitialQty</td>
+                    <td>@item.InitPriceWithoutVat</td>
+                    <td>@item.ProductionQty</td>
+                    <td>@item.PriceOfProdFromProduction</td>
+                    <td>@item.TotalProductionQty</td>
+                    <td>@item.TotalProductionPrice</td>
+                    <td>@item.CustomerName</td>
+                    <td>@item.CustomerAddress</td>
+                    <td>@item.CustomerBinOrNid</td>
+                    <td>@item.VatChallanNo</td>
+                    <td>@item.TaxInvoicePrintedTime</td>
+                    <td>@item.ProductName</td>
+                    <td>@item.SalesQty</td>
+                    <td>@item.TaxablePrice</td>
+                    <td>@item.SupplementaryDuty</td>
+                    <td>@item.ProdVatAmount</td>
+                    <td>@item.ClosingProdQty</td>
+                    <td>@item.ClosingProdPrice</td>
+                    <td>@item.OperationType</td>
+
+
+                </tr>
+
+
+                    }
+                }
+
+            </tbody>
+
+        </table>
+    </div>
+
+
+    <div class="col-xs-12">
+
+        <h5 style="font-weight: bold;">বিশেষ দ্রষ্টব্য:</h5>
+        <h5>
+            * যে ক্ষেত্রে অনিবন্ধিত ব্যক্তির নিকট হইতে পণ্য বিক্রয় করা হইবে সেই ক্ষেত্রে উক্ত ব্যক্তির পূর্ণাঙ্গ নাম, ঠিকানা ও জাতীয় পরিচয়পত্র নম্বর যথাযথভাবে সংশ্লিষ্ট কলাম [(৯),(১০)ও(১১)] এ আবশ্যিকভাবে উল্লেখ করিতে হইবে |
+        </h5>
+        
+    </div>
+
+</div>

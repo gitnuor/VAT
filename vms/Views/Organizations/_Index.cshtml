@@ -1,0 +1,19 @@
+﻿@model IEnumerable<vms.entity.models.Organization>
+@(Html.Grid(Model).Build(columns =>
+{
+    columns.Add(model => model.Name).Titled("Name");
+    columns.Add(model => model.Code).Titled("Code");
+    columns.Add(model => model.VatregNo).Titled("VAT Reg. No.");
+    columns.Add(model => model.Bin).Titled("BIN");
+    columns.Add(model => model.CertificateNo).Titled("Certificate");
+    columns.Add(model => model.Status).Titled("Status");
+    columns.Add(model => model.EnlistedNo).Titled("Enlisted No.");
+    columns.Add(model => model.PostalCode).Titled("Postal Code");
+    columns.Add().Encoded(false).RenderedAs(data => Html.PartialAsync("_ActionMenu", data).Result
+    ).Titled("Action");
+})
+    .Using(GridFilterMode.Excel)
+    .Empty("No data found")
+    .Filterable()
+    .Sortable()
+    .Pageable())

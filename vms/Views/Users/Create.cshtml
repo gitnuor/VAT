@@ -1,0 +1,170 @@
+﻿@model vms.entity.viewModels.User.UserCreateViewModel
+@{
+    ViewData["Title"] = "Create new User";
+
+}
+@section contentheader
+    {
+    <div class="p-3 page-header">
+        @ViewData["Title"]
+    </div>
+}
+
+
+
+<div class="row">
+    <div class="col-md-8 offset-2">
+        <form asp-action="Create" method="post" class="form-horizontal" id="frmusercreate" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-body">
+                        <div class="form-group">
+                            <label asp-for="FullName" ></label>
+                            <div>
+                                <input asp-for="FullName"  />
+                                <span asp-validation-for="FullName" ></span>
+                            </div>
+                        </div>
+                        @*<div class="form-group required hidden">
+                        <label >User Name : </label>
+                        <div>
+                        <input asp-for="UserName"  />
+                        <span asp-validation-for="UserName" ></span>
+                        </div>
+                        </div>*@
+
+                        <div class="form-group mt-3">
+                            <label  asp-for="EmailAddress"></label>
+                            <div>
+                                <input asp-for="EmailAddress"  />
+                                <span asp-validation-for="EmailAddress" ></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group mt-3">
+                            <label  asp-for="NidNo"></label>
+                            <div>
+                                <input asp-for="NidNo"  />
+                                <span asp-validation-for="NidNo" ></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group mt-3">
+                            <label  asp-for="TinNo"></label>
+                            <div>
+                                <input asp-for="TinNo"  />
+                                <span asp-validation-for="TinNo" ></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group mt-3">
+                            <label asp-for="UserImage" ></label>
+                            <div>
+                                <input asp-for="UserImage"  />
+                                <span asp-validation-for="UserImage" ></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group mt-3">
+                            <label  asp-for="Address"></label>
+                            <div>
+                                <textarea asp-for="Address" ></textarea>
+                                <span asp-validation-for="Address" ></span>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+
+                </div>
+                <div class="col-6">
+                    <div class="form-body">
+
+                        <div class="form-group">
+                            <label  asp-for="RoleId"></label>
+                            <div>
+                               @*  @Html.DropDownListFor(x => Model.RoleId, new SelectList(Model.Roles, "Id", "Name"), "Select", htmlAttributes: new { @class = "form-select form-select-sm" }) *@
+                                <select asp-for="RoleId" asp-items="SelectListConverter.CustomSelectListToSelectList(Model.Roles)">
+                                    <option value="@null">Select</option>
+                                </select>
+
+                                <span asp-validation-for="RoleId" ></span>
+                            </div>
+                        </div>
+                        @if ((EnumUserTypeOptions)ViewData[ViewStaticData.UserType] == EnumUserTypeOptions.Master)
+                        {
+
+                            <div class="form-group required mt-3">
+                                <label >Type</label>
+                                <div>
+                                    <select asp-for="UserTypeId" asp-items="SelectListConverter.CustomSelectListToSelectList(Model.UserTypes)">
+                                        <option value="@null">Select</option>
+                                    </select>
+                                  @*   @Html.DropDownListFor(x => Model.UserTypeId, new SelectList(Model.UserTypes, "Id", "Name"), "Select", htmlAttributes: new { @class = "form-select form-select-sm" }) *@
+
+                                    <span asp-validation-for="UserTypeId" ></span>
+                                </div>
+                            </div>
+                        }
+                        <div class="form-group mt-3">
+                            <label  asp-for="Mobile"></label>
+                            <div>
+                                <input asp-for="Mobile"  />
+                                <span asp-validation-for="Mobile" ></span>
+                            </div>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label  asp-for="Designation"></label>
+                            <div>
+                                <input asp-for="Designation"  />
+                                <span asp-validation-for="Designation" ></span>
+                            </div>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label  asp-for="ExpiryDate"></label>
+                            <div>
+                                <input placeholder="dd/MMM/yyyy" asp-for="ExpiryDate"  />
+                                <span asp-validation-for="ExpiryDate" ></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group mt-3">
+                            <label asp-for="UserSignature" ></label>
+                            <div>
+                                <input asp-for="UserSignature"  />
+                                <span asp-validation-for="UserSignature" ></span>
+                            </div>
+                        </div>
+                        <div class="form-group mt-3">
+                            <div class="form-group mb-3 form-group-checkbox">
+                                <div class="form-check form-switch">
+                                    <input type="checkbox" asp-for="IsRequireBranch" class="form-check-input">
+                                    <label asp-for="IsRequireBranch" class="form-check-label"></label>
+                                    <span asp-validation-for="IsRequireBranch" ></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <partial name="_CreateUserBranch" model="Model" />
+
+
+
+
+                <div class="float-end mt-3">
+                    <button type="submit" data-requiredconfirmation="true" class="btn  btn-primary btn-sm"><i class="bi bi-check-lg"></i> Submit</button>
+                    <button type="button" value="Reset" onclick="location.reload();" class="btn  btn-warning btn-sm"><i class="bi bi-arrow-repeat"></i> Reset</button>
+                    <a asp-controller="Users" asp-action="Index" class="btn btn-secondary btn-sm"><i class="bi bi-slash-circle"></i> Cancel</a>
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/CustomJs/UserCreate.js?vguid=@ViewStaticData.StaticFileVersionGuid"></script>
+}
+

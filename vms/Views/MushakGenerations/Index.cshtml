@@ -1,0 +1,108 @@
+﻿@model IEnumerable<vms.entity.models.MushakGeneration>
+@{
+    ViewData["Title"] = "Index";
+    
+}
+@{
+    var session = Context.Session.GetComplexData<VmUserSession>(ControllerStaticData.SESSION);
+}
+
+
+
+
+@using (Html.BeginForm("Index", "MushakGenerations", FormMethod.Get, new { id = "frmProduct" }))
+{
+
+    <div class="row">
+        <div class="col-md-6">
+            <h1 class="custom-page-title">Mushak Generation</h1>
+        </div>
+        <div class="col-md-5">
+            <div class="input-group Search mt-2">
+                <input type="text" class="form-control" placeholder="Search..." id="search" name="search" value="@ViewBag.searchText">
+                <span class="input-group-btn">
+                    <button type="submit" class="btn submit ">
+                        <i class="icon-magnifier"></i>
+                    </button>
+                </span>
+            </div>
+        </div>
+        {
+            <div class="col-md-1">
+                <a href="@Url.Action("Create", "MushakGenerations")" class="btn btn-success btn-sm pull-right mt-2"><i class="bi bi-plus-lg"></i> Add</a>
+            </div>
+        }
+    </div>
+
+}
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th class="text-center">
+                    @Html.DisplayNameFor(model => model.MushakForYear)
+                </th>
+                <th class="text-center">
+                    @Html.DisplayNameFor(model => model.MushakForMonth)
+                </th>
+                <th class="text-center">
+                    @Html.DisplayNameFor(model => model.GenerateDate)
+                </th>
+                <th class="text-center">
+                    Get Back Closing Amount?
+                </th>
+
+                
+            </tr>
+        </thead>
+
+        @if (Model.Any())
+        {
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="text-center">
+                            @item.MushakForYear
+
+                        </td>
+                        <td class="text-center">
+                            @item.MushakForMonth
+
+                        </td>
+                        <td class="text-center">
+                            @item.GenerateDate.ToShortDateString()
+
+                        </td>
+                        
+                    </tr>
+
+                }
+            </tbody>
+        }
+
+        else
+        {
+            <tr>
+                <td colspan="10">
+                    <p class="text-center">No Records Found</p>
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    <div class="pager">
+        @if ((int)ViewBag.PageCount <= 10)
+        {
+
+        }
+
+        else
+        {
+           @* @Html.PagedListPager(
+            (IPagedList)Model,
+            page => Url.Action("Index", new { page })
+            )*@
+        }
+    </div>

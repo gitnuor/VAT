@@ -1,0 +1,60 @@
+﻿<script>
+	var mainUrls = {
+		product: '@Url.Action("Index", "Products")'
+	}
+</script>
+@{ var session = Context.Session.GetComplexData<VmUserSession>(ControllerStaticData.SESSION); }
+<nav id="headernav" class="navbar navbar-expand-lg navbar-light bg-light">
+	<div class="container-fluid">
+		<a class="navbar-brand px-4" asp-controller="Home" asp-action="Dashboard">
+			<img src="~/images/logo.svg" alt="iVAT"/>
+		</a>
+		<button
+			class="navbar-toggler"
+			type="button"
+			data-bs-toggle="collapse"
+			data-bs-target="#navbarNav"
+			aria-controls="navbarNav"
+			aria-expanded="false"
+			aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNav">
+			<partial name="_NavigationTop"/>
+			<ul class="navbar-nav d-flex">
+				<li class="nav-item dropdown">
+					@if (session.UserId != 1)
+					{
+						<partial name="_NavigationQuickAdd"/>
+					}
+
+				</li>
+				<li class="nav-item dropdown">
+					@if (session.UserId != 1)
+					{
+						<partial name="_NavigationMain"/>
+					}
+
+				</li>
+				<li class="nav-item dropdown">
+					<a id="userddl" class="nav-link p-2 header-icon" role="button" data-bs-toggle="dropdown" aria-expanded="false" title="Account">
+						<img class="rounded-circle img-fluid image-header-icon" src="@session.UserImageUrl"/>
+					</a>
+					<ul class="dropdown-menu dropdown-menu-end">
+						<li>
+							<a asp-controller="Users" asp-action="ChangePassword" class="dropdown-item">
+								<i class="bi bi-shield-lock"></i> Change Password
+							</a>
+						</li>
+						<li class="dropdown-divider"></li>
+						<li>
+							<a class="dropdown-item" href="~/">
+								<i class="bi bi-box-arrow-right"></i> Log Out
+							</a>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</div>
+</nav>

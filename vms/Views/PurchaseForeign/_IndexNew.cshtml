@@ -1,0 +1,60 @@
+﻿@model IEnumerable<vms.entity.models.Purchase>
+@(Html.Grid(Model).Build(columns =>
+{
+	columns.Add(model => model.OrgBranch.Name)
+		.Titled("Branch");
+	columns.Add(model => model.PurchaseType.Name)
+		.Titled("Type").AppendCss("text-center");
+	columns.Add(model => model.InvoiceNo)
+		.Titled("Invoice").Sortable(false).AppendCss("text-center");
+	columns.Add(model => model.PurchaseDate.Date)
+		.Titled("Date").Formatted("{0:dd/MM/yyyy}").AppendCss("text-center");
+	columns.Add(model => model.Vendor.Name)
+		.Titled("Vendor");
+	columns.Add(model => model.VatChallanNo)
+		.Titled("Challan No").AppendCss("text-center");
+	columns.Add(model => model.VatChallanIssueDate)
+		.Titled("Challan Time").Formatted("{0:dd/MM/yyyy hh:mm:ss tt}").AppendCss("text-center");
+	columns.Add(model => model.VendorInvoiceNo)
+		.Titled("Vendor Inv./CI No").AppendCss("text-center");
+	columns.Add(model => model.BillOfEntry)
+		.Titled(Html.Raw("<div style='min-width: 60px;' data-bs-toggle='tooltip' title='Bill of Entry No.'>BOE<sup><i class='bi bi-question-circle'></i></sup><div>"));
+	columns.Add(model => model.TotalPriceWithoutVat)
+		.Titled(Html.Raw("<div style='min-width: 60px;' data-bs-toggle='tooltip' title='Price Excluding VAT'>Price<sup><i class='bi bi-question-circle'></i></sup><div>"))
+		.AppendCss("text-right").RenderedAs(model => StringGenerator.DecimalToCommaSeparated(model.TotalPriceWithoutVat));
+
+	columns.Add(model => model.TotalCustomDuty)
+		.Titled("CD").AppendCss("text-right").RenderedAs(model => StringGenerator.DecimalToCommaSeparated(model.TotalCustomDuty));
+
+	columns.Add(model => model.TotalImportDuty)
+		.Titled("ID").AppendCss("text-right").RenderedAs(model => StringGenerator.DecimalToCommaSeparated(model.TotalImportDuty));
+
+	columns.Add(model => model.TotalRegulatoryDuty)
+		.Titled("RD").AppendCss("text-right").RenderedAs(model => StringGenerator.DecimalToCommaSeparated(model.TotalRegulatoryDuty));
+
+	columns.Add(model => model.TotalAdvanceIncomeTax)
+		.Titled("AIT").AppendCss("text-right").RenderedAs(model => StringGenerator.DecimalToCommaSeparated(model.TotalAdvanceIncomeTax));
+
+	columns.Add(model => model.TotalSupplementaryDuty)
+		.Titled("SD").AppendCss("text-right").RenderedAs(model => StringGenerator.DecimalToCommaSeparated(model.TotalSupplementaryDuty));
+
+	columns.Add(model => model.TotalVat)
+		.Titled("VAT").AppendCss("text-right").RenderedAs(model => StringGenerator.DecimalToCommaSeparated(model.TotalVat));
+
+	columns.Add(model => model.TotalAdvanceTax)
+		.Titled("AT").AppendCss("text-right").RenderedAs(model => StringGenerator.DecimalToCommaSeparated(model.TotalAdvanceTax));
+
+	columns.Add(model => model.VDS)
+		.Titled("VDS?").AppendCss("text-center");
+	columns.Add(model => model.Vdsamount)
+		.Titled("VDS Amount").AppendCss("text-right").RenderedAs(model => StringGenerator.DecimalToCommaSeparated(model.Vdsamount));
+	columns.Add().Encoded(false).RenderedAs(data => Html.PartialAsync("_ActionMenu", data).Result)
+		.Titled(Html.Raw("<i class='bi bi-activity'></i>")).AppendCss("action-col-freez");
+})
+	.AppendCss("large-index-grid")
+	.Empty("No data found")
+	.Using(GridProcessingMode.Manual)
+	.Filterable(GridFilterType.Double)
+	.Sortable()
+	.Pageable())
+

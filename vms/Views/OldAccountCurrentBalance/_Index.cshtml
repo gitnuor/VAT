@@ -1,0 +1,13 @@
+﻿@model IEnumerable<vms.entity.models.OldAccountCurrentBalance>
+@(Html.Grid(Model).Build(columns =>
+{
+    columns.Add(model => model.MushakYear).Titled("Mushak Year");
+    columns.Add(model => model.MonthName).Titled("Mushak Month");
+    columns.Add(model => model.RemainingVatbalance).Titled("Remaining VAT Balance");
+    columns.Add(model => model.RemainingSdbalance).Titled("Remaining SD Balance");
+})
+    .Using(GridFilterMode.Excel)
+    .Empty("No data found")
+    .Filterable()
+    .Sortable()
+    .Pageable())

@@ -1,0 +1,28 @@
+﻿@model IEnumerable<vms.entity.models.DebitNote>
+@{
+    var session = Context.Session.GetComplexData<VmUserSession>(ControllerStaticData.SESSION);
+    ViewData["Title"] = "Mushak-6.8(Debit Note List)";
+    Layout = "_LayoutMushak";
+}
+
+@section contentheader
+    {
+    <div class="p-3 page-header">
+        @ViewData["Title"]
+    </div>
+}
+
+
+@(Html.Grid(Model).Build(columns =>
+{
+    columns.Add(model => model.Purchase.InvoiceNo).Titled("Invoice No.");
+    columns.Add(model => model.ReturnDate).Titled("Return Date").Formatted("{0:dd/MM/yyyy}");
+    columns.Add(model => model.ReasonOfReturn).Titled("Reason Of Return");
+    columns.Add().Encoded(false).RenderedAs(data => Html.PartialAsync("_DebitNoteViewActionMenu", data).Result);
+    //columns.Add().Encoded(false).RenderedAs(data =>$"<a class='btn btn-primary btn-sm' href='{Url.Action("DebitNoteViewById")}/{data.DebitNoteId}' role='button' target='_blank'> View</a>" );
+})
+    .Using(GridFilterMode.Excel)
+    .Empty("No data found")
+    .Filterable()
+    .Sortable()
+    .Pageable())

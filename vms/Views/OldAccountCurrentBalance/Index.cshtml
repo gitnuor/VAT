@@ -1,0 +1,45 @@
+﻿@model IEnumerable<vms.entity.models.OldAccountCurrentBalance>
+@{
+    ViewData["Title"] = "Remaining Amount From Mushak 18.6";
+
+    var session = Context.Session.GetComplexData<VmUserSession>(ControllerStaticData.SESSION);
+}
+
+@section contentheader
+    {
+	<div class="p-2 page-header d-flex">
+		<div class="flex-grow-1">
+			@ViewData["Title"]
+		</div>
+        <div class="d-flex justify-content-start">
+
+            @if (UserAuthorization.Check(FeatureList.MUSHAK_RETURN_REMAINING_AMOUNT_FROM_MUSHAK_18_6_CAN_ADD, session.Rights))
+            {
+                <div class="pr-1">
+                    <a href="@Url.Action("Create", "OldAccountCurrentBalance")" class="btn btn-primary btn-sm"><i class="bi bi-plus-lg"></i>Add Remaining Amount From Mushak 18.6</a>
+                </div>
+
+            }
+
+        </div>
+    </div>
+    <div class="col-12 d-flex">
+        <ul class="nav nav-pills mt-3 mr-auto align-bottom">
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Action("Index", "MushakReturnPayment" )">Mushak Return Payment List</a>
+            </li>
+            @if (UserAuthorization.Check(FeatureList.MUSHAK_RETURN_REMAINING_AMOUNT_FROM_MUSHAK_18_6_CAN_VIEW, session.Rights))
+            {
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Index", "OldAccountCurrentBalance")">Remaining Amount From Mushak 18.6</a>
+                </li>
+            }
+            <li class="nav-item pull-right">
+                <a class="nav-link" href="@Url.Action("Index", "MushakSubmissions")">Mushak Submissions</a>
+            </li>
+        </ul>
+        </div>
+}
+<scrollable-grid-container>
+    <partial name="_Index" model="Model" />
+</scrollable-grid-container>

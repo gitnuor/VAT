@@ -1,0 +1,116 @@
+﻿@model vms.entity.viewModels.BranchTransferSend.BranchTransferSendCreateViewModel
+
+
+<div class="col-md-7 form-1">
+	<div class="font-weight-bold mb-3">
+		Main Information
+	</div>
+	<form class="row g-3" method="post" id="frmMainInformation">
+		<div class="col-md-6 complex-form-col">
+			<label asp-for="SenderBranchId" ></label>
+			<select asp-for="SenderBranchId" >
+				<option value="@null">Select Sender Branch</option>
+				@if (Model.OrgBranchList.Any())
+				{
+					foreach (var branch in Model.OrgBranchList)
+					{
+						<option value="@branch.OrgBranchId"
+						        data-address="@branch.Address">
+							@branch.Name
+						</option>
+					}
+				}
+			</select>
+			<div id="SenderBranchIdHelp" class="form-text">Product is dependent on Branch.</div>
+			<span asp-validation-for="SenderBranchId" ></span>
+		</div>
+
+		<div class="col-md-6 complex-form-col">
+			<label asp-for="ReceiverBranchId" ></label>
+			<select asp-for="ReceiverBranchId" >
+				<option value="@null">Select Receiver Branch</option>
+				@if (Model.OrgBranchList.Any())
+				{
+					foreach (var branch in Model.OrgBranchList)
+					{
+						<option value="@branch.OrgBranchId"
+						data-address="@branch.Address">
+							@branch.Name
+						</option>
+					}
+				}
+			</select>
+			<span asp-validation-for="ReceiverBranchId" ></span>
+		</div>
+
+		<div class="col-md-4 complex-form-col">
+			<label asp-for="InvoiceNo" ></label>
+			<input type="text" asp-for="InvoiceNo" >
+			<span asp-validation-for="InvoiceNo" ></span>
+		</div>
+		<div class="col-md-4 complex-form-col">
+			<label asp-for="InvoiceDate" ></label>
+			<input type="date" asp-for="InvoiceDate"  min='2000-01-01' max='@DateTime.Now.ToString("yyyy-MM-dd")'>
+			<span asp-validation-for="InvoiceDate" ></span>
+		</div>
+
+		<div class="col-md-4 complex-form-col">
+			<label asp-for="DeliveryDate" ></label>
+			<input type="date" asp-for="DeliveryDate"  min='2000-01-01' max='@DateTime.Now.ToString("yyyy-MM-dd")'>
+			<span asp-validation-for="DeliveryDate" ></span>
+		</div>
+		<div class="col-md-4 complex-form-col">
+			<label asp-for="ReceiverName" ></label>
+			<input type="text" asp-for="ReceiverName" >
+			<span asp-validation-for="ReceiverName" ></span>
+		</div>
+
+		<div class="col-md-4 complex-form-col">
+			<label asp-for="ReceiverContactNo" ></label>
+			<input type="text" asp-for="ReceiverContactNo"  placeholder="01####">
+			<span asp-validation-for="ReceiverContactNo" ></span>
+		</div>
+
+		<div class="col-md-4 complex-form-col">
+			<label asp-for="ShippingAddress" ></label>
+			<input type="text" asp-for="ShippingAddress" >
+			<span asp-validation-for="ShippingAddress" ></span>
+		</div>
+
+		<div class="col-md-4 complex-form-col">
+			<label asp-for="VehicleTypeId" ></label>
+			<select asp-for="VehicleTypeId" >
+				<option value="@null">Select VehicleType</option>
+				@if (Model.VehicleTypesList.Any())
+				{
+					foreach (var vehicleType in Model.VehicleTypesList)
+					{
+						<option value="@vehicleType.VehicleTypeId"
+						        data-Is-Require-Registration="@vehicleType.IsRequireRegistration">
+							@vehicleType.VehicleTypeName
+						</option>
+					}
+				}
+			</select>
+			<span asp-validation-for="VehicleTypeId" ></span>
+		</div>
+
+		<div class="col-md-4 complex-form-col">
+			<label asp-for="DriverName" ></label>
+			<input type="text" asp-for="DriverName" >
+			<span asp-validation-for="DriverName" ></span>
+		</div>
+
+		<div class="col-md-4 complex-form-col">
+			<label asp-for="DriverMobile" ></label>
+			<input type="text" asp-for="DriverMobile" >
+			<span asp-validation-for="DriverMobile" ></span>
+		</div>
+
+		<div class="col-md-4 complex-form-col vehicle-registration-no d-none">
+			<label asp-for="VehicleRegistrationNo" ></label>
+			<input type="text" asp-for="VehicleRegistrationNo" >
+			<span asp-validation-for="VehicleRegistrationNo" ></span>
+		</div>
+	</form>
+</div>

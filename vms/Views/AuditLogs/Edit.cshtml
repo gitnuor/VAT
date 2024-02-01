@@ -1,0 +1,74 @@
+﻿@model vms.entity.models.AuditLog
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_LayoutForChnagePass.cshtml";
+}
+
+<h2>Edit</h2>
+
+<h4>AuditLog</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="AuditLogId" />
+            <div class="form-group">
+                <label asp-for="ObjectTypeId" class="form-label"></label>
+                <select asp-for="ObjectTypeId" class="form-control" asp-items="ViewBag.ObjectTypeId"></select>
+                <span asp-validation-for="ObjectTypeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PrimaryKey" class="form-label"></label>
+                <input asp-for="PrimaryKey" class="form-control" />
+                <span asp-validation-for="PrimaryKey" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AuditOperationId" class="form-label"></label>
+                <select asp-for="AuditOperationId" class="form-control" asp-items="ViewBag.AuditOperationId"></select>
+                <span asp-validation-for="AuditOperationId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserId" class="form-label"></label>
+                <input asp-for="UserId" class="form-control" />
+                <span asp-validation-for="UserId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Datetime" class="form-label"></label>
+                <input asp-for="Datetime" class="form-control" />
+                <span asp-validation-for="Datetime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Descriptions" class="form-label"></label>
+                <input asp-for="Descriptions" class="form-control" />
+                <span asp-validation-for="Descriptions" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="IsActive" /> @Html.DisplayNameFor(model => model.IsActive)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreatedBy" class="form-label"></label>
+                <input asp-for="CreatedBy" class="form-control" />
+                <span asp-validation-for="CreatedBy" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreatedTime" class="form-label"></label>
+                <input asp-for="CreatedTime" class="form-control" />
+                <span asp-validation-for="CreatedTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Update" class="btn btn-light" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

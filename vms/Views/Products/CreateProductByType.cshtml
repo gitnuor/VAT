@@ -1,0 +1,238 @@
+﻿@model vms.entity.viewModels.vmProduct
+
+@section contentheader
+    {
+    <div class="p-3 page-header">
+        @ViewData["Title"]
+    </div>
+}
+
+<div class="row">
+    <div class="col-md-8 offset-2">
+    <form asp-action="Create" class="form-horizontal" id="frmCreate">
+	<input type="hidden" asp-for="ProductTypeId" />
+    <div class="row">
+	    <div class="col-6">
+		    <div class="form-body">
+			    <div class="form-group">
+				    <label asp-for="Name"></label>
+				    <div>
+					    <input asp-for="Name"/>
+					    <span asp-validation-for="Name"></span>
+				    </div>
+			    </div>
+
+			    <div class="form-group mt-3">
+				    <label asp-for="BrandId"></label>
+				    <div>
+					    <select asp-for="BrandId" asp-items="Model.BrandsSelectListItems.CustomSelectListToSelectList()">
+						    <option value="@null">Select Brand</option>
+					    </select>
+					    <span asp-validation-for="BrandId"></span>
+				    </div>
+			    </div>
+
+			    <div class="form-group mt-3">
+				    <label asp-for="ModelNo"></label>
+				    <div>
+					    <input asp-for="ModelNo"/>
+					    <span asp-validation-for="ModelNo"></span>
+				    </div>
+			    </div>
+
+			    <div class="form-group mt-3">
+				    <label asp-for="Variant"></label>
+				    <div>
+					    <input asp-for="Variant"/>
+					    <span asp-validation-for="Variant"></span>
+				    </div>
+			    </div>
+
+			    <div class="form-group mt-3">
+				    <label asp-for="Color"></label>
+				    <div>
+					    <input asp-for="Color"/>
+					    <span asp-validation-for="Color"></span>
+				    </div>
+			    </div>
+
+			    <div class="form-group mt-3">
+				    <label asp-for="Size"></label>
+				    <div>
+					    <input asp-for="Size"/>
+					    <span asp-validation-for="Size"></span>
+				    </div>
+			    </div>
+
+			    <div class="form-group mt-3 d-none">
+				    <label asp-for="Weight"></label>
+				    <div>
+					    <input asp-for="Weight"/>
+					    <span asp-validation-for="Weight"></span>
+				    </div>
+			    </div>
+
+			    <div class="form-group mt-3">
+				    <label asp-for="WeightInKg"></label>
+				    <div>
+					    <input asp-for="WeightInKg"/>
+					    <span asp-validation-for="WeightInKg"></span>
+				    </div>
+			    </div>
+
+			    <div class="form-group mt-3">
+				    <label>Code </label>
+				    <div>
+					    <input asp-for="Code"/>
+					    <span asp-validation-for="Code"></span>
+				    </div>
+			    </div>
+
+		    </div>
+	    </div>
+	    <div class="col-6">
+		    <div class="form-body">
+			    <div class="form-group">
+				    <label asp-for="Hscode"> </label>
+				    <div>
+					    <input asp-for="Hscode"/>
+					    <span asp-validation-for="Hscode"></span>
+				    </div>
+			    </div>
+
+
+
+			    @* <div class="form-group mt-3">
+                        <label asp-for="ProductCategoryId" ></label>
+                        <div>
+                        <select asp-for="ProductCategoryId" asp-items="SelectListConverter.CustomSelectListToSelectList(Model.ProductCategories)">
+                        <option value="@null">Select Category</option>
+                        </select>
+                        <span asp-validation-for="ProductCategoryId" ></span>
+                        </div>
+                        </div> *@
+
+			    <div class="form-group mt-3">
+				    <label asp-for="ProductCategoryId"></label>
+				    <div>
+					    <select asp-for="ProductCategoryId" asp-items="Model.ProductCategories.CustomSelectListToSelectList()">
+						    <option value="@null">Select Category</option>
+					    </select>
+					    <span asp-validation-for="ProductCategoryId"></span>
+				    </div>
+			    </div>
+
+			    <div class="form-group mt-3">
+				    <label asp-for="ProductGroupId"></label>
+				    <div>
+					    <select asp-for="ProductGroupId" asp-items="Model.ProductGroups.CustomSelectListToSelectList()">
+						    <option value="@null">Select Product Group</option>
+					    </select>
+
+					    <span asp-validation-for="ProductGroupId"></span>
+				    </div>
+			    </div>
+
+
+			    <div class="form-group mt-3">
+				    <label asp-for="MeasurementUnitId"></label>
+				    <div>
+					    <select asp-for="MeasurementUnitId" asp-items="Model.MeasurementUnits.CustomSelectListToSelectList()">
+						    <option value="@null">Select Measurement</option>
+					    </select>
+					    <span asp-validation-for="MeasurementUnitId"></span>
+				    </div>
+			    </div>
+			    @* <div class="form-group mt-3">
+				    <label asp-for="ProductTypeId"></label>
+				    <div>
+
+					    <select asp-for="ProductTypeId" asp-items="Model.ProductTypeSelectListItems.CustomSelectListToSelectList()">
+						    <option value="@null">Select Product Type</option>
+					    </select>
+					    <span asp-validation-for="ProductTypeId"></span>
+				    </div>
+			    </div> *@
+
+			    <div class="form-group mt-3">
+				    <label asp-for="ProductVattypeId"></label>
+				    <div>
+					    <select asp-for="ProductVattypeId">
+						    <option value="@null">Select VAT Type</option>
+						    @if (Model.ProductVatTypeList.Any())
+						    {
+							    foreach (var vattype in Model.ProductVatTypeList)
+							    {
+								    <option value="@vattype.ProductVattypeId"
+								            data-product-default-vat-percent="@vattype.DefaultVatPercent"
+								            data-is-vat-updatable="@vattype.IsVatUpdatable">
+									    @vattype.Name (@vattype.LocalSaleNote)
+								    </option>
+							    }
+						    }
+					    </select>
+					    <span asp-validation-for="ProductVattypeId"></span>
+				    </div>
+			    </div>
+
+			    <div class="form-group mt-3 ">
+				    <label asp-for="ProductDefaultVatPercent"></label>
+				    <div>
+					    <input asp-for="ProductDefaultVatPercent" readonly="readonly"/>
+					    <span asp-validation-for="ProductDefaultVatPercent"></span>
+				    </div>
+			    </div>
+			    <div class="form-group mt-3">
+				    <label>Reference Key </label>
+				    <div>
+					    <input asp-for="ReferenceKey" maxlength="10" title="Maximum 10 Characters"/>
+					    <span asp-validation-for="ReferenceKey"></span>
+
+				    </div>
+			    </div>
+
+			    <div class="form-group mt-3 d-none">
+				    <div class="custom-control custom-checkbox custom-control-inline">
+					    <input asp-for="IsNonRebateable" class="custom-control-input"/>
+					    <label asp-for="IsNonRebateable" class="custom-control-label">Is Non-Rebateable?</label>
+				    </div>
+			    </div>
+
+		    </div>
+	    </div>
+	    <div class="col-12">
+		    <div class="form-body">
+			    <div class="form-group mt-3">
+				    <label asp-for="Specification"></label>
+				    <div>
+					    <textarea asp-for="Specification"></textarea>
+					    <span asp-validation-for="Specification"></span>
+				    </div>
+			    </div>
+		    </div>
+		    <div class="form-body">
+			    <div class="form-group mt-3">
+				    <label asp-for="Description"></label>
+				    <div>
+					    <textarea asp-for="Description"></textarea>
+					    <span asp-validation-for="Description"></span>
+				    </div>
+			    </div>
+		    </div>
+	    </div>
+    </div>
+
+
+    <div class="float-end mt-3">
+	    <button type="submit" class="btn  btn-primary btn-sm"><i class="bi bi-check-lg"></i> Submit</button>
+	    <button type="button" value="Reset" onclick="location.reload();" class="btn  btn-warning btn-sm"><i class="bi bi-arrow-repeat"></i> Reset</button>
+	    <a asp-controller="Products" asp-action="Index" class="btn btn-secondary btn-sm"><i class="bi bi-slash-circle"></i> Cancel</a>
+    </div>
+    </form>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script src="~/CustomJs/Products/ProductCreate.js?vguid=@ViewStaticData.StaticFileVersionGuid"></script>
+}

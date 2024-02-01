@@ -1,0 +1,66 @@
+﻿@model vms.entity.viewModels.VmMonthlyComparisonHtmlDisplayViewModel
+
+@{
+	var session = Context.Session.GetComplexData<VmUserSession>(ControllerStaticData.SESSION);
+	ViewData["Title"] = "Monthly Comparison Report";
+	Layout = "_LayoutReport";
+}
+
+@section contentheader
+    {
+    <div class="p-3 page-header">
+        @ViewData["Title"]
+    </div>
+}
+
+
+<div class="row">
+    <div class="col-md-6 offset-3">
+        <form asp-action="MonthlyComparisonReport" class="form-horizontal" target="_blank">
+            <div class="row">
+                <div class="col-6">
+                    <label asp-for="FromYear" ></label>
+                    <input autocomplete="off" asp-for="FromYear"  type="number" min="2020" max="2050" />
+                    <span asp-validation-for="FromYear" ></span>
+                </div>
+                <div class="col-6">
+                    <label asp-for="FromMonth" > </label>
+                    <select asp-for="FromMonth" asp-items="Model.MonthList.CustomSelectListToSelectList()" >
+                        <option value="@null">Select</option>
+                    </select>
+                    <span asp-validation-for="FromMonth" ></span>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-6">
+                    <label asp-for="ToYear" ></label>
+                    <input autocomplete="off" asp-for="ToYear"  type="number" min="2020" max="2050" />
+                    <span asp-validation-for="ToYear" ></span>
+                </div>
+                <div class="col-6">
+                    <label asp-for="ToMonth" > </label>
+                    <select asp-for="ToMonth" asp-items="Model.MonthList.CustomSelectListToSelectList()" >
+                        <option value="@null">Select</option>
+                    </select>
+                    <span asp-validation-for="ToMonth" ></span>
+                </div>
+
+            </div>
+
+            <div class="form-group mt-3">
+                <label  asp-for="ReportProcessOptionId"></label>
+                <div>
+                    <select asp-for="ReportProcessOptionId" asp-items="Model.ReportOptionSelectListItems.CustomSelectListToSelectList()" >
+                        <option value="@null">Select Option</option>
+                    </select>
+                    <span asp-validation-for="ReportProcessOptionId" ></span>
+                </div>
+            </div>
+            <div class="form-group mt-3 float-end">
+                <button type="submit" class="btn btn-sm btn-primary"> <i class="bi bi-file-text"></i> Process Report</button>
+            </div>
+        </form>
+    </div>
+</div>

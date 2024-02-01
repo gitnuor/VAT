@@ -1,0 +1,18 @@
+﻿@model IEnumerable<vms.entity.models.ExportType>
+@{
+    ViewData["Title"] = "Export Types";
+
+}
+@{
+    var session = Context.Session.GetComplexData<VmUserSession>(ControllerStaticData.SESSION);
+}
+
+@section contentheader
+    {
+    <div class="p-3 page-header">
+        @ViewData["Title"]
+    </div>
+}
+<scrollable-grid-container>
+	<partial name="_Index" model="Model" />
+</scrollable-grid-container>

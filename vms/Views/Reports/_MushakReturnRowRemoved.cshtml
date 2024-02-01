@@ -1,0 +1,139 @@
+﻿@model vms.entity.viewModels.ReportsViewModel.VmMushakReturn
+
+
+<div class="ivat-bangla-font w-100 mushak-return-bangla">
+    <div class="w-1-6-row">
+        <img src="/images/logo_bd_govt.svg" height="80px" width="80px" />
+    </div>
+    <div class="w-4-6-row report-header">
+        <div class="mushak-return-company-other-info">গণপ্রজাতন্ত্রী বাংলাদেশ সরকার</div> 
+        <div class="mushak-return-company-name">জাতীয় রাজস্ব বোর্ড</div>
+        <div class="mushak-return-company-name">মূল্য সংযোজন কর দাখিলপত্র</div>
+        <div class="mushak-return-sub-header">[বিধি ৪৭ এর উপ-বিধি (১) দ্রষ্টব্য]</div>
+    </div>
+    <div class="w-1-6-row">
+        <div class="mushak-return-name text-center">মূসক-৯.১</div>
+    </div>
+    <br />
+    <div class="w-100">
+        <partial name="MushakReturn/_part1" model="Model.MushakReturnPartOne" />
+    </div>
+
+    <div class="w-100 mt-2">
+        <partial name="MushakReturn/_part2" model="Model.MushakReturnPartTwo" />
+    </div>
+
+    <div class="w-100 mt-2">
+        <partial name="MushakReturn/_part3" model="Model.MushakReturnPartThree" />
+    </div>
+
+    <div class="w-100 mt-2">
+        <partial name="MushakReturn/_part4" model="Model.MushakReturnPartFour" />
+    </div>
+
+    <div class="w-100 mt-2">
+        <partial name="MushakReturn/_part5" model="Model.MushakReturnPartFive" />
+    </div>
+
+    <div class="w-100 mt-2">
+        <partial name="MushakReturn/_part6" model="Model.MushakReturnPartSix" />
+    </div>
+
+    <div class="w-100 mt-2">
+        <partial name="MushakReturn/_part7" model="Model.MushakReturnPartSeven" />
+    </div>
+    <div class="w-100 mt-2">
+        <partial name="MushakReturn/_part8" model="Model.MushakReturnPartEight" />
+    </div>
+    <div class="w-100 mt-2">
+        <partial name="MushakReturn/_part9" model="Model.MushakReturnPartNineList" />
+    </div>
+    <div class="w-100 mt-2">
+        <partial name="MushakReturn/_part10" model="Model.MushakReturnPartTen" />
+    </div>
+    <div class="w-100 mt-2">
+        <div class="col-12">
+            <partial name="MushakReturn/_part11" model="Model.MushakReturnPartEleven" />
+        </div>
+    </div>
+    <div class="w-100 mt-2">
+        <partial name="MushakReturn/_part12" model="Model.MushakReturnPartOne" />
+    </div>
+    <div class="ivat-page-break"></div>
+    <div class="w-100 mt-2">
+        @{
+            if (Model.MushakReturnSubFormKaList.Any())
+            {
+                var sfKas = Model.MushakReturnSubFormKaList.Select(sfk => sfk.SubFormName).Distinct();
+
+                foreach (var sfka in sfKas)
+                {
+                    <div id="subFormKa" style="font-weight:bold !important"><div class="parthead">@sfka</div></div>
+                    <partial name="MushakReturn/_ka" model="Model.MushakReturnSubFormKaList.Where(sfk => sfk.SubFormName == sfka)" />
+                }
+            }
+            else
+            {
+                <div id="subFormKa" style="font-weight:bold !important"><div class="parthead">সাবফর্ম- ক (নোট ১, ২, ৩, ৪, ৫, ৭, ১০, ১১, ১২, ১৩, ১৪,  ১৫, ১৬, ১৭, ১৯, ২০, ২১, ২২ এর জন্য প্রযোজ্য)</div></div>
+                <partial name="MushakReturn/_ka" model="Model.MushakReturnSubFormKaList" />
+            }
+            
+        }
+    </div>
+    <div class="w-100 mt-2">
+        <partial name="MushakReturn/_kha" model="Model.MushakReturnSubFormKhaList" />
+    </div>
+
+    <div class="w-100 mt-2" id="subFormGa">
+        @{
+            if (Model.MushakReturnSubFormGaList.Any())
+            {
+                var sfKas3 = Model.MushakReturnSubFormGaList.Select(sfk => sfk.SubFormName).Distinct();
+
+                foreach (var sfka3 in sfKas3)
+                {
+                    <div id=""><div class="parthead">@sfka3</div></div>
+                    <partial name="MushakReturn/_ga" model="Model.MushakReturnSubFormGaList.Where(ga => ga.SubFormName == sfka3)" />
+                }
+            }
+            else
+            {
+                <div id=""><div class="parthead">সাবফর্ম- গ (নোট ৬, ১৮ এর জন্য প্রযোজ্য)</div></div>
+                <partial name="MushakReturn/_ga" model="Model.MushakReturnSubFormGaList" />
+            }
+             }
+    </div>
+    @* <div class="ivat-page-break"></div> *@
+    <div class="w-100 mt-2">
+        <partial name="MushakReturn/_gha" model="Model.MushakReturnSubFormGhaList" />
+    </div>
+    @* <div class="ivat-page-break"></div> *@
+    <div class="w-100 mt-2">
+        <partial name="MushakReturn/_ungho" model="Model.MushakReturnSubFormUmaList" />
+    </div>
+    <div class="w-100 mt-2">
+        <partial name="MushakReturn/_ca" model="Model.MushakReturnSubFormChaList" />
+    </div>
+    <div class="w-100 mt-2">
+        @{
+            if (Model.MushakReturnSubFormChhaList.Any())
+            {
+                var sfKas7 = Model.MushakReturnSubFormChhaList.Select(sfk => sfk.SubFormName).Distinct();
+
+                foreach (var sfka7 in sfKas7)
+                {
+
+                    <div class="parthead" id="">@sfka7</div>
+                    <partial name="MushakReturn/_cha" model="Model.MushakReturnSubFormChhaList.Where(chh => chh.SubFormName == sfka7)" />
+
+                }
+            }
+            else
+            {
+    <div class="parthead" id="">সাবফর্ম- ছ (নোট ৫২, ৫৩, ৫৪, ৫৫, ৫৬, ৫৭, ৫৮, ৫৯, ৬০, ৬১ এর জন্য প্রযোজ্য)</div>
+                <partial name="MushakReturn/_cha" model="Model.MushakReturnSubFormChhaList" />
+            }
+            
+        }
+    </div>
+</div>

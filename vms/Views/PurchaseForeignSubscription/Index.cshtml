@@ -1,0 +1,13 @@
+﻿@model IEnumerable<vms.entity.models.ViewPurchase>
+@{
+	ViewData["Title"] = "Foreign Purchase (Subscription)";
+}
+
+@section contentheader
+	{
+	<partial name="Purchase/_PurchaseHeader" />
+}
+
+<scrollable-grid-container>
+	<partial name="_Index" model="Model" />
+</scrollable-grid-container>

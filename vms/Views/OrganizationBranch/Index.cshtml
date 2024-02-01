@@ -1,0 +1,28 @@
+﻿@model IEnumerable<vms.entity.models.OrgBranch>
+@{
+	ViewData["Title"] = "Branch List";
+
+	var session = Context.Session.GetComplexData<VmUserSession>(ControllerStaticData.SESSION);
+}
+
+@section contentheader
+{
+	<div class="p-2 page-header d-flex">
+		<div class="flex-grow-1">
+			@ViewData["Title"]
+		</div>
+		<div class="d-flex justify-content-start">
+
+			@if (UserAuthorization.Check(FeatureList.ADMINSTRATION_USERS_CAN_ADD, session.Rights))
+			{
+				<div class="pr-1">
+					<a href="@Url.Action("Create", "OrganizationBranch")" class="btn btn-primary btn-sm"><i class="bi bi-plus"></i> Add Branch</a>
+				</div>
+			}
+
+		</div>
+	</div>
+}
+<scrollable-grid-container>
+	<partial name="_Index" model="Model" />
+</scrollable-grid-container>

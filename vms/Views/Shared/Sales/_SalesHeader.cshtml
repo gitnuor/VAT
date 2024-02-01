@@ -1,0 +1,46 @@
+﻿@{
+	var session = Context.Session.GetComplexData<VmUserSession>(ControllerStaticData.SESSION);
+}
+
+<div class="p-2 page-header d-flex">
+	<div class="flex-grow-1">
+		@ViewData["Title"]
+	</div>
+	<div class="d-flex justify-content-start">
+
+		@if (UserAuthorization.Check(FeatureList.SALE_SALE_LIST_CAN_ADD, session.Rights))
+		{
+			<div class="me-1">
+				<a asp-controller="SalesLocal" asp-action="SaleLocal" class="btn btn-primary btn-sm"><i class="bi bi-plus"></i> Local</a>
+			</div>
+			<div class="me-1">
+				<a asp-controller="SalesForeign" asp-action="SaleExport" class="btn btn-success btn-sm"><i class="bi bi-plus"></i> Export (Foreign)</a>
+			</div>
+		}
+	</div>
+</div>
+<div class="col-12">
+	<ul class="nav nav-pills mr-auto align-bottom purchaseNavBar">
+		<li class="nav-item">
+			<a class="nav-link" asp-controller="Sales" asp-action="Index">All</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" asp-controller="SalesLocal" asp-action="Index">Local Sales</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" asp-controller="SalesForeign" asp-action="Index">Foreign Sales</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" asp-controller="Sales" asp-action="SaleVds">VDS List</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" asp-controller="Sales" asp-action="SalesDue">Due</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" asp-controller="Sales" asp-action="UploadSimplifiedLocalSaleWithoutPaymentList">Upload</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" asp-controller="SalesPriceReduce" asp-action="Index">Price Reduce (Credit Note)</a>
+		</li>
+	</ul>
+</div>

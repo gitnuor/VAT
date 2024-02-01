@@ -1,0 +1,57 @@
+﻿@model vms.entity.viewModels.SalesReport.SalesReportByBranchParameterViewModel
+@{
+	ViewData["Title"] = "Sales Report";
+	Layout = "_LayoutReport";
+}
+
+
+
+@section contentheader
+{
+	<div class="p-3 page-header">
+		@ViewData["Title"]
+	</div>
+}
+
+
+<div class="row">
+	<div class="col-md-6 offset-3">
+		<form asp-action="SalesReportByBranch" class="form-horizontal" target="_blank">
+			<div class="form-group">
+				<label  asp-for="FromDate"></label>
+				<div>
+					<input asp-for="FromDate"  type="date"/>
+					<span asp-validation-for="FromDate" ></span>
+				</div>
+			</div>
+			<div class="form-group mt-3">
+				<label  asp-for="ToDate"></label>
+				<div>
+					<input asp-for="ToDate"  type="date"/>
+					<span asp-validation-for="ToDate" ></span>
+				</div>
+			</div>
+			<div class="form-group mt-3">
+				<label  asp-for="BranchId"></label>
+				<div>
+					<select asp-for="BranchId" asp-items="Model.BranchSelectListItems.CustomSelectListToSelectList()" >
+						<option value="@null">Select Branch</option>
+					</select>
+					<span asp-validation-for="BranchId" ></span>
+				</div>
+			</div>
+			<div class="form-group mt-3">
+				<label  asp-for="ReportProcessOptionId"></label>
+				<div>
+					<select asp-for="ReportProcessOptionId" asp-items="Model.ReportOptionSelectListItems.CustomSelectListToSelectList()" >
+						<option value="@null">Select Option</option>
+					</select>
+					<span asp-validation-for="ReportProcessOptionId" ></span>
+				</div>
+			</div>
+			<div class="form-group mt-3 float-end">
+				<button type="submit" class="btn btn-sm btn-primary"> <i class="bi bi-file-text"></i> Process Report</button>
+			</div>
+		</form>
+	</div>
+</div>

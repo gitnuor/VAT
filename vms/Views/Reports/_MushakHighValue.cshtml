@@ -1,0 +1,118 @@
+﻿@model vms.entity.viewModels.ReportsViewModel.VmMushakHighValue
+
+<style>
+
+    .MreturnHeader {
+        text-align: center;
+        background-color: #ffedbe;
+    }
+
+
+    .Returntd {
+        text-align: left;
+    }
+
+    .Returntdhead {
+        text-align: center;
+    }
+    .ReturntdEmpty {
+        
+        background-color: lightgray;
+    }
+    .tdp1 {
+        width: 320px;
+    }
+
+    .tdp2 {
+        width: 30px;
+        text-align: center;
+    }
+    .report-margin {
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+</style>
+
+
+
+<div class="report-margin">
+    <div class="col-xs-12">
+
+        <div class="col-xs-3">
+
+            <img src="~/images/logo_bd_govt.svg" style="height :100px;" />
+
+
+        </div>
+
+        
+        <div class="col-xs-6" style="text-align:center">
+
+            <h3>গণপ্রজাতন্ত্রী বাংলাদেশ সরকার</h3>
+            <h3>জাতীয় রাজস্ব বোর্ড</h3>
+            <h4>২ (দুই) লক্ষ টাকার অধিক মূল্যমানের ক্রয়-বিক্রয় চালানপত্রের তথ্য</h4>
+            <h4>[বিধি ৪২ এর উপ-বিধি (১) দ্রষ্টব্য]</h4>
+
+        </div>
+
+        <div class="col-xs-3 pull-right">
+            <h3 style="color:green; border:solid; border-color:cornflowerblue; text-align:center"> মূসক-৬.১০</h3>
+
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <div class="col-xs-12">
+
+
+        <div class="col-xs-6" style="text-align:left">
+            <h5>নিবন্ধিত/তালিকাভুক্ত ব্যক্তির নাম :  @Model.SpPurcSalesChallanForHighValuePurchase.TaxRegisteredName</h5>
+
+
+        </div>
+
+
+        <div class="col-xs-6" style="text-align:left">
+
+            <h5>বিআইএন:  @Model.SpPurcSalesChallanForHighValuePurchase.TaxRegisteredBIN </h5>
+
+        </div>
+
+    </div>
+
+
+
+
+    <div class="row">
+
+
+        <partial name="Highvalue/_part1" model="Model.SpPurcSalesChallanForHighValuePurchaseList" />
+
+    </div>
+
+    <div class="row">
+
+
+        <partial name="Highvalue/_part2" model="Model.SpPurcSalesChallanForHighValueSaleList" />
+
+    </div>
+
+    <div class="col-xs-12">
+
+
+        <div class="col-xs-6" style="text-align:left">
+            <h5>দায়িত্বপ্রাপ্ত ব্যক্তির স্বাক্ষর :  </h5>
+            <h5>নাম :  @Model.SpPurcSalesChallanForHighValuePurchase.VatResponsiblePersonName </h5>
+            <h5>তারিখ : @Model.SpPurcSalesChallanForHighValuePurchase.VatChallanIssueDate </h5>
+
+
+        </div>
+
+    </div>
+</div>

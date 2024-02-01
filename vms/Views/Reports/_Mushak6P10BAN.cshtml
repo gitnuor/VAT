@@ -1,0 +1,218 @@
+﻿@model vms.entity.viewModels.ReportsViewModel.VmMushakHighValDisplay
+
+<div class="row ivat-bangla-font">
+    <div class="col-12">
+        <p class="mushak-name">মূসক - ৬.১০</p>
+    </div>
+    <div class="col-12 report-header">
+        <p class="company-name" style="font-size:14px!important; margin-bottom:0px">গণপ্রজাতন্ত্রী বাংলাদেশ সরকার</p>
+        <p class="company-name" style="font-size:14px!important;">জাতীয় রাজস্ব বোর্ড</p>
+        <p class="sub-header"><b>২ (দুই) লক্ষ টাকার অধিক মূল্যমানের ক্রয়-বিক্রয় চালানপত্রের তথ্য</b></p>
+
+        <p class="sub-header" style="font-size:16px!important;">
+            [ বিধি ৪২ এর উপ-বিধি (১) দ্রষ্টব্য ]
+        </p>
+    </div>
+
+    <div class="col-8" style="text-align:left">
+
+        <p class="sub-header">নিবন্ধিত/তালিকাভুক্ত ব্যক্তির নাম : @Model.OrgName</p>
+
+
+    </div>
+    <div class="col-4">
+        <p class="sub-header" style="text-align:end !important">বি আই এন: @Model.OrgBin</p>
+    </div>
+
+
+
+    <div class="col-12">
+        <p class="sub-header" style="text-align:center !important"><b>অংশ-ক : ক্রয় হিসাব তথ্য</b></p>
+        <table class="table table-bordered align-middle" style="text-align:center">
+            <thead>
+
+                <tr>
+                    <td rowspan="2">
+                        ক্রমিক নং
+                    </td>
+                    <td colspan="6">
+                        ক্রয়
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>
+                        চালানপত্র নং
+                    </td>
+                    <td>
+                        ইস্যুর তারিখ
+                    </td>
+                    <td>
+                        মূল্য
+                    </td>
+                    <td>
+                        বিক্রেতার নাম
+                    </td>
+                    <td>
+                        বিক্রেতার ঠিকানা
+                    </td>
+                    <td>
+                        বিক্রেতার বিআইএন/জাতীয়
+                        পরিচয়পত্র নং *
+                    </td>
+
+                </tr>
+
+
+                <tr>
+                    <td>(১)</td>
+                    <td>(২)</td>
+                    <td>(৩)</td>
+                    <td>(৪)</td>
+                    <td>(৫)</td>
+                    <td>(৬)</td>
+                    <td>(৭)</td>
+
+                </tr>
+            </thead>
+            <tbody style="text-align:center">
+                @if (Model.VmHigh.SpPurcSalesChallanForHighValuePurchaseList.Any())
+                {
+                    foreach (var type in Model.VmHigh.SpPurcSalesChallanForHighValuePurchaseList)
+                    {
+                        <tr>
+                            <td>@type.Sl</td>
+                            <td>@type.VatChallanNo</td>
+                            <td>@type.VatChallanIssueDate</td>
+                            <td>@StringGenerator.DecimalToCommaSeparated(type.ProdPriceInclVATAndDuty)</td>
+                            <td>@type.VendorName</td>
+                            <td>@type.VendorAddress</td>
+                            <td>@type.VendorBinOrNid</td>
+
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="7">
+                            No Data Found
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+        <br />
+    </div>
+
+
+    <div class="col-12">
+        <p class="sub-header" style="text-align:center !important"><b>অংশ-খ : বিক্রয় হিসাব তথ্য</b></p>
+        <table class="table table-bordered align-middle" style="text-align:center">
+            <thead>
+
+                <tr>
+                    <td rowspan="2">
+                        ক্রমিক নং
+                    </td>
+                    <td colspan="6">
+                        বিক্রয়
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>
+                        চালানপত্র নং
+                    </td>
+                    <td>
+                        ইস্যুর তারিখ
+                    </td>
+                    <td>
+                        মূল্য
+                    </td>
+                    <td>
+                        ক্রেতার নাম
+                    </td>
+                    <td>
+                        ক্রেতার ঠিকানা
+                    </td>
+                    <td>
+                        ক্রেতার বিআইএন/জাতীয়
+                        পরিচয়পত্র নং *
+                    </td>
+
+                </tr>
+
+
+                <tr>
+                    <td>(১)</td>
+                    <td>(২)</td>
+                    <td>(৩)</td>
+                    <td>(৪)</td>
+                    <td>(৫)</td>
+                    <td>(৬)</td>
+                    <td>(৭)</td>
+
+                </tr>
+            </thead>
+            <tbody style="text-align:center">
+                @if (Model.VmHigh.SpPurcSalesChallanForHighValueSaleList.Any())
+                {
+                    foreach (var type in Model.VmHigh.SpPurcSalesChallanForHighValueSaleList)
+                    {
+                        <tr>
+                            <td>@type.Sl</td>
+                            <td>@type.VatChallanNo</td>
+                            <td>@type.SalesDate</td>
+                            <td>@StringGenerator.DecimalToCommaSeparated(type.ProdPriceInclVATAndDuty)</td>
+                            <td>@type.CustomerName</td>
+                            <td>@type.CustomerAddress</td>
+                            <td>@type.CustomerBIN</td>
+
+
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="7">
+                            No Data Found
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+        <br />
+    </div>
+
+
+
+    <div class="col-12 mt-4" style="margin-left:70px !important">
+
+        <p class="company-other-info">দায়িত্বপ্রাপ্ত ব্যক্তির স্বাক্ষর : </p>
+
+        <p class="company-other-info">
+            নাম : @Model.VmHigh.SpPurcSalesChallanForHighValuePurchaseList.Select(x => x.VatResponsiblePersonName).FirstOrDefault()
+        </p>
+        <p class="company-other-info">পদবী : @Model.VmHigh.SpPurcSalesChallanForHighValuePurchaseList.Select(x => x.VatResponsiblePersonDesignation).FirstOrDefault()</p>
+        <p class="company-other-info">
+            তারিখ :
+        </p>
+
+    </div>
+
+
+    <div class="col-12 mt-4">
+
+        <p class="company-other-info"><b>
+    * যেইক্ষেত্রে অনিবন্ধিত ব্যক্তির নিকট হইতে পণ্য/সেবা ক্রয় করা হইবে বা অনিবন্ধিত ব্যক্তির নিকট পণ্য/সেবা বিক্রয় করা হইবে, সেই ক্ষেত্রে উক্ত ব্যক্তির পূর্ণাঙ্গ নাম, ঠিকানা ও জাতীয় পরিচয়পত্র নম্বর যথাযথভাবে সংশ্লিষ্ট কলাম [(৫),(৬) ও (৭)] এ আবশ্যিকভাবে উল্লেখ করিতে হইবে।
+</b></p>
+
+    </div>
+
+</div>

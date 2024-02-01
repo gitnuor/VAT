@@ -1,0 +1,201 @@
+﻿@model vms.entity.viewModels.VmCalculationBookParam
+
+
+            <div class="row ivat-bangla-font">
+                <div class="col-12">
+                    <div class="mushak-name">মূসক- ৬.২</div>
+                </div>
+                <div class="col-12 report-header">
+                    <div class="company-other-info">"গনপ্রজাতন্ত্রী বাংলাদেশ সরকার"</div>
+                    <div class="company-other-info">জাতীয় রাজস্ব বোর্ড</div>
+                    <div class="company-name mt-2">@Model.OrgName</div>
+                    <div class="company-other-info">@Model.OrgAddress</div>
+                    <div class="company-other-info">@Model.OrgBin</div>
+                    <div class="sub-header">
+                        বিক্রয় হিসাব পুস্তক
+                    </div>
+                    <div class="sub-header">
+                        (পণ্য বা সেবা প্রক্রিয়াকরণে সম্পৃক্ত  এমন নিবন্ধিত বা তালিকাভুক্ত ব্যক্তির জন্য প্রযোজ্য)
+                    </div>
+                    <div class="sub-header">
+                        [বিধি ৪০ (১) এর দফা (ক) ও বিধি ৪১ এর দফা (ক) দ্রষ্টব্য]
+                    </div>
+
+
+                </div>
+                <br />
+                <div class="col-12">
+
+                    <table class="table table-bordered align-middle" style="text-align:center">
+                        <thead>
+                            <tr>
+                                <td colspan="21">পণ্য/সেবার বিক্রয়</td>
+                            </tr>
+                            <tr>
+                                <td rowspan="2">
+                                    ক্রমিক সংখ্যা
+                                </td>
+                                <td rowspan="2">
+                                    তারিখ
+                                </td>
+                                <td colspan="2">
+                                    উৎপাদিত পণ্য/সেবার প্রারম্ভিক জের
+                                </td>
+                                <td colspan="2">
+                                    উৎপাদন
+                                </td>
+                                <td colspan="2">
+                                    মোট উৎপাদিত পণ্য / সেবার
+                                </td>
+                                <td colspan="3">
+                                    ক্রেতা /সরবরাহকারী
+                                </td>
+                                <td colspan="2">
+                                    চালানপত্রের বিবরণ
+                                </td>
+                                <td colspan="5">
+                                    বিক্রিত/সরবরাহকৃত পণ্যের বিবরণ
+                                </td>
+                                <td colspan="2">
+                                    পণ্যের প্রান্তিক জের
+                                </td>
+                                <td rowspan="2">
+                                    মন্তব্য
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    পরিমাণ (একক)
+                                </td>
+                                <td>
+                                    মূল্য (সকল প্রকার কর ব্যতীত)
+                                </td>
+                                <td>
+                                    পরিমাণ (একক)
+                                </td>
+                                <td>
+                                    মূল্য (সকল প্রকার কর ব্যতীত)
+                                </td>
+                                <td>
+                                    পরিমাণ (একক)
+                                </td>
+                                <td>
+                                    মূল্য (সকল প্রকার কর ব্যতীত)
+                                </td>
+                                <td>
+                                    নাম
+                                </td>
+                                <td>
+                                    ঠিকানা
+                                </td>
+                                <td>
+                                    নিবন্ধন/তালিকাভুক্তি/জাতীয় পরিচয়পত্র
+                                </td>
+                                <td>
+                                    নম্বর
+                                </td>
+                                <td>
+                                    তারিখ
+                                </td>
+                                <td>
+                                    বিবরণ
+                                </td>
+                                <td>
+                                    পরিমাণ
+                                </td>
+                                <td>
+                                    করযোগ্য মূল্য
+                                </td>
+                                <td>
+                                    সম্পূরক শুল্ক(যদি থাকে)
+                                </td>
+                                <td>
+                                    মূসক
+                                </td>
+                                <td>
+                                    পরিমাণ (একক)
+                                </td>
+                                <td>
+                                    মূল্য (সকল প্রকার কর ব্যতীত)
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <td>(১)</td>
+                                <td>(২)</td>
+                                <td>(৩)</td>
+                                <td>(৪)</td>
+                                <td>(৫)</td>
+                                <td>(৬)</td>
+                                <td>(৭)</td>
+                                <td>(৮)</td>
+                                <td>(৯)</td>
+                                <td>(১০)</td>
+                                <td>(১১)</td>
+                                <td>(১২)</td>
+                                <td>(১৩)</td>
+                                <td>(১৪)</td>
+                                <td>(১৫)</td>
+                                <td>(১৬)</td>
+                                <td>(১৭)</td>
+                                <td>(১৮)</td>
+                                <td>(১৯)</td>
+                                <td>(২০)</td>
+                                <td>(২১)</td>
+                            </tr>
+                        </thead>
+                        <tbody style="text-align:center">
+                            @if (Model.SaleCalcBook.Count() > 0)
+                            {
+                                foreach (var type in Model.SaleCalcBook)
+                                {
+                <tr>
+	                <td class="text-right">@type.SlNo</td>
+                    <td>@type.OperationTime</td>
+                    <td class="text-right">@StringGenerator.DecimalToCommaSeparated(type.InitialQty) (@type.MeasurementUnitName)</td>
+                    <td class="text-right">@StringGenerator.DecimalToCommaSeparated(type.InitPriceWithoutVat)</td>
+                    <td class="text-right">@StringGenerator.DecimalToCommaSeparated(type.ProductionQty) (@type.MeasurementUnitName)</td>
+                    <td class="text-right">@StringGenerator.DecimalToCommaSeparated(@type.PriceOfProdFromProduction)</td>
+                    <td class="text-right">@StringGenerator.DecimalToCommaSeparated(type.TotalProductionQty) (@type.MeasurementUnitName)</td>
+                    <td class="text-right">@StringGenerator.DecimalToCommaSeparated(type.TotalProductionPrice)</td>
+                    <td>@type.CustomerName</td>
+                    <td>@type.CustomerAddress</td>
+                    <td>@type.CustomerBinOrNid</td>
+                    <td>@type.VatChallanNo</td>
+                    <td>@type.SalesDate</td>
+                    <td>@type.ProductName</td>
+                    <td class="text-right">@StringGenerator.DecimalToCommaSeparated(type.SalesQty) (@type.MeasurementUnitName)</td>
+                    <td class="text-right">@StringGenerator.DecimalToCommaSeparated(type.TaxablePrice)</td>
+                    <td class="text-right">@StringGenerator.DecimalToCommaSeparated(type.SupplementaryDuty)</td>
+                    <td class="text-right">@StringGenerator.DecimalToCommaSeparated(type.ProdVatAmount)</td>
+                    <td class="text-right">@StringGenerator.DecimalToCommaSeparated(type.ClosingProdQty) (@type.MeasurementUnitName)</td>
+                    <td class="text-right">@StringGenerator.DecimalToCommaSeparated(type.ClosingProdPrice)</td>
+                    <td>@type.OperationType</td>
+                </tr> }
+                            }
+                            else
+                            {
+                <tr>
+                    <td colspan="21">
+                        No Data Found
+                    </td>
+                </tr>}
+                        </tbody>
+
+                    </table>
+
+                </div>
+                <div class="col-12 mt-3">
+                    <div class="special-note-title">বিশেষ দ্রষ্টব্য:</div>
+
+                    <div class="special-note-items">
+                        <div class="special-note-list-item">
+                            * যে ক্ষেত্রে অনিবন্ধিত ব্যক্তির নিকট হইতে পণ্য বিক্রয় করা হইবে সেই ক্ষেত্রে উক্ত ব্যক্তির পূর্ণাঙ্গ নাম, ঠিকানা ও জাতীয় পরিচয়পত্র নম্বর যথাযথভাবে সংশ্লিষ্ট কলাম [(৯),(১০)ও(১১)] এ আবশ্যিকভাবে উল্লেখ করিতে হইবে।
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        

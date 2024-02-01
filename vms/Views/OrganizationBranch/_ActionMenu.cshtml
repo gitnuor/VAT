@@ -1,0 +1,22 @@
+﻿@model vms.entity.models.OrgBranch
+@{
+    var session = Context.Session.GetComplexData<VmUserSession>(ControllerStaticData.SESSION);
+}
+
+<div class="nav navbar-nav">
+	<div class="dropdown dropdown-freeze-grid-action">
+		<a href="#" class="" data-bs-toggle="dropdown" data-close-others="true">
+			<i class="text-dark bi bi-three-dots-vertical"></i>
+		</a>
+		<ul class=" dropdown-menu dropdown-menu-right div-with-arrow-right-top">
+            @if (UserAuthorization.Check(FeatureList.ADMINSTRATION_USERS_CAN_EDIT, session.Rights))
+            {
+                <li>
+                    <a class="dropdown-item" asp-action="Edit" asp-route-id="@Model.EncryptedId"><i class="bi bi-pencil-square"></i> Edit</a>
+                </li>
+            }
+
+        
+        </ul>
+    </div>
+</div>

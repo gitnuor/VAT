@@ -1,0 +1,39 @@
+﻿@model IEnumerable<vms.entity.StoredProcedureModel.MushakReturn.MushakReturnPartNine>
+<table class="table table-bordered">
+    @*<thead>*@
+
+        <tr>
+
+            <th class="MreturnHeader" colspan="5" style="background-color: #FBD4B4!important">
+
+                <div class="parthead">Part-9: ACCOUNTS CODE WISE PAYMENT SCHEDULE (TREASURY DEPOSIT) </div>
+            </th>
+        </tr>
+    @*</thead>
+    <tbody class="Returntd">*@
+
+        <tr class="Returntdhead text-center font-weight-bold" style="background-color: #BFBFBF !important">
+            <td class="Returntdhead" style="text-align:center !important"><b> Items</b></td>
+            <td><b>Note</b></td>
+            <td><b>Economic Code</b></td>
+            <td><b>Amount</b></td>
+            <td><b></b></td>
+        </tr>
+
+        @if (Model.Any())
+        {
+
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.TypeName</td>
+                    <td class="text-center" style="text-align:center !important">@item.NoteNo</td>
+                    <td style="text-align:center !important">@item.EconomicCode</td>
+                    <td class="text-right" style="text-align:right !important">@StringGenerator.DecimalToCommaSeparated(item.PaidAmount)</td>
+                    <td><a href="#@item.SubFormId">Subform- ch  </a></td>
+                </tr>
+
+            }
+        }
+    @*</tbody>*@
+</table>

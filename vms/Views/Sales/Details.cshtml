@@ -1,0 +1,332 @@
+﻿@model vms.entity.viewModels.VmSalesDetail
+
+@{
+	ViewData["Title"] = "Sales Details";
+
+	var i = 1;
+	var j = 1;
+	decimal totalVat = 0, totalSd = 0, totalPriceWithVat = 0, totalPriceWithoutVat = 0, totalDiscount = 0;
+}
+
+@section contentheader
+{
+	<div class="p-2 page-header d-flex">
+		<div class="flex-grow-1">
+			@ViewData["Title"]
+		</div>
+		@*@if (Model.Sale.IsApproved == true)
+		{*@
+		<div class="d-flex justify-content-start">
+			<a asp-controller="Mushak" asp-action="MushakSixPointThree" asp-route-id="@Model.Sale.EncryptedId" asp-route-language="0" class="btn btn-primary btn-sm me-1" target="_blank"><i class="bi bi-file-text"></i> Mushak- 6.3 (Ban)</a>
+			<a asp-controller="Mushak" asp-action="MushakSixPointThree" asp-route-id="@Model.Sale.EncryptedId" asp-route-language="1" class="btn btn-success btn-sm me-1" target="_blank"><i class="bi bi-file-text"></i> Mushak- 6.3 (Eng)</a>
+			<a asp-action="Index" class="btn btn-secondary btn-sm me-1"><< Back</a>
+			<button id="btnPrint" type="button" class="btn btn-sm btn-primary"><i class="bi bi-printer-fill"></i> Print</button>
+		</div>
+		@*}*@
+
+	</div>
+}
+
+<div class="report-margin" id="printableArea">
+<div class="mt-3">
+	<div class="font-weight-bold mb-3">General Information</div>
+	<div class="row">
+		<div class="col-4">
+			<div class="row">
+				<div class="col-12">
+					Customer Name: @Model.Sale.Customer.Name
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-12">
+					Contact: @Model.Sale.Customer.PhoneNo
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-12">
+					Shipping Address: @Model.Sale.ShippingAddress
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-12">
+					Sales Type: @Model.Sale.SalesType.SalesTypeName
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-12">
+					Export Type: @Model.Sale?.ExportType?.ExportTypeName
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-12">
+					Invoice No: @Model.Sale?.InvoiceNo
+				</div>
+			</div>
+		</div>
+
+		<div class="col-4">
+			<div class="row">
+				<div class="col-12">
+						Work Order No: @Model.Sale?.WorkOrderNo
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-12">
+						Sales Delivery Type: @Model.Sale?.SalesDeliveryType.Name
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-12">
+						Delivery Date: @Model.Sale?.DeliveryDate.DateTimeToStringWithoutTime()
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-12">
+						LC Number: @Model.Sale?.LcNo
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-12">
+						PO Number: @Model.Sale?.CustomerPoNumber
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-12">
+						LC Date: @Model.Sale?.LcDate.DateTimeToStringWithoutTime()
+				</div>
+			</div>
+		</div>
+
+		<div class="col-4">
+
+
+			<div class="row">
+				<div class="col-12">
+					Com Date: @StringGenerator.DateTimeToStringWithoutTime(Model.Sale.SalesDate)
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-12">
+					Due Date: @Model.Sale.DueDate.DateTimeToStringWithoutTime()
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-12">
+					Sales Reason: @Model.Sale.SalesRemarks
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-12">
+					Receivable Amount: @Model.Sale.ReceivableAmount.DecimalToCommaSeparated()
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-12">
+					Discount: @StringGenerator.DecimalToCommaSeparated(Model.Sale.TotalDiscountOnIndividualProduct)
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-12">
+					Payment Receive Amount: @Model.Sale.PaymentReceiveAmount.DecimalToCommaSeparated()
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-12">
+					Payment Due Amount: @Model.Sale.PaymentDueAmount.DecimalToCommaSeparated()
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="col-md-12 mt-3">
+	<div class="font-weight-bold mb-3">Product Information</div>
+
+	<table class="table table-bordered" id="gridTable">
+		<thead>
+		<tr class="table-light">
+			<th>Serial</th>
+			<th>Product</th>
+			<th>M. Unit</th>
+			<th>Qty</th>
+			<th>Unit Price</th>
+			<th>Total Price Without Vat</th>
+			<th>Discount/Item</th>
+			<th>Discount Amount</th>
+			<th>VAT Type</th>
+			<th>VAT (%)</th>
+			<th>Vat Amount</th>
+			<th>SD (%)</th>
+			<th>SD Amount</th>
+			<th>Total Price</th>
+
+
+		</tr>
+		</thead>
+
+		<tbody id="tblPurchaseOD">
+		@foreach (var item in Model.SalesDetails)
+		{
+			var discountAmount = item.DiscountPerItem * item.Quantity;
+			var priceWithoutVat = item.UnitPrice * item.Quantity;
+			var sdAmount = priceWithoutVat * item.SupplementaryDutyPercent / 100;
+			var vatAmount = (priceWithoutVat + sdAmount) * item.Vatpercent / 100;
+			var priceWithVat = priceWithoutVat + vatAmount + sdAmount - discountAmount;
+			totalPriceWithVat += priceWithVat;
+			totalPriceWithoutVat += priceWithoutVat;
+			totalSd += sdAmount;
+			totalVat += vatAmount;
+			totalDiscount += discountAmount;
+
+			<tr class="table-light">
+				<td class="text-right">@i</td>
+				<td>
+					@item.Product.Name
+					@if (item.Product.Hscode != null)
+					{
+						<br/>
+						<span>Hscode: @item.Product.Hscode</span>
+					}
+					@if (item.Product.ProductType != null)
+					{
+						<br/>
+						<span>ProductType: @item.Product.ProductType.Name</span>
+					}
+					@if (item.Product.ProductCategory != null)
+					{
+						<br/>
+						<span>ProductCategory: @item.Product.ProductCategory.Name</span>
+					}
+					@if (item.Product.Brand != null)
+					{
+						<br/>
+						<span>Brand: @item.Product.Brand.Name</span>
+					}
+					@if (item.Product.ModelNo != null)
+					{
+						<br/>
+						<span>ModelNo: @item.Product.ModelNo</span>
+					}
+					@if (item.Product.Code != null)
+					{
+						<br/>
+						<span>Code: @item.Product.Code</span>
+					}
+					@if (item.Product.Variant != null)
+					{
+						<br/>
+						<span>Variant: @item.Product.Variant</span>
+					}
+					@if (item.Product.Color != null)
+					{
+						<br/>
+						<span>Color: @item.Product.Color</span>
+					}
+					@if (item.Product.Size != null)
+					{
+						<br/>
+						<span>Size: @item.Product.Size</span>
+					}
+					@if (item.Product.Weight != null)
+					{
+						<br/>
+						<span>Weight: @item.Product.Weight</span>
+					}
+					@if (item.Product.Specification != null)
+					{
+						<br/>
+						<span>Specification: @item.Product.Specification</span>
+					}
+				</td>
+				<td>@item.MeasurementUnit.Name</td>
+				<td class="text-right">@StringGenerator.DecimalToCommaSeparated(item.Quantity)</td>
+				<td class="text-right">@StringGenerator.DecimalToCommaSeparated(item.UnitPrice)</td>
+				<td class="text-right"> @StringGenerator.DecimalToCommaSeparated(priceWithoutVat)</td>
+				<td class="text-right">@StringGenerator.DecimalToCommaSeparated(item.DiscountPerItem)</td>
+				<td class="text-right">@StringGenerator.DecimalToCommaSeparated(discountAmount)</td>
+				<td>@(item.ProductVattype.Name)</td>
+				<td class="text-right">@StringGenerator.DecimalToCommaSeparated(item.Vatpercent)%</td>
+				<td class="text-right">@StringGenerator.DecimalToCommaSeparated(vatAmount)</td>
+				<td class="text-right">@StringGenerator.DecimalToCommaSeparated(item.SupplementaryDutyPercent)%</td>
+				<td class="text-right">@StringGenerator.DecimalToCommaSeparated(sdAmount)</td>
+				<td class="text-right">@StringGenerator.DecimalToCommaSeparated(totalPriceWithVat)</td>
+			</tr>
+			i++;
+		}
+		</tbody>
+		<tfoot>
+		<tr class="table-light">
+			<th colspan="5" class="text-right">Total</th>
+			<th class="text-right">@StringGenerator.DecimalToCommaSeparatedWithTwoDigit(totalPriceWithoutVat)</th>
+			<th class="text-right"></th>
+			<th class="text-right">@StringGenerator.DecimalToCommaSeparatedWithTwoDigit(totalDiscount)</th>
+			<th class="text-right"></th>
+			<th class="text-right"></th>
+			<th class="text-right">@StringGenerator.DecimalToCommaSeparatedWithTwoDigit(totalVat)</th>
+			<th class="text-right"></th>
+			<th class="text-right">@StringGenerator.DecimalToCommaSeparatedWithTwoDigit(totalSd)</th>
+			<th class="text-right">@StringGenerator.DecimalToCommaSeparatedWithTwoDigit(totalPriceWithVat)</th>
+		</tr>
+		</tfoot>
+
+	</table>
+</div>
+@if (Model.CreditNotes.Any())
+{
+	<div class="col-12 mt-3">
+		<div class="font-weight-bold mb-3">Credit Note(s) for this sale</div>
+		<table class="table table-bordered" id="gridTableCreditNote">
+			<thead>
+			<tr class="table-light">
+				<th>Serial</th>
+				<th>Voucher No.</th>
+				<th>Return Date</th>
+				<th>Reason Of Return</th>
+				<th></th>
+			</tr>
+			</thead>
+
+			<tbody>
+			@foreach (var item in Model.CreditNotes)
+			{
+				<tr class="table-light">
+					<td>@j</td>
+					<td>@item.VoucherNo</td>
+					<td>@item.ReturnDate.ToString("dd/MM/yyyy")</td>
+
+					<td>@item.ReasonOfReturn</td>
+					<td>
+						<a class='btn btn-primary btn-sm' href='@Url.Action("CreditNoteViewById", new { id = item.CreditNoteId })' role='button' target='_blank'> View</a>
+					</td>
+				</tr>
+				j++;
+			}
+			</tbody>
+
+		</table>
+	</div>
+}
+</div>
+
+@section Scripts{
+	<script src="~/js/print.min.js?vguid=@ViewStaticData.StaticFileVersionGuid"></script>
+	<script>
+
+		$(document).ready(function() {
+			window.$("#btnPrint").click(function() {
+				window.vmsPrint.printA4Portrait('printableArea');
+			});
+		});
+	</script>
+}

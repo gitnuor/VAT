@@ -1,0 +1,27 @@
+﻿@model vms.entity.viewModels.SaleApproveOrRejectViewModel
+<div class="font-weight-bold mb-3">
+	Approve/Reject Option
+</div>
+<form class="form-horizontal" method="post" id="frmApproveOrReject" asp-action="Approve">
+	<input type="hidden" asp-for="SalesId"/>
+	<input type="hidden" asp-for="EncSalesId"/>
+	<div class="row">
+		<div class="col-12">
+			<div class="form-group">
+				<label class="form-label" asp-for="Remarks"></label>
+				<div>
+					<textarea asp-for="Remarks" class="form-control form-control-sm"></textarea>
+					<span asp-validation-for="Remarks" class="text-danger"></span>
+				</div>
+			</div>
+		</div>
+		<div class="col-12 mt-3">
+			<button type="submit" class="btn btn-primary btn-sm"><i class="bi bi-check-lg"></i> Approve</button>
+			<button type="submit" class="btn btn-danger btn-sm" asp-action="Reject"><i class="bi bi-x-lg"></i> Reject</button>
+			<button type="button" value="Reset" onclick="location.reload();" class="btn  btn-warning btn-sm"><i class="bi bi-arrow-repeat"></i> Reset</button>
+			<a asp-action="Index" class="btn btn-secondary btn-sm"><i class="bi bi-slash-circle"></i> Cancel</a>
+		</div>
+	</div>
+
+</form>
+

@@ -1,0 +1,96 @@
+﻿@model vms.entity.viewModels.VmDamageDetailView
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+
+
+<h2>Damage Info</h2>
+
+<div class="col-md-12 ">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>NBR Verifier Name</th>
+                <th>NBR Verifier Designation</th>
+                <th>Voucher No</th>
+
+                <th>Prepared On</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Model.damage.NbrverifierName</td>
+                <td>@Model.damage.NbrverifierDesignation</td>
+                <td>@Model.damage.VoucherNo</td>
+                <td>@Model.damage.PreparedOn.ToShortDateString()</td>
+                <td>@Model.damage.Description</td>
+            </tr>
+        </tbody>
+        <tfoot>
+
+        </tfoot>
+    </table>
+
+</div>
+
+<h2>Damage Detail Info</h2>
+
+<div class="col-md-12 ">
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Damage Qty</th>
+                <th>Usable Qty</th>
+                <th>Usable Percent</th>
+                <th>Suggested New Unit Price</th>
+                <th>Damage Description</th>
+                @*TODO*@
+                @*<th>Approved Usable Qty</th>
+                <th>Approved New Unit Price</th>*@
+            </tr>
+        </thead>
+
+        <tbody>
+
+            @foreach (var item in Model.damageDetails)
+            {
+                <tr>
+                    <td>@item.Product.Name</td>
+                    <td>
+                        @item.DamageQty
+                    </td>
+
+                    <td>
+                        @item.UsableQty
+                    </td>
+                    <td>
+                        @item.UsablePercent
+                    </td>
+                    <td>
+                        @item.SuggestedNewUnitPrice
+                    </td>
+
+                    <td>
+                        @item.DamageDescription
+                    </td>
+                    @*TODO*@
+                    @*<td>
+                        @item.ApprovedUsableQty
+                    </td>
+
+                    <td>
+                        @item.ApprovedNewUnitPrice
+                    </td>*@
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+        </tfoot>
+    </table>
+</div>
+

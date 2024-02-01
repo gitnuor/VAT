@@ -1,0 +1,12 @@
+﻿@model IEnumerable<vms.entity.models.CustomsAndVatcommissionarate>
+@(Html.Grid(Model).Build(columns =>
+{
+    columns.Add(model => model.Name).Titled("Name");
+    columns.Add(model => model.NameInBangla).Titled("Name in Bangla").Css("ivat-bangla-font"); ;
+    columns.Add(model => model.Address).Titled("Address");
+})
+	.AppendCss("large-index-grid")
+	.Empty("No data found")
+	.Filterable(GridFilterType.Double)
+	.Sortable()
+	.Pageable())

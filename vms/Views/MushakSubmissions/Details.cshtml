@@ -1,0 +1,84 @@
+﻿@model vms.entity.models.MushakSubmission
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>MushakSubmission</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MushakForYear)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MushakForYear)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MushakForMonth)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MushakForMonth)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.GenerateDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.GenerateDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SubmissionDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SubmissionDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.VatResponsiblePersonId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.VatResponsiblePersonId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IsWantToGetBackClosingBalance)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IsWantToGetBackClosingBalance)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IsActive)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedBy)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CreatedBy)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedTime)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CreatedTime)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MushakSubmissionType)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MushakSubmissionType.SubmissionTypeName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Organization)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Organization.Address)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.MushakSubmissionId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

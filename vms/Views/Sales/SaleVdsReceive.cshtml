@@ -1,0 +1,137 @@
+﻿@model vms.entity.viewModels.vmSaleVdsReceive
+
+@{
+    ViewData["Title"] = "Sales VDS Certificate Receive";
+    
+}
+
+
+@section contentheader
+{
+    <div class="p-3 page-header">
+        @ViewData["Title"]
+    </div>
+}
+
+
+<div class="row">
+    <div class="col-md-4 offset-4">
+        <h3>@ViewData["Message"]</h3>
+
+        <form asp-action="SaleVdsReceive" class="form-horizontal" method="post" enctype="multipart/form-data">
+            <input type="hidden" asp-for="SalesId" />
+            <input type="hidden" asp-for="EncryptedId" />
+            <div class="form-body">
+
+                <div>
+                    <div class="form-group required">
+                        <label class="control-label">Certificate No</label>
+                        <div>
+                            <input asp-for="VdscertificateNo" class="form-control" id="vdscertificateNo" required />
+                            <span asp-validation-for="VdscertificateNo" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group mt-3">
+                        <label class="control-label">Certificate Issue Time : </label>
+                        <div>
+
+                            <input type="datetime-local" class="form-control" asp-for="VdscertificateIssueTime" max='@((DateTime.Now).ToString("yyyy-MM-ddTHH:mm"))'>
+                            <span asp-validation-for="VdscertificateIssueTime" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group mt-3 required">
+                        <label class="control-label">Payment Challan No</label>
+                        <div>
+                            <input asp-for="VdspaymentChallanNo" class="form-control" id="vdspaymentChallanNo" required />
+                            <span asp-validation-for="VdspaymentChallanNo" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group mt-3 required">
+                        <label class="control-label">Payment Economic Code</label>
+                        <div>
+                            <input asp-for="VdspaymentEconomicCode" class="form-control" id="vdspaymentEconomicCode" required />
+                            <span asp-validation-for="VdspaymentEconomicCode" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <label class="control-label" asp-for="VdspaymentBankId"></label>
+                        <div>
+                            <select asp-for="VdspaymentBankId" class="form-control" asp-items="Model.BankSelectList.CustomSelectListToSelectList()" required>
+                                <option value="@null">Select Bank</option>
+                            </select>
+                            <span asp-validation-for="VdspaymentBankId" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <label class="control-label" asp-for="VdspaymentBankBranchName"></label>
+                        <div>
+                            <input asp-for="VdspaymentBankBranchName" class="form-control" />
+                            <span asp-validation-for="VdspaymentBankBranchName" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group required mt-3">
+                        <label class="control-label">Book Transfer No</label>
+                        <div>
+                            <input asp-for="VdspaymentBookTransferNo" class="form-control" id="vdspaymentBookTransferNo" required />
+                            <span asp-validation-for="VdspaymentBookTransferNo" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group required mt-3">
+                        <label class="control-label">Note</label>
+                        <div>
+                            <input asp-for="Vdsnote" class="form-control" id="vdsNote" required />
+                            <span asp-validation-for="Vdsnote" class="text-danger"></span>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group mt-3 required">
+
+                        <label class="control-label">Upload VDS</label>
+                        <div>
+                            <input asp-for="File" class="form-control" />
+                            <span asp-validation-for="File" class="text-danger"></span>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <div class="row float-end mt-3">
+                    <div class="col-md-offset-3 col-md-12">
+                        <button type="submit" data-requiredconfirmation="true" class="btn  btn-primary btn-sm"><i class="bi bi-check-lg"></i> Submit</button>
+                        <button type="button" value="Reset" class="btn  btn-warning btn-sm" onclick="location.reload();"><i class="bi bi-arrow-repeat"></i> Reset</button>
+                        <a asp-action="SaleVds" class="btn btn-secondary btn-sm"><i class="bi bi-slash-circle"></i> Cancel</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+@section Scripts
+    {
+    <script>
+        $(document).ready(function () {
+            $('#VdscertificateIssueTime').datetimepicker({
+                maxDate: moment().startOf('minute').add(0, 'm')
+            });
+        })
+
+        function reset() {
+            $('#vdscertificateNo').val('');
+            $("#vdspaymentChallanNo").val('');
+            $("#vdsNote").val('');
+            $("#vdspaymentEconomicCode").val('');
+            $("#vdspaymentBookTransferNo").val('');
+            $("#VDSPaymentBankBranchId").val('');
+            $.datepicker._clearDate(this);
+        }
+    </script>
+
+}

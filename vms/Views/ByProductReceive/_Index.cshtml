@@ -1,0 +1,21 @@
+﻿@model IEnumerable<vms.entity.viewModels.ByProductReceive.VmByProductReceive>
+@(Html.Grid(Model).Build(columns =>
+{
+	columns.Add(model => model.BranchName).Titled("Branch").AppendCss("text-center");
+	columns.Add(model => model.ProductName).Titled("Product");
+	columns.Add(model => model.ReceiveDate)
+		.Titled("Receive Date").Formatted("{0:dd/MM/yyyy}").AppendCss("text-center");
+	columns.Add(model => model.Quantity).Titled("Quantity")
+	.AppendCss("text-right").RenderedAs(model => StringGenerator.DecimalToCommaSeparated(model.Quantity));
+	columns.Add(model => model.UnitPrice)
+		.Titled("Unit Price")
+		.AppendCss("text-right").RenderedAs(model => StringGenerator.DecimalToCommaSeparated(model.UnitPrice));
+	columns.Add(model => model.MeasurementUnitName).Titled("Unit").AppendCss("text-center");
+	@*columns.Add().Encoded(false).RenderedAs(data => Html.Partial("_ActionMenu", data))
+		.Titled(Html.Raw("<i class='bi bi-activity'></i>")).AppendCss("action-col-freez");*@
+})
+	.AppendCss("large-index-grid")
+	.Empty("No data found")
+	.Filterable(GridFilterType.Double)
+	.Sortable()
+	.Pageable())

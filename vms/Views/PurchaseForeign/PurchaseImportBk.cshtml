@@ -1,0 +1,469 @@
+﻿@model vms.entity.viewModels.VmPurchaseImport
+@{
+    ViewData["Title"] = "Foreign Purchase(Import)";
+
+}
+
+@section contentheader
+{
+    <div class="p-3 page-header">
+        @ViewData["Title"]
+        <a class="btn btn-sm btn-secondary float-end" asp-action="PurchaseLocal">Add Local Purchase</a>
+    </div>
+}
+
+<!--<div class="row mt-3">
+    <div class="col-md-6">
+        <div class="font-weight-bold mb-3">
+            Main Information
+        </div>
+        <form method="post" class="row g-3" id="frmMainInformation">
+            <div class="col-md-4 complex-form-col">
+                <label asp-for="PurchaseReasonId" class="form-label complex-form-label"></label>
+                <select asp-for="PurchaseReasonId" asp-items="Model.PurchaseReasonSelectList" class="searchable-dropdown" data-live-search="true" data-style="bootstrap-select-option">
+                    <option value="@null">Select Reason</option>
+                </select>
+                <span asp-validation-for="PurchaseReasonId" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-4 complex-form-col">
+                <label asp-for="VendorId" class="form-label complex-form-label"></label>
+                <select asp-for="VendorId" asp-items="Model.VendorSelectList" class="searchable-dropdown" data-live-search="true" data-style="bootstrap-select-option">
+                    <option value="@null">Select Vendor</option>
+                </select>
+                <span asp-validation-for="VendorId" class="text-danger"></span>
+            </div>
+            <div class="col-md-4 complex-form-col">
+                <label asp-for="VendorInvoiceNo" class="form-label complex-form-label"></label>
+                <input type="text" asp-for="VendorInvoiceNo" class="form-control form-control-sm">
+                <span asp-validation-for="VendorInvoiceNo" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-4 complex-form-col">
+                <label asp-for="LcNo" class="form-label complex-form-label"></label>
+                <input type="text" asp-for="LcNo" class="form-control form-control-sm">
+                <span asp-validation-for="LcNo" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-4 complex-form-col">
+                <label asp-for="LcDate" class="form-label complex-form-label"></label>
+                <input type="date" asp-for="LcDate" class="form-control form-control-sm">
+                <span asp-validation-for="LcDate" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-4 complex-form-col">
+                <label asp-for="BillEntry" class="form-label complex-form-label"></label>
+                <input type="text" asp-for="BillEntry" class="form-control form-control-sm">
+                <span asp-validation-for="BillEntry" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-4 complex-form-col">
+                <label asp-for="BoeDate" class="form-label complex-form-label"></label>
+                <input type="date" asp-for="BoeDate" class="form-control form-control-sm">
+                <span asp-validation-for="BoeDate" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-4 complex-form-col">
+                <label asp-for="DueDate" class="form-label complex-form-label"></label>
+                <input type="date" asp-for="DueDate" class="form-control form-control-sm">
+                <span asp-validation-for="DueDate" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-4 complex-form-col">
+                <label asp-for="LcTerm" class="form-label complex-form-label"></label>
+                <input type="text" asp-for="LcTerm" class="form-control form-control-sm">
+                <span asp-validation-for="LcTerm" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-4 complex-form-col">
+                <label asp-for="PoNo" class="form-label complex-form-label"></label>
+                <input type="text" asp-for="PoNo" class="form-control form-control-sm">
+                <span asp-validation-for="PoNo" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-4 complex-form-col">
+                <label asp-for="AtpDate" class="form-label complex-form-label"></label>
+                <input type="date" asp-for="AtpDate" class="form-control form-control-sm">
+                <span asp-validation-for="AtpDate" class="text-danger"></span>
+            </div>
+
+
+            <div class="col-md-4 complex-form-col">
+                <label asp-for="VatCommissionarate" class="form-label complex-form-label"></label>
+                <select asp-for="VatCommissionarate" asp-items="Model.VatCommissionarateList" class="searchable-dropdown" data-live-search="true" data-style="bootstrap-select-option">
+                    <option value="@null">Select Rate</option>
+                </select>
+                <span asp-validation-for="VatCommissionarate" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-4 complex-form-col">
+                <label asp-for="AtpBankBranch" class="form-label complex-form-label"></label>
+                <select asp-for="AtpBankBranch" asp-items="Model.AtpBankList" class="searchable-dropdown" data-live-search="true" data-style="bootstrap-select-option">
+                    <option value="@null">Select Bank</option>
+                </select>
+                <span asp-validation-for="AtpBankBranch" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-4 complex-form-col">
+                <label asp-for="Branch" class="form-label complex-form-label"></label>
+                <input type="text" asp-for="Branch" class="form-control form-control-sm">
+                <span asp-validation-for="Branch" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-4 complex-form-col d-none">
+                <input type="hidden" asp-for="EconomicCodeId" class="form-control form-control-sm">
+            </div>
+
+            <div class="col-md-4 complex-form-col">
+                <label asp-for="AtpChallanNo" class="form-label complex-form-label"></label>
+                <input type="text" asp-for="AtpChallanNo" class="form-control form-control-sm">
+                <span asp-validation-for="AtpChallanNo" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-4 complex-form-col">
+                <label asp-for="AdvTaxPaidAmount" class="form-label complex-form-label"></label>
+                <input type="text" asp-for="AdvTaxPaidAmount" class="form-control form-control-sm">
+                <span asp-validation-for="AdvTaxPaidAmount" class="text-danger"></span>
+            </div>
+
+        </form>
+    </div>
+    <div class="col-md-6 md-left-border">
+        <div class="font-weight-bold mb-3">
+            Product Information
+        </div>
+        <form class="row g-3 detail-form" id="frmProductInformation">
+            <div class="col-md-7 complex-form-col">
+                <label asp-for="ProductId" class="form-label complex-form-label"></label>
+                <input type="hidden" asp-for="PurchaseDetailId" class="form-control form-control-sm">
+                <select asp-for="ProductId" class="searchable-dropdown" data-live-search="true" data-style="bootstrap-select-option">
+                    <option value="@null">Select ProductId</option>
+                    @if (Model.ProductList.Any())
+                    {
+                        foreach (var prod in Model.ProductList)
+                        {
+                            <option value="@prod.ProductId"
+                                    data-mu-id="@prod.MeasurementUnitId"
+                                    data-mu-name="@prod.MeasurementUnitName"
+                                    data-vat-percent="@prod.DefaultVatPercent"
+                                    data-vat-type-id="@prod.ProductVatTypeId"
+                                    data-sd-percent="@prod.DefaultSupplementaryDutyPercent">
+                                @prod.ProductName
+                            </option>
+                        }
+                    }
+                </select>
+                <span asp-validation-for="ProductId" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-2 complex-form-col">
+                <label asp-for="MeasurementUnitId" class="form-label complex-form-label"></label>
+                <input type="hidden" asp-for="MeasurementUnitId" class="form-control form-control-sm">
+                <input type="text" asp-for="MeasurementUnitName" readonly="readonly" class="form-control form-control-sm">
+                <span asp-validation-for="MeasurementUnitId" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-3 complex-form-col">
+                <label asp-for="UnitPrice" class="form-label complex-form-label"></label>
+                <input type="text" asp-for="UnitPrice" class="form-control form-control-sm">
+                <span asp-validation-for="UnitPrice" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-6 complex-form-col">
+                <label asp-for="Quantity" class="form-label complex-form-label"></label>
+                <input type="text" asp-for="Quantity" class="form-control form-control-sm">
+                <span asp-validation-for="Quantity" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-6 complex-form-col">
+                <label asp-for="TotalPrice" class="form-label complex-form-label"></label>
+                <input type="text" asp-for="TotalPrice" class="form-control readonly form-control-sm">
+                <span asp-validation-for="TotalPrice" class="text-danger"></span>
+            </div>
+
+
+            <div class="col-md-3 complex-form-col">
+                <label asp-for="SupplementaryDutyPercent" class="form-label complex-form-label"></label>
+                <input type="text" asp-for="SupplementaryDutyPercent" class="form-control form-control-sm">
+                <span asp-validation-for="SupplementaryDutyPercent" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-3 complex-form-col">
+                <label asp-for="SupplementaryDuty" class="form-label complex-form-label"></label>
+                <input type="text" asp-for="SupplementaryDuty" readonly class="form-control form-control-sm">
+                <span asp-validation-for="SupplementaryDuty" class="text-danger"></span>
+            </div>
+
+
+            <div class="col-md-3 complex-form-col">
+                <label asp-for="CustomDutyPercent" class="form-label complex-form-label"></label>
+                <input type="text" asp-for="CustomDutyPercent" class="form-control form-control-sm">
+                <span asp-validation-for="CustomDutyPercent" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-3 complex-form-col">
+                <label asp-for="CustomDuty" class="form-label complex-form-label"></label>
+                <input type="text" asp-for="CustomDuty" readonly class="form-control form-control-sm">
+                <span asp-validation-for="CustomDuty" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-3 complex-form-col">
+                <label asp-for="ImportDutyPercent" class="form-label complex-form-label"></label>
+                <input type="text" asp-for="ImportDutyPercent" class="form-control form-control-sm">
+                <span asp-validation-for="ImportDutyPercent" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-3 complex-form-col">
+                <label asp-for="ImportDuty" class="form-label complex-form-label"></label>
+                <input type="text" asp-for="ImportDuty" readonly class="form-control form-control-sm">
+                <span asp-validation-for="ImportDuty" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-3 complex-form-col">
+                <label asp-for="RegulatoryDutyPercent" class="form-label complex-form-label"></label>
+                <input type="text" asp-for="RegulatoryDutyPercent" class="form-control form-control-sm">
+                <span asp-validation-for="RegulatoryDutyPercent" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-3 complex-form-col">
+                <label asp-for="RegulatoryDuty" class="form-label complex-form-label"></label>
+                <input type="text" asp-for="RegulatoryDuty" readonly class="form-control form-control-sm">
+                <span asp-validation-for="RegulatoryDuty" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-3 complex-form-col">
+                <label asp-for="AdvanceTaxPercent" class="form-label complex-form-label"></label>
+                <input type="text" asp-for="AdvanceTaxPercent" class="form-control form-control-sm">
+                <span asp-validation-for="AdvanceTaxPercent" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-3 complex-form-col">
+                <label asp-for="AdvanceTax" class="form-label complex-form-label"></label>
+                <input type="text" asp-for="AdvanceTax" readonly class="form-control form-control-sm">
+                <span asp-validation-for="AdvanceTax" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-3 complex-form-col">
+                <label asp-for="AdvanceIncomeTaxPercent" class="form-label complex-form-label"></label>
+                <input type="text" asp-for="AdvanceIncomeTaxPercent" class="form-control form-control-sm">
+                <span asp-validation-for="AdvanceIncomeTaxPercent" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-3 complex-form-col">
+                <label asp-for="AdvanceIncomeTax" class="form-label complex-form-label"></label>
+                <input type="text" asp-for="AdvanceIncomeTax" readonly class="form-control form-control-sm">
+                <span asp-validation-for="AdvanceIncomeTax" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-6 complex-form-col">
+                <label asp-for="ProductVatTypeId" class="form-label complex-form-label"></label>
+                <select asp-for="ProductVatTypeId" class="searchable-dropdown" data-live-search="true" data-style="bootstrap-select-option">
+                    <option value="@null">Select Vat Type</option>
+                    @if (Model.ProductVatTypes.Any())
+                    {
+                        foreach (var prod in Model.ProductVatTypes)
+                        {
+                            <option value="@prod.ProductVattypeId"
+                                    data-vat-percent="@prod.DefaultVatPercent">
+                                @prod.Name (@prod.ImportNote)
+                            </option>
+                        }
+                    }
+                </select>
+                <span asp-validation-for="ProductVatTypeId" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-3 complex-form-col">
+                <label asp-for="ProductVatPercent" class="form-label complex-form-label"></label>
+                <input type="text" asp-for="ProductVatPercent" class="form-control form-control-sm">
+                <span asp-validation-for="ProductVatPercent" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-3 complex-form-col">
+                <label asp-for="ProductVat" class="form-label complex-form-label"></label>
+                <input type="text" asp-for="ProductVat" readonly class="form-control form-control-sm">
+                <span asp-validation-for="ProductVat" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-12">
+                <div class="float-end">
+                    <button type="button" class="btn  btn-primary btn-sm" id="btnAddProduct"><i class="bi bi-plus-lg"></i> Add</button>
+                    <button type="button" class="btn  btn-warning btn-sm" id="btnResetProduct"><i class="bi bi-arrow-repeat"></i> Reset</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+    <div class="col-md-12">
+        <div class="font-weight-bold mt-3">
+            Product List
+        </div>
+        <table id="productTable" class="table table-bordered form-table mt-3">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>AV</th>
+                    <th>M.Unit</th>
+                    <th>Unit Price</th>
+                    <th>SD.(%)</th>
+                    <th>CD.(%)</th>
+                    <th>ID.(%)</th>
+                    <th>RD.(%)</th>
+                    <th>AT.(%)</th>
+                    <th>AIT.(%)</th>
+                    <th>VAT Type</th>
+                    <th>VAT Rate</th>
+                    <th>VAT</th>
+                    <th>Total</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="tbdProduct">
+            </tbody>
+        </table>
+    </div>-->
+
+
+    @*<div class="col-md-12">
+        <h4>Payment Info</h4>
+        <table class="table table-bordered form-table" id="contentTable">
+            <thead>
+                <tr>
+                    <th>Method</th>
+                    <th>Bank Name/Wallet No</th>
+                    <th>Doc. No./Trans ID</th>
+                    <th>Doc. Date</th>
+
+                    <th>Payment Date</th>
+                    <th>Amount</th>
+                    <th>Payment Remarks</th>
+                    <th class="single-button-action-column"></th>
+                </tr>
+                <tr>
+                    <td>
+                        <select asp-for="PaymentMethodId" class="searchable-dropdown" data-live-search="true" data-style="bootstrap-select-option">
+                            <option value="@null">Select Method</option>
+                            @if (Model.PaymentMethodList.Any())
+                            {
+                                foreach (var paymentMethod in Model.PaymentMethodList)
+                                {
+                                    <option value="@paymentMethod.PaymentMethodId" data-is-banking-channel="@paymentMethod.IsBankingChannel" data-is-mobile-transaction="@paymentMethod.IsMobileTransaction">@paymentMethod.Name</option>
+                                }
+                            }
+                        </select>
+                        <span asp-validation-for="PaymentMethodId" class="text-danger"></span>
+                    </td>
+
+                    <td>
+                        <div class="payment-bank d-none">
+                            <select asp-for="BankId" id="bankId" asp-items="Model.BankSelectList" class="searchable-dropdown" data-live-search="true" data-style="bootstrap-select-option">
+                                <option value="@null">Select Bank</option>
+                            </select>
+                            <span asp-validation-for="BankId" class="text-danger"></span>
+                        </div>
+                        <div class="payment-mobile d-none">
+                            <input type="text" id="mobilePaymentWalletNo" asp-for="MobilePaymentWalletNo" class="form-control form-control-sm">
+                            <span asp-validation-for="MobilePaymentWalletNo" class="text-danger"></span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="payment-bank payment-mobile d-none">
+                            <input type="text" id="documentNoOrTransactionId" asp-for="DocumentNoOrTransactionId" class="form-control form-control-sm">
+                            <span asp-validation-for="DocumentNoOrTransactionId" class="text-danger"></span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="payment-bank d-none">
+                            <input type="date" id="paymentDocumentDate" asp-for="PaymentDocumentDate" class="form-control form-control-sm">
+                            <span asp-validation-for="PaymentDocumentDate" class="text-danger"></span>
+                        </div>
+                    </td>
+
+                    <td>
+                        <input type="date" asp-for="PaymentDate" id="paymentDate" class="form-control form-control-sm">
+                        <span asp-validation-for="PaymentDate" class="text-danger"></span>
+                    </td>
+
+                    <td>
+                        <input type="text" asp-for="PaidAmount" id="paidAmount" class="form-control form-control-sm">
+                        <span asp-validation-for="PaidAmount" class="text-danger"></span>
+                    </td>
+                    <td>
+                        <input type="text" asp-for="PaymentRemarks" id="paymentRemarks" class="form-control form-control-sm">
+                        <span asp-validation-for="PaymentRemarks" class="text-danger"></span>
+                    </td>
+                    <td>
+                        <a id="btnAddRelatedPayment" class="btn btn-sm btn-success" aria-label="Left Align">
+                            <i class="bi bi-plus-lg"></i>
+                        </a>
+                    </td>
+                </tr>
+            </thead>
+            <tbody id="tbdPayment"></tbody>
+            <tfoot>
+
+            </tfoot>
+        </table>
+    </div>*@
+
+    @*<form id="fileForm">
+        <div class="col-md-12">
+            <h4>Document Info</h4>
+            <table class="table table-bordered form-table" id="contentTable">
+                <thead>
+                    <tr>
+
+                        <th>Type</th>
+                        <th>File</th>
+                        <th>Document Remarks</th>
+                        <th class="single-button-action-column"></th>
+                    </tr>
+
+                    <tr>
+
+                        <td>
+                            <select asp-for="DocumentType" asp-items="Model.DocumentTypeSelectList" class="searchable-dropdown DocumentType" data-live-search="true" data-style="bootstrap-select-option" id="drpFileType">
+                                <option value="@null">Select Document Type</option>
+                            </select>
+                            <span asp-validation-for="DocumentType" class="text-danger"></span>
+                        </td>
+                        <td>
+                            <input type="file" asp-for="FileUpload" id="fileDocument" multiple="multiple" class="form-control form-control-sm FileUpload" accept=".jpg,.jpeg,.png,.tif,.tiff,.gif,.bmp,.pdf,.doc,.docx,.xlsx,.xlx,.ppt,.pptx" />
+
+                            <small id="msgFileDocument" class="form-text text-danger"></small>
+                            <span asp-validation-for="FileUpload" class="text-danger"></span>
+                        </td>
+                        <td>
+                            <input type="text" asp-for="DocumentRemarks" id="DocumentRemarks" class="form-control form-control-sm" />
+                            <span asp-validation-for="DocumentRemarks" class="text-danger"></span>
+                        </td>
+                        <td>
+                            <a id="btnAddRelatedFile" class="btn btn-sm btn-success" aria-label="Left Align">
+                                <i class="bi bi-plus-lg"></i>
+                            </a>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody id="tbdAttachedFiles"></tbody>
+                <tfoot>
+
+                </tfoot>
+            </table>
+        </div>
+    </form>*@
+<!--</div>-->
+
+<div class="col-md-12">
+    <div class="float-end">
+        <button type="button" class="btn btn-success btn-sm" onclick="sendToPurchaseImportController()" id="save"><i class="bi bi-check-lg"></i> Submit</button>
+        <button type="button" class="btn btn-primary btn-sm d-none" id="draft"><i class="bi bi-card-list"></i> Draft</button>
+        <button type="button" value="Reset" onclick="location.reload();" class="btn btn-warning btn-sm"><i class="bi bi-arrow-repeat"></i> Reset</button>
+        <a asp-action="Index" class="btn btn-secondary btn-sm"><i class="bi bi-slash-circle"></i> Cancel</a>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script src="~/CustomJs/PurchaseImport.js"></script>
+}

@@ -1,0 +1,43 @@
+﻿@model vms.entity.viewModels.VmSaleExport
+
+<div class="col-md-12 form-5">
+    <h4>Document Info</h4>
+    <form id="frmDocument">
+        <table class="table table-bordered form-table" id="contentTable">
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>File</th>
+                    <th>Document Remarks</th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <td>
+                        <select asp-for="DocumentType" asp-items="Model.DocumentTypeSelectList.CustomSelectListToSelectList()" id="drpFileType">
+                            <option value="@null">Select Document Type</option>
+                        </select>
+                        <span asp-validation-for="DocumentType"></span>
+                    </td>
+                    <td>
+                        <input type="file" asp-for="FileUpload" id="fileDocument" multiple="multiple" class="form-control form-control-sm FileUpload" accept=".jpg,.jpeg,.png,.tif,.tiff,.gif,.bmp,.pdf,.doc,.docx,.xlsx,.xlx,.ppt,.pptx" />
+
+                        <small id="msgFileDocument" class="form-text text-danger"></small>
+                        <span asp-validation-for="FileUpload"></span>
+                    </td>
+                    <td>
+                        <input type="text" asp-for="DocumentRemarks" id="DocumentRemarks" />
+                        <span asp-validation-for="DocumentRemarks"></span>
+                    </td>
+                    <td>
+                        <a id="btnAddRelatedFile" class="btn btn-sm btn-success" aria-label="Left Align">
+                            <i class="bi bi-plus-lg"></i>
+                        </a>
+                    </td>
+                </tr>
+            </thead>
+            <tbody id="tbdAttachedFiles"></tbody>
+            <tfoot>
+            </tfoot>
+        </table>
+    </form>
+</div>

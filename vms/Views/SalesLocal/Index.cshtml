@@ -1,0 +1,15 @@
+﻿@model IEnumerable<vms.entity.models.ViewSalesLocal>
+
+@{
+	ViewData["Title"] = "Local Sale";
+}
+
+@section contentheader
+{
+
+	<partial name="Sales/_SalesHeader"/>
+}
+
+<scrollable-grid-container>
+	<partial name="_Index" model="Model"/>
+</scrollable-grid-container>

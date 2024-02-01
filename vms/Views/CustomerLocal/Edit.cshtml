@@ -1,0 +1,353 @@
+﻿@model vms.entity.viewModels.vmCustomer
+
+@{
+    ViewData["Title"] = "Edit Customer";
+    
+    
+}
+
+@section contentheader
+    {
+    <div class="p-3 page-header">
+        @ViewData["Title"]
+    </div>
+}
+
+<div class="row">
+    <div class="col-md-8 offset-2">
+
+        <form asp-action="Edit" class="form-horizontal">
+            <input type="hidden" asp-for="EncryptedId" />
+            <div class="form-body">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label class="form-label" asp-for="Name"></label>
+                            <div>
+                                <input asp-for="Name" class="form-control form-control-sm" />
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label class="form-label" asp-for="Address"></label>
+                            <div>
+                                <input asp-for="Address" class="form-control form-control-sm" />
+                                <span asp-validation-for="Address" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group non-foreign mt-3">
+                            <label class="form-label" asp-for="Bin"></label>
+                            <div>
+                                <input asp-for="Bin" class="form-control  form-control-sm" />
+                                <span asp-validation-for="Bin" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group non-foreign mt-3">
+                            <label class="form-label" asp-for="Tinno"></label>
+                            <div>
+                                <input asp-for="Tinno" class="form-control  form-control-sm" />
+                                <span asp-validation-for="Tinno" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group non-foreign mt-3">
+                            <label class="form-label" asp-for="Nidno"></label>
+                            <div>
+                                <input asp-for="Nidno" class="form-control  form-control-sm" />
+                                <span asp-validation-for="Nidno" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label class="form-label" asp-for="EmailAddress"></label>
+                            <div>
+                                <input asp-for="EmailAddress" class="form-control form-control-sm" />
+                                <span asp-validation-for="EmailAddress" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label class="form-label" asp-for="PhoneNo"></label>
+                            <div>
+                                <input asp-for="PhoneNo" class="form-control  form-control-sm" />
+                                <span asp-validation-for="PhoneNo" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label class="form-label" asp-for="ReferenceKey"></label>
+                            <div>
+                                <input asp-for="ReferenceKey" class="form-control  form-control-sm" />
+                                <span asp-validation-for="ReferenceKey" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label class="form-label" asp-for="ServiceVatCode"></label>
+                            <div>
+                                <input asp-for="ServiceVatCode" class="form-control  form-control-sm" />
+                                <span asp-validation-for="ServiceVatCode" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label class="form-label" asp-for="PostCode"></label>
+                            <div>
+                                <input asp-for="PostCode" class="form-control  form-control-sm" />
+                                <span asp-validation-for="PostCode" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label asp-for="BusinessNatureId" class="form-label"></label>
+                            <select asp-for="BusinessNatureId" asp-items="Model.BusinessNatureList.CustomSelectListToSelectList()" class="searchable-dropdown" data-live-search="true" data-style="bootstrap-select-option">
+                                <option value="@null">Select Business Nature</option>
+                            </select>
+                            <span asp-validation-for="BusinessNatureId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label asp-for="BusinessCategoryId" class="form-label"></label>
+                            <select asp-for="BusinessCategoryId" asp-items="Model.BusinessCategoryList.CustomSelectListToSelectList()" class="searchable-dropdown" data-live-search="true" data-style="bootstrap-select-option">
+                                <option value="@null">Select Business Category</option>
+                            </select>
+                            <span asp-validation-for="BusinessCategoryId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label class="form-label" asp-for="BusinessCategoryDescription"></label>
+                            <div>
+                                <input asp-for="BusinessCategoryDescription" class="form-control  form-control-sm" />
+                                <span asp-validation-for="BusinessCategoryDescription" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label class="form-label" asp-for="DeliveryContactPerson"></label>
+                            <div>
+                                <input asp-for="DeliveryContactPerson" class="form-control  form-control-sm" />
+                                <span asp-validation-for="DeliveryContactPerson" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label class="form-label" asp-for="DeliveryContactPersonDesignation"></label>
+                            <div>
+                                <input asp-for="DeliveryContactPersonDesignation" class="form-control  form-control-sm" />
+                                <span asp-validation-for="DeliveryContactPersonDesignation" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label class="form-label" asp-for="DeliveryContactPersonMobile"></label>
+                            <div>
+                                <input asp-for="DeliveryContactPersonMobile" class="form-control  form-control-sm" />
+                                <span asp-validation-for="DeliveryContactPersonMobile" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label class="form-label" asp-for="DeliveryContactPersonEmailAddress"></label>
+                            <div>
+                                <input asp-for="DeliveryContactPersonEmailAddress" class="form-control  form-control-sm" />
+                                <span asp-validation-for="DeliveryContactPersonEmailAddress" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group non-foreign mt-3">
+
+                            <label asp-for="CustomsAndVatcommissionarateId" class="form-label"></label>
+                            <select asp-for="CustomsAndVatcommissionarateId" asp-items="Model.CustomsAndVatCommissionarates.CustomSelectListToSelectList()" class="searchable-dropdown" data-live-search="true" data-style="bootstrap-select-option">
+                                <option value="@null">Select Commission</option>
+                            </select>
+                            <span asp-validation-for="CustomsAndVatcommissionarateId" class="text-danger"></span>
+                        </div>
+                        
+                        <div class="form-group mt-3">
+                            <div class="custom-control custom-checkbox custom-control-inline">
+                                <input asp-for="IsForeignCustomer" class="custom-control-input" />
+                                <label asp-for="IsForeignCustomer" class="custom-control-label"></label>
+                            </div>
+                        </div>
+                        <div class="form-group non-foreign">
+                            <div class="custom-control custom-checkbox custom-control-inline">
+                                <input asp-for="IsFullExportOriented" class="custom-control-input" />
+                                <label asp-for="IsFullExportOriented" class="custom-control-label"></label>
+                            </div>
+                        </div>
+                        <div class="form-group mt-3">
+                            <div class="custom-control custom-checkbox custom-control-inline">
+                                <input asp-for="IsTds" class="custom-control-input" />
+                                <label asp-for="IsTds" class="custom-control-label"></label>
+                            </div>
+                        </div>
+                        <div class="form-group mt-3">
+                            <div class="custom-control custom-checkbox custom-control-inline">
+                                <input asp-for="IsVds" class="custom-control-input" />
+                                <label asp-for="IsVds" class="custom-control-label"></label>
+                            </div>
+                        </div>
+                        <div class="form-group mt-3">
+                            <div class="custom-control custom-checkbox custom-control-inline">
+                                <input asp-for="IsRegisteredUnderActNinetyFour" class="custom-control-input" />
+                                <label asp-for="IsRegisteredUnderActNinetyFour" class="custom-control-label"></label>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-6">
+
+                        <div class="form-group">
+                            <label class="form-label" asp-for="ContactPerson"></label>
+                            <div>
+                                <input asp-for="ContactPerson" class="form-control  form-control-sm" />
+                                <span asp-validation-for="ContactPerson" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label class="form-label" asp-for="ContactPersonDesignation"></label>
+                            <div>
+                                <input asp-for="ContactPersonDesignation" class="form-control  form-control-sm" />
+                                <span asp-validation-for="ContactPersonDesignation" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label class="form-label" asp-for="ContactPersonMobile"></label>
+                            <div>
+                                <input asp-for="ContactPersonMobile" class="form-control  form-control-sm" />
+                                <span asp-validation-for="ContactPersonMobile" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label class="form-label" asp-for="ContactPersonEmailAddress"></label>
+                            <div>
+                                <input asp-for="ContactPersonEmailAddress" class="form-control  form-control-sm" />
+                                <span asp-validation-for="ContactPersonEmailAddress" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label asp-for="DeliveryCountryId" class="form-label"></label>
+                            <select asp-for="DeliveryCountryId" asp-items="Model.Countries.CustomSelectListToSelectList()" class="searchable-dropdown" data-live-search="true" data-style="bootstrap-select-option">
+                                <option value="@null">Select Country</option>
+                            </select>
+                            <span asp-validation-for="DeliveryCountryId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label asp-for="DeliveryDivisionOrStateId" class="form-label"></label>
+                            <select asp-for="DeliveryDivisionOrStateId" asp-items="Model.DeliveryDivisionList.CustomSelectListToSelectList()" class="searchable-dropdown" data-live-search="true" data-style="bootstrap-select-option">
+                                <option value="@null">Select Division</option>
+                            </select>
+                            <span asp-validation-for="DeliveryDivisionOrStateId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label asp-for="DeliveryDistrictOrCityId" class="form-label"></label>
+                            <select asp-for="DeliveryDistrictOrCityId" asp-items="Model.DeliveryDistrictList.CustomSelectListToSelectList()" class="searchable-dropdown" data-live-search="true" data-style="bootstrap-select-option">
+                                <option value="@null">Select District</option>
+                            </select>
+                            <span asp-validation-for="DeliveryDistrictOrCityId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label class="form-label" asp-for="DeliveryAddress"></label>
+                            <div>
+                                <input asp-for="DeliveryAddress" class="form-control  form-control-sm" />
+                                <span asp-validation-for="DeliveryAddress" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label asp-for="BankId" class="form-label"></label>
+                            <select asp-for="BankId" asp-items="Model.BankList.CustomSelectListToSelectList()" class="searchable-dropdown" data-live-search="true" data-style="bootstrap-select-option">
+                                <option value="@null">Select Bank</option>
+                            </select>
+                            <span asp-validation-for="BankId" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mt-3">
+                            <label class="form-label" asp-for="BankAccountNo"></label>
+                            <div>
+                                <input asp-for="BankAccountNo" class="form-control  form-control-sm" />
+                                <span asp-validation-for="BankAccountNo" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label class="form-label" asp-for="BankRoutingCode"></label>
+                            <div>
+                                <input asp-for="BankRoutingCode" class="form-control  form-control-sm" />
+                                <span asp-validation-for="BankRoutingCode" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group non-foreign mt-3">
+
+                            <label asp-for="BankBranchCountryId" class="form-label"></label>
+                            <select asp-for="BankBranchCountryId" asp-items="Model.Countries.CustomSelectListToSelectList()" class="searchable-dropdown" data-live-search="true" data-style="bootstrap-select-option">
+                                <option value="@null">Select Bank</option>
+                            </select>
+                            <span asp-validation-for="BankBranchCountryId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group non-foreign mt-3">
+
+                            <label asp-for="BankBranchDistrictOrCityId" class="form-label"></label>
+                            <select asp-for="BankBranchDistrictOrCityId" asp-items="Model.BankBranchDistrictList" class="searchable-dropdown" data-live-search="true" data-style="bootstrap-select-option">
+                                <option value="@null">Select District</option>
+                            </select>
+                            <span asp-validation-for="BankBranchDistrictOrCityId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label class="form-label" asp-for="BankBranchName"></label>
+                            <div>
+                                <input asp-for="BankBranchName" class="form-control  form-control-sm" />
+                                <span asp-validation-for="BankBranchName" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label class="form-label" asp-for="BankBranchAddress"></label>
+                            <div>
+                                <input asp-for="BankBranchAddress" class="form-control  form-control-sm" />
+                                <span asp-validation-for="BankBranchAddress" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label asp-for="CountryId" class="form-label"></label>
+                            <select asp-for="CountryId" asp-items="Model.Countries.CustomSelectListToSelectList()" class="searchable-dropdown" data-live-search="true" data-style="bootstrap-select-option">
+                                <option value="@null">Select Country</option>
+                            </select>
+                            <span asp-validation-for="CountryId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label asp-for="DivisionOrStateId" class="form-label"></label>
+                            <select asp-for="DivisionOrStateId" asp-items="Model.DivisionList.CustomSelectListToSelectList()" class="searchable-dropdown" data-live-search="true" data-style="bootstrap-select-option">
+                                <option value="@null">Select Division Or State</option>
+                            </select>
+                            <span asp-validation-for="DivisionOrStateId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label asp-for="DistrictOrCityId" class="form-label"></label>
+                            <select asp-for="DistrictOrCityId" asp-items="Model.DistrictList.CustomSelectListToSelectList()" class="searchable-dropdown" data-live-search="true" data-style="bootstrap-select-option">
+                                <option value="@null">Select District Or City</option>
+                            </select>
+                            <span asp-validation-for="DistrictOrCityId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label class="form-label" asp-for="Tdsrate"></label>
+                            <div>
+                                <input asp-for="Tdsrate" class="form-control  form-control-sm" readonly="readonly" />
+                                <span asp-validation-for="Tdsrate" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label class="form-label" asp-for="Vdsrate"></label>
+                            <div>
+                                <input asp-for="Vdsrate" class="form-control  form-control-sm" readonly="readonly" />
+                                <span asp-validation-for="Vdsrate" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label class="form-label" asp-for="RegistrationNumberUnderActNinetyFour"></label>
+                            <div>
+                                <input asp-for="RegistrationNumberUnderActNinetyFour" class="form-control  form-control-sm" readonly="readonly" />
+                                <span asp-validation-for="RegistrationNumberUnderActNinetyFour" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>            
+
+
+                <div class="float-end mt-3">
+                    <button type="submit" data-requiredconfirmation="true" class="btn btn-primary btn-sm"><i class="bi bi-check-lg"></i> Update</button>
+                    <button type="button" value="Reset" onclick="location.reload();" class="btn  btn-warning btn-sm"><i class="bi bi-arrow-repeat"></i> Reset</button>
+                    <a asp-controller="Customer" asp-action="Index" class="btn btn-secondary btn-sm"><i class="bi bi-slash-circle"></i> Cancel</a>
+                </div>
+</form>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/CustomJs/Customer.js?vguid=@ViewStaticData.StaticFileVersionGuid"></script>
+    
+}

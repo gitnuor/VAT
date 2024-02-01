@@ -1,0 +1,50 @@
+﻿@model vms.entity.StoredProcedureModel.MushakReturn.MushakReturnPartEight
+
+<table class="table table-bordered">
+    @* <thead> *@
+
+        <tr>
+
+            <th class="MreturnHeader" colspan="3" style="background-color: #FBD4B4!important">
+
+                <div class="parthead">Part-8: ADJUSTMENT FOR OLD ACCOUNT CURRENT BALANCE</div>
+            </th>
+        </tr>
+    @* </thead> *@
+    @* <tbody class="Returntd"> *@
+
+        <tr class="Returntdhead text-center font-weight-bold" style="background-color: #BFBFBF !important">
+
+            <td><b>Items</b></td>
+            <td><b>Note</b></td>
+            <td><b> Amount (Tax)</b></td>
+        </tr>
+
+        <tr>
+
+            <td>Closing Balance (VAT) up to 30th June, 2019 from Mushak-18.6 [Rule 118(5)]</td>
+            <td class="text-center">54</td>
+            <td class="manual text-right" style="text-align:right !important">@StringGenerator.DecimalToCommaSeparated(Model.RemainingVATAmountFromMushak18p6)</td>
+        </tr>
+        <tr>
+
+            <td>Closing Balance (SD) up to 30th June, 2019 from Mushak-18.6 [Rule 118(5)]</td>
+            <td class="text-center">55</td>
+            <td class="manual text-right" style="text-align:right !important">@StringGenerator.DecimalToCommaSeparated(Model.RemainingSDAmountFromMushak18p6)</td>
+        </tr>
+
+        <tr>
+
+            <td>Decreasing Adjustment for Note 54 (up to 30% of Note 34)</td>
+            <td class="text-center">56</td>
+            <td class="text-right" style="text-align:right !important">@StringGenerator.DecimalToCommaSeparated(Model.AdjustableAmountFromNote54)</td>
+        </tr>
+
+        <tr>
+
+            <td>Decreasing Adjustment for Note 55 (up to 30% of Note 36) </td>
+            <td class="text-center">57td>
+            <td class="text-right" style="text-align:right !important">@StringGenerator.DecimalToCommaSeparated(Model.AdjustableAmountFromNote55)</td>
+        </tr>
+    @* </tbody> *@
+</table>

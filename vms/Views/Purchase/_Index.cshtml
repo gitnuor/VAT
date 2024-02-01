@@ -1,0 +1,70 @@
+﻿@model IEnumerable<vms.entity.models.ViewPurchase>
+@(Html.Grid(Model).Build(columns =>
+{
+	columns.Add(model => model.BranchName)
+		.Titled("Branch");
+	columns.Add(model => model.PurchaseTypeName)
+		.Titled("Type").AppendCss("text-center");
+	@*columns.Add(model => model.ApproveStatus)
+		.Titled("Status").AppendCss("text-center");*@
+	columns.Add(model => model.InvoiceNo)
+		.Titled("Invoice").Sortable(false).AppendCss("text-center");
+	columns.Add(model => model.PurchaseDate.Date)
+		.Titled("Date").Formatted("{0:dd/MM/yyyy}").AppendCss("text-center");
+	columns.Add(model => model.VendorName)
+		.Titled("Vendor");
+	columns.Add(model => model.VatChallanNo)
+		.Titled("Challan No").AppendCss("text-center");
+	columns.Add(model => model.VatChallanIssueDate)
+		.Titled("Challan Time").Formatted("{0:dd/MM/yyyy hh:mm:ss tt}").AppendCss("text-center");
+	columns.Add(model => model.VendorInvoiceNo)
+		.Titled("Vendor Inv./CI No").AppendCss("text-center");
+	columns.Add(model => model.BillOfEntryNo)
+		.Titled(Html.Raw("<div style='min-width: 60px;' data-bs-toggle='tooltip' title='Bill of Entry No.'>BOE<sup><i class='bi bi-question-circle'></i></sup><div>"));
+	columns.Add(model => model.BillOfEntryDate.DateTimeToStringWithoutTime())
+		.Titled(Html.Raw("<div style='min-width: 60px;' data-bs-toggle='tooltip' title='Bill of Entry Date.'>BOE Date<sup><i class='bi bi-question-circle'></i></sup><div>"));
+	columns.Add(model => model.TotalPriceWithoutTax)
+		.Titled(Html.Raw("<div style='min-width: 60px;' data-bs-toggle='tooltip' title='Price Excluding Taxes'>Price<sup><i class='bi bi-question-circle'></i></sup><div>"))
+		.AppendCss("text-right").RenderedAs(model => model.TotalPriceWithoutTax.DecimalToCommaSeparated());
+
+	columns.Add(model => model.CustomDutyAmount)
+		.Titled("CD").AppendCss("text-right").RenderedAs(model => model.CustomDutyAmount.DecimalToCommaSeparated());
+
+	columns.Add(model => model.ImportDutyAmount)
+		.Titled("ID").AppendCss("text-right").RenderedAs(model => model.ImportDutyAmount.DecimalToCommaSeparated());
+
+	columns.Add(model => model.RegulatoryDutyAmount)
+		.Titled("RD").AppendCss("text-right").RenderedAs(model => model.RegulatoryDutyAmount.DecimalToCommaSeparated());
+
+	columns.Add(model => model.AdvanceIncomeTaxAmount)
+		.Titled("AIT").AppendCss("text-right").RenderedAs(model => model.AdvanceIncomeTaxAmount.DecimalToCommaSeparated());
+
+	columns.Add(model => model.SupplementaryDutyAmount)
+		.Titled("SD").AppendCss("text-right").RenderedAs(model => model.SupplementaryDutyAmount.DecimalToCommaSeparated());
+	columns.Add(model => model.VatOrAtImposablePrice)
+		.Titled(Html.Raw("<div style='min-width: 60px;' data-bs-toggle='tooltip' title='VAT or AT imposable Price'>VAT/AT Price<sup><i class='bi bi-question-circle'></i></sup><div>")).AppendCss("text-right").RenderedAs(model => model.VatOrAtImposablePrice.DecimalToCommaSeparated());
+
+	columns.Add(model => model.VatAmount)
+		.Titled("VAT").AppendCss("text-right").RenderedAs(model => model.VatAmount.DecimalToCommaSeparated());
+
+	columns.Add(model => model.AdvanceTaxAmount)
+		.Titled("AT").AppendCss("text-right").RenderedAs(model => model.AdvanceTaxAmount.DecimalToCommaSeparated());
+
+	columns.Add(model => model.IsVdsStatus)
+		.Titled("VDS?").AppendCss("text-center");
+	columns.Add(model => model.Vdsamount)
+		.Titled("VDS Amount").AppendCss("text-right").RenderedAs(model => model.Vdsamount.DecimalToCommaSeparated());
+
+	columns.Add(model => model.IsTdsStatus)
+		.Titled("TDS?").AppendCss("text-center");
+	columns.Add(model => model.TdsAmount)
+		.Titled("TDS Amount").AppendCss("text-right").RenderedAs(model => model.TdsAmount.DecimalToCommaSeparated());
+	columns.Add().Encoded(false).RenderedAs(data => Html.PartialAsync("_ActionMenu", data).Result)
+		.Titled(Html.Raw("<i class='bi bi-activity'></i>")).AppendCss("action-col-freez");
+})
+	.AppendCss("large-index-grid")
+	.Empty("No data found")
+	.Filterable(GridFilterType.Double)
+	.Sortable()
+	.Pageable()
+	.UsingFooter("_IndexFooter"))

@@ -1,0 +1,60 @@
+﻿@model IEnumerable<vms.entity.StoredProcedureModel.HighValue.SpPurcSalesChallanForHighValuePurchase>
+<h4>অংশ-ক : ক্রয় হিসাব তথ্য</h4>
+<table class="table table-bordered">
+
+    <tbody class="Returntd">
+
+        <tr class="">
+            <td rowspan="2" style="text-align:center;"> ক্রমিক নং :</td>
+            <td colspan="6" style="text-align:center;">ক্রয়</td>
+
+        </tr>
+        <tr class="">
+
+            <td style="text-align:center;">চালান পত্র নং</td>
+            <td style="text-align:center;">ইস্যুর তারিখ</td>
+            <td style="text-align:center;">মূল্য</td>
+            <td style="text-align:center;">বিক্রেতার  নাম</td>
+            <td style="text-align:center;">বিক্রেতার  ঠিকানা</td>
+            <td style="text-align:center;">বিক্রেতার  বিআইএন/জাতীয় পরিচয় পত্র নং *</td>
+
+        </tr>
+
+        <tr>
+
+            <td style="text-align:center;">(১)</td>
+            <td style="text-align:center;">(২)</td>
+            <td style="text-align:center;">(৩)</td>
+            <td style="text-align:center;">(৪)</td>
+            <td style="text-align:center;">(৫)</td>
+            <td style="text-align:center;">(৬)</td>
+            <td style="text-align:center;">(৭)</td>
+
+
+
+
+        </tr>
+
+
+
+
+
+        @if (Model.Any())
+        {
+
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Sl</td>
+                    <td>@item.VatChallanNo</td>
+                    <td>@item.PurchaseDate</td>
+                    <td>@item.TotalPriceWithoutVat</td>
+                    <td>@item.VendorName</td>
+                    <td>@item.VendorAddress</td>
+                    <td>@item.VendorBinOrNid</td>
+                </tr>
+
+            }
+        }
+    </tbody>
+</table>

@@ -1,0 +1,212 @@
+﻿@{ var session = Context.Session.GetComplexData<VmUserSession>(ControllerStaticData.SESSION); }
+
+<a id="settingsitem" class="nav-link p-2 header-icon" role="button" data-bs-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="bi bi-gear-fill text-logo"></i>
+</a>
+<div class="plus-menu dropdown-menu dropdown-menu-end detail-menu">
+	<div class="header bg-aash p-2 mb-3">
+		<div class="mt-2 ml-4 font-weight-bold">Navigation</div>
+	</div>
+
+	<div class="p-3">
+		<div class="row mb-2">
+			<div class="col-3">
+				<div class="menu-heading">
+					Configuration
+				</div>
+				<ul>
+					<li>
+						<a asp-action="Index" asp-controller="Organizations" class="text-decoration-none"> Organization</a>
+					</li>
+					<li>
+						<a asp-action="Index" asp-controller="OrganizationBranch" class="text-decoration-none"> Branches</a>
+					</li>
+					<li>
+						<a asp-action="Index" asp-controller="Users" class="text-decoration-none">Users</a>
+					</li>
+					<li>
+						<a asp-action="Index" asp-controller="Roles" class="text-decoration-none">Roles</a>
+					</li>
+					<li>
+						<a asp-action="Index" asp-controller="Vendor" class="text-decoration-none">Suppliers/Vendors</a>
+					</li>
+					<li>
+						<a asp-action="Index" asp-controller="VendorCategory" class="text-decoration-none">Vendor Category</a>
+					</li>
+					<li>
+						<a asp-action="Index" asp-controller="Customer" class="text-decoration-none">Customers</a>
+					</li>
+					<li>
+						<a asp-action="Index" asp-controller="CustomerCategory" class="text-decoration-none">Customer Category</a>
+					</li>
+					<li>
+						<a asp-action="Index" asp-controller="DocumentTypes" class="text-decoration-none">Document Types</a>
+					</li>
+					<li>
+						<a asp-action="Index" asp-controller="VehicleType" class="text-decoration-none">Vehicle Types</a>
+					</li>
+					<li>
+						<a asp-action="Index" asp-controller="AuditLogs" class="text-decoration-none">Audit Logs</a>
+					</li>
+					<li>
+						<a asp-action="Index" asp-controller="DistrictOrCity" class="text-decoration-none">Districts</a>
+					</li>
+					<li>
+						<a asp-action="Index" asp-controller="DivisionOrState" class="text-decoration-none">Divisions</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-3">
+				<div class="menu-heading">
+					Product/Service
+				</div>
+				<ul>
+					<li>
+						<a asp-action="Index" asp-controller="Products" class="text-decoration-none">Products/Services</a>
+					</li>
+
+					<li>
+						<a asp-action="Index" asp-controller="Brand" class="text-decoration-none">Brands</a>
+					</li>
+					<li>
+						<a asp-action="Index" asp-controller="ProductCategories" class="text-decoration-none">Product Categories</a>
+					</li>
+					<li>
+						<a asp-action="Index" asp-controller="ProductGroups" class="text-decoration-none">Product Groups</a>
+					</li>
+					<li>
+						<a asp-action="Index" asp-controller="OverHeadCost" class="text-decoration-none">Overhead Costs</a>
+					</li>
+					<li>
+						<a asp-action="Index" asp-controller="MeasurementUnits" class="text-decoration-none">Measurement Units</a>
+					</li>
+					<li>
+						<a asp-action="Index" asp-controller="ProductMeasurementUnit" class="text-decoration-none">Product Measurement Units</a>
+					</li>
+					<li>
+						<a asp-action="Index" asp-controller="Damage" class="text-decoration-none">Damages</a>
+					</li>
+					<li>
+						<a asp-action="Index" asp-controller="CustomerSubscription" class="text-decoration-none">Customer Subscription</a>
+					</li>
+					<li>
+						<a asp-action="Index" asp-controller="CustomerSubscriptionCategory" class="text-decoration-none">Subscription Category</a>
+					</li>
+					
+				</ul>
+			</div>
+			<div class="col-3">
+				<div class="menu-heading">
+					Transaction
+				</div>
+				<ul>
+
+					@if (UserAuthorization.Check(FeatureList.PURCHASE, session.Rights))
+					{
+						<li>
+							<a asp-action="Index" asp-controller="Purchase" class="text-decoration-none">Purchases</a>
+						</li>
+					}
+
+					@if (UserAuthorization.Check(FeatureList.PRODUCTION, session.Rights) && session.IsProductionCompany)
+					{
+						<li>
+							<a asp-action="Index" asp-controller="Production" class="text-decoration-none">Productions</a>
+						</li>
+					}
+
+					@if (UserAuthorization.Check(FeatureList.SALE, session.Rights))
+					{
+						<li>
+							<a asp-action="Index" asp-controller="Sales" class="text-decoration-none">Sales</a>
+						</li>
+					}
+					@if (UserAuthorization.Check(FeatureList.SALE, session.Rights))
+					{
+						<li>
+							<a asp-action="Index" asp-controller="BranchTransferSend" class="text-decoration-none">Branch Transfer Sends</a>
+						</li>
+					}
+					@* @if (UserAuthorization.Check(FeatureList.PURCHASE, session.Rights)) *@
+					@* { *@
+					@* 	<li> *@
+					@* 		<a asp-action="Index" asp-controller="BranchTransferReceive" class="text-decoration-none">Branch Transfer Receive</a> *@
+					@* 	</li> *@
+					@* } *@
+					<li>
+						<a asp-action="Index" asp-controller="Adjustment" class="text-decoration-none">Adjustments</a>
+					</li>
+					@if (UserAuthorization.Check(FeatureList.MUSHAK_RETURN_MUSHAK_RETURN_PAYMENT_CAN_VIEW, session.Rights))
+					{
+						<li>
+							<a asp-action="Index" asp-controller="MushakReturnPayment" class="text-decoration-none">Mushak Return Payments</a>
+						</li>
+
+						<li>
+							<a asp-action="VdsPayment" asp-controller="MushakReturnPayment" class="text-decoration-none">VDS Payments</a>
+						</li>
+
+						<li>
+							<a asp-action="Index" asp-controller="TdsPayment" class="text-decoration-none">TDS Payments</a>
+						</li>
+					}
+
+					@if (UserAuthorization.Check(FeatureList.PRODUCT_BYPRODUCT_RECEIVE_LIST_CAN_VIEW, session.Rights))
+					{
+						<li>
+							<a asp-action="Index" asp-controller="ByProductReceive" class="text-decoration-none">By Product Receives</a>
+						</li>
+					}
+					@if (UserAuthorization.Check(FeatureList.PRODUCT_USED_IN_SERVICE_LIST_CAN_VIEW, session.Rights))
+					{
+						<li>
+							<a asp-action="Index" asp-controller="ProductUsedInService" class="text-decoration-none">Product Used In Services</a>
+						</li>
+					}
+
+					<li>
+						<a asp-action="Index" asp-controller="SubscriptionBill" class="text-decoration-none">Subscription Bills</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-3">
+				<div class="menu-heading">
+					Reference
+				</div>
+				<ul>
+					<li>
+						<a asp-action="Index" asp-controller="AdjustmentType" class="text-decoration-none">Misc. Adjustment Types</a>
+					</li>
+					<li>
+						<a asp-action="Index" asp-controller="ExportTypes" class="text-decoration-none">Export Types</a>
+					</li>
+					<li>
+						<a asp-action="Index" asp-controller="SalesDeliveryTypes" class="text-decoration-none">Sales Delivery Types</a>
+					</li>
+					<li>
+						<a asp-action="Index" asp-controller="DamageTypes" class="text-decoration-none">Damage Types</a>
+					</li>
+					<li>
+						<a asp-action="Index" asp-controller="PaymentMethods" class="text-decoration-none">Payment Methods</a>
+					</li>
+					<li>
+						<a asp-action="Index" asp-controller="PurchaseReasons" class="text-decoration-none">Purchase Reasons</a>
+					</li>
+					<li>
+						<a asp-action="Index" asp-controller="CustomsAndVatcommissionarate" class="text-decoration-none">VAT Commissionerates</a>
+					</li>
+					<li>
+						<a asp-action="Index" asp-controller="DeliveryMethods" class="text-decoration-none">Delivery Methods</a>
+					</li>
+					<li>
+						<a asp-action="Index" asp-controller="ProductVattypes" class="text-decoration-none">Product VAT Types</a>
+					</li>
+
+					<li>
+						<a asp-action="Index" asp-controller="OrgBranchType" class="text-decoration-none">Branch Types</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>

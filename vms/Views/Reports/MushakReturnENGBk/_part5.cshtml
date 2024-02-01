@@ -1,0 +1,63 @@
+﻿@model vms.entity.StoredProcedureModel.MushakReturn.MushakReturnPartFive
+
+<table class="table table-bordered">
+    <thead>
+
+        <tr>
+
+            <th class="MreturnHeader" colspan="3">
+
+                <h4>Part-5: INCREASING ADJUSTMENTS (VAT)</h4>
+            </th>
+        </tr>
+    </thead>
+    <tbody class="Returntd"> 
+
+        <tr class="Returntdhead">
+            <td class="Returntdhead"> Adjustment Details</td>
+            <td>Note</td>
+            <td>VAT Amount</td>
+        </tr>
+
+        <tr>
+            <td>Due to VAT Deducted at Source by the supply reciver </td>
+            <td style="text-align:center;">24</td>
+
+            <td style="text-align:right;">@Model.IncrementalAdjustmentAmountForVdsSale</td>
+            <td><a href="#note24SubForm">Sub-form</a> </td>
+        </tr>
+        <tr>
+            <td>Payment Not Made Through Banking Channel </td>
+            <td style="text-align:center;">25</td>
+
+            <td style="text-align:right;">@Model.IncrementalAdjustmentAmountForNotPaidInBankingChannel</td>
+        </tr>
+
+        <tr>
+            <td>Issuance of Debit Note </td>
+            <td style="text-align:center;">26</td>
+
+            <td style="text-align:right;">@Model.IncrementalAdjustmentVatAmountForDebitNote</td>
+        </tr>
+
+        <tr>
+            <td>
+                Any Other Adjustments (please specify below)
+
+                <div class="border" style="border-color:black;   height:25px ; width:450px;">
+                    @Model.MiscIncrementalAdjustmentDesc
+                </div>
+            </td>
+            <td style="text-align:center;">27</td>
+
+            <td style="text-align:right;"class="manual">@Model.MiscIncrementalAdjustmentAmount</td>
+        </tr>
+
+        <tr>
+            <td>Total Increasing Adjustment </td>
+            <td style="text-align:center;">28</td>
+
+            <td style="text-align:right;">@Model.TotalIncrementalAdjustmentVatAmount</td>
+        </tr>
+    </tbody>
+</table>

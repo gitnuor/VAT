@@ -1,0 +1,23 @@
+﻿@model vms.entity.viewModels.ReportsViewModel.ReoportOption
+@section breadcrumb
+    {
+    <ul class="page-breadcrumb">
+        <li>
+            <a href="@Url.Action("Dashboard", "Home")">Root</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a href="@Url.Action("Mushok1","Reports")">Mushak</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a href="@Url.Action("Mushok4","Reports")">Mushak-4</a>
+        </li>
+    </ul>
+}
+<h1 class="custom-page-title">Mushak-4</h1>
+<partial name="_ReportSearchOption" />
+@if (Model != null)
+{
+    <iframe src="~/Reports/mushak1.pdf" style="width: 100%; min-height: 1000px"></iframe>
+}

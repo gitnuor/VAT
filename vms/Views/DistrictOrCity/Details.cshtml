@@ -1,0 +1,94 @@
+﻿@model vms.entity.models.VehicleType
+
+@{
+    ViewData["Title"] = "Details";
+
+}
+
+
+
+@section contentheader
+    {
+    <div class="p-3 page-header">
+        <h5>Details</h5>
+        <div class="d-flex justify-content-start">
+
+
+        </div>
+    </div>
+    <div class="col-12 d-flex">
+        <ul class="nav nav-pills mt-3 mr-auto align-bottom">
+        </ul>
+        @using (Html.BeginForm("Index", "Users", FormMethod.Get, new { id = "frmPurchase", @class = "d-flex pr-1" }))
+        {
+
+        }
+    </div>
+}
+
+<div class="row">
+
+    <div class="col-md-12 ">
+        <div class="col-md-5 ">
+
+            <div class="col-md-12 ">
+                <div class="form-group">
+
+                    <label for="form_control" class="control-label"><b>Vehicle Type Name :</b> @Model.VehicleTypeName</label>
+                </div>
+            </div>
+
+            <div class="col-md-12 ">
+                <div class="form-group">
+
+                    <label for="form_control" class="control-label"><b>Description :</b> @Model.Description</label>
+                </div>
+            </div>
+            <div class="col-md-12 ">
+                <div class="form-group">
+
+                    @{if (Model.IsRequireRegistration)
+                        {
+                            <label for="form_control_1" class="control-label">
+                                <b>Is Require Registration? :</b> Yes
+                            </label>
+                        }
+                        else
+                        {
+                            <label for="form_control_1" class="control-label">
+                                <b>Is Require Registration? :</b> No
+                            </label>
+                        }
+                    }
+
+                </div>
+            </div>
+            <div class="col-md-12 ">
+                <div class="form-group">
+                    @{if (Model.IsActive)
+                        {
+                            <label for="form_control_1" class="control-label">
+                                <b>Is Active? :</b> Yes
+                            </label>
+                        }
+                        else
+                        {
+                            <label for="form_control_1" class="control-label">
+                                <b>Is Active? :</b> No
+                            </label>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-actions">
+        <div class="row mb-2">
+            <div class="col-md-12 pt-3 pl-5">
+                <a href="~/VehicleType/Index" class="btn btn-info"><i class="bi bi-chevron-double-left"></i> Back</a>
+            </div>
+        </div>
+    </div>
+
+</div>

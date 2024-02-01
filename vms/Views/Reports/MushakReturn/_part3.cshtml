@@ -1,0 +1,136 @@
+﻿@model vms.entity.StoredProcedureModel.MushakReturn.MushakReturnPartThree
+
+<table class="table table-bordered">
+    @* <thead> *@
+
+        <tr>
+
+            <th class="MreturnHeader" colspan="7" style="background-color: #FBD4B4!important">
+
+                <div class="parthead text-center font-weight-light"> অংশ-৩: সরবরাহ প্রদান - প্রদেয় কর</div>
+            </th>
+        </tr>
+    @* </thead> *@
+    @* <tbody class="Returntd"> *@
+
+<tr class="Returntdhead text-center font-weight-bold" style="background-color: #BFBFBF !important">
+    <td class="text-center" colspan="2"> <b>সরবরাহের প্রকৃতি</b></td>
+    <td style="text-align:center"><b>নোট</b></td> 
+    <td style="text-align:center"><b>মূল (ক)</b></td>
+    <td style="text-align:center"><b>এসডি (খ) </b></td>
+    <td style="text-align:center"><b>মূসক (গ)</b></td>
+    <td><b></b></td>
+</tr>
+
+        <tr>
+            <td class="border-end" rowspan="2">
+                শূন্যহার বিশিষ্ট
+                পণ্য/সেবা
+            </td>
+            <td>সরাসরি রপ্তানি</td>
+            <td class="text-center">১</td>
+            <td class="text-right" style="text-align:right">@StringGenerator.DecimalToCommaSeparated(Model.DirectExportAmount) </td>
+            <td class="ReturntdEmpty" style="background-color: #BFBFBF !important"></td>
+            <td class="ReturntdEmpty" style="background-color: #BFBFBF !important"></td>
+	        <td style="background-color: #BFBFBF !important">
+		         <a asp-action="Mushok9P1SubKa" asp-route-year="@ViewBag.Year" asp-route-month="@ViewBag.Month" target="_blank" class="ReturntdEmpty">সাবফর্ম-ক </a>
+	        </td>
+        </tr>
+        <tr>
+
+            <td>প্রচ্ছন্ন রপ্তানি</td>
+            <td class="text-center">২</td>
+            <td class="text-right" style="text-align:right">@StringGenerator.DecimalToCommaSeparated(Model.IndirectExportAmount)</td>
+            <td class="ReturntdEmpty" style="background-color: #BFBFBF !important"></td>
+            <td class="ReturntdEmpty" style="background-color: #BFBFBF !important"></td>
+            <td style="background-color: #BFBFBF !important">
+	            <a asp-action="Mushok9P1SubKa" asp-route-year="@ViewBag.Year" asp-route-month="@ViewBag.Month" target="_blank" class="ReturntdEmpty">সাবফর্ম-ক </a> </td>
+        </tr>
+
+        <tr>
+            <td colspan="2">
+                অব্যাহতিপ্রাপ্ত পণ্য/সেবা
+            </td>
+
+            <td class="text-center">৩</td>
+            <td class="text-right" style="text-align:right">@StringGenerator.DecimalToCommaSeparated(Model.VatExemptedProdSellAmount)</td>
+            <td class="ReturntdEmpty" style="background-color: #BFBFBF !important"></td>
+            <td class="ReturntdEmpty" style="background-color: #BFBFBF !important"></td>
+            <td style="background-color: #BFBFBF !important">
+	            <a asp-action="Mushok9P1SubKa" asp-route-year="@ViewBag.Year" asp-route-month="@ViewBag.Month" target="_blank" class="ReturntdEmpty">সাবফর্ম-ক </a></td>
+        </tr>
+
+        <tr>
+            <td colspan="2">
+                আদর্শ হারের পণ্য/সেবা
+            </td>
+
+            <td class="text-center">৪</td>
+            <td class="text-right" style="text-align:right">@StringGenerator.DecimalToCommaSeparated(Model.StandardVatRateProdSellAmount)</td>
+            <td class="text-right" style="text-align:right">@StringGenerator.DecimalToCommaSeparated(Model.StandardVatRateProdSellSdAmount)</td>
+            <td class="text-right" style="text-align:right">@StringGenerator.DecimalToCommaSeparated(Model.StandardVatRateProdSellVatAmount)</td>
+            <td>
+	            <a asp-action="Mushok9P1SubKa" asp-route-year="@ViewBag.Year" asp-route-month="@ViewBag.Month" target="_blank" class="ReturntdEmpty">সাবফর্ম-ক </a></td>
+        </tr>
+
+        <tr>
+            <td colspan="2">
+                সর্বোচ্চ খুচরা মূল্যভিত্তিক পণ্য
+            </td>
+
+            <td class="text-center">৫</td>
+            <td class="text-right" style="text-align:right">@StringGenerator.DecimalToCommaSeparated(Model.MrpProdSellAmount)</td>
+            <td class="text-right" style="text-align:right">@StringGenerator.DecimalToCommaSeparated(Model.MrpProdSellSdAmount)</td>
+            <td class="text-right" style="text-align:right">@StringGenerator.DecimalToCommaSeparated(Model.MrpProdSellVatAmount)</td>
+            <td><a asp-action="Mushok9P1SubKa" asp-route-year="@ViewBag.Year" asp-route-month="@ViewBag.Month" target="_blank" class="ReturntdEmpty">সাবফর্ম-ক </a></td>
+        </tr>
+
+        <tr>
+            <td colspan="2">
+                সুনির্দিষ্ট কর ভিত্তিক পণ্য/সেবা
+            </td>
+
+            <td class="text-center">৬</td>
+            <td class="text-right" style="text-align:right">@StringGenerator.DecimalToCommaSeparated(Model.FixedVatProdSellAmount)    </td>
+            <td class="text-right" style="text-align:right">@StringGenerator.DecimalToCommaSeparated(Model.FixedVatProdSellSdAmount)  </td>
+            <td class="text-right" style="text-align:right">@StringGenerator.DecimalToCommaSeparated(Model.FixedVatProdSellVatAmount) </td>
+            <td><a asp-action="Mushok9P1SubGa" asp-route-year="@ViewBag.Year" asp-route-month="@ViewBag.Month" target="_blank" class="ReturntdEmpty">সাবফর্ম-গ</a> </td>
+        </tr>
+
+        <tr>
+            <td colspan="2">
+                আদর্শ করহার ব্যতীত ভিন্ন করহার ভিত্তিক পণ্য/সেবা
+            </td>
+
+            <td class="text-center">৭</td>
+            <td class="text-right" style="text-align:right">@StringGenerator.DecimalToCommaSeparated(Model.OtherThanStandardVatRateProdSellAmount) </td>
+            <td class="text-right" style="text-align:right">@StringGenerator.DecimalToCommaSeparated(Model.OtherThanStandardVatRateProdSellSdAmount) </td>
+            <td class="text-right" style="text-align:right">@StringGenerator.DecimalToCommaSeparated(Model.OtherThanStandardVatRateProdSellVatAmount) </td>
+            <td><a asp-action="Mushok9P1SubKa" asp-route-year="@ViewBag.Year" asp-route-month="@ViewBag.Month" target="_blank" class="ReturntdEmpty">সাবফর্ম-ক </a></td>
+        </tr>
+
+        <tr>
+            <td colspan="2">
+                খুচরা/পাইকারী/ব্যবসায়ী ভিত্তিক সরবরাহ
+            </td>
+
+            <td class="text-center">৮</td>
+            <td class="text-right" style="text-align:right">@StringGenerator.DecimalToCommaSeparated(Model.TradingSellAmount)</td>
+            <td class="text-right" style="text-align:right">@StringGenerator.DecimalToCommaSeparated(Model.TradingSellSdAmount)</td>
+            <td class="ReturntdEmpty text-right" style="text-align: right;">@StringGenerator.DecimalToCommaSeparated(Model.TradingSellVatAmount)</td>
+            <td><a asp-action="Mushok9P1SubKha" asp-route-year="@ViewBag.Year" asp-route-month="@ViewBag.Month" target="_blank" class="ReturntdEmpty">সাবফর্ম-খ</a></td>
+        </tr>
+
+        <tr class="font-weight-bold">
+            <td colspan="2">
+                <b>মোট বিক্রয়মূল্য ও মোট প্রদেয় কর</b>
+            </td>
+
+            <td class="text-center font-weight-bold">৯</td>
+            <td class="ReturntdEmpty text-right" style="background-color: #BFBFBF !important; text-align: right">@StringGenerator.DecimalToCommaSeparated(Model.TotalAmount)  </td>
+            <td class="text-right font-weight-bold" style="text-align:right">@StringGenerator.DecimalToCommaSeparated(Model.TotalSdAmount)</td>
+            <td class="text-right font-weight-bold" style="text-align:right">@StringGenerator.DecimalToCommaSeparated(Model.TotalVatAmount)</td>
+            <td></td>
+        </tr>
+    @* </tbody> *@
+</table>

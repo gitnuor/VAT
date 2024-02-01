@@ -1,0 +1,76 @@
+﻿@model IEnumerable<vms.entity.StoredProcedureModel.MushakReturn.MushakReturnSubFormUma>
+<h4 id="note29SubForm">সাবফর্ম-ঙ ( নোট ২৯-"প্রদত্ত সরবরাহ হইতে উৎসে কর্তনের জন্য" এর জন্য প্রযোজ্য)</h4>
+<table class="table table-bordered">
+
+    <thead>
+
+        <tr class="MreturnHeader">
+
+            <th>Serial No.</th>
+            <th>
+               Buyer's'
+                BIN
+            </th>
+            <th>
+                Buyer's'
+               Name
+            </th>
+            <th>
+                Buyer's'
+                Address
+            </th>
+            <th>
+                Value
+            </th>
+
+            <th>
+                Deducted VAT
+            </th>
+            <th>
+                Invoice No.(Challan/Bill No.etc)
+            </th>
+            <th>Invoice/Challan/Bill Date</th>
+            <th>
+                একাউন্ট কোড
+            </th>
+            <th>মন্তব্য</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Any())
+        {
+
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.SlNo</td>
+                    <td>@item.CustomerBinNo</td>
+                    <td>@item.CustomerName</td>
+                    <td>@item.CustomerAddress</td>
+                    <td class="text-right">@item.Price</td>
+                    <td class="text-right">@item.DeductedVat</td>
+                    <td >@item.VatChallanNo</td>
+                    <td>@item.TaxInvoicePrintedTime</td>
+                    <td>@item.EconomicCode</td>
+                    <td></td>
+                </tr>
+
+            }
+        }
+    </tbody>
+    <tfoot>
+        <tr class="MreturnHeader">
+
+            <th></th>
+            <th></th>
+            <th></th>
+            <th class="text-right">মোট</th>
+            <th class="text-right">@Model.Sum(c => c.Price)</th>
+            <th class="text-right">@Model.Sum(c => c.DeductedVat)</th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+    </tfoot>
+</table>

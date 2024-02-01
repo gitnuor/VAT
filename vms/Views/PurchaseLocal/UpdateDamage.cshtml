@@ -1,0 +1,152 @@
+﻿@model vms.entity.viewModels.vmDamageDetails
+
+@{
+    ViewData["Title"] = "Damage";
+    
+    var i = 1;
+    // decimal vatTotal = 0;
+    // decimal total = 0;
+}
+
+
+<input type="hidden" class="form-control" id="ProductId" name="ProductId" />
+
+<div class="custom-page-title">
+    Update Damage
+</div>
+<form asp-action="Damage" id="damageFrm" method="post">
+    <div class="row" hidden>
+
+        <div class="col-md-12 ">
+
+            <div class="col-md-2 ">
+                <div class="form-group form-md-line-input">
+                    <div>
+                        @Html.EditorFor(Model => Model.Damage.VoucherNo, new { htmlAttributes = new { @class = "form-control" } })
+                        <label for="form_control" class="labelColor">Voucher No<span class="label-color">*</span></label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-2 ">
+                <div class="form-group form-md-line-input has-info">
+                    <select id="damageType" name="DamageType" asp-for="Damage.DamageTypeId" class="form-control" asp-items="ViewBag.damageType"></select>
+                    <label for="form_control">Damage Type</label>
+                </div>
+            </div>
+            <div class="col-md-2 ">
+                <div class="form-group form-md-line-input has-info">
+                    @Html.EditorFor(Model => Model.Damage.Description, new { htmlAttributes = new { @class = "form-control" } })
+                    <label for="form_control">Description</label>
+                </div>
+            </div>
+            <div class="col-md-2 ">
+                <div class="form-group form-md-line-input">
+                    <div>
+                        @Html.EditorFor(Model => Model.Damage.NbrverifierName, new { htmlAttributes = new { @class = "form-control" } })
+                        <label for="form_control" class="labelColor">NBR Verifier Name</label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2 ">
+                <div class="form-group form-md-line-input">
+                    <div>
+                        @Html.EditorFor(Model => Model.Damage.NbrverifierDesignation, new { htmlAttributes = new { @class = "form-control" } })
+                        <label for="form_control" class="labelColor">NBR Verifier Designation</label>
+                    </div>
+                </div>
+            </div>
+            
+                        @Html.EditorFor(Model => Model.Damage.ReferenceKey, new { htmlAttributes = new { @class = "form-control" } })-->
+            
+        </div>
+
+    </div>
+
+    <div class="col-md-12 ">
+
+        <table class="table table-bordered" id="damageDetails">
+            <thead>
+                <tr>
+                    <th hidden></th>
+                    <th hidden></th>
+                    <th>Serial</th>
+                    <th>Product</th>
+                    <th>Damage Qty</th>
+                    <th>Useable Qty</th>
+                    <th>Useable percnt</th>
+                    <th>New Unit Price</th>
+                    <th>Des</th>
+                    <th class="prgbarwidth">Approved Qty</th>
+                    <th> Approved Price</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @{int index = 0;}
+                @foreach (var item in Model.DamageDetails)
+                {
+                    // decimal returnQty = 0;
+                    <tr id="@item.PurchaseDetailId">
+                        <td hidden>@item.PurchaseDetailId</td>
+                        <td hidden>@item.MeasurementUnitId</td>
+                        <td>@i</td>
+                        <td>
+                            @item.Product.Name
+
+                        </td>
+
+                        <td class="form-group form-md-line-input col-md-2">
+                            <div>
+
+                                @item.DamageQty
+                            </div>
+                        </td>
+                        <td class="form-group form-md-line-input col-md-2">
+                            <div>
+                                @Html.EditorFor(Model => Model.DamageDetails[index].UsableQty, new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                        </td>
+                        <td class="form-group form-md-line-input col-md-2">
+                            <div>
+                                @item.UsablePercent
+                            </div>
+                        </td>
+                        <td class="form-group form-md-line-input col-md-2">
+                            <div>
+                                @item.SuggestedNewUnitPrice
+                            </div>
+                        </td>
+                        <td class="form-group form-md-line-input col-md-2">
+                            <div>
+                                @item.DamageDescription
+                            </div>
+                        </td>
+
+                        <td class="form-group form-md-line-input col-md-2">
+                            <div>
+                                @Html.EditorFor(Model => Model.DamageDetails[index].ApprovedUsableQty, new { htmlAttributes = new { @class = "form-control" } })
+
+                            </div>
+                        </td>
+                        <td class="form-group form-md-line-input col-md-2">
+                            <div>
+                                @Html.EditorFor(Model => Model.DamageDetails[index].ApprovedNewUnitPrice, new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                        </td>
+
+
+                    </tr>
+                    i++;
+                    index = index + 1;
+                }
+            </tbody>
+
+        </table>
+    </div>
+
+    <div class="form-actions ml-2">
+        <button type="submit" class="btn blue" id="save"><i class="bi bi-check-lg"></i> Submit</button>
+        <a href="~/Purchase/Index" class="btn btn-secondary btn-sm"><i class="bi bi-slash-circle"></i> Cancel</a>
+    </div>
+</form>

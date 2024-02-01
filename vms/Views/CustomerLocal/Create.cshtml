@@ -1,0 +1,46 @@
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model vms.entity.viewModels.CustomerViewModel.CustomerLocalCreateViewModel	
+
+@{
+	ViewData["Title"] = "Create Local Customer";
+}
+
+@section contentheader
+{
+	<div class="p-3 page-header">
+		@ViewData["Title"]
+	</div>
+}
+
+<div class="row">
+	<div class="col-md-8 offset-2">
+		<form asp-action="Create" class="form-horizontal" id="frmCreate">
+			<div class="form-body">
+				<partial name="_CreateLocalBasicInformation" model="Model"/>
+				<partial name="_CreateLocalBranch" model="Model"/>
+				<partial name="_CreateLocalContactPerson" model="Model"/>
+				<partial name="_CreateLocalDeliveryAddress" model="Model"/>
+				<partial name="_CreateLocalBankInformation" model="Model"/>
+				<partial name="_CreateLocalOtherInformation" model="Model"/>
+			</div>
+		</form>
+
+		<div class="form-body">
+			<partial name="_CustomerLocalDocument" model="Model"/>
+			<div class="row">
+				<div class="col-12">
+					<div class="float-end mt-3">
+						<button type="button" class="btn btn-primary btn-sm" id="btnSave"><i class="bi bi-check-lg"></i> Submit</button>
+						<button type="button" value="Reset" onclick="location.reload();" class="btn  btn-warning btn-sm" id="btnReset"><i class="bi bi-arrow-repeat"></i> Reset</button>
+						<a asp-controller="CustomerLocal" asp-action="Index" class="btn btn-secondary btn-sm"><i class="bi bi-slash-circle"></i> Cancel</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+@section Scripts{
+	<script src="~/CustomJs/Customer/CreateLocal.js?vguid=@ViewStaticData.StaticFileVersionGuid"></script>
+}

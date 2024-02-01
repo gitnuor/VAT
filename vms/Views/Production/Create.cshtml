@@ -1,0 +1,743 @@
+﻿@{
+    ViewData["Title"] = "Create";
+    
+
+}
+
+@section contentheader
+    {
+    <div class="p-3 page-header">
+        
+            Production
+       
+        <div class="d-flex justify-content-start">
+
+
+        </div>
+    </div>
+    <div class="col-12 d-flex">
+        <ul class="nav nav-pills mt-3 mr-auto align-bottom">
+        </ul>
+        @using (Html.BeginForm("", "", FormMethod.Get, new { id = "frmPurchase", @class = "d-flex pr-1" }))
+        {
+
+        }
+    </div>
+}
+<input type="hidden" class="form-control form-control-sm" id="ProductId" name="ProductId" />
+<input type="hidden" class="form-control form-control-sm" id="ProductIdParent" name="ProductIdParent" />
+<input type="hidden" class="form-control form-control-sm" id="ContractualProductionId" name="ContractualProductionId" />
+
+<form method="post" id="productionFrm">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group form-md-line-input">
+                        <div>
+                            <input type="checkbox" id="IsContractual" name="IsContractual">Contractual?
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 p_element" hidden>
+                    <div class="form-group form-md-line-input">
+                        <div>
+                            <label class="labelColor"><span class="text-danger "> *</span>Contract No</label>
+                            <input type="text" class="form-control form-control-sm" id="ContractNo" name="ContractNo" placeholder="#">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 p_element" hidden>
+                    <div class="form-group form-md-line-input">
+                        <div>
+                            <label class="labelColor">Challan No</label>
+                            <input type="text" class="form-control form-control-sm" id="ChallanNo" name="ChallanNo" placeholder="#">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group form-md-line-input">
+                        <div>
+                            <label class="labelColor">Batch No</label>
+                            <input type="text" class="form-control form-control-sm" id="BatchNo" name="BatchNo" placeholder="#">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group form-md-line-input typeahead-container">
+                        <div>
+                            <label class="labelColor">Product Name<span class="label-color">*</span></label>
+                            <input type="text" class="form-control form-control-sm" id="ProductName" name="ProductName">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group form-md-line-input">
+                        <div>
+                            <label class="labelColor">Rcv. Quantity<span class="label-color">*</span></label>
+                            <input type="text" class="form-control form-control-sm" id="ReceiveQuantity" name="ReceiveQuantity" placeholder="0" maxlength="10">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group form-md-line-input has-info">
+                        <label class="labelColor">M. Unit<span class="label-color">*</span></label>
+                        <select id="MeasurementUnitId" name="MeasurementUnitId" class="form-select form-select-sm" asp-items="ViewBag.MeasurementUnitId">
+                            <option value=null></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group form-md-line-input">
+                        <div>
+                            <label class="labelColor">Rcv. Time<span class="label-color">*</span></label>
+                            <input type="datetime" class="form-control form-control-sm" id="ReceiveTime" name="ReceiveTime" placeholder="2019-01-01" value="@DateTime.Now.Date">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12 ">
+            <h4>BOM</h4>
+            <table class="table table-bordered" id="gridTable">
+                <thead>
+                    <tr>
+
+                        <th>Raw Material</th>
+                        <th>Max Qty.</th>
+                        <th>Used Qty.</th>
+                        <th>M. Unit</th>
+
+                    </tr>
+                </thead>
+
+                <tbody id="BomInfo"></tbody>
+            </table>
+        </div>
+
+        <div class="col-md-12">
+            <h4>Document Info</h4>
+            <table class="table table-bordered" id="contentTable">
+                <thead>
+                    <tr>
+
+                        <th>Type</th>
+                        <th>File</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+                <tfoot>
+                    <tr>
+
+                        <td class="form-group form-md-line-input has-info">
+
+                            <select id="DocumentTypeId" name="DocumentTypeId" class="form-select form-select-sm" asp-items="ViewBag.DocumentTypeId">
+                                <option value=null></option>
+                            </select>
+
+                        </td>
+                        <td class="form-group form-md-line-input has-info">
+                            <input type="file" name="FileUpload" id="FileUpload" class="form-control form-control-sm" />
+                        </td>
+                        <td class="single-button-action-column">
+                            <a id="addDocument" class="btn btn-sm btn-success" aria-label="Left Align">
+                                <i class="bi bi-plus-lg"></i>
+                            </a>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+    <div class="form-actions">
+        <button type="button" class="btn btn-primary btn-sm" id="save"><i class="bi bi-check-lg"></i> Submit</button>
+        <button type="button" value="Reset" class="btn  btn-warning btn-sm" onclick="location.reload();"><i class="bi bi-arrow-repeat"></i> Reset</button>
+        <a asp-action="Index" class="btn btn-secondary btn-sm"><i class="bi bi-slash-circle"></i> Cancel</a>
+    </div>
+</form>
+@section Scripts{
+
+    <script src="~/js/typeahead.bundle.js"></script>
+    <script src="~/js/jquery-ui.js"></script>
+    <script>
+
+        var ProductionReceive = {
+            init: function() {},
+            count: 1,
+            ProductionReceiveDetailList: [],
+            item: [],
+            ContentInfoJson: [],
+            gridTableEmpty: function() {
+                $('#ProductId').val('');
+                $('#Product').val('');
+                $('#UsedQuantity').text('');
+                $('#unit').val('');
+                $('#MaxUseQty').val('');
+
+            },
+            gridContentEmpty: function() {
+                $('#DocumentTypeId').val('');
+                $('#FileUpload').val('');
+            },
+            addDocument: function() {
+                debugger
+                var DocumentName = $('#DocumentTypeId option:selected').text();
+                var DocumentTypeId = $('#DocumentTypeId').val();
+                var files = $("#FileUpload").get(0).files;
+                var table = document.getElementById('contentTable');
+                var rowCount = table.rows.length;
+                if (DocumentTypeId > 0) {
+                    var canAdd = true;
+
+                    if (canAdd) {
+                        var data = new Object();
+                        data.rowCount = rowCount;
+                        data.DocumentTypeId = DocumentTypeId;
+                        data.UploadFile = files[0];
+                        ProductionReceive.ContentInfoJson.push(data);
+
+                        //var html = '<tr id="' +
+                        //    rowCount +
+                        //    '">' +
+                        //    '<td>' +
+                        //    DocumentName +
+                        //    '</td>' +
+                        //    '<td>' +
+                        //    files[0].name +
+                        //    '</td>' +
+                        //    '<td><span onclick="DeleteDocument(' +
+                        //    rowCount +
+                        //    ')"  class="glyphicon glyphicon-minus btn-xs"></a></span></td>';
+
+                        //html += '</tr>';
+                        const html = `
+                                <tr id='${rowCount}'>
+                                    <td>${DocumentName}</td>
+                                    <td>${files[0].name}</td>
+                                    <td><a href='#' class='btn btn-sm' onclick="DeleteDocument('${rowCount}')"><i class="bi bi-trash"></i></a></td>
+                                </tr>`;
+                        $("table#contentTable > tbody").append(html);
+
+                    }
+                    ProductionReceive.gridContentEmpty();
+                }
+
+            },
+            isNumber: function(n) {
+                return !isNaN(parseFloat(n)) && isFinite(n);
+            },
+
+            UsedQtyCalculation: function(value) {
+                $("#BomInfo").empty();
+                $.each(ProductionReceive.ProductionReceiveDetailList,
+                    function(i, v) {
+
+                        var item = ProductionReceive.ProductionReceiveDetailList[i].requireQty * value;
+                        var html = '<tr id="' +
+                            ProductionReceive.ProductionReceiveDetailList[i].id +
+                            '">' +
+                            '<td>' +
+                            ProductionReceive.ProductionReceiveDetailList[i].prodName +
+                            '</td>' +
+                            '<td>' +
+                            ProductionReceive.ProductionReceiveDetailList[i].currentStock +
+                            '</td>' +
+                            '<td>' +
+                            item +
+                            '</td>' +
+                            '<td>' +
+                            ProductionReceive.ProductionReceiveDetailList[i].unitName +
+                            '</td>'
+                        html += '</tr>';
+
+                        $("table#gridTable > tbody").append(html);
+                    });
+
+            },
+
+            getRawMaterial: function(id) {
+                $("#BomInfo").empty();
+                ProductionReceive.ProductionReceiveDetailList = [];
+                $.ajax({
+                    type: "GET",
+                    url: '@Url.Action("ProductionReceiveGetData", "Products")',
+                    data: { prodId: id },
+                    contentType: "application/json;charset=utf-8",
+                    dataType: "json",
+                    beforeSend: function() {
+                        $("#loading").show();
+                    },
+
+                    success: function(result) {
+                        for (var i = 0; i < result.length; i++) {
+                            var data = new Object();
+                            data.id = result[i].id;
+                            data.prodName = result[i].prodName;
+                            data.currentStock = result[i].currentStock;
+                            data.requireQty = result[i].requiredQtyPerUnitProduction;
+                            data.unitName = result[i].unitName;
+                            ProductionReceive.ProductionReceiveDetailList.push(data);
+                            var html = '<tr id="' +
+                                result[i].id +
+                                '">' +
+                                '<td>' +
+                                result[i].prodName +
+                                '</td>' +
+                                '<td>' +
+                                result[i].currentStock +
+                                '</td>' +
+                                '<td>' +
+                                result[i].requiredQtyPerUnitProduction +
+                                '</td>' +
+                                '<td>' +
+                                result[i].unitName +
+                                '</td>'
+                            html += '</tr>';
+
+                            $("table#gridTable > tbody").append(html);
+                        }
+
+                    },
+                    error: function(x, e) {
+                        $("#loading").hide();
+                        alert('error');
+                    }
+                });
+            },
+
+            add: function() {
+
+                var productName = $('#Product').val();
+                var productId = $('#ProductId').val();
+                var unit = $('#unit').val();
+                var unitName = $("#unit option:selected").text();
+                var qty = $('#UsedQuantity').val();
+                var MaxUseQty = $('#MaxUseQty').val();
+                if (productId > 0) {
+
+                    var canAdd = true;
+
+                    $.each(ProductionReceive.ProductionReceiveDetailList,
+                        function(i, v) {
+                            if (ProductionReceive.ProductionReceiveDetailList[i].RawMaterialId == productId) {
+                                alert('Sorry! Raw Material Exists.');
+                                canAdd = false;
+
+                            }
+
+                        });
+                    if (!parseInt(qty)) {
+                        alert('Number of used qty is inValid!');
+                        canAdd = false;
+                    }
+                    if (canAdd) {
+                        var data = new Object();
+                        data.RawMateriaddisplayFormatsplayForDISPLAY_DATE_FORMATatisplayFormatnputdateFormatId = productId;
+                        data.UsedQuantity = qty;
+                        data.MeasurementUnitId = unit;
+                        data.MaxUseQty = MaxUseQty;
+                        data.IsActive = true;
+                        ProductionReceive.ProductionReceiveDetailList.push(data);
+
+                        var html = '<tr id="' +
+                            data.RawMaterialId +
+                            '">' +
+                            '<td>' +
+                            ProductionReceive.count +
+                            '</td>' +
+                            '<td>' +
+                            productName +
+                            '</td>' +
+                            '<td>' +
+                            MaxUseQty +
+                            '</td>' +
+                            '<td>' +
+                            qty +
+                            '</td>' +
+                            '<td>' +
+                            unitName +
+                            '</td>' +
+                            '<td><span onclick="Delete(' +
+                            data.RawMaterialId +
+                            ')"  class="glyphicon glyphicon-minus btn-xs"></a></span></td>';
+
+                        html += '</tr>';
+
+                        $("table#gridTable > tbody").append(html);
+                        ProductionReceive.gridTableEmpty();
+                        ProductionReceive.count++;
+
+                    }
+                }
+
+            },
+
+            delete: function(id) {
+
+                $.each(ProductionReceive.ProductionReceiveDetailList,
+                    function(i, v) {
+                        if (ProductionReceive.ProductionReceiveDetailList[i].RawMaterialId == id) {
+
+                            ProductionReceive.ProductionReceiveDetailList.splice(i, 1);
+                            ProductionReceive.count--;
+                        }
+                        $("tr#" + id).remove().fadeOut();
+
+                    });
+
+            },
+            deleteDocument: function(id) {
+
+                $.each(ProductionReceive.ContentInfoJson,
+                    function(i, v) {
+                        if (ProductionReceive.ContentInfoJson[i].rowCount == id) {
+
+                            ProductionReceive.ContentInfoJson.splice(i, 1);
+
+                        }
+                        $(" tr#" + id).remove().fadeOut();
+
+                    });
+
+            },
+
+
+            Save: function() {
+                var ProductIdParent = $('#ProductIdParent').val();
+                var MeasurementUnitId = $('#MeasurementUnitId').val();
+                var BatchNo = $('#BatchNo').val();
+                var ReceiveQuantity = $('#ReceiveQuantity').val();
+                var ReceiveTime = $('#ReceiveTime').val();
+                var MaterialCost = $('#MaterialCost').val();
+                var IsContractual = $('#IsContractual').is(":checked");
+                var ContractualProductionId = $('#ContractualProductionId').val();
+                var ContractualProductionChallanNo = $('#ChallanNo').val();
+                var data = new FormData();
+
+                for (var i = 0; i < ProductionReceive.ProductionReceiveDetailList.length; i++) {
+                    data.append('ProductionReceiveDetailList[' + i + '].RawMaterialId',
+                        ProductionReceive.ProductionReceiveDetailList[i].RawMaterialId);
+                    data.append('ProductionReceiveDetailList[' + i + '].UsedQuantity',
+                        ProductionReceive.ProductionReceiveDetailList[i].UsedQuantity);
+                    data.append('ProductionReceiveDetailList[' + i + '].MeasurementUnitId',
+                        ProductionReceive.ProductionReceiveDetailList[i].MeasurementUnitId);
+
+                }
+                //TODO
+                for (var i = 0; i < ProductionReceive.ContentInfoJson.length; i++) {
+                    data.append('ContentInfoJson[' + i + '].DocumentTypeId',
+                        ProductionReceive.ContentInfoJson[i].DocumentTypeId);
+                    data.append('ContentInfoJson[' + i + '].UploadFile',
+                        ProductionReceive.ContentInfoJson[i].UploadFile);
+
+                }
+                data.append("IsContractual", IsContractual);
+                data.append("ContractualProductionId", ContractualProductionId);
+                data.append("ContractualProductionChallanNo", ContractualProductionChallanNo);
+                data.append("BatchNo", BatchNo);
+                data.append("ProductId", ProductIdParent);
+                data.append("ReceiveQuantity", ReceiveQuantity);
+                data.append("MeasurementUnitId", MeasurementUnitId);
+                data.append("ReceiveTime", ReceiveTime);
+                data.append("__RequestVerificationToken", $("input[name=__RequestVerificationToken]").val());
+
+                $.ajax({
+                    url: '@Url.Action("CreateAsync", "Production")',
+                    data: data,
+                    type: "POST",
+                    processData: false,
+                    contentType: false,
+                    dataType: "json",
+                    beforeSend: function() {
+                        $("#loading").show();
+                    },
+
+                    success: function(result) {
+                        $("#showData").html("");
+
+                        if (result == "Successful") {
+                            window.location.href = '@Url.Action("Index", "Production")';
+
+                        } else {
+                            alert(result);
+                            //window.location.href = '@Url.Action("Index", "Production")';
+                        }
+                    },
+                    error: function(x, e) {
+                        $("#loading").hide();
+                        alert('error');
+                    }
+                });
+            },
+            product: {
+                init: function() {},
+                productAutoCompleteParent: function() {
+                    var materialforrequsition = {
+                        Initialize: function() {
+                            materialforrequsition.Typehead();
+                        },
+
+                        Typehead: function() {
+                            $('#ProductName').typeahead('destroy');
+                            $('#ProductName').typeahead({
+                                    hint: true,
+                                    highlight: true,
+                                    minLength: 2,
+                                },
+                                {
+                                    items: 8,
+                                    name: 'ProductName',
+                                    displayKey: function(s) {
+                                        return s.name;
+                                    },
+                                    property: "ProductId",
+                                    source: function(strmaterial, process) {
+                                        debugger
+                                        if ($('#IsContractual').is(":checked")) {
+                                            var isValue = $("#ContractualProductionId").val();
+                                            if (isValue == 0) {
+                                                GridInfoReset();
+                                                return alert("Enter Contruct No first!");
+                                            } else {
+                                                var url = '@Url.Content("~/Products/ProductionReceiveAutoComplete")';
+                                                return $.getJSON(url,
+                                                    {
+                                                        filterText: $("#ProductName").val(),
+                                                        contructId: $("#ContractualProductionId").val()
+                                                    },
+                                                    function(Data) {
+
+                                                        return process(Data);
+                                                    });
+                                            }
+                                        } else {
+                                            var url = '@Url.Content("~/Products/ProductionReceiveAutoComplete")';
+                                            return $.getJSON(url,
+                                                {
+                                                    filterText: $("#ProductName").val(),
+                                                    contructId: $("#ContractualProductionId").val()
+                                                },
+                                                function(Data) {
+
+                                                    return process(Data);
+                                                });
+                                        }
+                                    },
+                                    updater: function(item) {
+                                        return item.name;
+                                    }
+                                }).on('typeahead:selected',
+                                function(obj, datum) {
+
+                                    $("#ProductIdParent").val(datum.id);
+                                    $("#ReceiveQuantity").val("1");
+                                    $("#MeasurementUnitId").val(datum.measurementUnitId)
+                                    ProductionReceive.getRawMaterial(datum.id);
+
+                                });
+                            $("#ProductName").focus();
+
+                        }
+                    }
+                    materialforrequsition.Initialize();
+                },
+
+
+                ContractualAutoComplete: function() {
+                    var materialforrequsition = {
+                        Initialize: function() {
+                            materialforrequsition.Typehead();
+                        },
+
+                        Typehead: function() {
+                            $('#ContractNo').typeahead('destroy');
+                            $('#ContractNo').typeahead({
+                                    hint: true,
+                                    highlight: true,
+                                    minLength: 2,
+                                },
+                                {
+                                    items: 8,
+                                    name: 'ContractNo',
+                                    displayKey: function(s) {
+                                        return s.contractNo;
+                                    },
+                                    property: "ContractNo",
+                                    source: function(strmaterial, process) {
+                                        var url = '@Url.Content("~/Production/ContractualContractNoAutoComplete")';
+                                        return $.getJSON(url,
+                                            {
+                                                filterText: $("#ContractNo").val()
+                                            },
+                                            function(Data) {
+
+                                                return process(Data);
+                                            });
+                                    },
+                                    updater: function(item) {
+                                        return item.name;
+                                    }
+                                }).on('typeahead:selected',
+                                function(obj, datum) {
+
+                                    $("#ContractualProductionId").val(datum.id);
+
+                                });
+                            $("#ContractNo").focus();
+
+                        }
+                    }
+                    materialforrequsition.Initialize();
+                }
+            }
+        }
+
+        $(document).ready(function() {
+            $('#productionFrm').validate({
+                errorClass: 'help-block animation-slideDown',
+                errorElement: 'div',
+                errorPlacement: function(error, e) {
+                    e.parents('.form-group >div').append(error);
+                },
+                highlight: function(e) {
+                    $(e).closest('.form-group').removeClass('has-success has-error').addClass('has-error');
+                    $(e).closest('.help-block').remove();
+                },
+
+                success: function(e) {
+                    e.closest('.form-group').removeClass('has-success has-error');
+                    e.closest('.help-block').remove();
+                },
+                rules: {
+                    BatchNo: {
+                        maxlength: 50
+                    },
+                    ReceiveTime: {
+                        required: true,
+                        date: true
+                    },
+                    ProductName: {
+                        required: true,
+
+                    },
+                    ReceiveQuantity: {
+                        required: true,
+                        number: true
+                    }
+
+
+                },
+                messages: {
+                    BatchNo: {
+                        maxlength: 'BatchNo Can not be more than 50 char'
+                    },
+                    ReceiveTime: {
+                        required: 'Please Select a date',
+                        date: 'Provide valid Date'
+                    },
+                    ProductName: {
+                        required: 'Please provide Product'
+
+                    },
+                    ReceiveQuantity: {
+                        required: 'Please provide Quantity',
+                        number: 'Entrer Number'
+                    }
+
+
+                }
+            });
+            $('#add').click(function() {
+                ProductionReceive.add();
+            });
+
+            $('#save').click(function() {
+                if ($("#productionFrm").valid()) {
+                    if (ProductionReceive.ProductionReceiveDetailList.length != 0) {
+                        if (confirm('Are you sure?')) {
+
+                            ProductionReceive.Save();
+                            return true
+                        }
+                    } else {
+                        alert('Please set up Input Output Co-Efficient First!');
+                    }
+
+                } else {
+                    alert('Please Enter Required Fields!');
+                    return false;
+                }
+
+            });
+            ProductionReceive.product.ContractualAutoComplete();
+            ProductionReceive.product.productAutoCompleteParent();
+            @*$("#ExpectedDate").datepicker();
+            $("#ExpectedDate").datepicker('option', 'dateFormat', '@DefinedDateFormat.DISPLAY_DATE_FORMAT');
+            $("#ReceiveTime").datepicker();
+            $("#ReceiveTime").datepicker('option', 'dateFormat',   '@DefinedDateFormat.DISPLAY_DATE_FORMAT');
+            $("#EndDate").datepicker();
+            $("#EndDate").datepicker('option', 'dateFormat', '@DefinedDateFormat.DISPLAY_DATE_FORMAT');*@
+        });
+
+        function DeleteDocument(id) {
+            ProductionReceive.deleteDocument(id);
+        };
+
+        function Delete(id) {
+            ProductionReceive.delete(id);
+        }
+
+        $("#item").keyup(function() {
+            var that = this,
+                numberOfItem = $(this).val();
+
+        });
+        $("#ReceiveQuantity").keyup(function() {
+            var that = this,
+                numberOfItem = $(this).val();
+            ProductionReceive.UsedQtyCalculation(numberOfItem);
+
+        });
+        $('#addDocument').click(function() {
+            ProductionReceive.addDocument();
+        });
+        $("#amount").keyup(function() {
+            var that = this,
+                amount = $(this).val();
+
+        });
+
+        function GridInfoReset() {
+            $("#BomInfo").empty();
+            $("#ContractualProductionId").val('0');
+            $("#ContractNo").val('');
+            $("#ProductId").val('');
+            $("#ProductName").val('');
+            $("#ReceiveQuantity").val('');
+            $("#ChallanNo").val('');
+        };
+
+        $('#IsContractual').change(function() {
+            if ($('#IsContractual:checked').length == 0) {
+                GridInfoReset();
+                $('.p_element').hide();
+            } else {
+                $('.p_element').show();
+                GridInfoReset();
+                $('.check_box:checked').each(function() {
+                    $('#' + $(this).attr('data-ptag')).show();
+                });
+            }
+
+        });
+    </script>
+
+}

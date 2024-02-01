@@ -1,0 +1,42 @@
+﻿@model IEnumerable<vms.entity.models.ContractualProduction>
+@{
+    var session = Context.Session.GetComplexData<VmUserSession>(ControllerStaticData.SESSION);
+}
+@{
+    ViewData["Title"] = "Index";
+
+}
+@section contentheader
+    {
+    <div class="p-3 page-header">
+        Contractual Production
+        <div class="d-flex justify-content-start">
+
+            @if (UserAuthorization.Check(FeatureList.PRODUCTION_CONTRACTUAL_PRODUCTION_CAN_ADD, session.Rights))
+            {
+                <div class="pr-1">
+                    <a href="@Url.Action("Create", "ProductionContractual")" class="btn btn-primary btn-sm"><i class="bi bi-plus-lg"></i> Add Contractual Production</a>
+                </div>
+
+            }
+
+        </div>
+    </div>
+    <div class="col-12 d-flex">
+        <ul class="nav nav-pills mt-3 mr-auto align-bottom">
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Action("Index", "Production")">Production List</a>
+            </li>
+            <li class="nav-item pull-right">
+                <a class="nav-link" href="@Url.Action("Index", "ProductionContractual")">Contractual Production</a>
+            </li>
+            <li class="nav-item pull-right">
+                <a class="nav-link" href="@Url.Action("TransferRawMaterialList", "ProductionContractual")">Transfer List</a>
+            </li>
+
+        </ul>
+    </div>
+}
+
+
+@await Html.PartialAsync("_Index")

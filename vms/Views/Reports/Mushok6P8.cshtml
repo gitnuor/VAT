@@ -1,0 +1,221 @@
+﻿@model IEnumerable<vms.entity.StoredProcedureModel.SpDebiNotetMushak>
+@{
+    ViewData["Title"] = "Mushak- 6.8 (Chalan)";
+	var firstElement = new vms.entity.StoredProcedureModel.SpDebiNotetMushak(); 
+	if (Model.Any())
+	{
+		firstElement = Model.First();
+	}
+	// var watermarkStatusClass = "";
+	// if (!string.IsNullOrEmpty(firstElement.InvoiceStatus))
+	// {
+	// 	watermarkStatusClass = "copy-watermark";
+	// }
+	Layout = "_LayoutMushak";
+}
+
+@section contentheader
+{
+	<div class="p-3 page-header">
+		@*<div></div>*@
+		<div class="row">
+			<div class="col-8">
+				Mushak- 6.8 (Chalan)
+			</div>
+			<div class="col-4">
+				<form method="post">
+
+					<div class="form-group float-end">
+						<button id="btnPrint" type="button" class="btn btn-sm btn-primary inline-sm-button"><i class="bi bi-printer-fill"></i> Print</button>
+
+					</div>
+
+				</form>
+			</div>
+		</div>
+
+	</div>
+
+}
+<div class="report-section mt-3">
+
+<div class="report-margin" id="printableArea">
+	<div class="row ivat-bangla-font">
+
+
+		<div class="col-3">
+
+			<img src="~/images/logo_bd_govt.svg" style="height :100px;" />
+
+		</div>
+
+
+			<div class="col-6 report-header mt-3">
+
+			<div >গণপ্রজাতন্ত্রী বাংলাদেশ সরকার</div>
+			<div class="sub-header">জাতীয় রাজস্ব বোর্ড</div>
+			<div class="sub-header">ডেবিট নোট </div>
+			<div class="sub-header">
+				[বিধি ৪০ এর উপবিধি (১) এর দফা (ছ) দ্রষ্টব্য ]
+			</div>
+
+		</div>
+
+		<div class="col-3">
+			<div class="mushak-name"> মূসক - ৬.৮</div>
+
+
+
+		</div>
+		<div class="col-12 mt-5"></div>
+		<div class="col-8">
+
+
+			<div>নিবন্ধিত ব্যাক্তির নাম : @firstElement.OrganizationName </div>
+			<div>নিবন্ধিত ব্যাক্তির বিআইএন : @firstElement.OrganizationBin </div>
+			<div>নিবন্ধিত ব্যাক্তির ঠিকানা : @firstElement.OrganizationAddress </div>
+			<div>ক্রেতা/গ্রহীতার নাম : @firstElement.VendorName </div>
+			<div>ক্রেতা/গ্রহীতার বিআইএন : @firstElement.VendorBinOrNid </div>
+			<div>ঠিকানা : @firstElement.VendorAddress </div>
+			<div>যানবাহনের প্রকৃতি ও নম্বর : @firstElement.VehicleTypeAndRegistrationNo </div>
+
+		</div>
+
+		<div class="col-4">
+
+			<div>ডেবিট নোট নম্বর: @firstElement.DebitNoteChallanNo</div>
+			<div>ইস্যুর তারিখ: @StringGenerator.DateTimeToStringWithoutTime(firstElement.DebitNoteChallanPrintTime) </div>
+			<div>ইস্যুর সময়: @StringGenerator.DateTimeToTimeString(firstElement.DebitNoteChallanPrintTime) </div>
+		</div>
+            
+
+ 
+
+		<div class="col-12 mt-3">
+
+			<table class="table table-bordered">
+
+
+				<tbody style="text-align:center">
+
+
+						<tr class="text-center">
+					<td rowspan="2">
+						ক্রমিক
+						নং
+					</td>
+					<td rowspan="2">কর চালানপত্রের নম্বর ও তারিখ  </td>
+					<td rowspan="2">
+						ডেবিট নোট ইস্যুর কারণ
+					</td>
+					<td colspan="4">
+						চালানপত্রের উল্লিখিত সরবরাহের
+					</td>
+
+					<td colspan="4">বৃদ্ধিকারী সমন্বয়ের সহিত সংশ্লিষ্ট </td>
+
+				</tr>
+
+				<tr>
+					<td><sup>১</sup>মূল্য</td>
+					<td>পরিমাণ  </td>
+					<td>মূল্য সংযোজন করের পরিমাণ</td>
+					<td>সম্পূরক শুল্কের পরিমাণ </td>
+					<td><sup>১</sup>মূল্য</td>
+					<td>পরিমাণ</td>
+					<td>মূল্য সংযোজন করের পরিমাণ</td>
+					<td>সমন্বয়যোগ্য সম্পূরক শুল্কের পরিমাণ </td>
+				</tr>
+
+						<tr class="text-center">
+
+							<td>(১)</td>
+							<td>(২)</td>
+							<td>(৩)</td>
+							<td>(৪)</td>
+							<td>(৫)</td>
+							<td>(৬)</td>
+							<td>(৭)</td>
+							<td>(৮)</td>
+							<td>(৯)</td>
+							<td>(১০)</td>
+							<td>(১১)</td>
+
+				</tr>
+
+				@if (Model.Any())
+				{
+					int i = 1;
+					foreach (var item in Model)
+					{
+
+
+						<tr>
+
+							<td>@i</td>
+							<td>@item.DebitNoteChallanPrintTime</td>
+							<td>@item.ReasonOfReturn</td>
+							<td class="text-right">@StringGenerator.DecimalToCommaSeparated(item.PurchasePrice)</td>
+							<td class="text-right">@StringGenerator.DecimalToCommaSeparated(item.PurchaseQuantity)</td>
+							<td class="text-right">@StringGenerator.DecimalToCommaSeparated(item.PurchaseVatAmount)</td>
+							<td class="text-right">@StringGenerator.DecimalToCommaSeparated(item.PurchaseSupplementaryDutyAmount)</td>
+							<td class="text-right">@StringGenerator.DecimalToCommaSeparated(item.ReturnedPrice)</td>
+							<td class="text-right">@StringGenerator.DecimalToCommaSeparated(item.ReturnQuantity)</td>
+							<td class="text-right">@StringGenerator.DecimalToCommaSeparated(item.ReturnVatAmount)</td>
+							<td class="text-right">@StringGenerator.DecimalToCommaSeparated(item.ReturnSupplementaryDutyAmount)</td>
+
+
+						</tr>
+
+						i++;
+					}
+				}
+
+
+				</tbody>
+
+			</table>
+
+		</div>
+
+		<div class="col-12 mt-5">
+			<div>দায়িত্বপ্রাপ্ত ব্যাক্তির নাম: @firstElement.VatResponsiblePersonName   </div>
+			<div>পদবি: @firstElement.VatResponsiblePersonDesignation   </div>
+			<div>স্বাক্ষর:   </div>
+				<div class="mb-4 mt-3">সিল: </div>
+		</div>
+
+			<div class="col-12 mt-2">
+				<div class="row">
+					<div class="col-4">
+						<hr class="black-hr">
+						<sup>১</sup>পণ্য/সেবার মূসক ও সম্পূরক শুল্কসহ
+					</div>
+				</div>
+			</div>
+			<div class="col-12">
+				<div class="print-footer">
+					<div class="text-center">** এটি একটি কম্পিউটার কর্তৃক প্রস্তুতকৃত দলিল, এতে কোন হস্তকৃত স্বাক্ষর এর প্রয়োজন নেই। **</div>
+					চালানপত্র তৈরির/মুদ্রণের সময়: @StringGenerator.DateTimeToString(DateTime.Now)
+				</div>
+			</div>
+		
+	</div>
+	
+	
+</div>
+</div>
+
+@section Scripts{
+
+	<script>
+
+		$(document).ready(function () {
+			window.$("#btnPrint").click(function () {
+				window.vmsPrint.printA4Portrait('printableArea');
+
+			});
+		});
+
+	</script>
+}

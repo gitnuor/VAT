@@ -1,0 +1,49 @@
+﻿@model vms.entity.models.ViewSalesLocal
+@{
+    var session = Context.Session.GetComplexData<VmUserSession>(ControllerStaticData.SESSION);
+}
+
+<div class="nav navbar-nav">
+	<div class="dropdown dropdown-freeze-grid-action">
+        <a href="#" class="" data-bs-toggle="dropdown" data-close-others="true">
+            <i class="text-dark bi bi-three-dots-vertical"></i>
+        </a>
+        <ul class=" dropdown-menu dropdown-menu-right div-with-arrow-right-top">
+            @if (UserAuthorization.Check(FeatureList.SALE_SALE_VDS_LIST_CAN_ADD_VDS_RECEIVE, session.Rights) && !Model.IsVds && Model.TotalVat > 0)
+            {
+                <li>
+                    <a class="dropdown-item" asp-action="ConvertToVds" asp-route-id="@Model.EncryptedId"><i class="bi bi-cash-stack"></i> Convert to VDS</a>
+                </li>
+            }
+            @if (UserAuthorization.Check(FeatureList.SALE_SALE_LIST_CAN_ADD_CREDIT_NOTE, session.Rights))
+            {
+                <li>
+                    <a class="dropdown-item" asp-controller="sales" asp-action="CreditNote" asp-route-id="@Model.EncryptedId"><i class="bi bi-arrow-return-right"></i> Add Credit Note</a>
+                </li>
+                <li>
+                    <a class="dropdown-item" asp-action="PriceChangeCreditNote" asp-controller="SalesPriceReduce" asp-route-id="@Model.EncryptedId"><i class="bi bi-arrow-return-right"></i> Add Price Decrease Credit Note</a>
+                </li>
+            }
+            @if (UserAuthorization.Check(FeatureList.SALE_SALE_LIST_CAN_VIEW_DETAILS, session.Rights))
+            {
+                <li>
+                    <a class="dropdown-item" asp-controller="sales" asp-action="Damage" asp-route-id="@Model.EncryptedId"><i class="bi bi-layout-wtf"></i> Add Damage</a>
+                </li>
+                <li>
+                    <a class="dropdown-item" asp-action="Details" asp-route-id="@Model.EncryptedId"><i class="bi bi-grid"></i> Details</a>
+                </li>
+
+            }
+            @if (UserAuthorization.Check(FeatureList.MUSHAK_MUSHAK_6_3_CAN_VIEW, session.Rights) && Model.IsComplete)
+            {
+                <li>
+                    <a class="dropdown-item" asp-controller="Mushak" asp-action="MushakSixPointThree" asp-route-language="0" asp-route-id="@Model.EncryptedId" target="_blank"><i class="bi bi-printer"></i> Print Mushak- 6.3 (Bangla)</a>
+                </li>
+                <li>
+                    <a class="dropdown-item"asp-controller="Mushak" asp-action="MushakSixPointThree" asp-route-language="1" asp-route-id="@Model.EncryptedId" target="_blank"><i class="bi bi-printer"></i> Print Mushak- 6.3 (English)</a>
+                </li>
+            }
+
+        </ul>
+    </div>
+</div>

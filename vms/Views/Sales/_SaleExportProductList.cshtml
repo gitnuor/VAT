@@ -1,0 +1,35 @@
+﻿@model vms.entity.viewModels.VmSaleExport
+
+
+    <div class="col-md-12">
+	    <div id="notificationArea"></div>
+        <div class="font-weight-bold mt-3">
+            Product List
+        </div>
+        <table id="productTable" class="table table-bordered form-table mt-3">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>SKU</th>
+                    <th>Goods ID</th>
+                    <th>M. Unit</th>
+                    <th>Stock</th>
+                    <th>Unit Price</th>
+                    <th>Qty.</th>
+                    <th>Total Price</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="tbdProduct">
+            </tbody>
+            <tfoot>
+                <tr class="text-end">
+                    <th colspan="7">Total</th>
+                    <th id="productTotalPrice"></th>
+                    <th></th>
+                </tr>
+                </tfoot>
+        </table>
+    </div>
+
+  

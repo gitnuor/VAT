@@ -1,0 +1,141 @@
+﻿@model vms.entity.models.User
+@{
+    ViewData["Title"] = "Log In";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Welcome iVAT</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta content="Preview page of Metronic Admin Theme #1 for " name="description" />
+    <meta content="" name="author" />
+    <link href="~/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body class=" login">
+    <div class="user-login-5">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="login-bg">
+                    <img class="login-logo" src="~/assets/pages/img/login/logo.png" />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="login-content">
+                    <h1><b> biTS VAT Management System </b></h1>
+                    <h3>Log In</h3>
+                    <h3 class="text-danger">
+                        @TempData["message"]
+                    </h3>
+                    <h3>@ViewData["Message"]</h3>
+
+                    <form id="pform" action="/home/LogIn" class="login-form" method="post">
+                        <div class="alert alert-danger display-hide">
+                            <button class="close" data-close="alert"></button>
+                            <span class="">Enter any Username and Password. </span>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <input asp-for="UserName" class="form-control form-control-solid placeholder-no-fix form-group" type="text" autocomplete="off" placeholder="Username" name="username" required />
+                            </div>
+                            <div class="col-xs-6">
+                                <input asp-for="Password" type="password" class="form-control form-control-solid placeholder-no-fix form-group" autocomplete="off" placeholder="Password" name="password" required />
+                            </div>
+                        </div>
+                        <div class="row">
+
+                            <div class="col-sm-4">
+                                <div class="rem-password">
+                                    <label class="rememberme mt-checkbox mt-checkbox-outline">
+                                        <input type="checkbox" name="remember" value="1" /> Remember me
+                                        <span></span>
+                                    </label>
+                                </div>
+                            </div>
+                           
+                        </div>
+                    </form>
+                    <div class="col-md-4">
+                    </div>
+                    <div class="col-md-4">
+                        <a id="sign" href="Organizations/Registration/"> Sign </a>
+                    </div>
+                    <form class="forget-form" action="javascript:;" method="post">
+                        <h3 class="font-green">Forgot Password ?</h3>
+                        <p> Enter your e-mail address below to reset your password. </p>
+                        <div class="form-group">
+                            <input class="form-control placeholder-no-fix form-group" type="text" autocomplete="off" placeholder="Email" name="email" />
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" id="back-btn" class="btn green btn-outline">Back</button>
+                            <button type="submit" class="btn btn-success uppercase pull-right">Submit</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="login-footer">
+                    <div class="row bs-reset">
+                        
+                        <div class="col-xs-5">
+                            <ul class="login-social">
+                                <li>
+                                    <a href="javascript:;">
+                                        <i class="icon-social-facebook"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:;">
+                                        <i class="icon-social-twitter"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:;">
+                                        <i class="icon-social-dribbble"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="col-xs-7">
+                            <div class="login-copyright text-right">
+                                <p>Copyright &copy; BRAC IT Service Ltd</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+</body>
+</html>
+<div>
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Change Password</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-body mx-3">
+                        <div class="md-form mb-4">
+                            <label data-error="wrong" data-success="right" for="defaultForm-pass">Password</label>
+                            <input type="password" id="newPassword" class="form-control validate">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="btnSave" class="btn btn-default btn green">Save</button>
+                        <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+</script>

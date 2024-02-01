@@ -1,0 +1,376 @@
+﻿@{
+    ViewData["Title"] = "Tansfer Receive";
+}
+
+<input type="hidden" class="form-control" id="ProductId" name="ProductId" />
+<input type="hidden" class="form-control" id="ProductIdParent" name="ProductIdParent" />
+<input type="hidden" class="form-control" id="ContractualProductionId" name="ContractualProductionId" />
+<div class="custom-page-title">
+    Purchase Transfer Receive
+</div>
+<form method="post" id="productionFrm">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+
+                <div class="col-md-3 p_element" hidden>
+                    <div class="form-group form-md-line-input">
+                        <div>
+                            <input type="text" class="form-control" id="ChallanNo" name="ChallanNo" placeholder="#">
+                            <label class="labelColor">Challan No</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group form-md-line-input has-info">
+                        <select id="InvoiceNo" name="InvoiceNo" class="form-control" asp-items="ViewBag.InvoiceNo">
+                            <option value=null></option>
+                        </select>
+                        <label>Invoice No<span class="label-color">*</span></label>
+                    </div>
+                </div>
+                
+            </div>
+
+        </div>
+
+        <div class="col-md-12 ">
+            <h4>Transfer List</h4>
+            <table class="table table-bordered" id="gridTable">
+                <thead>
+                    <tr>
+
+                        <th>Product</th>
+                        <th>Qty.</th>
+                        <th>Amount</th>
+                        <th>Unit Price</th>
+                        <th>M. Unit</th>
+
+                    </tr>
+                </thead>
+
+                <tbody id="BomInfo"></tbody>
+            </table>
+        </div>
+
+        <div class="col-md-12">
+            <h4>Document Info</h4>
+            <table class="table table-bordered" id="contentTable">
+                <thead>
+                    <tr>
+
+                        <th>Type</th>
+                        <th>File</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+                <tfoot>
+                    <tr>
+
+                        <td class="form-group form-md-line-input has-info">
+                          
+                            <select id="DocumentTypeId" name="DocumentTypeId" class="form-control" asp-items="ViewBag.DocumentTypeId">
+                                <option value=null></option>
+                            </select>
+
+                        </td>
+                        <td class="form-group form-md-line-input has-info">
+                            <input type="file" name="FileUpload" id="FileUpload" class="form-control" />
+                        </td>
+                        <td>
+                            <a id="addDocument" class="btn btn-sm btn-success" aria-label="Left Align">
+                                <i class="bi bi-plus-lg"></i>
+                            </a>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+    <div class="form-actions">
+        <button type="button" class="btn blue" id="save"><i class="bi bi-check-lg"></i> Submit</button>
+        <a href="~/Production/Index" class="btn btn-secondary btn-sm"><i class="bi bi-slash-circle"></i> Cancel</a>
+    </div>
+</form>
+@section Scripts{
+
+    <script src="~/js/typeahead.bundle.js"></script>
+    <script src="~/js/jquery-ui.js"></script>
+    <script>
+
+        var TransferReceive = {
+            init: function() {},
+            count: 1,
+            TransferReceiveDetailList: [],
+            item: [],
+            ContentInfoJson: [],
+            gridTableEmpty: function() {
+                $('#ProductId').val('');
+                $('#Product').val('');
+                $('#UsedQuantity').text('');
+                $('#unit').val('');
+                $('#MaxUseQty').val('');
+
+            },
+            addDocument: function() {
+                debugger
+                var DocumentName = $('#DocumentTypeId option:selected').text();
+                var DocumentTypeId = $('#DocumentTypeId').val();
+                var files = $("#FileUpload").get(0).files;
+                var table = document.getElementById('contentTable');
+                var rowCount = table.rows.length;
+                if (DocumentTypeId > 0) {
+                    var canAdd = true;
+
+                    if (canAdd) {
+                        var data = new Object();
+                        data.rowCount = rowCount;
+                        data.DocumentTypeId = DocumentTypeId;
+                        data.UploadFile = files[0];
+                        TransferReceive.ContentInfoJson.push(data);
+
+                        var html = '<tr id="' +
+                            rowCount +
+                            '">' +
+                            '<td>' +
+                            DocumentName +
+                            '</td>' +
+                            '<td>' +
+                            files[0].name +
+                            '</td>' +
+                            '<td><span onclick="DeleteDocument(' +
+                            rowCount +
+                            ')"  class="glyphicon glyphicon-minus btn-xs"></a></span></td>';
+
+                        html += '</tr>';
+
+                        $("table#contentTable > tbody").append(html);
+
+                    }
+                }
+
+            },
+            isNumber: function(n) {
+                return !isNaN(parseFloat(n)) && isFinite(n);
+            },
+
+            UsedQtyCalculation: function (value) {
+                $("#BomInfo").empty();
+                $.each(TransferReceive.TransferReceiveDetailList,
+                    function(i, v) {
+
+                        var item = TransferReceive.TransferReceiveDetailList[i].requireQty*value;
+                        var html = '<tr id="' +
+                            TransferReceive.TransferReceiveDetailList[i].id +
+                            '">' +
+                            '<td>' +
+                            TransferReceive.TransferReceiveDetailList[i].prodName +
+                            '</td>' +
+                            '<td>' +
+                            item +
+                            '</td>' +
+                            '<td>' +
+                            TransferReceive.TransferReceiveDetailList[i].unitName +
+                            '</td>'
+                        html += '</tr>';
+
+                        $("table#gridTable > tbody").append(html);
+                    });
+
+            },
+
+            getRawMaterial: function(id) {
+                $("#BomInfo").empty();
+                TransferReceive.TransferReceiveDetailList = [];
+                $.ajax({
+                    type: "GET",
+                    url: '@Url.Action("PurchaseReceiveGetData", "Purchase")',
+                    data: { saleId: id },
+                    contentType: "application/json;charset=utf-8",
+                    dataType: "json",
+                    beforeSend: function() {
+                        $("#loading").show();
+                    },
+
+                    success: function(result) {
+                        for (var i = 0; i < result.length; i++) {
+                            var data = new Object();
+                            data.id = result[i].id;
+                            data.prodName = result[i].prodName;
+                            data.requireQty = result[i].requireQty;
+                            data.unitName = result[i].unitName;
+                            TransferReceive.TransferReceiveDetailList.push(data);
+                            var html = '<tr id="' +
+                                result[i].id +
+                                '">' +
+                                '<td>' +
+                                result[i].prodName +
+                                '</td>' +
+                                '<td>' +
+                                result[i].quantity +
+                                '</td>' +
+                                '<td>' +
+                                (result[i].quantity * result[i].unitPrice) +
+                                '</td>' +
+                                '<td>' +
+                                result[i].unitPrice +
+                                '</td>' +
+                                '<td>' +
+                                result[i].unitName +
+                                '</td>'
+
+                            html += '</tr>';
+
+                            $("table#gridTable > tbody").append(html);
+                        }
+
+                    },
+                    error: function(x, e) {
+                        $("#loading").hide();
+                        alert('error');
+                    }
+                });
+            },
+
+
+
+            delete: function(id) {
+                
+                $.each(TransferReceive.TransferReceiveDetailList,
+                    function(i, v) {
+                        if (TransferReceive.TransferReceiveDetailList[i].RawMaterialId == id) {
+
+                            TransferReceive.TransferReceiveDetailList.splice(i, 1);
+                            TransferReceive.count--;
+                        }
+                        $("tr#" + id).remove().fadeOut();
+
+                    });
+
+            },
+            deleteDocument: function(id) {
+
+                $.each(TransferReceive.ContentInfoJson,
+                    function(i, v) {
+                        if (TransferReceive.ContentInfoJson[i].rowCount == id) {
+
+                            TransferReceive.ContentInfoJson.splice(i, 1);
+
+                        }
+                        $(" tr#" + id).remove().fadeOut();
+
+                    });
+
+            },
+
+
+
+            Save: function() {
+                var TransferSalesId = $('#InvoiceNo').val();
+                var InvoiceNo = $("#InvoiceNo option:selected").text();
+               
+                var data = new FormData();
+
+                for (var i = 0; i < TransferReceive.ContentInfoJson.length; i++) {
+                    data.append('ContentInfoJson[' + i + '].DocumentTypeId',
+                        TransferReceive.ContentInfoJson[i].DocumentTypeId);
+                    data.append('ContentInfoJson[' + i + '].UploadFile',
+                        TransferReceive.ContentInfoJson[i].UploadFile);
+
+                }
+                data.append("TransferSalesId", TransferSalesId);
+                data.append("InvoiceNo", InvoiceNo);
+                data.append("__RequestVerificationToken", $("input[name=__RequestVerificationToken]").val());
+
+                $.ajax({
+                    url: '@Url.Action("TransferReceivePost", "Purchase")',
+                    data: data,
+                    type: "POST",
+                    processData: false,
+                    contentType: false,
+                    dataType: "json",
+                    beforeSend: function() {
+                        $("#loading").show();
+                    },
+
+                    success: function(result) {
+                        $("#showData").html("");
+
+                        if (result == true) {
+                            window.location.href = '@Url.Action("Index", "Purchase")';
+
+                        } else {
+                            alert(result);
+                           //window.location.href = '@Url.Action("Index", "Purchase")';
+                        }
+                    },
+                    error: function(x, e) {
+                        $("#loading").hide();
+                        alert('error');
+                    }
+                });
+            },
+            product: {
+                init: function() {},
+
+            }
+        }
+
+        $(document).ready(function() {
+      
+            $('#add').click(function () {
+                TransferReceive.add();
+            });
+
+            $('#save').click(function () {
+                if ($("#productionFrm").valid()) {
+                    if (confirm('Are you sure?')) {
+                        TransferReceive.Save();
+                        return true
+                    }
+                }
+                else {
+                    return false;
+                }
+
+            });
+ 
+            $("#ExpectedDate").datepicker();
+            $("#ExpectedDate").datepicker('option', 'dateFormat', 'dd M, yy');
+            $("#ReceiveTime").datepicker();
+            $("#ReceiveTime").datepicker('option', 'dateFormat', 'dd M, yy');
+            $("#EndDate").datepicker();
+            $("#EndDate").datepicker('option', 'dateFormat', 'dd M, yy');
+        });
+        function DeleteDocument(id) {
+            TransferReceive.deleteDocument(id);
+        };
+        function Delete(id) {
+            TransferReceive.delete(id);
+        }
+
+
+
+        $('#addDocument').click(function() {
+            TransferReceive.addDocument();
+        });
+
+        function GridInfoReset() {
+            $("#BomInfo").empty();
+            $("#ContractualProductionId").val('0');
+            $("#ContractNo").val('');
+            $("#ProductId").val('');
+            $("#ProductName").val('');
+            $("#ReceiveQuantity").val('');
+            $("#ChallanNo").val('');
+        };
+        $('#InvoiceNo').change(function() {
+            var id = $('#InvoiceNo').val();
+            TransferReceive.getRawMaterial(id);
+
+        });
+
+    </script>
+
+}

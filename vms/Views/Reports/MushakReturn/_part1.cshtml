@@ -1,0 +1,58 @@
+﻿@model vms.entity.StoredProcedureModel.MushakReturn.MushakReturnPartOne
+
+
+<table class="table table-bordered">
+  
+         
+        <tr>
+            <th class="MreturnHeader" colspan="3" style="background-color: #FBD4B4!important">
+                <div class="parthead" >অংশ-১: করদাতার তথ্য</div>
+            </th>
+        </tr>
+
+
+ 
+    @*<tbody class="Returntd">*@
+
+        <tr>
+            <td class="tdp1">(১) ব্যবসায় সনাক্তকরণ সংখ্যা </td>
+            <td class="tdp2"> :</td>
+            <td>@Model.OrganizationBin</td>
+
+
+        </tr>
+
+        <tr>
+            <td>(২) করদাতার নাম </td>
+            <td class="tdp2"> :</td>
+            <td>@Model.TaxPayersName</td>
+
+
+        </tr>
+        <tr>
+            <td>(৩) করদাতার ঠিকানা </td>
+            <td class="tdp2"> :</td>
+            <td>@Model.OrganizationAddress</td>
+
+
+        </tr>
+
+        <tr>
+            <td>(৪) ব্যবসার প্রকৃতি </td>
+            <td class="tdp2"> :</td>
+            <td>@Model.BusinessNature</td>
+
+
+        </tr>
+
+        <tr>
+            <td>(৫) অর্থনৈতিক কার্যক্রম এর প্রকৃতি</td>
+            <td class="tdp2"> :</td>
+            <td>@Model.FinancialActivityNature</td>
+
+
+        </tr>
+
+    @*</tbody>*@
+
+</table>

@@ -1,0 +1,115 @@
+﻿@model vms.entity.viewModels.VmPurchaseImport
+
+<div class="font-weight-bold mb-3">
+    Main Information
+</div>
+@*<form method="post" class="row g-3" id="frmMainInformation">
+    <div class="col-md-4 complex-form-col">
+        <label asp-for="PurchaseReasonId" class="form-label complex-form-label"></label>
+        <select asp-for="PurchaseReasonId" asp-items="Model.PurchaseReasonSelectList" class="searchable-dropdown" data-live-search="true" data-style="bootstrap-select-option">
+            <option value="@null">Select Reason</option>
+        </select>
+        <span asp-validation-for="PurchaseReasonId" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-4 complex-form-col">
+        <label asp-for="VendorId" class="form-label complex-form-label"></label>
+        <select asp-for="VendorId" asp-items="Model.VendorSelectList" class="searchable-dropdown" data-live-search="true" data-style="bootstrap-select-option">
+            <option value="@null">Select Vendor</option>
+        </select>
+        <span asp-validation-for="VendorId" class="text-danger"></span>
+    </div>
+    <div class="col-md-4 complex-form-col">
+        <label asp-for="VendorInvoiceNo" class="form-label complex-form-label"></label>
+        <input type="text" asp-for="VendorInvoiceNo" class="form-control form-control-sm">
+        <span asp-validation-for="VendorInvoiceNo" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-4 complex-form-col">
+        <label asp-for="LcNo" class="form-label complex-form-label"></label>
+        <input type="text" asp-for="LcNo" class="form-control form-control-sm">
+        <span asp-validation-for="LcNo" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-4 complex-form-col">
+        <label asp-for="LcDate" class="form-label complex-form-label"></label>
+        <input type="date" asp-for="LcDate" min='2000-01-01' max='2050-12-12' class="form-control form-control-sm">
+        <span asp-validation-for="LcDate" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-4 complex-form-col">
+        <label asp-for="BillEntry" class="form-label complex-form-label"></label>
+        <input type="text" asp-for="BillEntry" class="form-control form-control-sm">
+        <span asp-validation-for="BillEntry" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-4 complex-form-col">
+        <label asp-for="BoeDate" class="form-label complex-form-label"></label>
+        <input type="date" asp-for="BoeDate" min='2000-01-01' max='2050-12-12' class="form-control form-control-sm">
+        <span asp-validation-for="BoeDate" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-4 complex-form-col">
+        <label asp-for="DueDate" class="form-label complex-form-label"></label>
+        <input type="date" asp-for="DueDate" min='2000-01-01' max='2050-12-12' class="form-control form-control-sm">
+        <span asp-validation-for="DueDate" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-4 complex-form-col">
+        <label asp-for="LcTerm" class="form-label complex-form-label"></label>
+        <input type="text" asp-for="LcTerm" class="form-control form-control-sm">
+        <span asp-validation-for="LcTerm" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-4 complex-form-col">
+        <label asp-for="PoNo" class="form-label complex-form-label"></label>
+        <input type="text" asp-for="PoNo" class="form-control form-control-sm">
+        <span asp-validation-for="PoNo" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-4 complex-form-col">
+        <label asp-for="AtpDate" class="form-label complex-form-label"></label>
+        <input type="date" asp-for="AtpDate" min='2000-01-01' max='2050-12-12' class="form-control form-control-sm">
+        <span asp-validation-for="AtpDate" class="text-danger"></span>
+    </div>
+
+
+    <div class="col-md-4 complex-form-col">
+        <label asp-for="VatCommissionarate" class="form-label complex-form-label"></label>
+        <select asp-for="VatCommissionarate" asp-items="Model.VatCommissionarateList" class="searchable-dropdown" data-live-search="true" data-style="bootstrap-select-option">
+            <option value="@null">Vat Commissionarate</option>
+        </select>
+        <span asp-validation-for="VatCommissionarate" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-4 complex-form-col">
+        <label asp-for="AtpbankId" class="form-label complex-form-label"></label>
+        <select asp-for="AtpbankId" asp-items="Model.AtpBankList" class="searchable-dropdown" data-live-search="true" data-style="bootstrap-select-option">
+            <option value="@null">Select Bank</option>
+        </select>
+        <span asp-validation-for="AtpbankId" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-4 complex-form-col">
+        <label asp-for="AtpbankBranchName" class="form-label complex-form-label"></label>
+        <input type="text" asp-for="AtpbankBranchName" class="form-control form-control-sm">
+        <span asp-validation-for="AtpbankBranchName" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-4 complex-form-col d-none">
+        <input type="hidden" asp-for="EconomicCodeId" class="form-control form-control-sm">
+    </div>
+
+    <div class="col-md-4 complex-form-col">
+        <label asp-for="AtpchallanNo" class="form-label complex-form-label"></label>
+        <input type="text" asp-for="AtpchallanNo" class="form-control form-control-sm">
+        <span asp-validation-for="AtpchallanNo" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-4 complex-form-col">
+        <label asp-for="AdvTaxPaidAmount" class="form-label complex-form-label"></label>
+        <input type="text" asp-for="AdvTaxPaidAmount" class="form-control form-control-sm">
+        <span asp-validation-for="AdvTaxPaidAmount" class="text-danger"></span>
+    </div>
+
+</form>*@

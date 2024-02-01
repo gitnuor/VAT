@@ -1,0 +1,53 @@
+﻿@model vms.entity.viewModels.CustomerViewModel.CustomerLocalCreateViewModel
+@{
+	var branchSl = 0;
+}
+<div class="accordion mt-3 d-none branch-information" id="accordionBranchForm">
+	<div class="accordion-item">
+		<div class="accordion-header" id="headingBranchForm">
+			<button class="accordion-button vms-accordion-button"
+				type="button"
+				data-bs-toggle="collapse"
+				data-bs-target="#branchInformation"
+				aria-expanded="false"
+				aria-controls="branchInformation">
+				Branch related to customer
+			</button>
+		</div>
+		<div
+			id="branchInformation"
+			class="accordion-collapse collapse show"
+			aria-labelledby="headingbranchInformation"
+			data-bs-parent="#accordionForm">
+			<div class="accordion-body">
+				<table class="table table-bordered">
+					<thead>
+					<tr>
+						<th></th>
+						<th>Branch Name</th>
+					</tr>
+					</thead>
+					<tbody>
+					@foreach (var branch in Model.CustomerBranchList)
+					{
+						<tr>
+							<td>
+								<input type="checkbox" asp-for="CustomerBranchList[branchSl].IsSelected"/>
+								<input type="hidden" asp-for="CustomerBranchList[branchSl].OrgBranchId"/>
+								<input type="hidden" asp-for="CustomerBranchList[branchSl].BranchName"/>
+								@{
+									branchSl++;
+								}
+							</td>
+							<td>
+								@branch.BranchName
+							</td>
+						</tr>
+					}
+
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

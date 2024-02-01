@@ -1,0 +1,32 @@
+﻿@model VmViewSimplifiedPurchase
+@{
+    ViewData["Title"] = "Upload Local Purchase";
+    var session = Context.Session.GetComplexData<VmUserSession>(ControllerStaticData.SESSION);
+}
+
+@section contentheader
+{
+	<div class="p-2 page-header d-flex">
+		<div class="flex-grow-1">
+			@ViewData["Title"]
+		</div>
+        <div>
+
+            <form asp-action="UploadSimplifiedLocalPurchase" enctype="multipart/form-data" class="row">
+                <div class="col-3">
+                    <input asp-for="UploadedFile" class="form-control form-control-sm">
+                    <span asp-validation-for="UploadedFile" class="text-danger"></span>
+                </div>
+                <div class="col-2 d-flex"><input type="submit" value="Upload" class="btn btn-primary btn-sm" /></div>
+
+            </form>
+        </div>
+    </div>
+    <partial name="Purchase/_PurchaseSubLink" />
+}
+
+<div class="gray-slim-scroll-container">
+	<div class="table-scroll-container">
+		<partial name="_UploadedSimplifiedLocalPurchase" model="Model.Purchases"/>
+	</div>
+</div>

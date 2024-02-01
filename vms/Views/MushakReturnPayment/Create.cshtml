@@ -1,0 +1,196 @@
+﻿@model vms.entity.viewModels.vmMushakReturnPayment
+@{
+    ViewData["Title"] = "Create Mushak Return Payment";
+
+
+}
+@section contentheader
+    {
+    <div class="p-3 page-header">
+        Add Mushak Return Payment
+    </div>
+}
+
+
+<div class="row">
+    <div class="col-md-4 offset-4">
+        <form asp-action="Create" class="form-horizontal" id="frmMainInformation">
+
+            <div class="form-body">
+
+                <div class="form-group required mt-3">
+                    <label>Year</label>
+                    <div>
+                        @Html.DropDownList("MushakYear", Model.YearList, "Select Year", new { @class = "form-control", @required = true })
+                        <span asp-validation-for="MushakYear"></span>
+                    </div>
+                </div>
+                <div class="form-group required mt-3">
+                    <label>Month</label>
+                    <div>
+                        @Html.DropDownList("MushakMonth", Model.MonthList, "Select Month", new { @class = "form-control form-control-sm" })
+                        <span asp-validation-for="MushakMonth"></span>
+                    </div>
+                </div>
+
+
+                <div class="form-group mt-3">
+                    <label asp-for="CustomsAndVatcommissionarateId"></label>
+                    <select asp-for="CustomsAndVatcommissionarateId">
+                        <option value="@null">Select Customer</option>
+                        @if (Model.CustomsAndVATCommissionarate.Any())
+                        {
+                            foreach (var customsAndVATCommissionarate in Model.CustomsAndVATCommissionarate)
+                            {
+                                <option value="@customsAndVATCommissionarate.CustomsAndVatcommissionarateId"
+                                        data-Operational-Code-First-Digit="@customsAndVATCommissionarate.OperationalCode1stDigit"
+                                        data-Operational-Code-Second-Digit="@customsAndVATCommissionarate.OperationalCode2ndDigit"
+                                        data-Operational-Code-Third-Digit="@customsAndVATCommissionarate.OperationalCode3rdDigit"
+                                        data-Operational-Code-Fourth-Digit="@customsAndVATCommissionarate.OperationalCode4thDigit">
+                                    @customsAndVATCommissionarate.Name
+                                </option>
+                            }
+                        }
+                    </select>
+                    <span asp-validation-for="CustomsAndVatcommissionarateId"></span>
+                </div>
+
+                @*<div class="form-group mt-3">
+                <label  asp-for="MushakReturnPaymentTypeId">Payment Type</label>
+                <div>
+                <select asp-for="MushakReturnPaymentTypeId" class="form-select form-select-sm" asp-items="Model.PaymentTypes">
+                <option value="@null">Select Payment Type</option>
+                </select>
+                <span asp-validation-for="MushakReturnPaymentTypeId" ></span>
+                </div>
+                </div>*@
+
+                <div class="form-group mt-3">
+                    <label asp-for="MushakReturnPaymentTypeId"></label>
+                    <select asp-for="MushakReturnPaymentTypeId">
+                        <option value="@null">Select Customer</option>
+                        @if (Model.PaymentTypes.Any())
+                        {
+                            foreach (var paymentType in Model.PaymentTypes)
+                            {
+                                <option value="@paymentType.MushakReturnPaymentTypeId"
+                                        data-Nbr-Economic-Code-First-Digit="@paymentType.NbrEconomicCode.Code1stDisit"
+                                        data-Nbr-Economic-Code-Second-Digit="@paymentType.NbrEconomicCode.Code2ndDisit"
+                                        data-Nbr-Economic-Code-Third-Digit="@paymentType.NbrEconomicCode.Code3rdDisit"
+                                        data-Nbr-Economic-Code-Fourth-Digit="@paymentType.NbrEconomicCode.Code4thDisit"
+                                        data-Nbr-Economic-Code-Fifth-Digit="@paymentType.NbrEconomicCode.Code5thDisit"
+                                        data-Nbr-Economic-Code-Sixth-Digit="@paymentType.NbrEconomicCode.Code6thDisit"
+                                        data-Nbr-Economic-Code-Seventh-Digit="@paymentType.NbrEconomicCode.Code7thDisit"
+                                        data-Nbr-Economic-Code-Eighth-Digit="@paymentType.NbrEconomicCode.Code8thDisit"
+                                        data-Nbr-Economic-Code-Nighth-Digit="@paymentType.NbrEconomicCode.Code9thDisit"
+                                        data-Nbr-Economic-Code-Teenth-Digit="@paymentType.NbrEconomicCode.Code10thDisit"
+                                        data-Nbr-Economic-Code-Eleventh-Digit="@paymentType.NbrEconomicCode.Code11thDisit"
+                                        data-Nbr-Economic-Code-Twelveth-Digit="@paymentType.NbrEconomicCode.Code12thDisit"
+                                        data-Nbr-Economic-Code-Thirteenth-Digit="@paymentType.NbrEconomicCode.Code13thDisit">
+                                    @paymentType.TypeName
+                                </option>
+                            }
+                        }
+                    </select>
+                    <span asp-validation-for="MushakReturnPaymentTypeId"></span>
+                </div>
+
+                <div class="form-group mt-3">
+                    <label asp-for="EconomicCode1stDisit"></label>
+                    <div class="input-group economic-code-group">
+
+                        <input type="text" asp-for="EconomicCode1stDisit" class="form-control form-control-sm economic-code" />
+                        <input type="text" asp-for="EconomicCode2ndDisit" class="form-control form-control-sm economic-code ms-1" />
+                        <input type="text" asp-for="EconomicCode3rdDisit" class="form-control form-control-sm economic-code" />
+                        <input type="text" asp-for="EconomicCode4thDisit" class="form-control form-control-sm economic-code" />
+                        <input type="text" asp-for="EconomicCode5thDisit" class="form-control form-control-sm economic-code" />
+                        <input type="text" asp-for="EconomicCode6thDisit" class="form-control form-control-sm economic-code ms-1" />
+                        <input type="text" asp-for="EconomicCode7thDisit" class="form-control form-control-sm economic-code" />
+                        <input type="text" asp-for="EconomicCode8thDisit" class="form-control form-control-sm economic-code" />
+                        <input type="text" asp-for="EconomicCode9thDisit" class="form-control form-control-sm economic-code" />
+                        <input type="text" asp-for="EconomicCode10thDisit" class="form-control form-control-sm economic-code ms-1" />
+                        <input type="text" asp-for="EconomicCode11thDisit" class="form-control form-control-sm economic-code" />
+                        <input type="text" asp-for="EconomicCode12thDisit" class="form-control form-control-sm economic-code" />
+                        <input type="text" asp-for="EconomicCode13thDisit" class="form-control form-control-sm economic-code" />
+
+                        <span asp-validation-for="EconomicCode1stDisit"></span>
+                        <span asp-validation-for="EconomicCode2ndDisit"></span>
+                        <span asp-validation-for="EconomicCode3rdDisit"></span>
+                        <span asp-validation-for="EconomicCode4thDisit"></span>
+                        <span asp-validation-for="EconomicCode5thDisit"></span>
+                        <span asp-validation-for="EconomicCode6thDisit"></span>
+                        <span asp-validation-for="EconomicCode7thDisit"></span>
+                        <span asp-validation-for="EconomicCode8thDisit"></span>
+                        <span asp-validation-for="EconomicCode9thDisit"></span>
+                        <span asp-validation-for="EconomicCode10thDisit"></span>
+                        <span asp-validation-for="EconomicCode11thDisit"></span>
+                        <span asp-validation-for="EconomicCode12thDisit"></span>
+                        <span asp-validation-for="EconomicCode13thDisit"></span>
+                    </div>
+                </div>
+
+                <div class="form-group  mt-3">
+                    <label asp-for="PaidAmount">Paid Amount</label>
+                    <div>
+                        <input asp-for="PaidAmount" />
+                        <span asp-validation-for="PaidAmount"></span>
+                    </div>
+                </div>
+
+
+                <div class="form-group  mt-3">
+                    <label asp-for="PaymentDate">Payment Date</label>
+                    <div>
+
+                        <input type="date" id="PaymentDate" asp-for="PaymentDate" value="@DateTime.Now" />
+                        <span asp-validation-for="PaymentDate"></span>
+                    </div>
+                </div>
+
+                <div class="form-group  mt-3">
+                    <label asp-for="BankId">Bank</label>
+                    <div>
+                        <select asp-for="BankId" asp-items="Model.BankList.CustomSelectListToSelectList()">
+                            <option value="@null">Select Bank</option>
+                        </select>
+                        <span asp-validation-for="BankId"></span>
+                    </div>
+                </div>
+
+                <div class="form-group  mt-3">
+                    <label asp-for="BankBranchName">Bank Branch</label>
+                    <div>
+                        <input asp-for="BankBranchName" />
+                        <span asp-validation-for="BankBranchName"></span>
+                    </div>
+                </div>
+
+                <div class="form-group mt-3">
+                    <label asp-for="BankBranchCountryId"></label>
+                    <select asp-for="BankBranchCountryId" asp-items="Model.CountryList.CustomSelectListToSelectList()">
+                        <option value="@null">Select Country</option>
+                    </select>
+                    <span asp-validation-for="BankBranchCountryId"></span>
+                </div>
+
+                <div class="form-group mt-3">
+                    <label asp-for="BankBranchDistrictOrCityId"></label>
+                    <select asp-for="BankBranchDistrictOrCityId" asp-items="Model.DistrictOrCItyList.CustomSelectListToSelectList()">
+                        <option value="@null">District/City</option>
+                    </select>
+                    <span asp-validation-for="BankBranchDistrictOrCityId"></span>
+                </div>
+
+            </div>
+            <div class="float-end mt-3">
+                <button type="submit" data-requiredconfirmation="true" class="btn  btn-primary btn-sm"><i class="bi bi-check-lg"></i> Submit</button>
+                <button type="button" value="Reset" onclick="location.reload();" class="btn  btn-warning btn-sm"><i class="bi bi-arrow-repeat"></i> Reset</button>
+                <a asp-controller="MushakReturnPayment" asp-action="Index" class="btn btn-secondary btn-sm"><i class="bi bi-slash-circle"></i> Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/CustomJs/MushakReturnPayment.js?vguid=@ViewStaticData.StaticFileVersionGuid"></script>
+}

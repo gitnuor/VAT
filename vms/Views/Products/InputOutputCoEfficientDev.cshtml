@@ -1,0 +1,36 @@
+﻿@model vms.entity.viewModels.VmInputOutputCoEfficient
+@{
+	ViewData["Title"] = "Input-Output Coefficient";
+}
+
+@section contentheader
+{
+	<div class="p-3 page-header">
+		@ViewData["Title"]
+	</div>
+}
+
+<partial name="_InputOutputCoEfficientProductDetail"/>
+<input type="hidden" id="HiddenProductId" asp-for="HiddenProductId"/>
+<input type="hidden" id="ItemType" name="ItemType"/>
+<div class="form-body">
+	<div class="row">
+		<div class="col-8">
+			<partial name="_InputOutputCoEfficientProductCost" />
+		</div>
+		<div class="col-4">
+			<partial name="_InputOutputCoEfficientOverheadCost" />
+		</div>
+		<div class="col-12">
+			<div class="float-end">
+				<button type="button" class="btn btn-success btn-sm" onclick="sendToInputOutputCoEfficientController();" id="save"><i class="bi bi-check-lg"></i> Submit</button>
+				<button type="button" value="Reset" onclick="location.reload();" class="btn btn-warning btn-sm"><i class="bi bi-arrow-repeat"></i> Reset</button>
+				<a asp-action="Index" class="btn btn-secondary btn-sm"><i class="bi bi-slash-circle"></i> Cancel</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+@section Scripts {
+	<script src="~/CustomJs/InputOutputCoEfficientDev.js?vguid=@ViewStaticData.StaticFileVersionGuid"></script>
+}

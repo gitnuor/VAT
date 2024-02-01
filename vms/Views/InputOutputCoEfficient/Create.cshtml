@@ -1,0 +1,173 @@
+﻿@model vms.entity.viewModels.vmProduct
+@{
+	ViewData["Title"] = "Add Product/Service";
+}
+
+@section contentheader
+{
+	<div class="p-3 page-header">
+		@ViewData["Title"]
+	</div>
+}
+
+<div class="row">
+	<div class="col-md-8 offset-2">
+		<form asp-action="Create" class="form-horizontal" id="frmusercreate">
+			<div class="row">
+				<div class="col-6">
+					<div class="form-body">
+						<div class="form-group">
+							<label class="form-label" asp-for="Name"></label>
+							<div>
+								<input asp-for="Name" class="form-control form-control-sm"/>
+								<span asp-validation-for="Name" class="text-danger"></span>
+							</div>
+						</div>
+
+						<div class="form-group mt-3">
+							<label class="form-label" asp-for="ModelNo"></label>
+							<div>
+								<input asp-for="ModelNo" class="form-control form-control-sm"/>
+								<span asp-validation-for="ModelNo" class="text-danger"></span>
+							</div>
+						</div>
+
+						<div class="form-group mt-3">
+							<label class="form-label" asp-for="BrandId"></label>
+							<div>
+								<select asp-for="BrandId" asp-items="Model.BrandsSelectListItems.CustomSelectListToSelectList()" class="form-select form-select-sm">
+									<option value="@null">Select Brand</option>
+								</select>
+								<span asp-validation-for="BrandId" class="text-danger"></span>
+							</div>
+						</div>
+
+						<div class="form-group mt-3">
+							<label class="form-label">Code </label>
+							<div>
+								<input asp-for="Code" class="form-control form-control-sm"/>
+								<span asp-validation-for="Code" class="text-danger"></span>
+							</div>
+						</div>
+						<div class="form-group mt-3">
+							<label class="form-label">Reference Key </label>
+							<div>
+								<input asp-for="ReferenceKey" class="form-control form-control-sm" maxlength="10" title="Maximum 10 Characters"/>
+								<span asp-validation-for="ReferenceKey" class="text-danger"></span>
+
+							</div>
+						</div>
+						<div class="form-group mt-3">
+							<label class="form-label" asp-for="Hscode"> </label>
+							<div>
+								<input asp-for="Hscode" class="form-control form-control-sm"/>
+								<span asp-validation-for="Hscode" class="text-danger"></span>
+							</div>
+						</div>
+
+					</div>
+				</div>
+				<div class="col-6">
+					<div class="form-body">
+
+						<div class="form-group">
+							<label asp-for="ProductCategoryId" class="form-label"></label>
+							<div>
+
+								@Html.DropDownListFor(x => Model.ProductCategoryId, new SelectList(Model.ProductCategories, "Id", "Name"), "Select", htmlAttributes: new { @class = "form-select form-select-sm" })
+								<span asp-validation-for="ProductCategoryId" class="text-danger"></span>
+							</div>
+						</div>
+
+						<div class="form-group mt-3">
+							<label asp-for="ProductGroupId" class="form-label"></label>
+							<div>
+								@* <select asp-for="ProductGroupId" class="form-select form-select-sm" asp-items="Model.ProductGroups"></select> *@
+								@Html.DropDownListFor(x => Model.ProductGroupId, new SelectList(Model.ProductGroups, "Id", "Name"), "Select", htmlAttributes: new { @class = "form-select form-select-sm" })
+								<span asp-validation-for="ProductGroupId" class="text-danger"></span>
+							</div>
+						</div>
+
+
+						<div class="form-group mt-3">
+							<label asp-for="MeasurementUnitId" class="form-label"></label>
+							<div>
+
+								@Html.DropDownListFor(x => Model.MeasurementUnitId, new SelectList(Model.MeasurementUnits, "Id", "Name"), "Select", htmlAttributes: new { @class = "form-select form-select-sm" })
+								<span asp-validation-for="MeasurementUnitId" class="text-danger"></span>
+							</div>
+						</div>
+						<div class="form-group mt-3">
+							<label class="form-label" asp-for="ProductTypeId"></label>
+							<div>
+
+								@Html.DropDownListFor(x => Model.ProductTypeId, new SelectList(Model.ProductTypeSelectListItems, "Id", "Name"), "Select", htmlAttributes: new { @class = "form-select form-select-sm" })
+								<span asp-validation-for="ProductTypeId" class="text-danger"></span>
+							</div>
+						</div>
+
+						<div class="form-group mt-3">
+							<label class="form-label" asp-for="ProductVattypeId"></label>
+							<div>
+								<select asp-for="ProductVattypeId" class="form-select form-select-sm" data-live-search="true" data-style="bootstrap-select-option">
+									<option value="@null">Select VAT Type</option>
+									@if (Model.ProductVatTypeList.Any())
+									{
+										foreach (var vattype in Model.ProductVatTypeList)
+										{
+											<option value="@vattype.ProductVattypeId"
+											        data-product-default-vat-percent="@vattype.DefaultVatPercent"
+											        data-is-vat-updatable="@vattype.IsVatUpdatable">
+												@vattype.Name (@vattype.LocalSaleNote)
+											</option>
+										}
+									}
+								</select>
+								<span asp-validation-for="ProductVattypeId" class="text-danger"></span>
+							</div>
+						</div>
+
+						<div class="form-group mt-3 ">
+							<label class="form-label" asp-for="ProductDefaultVatPercent"></label>
+							<div>
+								<input asp-for="ProductDefaultVatPercent" class="form-control form-control-sm" readonly="readonly"/>
+								<span asp-validation-for="ProductDefaultVatPercent" class="text-danger"></span>
+							</div>
+						</div>
+
+						<div class="form-group mt-3 d-none">
+							<div class="custom-control custom-checkbox custom-control-inline">
+								<input asp-for="IsNonRebateable" class="custom-control-input"/>
+								<label asp-for="IsNonRebateable" class="custom-control-label">Is Non-Rebateable?</label>
+							</div>
+						</div>
+
+					</div>
+				</div>
+				<div class="col-12">
+					<div class="form-body">
+						<div class="form-group mt-3">
+							<label class="form-label" asp-for="Description"></label>
+							<div>
+								<textarea asp-for="Description" class="form-control form-control-sm"></textarea>
+								<span asp-validation-for="Description" class="text-danger"></span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="float-end mt-3">
+				<button type="submit" class="btn  btn-primary btn-sm"><i class="bi bi-check-lg"></i> Submit</button>
+				<button type="button" value="Reset" onclick="location.reload();" class="btn  btn-warning btn-sm"><i class="bi bi-arrow-repeat"></i> Reset</button>
+				<a asp-controller="Products" asp-action="Index" class="btn btn-secondary btn-sm"><i class="bi bi-slash-circle"></i> Cancel</a>
+			</div>
+		</form>
+	</div>
+</div>
+
+
+@section Scripts{
+	<script src="~/CustomJs/Products/ProductCreate.js?vguid=@ViewStaticData.StaticFileVersionGuid"></script>
+}

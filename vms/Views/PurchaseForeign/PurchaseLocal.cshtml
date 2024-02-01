@@ -1,0 +1,42 @@
+﻿@model vms.entity.viewModels.VmPurchaseLocal
+@{
+    ViewData["Title"] = "Purchase Local";
+}
+
+@section contentheader
+{
+    <div class="p-3 page-header">
+        @ViewData["Title"]
+    </div>
+}
+
+<div class="row mt-3 form-margin">
+<div class="col-md-5">
+    <partial name="_PurchaseLocalMainInformation" model="Model"/>
+</div>
+<div class="col-md-7 md-left-border">
+    <partial name="_PurchaseLocalProductAdd" model="Model" />
+</div>
+	<div class="col-md-12">
+        <div id="notificationArea"></div>
+		<partial name="_PurchaseLocalProductList" model="Model"/>
+	</div>
+<div class="col-md-12">
+    <partial name="_PurchaseLocalPayment" model="Model" />
+</div>
+<div class="col-md-12">
+    <partial name="_PurchaseLocalDocument" model="Model" />
+</div>
+<div class="col-md-12">
+    <div class="float-end mt-2">
+        <button type="button" class="btn btn-success btn-sm" id="btnSave"><i class="bi bi-check-lg"></i> Submit</button>
+        <button type="button" class="btn btn-primary btn-sm d-none" id="btnSaveDraft"><i class="bi bi-card-list"></i> Draft</button>
+        <button type="button" class="btn btn-warning btn-sm" id="btnResetForm"><i class="bi bi-arrow-repeat"></i> Reset</button> 
+        <a asp-action="Index" class="btn btn-secondary btn-sm"><i class="bi bi-slash-circle"></i> Cancel</a>
+    </div>
+</div>
+</div>
+
+@section Scripts{
+    <script src="~/CustomJs/PurchaseLocal.js?vguid=@ViewStaticData.StaticFileVersionGuid"></script>
+}
